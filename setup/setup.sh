@@ -30,7 +30,6 @@ fi
 echo
 echo "Flux bootstrap"
 ${FLUX} bootstrap github \
-    --context=dev \
     --owner=${GITHUB_USER} \
     --repository=${GITHUB_REPO} \
     --branch=main \

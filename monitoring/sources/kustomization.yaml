@@ -1,0 +1,5 @@
+apiversion: kustomize.config.k8s.io/v1beta
+kind: Kustomization
+namespace: flux-system
+resources:
+  - podinfo.yml
