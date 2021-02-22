@@ -7,7 +7,7 @@ spec:
   interval: 10m0s
   sourceRef:
     kind: GitRepository
-    name: flux-sytem
+    name: flux-system
   path: ./monitoring/dev
   prune: true
   validation: client
