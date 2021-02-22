@@ -1,7 +1,6 @@
 #!/bin/bash
 
 FLUX=flux
-GITHUB_REPO=$(git rev-parse --show-toplevel)
 
 if [ -z "${GITHUB_USER}" ]; then
   echo "Required env GITHUB_USER not set"
