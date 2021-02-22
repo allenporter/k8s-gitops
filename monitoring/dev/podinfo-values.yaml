@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: podinfo
+  namespace: podinfo
+spec:
+  chart:
+    spec:
+      version: ">=1.0.0-alpha"
+  test:
+    enable: false
+  values:
+    ingress:
+      annotations:
+        kubernetes.io/ingress.class: haproxy-dev
+        external-dns.alpha.kubernetes.io/hostname: podinfo.dev.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
+      hosts:
+        - podinfo.dev.mrv.thebends.org
+      tls:
+        - secretName: thebends-cert
+          hosts:
+            - podinfo.dev.mrv.thebends.org
