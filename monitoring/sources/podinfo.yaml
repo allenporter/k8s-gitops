@@ -3,5 +3,5 @@ kind: HelmRepository
 metadata:
   name: podinfo
 spec:
-  interval: 30m
+  interval: 5m
   url: https://stefanprodan.github.io/podinfo
