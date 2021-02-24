@@ -19,7 +19,8 @@ spec:
   # Default values
   # https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard#configuration
   values:
+    service:
+      annotations:
+        haproxy.org/server-ssl: "true"
     ingress:
       enabled: true
-      paths:
-        - /
