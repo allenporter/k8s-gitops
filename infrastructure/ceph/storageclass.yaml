@@ -9,8 +9,8 @@ provisioner: kubernetes.io/rbd
 parameters:
   monitors: 10.10.20.5:6789, 10.10.20.6:6789, 10.10.20.7:6789
   adminId: admin
-  adminSecretName: ceph-secret
+  adminSecretName: ceph-admin-secret
   adminSecretNamespace: storage
-  pool: kube
+  pool: kube-pool
 reclaimPolicy: Retain
 allowVolumeExpansion: true
