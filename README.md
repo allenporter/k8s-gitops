@@ -33,6 +33,6 @@ The cluster has multiple existing helm charts which are manually installed, and 
 
 ## Resources
 
-  - https://github.com/fluxcd/flux2-kustomize-helm-example)
+  - https://github.com/fluxcd/flux2-kustomize-helm-example
   - https://github.com/k8s-at-home/awesome-home-kubernetes
 
