@@ -16,9 +16,12 @@ Initial cluster setup not included here includes:
   - [calico](https://docs.projectcalico.org/about/about-calico) for cluster internal networking via ansible
   - [haproxy k8s ingress](https://github.com/haproxytech/kubernetes-ingress) for providing `ingress` for the cluster and tls keys via helm
 
-The cluster has multiple existing helm charts which are manually installed, and are being moved into this repository to automate deployment.
-
 This repository manages everything else running within the k8s cluster. See setup/ flux bootstrap.
+
+## Motivation
+
+The cluster has multiple existing helm charts which are manually installed, and are being moved into this repository to automate deployment. I was effectively managing per environment kustomization myself via separate helm values files.
+
 
 ## Progress
 
