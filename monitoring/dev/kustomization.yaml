@@ -3,6 +3,8 @@ kind: Kustomization
 resources:
   - ../base/podinfo
   - ../base/speedtest-prometheus
+  - ../base/kubernetes-dashboard
 patchesStrategicMerge:
   - podinfo-values.yaml
   - speedtest-prometheus-values.yaml
+  - kubernetes-dashboard-values.yaml
