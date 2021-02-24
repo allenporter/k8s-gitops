@@ -7,3 +7,4 @@ resources:
   - k8s-at-home.yaml
   - kubernetes-dashboard.yaml
   - prometheus-community.yaml
+  - kube-state-metrics.yaml
