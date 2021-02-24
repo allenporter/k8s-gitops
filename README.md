@@ -8,6 +8,14 @@ This is a Flux/Gitops managed k8s cluster following the model used by [k8s@home]
 
 The servers that make up the cluster are provisioned via [Terraform](https://www.terraform.io/) and configured via [Ansible](https://www.ansible.com/) on bare metal on [Ubuntu Server](https://ubuntu.com/server). That bootstrap process as well as the k8s worker nodes are all configured via a private git repository, not included here.
 
+Initial cluster setup not included here includes:
+
+  - [haproxy](http://www.haproxy.org/) for load balancing kubernetes API
+  - [calico](https://docs.projectcalico.org/about/about-calico) for cluster internal networking
+  - [haproxy k8s ingress](https://github.com/haproxytech/kubernetes-ingress) for providing `ingress` for the cluster and tls keys
+
+The cluster has multiple existing helm charts which are manually installed, and are being moved into this repository to automate deployment.
+
 This repository manages everything else running within the k8s cluster. See setup/ flux bootstrap.
 
 ## Progress
