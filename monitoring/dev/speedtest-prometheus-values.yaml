@@ -8,18 +8,5 @@ spec:
     spec:
       version: ">=2.1.0"
   test:
-    enable: false
+    enable: true
   values:
-    ingress:
-      annotations:
-        kubernetes.io/ingress.class: haproxy-dev
-        external-dns.alpha.kubernetes.io/hostname: speedtest-prometheus.dev.mrv.thebends.org.
-        external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
-      hosts:
-        - host: speedtest-prometheus.dev.mrv.thebends.org
-          paths:
-            - path: /
-      tls:
-        - secretName: thebends-cert
-          hosts:
-            - speedtest-prometheus.dev.mrv.thebends.org
