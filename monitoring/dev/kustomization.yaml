@@ -4,7 +4,9 @@ resources:
   - ../base/podinfo
   - ../base/speedtest-prometheus
   - ../base/kubernetes-dashboard
+  - ../base/prometheus
 patchesStrategicMerge:
   - podinfo-values.yaml
   - speedtest-prometheus-values.yaml
   - kubernetes-dashboard-values.yaml
+  - prometheus-values.yaml
