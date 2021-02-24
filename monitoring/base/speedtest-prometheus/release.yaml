@@ -1,13 +1,13 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: prometheus-speedtest
+  name: speedtest-prometheus
   namespace: monitoring
 spec:
-  releaseName: prometheus-speedtest
+  releaseName: speedtest-prometheus
   chart:
     spec:
-      chart: prometheus-speedtest
+      chart: speedtest-prometheus
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home
