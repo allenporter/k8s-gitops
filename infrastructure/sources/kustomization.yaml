@@ -4,3 +4,4 @@ namespace: flux-system
 resources:
   - podinfo.yaml
   - bitnami.yaml
+  - k8s-at-home.yaml
