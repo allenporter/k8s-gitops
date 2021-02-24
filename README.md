@@ -1,6 +1,14 @@
 # k8s-gitops
 
-Flux/Gitops managed k8d cluster
+## Introduction
+
+This is a Flux/Gitops managed k8s cluster following the model used by [k8s@home](https://github.com/k8s-at-home). This repository defines the cluster and flux watches for updates and pushes them.
+
+## Cluster
+
+The servers that make up the cluster are provisioned via [Terraform](https://www.terraform.io/) and configured via [Ansible](https://www.ansible.com/) on bare metal on [Ubuntu Server](https://ubuntu.com/server). That bootstrap process as well as the k8s worker nodes are all configured via a private git repository, not included here.
+
+This repository manages everything else running within the k8s cluster. See setup/ flux bootstrap.
 
 ## Progress
 
