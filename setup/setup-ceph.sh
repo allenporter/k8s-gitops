@@ -5,6 +5,7 @@ set -e
 
 NAMESPACE="storage"
 SECRET_NAME="ceph-admin-secret"
+SECRET_TYPE="kubernetes.io/rbd"
 
 if [ -z $1 ]; then
   echo "Usage: $0 <ceph hostname>"
@@ -12,9 +13,8 @@ if [ -z $1 ]; then
 fi
 
 CEPH_HOST=$1
+SECRET_DATA=$(ssh ${CEPH_HOST} sudo ceph auth get-key client.admin)
 
-SECRET=$(ssh ${CEPH_HOST} sudo ceph auth get-key client.admin)
-
-kubectl create secret generic ${SECRET_NAME} --from-literal=key="${SECRET}" --namespace=${NAMESPACE}
+kubectl create secret generic ${SECRET_NAME} --from-literal=key="${SECRET_DATA}" --type="${SECRET_TYPE}" --namespace=${NAMESPACE}
 
 kubectl get secrets ${SECRET_NAME} --namespace=${NAMESPACE}
