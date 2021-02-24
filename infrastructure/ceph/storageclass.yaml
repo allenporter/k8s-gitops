@@ -12,5 +12,7 @@ parameters:
   adminSecretName: ceph-admin-secret
   adminSecretNamespace: storage
   pool: kube-pool
+  userId: kube
+  userSecretName: ceph-user-secret
 reclaimPolicy: Retain
 allowVolumeExpansion: true
