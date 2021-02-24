@@ -16,7 +16,9 @@ spec:
         external-dns.alpha.kubernetes.io/hostname: speedtest-prometheus.dev.mrv.thebends.org.
         external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
       hosts:
-        - speedtest-prometheus.dev.mrv.thebends.org
+        - host: speedtest-prometheus.dev.mrv.thebends.org
+          paths:
+            - path: /
       tls:
         - secretName: thebends-cert
           hosts:
