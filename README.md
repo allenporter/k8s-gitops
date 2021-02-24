@@ -10,9 +10,11 @@ The servers that make up the cluster are provisioned via [Terraform](https://www
 
 Initial cluster setup not included here includes:
 
-  - [haproxy](http://www.haproxy.org/) for load balancing kubernetes API
-  - [calico](https://docs.projectcalico.org/about/about-calico) for cluster internal networking
-  - [haproxy k8s ingress](https://github.com/haproxytech/kubernetes-ingress) for providing `ingress` for the cluster and tls keys
+  - [etcd](https://etcd.io/) with 3 nodes managed via ansible
+  - [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/) provisioned via ansible
+  - [haproxy](http://www.haproxy.org/) for load balancing kubernetes API via ansible
+  - [calico](https://docs.projectcalico.org/about/about-calico) for cluster internal networking via ansible
+  - [haproxy k8s ingress](https://github.com/haproxytech/kubernetes-ingress) for providing `ingress` for the cluster and tls keys via helm
 
 The cluster has multiple existing helm charts which are manually installed, and are being moved into this repository to automate deployment.
 
