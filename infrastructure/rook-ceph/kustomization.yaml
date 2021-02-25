@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: rook-ceph
 resources:
   - namespace.yaml
-  - storageclass.yaml
+  - release.yaml
