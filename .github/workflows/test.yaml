@@ -1,7 +1,7 @@
 name: Test
 
 on:
-  pull-reqeusts:
+  pull-requsts:
   push:
     branches:
      - main

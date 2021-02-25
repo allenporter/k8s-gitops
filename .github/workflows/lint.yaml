@@ -1,7 +1,11 @@
 ---
 name: Lint
 
-on: push
+on:
+  pull-requsts:
+  push:
+    branches:
+     - main
 
 jobs:
   yaml:
