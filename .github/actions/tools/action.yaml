@@ -2,4 +2,4 @@
 name: kustomize
 runs:
   using: docker
-  image: nekottyo/docker-kustomize-kubeval/blob/master/Dockerfile
+  image: Dockerfile
