@@ -9,4 +9,4 @@ resources:
   - kubernetes-dashboard.yaml
   - prometheus-community.yaml
   - kube-state-metrics.yaml
-  - root-release.yaml
+  - rook-release.yaml
