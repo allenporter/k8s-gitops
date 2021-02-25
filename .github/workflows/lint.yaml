@@ -17,5 +17,5 @@ jobs:
       - name: Run lint
         uses: ibiqlik/action-yamllint@v3
         with:
-          file_or_dir: "./clusters"
+          file_or_dir: "./"
           config_file: "./.github/yamllint-config.yaml"
