@@ -4,7 +4,7 @@ ENV KUBEVAL_VERSION=0.15.0 \
 
 RUN apk add --no-cache curl
 
-RUN curl -s https://github.com/instrumenta/kubeval/releases/download/${KUBEVAL_VERSION}/kubeval-linux-amd64.tar.gz \
+RUN curl -sLf https://github.com/instrumenta/kubeval/releases/download/${KUBEVAL_VERSION}/kubeval-linux-amd64.tar.gz \
     && tar xf kubeval-linux-amd64.tar.gz \
     && mv kubeval /usr/local/bin \
     && rm -rf kubeval-linux-amd64.tar.gz
