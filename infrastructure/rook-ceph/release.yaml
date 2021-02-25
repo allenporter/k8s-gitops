@@ -11,7 +11,7 @@ spec:
       chart: rook-ceph
       sourceRef:
         kind: HelmRepository
-        chart: rook-release
+        name: rook-release
         namespace: flux-system
       version: "0.1.1"
   interval: 5m
