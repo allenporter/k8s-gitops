@@ -2,7 +2,7 @@ FROM alpine:3.7
 ENV KUBEVAL_VERSION=0.15.0 \
     KUSTOMIZE_VERSION=4.0.1
 
-RUN apk add --non-cache curl
+RUN apk add --no-cache curl
 
 RUN curl -s https://github.com/instrumenta/kubeval/releases/download/${KUBEVAL_VERSION}/kubeval-linux-amd64.tar.gz \
     && tar xf kubeval-linux-amd64.tar.gz \
