@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - sources
   - redis
-  - ceph
   - rook-ceph
