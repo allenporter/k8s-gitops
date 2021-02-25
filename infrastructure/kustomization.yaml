@@ -4,3 +4,4 @@ resources:
   - sources
   - redis
   - ceph
+  - rook-ceph
