@@ -18,4 +18,4 @@ jobs:
         uses: ibiqlik/action-yamllint@v3
         with:
           file_or_dir: "./cluster"
-          config_file: ".yamllint.yaml"
+          config_file: "./.github/yamllint-config.yaml"
