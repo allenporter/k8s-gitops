@@ -1,0 +1,17 @@
+---
+name: Lint
+
+on: push
+
+jobs:
+  yaml:
+  runs-on: ubuntu-20.04
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run lint
+      uses: ibiqlik/action-yamllint@v3
+      with:
+        file_or_dir: "./cluster"
+        config_files: "./.github/yamllit.config.yaml"
