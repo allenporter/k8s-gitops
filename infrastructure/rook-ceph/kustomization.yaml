@@ -13,4 +13,4 @@ resources:
   - cephcluster.yaml
 spec:
   dependsOn:
-    - rook-ceph
+    - name: rook-ceph
