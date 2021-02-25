@@ -13,11 +13,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Checkout docker-kustomize-kubeval
-        uses: actions/checkout@v2
-        with:
-          repository: nekottyo/docker-kustomize-kubeval
-          path: docker-kustomize-kubeval
       - name: Setup tools
         uses: ./.github/actions/tools
       - name: Validate manifests
