@@ -2,7 +2,7 @@
 name: Lint
 
 on:
-  pull-requsts:
+  pull-requests:
   push:
     branches:
      - main
