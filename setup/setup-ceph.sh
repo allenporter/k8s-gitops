@@ -1,11 +1,10 @@
 #!/bin/bash
-# Fetches the ceph-admin-secret from the cluster over ssh.
+# Fetchs the external cluster configuration over ssh from a host that already
+# has been bootstrapped with access.
+#
+# See https://rook.io/docs/rook/v1.5/ceph-cluster-crd.html#external-cluster
 
 set -e
-
-NAMESPACE="storage"
-SECRET_NAME="ceph-admin-secret"
-SECRET_TYPE="kubernetes.io/rbd"
 
 if [ -z $1 ]; then
   echo "Usage: $0 <ceph hostname>"
@@ -13,8 +12,10 @@ if [ -z $1 ]; then
 fi
 
 CEPH_HOST=$1
-SECRET_DATA=$(ssh ${CEPH_HOST} sudo ceph auth get-key client.admin)
+NAMESPACE="rook-ceph"
+ROOK_EXTERNAL_FSID=$(ssh ${CEPH_HOST} sudo ceph fsid)
+ROOK_EXTERNAL_ADMIN_SECRET=$(ssh ${CEPH_HOST} sudo ceph auth get-key client.admin)
+# Pick the first monitor
+ROOK_EXTERNAL_CEPH_MON_DATA=$(ssh ${CEPH_HOST} sudo ceph mon dump | egrep "^[0-9]: " | sed 's/.*v1:\(.*:6789\).*/\1/' | head -1)
 
-kubectl create secret generic ${SECRET_NAME} --from-literal=key="${SECRET_DATA}" --type="${SECRET_TYPE}" --namespace=${NAMESPACE}
-
-kubectl get secrets ${SECRET_NAME} --namespace=${NAMESPACE}
+source <(curl -s https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/import-external-cluster.sh)
