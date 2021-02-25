@@ -16,5 +16,3 @@ spec:
       version: "1.5.7"
   interval: 5m
   values:
-    crds:
-      enabled: false
