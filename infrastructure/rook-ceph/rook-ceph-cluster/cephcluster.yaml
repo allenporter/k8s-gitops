@@ -2,7 +2,7 @@
 apiVersion: ceph.rook.io/v1
 kind: CephCluster
 metadata:
-  name: rook-ceph-external
+  name: rook-ceph
   namespace: rook-ceph
 spec:
   external:
