@@ -9,3 +9,10 @@ spec:
     enable: true
   crashCollector:
     disable: true
+  monitoring:
+    enabled: true
+    rulesNamespace: rook-ceph
+    externalMgrEndpoints:
+      - ip: 10.10.20.5
+      - ip: 10.10.20.6
+      - ip: 10.10.20.7
