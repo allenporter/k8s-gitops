@@ -36,3 +36,10 @@ echo "ROOK_EXTERNAL_FSID=${ROOK_EXTERNAL_FSID}"
 echo "ROOK_EXTERNAL_CEPH_MON_DATA=${ROOK_EXTERNAL_CEPH_MON_DATA}"
 
 source <(curl -s https://raw.githubusercontent.com/rook/rook/master/cluster/examples/kubernetes/ceph/import-external-cluster.sh)
+
+# Following https://github.com/rook/rook/issues/5732#issuecomment-667013311
+# To get this to work, manually needed to delete these keys:
+# rook-ceph rook-csi-cephfs-node
+# rook-ceph rook-csi-cephfs-provisioner
+# rook-ceph rook-csi-rbd-node
+# rook-ceph rook-csi-rbd-provisioner
