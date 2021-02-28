@@ -23,7 +23,7 @@ jobs:
           title: "Update renovatebot helm-release annotations"
           signoff: true
           committer: "Allen Porter <allenporter@users.noreply.github.com>"
-          authorr: "Allen Porter <allenporter@users.noreply.github.com>"
+          author: "Allen Porter <allenporter@users.noreply.github.com>"
           assignees: allenporter
           commit-message: "Update HelmRelease via renovatebot annotations"
           body: |
