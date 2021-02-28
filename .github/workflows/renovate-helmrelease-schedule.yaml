@@ -1,0 +1,31 @@
+---
+name: Schedule - Rennovate Helm Releases
+on:
+  worfklow_dispatch:
+  schedule:
+    - cron: '15 3 * * *'   # Evenings PST
+jobs:
+  renovate-helmrelease:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Renovate Helm Releases
+        uses: k8s-at-home/renovate-helm-releases@v1
+        with:
+          cluster-path: ./clusters
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: renovate-helm-release-annotations
+          delete-branch: true
+          title: "Update renovatebot helm-release annotations"
+          signoff: true
+          committer: "Allen Porter <allenporter@users.noreply.github.com>"
+          authorr: "Allen Porter <allenporter@users.noreply.github.com>"
+          assignees: allenporter
+          commit-message: "Update HelmRelease via renovatebot annotations"
+          body: |
+            Add Renovate annotations to HelmReleases to pick up new versions of Helm charts
+          labels: renovate/helm-release-annotations
