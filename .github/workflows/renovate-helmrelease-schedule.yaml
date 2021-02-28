@@ -10,15 +10,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Renovate infrastruture Helm Releases
+      - name: Renovate Helm Releases
         uses: k8s-at-home/renovate-helm-releases@v1
         with:
-          cluster-path: ./infrastructure
-          debug: true
-      - name: Renovate monitoring Helm Releases
-        uses: k8s-at-home/renovate-helm-releases@v1
-        with:
-          cluster-path: ./monitoring
+          cluster-path: ./
           debug: true
       - name: Create pull request
         uses: peter-evans/create-pull-request@v3
