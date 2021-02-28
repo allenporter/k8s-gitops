@@ -24,4 +24,4 @@ spec:
         enabled: true
       persistentVolume:
         enabled: true
-        storageClass: "ceph-block"
+        storageClass: "rook-ceph-block"
