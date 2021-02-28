@@ -19,7 +19,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: renovate-helm-release-annotations
-          delete-branch: true
+          delete-branch: false
           title: "Update renovatebot helm-release annotations"
           signoff: true
           committer: "Allen Porter <allenporter@users.noreply.github.com>"
