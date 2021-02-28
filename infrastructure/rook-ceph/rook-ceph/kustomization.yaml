@@ -7,3 +7,4 @@ metadata:
 resources:
   - namespace.yaml
   - release.yaml
+  - storageclass.yaml
