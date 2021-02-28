@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - rook-ceph
   - rook-ceph-cluster
-  - rook-ceph-storage
