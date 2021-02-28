@@ -15,4 +15,6 @@ spec:
         namespace: flux-system
       version: "1.5.7"
   interval: 5m
+  # Default values:
+  # https://github.com/rook/rook/blob/master/cluster/charts/rook-ceph/values.yaml
   values:
