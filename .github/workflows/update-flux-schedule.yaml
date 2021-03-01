@@ -13,6 +13,7 @@ jobs:
       - name: Setup Flux CLI
         uses: fluxcd/flux2/action@main
       - name: Upgrade Flux
+        id: upgrade
         run: |
           UGLY_VERSION="$(flux -v)"
           VERSION="v${UGLY_VERSION#*flux version }"
