@@ -39,6 +39,6 @@ spec:
 
             static_configs:
               - targets:
-                - 'mon01.prod:9090'
-                - 'mon02.prod:9090'
-                - 'mon03.prod:9090'
+                  - 'mon01.prod:9090'
+                  - 'mon02.prod:9090'
+                  - 'mon03.prod:9090'
