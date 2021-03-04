@@ -23,3 +23,21 @@ spec:
     server:
       ingress:
         enabled: true
+
+    serverFiles:
+      prometheus.yml:
+        scrape_configs:
+          - job_name: 'federate'
+            scrape_interval: 15s
+            honor_labels: true
+            metrics_path: '/federate'
+            params:
+              'match[]':
+                - '{job="prometheus"}'
+                - '{__name__=~"job:.*"}'
+
+            static_configs:
+              - targets:
+                - 'mon01.prod:9090'
+                - 'mon02.prod:9090'
+                - 'mon03.prod:9090'
