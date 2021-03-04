@@ -10,3 +10,4 @@ resources:
   - prometheus-community.yaml
   - kube-state-metrics.yaml
   - rook-release.yaml
+  - grafana.yaml
