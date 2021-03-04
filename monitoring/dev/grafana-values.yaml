@@ -26,20 +26,20 @@ spec:
       datasources.yaml:
         apiVersion: 1
         datasources:
-           - name: Prometheus
-             type: prometheus
-             url: https://prometheus.dev.mrv.thebends.org
-             access: direct
-             isDefault: true
-           - name: mon01
-             type: prometheus
-             url: http://mon01.prod:9100
-             access: direct
-           - name: mon02
-             type: prometheus
-             url: http://mon02.prod:9100
-             access: direct
-           - name: mon03
-             type: prometheus
-             url: http://mon03.prod:9100
-             access: direct
+          - name: Prometheus
+            type: prometheus
+            url: https://prometheus.dev.mrv.thebends.org
+            access: direct
+            isDefault: true
+          - name: mon01
+            type: prometheus
+            url: http://mon01.prod:9100
+            access: direct
+          - name: mon02
+            type: prometheus
+            url: http://mon02.prod:9100
+            access: direct
+          - name: mon03
+            type: prometheus
+            url: http://mon03.prod:9100
+            access: direct
