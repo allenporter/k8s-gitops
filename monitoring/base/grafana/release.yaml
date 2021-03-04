@@ -20,6 +20,5 @@ spec:
   # Default values
   # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
   values:
-    server:
-      ingress:
-        enabled: true
+    ingress:
+      enabled: true
