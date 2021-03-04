@@ -35,14 +35,11 @@ spec:
              type: prometheus
              url: http://mon01.prod:9100
              access: direct
-             isDefault: true
            - name: mon02
              type: prometheus
              url: http://mon02.prod:9100
              access: direct
-             isDefault: true
            - name: mon03
              type: prometheus
              url: http://mon03.prod:9100
              access: direct
-             isDefault: true
