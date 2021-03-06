@@ -1,6 +1,0 @@
-usePassword: false
-cluster:
-  enabled: false
-master:
-  persistence:
-    enabled: false
