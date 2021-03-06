@@ -1,0 +1,33 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: external-dns
+  namespace: routing
+spec:
+  chart:
+    spec:
+      chart: external-dns
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  # Default values
+  # https://github.com/bitnami/charts/blob/master/bitnami/external-dns/values.yaml
+  values:
+    fqdnTemplates: ["{{.Name}}.mrv.thebends.org."]
+    rfc2136:
+      host: "10.10.1.10"
+      zone: "mrv.thebends.org"
+      tsigSecretAlg: hmac-sha512
+    createSecret: true
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+    interval: "30s"
+
