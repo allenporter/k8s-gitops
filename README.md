@@ -22,15 +22,6 @@ This repository manages everything else running within the k8s cluster. See setu
 
 The cluster has multiple existing helm charts which are manually installed, and are being moved into this repository to automate deployment. I was effectively managing per environment kustomization myself via separate helm values files.
 
-
-## Progress
-
-  [x] Bootstrapped flux and operators
-  [x] podinfo example up and running
-  [ ] ceph for persistent volume claims
-  [ ] prometheus speed test
-
-
 ## Resources
 
   - https://github.com/fluxcd/flux2-kustomize-helm-example
