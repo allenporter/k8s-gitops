@@ -1,3 +1,5 @@
 .env
 .swp
+.tox
+__pycache__
 venv
