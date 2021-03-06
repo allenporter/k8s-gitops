@@ -18,3 +18,4 @@ spec:
       retries: 3
   # https://artifacthub.io/packages/helm/jetstack/cert-manager#configuration
   values:
+    installCRDs: true
