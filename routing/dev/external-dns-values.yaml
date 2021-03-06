@@ -13,4 +13,4 @@ spec:
     enable: true
   values:
     tsigKeyname: externaldns-dev-key
-    domainFilters: [ "dev.mrv.thebends.org" ]
+    domainFilters: ["dev.mrv.thebends.org"]

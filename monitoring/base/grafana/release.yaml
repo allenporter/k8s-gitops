@@ -23,5 +23,5 @@ spec:
     ingress:
       enabled: true
 
-  # Get admin password example:
-  # kubectl get secret grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+# Get admin password example:
+# kubectl get secret grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
