@@ -3,7 +3,7 @@ kind: HelmRelease
 metadata:
   name: cert-manager
 spec:
-  releaseName: cerg-manager
+  releaseName: cert-manager
   chart:
     spec:
       chart: cert-manager
