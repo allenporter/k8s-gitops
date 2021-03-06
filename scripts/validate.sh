@@ -15,4 +15,3 @@ find . -type f -name ${KUSTOMIZE_CONFIG} -print0 | while IFS= read -r -d $'\0' f
       exit 1
     fi
 done
-
