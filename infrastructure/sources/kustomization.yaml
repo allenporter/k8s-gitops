@@ -11,3 +11,4 @@ resources:
   - kube-state-metrics.yaml
   - rook-release.yaml
   - grafana.yaml
+  - jetstack.yaml
