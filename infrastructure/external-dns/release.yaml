@@ -34,3 +34,5 @@ spec:
     metrics:
       enabled: true
     interval: "30s"
+    annotations:
+      meta.helm.sh/release-namespace: external-dns
