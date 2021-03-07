@@ -27,6 +27,4 @@ spec:
     createSecret: true
     metrics:
       enabled: true
-      serviceMonitor:
-        enabled: true
     interval: "30s"
