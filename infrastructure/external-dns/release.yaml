@@ -5,9 +5,11 @@ metadata:
   name: external-dns
   namespace: routing
 spec:
+  releaseName: external-dns
   chart:
     spec:
       chart: external-dns
+      version: ">=4.8.6"
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -16,14 +18,18 @@ spec:
   install:
     remediation:
       retries: 3
+  test:
+    enable: true
   # Default values
   # https://github.com/bitnami/charts/blob/master/bitnami/external-dns/values.yaml
   values:
     fqdnTemplates: ["{{.Name}}.mrv.thebends.org."]
+    domainFilters: ["dev.mrv.thebends.org", "prod.mrv.thebends.org"]
     rfc2136:
       host: "10.10.1.10"
       zone: "mrv.thebends.org"
       tsigSecretAlg: hmac-sha512
+      tsigKeyname: externaldns-key
     createSecret: true
     metrics:
       enabled: true
