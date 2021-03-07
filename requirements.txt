@@ -16,6 +16,6 @@ pyparsing==2.4.7
 pytest==6.2.2
 PyYAML==5.4.1
 six==1.15.0
-smmap==4.0.0
+smmap==3.0.5
 toml==0.10.2
 virtualenv==20.4.2
