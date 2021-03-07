@@ -10,6 +10,8 @@ if [ ! -d ".git" ]; then
   exit 1
 fi
 
+sudo apt-get install -y git-crypt gnupg
+
 python3 -m venv venv
 source venv/bin/activate
 
