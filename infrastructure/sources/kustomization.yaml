@@ -12,3 +12,4 @@ resources:
   - rook-release.yaml
   - grafana.yaml
   - jetstack.yaml
+  - haproxytech.yaml
