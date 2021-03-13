@@ -7,4 +7,4 @@ resources:
   - selfsigned-cert.yaml
   - test-selfsigned.yaml
 patchesStrategicMerge:
-  - cecrtmanager-values.yaml
+  - certmanager-values.yaml
