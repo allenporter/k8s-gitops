@@ -14,7 +14,6 @@ Initial cluster setup not included here includes:
   - [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/) provisioned via ansible
   - [haproxy](http://www.haproxy.org/) for load balancing kubernetes API via ansible
   - [calico](https://docs.projectcalico.org/about/about-calico) for cluster internal networking via ansible
-  - [haproxy k8s ingress](https://github.com/haproxytech/kubernetes-ingress) for providing `ingress` for the cluster and tls keys via helm
 
 This repository manages everything else running within the k8s cluster. See setup/ flux bootstrap.
 
