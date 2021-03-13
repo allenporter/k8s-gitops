@@ -11,6 +11,12 @@ if [ -z $1 ]; then
   exit 1
 fi
 
+echo "Creating namespace"
+kubectl apply -f infrastructure/rook-ceph/rook-ceph/namespace.yaml
+
+echo "Creating CRDs"
+kubectl apply -f https://raw.githubusercontent.com/rook/rook/release-1.5/cluster/examples/kubernetes/ceph/crds.yaml
+
 CEPH_HOST=$1
 NAMESPACE="rook-ceph"
 ROOK_EXTERNAL_FSID=$(ssh ${CEPH_HOST} sudo ceph fsid)
@@ -29,8 +35,6 @@ CSI_RBD_NODE_SECRET_SECRET=${SECRET}
 CSI_RBD_PROVISIONER_SECRET=${SECRET}
 CSI_CEPHFS_NODE_SECRET=${SECRET}
 CSI_CEPHFS_PROVISIONER_SECRET=${SECRET}
-
-#ROOK_EXTERNAL_ADMIN_SECRET
 
 echo "ROOK_EXTERNAL_FSID=${ROOK_EXTERNAL_FSID}"
 echo "ROOK_EXTERNAL_CEPH_MON_DATA=${ROOK_EXTERNAL_CEPH_MON_DATA}"
