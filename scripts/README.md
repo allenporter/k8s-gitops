@@ -11,7 +11,22 @@ Flux setup is modeled after these guides:
   - https://github.com/fluxcd/flux2-kustomize-helm-example
   - https://github.com/billimek/k8s-gitops/tree/master/setup
 
+See https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/ for more details on
+multi-cluster kubernetes configuration.
+
+```
+$ cp scripts/.env.sample scripts.env
+# Edit scripts.env and set environment variables
+$ source scripts/.env
+# Set up the flux environment based on ENV settings.
+$ scripts/setup-flux.sh
+```
+
 ## Storage
 
 Ceph is also currently configured externally, managed via ansible. This repo
 just manages setup of ceph for use within kuberntes.
+
+```
+$ scripts/setup-ceph.sh
+```

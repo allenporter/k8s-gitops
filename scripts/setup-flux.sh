@@ -2,6 +2,11 @@
 
 FLUX=flux
 
+if [ -z "${ENV}" ]; then
+  echo "Required env ENV not set"
+  exit 1
+fi
+
 if [ -z "${GITHUB_USER}" ]; then
   echo "Required env GITHUB_USER not set"
   exit 1
@@ -29,8 +34,9 @@ fi
 echo
 echo "Flux bootstrap"
 ${FLUX} bootstrap github \
+    --context="${ENV}-context" \
     --owner=${GITHUB_USER} \
     --repository=${GITHUB_REPO} \
     --branch=main \
     --personal \
-    --path=clusters/dev
+    --path=clusters/${ENV}
