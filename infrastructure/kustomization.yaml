@@ -5,5 +5,4 @@ resources:
   - sources
   - redis
   - rook-ceph
-  - certmanager
   - external-dns
