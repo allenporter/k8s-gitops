@@ -18,3 +18,5 @@ spec:
   # Default values:
   # https://github.com/rook/rook/blob/master/cluster/charts/rook-ceph/values.yaml
   values:
+    crds:
+      false
