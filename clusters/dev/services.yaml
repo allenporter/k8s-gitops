@@ -2,21 +2,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
-  name: monitoring
+  name: services
   namespace: flux-system
 spec:
   interval: 10m0s
   dependsOn:
     - name: infrastructure
-    - name: services
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./monitoring/dev
+  path: ./services
   prune: true
   validation: client
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v1beta1
-      kind: HelmRelease
-      name: podinfo
-      namespace: podinfo
