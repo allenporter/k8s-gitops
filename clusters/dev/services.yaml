@@ -12,6 +12,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./services
+  path: ./services/dev
   prune: true
   validation: client
