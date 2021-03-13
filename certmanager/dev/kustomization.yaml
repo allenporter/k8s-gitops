@@ -3,6 +3,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: services
 resources:
-  - selfsigned-cert.yaml
-  - test-selfsigned.yaml
+  - ../base
 patchesStrategicMerge:
+  - values.yaml
