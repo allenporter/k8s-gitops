@@ -1,0 +1,17 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: metallb
+  namespace: metallb
+spec:
+  chart:
+    spec:
+      version: ">=2.3.2"
+  values:
+    configInline:
+      address-pools:
+      - name: generic-cluster-pool
+        protocol: layer2
+        addresses:
+        - 10.10.24.1-10.10.24.254

@@ -1,0 +1,33 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: haproxy
+  namespace: haproxy
+spec:
+  releaseName: haproxy
+  chart:
+    spec:
+      chart: kubernetes-ingress
+      sourceRef:
+        kind: HelmRepository
+        name: haproxytech
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  # Default values
+  # https://github.com/haproxytech/helm-charts/blob/master/kubernetes-ingress/values.yaml
+  values:
+    controller:
+      config:
+        ssl-redirect: "true"
+        syslog-server: "address:10.10.1.10,facility:local0,level:info"
+      defaultTLSSecret:
+        enabled: true
+        secret: thebends-wildcard-cert
+      service:
+        type: LoadBalancer
+      logging:
+        level: debug
