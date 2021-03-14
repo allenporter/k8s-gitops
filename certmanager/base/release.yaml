@@ -20,3 +20,6 @@ spec:
   # https://artifacthub.io/packages/helm/jetstack/cert-manager#configuration
   values:
     installCRDs: true
+    extraArgs:
+      - --dns01-recursive-nameservers-only
+      - --dns01-recursive-nameservers="8.8.8.8:53"
