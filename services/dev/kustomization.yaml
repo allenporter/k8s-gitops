@@ -4,8 +4,8 @@ kind: Kustomization
 resources:
   - ../base/haproxy
   - ../base/metallb
-  - selfsigned-cert.yaml
-  - test-selfsigned.yaml
+  - letsencrypt.yaml
+  - thebends-dev.yaml
 patchesStrategicMerge:
   - haproxy-values.yaml
   - metallb-values.yaml
