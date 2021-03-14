@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: thebends-dev
+  namespace: cert-manager
+spec:
+  secretName: thebends-dev-tls
+  issuerRef:
+    name: letsencrypt
+  dnsNames:
+  - *.dev.mrv.thebends.org
