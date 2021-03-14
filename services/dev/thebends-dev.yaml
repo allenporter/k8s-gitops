@@ -1,3 +1,4 @@
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -8,4 +9,4 @@ spec:
   issuerRef:
     name: letsencrypt
   dnsNames:
-  - *.dev.mrv.thebends.org
+    - "*.dev.mrv.thebends.org"
