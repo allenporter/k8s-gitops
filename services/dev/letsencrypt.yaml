@@ -3,6 +3,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: letsencrypt
+  namespace: cert-manager
 spec:
   acme:
     # You must replace this email address with your own.
