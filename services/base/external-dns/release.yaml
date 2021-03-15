@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: external-dns
-  namespace: routing
+  namespace: external-dns
 spec:
   releaseName: external-dns
   chart:
@@ -22,15 +22,17 @@ spec:
     enable: true
   # Default values
   # https://github.com/bitnami/charts/blob/master/bitnami/external-dns/values.yaml
+  valuesFrom:
   values:
     fqdnTemplates: ["{{.Name}}.mrv.thebends.org."]
-    domainFilters: ["dev.mrv.thebends.org", "prod.mrv.thebends.org"]
     rfc2136:
       host: "10.10.1.10"
       zone: "mrv.thebends.org"
       tsigSecretAlg: hmac-sha512
-      tsigKeyname: externaldns-key
-    createSecret: true
+      tsigKeyname: external-dns-key
+    # See https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/rfc2136.md
+    # Key is rfc2136_tsig_secret
+    createSecret: false
     metrics:
       enabled: true
     interval: "30s"

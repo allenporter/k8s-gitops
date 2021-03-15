@@ -4,8 +4,10 @@ kind: Kustomization
 resources:
   - ../base/haproxy
   - ../base/metallb
+  - ../base/external-dns
   - letsencrypt.yaml
   - thebends-dev.yaml
 patchesStrategicMerge:
   - haproxy-values.yaml
   - metallb-values.yaml
+  - external-dns-values.yaml
