@@ -10,8 +10,7 @@ spec:
     # Let's Encrypt will use this to contact you about expiring
     # certificates, and issues related to your account.
     email: allen.porter@gmail.com
-    # TODO: Switch to production once this is working
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-issuer-account-key
     solvers:
