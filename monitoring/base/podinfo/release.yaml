@@ -17,6 +17,8 @@ spec:
   install:
     remediation:
       retries: 3
+  test:
+    enable: true
   # Default values
   # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
   values:
@@ -24,3 +26,5 @@ spec:
     ingress:
       enabled: true
       path: "/"
+      annotations:
+        kubernetes.io/ingress.class: haproxy

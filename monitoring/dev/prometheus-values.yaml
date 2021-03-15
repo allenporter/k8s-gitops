@@ -8,13 +8,10 @@ spec:
   chart:
     spec:
       version: ">=13.3.3"
-  test:
-    enable: true
   values:
     server:
       ingress:
         annotations:
-          kubernetes.io/ingress.class: haproxy-dev
           external-dns.alpha.kubernetes.io/hostname: prometheus.dev.mrv.thebends.org.
           external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
         hosts:

@@ -17,6 +17,8 @@ spec:
   install:
     remediation:
       retries: 3
+  test:
+    enable: true
   # Default values
   # https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard#configuration
   values:
@@ -25,3 +27,5 @@ spec:
         haproxy.org/server-ssl: "true"
     ingress:
       enabled: true
+      annotations:
+        kubernetes.io/ingress.class: haproxy

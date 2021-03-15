@@ -8,6 +8,4 @@ spec:
   chart:
     spec:
       version: ">=2.1.0"
-  test:
-    enable: true
   values:
