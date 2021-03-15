@@ -17,11 +17,15 @@ spec:
   install:
     remediation:
       retries: 3
+  test:
+    enable: true
   # Default values
   # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
   values:
     ingress:
       enabled: true
+      annotations:
+        kubernetes.io/ingress.class: haproxy
 
 # Get admin password example:
 # kubectl get secret grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo

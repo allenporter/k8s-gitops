@@ -8,12 +8,9 @@ spec:
   chart:
     spec:
       version: ">=6.4.5"
-  test:
-    enable: true
   values:
     ingress:
       annotations:
-        kubernetes.io/ingress.class: haproxy-dev
         external-dns.alpha.kubernetes.io/hostname: grafana.dev.mrv.thebends.org.
         external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
       hosts:
