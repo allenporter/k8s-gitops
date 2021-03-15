@@ -4,3 +4,4 @@ kind: Kustomization
 namespace: cert-manager
 resources:
   - letsencrypt.yaml
+  - wildcard-cartificate.yaml
