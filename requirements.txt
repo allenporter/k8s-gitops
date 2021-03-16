@@ -18,4 +18,4 @@ PyYAML==5.4.1
 six==1.15.0
 smmap==3.0.5
 toml==0.10.2
-virtualenv==20.4.2
+virtualenv==20.4.3
