@@ -1,0 +1,44 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  chart:
+    spec:
+      version: ">=6.3.1"
+  values:
+    ingress:
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: home-assistant.dev.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
+        cert-manager.io/cluster-issuer: letsencrypt
+      hosts:
+        - hsot: home-assistant.dev.mrv.thebends.org
+          path:
+            - path: /
+      tls:
+        - secretName: home-assistant-tls
+          hosts:
+            - home-assistant.dev.mrv.thebends.org
+    env:
+      HASS_EXTERNAL_URL: "https://ha-dev.thebends.org:28123"
+      HASS_INTERNAL_URL: "https://home-assistant.dev.mrv.thebends.org"
+
+    addons:
+      codeserver:
+        ingress:
+          enabled: true
+          annotations:
+            kubernetes.io/ingress.class: haproxy
+            external-dns.alpha.kubernetes.io/hostname: vscode-ha.dev.mrv.thebends.org.
+            external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org
+          hosts:
+            - host: vscode-ha.dev.mrv.thebends.org
+              paths:
+                - path: /
+          tls:
+            - secretName: home-assistant-tls
+              hosts:
+                - vscode-ha.dev.mrv.thebends.org
