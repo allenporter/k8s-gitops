@@ -13,9 +13,10 @@ spec:
       annotations:
         external-dns.alpha.kubernetes.io/hostname: kubernetes-dashboard.dev.mrv.thebends.org.
         external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
+        cert-manager.io/cluster-issuer: letsencrypt
       hosts:
         - kubernetes-dashboard.dev.mrv.thebends.org
       tls:
-        - secretName: thebends-cert
+        - secretName: kubernetes-dashboard-tls
           hosts:
             - kubernetes-dashboard.dev.mrv.thebends.org
