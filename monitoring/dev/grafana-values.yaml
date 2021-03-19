@@ -13,10 +13,11 @@ spec:
       annotations:
         external-dns.alpha.kubernetes.io/hostname: grafana.dev.mrv.thebends.org.
         external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
+        cert-manager.io/cluster-issuer: letsencrypt
       hosts:
         - grafana.dev.mrv.thebends.org
       tls:
-        - secretName: thebends-cert
+        - secretName: grafana-tls
           hosts:
             - grafana.dev.mrv.thebends.org
     datasources:
