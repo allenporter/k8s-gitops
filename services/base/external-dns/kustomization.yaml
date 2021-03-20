@@ -5,5 +5,3 @@ namespace: external-dns
 resources:
   - namespace.yaml
   - release.yaml
-patchesStrategicMerge:
-  - secret.yaml
