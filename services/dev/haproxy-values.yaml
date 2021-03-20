@@ -10,9 +10,7 @@ spec:
       version: ">=1.12.3"
   values:
     controller:
-      ingressClass: haproxy
       service:
-        type: LoadBalancer
         annotations:
           external-dns.alpha.kubernetes.io/hostname: prx02.dev.mrv.thebends.org.
         loadBalancerIP: "10.10.24.4"
