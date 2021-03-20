@@ -27,6 +27,7 @@ spec:
             - home-assistant.dev.mrv.thebends.org
     env:
       HASS_INTERNAL_URL: "https://home-assistant.dev.mrv.thebends.org"
+      HASS_EXTERNAL_URL: "https://ha-dev.thebends.org:28123"
 
     addons:
       codeserver:
