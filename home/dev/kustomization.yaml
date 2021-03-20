@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ../base/home-assistant
 patchesStrategicMerge:
-  - home-assistant-values.yaml
+#  - home-assistant-values.yaml
