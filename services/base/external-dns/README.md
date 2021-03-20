@@ -20,10 +20,10 @@ ingress:
     thebends.org/prod-namespace: ""
 ```
 
-The external-dns chart creates a secrete key that needs a one time registration with the DNS server. You can
-list the keys with:
+## Secret Configuration
+
+external-dns requires a key shared with the DNS server. set the key for external-dns with:
 
 ```
-$ kubectl get secret -n external-dns
-$ kubectl describe secret -n external-dns external-dns-dev-token-<xxx>
+$ kubectl create secret generic external-dns-key -n external-dns --from-literal="tsigSecret=MY-SECRET"
 ```
