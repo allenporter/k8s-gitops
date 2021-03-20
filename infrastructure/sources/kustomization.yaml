@@ -13,4 +13,3 @@ resources:
   - grafana.yaml
   - jetstack.yaml
   - haproxytech.yaml
-  - appscode.yaml
