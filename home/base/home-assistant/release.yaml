@@ -22,13 +22,13 @@ spec:
   # Default values
   # https://github.com/k8s-at-home/charts/blob/master/charts/stable/home-assistant/values.yaml
   values:
-  ingress:
-    enabled: true
-    annotations:
-      kubernetes.io/ingress.class: haproxy
-  addons:
-    codeserver:
-      ingress:
-        enabled: true
-        annotations:
-          kubernetes.io/ingress.class: haproxy
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: haproxy
+    addons:
+      codeserver:
+        ingress:
+          enabled: true
+          annotations:
+            kubernetes.io/ingress.class: haproxy
