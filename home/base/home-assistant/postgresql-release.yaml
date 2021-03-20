@@ -28,6 +28,8 @@ spec:
       create: true
     rbac:
       create: true
+    # To get postgresql password:
+    # kubectl get secret postgresql -n home-assistant -o jsonpath="{.data.postgresql-password}" | base64 --decode
     postgresqlDatabase: home-assistant
     metrics:
       enabled: true

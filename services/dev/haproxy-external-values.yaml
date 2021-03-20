@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: haproxy
+  name: haproxy-external
   namespace: haproxy
 spec:
   chart:
@@ -12,5 +12,5 @@ spec:
     controller:
       service:
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: prx02.dev.mrv.thebends.org.
-        loadBalancerIP: "10.10.24.4"
+          external-dns.alpha.kubernetes.io/hostname: prx03.dev.mrv.thebends.org.
+        loadBalancerIP: "10.10.26.2"

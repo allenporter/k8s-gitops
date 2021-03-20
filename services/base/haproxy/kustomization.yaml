@@ -5,3 +5,4 @@ namespace: haproxy
 resources:
   - namespace.yaml
   - release.yaml
+  - external-release.yaml
