@@ -27,9 +27,26 @@ spec:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: haproxy
+    persistence:
+      config:
+        enabled: true
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 5Gi
+    additionalVolumes:
+      - name: ssh-creds
+        secret:
+          secretName: git-creds
+          defaultMode: 0400
+          optional: true
     addons:
       codeserver:
         enabled: true
+        volumeMounts:
+          - name: config
+            mountPath: /config
+          - name: ssh-creds
+            mountPath: /root/.ssh/
         ingress:
           enabled: true
           annotations:
