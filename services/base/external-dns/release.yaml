@@ -40,9 +40,7 @@ spec:
       meta.helm.sh/release-namespace: external-dns
     logLevel: debug
   valuesFrom:
-  - secretKeyRef:
-      # Intended to store rfc2136.tsigSecret
-      name: external-dns-values
-      namespace: external-dns
-      key: secret-values.yaml
-      optional: false
+  - kind: Secret
+    name: external-dns-key
+    valuesKey: tsigSecret
+    targetPath: rfc2136.tsigSecret
