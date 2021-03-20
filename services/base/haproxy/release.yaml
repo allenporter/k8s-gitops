@@ -24,9 +24,6 @@ spec:
       config:
         ssl-redirect: "true"
         syslog-server: "address:10.10.1.10,facility:local0,level:info"
-      defaultTLSSecret:
-        enabled: true
-        secret: "thebends-wildcard-cert"
       service:
         type: LoadBalancer
       logging:

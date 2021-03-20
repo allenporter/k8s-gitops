@@ -10,4 +10,3 @@ patchesStrategicMerge:
   - haproxy-values.yaml
   - metallb-values.yaml
   - external-dns-values.yaml
-  - wildcard-certificate.yaml
