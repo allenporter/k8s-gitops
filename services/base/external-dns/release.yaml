@@ -24,6 +24,7 @@ spec:
   # https://github.com/bitnami/charts/blob/master/bitnami/external-dns/values.yaml
   values:
     fqdnTemplates: ["{{.Name}}.mrv.thebends.org."]
+    provider: rfc2136
     rfc2136:
       host: "10.10.1.10"
       zone: "mrv.thebends.org"
@@ -37,3 +38,4 @@ spec:
     interval: "30s"
     annotations:
       meta.helm.sh/release-namespace: external-dns
+    logLevel: debug
