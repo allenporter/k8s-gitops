@@ -8,5 +8,6 @@ resources:
   - ../base/certs/
 patchesStrategicMerge:
   - haproxy-values.yaml
+  - haproxy-external-values.yaml
   - metallb-values.yaml
   - external-dns-values.yaml
