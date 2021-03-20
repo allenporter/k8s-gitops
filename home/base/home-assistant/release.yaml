@@ -29,6 +29,7 @@ spec:
         kubernetes.io/ingress.class: haproxy
     addons:
       codeserver:
+        enabled: true
         ingress:
           enabled: true
           annotations:
