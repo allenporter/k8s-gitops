@@ -22,7 +22,6 @@ spec:
     enable: true
   # Default values
   # https://github.com/bitnami/charts/blob/master/bitnami/external-dns/values.yaml
-  valuesFrom:
   values:
     fqdnTemplates: ["{{.Name}}.mrv.thebends.org."]
     rfc2136:
