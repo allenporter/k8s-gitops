@@ -25,6 +25,7 @@ spec:
   values:
     fqdnTemplates: ["{{.Name}}.mrv.thebends.org."]
     provider: rfc2136
+    txtOwnerId: "k8s"
     rfc2136:
       host: "10.10.1.10"
       zone: "mrv.thebends.org"
