@@ -8,7 +8,7 @@ spec:
   releaseName: postgresql
   chart:
     spec:
-      chart: postgreqsl
+      chart: postgresql
       sourceRef:
         kind: HelmRepository
         name: bitnami
