@@ -15,8 +15,8 @@ spec:
         external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
         cert-manager.io/cluster-issuer: letsencrypt
       hosts:
-        - hsot: home-assistant.dev.mrv.thebends.org
-          path:
+        - host: home-assistant.dev.mrv.thebends.org
+          paths:
             - path: /
       tls:
         - secretName: home-assistant-tls
