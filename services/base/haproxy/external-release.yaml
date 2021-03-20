@@ -21,7 +21,7 @@ spec:
   # https://github.com/haproxytech/helm-charts/blob/master/kubernetes-ingress/values.yaml
   values:
     controller:
-      ingressClass: haproxy
+      ingressClass: haproxy-external
       config:
         ssl-redirect: "true"
         syslog-server: "address:10.10.1.10,facility:local0,level:info"
