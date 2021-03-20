@@ -24,8 +24,6 @@ The external-dns chart creates a secrete key that needs a one time registration 
 list the keys with:
 
 ```
-$ kubectl get secret -n routing
-$ kubectl describe secret -n routing external-dns-dev-token-<xxx>
+$ kubectl get secret -n external-dns
+$ kubectl describe secret -n external-dns external-dns-dev-token-<xxx>
 ```
-
-The decode a ke with
