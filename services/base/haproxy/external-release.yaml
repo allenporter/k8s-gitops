@@ -31,3 +31,5 @@ spec:
         level: debug
     defaultBackend:
       enabled: false
+    extraArgs:
+      - --log=debug
