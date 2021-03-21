@@ -8,6 +8,9 @@ This is a Flux/Gitops managed k8s cluster following the model used by [k8s@home]
 
 The servers that make up the cluster are provisioned via [Terraform](https://www.terraform.io/) and configured via [Ansible](https://www.ansible.com/) on bare metal on [Ubuntu Server](https://ubuntu.com/server). That bootstrap process as well as the k8s worker nodes are all configured via a private git repository, not included here.
 
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQSdj_iQgONocRCS5xzm-SGVDlHUF5PFnhRMoef2jgxjehC9hKFuafqKDzUIznGV9FOEWNEFlnstKSt/pub?w=480&h=360"
+width="480" height="360">
+
 Initial cluster setup not included here includes:
 
   - [etcd](https://etcd.io/) with 3 nodes managed via ansible
