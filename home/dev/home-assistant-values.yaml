@@ -21,19 +21,13 @@ spec:
         - host: home-assistant.dev.mrv.thebends.org
           paths:
             - path: /
-        - host: ha-dev.thebends.org
-          paths:
-            - path: /
       tls:
         - secretName: home-assistant-tls
           hosts:
             - home-assistant.dev.mrv.thebends.org
-        - secretName: home-assistant-external-tls
-          hosts:
-            - ha-dev.mrv.thebends.org
     env:
       HASS_INTERNAL_URL: "https://home-assistant.dev.mrv.thebends.org"
-      HASS_EXTERNAL_URL: "https://ha-dev.thebends.org:28123"
+      HASS_EXTERNAL_URL: "https://home-assistant.dev.mrv.thebends.org:28123"
 
     addons:
       codeserver:
