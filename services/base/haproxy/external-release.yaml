@@ -32,4 +32,4 @@ spec:
     defaultBackend:
       enabled: false
     extraArgs:
-      - --log=debug
+      - --log=trace
