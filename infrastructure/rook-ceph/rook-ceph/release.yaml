@@ -8,6 +8,7 @@ spec:
   releaseName: rook-ceph
   chart:
     spec:
+      # renovate: registryUrl=https://charts.rook.io/release
       chart: rook-ceph
       sourceRef:
         kind: HelmRepository
