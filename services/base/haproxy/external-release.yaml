@@ -28,8 +28,6 @@ spec:
       service:
         type: LoadBalancer
       logging:
-        level: debug
+        level: trace
     defaultBackend:
       enabled: false
-    extraArgs:
-      - --log=trace
