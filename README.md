@@ -21,10 +21,9 @@ Additional cluster setup not included in this repo includes:
 
 This repository manages everything else running within the k8s cluster (e.g. containers, load balancers, applications, etc). See setup/ flux bootstrap.
 
-The key infrastructure components running within the cluster are:
+The key infrastructure components running within the cluster and managed by this repo are:
 
-  - [rook-ceph](https://rook.io/): For creating the persistent volume classes, allowing containers
-    to use the external ceph storage
+  - [rook-ceph](https://rook.io/): Provides persistent volumes, allowing any application to use the external ceph storage cluster
   - [metallb](https://metallb.universe.tf/): A load balancer for bare metal kubernetes
   - [external-dns](https://github.com/kubernetes-sigs/external-dns): Creates DNS entries on an external dns server for all relevant ingress services in the cluster. This relies on an existing local dns server outside of the cluster.
   - [certmanager](https://cert-manager.io/docs/): Configured to create TLS certs for all ingress services automatically using LetsEncrypt, using DNS
