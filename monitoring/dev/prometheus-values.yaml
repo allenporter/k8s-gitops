@@ -7,7 +7,8 @@ metadata:
 spec:
   chart:
     spec:
-      version: ">=13.3.3"
+      chart: prometheus
+      version: 13.3.3
   values:
     server:
       ingress:

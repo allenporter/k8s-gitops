@@ -7,7 +7,8 @@ metadata:
 spec:
   chart:
     spec:
-      version: ">=6.4.5"
+      chart: grafana
+      version: 6.4.5
   values:
     ingress:
       annotations:
