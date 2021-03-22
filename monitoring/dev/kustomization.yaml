@@ -3,13 +3,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - namespace.yaml
-#  - ../base/podinfo
+  - ../base/podinfo
   - ../base/speedtest-prometheus
   - ../base/kubernetes-dashboard
   - ../base/prometheus
   - ../base/grafana
 patchesStrategicMerge:
-#  - podinfo-values.yaml
+  - podinfo-values.yaml
   - speedtest-prometheus-values.yaml
   - kubernetes-dashboard-values.yaml
   - prometheus-values.yaml
