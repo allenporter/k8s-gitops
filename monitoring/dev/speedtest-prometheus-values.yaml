@@ -7,6 +7,7 @@ metadata:
 spec:
   chart:
     spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: speedtest-prometheus
       version: 2.1.0
   values:
