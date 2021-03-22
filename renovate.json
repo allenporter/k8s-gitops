@@ -2,6 +2,9 @@
   "extends": [
     "config:base"
   ],
+  "timezone": "America/Los_Angeles",
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dashboard",
   "regexManagers": [
     {
       "fileMatch": [".+(release|values).+\\.yaml$"],
