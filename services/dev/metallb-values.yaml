@@ -7,7 +7,8 @@ metadata:
 spec:
   chart:
     spec:
-      version: ">=2.3.2"
+      chart: metallb
+      version: 2.3.2
   values:
     configInline:
       address-pools:
