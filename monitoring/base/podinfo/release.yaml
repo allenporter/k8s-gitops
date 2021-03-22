@@ -18,7 +18,7 @@ spec:
     remediation:
       retries: 3
   test:
-    enable: true
+    enable: false
   # Default values
   # https://github.com/stefanprodan/podinfo/blob/master/charts/podinfo/values.yaml
   values:
