@@ -7,6 +7,7 @@ metadata:
 spec:
   chart:
     spec:
+      chart: home-assistant
       version: 6.3.1
   values:
     image:
