@@ -8,11 +8,11 @@ spec:
   chart:
     spec:
       chart: redis
+      version: 11.3.4
       sourceRef:
         kind: HelmRepository
         name: bitnami
         namespace: flux-system
-      version: "11.3.4"
   interval: 1h0m0s
   install:
     remediation:

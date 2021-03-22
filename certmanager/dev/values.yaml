@@ -8,4 +8,5 @@ spec:
   releaseName: cert-manager
   chart:
     spec:
-      version: ">=1.2.0"
+      chart: cert-manager
+      version: 1.2.0
