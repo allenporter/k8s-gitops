@@ -10,11 +10,11 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.rook.io/release
       chart: rook-ceph
+      version: 1.5.7
       sourceRef:
         kind: HelmRepository
         name: rook-release
         namespace: flux-system
-      version: "1.5.7"
   interval: 5m
   # Default values:
   # https://github.com/rook/rook/blob/master/cluster/charts/rook-ceph/values.yaml
