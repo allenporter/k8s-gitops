@@ -51,3 +51,16 @@ spec:
           enabled: true
           annotations:
             kubernetes.io/ingress.class: haproxy
+    postgresql:
+      enabled: true
+      postgresqlUsername: home-assistant
+      postgresqlDatabase: home-assistant
+      persistence:
+        enabled: true
+  valuesFrom:
+    # Set a password with a command like:
+    #     kubectl create secret generic postgresql-password -n home-assistant --from-literal="data=MY-SECRET"
+    - kind: Secret
+      name: postgresql-password
+      valuesKey: data
+      targetPath: postgresql.postgresqlPassword
