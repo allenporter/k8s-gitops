@@ -20,3 +20,6 @@ spec:
   # Default values
   # https://github.com/k8s-at-home/charts/blob/master/charts/speedtest-prometheus/values.yaml
   values:
+    serviceMonitor:
+      enabled: true
+      interval: "60m"
