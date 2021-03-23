@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://stefanprodan.github.io/podinfo
       chart: podinfo
-      version: 5.1.4
+      version: 5.2.0
   values:
     ingress:
       annotations:
