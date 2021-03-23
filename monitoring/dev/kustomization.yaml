@@ -6,13 +6,9 @@ resources:
   - ../base/podinfo
   - ../base/speedtest-prometheus
   - ../base/kubernetes-dashboard
-  - ../base/prometheus
-  - ../base/grafana
   - ../base/kube-prometheus-stack
 patchesStrategicMerge:
   - podinfo-values.yaml
   - speedtest-prometheus-values.yaml
   - kubernetes-dashboard-values.yaml
-  - prometheus-values.yaml
-  - grafana-values.yaml
   - kube-prometheus-stack-values.yaml
