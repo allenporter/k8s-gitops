@@ -1,0 +1,40 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  chart:
+    spec:
+      chart: kube-stack-prometheus
+      version: 14.3.0
+  values:
+    grafana:
+      ingress:
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: g.dev.mrv.thebends.org.
+          external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+          - g.dev.mrv.thebends.org
+        tls:
+          - secretName: g-tls
+            hosts:
+              - g.dev.mrv.thebends.org
+    prometheus:
+      ingress:
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: p.dev.mrv.thebends.org.
+          external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+          - p.dev.mrv.thebends.org
+        tls:
+          - secretName: p-tls
+            hosts:
+              - p.dev.mrv.thebends.org
+    kubeEtcd:
+      enabled: true
+      endpoints:
+        - cfg01.dev
