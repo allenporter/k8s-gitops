@@ -37,4 +37,4 @@ spec:
     kubeEtcd:
       enabled: true
       endpoints:
-        - cfg01.dev
+        - 10.10.22.11
