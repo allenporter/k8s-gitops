@@ -7,7 +7,7 @@
   "dependencyDashboardTitle": "Renovate Dashboard",
   "regexManagers": [
     {
-      "fileMatch": [".+(release|values).+\\.yaml$"],
+      "fileMatch": [".+\\.yaml$"],
       "matchStrings": [
         "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n"
       ],
