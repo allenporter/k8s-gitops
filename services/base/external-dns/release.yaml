@@ -8,9 +8,7 @@ spec:
   releaseName: external-dns
   chart:
     spec:
-      # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: external-dns
-      version: 4.9.2
       sourceRef:
         kind: HelmRepository
         name: bitnami
