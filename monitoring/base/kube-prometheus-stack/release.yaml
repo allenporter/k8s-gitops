@@ -45,3 +45,6 @@ spec:
         enabled: true
         annotations:
           kubernetes.io/ingress.class: haproxy
+      prometheusSpec:
+        serviceMonitorNamespaceSelector:
+          any: true
