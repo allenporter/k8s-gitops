@@ -57,6 +57,9 @@ spec:
       postgresqlDatabase: home-assistant
       persistence:
         enabled: true
+    prometheus:
+      serviceMonitor:
+        enabled: true
   valuesFrom:
     # Set a password with a command like:
     #     kubectl create secret generic postgresql-password -n home-assistant --from-literal="data=MY-SECRET"
