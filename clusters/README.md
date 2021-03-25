@@ -19,8 +19,8 @@ flux, helm, and kustomize given the current state of the cluster.
 
 ## Multi-cluster
 
-One simple approach is to setup multiple clusters, then run the same structure
-in both clusters.
+The approach chosen by this repo is to setup multiple clusters, then run the same
+structure in both clusters.
 
 - Simplifies kustomization: The separation point happens within the flux-system
 - Requires additional cluster setup and resources
