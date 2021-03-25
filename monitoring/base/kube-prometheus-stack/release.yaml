@@ -46,5 +46,12 @@ spec:
         annotations:
           kubernetes.io/ingress.class: haproxy
       prometheusSpec:
-        serviceMonitorNamespaceSelector:
-          any: true
+        ruleSelector: {}
+        ruleNamespaceSelector: {}
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelector: {}
+        serviceMonitorNamespaceSelector: {}
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelector: {}
+        podMonitorNamespaceSelector: {}
+        podMonitorSelectorNilUsesHelmValues: false
