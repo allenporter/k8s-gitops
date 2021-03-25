@@ -6,5 +6,6 @@ metadata:
 spec:
   type: discord
   channel: general
+  username: Flux Bot
   secretRef:
     name: discord-url
