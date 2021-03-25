@@ -32,6 +32,12 @@ spec:
       enabled: false
     kubeDns:
       enabled: false
+    kubeControllerManager:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    kubeScheduler:
+      enabled: false
     kubeEtcd:
       enabled: true
     prometheus:
