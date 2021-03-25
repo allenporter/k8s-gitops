@@ -1,0 +1,89 @@
+# yamllint disable-file
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: pihole
+  namespace: pihole
+spec:
+  releaseName: pihole
+  chart:
+    spec:
+      chart: pihole
+      sourceRef:
+        kind: HelmRepository
+        name: mojo2600
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    enable: false
+  # Default values
+  # https://github.com/MoJo2600/pihole-kubernetes/blob/master/charts/pihole/values.yaml
+  values:
+    cache: redis-master.redis:6379
+    foo: example
+    ingress:
+      enabled: true
+      path: "/"
+      annotations:
+        kubernetes.io/ingress.class: haproxy
+        cert-manager.io/cluster-issuer: letsencrypt
+
+    serviceTCP:
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+
+    serviceUDP:
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+
+    # OpenDNS family shield:
+    DNS1: "208.67.222.123"
+    DNS2: "208.67.220.123"
+
+    dnsmasq:
+      upstreamServers:
+        # Here you can add upstream dns servers with. All lines will be added to the
+        # pihole dnsmasq configuration.
+        # The format should be like:
+        # - server=/foo.bar/192.168.178.10
+        # - server=/bar.foo/192.168.178.11
+        - server=/mrv.thebends.org/10.10.1.10
+        - server=/10.10.in-addr.arpa/10.10.1.10
+
+      customDnsEntries:
+        # Here you can add custom dns entries to override the
+        # dns resolution with. All lines will be added to the
+        # pihole dnsmasq configuration.
+        # The format should be like:
+        # - address=/foo.bar/192.168.178.10
+        # - address=/bar.foo/192.168.178.11
+        - cname=youtube.com,restrict.youtube.com
+        - cname=www.youtube.com,restrict.youtube.com
+        - cname=m.youtube.com,restrict.youtube.com
+        - cname=youtubei.googleapis.com,restrict.youtube.com
+        - cname=youtube.googleapis.com,restrict.youtube.com
+        - cname=youtube-nocookie.com,restrict.youtube.com
+        - cname=www.youtube-nocookie.com,restrict.youtube.com
+        - cname=bing.com,strict.bing.com
+        - cname=www.bing.com,strict.bing.com
+        - cname=www.google.com,forcesafesearch.google.com
+        - cname=www.duckduckgo.com,safe.duckduckgo.com
+
+      additionalHostsEntries:
+        # Dnsmasq reads the /etc/hosts file to resolve ips. You can add additional entries if you like
+        # - 192.168.0.3     host4
+        # - 192.168.0.4     host5
+        - 216.239.38.120 restrict.youtube.com
+        - 216.239.38.119 restrictmoderate.youtube.com
+        - 216.239.38.120 forcesafesearch.google.com
+        - 204.79.197.220 strict.bing.com
+        - 46.51.179.90 safe.duckduckgo.com
+        - 216.239.38.120 restrict.youtube.com
+        - 216.239.38.119 restrictmoderate.youtube.com
+        - 216.239.38.120 forcesafesearch.google.com
+        - 204.79.197.220 strict.bing.com
+        - 46.51.179.90 safe.duckduckgo.com
