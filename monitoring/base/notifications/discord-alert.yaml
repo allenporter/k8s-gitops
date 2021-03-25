@@ -1,13 +1,13 @@
 apiVersion: notification.toolkit.fluxcd.io/v1beta1
 kind: Provider
 metadata:
-  name: discord
+  name: discord-alert
   namespace: flux-system
 spec:
   type: discord
   channel: general
   username: Flux Bot
   # See https://toolkit.fluxcd.io/guides/notifications/
-  # kubectl -n flux-system create secret generic discord-alert --from-literal=address=https://xxx
+  # kubectl -n flux-system create secret generic discord-alert-url --from-literal=address=https://xxx
   secretRef:
-    name: discord-url
+    name: discord-alert-url

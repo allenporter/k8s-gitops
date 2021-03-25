@@ -4,4 +4,6 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - discord.yaml
-  - alerts.yaml
+  - discord-alert.yaml
+  - info.yaml
+  - error.yaml
