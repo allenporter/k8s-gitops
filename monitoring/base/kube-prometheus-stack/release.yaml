@@ -61,7 +61,24 @@ spec:
         annotations:
           kubernetes.io/ingress.class: haproxy
       config:
+        global:
+          resolve_timeout: 5m
+        route:
+          group_by: ['job']
+          group_wait: 30s
+          group_interval: 5m
+          repeat_interval: 12h
+          receiver: 'discord'
+          routes:
+          - match:
+              severity: page
+            continue: true
+            receiver: discord
+          - match:
+              alertname: Watchdog
+            receiver: 'null'
         receivers:
+        - name: 'null'
         - name: 'discord'
           slack_configs:
           - channel: '#alerts'
@@ -78,12 +95,8 @@ spec:
                 {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
                 {{ end }}
               {{ end }}
-        route:
-          group_by: ['alertname', 'job']
-          group_wait: 30s
-          group_interval: 5m
-          repeat_interval: 6h
-          receiver: 'discord'
+        templates:
+        - '/etc/alertmanager/config/*.tmpl'
   valuesFrom:
   # kubectl -n monitoring create secret generic discord-alert --from-literal=address=https://xxx
   - kind: Secret
