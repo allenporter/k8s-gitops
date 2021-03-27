@@ -71,7 +71,7 @@ spec:
           receiver: 'discord'
           routes:
           - match:
-              severity: page
+              severity: warning
             continue: true
             receiver: discord
           - match:
