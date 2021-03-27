@@ -13,6 +13,6 @@ spec:
   values:
     domainFilters: ["dev.mrv.thebends.org"]
     image:
-      repository: allenporter/homelab
-      tag: external-dns-dev
+      repository: allenporter/external-dns
+      tag: dev
       pullPolicy: Always
