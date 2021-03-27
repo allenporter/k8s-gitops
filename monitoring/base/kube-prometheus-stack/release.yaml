@@ -41,9 +41,6 @@ spec:
     kubeEtcd:
       enabled: true
     prometheus:
-      service:
-        # Fix for external-dns
-        type: NodePort
       ingress:
         enabled: true
         annotations:
@@ -59,9 +56,6 @@ spec:
         podMonitorNamespaceSelector: {}
         podMonitorSelectorNilUsesHelmValues: false
     alertmanager:
-      service:
-        # Fix for external-dns
-        type: NodePort
       ingress:
         enabled: true
         annotations:
