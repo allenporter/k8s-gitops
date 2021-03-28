@@ -60,6 +60,11 @@ spec:
     prometheus:
       serviceMonitor:
         enabled: true
+        # Set the token with:
+        #  kubectl create secret generic prometheus-bearer-token -n home-assistant --from-literal="token=MY-SECRET"
+        bearerTokenSecret:
+          name: prometheus-bearer-token
+          key: token
   valuesFrom:
     # Set a password with a command like:
     #     kubectl create secret generic postgresql-password -n home-assistant --from-literal="data=MY-SECRET"
