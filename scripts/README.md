@@ -15,8 +15,8 @@ See https://kubernetes.io/docs/tasks/access-application-cluster/configure-access
 multi-cluster kubernetes configuration.
 
 ```
-$ cp scripts/.env.sample scripts.env
-# Edit scripts.env and set environment variables
+$ cp scripts/.env.sample scripts/.env
+# Edit scripts/.env and set environment variables
 $ source scripts/.env
 # Set up the flux environment based on ENV settings.
 $ scripts/setup-flux.sh
