@@ -1,0 +1,19 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: metallb
+  namespace: metallb
+spec:
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.bitnami.com/bitnami
+      chart: metallb
+      version: 2.3.4
+  values:
+    configInline:
+      address-pools:
+      - name: generic-cluster-pool
+        protocol: layer2
+        addresses:
+        - 10.10.25.1-10.10.25.254
