@@ -39,6 +39,14 @@ spec:
     serviceDns:
       type: LoadBalancer
       externalTrafficPolicy: Local
+      annotations:
+          metallb.universe.tf/allow-shared-ip: pihole-svc
+
+    serviceWeb:
+      type: LoadBalancer
+      externalTrafficPolicy: Local
+      annotations:
+          metallb.universe.tf/allow-shared-ip: pihole-svc
 
     # OpenDNS family shield:
     DNS1: "208.67.222.123"
