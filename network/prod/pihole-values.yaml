@@ -1,0 +1,27 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: pihole
+  namespace: pihole
+spec:
+  chart:
+    spec:
+      chart: pihole
+      version: 1.8.30
+  values:
+    serviceTCP:
+      loadBalancerIP: 10.10.25.10
+    serviceUDP:
+      loadBalancerIP: 10.10.25.11
+    virtualHost: pihole.prod.mrv.thebends.org
+    ingress:
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: pihole.prod.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+      hosts:
+        - pihole.prod.mrv.thebends.org
+      tls:
+        - secretName: pihole-tls
+          hosts:
+            - pihole.prod.mrv.thebends.org
