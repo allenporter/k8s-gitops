@@ -11,8 +11,5 @@ spec:
   eventSources:
     - kind: GitRepository
       name: '*'
-# Temporarily disable tdue to spam
-#    - kind: Kustomization
-#      name: '*'
     - kind: HelmRelease
       name: '*'
