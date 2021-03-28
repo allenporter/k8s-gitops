@@ -29,7 +29,7 @@ spec:
             - home-assistant.prod.mrv.thebends.org
     env:
       HASS_INTERNAL_URL: "https://home-assistant.prod.mrv.thebends.org"
-      HASS_EXTERNAL_URL: "https://home-assistant.prod.mrv.thebends.org:28123"
+      HASS_EXTERNAL_URL: "https://home-assistant.prod.mrv.thebends.org:18123"
 
     addons:
       codeserver:
