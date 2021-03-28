@@ -1,0 +1,24 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kubernetes-dashboard
+  namespace: kubernetes-dashboard
+spec:
+  chart:
+    spec:
+      # renovate: registryUrl=https://kubernetes.github.io/dashboard/
+      chart: kubernetes-dashboard
+      version: 4.0.2
+  values:
+    ingress:
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: kubernetes-dashboard.prod.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+        cert-manager.io/cluster-issuer: letsencrypt
+      hosts:
+        - kubernetes-dashboard.prod.mrv.thebends.org
+      tls:
+        - secretName: kubernetes-dashboard-tls
+          hosts:
+            - kubernetes-dashboard.prod.mrv.thebends.org
