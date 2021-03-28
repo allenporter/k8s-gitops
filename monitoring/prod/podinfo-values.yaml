@@ -1,0 +1,24 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: podinfo
+  namespace: podinfo
+spec:
+  chart:
+    spec:
+      # renovate: registryUrl=https://stefanprodan.github.io/podinfo
+      chart: podinfo
+      version: 5.2.0
+  values:
+    ingress:
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: podinfo.prod.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+        cert-manager.io/cluster-issuer: letsencrypt
+      hosts:
+        - podinfo.prod.mrv.thebends.org
+      tls:
+        - secretName: podinfo-tls
+          hosts:
+            - podinfo.prod.mrv.thebends.org
