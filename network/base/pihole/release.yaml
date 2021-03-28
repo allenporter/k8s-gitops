@@ -36,11 +36,7 @@ spec:
         kubernetes.io/ingress.class: haproxy
         cert-manager.io/cluster-issuer: letsencrypt
 
-    serviceTCP:
-      type: LoadBalancer
-      externalTrafficPolicy: Local
-
-    serviceUDP:
+    serviceDns:
       type: LoadBalancer
       externalTrafficPolicy: Local
 

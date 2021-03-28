@@ -10,9 +10,7 @@ spec:
       chart: pihole
       version: 1.8.30
   values:
-    serviceTCP:
-      loadBalancerIP: 10.10.25.10
-    serviceUDP:
+    serviceDns:
       loadBalancerIP: 10.10.25.11
     virtualHost: pihole.prod.mrv.thebends.org
     ingress:
