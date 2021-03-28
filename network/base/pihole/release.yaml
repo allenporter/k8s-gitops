@@ -23,8 +23,6 @@ spec:
   # Default values
   # https://github.com/MoJo2600/pihole-kubernetes/blob/master/charts/pihole/values.yaml
   values:
-    cache: redis-master.redis:6379
-
     admin:
       existingSecret: "pihole-password"
       passwordKey: "password"
