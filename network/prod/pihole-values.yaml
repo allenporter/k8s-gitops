@@ -12,6 +12,8 @@ spec:
   values:
     serviceDns:
       loadBalancerIP: 10.10.25.11
+    serviceWeb:
+      loadBalancerIP: 10.10.25.11
     virtualHost: pihole.prod.mrv.thebends.org
     ingress:
       annotations:
