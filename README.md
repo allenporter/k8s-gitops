@@ -36,17 +36,17 @@ While this is not a high criticality system, having multiple environments makes 
 
 ## Cluster Infrastructure
 
+The key infrastructure components running within the cluster and managed by this repo are:
+
 <img
 src="https://docs.google.com/drawings/d/e/2PACX-1vSZh09V6luZjHGP7YWNVQM9tGQ69R7exD--vz7lknp6Z2OuMDItiVjTSJhjVN2Y-PPaoQoqx2x3D0Ey/pub?w=481&amp;h=374"
 align=right>
 
-The key infrastructure components running within the cluster and managed by this repo are:
-
-  - [rook-ceph](https://rook.io/): Provides persistent volumes, allowing any application to use the external ceph storage cluster
-  - [metallb](https://metallb.universe.tf/): A load balancer for bare metal kubernetes
-  - [external-dns](https://github.com/kubernetes-sigs/external-dns): Creates DNS entries on an external dns server for all relevant ingress services in the cluster. This relies on an existing local dns server outside of the cluster.
-  - [cert-manager](https://cert-manager.io/docs/): Configured to create TLS certs for all ingress services automatically using LetsEncrypt, using DNS01 method and a DNS server run outside the cluster.
+  - [rook-ceph](https://rook.io/): Provides persistent volumes, allowing any application to use the external ceph storage cluster.
+  - [metallb](https://metallb.universe.tf/): A load balancer for bare metal kubernetes.
   - [haproxy](https://github.com/haproxytech/kubernetes-ingress): Used for proxying services through kubernetes ingress, exposing any service through the LoadBalancer with TLS.
+  - [external-dns](https://github.com/kubernetes-sigs/external-dns): Creates DNS entries on an external dns server for all relevant ingress services in the cluster. This relies on an existing local dns server outside of the cluster.
+  - [cert-manager](https://cert-manager.io/docs/): Creates TLS certs using LetsEncrypt for each service in the cluster.  Uses `dns01` on a DNS server managed outside of the cluster.
 
 This setup results in load balancing, TLS, ingress services for any application that needs it just by adding annotations.
 
