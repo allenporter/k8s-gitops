@@ -12,6 +12,7 @@ The kubernetes containers managed in this repo run within a larger cluster provi
 src="https://docs.google.com/drawings/d/e/2PACX-1vQSdj_iQgONocRCS5xzm-SGVDlHUF5PFnhRMoef2jgxjehC9hKFuafqKDzUIznGV9FOEWNEFlnstKSt/pub?w=433&amp;h=379"
 align=right>
 
+
 Additional cluster setup not included in this repo includes:
 
   - [etcd](https://etcd.io/) with 3 nodes managed via ansible
@@ -34,6 +35,10 @@ Running these environments in separate clusters simplifies overall configuration
 While this is not a high criticality system, having multiple environments makes it easier to move quickly and risk making mistakes in the dev environment first (then getting distracted and leaving it broken for a bit) without harming prod. See [kubernetes: Configure Access to Multiple Clusters](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) for details.
 
 ## Cluster Infrastructure
+
+<img
+src="https://docs.google.com/drawings/d/e/2PACX-1vSZh09V6luZjHGP7YWNVQM9tGQ69R7exD--vz7lknp6Z2OuMDItiVjTSJhjVN2Y-PPaoQoqx2x3D0Ey/pub?w=481&amp;h=374"
+align=right>
 
 The key infrastructure components running within the cluster and managed by this repo are:
 
