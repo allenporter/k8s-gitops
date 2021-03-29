@@ -50,6 +50,14 @@ align=right>
 
 This setup results in load balancing, TLS, ingress services for any application that needs it just by adding annotations.
 
+## Updates
+
+Updates to the cluster are managed by Renovate and and a handful of github actions.
+
+- See [Renovate Docs: GitHub app installation](https://docs.renovatebot.com/install-github-app/) for how to enable Renovate on a github repo
+- See [Renovate Helm Releases](https://github.com/k8s-at-home/renovate-helm-releases) for a GitHub action that adds the neccessary annotations to a `HelmRelease` so that renovate knows how to manage it. This runs as a nightly action.
+- See [Schedule - Update Flux](https://github.com/onedr0p/home-cluster/blob/main/.github/workflows/flux-schedule.yaml) for an example of how to use a GitHub action to update flux itself.
+
 ## Resources
 
   - https://github.com/fluxcd/flux2-kustomize-helm-example
