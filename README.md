@@ -40,7 +40,7 @@ The key infrastructure components running within the cluster and managed by this
   - [rook-ceph](https://rook.io/): Provides persistent volumes, allowing any application to use the external ceph storage cluster
   - [metallb](https://metallb.universe.tf/): A load balancer for bare metal kubernetes
   - [external-dns](https://github.com/kubernetes-sigs/external-dns): Creates DNS entries on an external dns server for all relevant ingress services in the cluster. This relies on an existing local dns server outside of the cluster.
-  - [certmanager](https://cert-manager.io/docs/): Configured to create TLS certs for all ingress services automatically using LetsEncrypt, using DNS01 method and a DNS server run outside the cluster.
+  - [cert-manager](https://cert-manager.io/docs/): Configured to create TLS certs for all ingress services automatically using LetsEncrypt, using DNS01 method and a DNS server run outside the cluster.
   - [haproxy](https://github.com/haproxytech/kubernetes-ingress): Used for proxying services through kubernetes ingress, exposing any service through the LoadBalancer with TLS.
 
 This setup results in load balancing, TLS, ingress services for any application that needs it just by adding annotations.
