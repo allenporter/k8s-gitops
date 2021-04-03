@@ -13,5 +13,15 @@
       ],
       "datasourceTemplate": "helm"
     }
+    // regexManager to read and yaml references to docker images (helm, etc)
+    {
+      "fileMatch": [
+        ".+\\.yaml$"
+      ],
+      "matchStrings": [
+        "image: (?<depName>.*?):(?<currentValue>.*?)\n"
+      ],
+      "datasourceTemplate": "docker"
+    }
   ]
 }
