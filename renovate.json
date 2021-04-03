@@ -12,7 +12,7 @@
         "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n"
       ],
       "datasourceTemplate": "helm"
-    }
+    },
     // regexManager to read and yaml references to docker images (helm, etc)
     {
       "fileMatch": [
