@@ -16,6 +16,6 @@
   ],
   "helm-values": {
     // Match value files in HelmReleases
-    "fileMatch": [".*(release|values)\\.yaml$"],
+    "fileMatch": [".*(release|values|components)\\.yaml$"],
   },
 }
