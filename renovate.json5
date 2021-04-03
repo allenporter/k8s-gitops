@@ -13,12 +13,9 @@
       ],
       "datasourceTemplate": "helm"
     },
-    {
-      "fileMatch": [".+\\.yaml$"],
-      "matchStrings": [
-        "image: (?<depName>.*?):(?<currentValue>.*?)\n"
-      ],
-      "datasourceTemplate": "docker"
-    }
-  ]
+  ],
+  "helm-values": {
+    // Match value files in HelmReleases
+    "fileMatch": [".*(release|values)\\.yaml$"],
+  },
 }
