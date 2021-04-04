@@ -1,0 +1,29 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: teslamate
+  namespace: teslamate
+spec:
+  chart:
+    spec:
+      chart: teslamate
+      version: 3.6.3
+  values:
+    image:
+      repository: teslamate/teslamate
+      tag: 1.22.0
+    virtualHost: teslamate.prod.mrv.thebends.org
+    ingress:
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: teslamate.prod.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+        cert-manager.io/cluster-issuer: letsencrypt
+      hosts:
+        - host: teslamate.prod.mrv.thebends.org
+          paths:
+            - path: /
+      tls:
+        - secretName: teslamate-tls
+          hosts:
+            - teslamate.prod.mrv.thebends.org

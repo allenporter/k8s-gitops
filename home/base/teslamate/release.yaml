@@ -1,0 +1,26 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: teslamate
+  namespace: teslamate
+spec:
+  releaseName: teslamate
+  chart:
+    spec:
+      chart: teslamate
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  # Default values
+  # https://github.com/k8s-at-home/charts/blob/master/charts/stable/teslamate/values.yaml
+  values:
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: haproxy
