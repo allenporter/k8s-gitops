@@ -1,0 +1,27 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: frigate
+  namespace: frigate
+spec:
+  chart:
+    spec:
+      chart: frigate
+      version: 5.0.1
+  values:
+    image:
+      repository: blakeblackshear/frigate
+      tag: 0.8.0-amd64
+    virtualHost: frigate.prod.mrv.thebends.org
+    ingress:
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: frigate.prod.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+        cert-manager.io/cluster-issuer: letsencrypt
+      hosts:
+        - frigate.prod.mrv.thebends.org
+      tls:
+        - secretName: frigate-tls
+          hosts:
+            - frigate.prod.mrv.thebends.org

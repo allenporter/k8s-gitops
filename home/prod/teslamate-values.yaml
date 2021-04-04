@@ -21,7 +21,6 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt
       hosts:
         - teslamate.prod.mrv.thebends.org
-      path: /
       tls:
         - secretName: teslamate-tls
           hosts:
