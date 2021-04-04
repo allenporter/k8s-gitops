@@ -18,4 +18,19 @@
     // Match value files in HelmReleases
     "fileMatch": [".*(release|values|components)\\.yaml$"],
   },
+  "packageRules": [
+    {
+      // Automatically update dev packages immediately
+      "groupName": "dev-packages",
+      "matchPaths": [".*/dev/.*"],
+      "automerge": true,
+      "automergeType": "branch"
+    },
+    {
+      // Production packages are updated weekly
+      "groupName": "prod-packages",
+      "matchPaths": [".*/prod/.*"],
+      "schedule": ["before 10am on saturday"],
+    },
+  ],
 }
