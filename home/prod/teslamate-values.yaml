@@ -20,9 +20,8 @@ spec:
         external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
         cert-manager.io/cluster-issuer: letsencrypt
       hosts:
-        - host: teslamate.prod.mrv.thebends.org
-          paths:
-            - path: /
+        - teslamate.prod.mrv.thebends.org
+      path: /
       tls:
         - secretName: teslamate-tls
           hosts:
