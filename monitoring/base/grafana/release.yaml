@@ -31,8 +31,14 @@ spec:
     env:
       GF_EXPLORE_ENABLED: true
     grafana.ini:
-      auth.basic:
+      auth:
         disable_login_form: true
+        disable_signout_menu: true
+      auth.anonymous:
+        enabled: true
+        org_role: Admin
+      auth.basic:
+        enabled: false
     sidecar:
       dashboards:
         enabled: true
