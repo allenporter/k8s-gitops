@@ -45,3 +45,5 @@ spec:
       notifiers:
         enabled: true
         searchNamespace: ALL
+    admin:
+      existingSecret: "grafana"

@@ -44,12 +44,15 @@ fi
 #kubectl -n flux-system create secret generic discord-alert-url --from-literal=address=https://xxx
 #kubectl -n flux-system create secret generic discord-alert --from-literal=address=https://xxx
 #kubectl create secret generic external-dns-key -n external-dns --from-literal="tsigSecret=MY-SECRET"
+#kubectl create secret generic grafana -n monitoring --from-literal="admin-password=GRAFANA_ADMIN_PASSWORD" --from-literal="admin-user=GRAFANA_ADMIN_USER"
 
 echo export HA_POSTGRESQL_PWD=$(get_secret "postgresql-password" "home-assistant" "data")
 echo export PROMETHEUS_DISCORD_ALERT_URL=$(get_secret "discord-alert" "monitoring" "address")
 echo export FLUX_DISCORD_URL=$(get_secret "discord-url" "flux-system" "address")
 echo export FLUX_DISCORD_ALERT_URL=$(get_secret "discord-alert-url" "flux-system" "address")
 echo export EXTERNAL_DNS_KEY=$(get_secret "external-dns-key" "external-dns" "tsigSecret")
+echo export GRAFANA_ADMIN_USER=$(get_secret "grafana" "monitoring" "admin-user")
+echo export GRAFANA_ADMIN_PASSWORD=$(get_secret "grafana" "monitoring" "admin-password")
 
 CLOUD_DNS_KEY_FILE="${SECRETS_DIR}/clouddns-dns01-key.json"
 if [ "${CONTEXT}" == "template" ]; then
