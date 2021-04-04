@@ -30,26 +30,8 @@ spec:
           kubernetes.io/ingress.class: haproxy
       persistence:
         enabled: true
-      sidecar:
-        datasources:
-          enabled: true
-        dashboards:
-          enabled: true
-          searchNamespace: ALL
-      dashboardProviders:
-        dashboardproviders.yaml:
-          apiVersion:
-          providers:
-          - name: teslamate
-            orgId: 1
-            folder: Teslamate
-            type: file
-            disableDeletion: false
-            editable: true
-            isDefault: false
-            allowUiUpdates: true
-            options:
-              path: /var/lib/grafana/dashboards/teslamate
+      env:
+        GF_EXPLORE_ENABLED: true
       dashboards:
         default:
           # Ref: https://grafana.com/grafana/dashboards/2842
