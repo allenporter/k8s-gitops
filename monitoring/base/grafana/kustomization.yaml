@@ -4,3 +4,4 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - release.yaml
+  - datasource-configmap.yaml
