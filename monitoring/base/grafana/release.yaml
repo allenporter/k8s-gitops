@@ -1,0 +1,45 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  releaseName: grafana
+  chart:
+    spec:
+      chart: grafana
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    enable: false
+  # Default values
+  # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+  values:
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: haproxy
+    persistence:
+      enabled: true
+    env:
+      GF_EXPLORE_ENABLED: true
+    grafana.ini:
+      auth.basic:
+        disable_login_form: true
+    sidecar:
+      dashboards:
+        enabled: true
+        searchNamespace: ALL
+      datasources:
+        enabled: true
+        searchNamespace: ALL
+      notifiers:
+        enabled: true
+        searchNamespace: ALL
