@@ -11,5 +11,9 @@ data:
     apiVersion: 1
     datasources:
     - name: Prometheus
-      type: Prometheus
+      type: prometheus
       url: http://kube-prometheus-stack-prometheus.monitoring:9090/
+      access: proxy
+      isDefault: true
+      jsonData:
+        timeInterval: 30s
