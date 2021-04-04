@@ -32,6 +32,22 @@ spec:
         enabled: true
       env:
         GF_EXPLORE_ENABLED: true
+      dashboardProviders:
+        dashboardproviders.yaml:
+      dashboards:
+        default:
+      sidecar:
+        datasources:
+          enabled: true
+          searchNamespace: ALL
+        dashboards:
+          enabled: true
+          searchNamespace: ALL
+      datasources:
+        datasources.yaml:
+      grafana.ini:
+        auth.basic:
+          disable_login_form: true
     coreDns:
       enabled: false
     kubeDns:
