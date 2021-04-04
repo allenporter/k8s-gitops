@@ -12,7 +12,7 @@ data:
     datasources:
     - name: Prometheus
       type: prometheus
-      url: http://kube-prometheus-stack-prometheus.monitoring:9090/
+      url: http://kube-prometheus-stack-prometheus:9090/
       access: proxy
       isDefault: true
       jsonData:
