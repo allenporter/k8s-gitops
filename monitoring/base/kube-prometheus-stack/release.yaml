@@ -23,7 +23,27 @@ spec:
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
     grafana:
-      enabled: false
+      enabled: true
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: haproxy
+      persistence:
+        enabled: true
+      sidecar:
+        dashboards:
+          enabled: true
+          label: grafana_dashboard
+          searchNamespace: ALL
+        datasources:
+          enabled: true
+          label: grafana_datasource
+          searchNamespace: ALL
+      env:
+        GF_EXPLORE_ENABLED: true
+      admin:
+        # See scripts/
+        existingSecret: "grafana"
     coreDns:
       enabled: false
     kubeDns:
