@@ -36,6 +36,7 @@ spec:
         disable_signout_menu: true
       auth.anonymous:
         enabled: true
+        org_name: Main Org.
         org_role: Admin
       auth.basic:
         enabled: false
