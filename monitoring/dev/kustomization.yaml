@@ -8,8 +8,10 @@ resources:
   - ../base/kubernetes-dashboard
   - ../base/kube-prometheus-stack
   - ../base/notifications
+  - ../base/grafana
 patchesStrategicMerge:
   - podinfo-values.yaml
   - speedtest-prometheus-values.yaml
   - kubernetes-dashboard-values.yaml
   - kube-prometheus-stack-values.yaml
+  - grafana-values.yaml
