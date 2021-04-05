@@ -5,3 +5,4 @@ namespace: teslamate
 resources:
   - namespace.yaml
   - release.yaml
+  - grafana-datasource.yaml

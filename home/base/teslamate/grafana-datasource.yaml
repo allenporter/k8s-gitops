@@ -2,19 +2,19 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: grafana-datasource
-  namespace: home-assistant
+  namespace: teslamate
   labels:
     grafana_datasource: "1"
 data:
   ha-datasource.yaml: |-
     apiVersion: 1
     datasources:
-    - name: Home Assistant Postgresql
+    - name: Teslamate
       type: postgres
-      url: home-assistant-postgresql.home-assistant:5432
-      database: home-assistant
-      user: home-assistant
-      password: "$HA_POSTGRESQL_PWD"
+      url: teslamate-postgresql.teslamate:5432
+      database: teslamate
+      user: teslamate
+      password: teslamate
       access: proxy
       jsonData:
         sslmode: disable
