@@ -6,4 +6,3 @@ resources:
   - namespace.yaml
   - release.yaml
   - grafana-datasource.yaml
-  - grafana-dashboard.yaml
