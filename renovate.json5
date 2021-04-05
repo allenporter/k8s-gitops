@@ -1,6 +1,6 @@
 {
   "extends": [
-    "config:base"
+    "config:base",
   ],
   "timezone": "America/Los_Angeles",
   "dependencyDashboard": true,
@@ -9,9 +9,9 @@
     {
       "fileMatch": [".+\\.yaml$"],
       "matchStrings": [
-        "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n"
+        "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
       ],
-      "datasourceTemplate": "helm"
+      "datasourceTemplate": "helm",
     },
   ],
   "helm-values": {
@@ -20,17 +20,15 @@
   },
   "packageRules": [
     {
-      // Automatically update dev packages immediately
-      "groupName": "dev-packages",
-      "matchPaths": [".*/dev/.*"],
+      "description": "Silently update all dev packages automatically",
+      "matchPaths": ["/dev/"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "branch",
     },
     {
-      // Production packages are updated weekly
-      "groupName": "prod-packages",
-      "matchPaths": [".*/prod/.*"],
-      "schedule": ["before 10am on saturday"],
+      "description": "Update production packages weekly",
+      "matchPaths": ["/prod/"],
+      "extends": ["schedule:weekends"],
     },
   ],
 }
