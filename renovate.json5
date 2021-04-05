@@ -24,11 +24,13 @@
       "matchPaths": ["/dev/"],
       "automerge": true,
       "automergeType": "branch",
+      "additionalBranchPrefix": "dev-",
     },
     {
       "description": "Update production packages weekly",
       "matchPaths": ["/prod/"],
       "extends": ["schedule:weekends"],
+      "additionalBranchPrefix": "prod-",
     },
   ],
 }
