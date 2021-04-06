@@ -1,14 +1,6 @@
 ---
 name: Test
-on:
-  pull_request:
-    branches:
-      - main
-      - 'renovate/**'
-  push:
-    branches:
-      - main:
-      - 'renovate/**'
+on: [push, pull_request]
 jobs:
   tests:
     runs-on: ubuntu-20.04
