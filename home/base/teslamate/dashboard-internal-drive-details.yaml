@@ -6,7 +6,7 @@ metadata:
   name: grafana-dashboard-internal-drive-details
   namespace: teslamate
   labels:
-    grafana_dashboard: 1
+    grafana_dashboard: "1"
 data:
   internal-drive-details.json: |
     {
