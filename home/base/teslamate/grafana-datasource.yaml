@@ -9,7 +9,7 @@ data:
   ha-datasource.yaml: |-
     apiVersion: 1
     datasources:
-    - name: Teslamate
+    - name: TeslaMate
       type: postgres
       url: teslamate-postgresql.teslamate:5432
       database: teslamate
