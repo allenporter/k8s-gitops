@@ -15,7 +15,6 @@ spec:
       annotations:
         external-dns.alpha.kubernetes.io/hostname: podinfo.dev.mrv.thebends.org.
         external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
-        cert-manager.io/cluster-issuer: letsencrypt
       hosts:
         - podinfo.dev.mrv.thebends.org
       tls:

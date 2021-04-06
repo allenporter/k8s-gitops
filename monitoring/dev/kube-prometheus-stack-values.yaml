@@ -16,7 +16,6 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: g.dev.mrv.thebends.org.
           external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
-          cert-manager.io/cluster-issuer: letsencrypt
         hosts:
           - g.dev.mrv.thebends.org
         tls:
@@ -28,7 +27,6 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: p.dev.mrv.thebends.org.
           external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
-          cert-manager.io/cluster-issuer: letsencrypt
         hosts:
           - p.dev.mrv.thebends.org
         tls:
@@ -40,7 +38,6 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: a.dev.mrv.thebends.org.
           external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
-          cert-manager.io/cluster-issuer: letsencrypt
         hosts:
           - a.dev.mrv.thebends.org
         tls:
