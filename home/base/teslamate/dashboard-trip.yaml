@@ -8,7 +8,7 @@ metadata:
   labels:
     grafana_dashboard: 1
 data:
-  trip.json: |-
+  trip.json: |
 {
   "annotations": {
     "list": [
