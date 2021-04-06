@@ -6,4 +6,20 @@ resources:
   - namespace.yaml
   - release.yaml
   - grafana-datasource.yaml
-  - grafana-dashboard.yaml
+  - dashboard-charge-level.yaml
+  - dashboard-charges.yaml
+  - dashboard-charging-stats.yaml
+  - dashboard-drive-stats.yaml
+  - dashboard-drives.yaml
+  - dashboard-efficiency.yaml
+  - dashboard-internal-charge-details.yaml
+  - dashboard-internal-drive-details.yaml
+  - dashboard-locations.yaml
+  - dashboard-mileage.yaml
+  - dashboard-overview.yaml
+  - dashboard-projected-range.yaml
+  - dashboard-states.yaml
+  - dashboard-trip.yaml
+  - dashboard-updates.yaml
+  - dashboard-vampire-drain.yaml
+  - dashboard-visited.yaml
