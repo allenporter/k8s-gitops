@@ -6,7 +6,7 @@ metadata:
   name: grafana-dashboard-charging-stats
   namespace: teslamate
   labels:
-    grafana_dashboard: 1
+    grafana_dashboard: "1"
 data:
   charging-stats.json: |
     {

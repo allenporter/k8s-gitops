@@ -30,7 +30,7 @@ metadata:
   name: grafana-dashboard-${DASHBOARD_NAME}
   namespace: teslamate
   labels:
-    grafana_dashboard: 1
+    grafana_dashboard: "1"
 data:
   ${DASHBOARD_NAME}.json: |
 ${JSON_DATA}

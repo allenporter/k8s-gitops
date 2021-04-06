@@ -6,7 +6,7 @@ metadata:
   name: grafana-dashboard-internal-charge-details
   namespace: teslamate
   labels:
-    grafana_dashboard: 1
+    grafana_dashboard: "1"
 data:
   internal-charge-details.json: |
     {
