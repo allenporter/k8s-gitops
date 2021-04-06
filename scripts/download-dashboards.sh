@@ -30,8 +30,8 @@ metadata:
   labels:
     grafana_dashboard: 1
 data:
-  |-
-  ${JSON_DATA}
+  ${DASHBOARD_NAME}.json: |-
+${JSON_DATA}
 EOT
 
 done
