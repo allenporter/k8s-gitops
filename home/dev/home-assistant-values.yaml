@@ -18,7 +18,6 @@ spec:
       annotations:
         external-dns.alpha.kubernetes.io/hostname: home-assistant.dev.mrv.thebends.org.
         external-dns.alpha.kubernetes.io/target: prx03.dev.mrv.thebends.org.
-        cert-manager.io/cluster-issuer: letsencrypt
       hosts:
         - host: home-assistant.dev.mrv.thebends.org
           paths:
@@ -37,7 +36,6 @@ spec:
           annotations:
             external-dns.alpha.kubernetes.io/hostname: vscode-ha.dev.mrv.thebends.org.
             external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org
-            cert-manager.io/cluster-issuer: letsencrypt
           hosts:
             - host: vscode-ha.dev.mrv.thebends.org
               paths:

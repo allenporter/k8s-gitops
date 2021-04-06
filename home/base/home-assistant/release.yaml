@@ -27,6 +27,7 @@ spec:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: haproxy-external
+        cert-manager.io/cluster-issuer: letsencrypt
     persistence:
       config:
         enabled: true
@@ -51,6 +52,7 @@ spec:
           enabled: true
           annotations:
             kubernetes.io/ingress.class: haproxy
+            cert-manager.io/cluster-issuer: letsencrypt
     postgresql:
       enabled: true
       postgresqlUsername: home-assistant
