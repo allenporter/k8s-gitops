@@ -8,8 +8,8 @@ metadata:
   labels:
     grafana_dashboard: 1
 data:
-  |-
-  {
+  charges.json: |-
+{
   "annotations": {
     "list": [
       {
