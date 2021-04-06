@@ -8,7 +8,7 @@ metadata:
   labels:
     grafana_dashboard: 1
 data:
-  internal-charge-details.json: |-
+  internal-charge-details.json: |
 {
   "annotations": {
     "list": [

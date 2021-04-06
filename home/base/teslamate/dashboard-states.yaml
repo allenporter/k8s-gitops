@@ -8,7 +8,7 @@ metadata:
   labels:
     grafana_dashboard: 1
 data:
-  states.json: |-
+  states.json: |
 {
   "annotations": {
     "list": [
