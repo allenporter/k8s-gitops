@@ -2,9 +2,13 @@
 name: Lint
 on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - 'renovate/**'
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - 'renovate/**'
 jobs:
   yaml:
     runs-on: ubuntu-20.04
