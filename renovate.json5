@@ -28,7 +28,7 @@
     },
     {
       "description": "Update production packages weekly",
-      "matchPaths": ["/prod/"],
+      "matchPaths": ["/prod/", "/infrastructure/"],
       "extends": ["schedule:weekends"],
       "additionalBranchPrefix": "prod-",
     },
