@@ -18,7 +18,6 @@ spec:
       annotations:
         external-dns.alpha.kubernetes.io/hostname: teslamate.prod.mrv.thebends.org.
         external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
-        cert-manager.io/cluster-issuer: letsencrypt
       hosts:
         - teslamate.prod.mrv.thebends.org
       tls:
