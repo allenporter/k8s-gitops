@@ -58,6 +58,8 @@ Updates to the cluster are managed by Renovate and and a handful of github actio
 - See [Renovate Helm Releases](https://github.com/k8s-at-home/renovate-helm-releases) for a GitHub action that adds the neccessary annotations to a `HelmRelease` so that renovate knows how to manage it. This runs as a nightly action.
 - See [Schedule - Update Flux](https://github.com/onedr0p/home-cluster/blob/main/.github/workflows/flux-schedule.yaml) for an example of how to use a GitHub action to update flux itself.
 
+The cluster has separate update schedules for the `dev` and `prod` clusters. The `dev` cluster is updated silently, and the `prod` cluster is updated on weekends.
+
 ## Resources
 
   - https://github.com/fluxcd/flux2-kustomize-helm-example
