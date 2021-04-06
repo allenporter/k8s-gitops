@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard
+  namespace: teslamate
+  labels:
+    grafana_dashboard: "1"
+data:
+  charge-level:
+    url: https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charge-level.json
