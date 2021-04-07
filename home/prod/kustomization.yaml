@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
   - ../base/home-assistant
   - ../base/teslamate
+  - ../base/frigate
 patchesStrategicMerge:
   - home-assistant-values.yaml
   - teslamate-values.yaml
+  - frigate-values.yaml
