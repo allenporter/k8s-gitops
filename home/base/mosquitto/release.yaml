@@ -1,0 +1,25 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: mosquitto
+  namespace: mqtt
+spec:
+  releaseName: frigate
+  chart:
+    spec:
+      chart: mosquitto
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  # Default values
+  # https://github.com/k8s-at-home/charts/blob/master/charts/stable/mosquitto/values.yaml
+  values:
+    persistence:
+      data:
+        enabled: true

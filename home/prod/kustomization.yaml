@@ -5,6 +5,7 @@ resources:
   - ../base/home-assistant
   - ../base/teslamate
   - ../base/frigate
+  - ../base/mosquitto
 patchesStrategicMerge:
   - home-assistant-values.yaml
   - teslamate-values.yaml
