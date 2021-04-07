@@ -27,3 +27,16 @@ spec:
     persistence:
       data:
         enabled: true
+    config: |
+      mqtt:
+        host: frigate.mqtt
+        port: 1883
+        topic_prefix: frigate
+        client_id: frigate
+        user: mqtt_user
+        password: password
+        stats_interval: 60
+      detectors:
+        coral:
+          type: edgetpu
+          device: usb
