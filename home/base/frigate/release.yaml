@@ -29,7 +29,7 @@ spec:
         enabled: true
     config: |
       mqtt:
-        host: frigate.mqtt
+        host: mosquitto.mqtt
         port: 1883
         topic_prefix: frigate
         client_id: frigate
