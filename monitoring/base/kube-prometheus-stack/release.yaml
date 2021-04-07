@@ -45,6 +45,8 @@ spec:
       admin:
         # See scripts/
         existingSecret: "grafana"
+      plugins:
+      - natel-discrete-panel
     coreDns:
       enabled: false
     kubeDns:
