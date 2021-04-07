@@ -14,3 +14,4 @@ resources:
   - jetstack.yaml
   - haproxytech.yaml
   - mojo2600.yaml
+  - blakeshome.yaml
