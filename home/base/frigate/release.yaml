@@ -36,7 +36,11 @@ spec:
         user: mqtt_user
         password: password
         stats_interval: 60
+      objects:
+        track:
+        - person
       detectors:
-        coral:
-          type: edgetpu
-          device: usb
+        cpu1:
+          type: cpu
+        cpu2:
+          type: cpu
