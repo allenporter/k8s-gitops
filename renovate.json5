@@ -3,6 +3,7 @@
     "config:base",
   ],
   "timezone": "America/Los_Angeles",
+  "assignees": ["allenporter"],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard",
   "regexManagers": [
@@ -20,17 +21,34 @@
   },
   "packageRules": [
     {
-      "description": "Silently update all dev packages automatically",
+      "description": "dev: Minor updates are automatic",
       "matchPaths": ["/dev/"],
       "automerge": true,
       "automergeType": "branch",
       "additionalBranchPrefix": "dev-",
+      "matchUpdateTypes": ["minor", "patch"],
     },
     {
-      "description": "Update production packages weekly",
+      "description": "dev: Major packages updated weekly",
+      "matchPaths": ["/dev/"],
+      "extends": ["schedule:weekends"],
+      "additionalBranchPrefix": "dev-",
+    },
+     {
+      "description": "prod: Patches are automatic after 1 day",
+      "matchPaths": ["/prod/", "/infrastructures/"],
+      "automerge": true,
+      "automergeType": "branch",
+      "stabilityDays": 1,
+      "additionalBranchPrefix": "prod-",
+      "matchUpdateTypes": ["patch"],
+    },
+    {
+      "description": "prod: Packages updated weekly",
       "matchPaths": ["/prod/", "/infrastructure/"],
       "extends": ["schedule:weekends"],
       "additionalBranchPrefix": "prod-",
+      "stabilityDays": 1,
     },
   ],
 }
