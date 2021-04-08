@@ -26,13 +26,14 @@
       "automerge": true,
       "automergeType": "branch",
       "additionalBranchPrefix": "dev-",
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
     },
     {
       "description": "dev: Major packages updated weekly",
       "matchPaths": ["/dev/"],
       "extends": ["schedule:weekends"],
       "additionalBranchPrefix": "dev-",
+      "matchUpdateTypes": ["major"],
     },
      {
       "description": "prod: Patches are automatic after 1 day",
@@ -49,6 +50,7 @@
       "extends": ["schedule:weekends"],
       "additionalBranchPrefix": "prod-",
       "stabilityDays": 1,
+      "matchUpdateTypes": ["major", "minor"],
     },
   ],
 }
