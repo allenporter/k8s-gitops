@@ -1,4 +1,6 @@
 .env
+.env.dev
+.env.prod
 .swp
 .tox
 __pycache__

@@ -5,7 +5,8 @@
 
 set -e
 
-CONTEXT=$1
+CONTEXT_ARG=$1
+CONTEXT=${CONTEXT_ARG:-$ENV}
 if [[ ! "$CONTEXT" =~ ^(dev|prod|template)$ ]]; then
   echo "Usage: $0 <dev|prod|template>"
   exit 1
@@ -40,20 +41,22 @@ if [ ! -d ${SECRETS_DIR} ]; then
 fi
 
 #kubectl get secret generic postgresql-password -n home-assistant --from-literal="data=MY-SECRET"
-#kubectl -n monitoring create secret generic discord-alert --from-literal=address=https://xxx
-#kubectl -n flux-system create secret generic discord-alert-url --from-literal=address=https://xxx
-#kubectl -n flux-system create secret generic discord-alert --from-literal=address=https://xxx
+#kubectl -n monitoring create secret generic discord-alert --from-literal="address=${PROMETHEUS_DISCORD_ALERT_URL}"
+#kubectl -n flux-system create secret generic discord-alert-url --from-literal="address=${FLUX_DISCORD_ALERT_URL}"
+#kubectl -n flux-system create secret generic discord-alert --from-literal="address=${FLUX_DISCORD_URL}"
 #kubectl create secret generic external-dns-key -n external-dns --from-literal="tsigSecret=MY-SECRET"
 #kubectl create secret generic grafana -n monitoring --from-literal="admin-password=GRAFANA_ADMIN_PASSWORD" --from-literal="admin-user=GRAFANA_ADMIN_USER"
 
+echo "# Env specific variables"
 echo export HA_POSTGRESQL_PWD=$(get_secret "postgresql-password" "home-assistant" "data")
 echo export PROMETHEUS_DISCORD_ALERT_URL=$(get_secret "discord-alert" "monitoring" "address")
-echo export FLUX_DISCORD_URL=$(get_secret "discord-url" "flux-system" "address")
 echo export FLUX_DISCORD_ALERT_URL=$(get_secret "discord-alert-url" "flux-system" "address")
 echo export EXTERNAL_DNS_KEY=$(get_secret "external-dns-key" "external-dns" "tsigSecret")
 echo export GRAFANA_ADMIN_USER=$(get_secret "grafana" "monitoring" "admin-user")
 echo export GRAFANA_ADMIN_PASSWORD=$(get_secret "grafana" "monitoring" "admin-password")
 
+echo "# Common variables"
+echo export FLUX_DISCORD_URL=$(get_secret "discord-url" "flux-system" "address")
 CLOUD_DNS_KEY_FILE="${SECRETS_DIR}/clouddns-dns01-key.json"
 if [ "${CONTEXT}" == "template" ]; then
   CLOUD_DNS_KEY_FILE=""
