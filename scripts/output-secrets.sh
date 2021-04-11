@@ -52,8 +52,8 @@ echo export FLUX_DISCORD_URL=$(get_secret "discord-url" "flux-system" "address")
 # kubectl create secret generic discord-alert-url -n flux-system --from-literal="address=${FLUX_DISCORD_ALERT_URL}"
 echo export FLUX_DISCORD_ALERT_URL=$(get_secret "discord-alert-url" "flux-system" "address")
 
-# kubectl create secret generic external-dns-key -n external-dns --from-literal="tsigSecret=${EXTERNAL_DNS_KEY}"
-echo export EXTERNAL_DNS_KEY=$(get_secret "external-dns-key" "external-dns" "tsigSecret")
+# kubectl create secret generic external-dns-key -n external-dns --from-literal="rfc2136_tsig_secret=${EXTERNAL_DNS_KEY}"
+echo export EXTERNAL_DNS_KEY=$(get_secret "external-dns-key" "external-dns" "rfc2136_tsig_secret")
 
 # kubectl create secret generic grafana -n monitoring --from-literal="admin-password=${GRAFANA_ADMIN_PASSWORD}" --from-literal="admin-user=${GRAFANA_ADMIN_USER}"
 echo export GRAFANA_ADMIN_USER=$(get_secret "grafana" "monitoring" "admin-user")
