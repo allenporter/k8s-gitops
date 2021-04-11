@@ -28,6 +28,7 @@ spec:
     rfc2136:
       host: "10.10.1.10"
       zone: "mrv.thebends.org"
+      secretName: external-dns-key
       tsigSecretAlg: hmac-sha512
       tsigKeyname: external-dns-key
     # See https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/rfc2136.md
@@ -39,8 +40,3 @@ spec:
     annotations:
       meta.helm.sh/release-namespace: external-dns
     logLevel: debug
-  valuesFrom:
-  - kind: Secret
-    name: external-dns-key
-    valuesKey: tsigSecret
-    targetPath: rfc2136.tsigSecret
