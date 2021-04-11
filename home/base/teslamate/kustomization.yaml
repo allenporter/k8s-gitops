@@ -6,20 +6,27 @@ resources:
   - namespace.yaml
   - release.yaml
   - grafana-datasource.yaml
-  - dashboard-charge-level.yaml
-  - dashboard-charges.yaml
-  - dashboard-charging-stats.yaml
-  - dashboard-drive-stats.yaml
-  - dashboard-drives.yaml
-  - dashboard-efficiency.yaml
-  - dashboard-internal-charge-details.yaml
-  - dashboard-internal-drive-details.yaml
-  - dashboard-locations.yaml
-  - dashboard-mileage.yaml
-  - dashboard-overview.yaml
-  - dashboard-projected-range.yaml
-  - dashboard-states.yaml
-  - dashboard-trip.yaml
-  - dashboard-updates.yaml
-  - dashboard-vampire-drain.yaml
-  - dashboard-visited.yaml
+generatorOptions:
+  labels:
+    grafana_dashboard: "1"
+configMapGenerator:
+  - name: grafana-dashboard-teslamate
+    # Note: These are currently not renovated
+    files:
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charge-level.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charges.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charging-stats.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/drive-stats.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/drives.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/efficiency.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/internal-charge-details.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/internal-drive-details.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/locations.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/mileage.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/overview.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/projected-range.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/states.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/trip.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/updates.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/vampire-drain.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/visited.yaml
