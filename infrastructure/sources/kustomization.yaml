@@ -15,4 +15,3 @@ resources:
   - haproxytech.yaml
   - mojo2600.yaml
   - blakeshome.yaml
-  - flux.yaml
