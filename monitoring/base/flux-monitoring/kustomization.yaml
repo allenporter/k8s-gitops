@@ -4,3 +4,12 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - podmonitor.yaml
+generatorOptions:
+  labels:
+    grafana_dashboard: "1"
+configMapGenerator:
+  - name: grafana-dashboard-control-plane
+    # Note: These are currently not versioned
+    files:
+      - https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/control-plane.json
+      - https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/grafana/dashboards/cluster.json
