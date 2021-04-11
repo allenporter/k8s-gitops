@@ -1,0 +1,32 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minecraft
+  namespace: minecraft
+spec:
+  releaseName: minecraft
+  chart:
+    spec:
+      chart: minecraft
+      sourceRef:
+        kind: HelmRepository
+        name: itzg
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  # Default values
+  # https://github.com/itzg/minecraft-server-charts/blob/master/charts/minecraft/values.yaml
+  values:
+    minecraftServer:
+      gameMod: survival
+      pvp: false
+  valuesFrom:
+    - kind: ConfigMap
+      name: minecraft-values
+    - kind: Secret
+      name: minecraft-rcon-password
+      valuesKey: password
+      targetPath: rcon.password

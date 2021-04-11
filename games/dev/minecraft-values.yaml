@@ -1,0 +1,17 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minecraft
+  namespace: minecraft
+spec:
+  chart:
+    spec:
+      chart: minecraft
+      version: 3.1.3
+  values:
+    image:
+      repository: itzg/minecraft-server
+      tag: 2021.9.0
+    minecraftServer:
+      motd: "Welcome to Minecraft! [dev]"
