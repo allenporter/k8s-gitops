@@ -5,16 +5,20 @@ import git
 import os
 import subprocess
 import logging
+import yaml
 
 _LOGGER = logging.getLogger(__name__)
 
+KUSTOMIZE_BIN = "kustomize"
 KUSTOMIZE_CONFIG = "kustomization.yaml"
 KUSTOMIZE_FLAGS = ["--allow-id-changes=false"]
 
+KUSTOMIZATION_KIND = "Kustomization"
+KUSTOMIZATION_API_VERSIONS = ["kustomize.toolkit.fluxcd.io/v1beta1"]
 
-def kustomize_build(filename):
-    command = ["kustomize", "build", filename]
-    command.extend(KUSTOMIZE_FLAGS)
+
+def run_command(command):
+    """Run the specified command and return stdout."""
     proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (out, err) = proc.communicate()
     if proc.returncode:
@@ -27,6 +31,31 @@ def kustomize_build(filename):
     return out.decode("utf-8")
 
 
+def kustomize_grep(cluster_path, kind):
+    """Loads all Kustomizations for a specific kind as a yaml object."""
+    command = [KUSTOMIZE_BIN, "cfg", "grep", f"kind={kind}", cluster_path]
+    doc_contents = run_command(command)
+    for doc in yaml.safe_load_all(doc_contents):
+        yield doc
+
+
+def kind_filter(kind, api_versions):
+    """Return a yaml doc filter for specified resource type and version."""
+
+    def func(doc):
+        if doc.get("kind") != kind:
+            return False
+        return doc.get("apiVersion") in api_versions
+
+    return func
+
+
+def kustomize_build(filename):
+    command = ["kustomize", "build", filename]
+    command.extend(KUSTOMIZE_FLAGS)
+    return run_command(command)
+
+
 def repo_root():
     git_repo = git.Repo(os.getcwd(), search_parent_directories=True)
     return git_repo.git.rev_parse("--show-toplevel")
@@ -35,12 +64,14 @@ def repo_root():
 def kustomization_files():
     root = repo_root()
     matches = []
-    for dirname, dirs, files in os.walk(root):
-        basedirname = dirname[len(root) + 1 :]
-        for filename in files:
-            if filename != KUSTOMIZE_CONFIG:
-                continue
-            matches.append(basedirname)
+    is_kustomization = kind_filter(KUSTOMIZATION_KIND, KUSTOMIZATION_API_VERSIONS)
+    yaml_docs = kustomize_grep(root, "Kustomization")
+    for doc in filter(is_kustomization, yaml_docs):
+        if doc["metadata"]["name"] == "flux-system":
+            continue
+        if doc["spec"]["sourceRef"]["kind"] != "GitRepository":
+            continue
+        matches.append(doc["spec"]["path"])
     return matches
 
 
