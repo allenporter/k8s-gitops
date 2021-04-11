@@ -36,24 +36,3 @@ data:
 ${JSON_DATA}
 EOT
 done
-
-DASHBOARD_NAME="helm-operator"
-URL=https://raw.githubusercontent.com/fluxcd/helm-operator/master/chart/helm-operator/dashboards/helm-operator.json
-echo "Fetching ${URL}"
-JSON_DATA=$(curl -s $URL | indent)
-OUTPUT_FILE="infrastructure/dashboards/dashboard-${DASHBOARD_NAME}.yaml"
-echo $OUTPUT_FILE
-cat <<EOT >$OUTPUT_FILE
-# yamllint disable-file
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: grafana-dashboard-${DASHBOARD_NAME}
-  namespace: flux-system
-  labels:
-    grafana_dashboard: "1"
-data:
-  ${DASHBOARD_NAME}.json: |
-${JSON_DATA}
-EOT
