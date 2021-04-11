@@ -61,8 +61,11 @@ k8s-at-home folks:
 - See the [Renovate configuration](renovate.json5) for this cluster which has separate updates schedules for the `dev`
   and `prod` clusters. The `dev` cluster is updated silently, while the `prod` cluster has minor updates applied on
   weekends. This config is heavily documented given there are numerous [Configuration Options](https://docs.renovatebot.com/configuration-options/) that may be hard to piece together.
+- See [Renovate Dashboard](https://app.renovatebot.com/dashboard) if you want visibility into how Renovate is doing.
+  This is a must if you start making complex configuration changes.
 - See [Renovate Helm Releases](https://github.com/k8s-at-home/renovate-helm-releases) for a GitHub action that adds the neccessary annotations to a `HelmRelease` so that renovate knows how to manage it. This runs as a nightly action.
 - See [Schedule - Update Flux](https://github.com/onedr0p/home-cluster/blob/main/.github/workflows/flux-schedule.yaml) for an example of how to use a GitHub action to update flux itself.
+  your repo. This is helpful to understand why certain configuration options
 
 ## Resources
 
