@@ -15,18 +15,18 @@ configMapGenerator:
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charge-level.json
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charges.json
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charging-stats.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/drive-stats.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/drives.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/efficiency.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/internal-charge-details.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/internal-drive-details.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/locations.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/mileage.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/overview.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/projected-range.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/states.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/trip.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/updates.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/vampire-drain.yaml
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/visited.yaml
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charging-stats.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/drive-stats.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/drives.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/efficiency.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/internal-charge-details.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/internal-drive-details.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/locations.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/mileage.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/overview.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/projected-range.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/states.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/trip.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/updates.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/vampire-drain.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/visited.json
