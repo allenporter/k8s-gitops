@@ -64,8 +64,10 @@ k8s-at-home folks:
 - See [Renovate Dashboard](https://app.renovatebot.com/dashboard) if you want visibility into how Renovate is doing.
   This is a must if you start making complex configuration changes.
 - See [Renovate Helm Releases](https://github.com/k8s-at-home/renovate-helm-releases) for a GitHub action that adds the
-  neccessary annotations to a `HelmRelease` so that renovate knows how to manage it. This runs as a nightly action. In
-  other words, renovate-helm-releases doesn't actually do any updating itself, just prep work to make Renovate work.
+  neccessary annotations to a `HelmRelease` so that renovate knows how to manage it. In other words, renovate-helm-releases
+  doesn't actually do any updating itself, just prep work to make Renovate work. You have to update your renovate
+  configuration with a regexp, which is a simple solution to avoid adding special code in Renovate itself to support
+  this. This runs as a nightly action to opt in any newly added `HelmRelease`.
 - See [Schedule - Update Flux](https://github.com/onedr0p/home-cluster/blob/main/.github/workflows/flux-schedule.yaml) for an example of how to use a GitHub action to update flux itself.
   your repo. This is helpful to understand why certain configuration options
 
