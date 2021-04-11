@@ -46,19 +46,30 @@ align=right>
   - [metallb](https://metallb.universe.tf/): A load balancer for bare metal kubernetes.
   - [haproxy](https://github.com/haproxytech/kubernetes-ingress): Used for proxying services through kubernetes ingress, exposing any service through the LoadBalancer with TLS.
   - [external-dns](https://github.com/kubernetes-sigs/external-dns): Creates DNS entries on an external dns server for all relevant ingress services in the cluster. This relies on an existing local dns server outside of the cluster.
-  - [cert-manager](https://cert-manager.io/docs/): Creates TLS certs using LetsEncrypt for each service in the cluster.  Uses `dns01` on a DNS server managed outside of the cluster.
+  - [cert-manager](https://cert-manager.io/docs/): Creates TLS certs using LetsEncrypt for each service in the cluster. Uses `dns01` on a DNS server managed outside of the cluster.
 
 This setup results in load balancing, TLS, ingress services for any application that needs it just by adding annotations.
 
 ## Updates
 
-Updates to the cluster are managed by Renovate and and a handful of github actions.
+Updates to the cluster are managed by Renovate and and a handful of github actions. Renovate will either apply updates
+silently or send PRs to update packages to the latest versions, which are then automatically pushed to the cluster by
+flux. Renovate has a bit of a learning curve, so here are the pieces i've put together following the patterns of the
+k8s-at-home folks:
 
 - See [Renovate Docs: GitHub app installation](https://docs.renovatebot.com/install-github-app/) for how to enable Renovate on a github repo
-- See [Renovate Helm Releases](https://github.com/k8s-at-home/renovate-helm-releases) for a GitHub action that adds the neccessary annotations to a `HelmRelease` so that renovate knows how to manage it. This runs as a nightly action.
-- See [Schedule - Update Flux](https://github.com/onedr0p/home-cluster/blob/main/.github/workflows/flux-schedule.yaml) for an example of how to use a GitHub action to update flux itself.
-
-The cluster has separate update schedules for the `dev` and `prod` clusters. The `dev` cluster is updated silently, and the `prod` cluster is updated on weekends.
+- See the [Renovate configuration](renovate.json5) for this cluster which has separate updates schedules for the `dev`
+  and `prod` clusters. The `dev` cluster is updated silently, while the `prod` cluster has minor updates applied on
+  weekends. This config is heavily documented given there are numerous [Configuration Options](https://docs.renovatebot.com/configuration-options/) that may be hard to piece together.
+- See [Renovate Dashboard](https://app.renovatebot.com/dashboard) for visibility into what Renovate is doing behind the
+  scenes. This is pretty useful if you start making configuration changes.
+- See [Renovate Helm Releases](https://github.com/k8s-at-home/renovate-helm-releases) for a GitHub action that adds the
+  neccessary annotations to a `HelmRelease` so that renovate knows how to manage it. In other words, renovate-helm-releases
+  doesn't actually do any updating itself, just prep work to make Renovate work. You have to update your renovate
+  configuration with a regexp, which is a simple solution to avoid adding special code in Renovate itself to support
+  this. This runs as a nightly action to opt in any newly added `HelmRelease`.
+- See [onedr0p's Schedule - Update Flux](https://github.com/onedr0p/home-cluster/blob/main/.github/workflows/flux-schedule.yaml)
+  for an example of how to use a GitHub action to update flux itself. My copy is here: [Schedule - Update Flux](.github/workflows/update-flux-schedule.yaml)
 
 ## Resources
 
