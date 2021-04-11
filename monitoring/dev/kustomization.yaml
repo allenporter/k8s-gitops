@@ -8,6 +8,7 @@ resources:
   - ../base/kubernetes-dashboard
   - ../base/kube-prometheus-stack
   - ../base/notifications
+  - ../base/flux-monitoring
 patchesStrategicMerge:
   - podinfo-values.yaml
   - speedtest-prometheus-values.yaml
