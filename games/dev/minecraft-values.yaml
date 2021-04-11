@@ -10,8 +10,7 @@ spec:
       chart: minecraft
       version: 3.1.3
   values:
-    image:
-      repository: itzg/minecraft-server
-      imageTag: 2021.9.0
+    image: itzg/minecraft-server
+    imageTag: 2021.9.0
     minecraftServer:
       motd: "Welcome to Minecraft! [dev]"
