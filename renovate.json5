@@ -8,6 +8,10 @@
   "dependencyDashboardTitle": "Renovate Dashboard",
   "regexManagers": [
     {
+      // Every HelmRelease has an annotation that can tell renovate how
+      // to find the HelmRepository url and chart version. This regexp
+      // tells renovate how to parse it. The annotation itself is added by the
+      // renovate-helm-releases github action.
       "fileMatch": [".+\\.yaml$"],
       "matchStrings": [
         "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
@@ -16,10 +20,15 @@
     },
   ],
   "helm-values": {
-    // Match value files in HelmReleases
+    // Match value files in HelmReleases. This is used so that renovate include
+    // these files when evaluating updates to helm charts or even images referenced
+    // within the chart.
     "fileMatch": [".*(release|values|components)\\.yaml$"],
   },
   "packageRules": [
+    // Use different update schedules for dev and prod based on the type of
+    // patch. Note that each rule needs its own brach prefix in order to
+    // have a working space for evaluating the rules independently.
     {
       "description": "dev: Minor updates are automatic",
       "matchPaths": ["/dev/"],
@@ -32,7 +41,7 @@
       "description": "dev: Major packages updated weekly",
       "matchPaths": ["/dev/"],
       "extends": ["schedule:weekends"],
-      "additionalBranchPrefix": "dev-",
+      "additionalBranchPrefix": "dev-major",
       "matchUpdateTypes": ["major"],
     },
      {
@@ -41,7 +50,7 @@
       "automerge": true,
       "automergeType": "branch",
       "stabilityDays": 1,
-      "additionalBranchPrefix": "prod-",
+      "additionalBranchPrefix": "prod-patch",
       "matchUpdateTypes": ["patch"],
     },
     {
