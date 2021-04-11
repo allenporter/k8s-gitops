@@ -40,23 +40,31 @@ if [ ! -d ${SECRETS_DIR} ]; then
   mkdir ${SECRETS_DIR}
 fi
 
-#kubectl get secret generic postgresql-password -n home-assistant --from-literal="data=MY-SECRET"
-#kubectl -n monitoring create secret generic discord-alert --from-literal="address=${PROMETHEUS_DISCORD_ALERT_URL}"
-#kubectl -n flux-system create secret generic discord-alert-url --from-literal="address=${FLUX_DISCORD_ALERT_URL}"
-#kubectl -n flux-system create secret generic discord-alert --from-literal="address=${FLUX_DISCORD_URL}"
-#kubectl create secret generic external-dns-key -n external-dns --from-literal="tsigSecret=MY-SECRET"
-#kubectl create secret generic grafana -n monitoring --from-literal="admin-password=GRAFANA_ADMIN_PASSWORD" --from-literal="admin-user=GRAFANA_ADMIN_USER"
-
-echo "# Env specific variables"
+# kubectl get secret generic postgresql-password -n home-assistant --from-literal="data=${HA_POSTGRESQL_PWD}"
 echo export HA_POSTGRESQL_PWD=$(get_secret "postgresql-password" "home-assistant" "data")
+
+# kubectl create secret generic discord-alert -n monitoring --from-literal=address="${PROMETHEUS_DISCORD_ALERT_URL}"
 echo export PROMETHEUS_DISCORD_ALERT_URL=$(get_secret "discord-alert" "monitoring" "address")
+
+# kubectl create secret generic discord-url -n flux-system --from-literal="address=${FLUX_DISCORD_URL}"
+echo export FLUX_DISCORD_URL=$(get_secret "discord-url" "flux-system" "address")
+
+# kubectl create secret generic discord-alert-url -n flux-system --from-literal="address=${FLUX_DISCORD_ALERT_URL}"
 echo export FLUX_DISCORD_ALERT_URL=$(get_secret "discord-alert-url" "flux-system" "address")
+
+# kubectl create secret generic external-dns-key -n external-dns --from-literal="tsigSecret=${EXTERNAL_DNS_KEY}"
 echo export EXTERNAL_DNS_KEY=$(get_secret "external-dns-key" "external-dns" "tsigSecret")
+
+# kubectl create secret generic grafana -n monitoring --from-literal="admin-password=${GRAFANA_ADMIN_PASSWORD}" --from-literal="admin-user=${GRAFANA_ADMIN_USER}"
 echo export GRAFANA_ADMIN_USER=$(get_secret "grafana" "monitoring" "admin-user")
 echo export GRAFANA_ADMIN_PASSWORD=$(get_secret "grafana" "monitoring" "admin-password")
 
-echo "# Common variables"
-echo export FLUX_DISCORD_URL=$(get_secret "discord-url" "flux-system" "address")
+# kubectl create secret generic prometheus-bearer-token -n home-assistant --from-literal="token=${PROMETHEUS_HA_BEARER_TOKEN}"
+echo export PROMETHEUS_HA_BEARER_TOKEN=$(get_secret "prometheus-bearer-token" "home-assistant" "token")
+
+# kubectl create secret generic pihole-password -n pihole --from-literal="password=${PIHOLE_ADMIN_PASSWORD}"
+echo export PIHOLE_ADMIN_PASSWORD=$(get_secret "pihole-password" "pihole" "password")
+
 CLOUD_DNS_KEY_FILE="${SECRETS_DIR}/clouddns-dns01-key.json"
 if [ "${CONTEXT}" == "template" ]; then
   CLOUD_DNS_KEY_FILE=""
