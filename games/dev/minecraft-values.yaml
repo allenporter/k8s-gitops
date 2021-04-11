@@ -12,6 +12,6 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
-      tag: 2021.9.0
+      imageTag: 2021.9.0
     minecraftServer:
       motd: "Welcome to Minecraft! [dev]"
