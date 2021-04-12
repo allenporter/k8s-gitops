@@ -8,9 +8,6 @@ minecraftServer:
   memory: 2048M
 rcon:
   enabled: true
-persistence:
-  dataDir:
-    enabled: true
 resources:
   requests:
     memory: 2048Mi
