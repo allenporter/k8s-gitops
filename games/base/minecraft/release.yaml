@@ -24,7 +24,7 @@ spec:
   # https://github.com/itzg/minecraft-server-charts/blob/master/charts/minecraft/values.yaml
   values:
     minecraftServer:
-      gameMod: survival
+      gameMode: survival
       pvp: false
   valuesFrom:
     - kind: ConfigMap
