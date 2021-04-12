@@ -14,3 +14,4 @@ spec:
     imageTag: latest
     minecraftServer:
       motd: "Welcome to Minecraft! [dev]"
+      loadBalancerIP: "10.10.24.6"
