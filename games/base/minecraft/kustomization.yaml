@@ -5,9 +5,3 @@ namespace: minecraft
 resources:
   - namespace.yaml
   - release.yaml
-configMapGenerator:
-  - name: minecraft-values
-    files:
-      - values.yaml=values.yaml
-configurations:
-  - kustomizeconfig.yaml
