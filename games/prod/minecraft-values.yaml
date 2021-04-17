@@ -16,3 +16,5 @@ spec:
     minecraftServer:
       motd: "Welcome to Minecraft!"
       loadBalancerIP: "10.10.25.6"
+    serviceAnnotations:
+      external-dns.alpha.kubernetes.io/hostname: minecraft.prod.mrv.thebends.org.
