@@ -44,7 +44,7 @@
       "additionalBranchPrefix": "dev-major",
       "matchUpdateTypes": ["major"],
     },
-     {
+    {
       "description": "prod: Patches are automatic after 1 day",
       "matchPaths": ["/prod/", "/infrastructures/"],
       "automerge": true,
@@ -52,6 +52,8 @@
       "stabilityDays": 1,
       "additionalBranchPrefix": "prod-patch",
       "matchUpdateTypes": ["patch"],
+      # This may not be needed after https://github.com/renovatebot/renovate/pull/9393 is released
+      "separateMinorPatch": true,
     },
     {
       "description": "prod: Packages updated weekly",
