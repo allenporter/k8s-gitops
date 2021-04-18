@@ -15,6 +15,11 @@ spec:
     imageTag: latest
     minecraftServer:
       motd: "Welcome to Minecraft! [dev]"
-      loadBalancerIP: "10.10.24.6"
     serviceAnnotations:
       external-dns.alpha.kubernetes.io/hostname: minecraft.dev.mrv.thebends.org.
+  valuesFrom:
+    - kind: ConfigMap
+      name: network-ips
+      namespace: services
+      valuesKey: minecraft
+      targetPath: minecraftServer.loadBalancerIP
