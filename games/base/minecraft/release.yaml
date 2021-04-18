@@ -35,14 +35,11 @@ spec:
       serviceType: LoadBalancer
     rcon:
       enabled: true
+      existingSecret: minecraft-rcon-password
+      secretKey: password
     resources:
       requests:
         memory: 2048Mi
         cpu: 250m
       limits:
         memory: 3072Mi
-  valuesFrom:
-    - kind: Secret
-      name: minecraft-rcon-password
-      valuesKey: password
-      targetPath: rcon.password
