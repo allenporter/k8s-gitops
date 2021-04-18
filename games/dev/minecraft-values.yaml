@@ -20,5 +20,5 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: network-ips
-      valuesKey: minecraft
+      valuesKey: MINECRAFT
       targetPath: minecraftServer.loadBalancerIP
