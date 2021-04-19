@@ -7,3 +7,5 @@ resources:
   - ../../services/dev/ips/
 patchesStrategicMerge:
   - minecraft-values.yaml
+configurations:
+  - kustomizeconfig.yaml
