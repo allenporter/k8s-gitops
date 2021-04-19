@@ -11,6 +11,7 @@ spec:
       chart: external-dns
       version: 4.11.0
   values:
+    fqdnTemplates: ["{{.Name}}.dev.mrv.thebends.org."]
     domainFilters: ["dev.mrv.thebends.org"]
     image:
       repository: allenporter/external-dns
