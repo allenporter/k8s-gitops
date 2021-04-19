@@ -6,7 +6,6 @@ resources:
   - ../base/metallb/
   - ../base/external-dns/
   - ../base/certs/
-  - ips/
   - namespace.yaml
 patchesStrategicMerge:
   - haproxy-values.yaml
