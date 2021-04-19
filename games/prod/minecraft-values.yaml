@@ -12,9 +12,10 @@ spec:
       version: 3.1.4
   values:
     image: itzg/minecraft-server
-    imageTag: latest
+    imageTag: 2021.10.0
     minecraftServer:
       motd: "Welcome to Minecraft!"
-      loadBalancerIP: "10.10.25.6"
     serviceAnnotations:
-      external-dns.alpha.kubernetes.io/hostname: minecraft.prod.mrv.thebends.org.
+      external-dns.alpha.kubernetes.io/hostname: mc01.prod.mrv.thebends.org.
+    rconServiceAnnotations:
+      external-dns.alpha.kubernetes.io/hostname: mc01-admin.prod.mrv.thebends.org.
