@@ -1,6 +1,6 @@
 ---
 auth:
-  usePassword: false
+  enabled: false
 architecture: standalone
 master:
   persistence:
