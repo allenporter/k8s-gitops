@@ -75,6 +75,11 @@ def kustomization_files():
     return matches
 
 
+def test_kustomize_version():
+    command = ["kustomize", "version"]
+    _LOGGER.info(run_command(command))
+
+
 @pytest.mark.parametrize("filename", kustomization_files())
 def test_validate_kustomization_file(filename):
     root = repo_root()
