@@ -10,4 +10,4 @@ RUN curl -sLf https://github.com/kubernetes-sigs/kustomize/releases/download/kus
     && chmod +x /usr/local/bin/kustomize \
     && rm -rf kustomize.tar.gz
 
-CMD ["kustomize"]
+CMD ["kustomize", "version"]
