@@ -65,6 +65,10 @@ echo export PROMETHEUS_HA_BEARER_TOKEN=$(get_secret "prometheus-bearer-token" "h
 # kubectl create secret generic pihole-password -n pihole --from-literal="password=${PIHOLE_ADMIN_PASSWORD}"
 echo export PIHOLE_ADMIN_PASSWORD=$(get_secret "pihole-password" "pihole" "password")
 
+# kubectl create secret generic minecraft-rcon-password -n minecraft --from-literal="password=${RCON_PASSWORD}"
+echo export RCON_PASSWORD=$(get_secret "minecraft-rcon-password" "minecraft" "password")
+
+
 CLOUD_DNS_KEY_FILE="${SECRETS_DIR}/clouddns-dns01-key.json"
 if [ "${CONTEXT}" == "template" ]; then
   CLOUD_DNS_KEY_FILE=""
