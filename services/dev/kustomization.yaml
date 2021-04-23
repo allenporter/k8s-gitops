@@ -2,10 +2,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ../base/haproxy
-  - ../base/metallb
-  - ../base/external-dns
+  - ../base/haproxy/
+  - ../base/metallb/
+  - ../base/external-dns/
   - ../base/certs/
+  - namespace.yaml
 patchesStrategicMerge:
   - haproxy-values.yaml
   - haproxy-external-values.yaml

@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minecraft
+  namespace: minecraft
+spec:
+  chart:
+    spec:
+      # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
+      chart: minecraft
+      version: 3.1.4
+  values:
+    image: itzg/minecraft-server
+    imageTag: 2021.10.0
+    minecraftServer:
+      motd: "Welcome to Minecraft! [dev]"
+    serviceAnnotations:
+      external-dns.alpha.kubernetes.io/hostname: minecraft.dev.mrv.thebends.org.
+    rconServiceAnnotations:
+      external-dns.alpha.kubernetes.io/hostname: minecraft-admin.dev.mrv.thebends.org.

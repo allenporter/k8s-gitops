@@ -9,4 +9,4 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: speedtest-prometheus
-      version: 2.1.3
+      version: 2.2.1
