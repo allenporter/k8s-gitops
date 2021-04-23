@@ -1,6 +1,5 @@
 FROM alpine:3.13
-ENV KUBEVAL_VERSION=0.15.0 \
-    KUSTOMIZE_VERSION=4.0.1
+ENV KUSTOMIZE_VERSION=4.1.2
 
 RUN apk add --no-cache curl
 
