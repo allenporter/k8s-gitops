@@ -11,7 +11,7 @@ _LOGGER = logging.getLogger(__name__)
 
 KUSTOMIZE_BIN = "kustomize"
 KUSTOMIZE_CONFIG = "kustomization.yaml"
-KUSTOMIZE_FLAGS = ["--allow-id-changes=false"]
+KUSTOMIZE_FLAGS = []
 
 KUSTOMIZATION_KIND = "Kustomization"
 KUSTOMIZATION_API_VERSIONS = ["kustomize.toolkit.fluxcd.io/v1beta1"]
