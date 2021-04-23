@@ -1,7 +1,7 @@
 ---
-usePassword: false
-cluster:
-  enabled: false
+auth:
+  usePassword: false
+architecture: standalone
 master:
   persistence:
     enabled: false
