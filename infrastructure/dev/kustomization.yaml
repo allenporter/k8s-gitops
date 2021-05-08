@@ -5,6 +5,7 @@ resources:
   - ../base/sources
   - ../base/redis
   - ../base/rook-ceph
+  - https://raw.githubusercontent.com/rook/rook/release-1.5/cluster/examples/kubernetes/ceph/crds.yaml
 patchesStrategicMerge:
   - redis-values.yaml
   - rook-ceph-values.yaml
