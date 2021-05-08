@@ -6,6 +6,5 @@ metadata:
   namespace: flux-system
 resources:
   - namespace.yaml
-  - https://raw.githubusercontent.com/rook/rook/release-1.5/cluster/examples/kubernetes/ceph/crds.yaml
   - release.yaml
   - storageclass.yaml
