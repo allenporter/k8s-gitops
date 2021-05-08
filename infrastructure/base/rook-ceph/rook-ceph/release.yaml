@@ -14,6 +14,10 @@ spec:
         name: rook-release
         namespace: flux-system
   interval: 5m
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   # Default values:
   # https://github.com/rook/rook/blob/master/cluster/charts/rook-ceph/values.yaml
   values:
