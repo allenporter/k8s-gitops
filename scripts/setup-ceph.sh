@@ -12,7 +12,7 @@ if [ -z $1 ]; then
 fi
 
 echo "Creating namespace"
-kubectl apply -f infrastructure/rook-ceph/rook-ceph/namespace.yaml
+kubectl apply -f infrastructure/base/rook-ceph/rook-ceph/namespace.yaml
 
 echo "Creating CRDs"
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/release-1.5/cluster/examples/kubernetes/ceph/crds.yaml
