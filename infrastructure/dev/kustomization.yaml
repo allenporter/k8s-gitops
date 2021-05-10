@@ -9,3 +9,4 @@ resources:
 patchesStrategicMerge:
   - redis-values.yaml
   - rook-ceph-values.yaml
+  - cephcluster.yaml
