@@ -2,7 +2,7 @@
 # Fetchs the external cluster configuration over ssh from a host that already
 # has been bootstrapped with access.
 #
-# See https://rook.io/docs/rook/v1.5/ceph-cluster-crd.html#external-cluster
+# See https://rook.io/docs/rook/v1.6/ceph-cluster-crd.html#external-cluster
 
 set -e
 
@@ -15,7 +15,7 @@ echo "Creating namespace"
 kubectl apply -f infrastructure/base/rook-ceph/rook-ceph/namespace.yaml
 
 echo "Creating CRDs"
-kubectl apply -f https://raw.githubusercontent.com/rook/rook/release-1.5/cluster/examples/kubernetes/ceph/crds.yaml
+kubectl apply -f https://raw.githubusercontent.com/rook/rook/release-1.6/cluster/examples/kubernetes/ceph/crds.yaml
 
 CEPH_HOST=$1
 NAMESPACE="rook-ceph"
