@@ -5,14 +5,10 @@ metadata:
   name: rook-ceph
   namespace: rook-ceph
 spec:
-  cephVersion:
-    image: ceph/ceph:v15.2.11-20210224
   external:
     enable: true
   crashCollector:
     disable: true
-  mon:
-    count: 1
   monitoring:
     enabled: true
     rulesNamespace: rook-ceph
