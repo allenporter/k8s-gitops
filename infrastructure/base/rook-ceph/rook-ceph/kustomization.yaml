@@ -8,3 +8,5 @@ resources:
   - namespace.yaml
   - release.yaml
   - storageclass.yaml
+  - ceph-prometheus.yaml
+  - ceph-monitor.yaml
