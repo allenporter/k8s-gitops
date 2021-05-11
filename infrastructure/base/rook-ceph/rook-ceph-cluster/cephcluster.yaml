@@ -11,6 +11,8 @@ spec:
     enable: true
   crashCollector:
     disable: true
+  mon:
+    count: 1
   monitoring:
     enabled: true
     rulesNamespace: rook-ceph
