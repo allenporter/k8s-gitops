@@ -27,9 +27,6 @@ spec:
           hosts:
             - home-assistant.dev.mrv.thebends.org
 
-    postgresql:
-      enabled: false
-
     env:
       HASS_INTERNAL_URL: "https://home-assistant.dev.mrv.thebends.org"
       HASS_EXTERNAL_URL: "https://home-assistant.dev.mrv.thebends.org:28123"
