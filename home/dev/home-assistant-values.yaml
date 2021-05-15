@@ -13,7 +13,7 @@ spec:
   values:
     image:
       repository: homeassistant/home-assistant
-      tag: dev@sha256:9e2a412c607513e74516deab6efe9c57187060d6124026551b6ab4b26fed2cdb
+      tag: dev@sha256:3d8a870206a8b7273043ba04d4a633e1b120388b9bc23013fd853f5aa2867f56
     ingress:
       annotations:
         external-dns.alpha.kubernetes.io/hostname: home-assistant.dev.mrv.thebends.org.
