@@ -18,7 +18,6 @@ jobs:
           UGLY_VERSION="$(flux -v)"
           VERSION="v${UGLY_VERSION#*flux version }"
           flux install --version="${VERSION}" \
-            --network-policy=false \
             --export > ./clusters/dev/flux-system/gotk-components.yaml
           echo "::set-output name=flux_version::$VERSION"
       - name: Create pull request
