@@ -39,4 +39,5 @@ ${FLUX} bootstrap github \
     --repository=${GITHUB_REPO} \
     --branch=main \
     --personal \
+    --private=false \
     --path=clusters/${ENV}
