@@ -16,3 +16,7 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: prx02.dev.mrv.thebends.org.
         loadBalancerIP: "10.10.24.4"
+      image:
+        repository: haproxytech/kubernetes-ingress
+        # Run latest haproxy image with http/2
+        tag: 1.6.1
