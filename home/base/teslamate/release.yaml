@@ -30,3 +30,14 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt
     postgresql:
       enabled: true
+      postgresqlUsername: teslamate
+      postgresqlDatabase: teslamate
+      persistence:
+        enabled: true
+  valuesFrom:
+    # Set a password with a command like:
+    #     kubectl create secret generic postgresql-password -n teslamate --from-literal="data=MY-SECRET"
+    - kind: Secret
+      name: postgresql-password
+      valuesKey: data
+      targetPath: postgresql.postgresqlPassword

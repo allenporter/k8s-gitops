@@ -68,6 +68,9 @@ echo export PIHOLE_ADMIN_PASSWORD=$(get_secret "pihole-password" "pihole" "passw
 # kubectl create secret generic minecraft-rcon-password -n minecraft --from-literal="password=${RCON_PASSWORD}"
 echo export RCON_PASSWORD=$(get_secret "minecraft-rcon-password" "minecraft" "password")
 
+# kubectl create secret generic postgresql-password -n teslamate --from-literal="data=${TESLAMATE_POSTGRESQL_PWD}"
+echo export TESLAMATE_POSTGRESQL_PWD=$(get_secret "postgresql-password" "teslamate" "data")
+
 
 CLOUD_DNS_KEY_FILE="${SECRETS_DIR}/clouddns-dns01-key.json"
 if [ "${CONTEXT}" == "template" ]; then
