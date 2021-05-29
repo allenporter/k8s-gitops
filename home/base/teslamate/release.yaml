@@ -34,7 +34,7 @@ spec:
       DATABASE_HOST: "teslamate-postgresql"
       DISABLE_MQTT: "true"
     envValueFrom:
-      - name: POSTGRES_PASSWORD
+      POSTGRES_PASSWORD:
         secretKeyRef:
           name: teslamate-postgresql
           key: postgresql-password
