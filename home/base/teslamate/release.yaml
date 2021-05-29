@@ -37,7 +37,7 @@ spec:
       DATABASE_PASS:
         secretKeyRef:
           name: teslamate-postgresql
-          key: postgresql-postgresql-password
+          key: postgresql-password
     postgresql:
       enabled: true
       postgresqlDatabase: teslamate
