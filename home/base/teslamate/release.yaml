@@ -28,6 +28,11 @@ spec:
       annotations:
         kubernetes.io/ingress.class: haproxy
         cert-manager.io/cluster-issuer: letsencrypt
+    env:
+      DATABASE_NAME: "teslamate"
+      DATABASE_USER: "teslamate"
+      DATABASE_HOST: "teslamate-postgresql"
+      DISABLE_MQTT: "true"
     postgresql:
       enabled: true
       postgresqlUsername: teslamate
@@ -41,3 +46,7 @@ spec:
       name: postgresql-password
       valuesKey: data
       targetPath: postgresql.postgresqlPassword
+    - kind: Secret
+      name: postgresql-password
+      valuesKey: data
+      targetPath: env.DATABASE_PASS
