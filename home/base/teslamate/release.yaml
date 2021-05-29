@@ -36,9 +36,8 @@ spec:
     envValueFrom:
       - name: POSTGRES_PASSWORD
         secretKeyRef:
-          secretRef:
-            name: teslamate-postgresql
-            key: postgresql-password
+          name: teslamate-postgresql
+          key: postgresql-password
     postgresql:
       enabled: true
       postgresqlUsername: teslamate
