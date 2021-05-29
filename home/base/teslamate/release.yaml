@@ -33,16 +33,15 @@ spec:
       DATABASE_USER: "teslamate"
       DATABASE_HOST: "teslamate-postgresql"
       DISABLE_MQTT: "true"
+    envValueFrom:
+      - name: POSTGRES_PASSWORD
+        secretKeyRef:
+          secretRef:
+            name: teslamate-postgresql
+            key: postgresql-password
     postgresql:
       enabled: true
       postgresqlUsername: teslamate
       postgresqlDatabase: teslamate
       persistence:
         enabled: true
-  valuesFrom:
-    # Set a password with a command like:
-    #     kubectl create secret generic postgresql-password -n teslamate --from-literal="data=MY-SECRET"
-    - kind: Secret
-      name: teslamate-postgresql
-      valuesKey: postgresql-password
-      targetPath: env.DATABASE_PASS
