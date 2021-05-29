@@ -30,17 +30,16 @@ spec:
         cert-manager.io/cluster-issuer: letsencrypt
     env:
       DATABASE_NAME: "teslamate"
-      DATABASE_USER: "teslamate"
+      DATABASE_USER: "postgres"
       DATABASE_HOST: "teslamate-postgresql"
       DISABLE_MQTT: "true"
     envValueFrom:
       DATABASE_PASS:
         secretKeyRef:
           name: teslamate-postgresql
-          key: postgresql-password
+          key: postgresql-postgresql-password
     postgresql:
       enabled: true
-      postgresqlUsername: teslamate
       postgresqlDatabase: teslamate
       persistence:
         enabled: true
