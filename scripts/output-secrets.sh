@@ -76,3 +76,6 @@ elif [ ! -f ${CLOUD_DNS_KEY_FILE} ]; then
   echo ${CLOUD_DNS_KEY_JSON} > ${CLOUD_DNS_KEY_FILE}
 fi
 echo export CLOUD_DNS_KEY_FILE=${CLOUD_DNS_KEY_FILE}
+
+# kubectl create secret generic k10-htpasswd -n kasten-io --from-literal="auth=${K10_HTPASSWD}"
+echo export K10_HTPASSWD=$(get_secret "k10-htpasswd" "kasten-io" "auth")
