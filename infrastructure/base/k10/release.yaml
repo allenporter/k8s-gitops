@@ -17,3 +17,18 @@ spec:
   install:
     remediation:
       retries: 3
+  values:
+    eula:
+      accept: true
+      company: allenporter-k8-gitops
+      email: allen.porter@gmail.com
+    ingress:
+      create: true
+      class: haproxy
+      urlPath: "/"
+      tls:
+        enabled: true
+        secretName: k10-tls
+      annotations:
+        kubernetes.io/ingress.class: haproxy
+        cert-manager.io/cluster-issuer: letsencrypt
