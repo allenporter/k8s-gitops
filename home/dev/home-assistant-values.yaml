@@ -45,3 +45,8 @@ spec:
             - secretName: vscode-home-assistant-tls
               hosts:
                 - vscode-ha.dev.mrv.thebends.org
+    additionalVolumes:
+      - name: nfs-music
+        nfs:
+          server: sto01.prod.mrv.thebends.org
+          path: /volume1/music
