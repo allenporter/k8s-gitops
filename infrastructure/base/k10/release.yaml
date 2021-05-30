@@ -8,7 +8,7 @@ spec:
   releaseName: k10
   chart:
     spec:
-      chart: k10-restore
+      chart: k10
       sourceRef:
         kind: HelmRepository
         name: kasten
