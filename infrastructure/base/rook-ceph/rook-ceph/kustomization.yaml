@@ -10,3 +10,4 @@ resources:
   - storageclass.yaml
   - ceph-prometheus.yaml
   - ceph-monitor.yaml
+  - volume-snapshot-class.yaml
