@@ -44,6 +44,9 @@ spec:
         nfs:
           server: sto01.prod.mrv.thebends.org
           path: /volume1/music
+    volumeMounts:
+      - name: nfs-music
+        mountPath: /mnt/music
     addons:
       codeserver:
         enabled: true
@@ -52,8 +55,6 @@ spec:
             mountPath: /config
           - name: ssh-creds
             mountPath: /root/.ssh/
-          - name: nfs-music
-            mountPath: /mnt/music
         ingress:
           enabled: true
           annotations:
