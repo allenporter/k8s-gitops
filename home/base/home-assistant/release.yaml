@@ -40,6 +40,10 @@ spec:
           secretName: git-creds
           defaultMode: 0400
           optional: true
+      - name: nfs-music
+        nfs:
+          server: sto01.prod.mrv.thebends.org
+          path: /volume1/music
     addons:
       codeserver:
         enabled: true
