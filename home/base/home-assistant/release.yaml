@@ -52,7 +52,7 @@ spec:
             mountPath: /config
           - name: ssh-creds
             mountPath: /root/.ssh/
-          - name: music
+          - name: nfs-music
             mountPath: /media
         ingress:
           enabled: true
