@@ -8,4 +8,5 @@ spec:
   releaseName: k10
   chart:
     spec:
-      chart: kasten
+      chart: k10restore
+      version: 4.0.1
