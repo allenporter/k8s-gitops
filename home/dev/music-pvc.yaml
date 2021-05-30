@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: music-pv
-  namespace: homoe
+  namespace: home
 spec:
   capacity:
     storage: 1024Gi
@@ -23,7 +23,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: music-pvc
-  namespace: music
+  namespace: home
 spec:
   storageClassName: nfs
   accessModes:
