@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: music-pv
+  namespace: homoe
+spec:
+  capacity:
+    storage: 1024Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: nfs
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    path: /volume1/music
+    server: sto01.prod.mrv.thebends.org
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: music-pvc
+  namespace: music
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 1024Gi
