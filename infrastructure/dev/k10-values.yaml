@@ -10,3 +10,8 @@ spec:
     spec:
       chart: k10
       version: 4.0.3
+    ingress:
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: k10.dev.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
+      host: k10.dev.mrv.thebends.org
