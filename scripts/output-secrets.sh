@@ -78,4 +78,5 @@ fi
 echo export CLOUD_DNS_KEY_FILE=${CLOUD_DNS_KEY_FILE}
 
 # kubectl create secret generic k10-htpasswd -n kasten-io --from-literal="auth=${K10_HTPASSWD}"
+# Created with https://hostingcanada.org/htpasswd-generator/
 echo export K10_HTPASSWD=$(get_secret "k10-htpasswd" "kasten-io" "auth")
