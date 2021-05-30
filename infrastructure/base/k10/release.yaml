@@ -25,7 +25,6 @@ spec:
     ingress:
       create: true
       class: haproxy
-      urlPath:
       tls:
         enabled: true
         secretName: k10-tls
