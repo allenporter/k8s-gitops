@@ -16,7 +16,6 @@ spec:
     - hard
     - nfsvers=4.1
   nfs:
-    path: /k10-backup
     server: sto01.prod.mrv.thebends.org
 ---
 apiVersion: v1
