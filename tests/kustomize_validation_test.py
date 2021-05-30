@@ -71,6 +71,8 @@ def kustomization_files():
             continue
         if doc["spec"]["sourceRef"]["kind"] != "GitRepository":
             continue
+        if "path" not in doc["spec"]:
+            raise Exception(f"Invalid spec/path in doc {doc}")
         matches.append(doc["spec"]["path"])
     return matches
 
