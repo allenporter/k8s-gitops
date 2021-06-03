@@ -3,7 +3,7 @@ name: Schedule - Update Flux
 on:
   workflow_dispatch:
   schedule:
-    - cron: '5 3 * * *'   # Evenings PST
+    - cron: '5 10 * * SAT'   # Saturday Mornings PST
 jobs:
   flux-upgrade:
     runs-on: ubuntu-20.04
@@ -18,7 +18,7 @@ jobs:
           UGLY_VERSION="$(flux -v)"
           VERSION="v${UGLY_VERSION#*flux version }"
           flux install --version="${VERSION}" \
-            --export > ./clusters/dev/flux-system/gotk-components.yaml
+            --export > ./clusters/prod/flux-system/gotk-components.yaml
           echo "::set-output name=flux_version::$VERSION"
       - name: Create pull request
         uses: peter-evans/create-pull-request@v3
