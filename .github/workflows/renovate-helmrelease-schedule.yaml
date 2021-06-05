@@ -14,6 +14,7 @@ jobs:
         uses: k8s-at-home/renovate-helm-releases@v1
         with:
           cluster-path: './'
+          debug: 'yes'
       - name: Create pull request
         uses: peter-evans/create-pull-request@v3
         with:
