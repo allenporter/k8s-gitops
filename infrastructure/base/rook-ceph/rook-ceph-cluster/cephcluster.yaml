@@ -16,4 +16,5 @@ spec:
       - ip: 10.10.20.5
       - ip: 10.10.20.6
       - ip: 10.10.20.7
-    externalMgrPrometheusPort: 9283
+    # Temporary override to keep rook-ceph from poking the osds
+    #externalMgrPrometheusPort: 9283
