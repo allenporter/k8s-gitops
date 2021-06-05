@@ -1,0 +1,34 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: unifi
+  namespace: unifi
+spec:
+  chart:
+    spec:
+      chart: unifi
+      version: 2.0.4
+  values:
+    controllerService:
+      ingress:
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: unifi-controller.prod.mrv.thebends.org.
+          external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+        hosts:
+          - unifi-controller.prod.mrv.thebends.org
+        tls:
+          - secretName: unifi-controller-tls
+            hosts:
+              - unifi-controller.prod.mrv.thebends.org
+    ingress:
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: unifi.prod.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+        haproxy.org/server-ssl: "true"
+      hosts:
+        - unifi.prod.mrv.thebends.org
+      tls:
+        - secretName: unifi-tls
+          hosts:
+            - unifi.prod.mrv.thebends.org

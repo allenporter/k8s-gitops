@@ -1,0 +1,40 @@
+# yamllint disable-file
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: unifi
+  namespace: unifi
+spec:
+  releaseName: unifi
+  chart:
+    spec:
+      chart: unifi
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    enable: false
+  # Default values
+  # https://github.com/k8s-at-home/charts/blob/master/charts/stable/unifi/values.yaml
+  values:
+    controllerService:
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: haproxy
+          cert-manager.io/cluster-issuer: letsencrypt
+
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: haproxy
+        cert-manager.io/cluster-issuer: letsencrypt
+
+    persistence:
+      enabled: true
