@@ -10,7 +10,14 @@ spec:
       chart: unifi
       version: 2.0.4
   values:
+    guiService:
+      type: ClusteRIP
     controllerService:
+      type: LoadBalancer
+      loadBalancerIP: 10.10.25.20
+      externalTrafficPolicy: Local
+      annotations:
+        metallb.universe.tf/allow-shared-ip: unifi-controller-svc
       ingress:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: unifi-controller.prod.mrv.thebends.org.
@@ -21,7 +28,19 @@ spec:
           - secretName: unifi-controller-tls
             hosts:
               - unifi-controller.prod.mrv.thebends.org
+    stunService:
+      loadBalancerIP: 10.10.25.20
+      externalTrafficPolicy: Local
+      annotations:
+        metallb.universe.tf/allow-shared-ip: pihole-svc
+    discoveryService:
+      type: LoadBalancer
+      loadBalancerIP: 10.10.25.20
+      externalTrafficPolicy: Local
+      annotations:
+        metallb.universe.tf/allow-shared-ip: unifi-controller-svc
     ingress:
+      enabled: true
       annotations:
         external-dns.alpha.kubernetes.io/hostname: unifi.prod.mrv.thebends.org.
         external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
@@ -32,3 +51,6 @@ spec:
         - secretName: unifi-tls
           hosts:
             - unifi.prod.mrv.thebends.org
+    persistence:
+      enabled: true
+      size: 40Gi
