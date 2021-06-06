@@ -11,13 +11,15 @@ spec:
       version: 2.0.4
   values:
     guiService:
-      type: ClusteRIP
+      type: LoadBalancer
+      loadBalancerIP: 10.10.25.20
+      annotations:
+        metallb.universe.tf/allow-shared-ip: unifi
     controllerService:
       type: LoadBalancer
       loadBalancerIP: 10.10.25.20
-      externalTrafficPolicy: Local
       annotations:
-        metallb.universe.tf/allow-shared-ip: unifi-controller-svc
+        metallb.universe.tf/allow-shared-ip: unifi
       ingress:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: unifi-controller.prod.mrv.thebends.org.
@@ -32,13 +34,13 @@ spec:
       loadBalancerIP: 10.10.25.20
       externalTrafficPolicy: Local
       annotations:
-        metallb.universe.tf/allow-shared-ip: pihole-svc
+        metallb.universe.tf/allow-shared-ip: unifi
     discoveryService:
       type: LoadBalancer
       loadBalancerIP: 10.10.25.20
       externalTrafficPolicy: Local
       annotations:
-        metallb.universe.tf/allow-shared-ip: unifi-controller-svc
+        metallb.universe.tf/allow-shared-ip: unifi
     ingress:
       enabled: true
       annotations:
