@@ -28,6 +28,7 @@ spec:
       annotations:
         kubernetes.io/ingress.class: haproxy-external
         cert-manager.io/cluster-issuer: letsencrypt
+    hostNetwork: true
     persistence:
       config:
         enabled: true
