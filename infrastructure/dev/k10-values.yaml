@@ -8,6 +8,7 @@ spec:
   releaseName: k10
   chart:
     spec:
+      # renovate: registryUrl=https://charts.kasten.io/
       chart: k10
       version: 4.0.3
   values:
