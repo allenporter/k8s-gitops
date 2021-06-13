@@ -36,10 +36,15 @@ spec:
     envValueFrom:
       DATABASE_PASS:
         secretKeyRef:
-          name: teslamate-postgresql
-          key: postgresql-password
+          name: postgresql-password
+          key: data
     postgresql:
       enabled: true
       postgresqlDatabase: teslamate
       persistence:
         enabled: true
+  valuesFrom:
+    - kind: Secret
+      name: postgresql-password
+      valuesKey: data
+      targetPath: postgresql.postgresqlPassword
