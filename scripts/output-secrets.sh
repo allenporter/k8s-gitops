@@ -43,6 +43,9 @@ fi
 # kubectl get secret generic postgresql-password -n home-assistant --from-literal="data=${HA_POSTGRESQL_PWD}"
 echo export HA_POSTGRESQL_PWD=$(get_secret "postgresql-password" "home-assistant" "data")
 
+# kubectl create secret generic postgresql-password -n teslamate --from-literal="data=${TESLAMATE_POSTGRESQL_PWD}"
+echo export TESLAMATE_POSTGRESQL_PWD=$(get_secret "postgresql-password" "teslamate" "data")
+
 # kubectl create secret generic discord-alert -n monitoring --from-literal=address="${PROMETHEUS_DISCORD_ALERT_URL}"
 echo export PROMETHEUS_DISCORD_ALERT_URL=$(get_secret "discord-alert" "monitoring" "address")
 
