@@ -9,14 +9,16 @@ spec:
     spec:
       # renovate: registryUrl=https://stefanprodan.github.io/podinfo
       chart: podinfo
-      version: 5.2.1
+      version: 6.0.0
   values:
     ingress:
       annotations:
         external-dns.alpha.kubernetes.io/hostname: podinfo.prod.mrv.thebends.org.
         external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
       hosts:
-        - podinfo.prod.mrv.thebends.org
+        - host: podinfo.prod.mrv.thebends.org
+          paths:
+            path: /
       tls:
         - secretName: podinfo-tls
           hosts:
