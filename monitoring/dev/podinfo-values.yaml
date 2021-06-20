@@ -19,6 +19,7 @@ spec:
         - host: podinfo.dev.mrv.thebends.org
           paths:
             - path: /
+              pathType: ImplementationSpecific
       tls:
         - secretName: podinfo-tls
           hosts:
