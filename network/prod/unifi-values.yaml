@@ -11,6 +11,11 @@ spec:
       chart: unifi
       version: 2.0.4
   values:
+    livenessProbe:
+      initialDelaySeconds: 60
+      periodSeconds: 20
+      timeoutSeconds: 5
+      failureThreshold: 5
     guiService:
       type: LoadBalancer
       loadBalancerIP: 10.10.25.20
