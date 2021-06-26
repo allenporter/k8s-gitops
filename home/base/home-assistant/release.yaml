@@ -36,19 +36,19 @@ spec:
         mountPath: /config
         accessMode: ReadWriteOnce
         size: 5Gi
-    additionalVolumes:
-      - name: ssh-creds
-        secret:
-          secretName: git-creds
-          defaultMode: 0400
-          optional: true
-      - name: nfs-music
-        nfs:
-          server: sto01.prod.mrv.thebends.org
-          path: /volume1/music
-    additionalVolumeMounts:
-      - name: nfs-music
-        mountPath: /mnt/music
+      ssh-creds:
+        type: custom
+        volumeSpec:
+          secret:
+            secretName: git-creds
+            defaultMode: 0400
+            optional: true
+      nfs-music:
+        type: custom
+        volumeSpec:
+          nfs:
+            server: sto01.prod.mrv.thebends.org
+            path: /volume1/music
     addons:
       codeserver:
         enabled: true
