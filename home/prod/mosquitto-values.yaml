@@ -9,5 +9,5 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: mosquito
-      version: 2.3.1
+      version: 3.2.0
   values:
