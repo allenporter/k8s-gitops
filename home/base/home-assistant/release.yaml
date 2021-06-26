@@ -37,11 +37,20 @@ spec:
         accessMode: ReadWriteOnce
         size: 5Gi
       nfs-music:
+        enabled: true
         type: custom
         volumeSpec:
           nfs:
             server: sto01.prod.mrv.thebends.org
             path: /volume1/music
+      ssh-creds:
+        enabled: true
+        type: custom
+        volumeSpec:
+          secret:
+            secretName: git-creds
+            defaultMode: 0400
+            optional: true
     addons:
       codeserver:
         enabled: true
@@ -55,14 +64,6 @@ spec:
           annotations:
             kubernetes.io/ingress.class: haproxy
             cert-manager.io/cluster-issuer: letsencrypt
-        persistence:
-          ssh-creds:
-            type: custom
-            volumeSpec:
-              secret:
-                secretName: git-creds
-                defaultMode: 0400
-                optional: true
     postgresql:
       enabled: true
       postgresqlUsername: home-assistant
