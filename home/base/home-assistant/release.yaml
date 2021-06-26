@@ -69,7 +69,6 @@ spec:
       postgresqlDatabase: home-assistant
       persistence:
         enabled: true
-        existingClaim: data-home-assistant-postgresql-0
     prometheus:
       serviceMonitor:
         enabled: true
