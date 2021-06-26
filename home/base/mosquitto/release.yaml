@@ -23,3 +23,5 @@ spec:
     persistence:
       data:
         enabled: true
+        accessMode: ReadWriteOnce
+        size: 8Gi
