@@ -36,13 +36,6 @@ spec:
         mountPath: /config
         accessMode: ReadWriteOnce
         size: 5Gi
-      ssh-creds:
-        type: custom
-        volumeSpec:
-          secret:
-            secretName: git-creds
-            defaultMode: 0400
-            optional: true
       nfs-music:
         type: custom
         volumeSpec:
@@ -62,6 +55,14 @@ spec:
           annotations:
             kubernetes.io/ingress.class: haproxy
             cert-manager.io/cluster-issuer: letsencrypt
+        persistence:
+          ssh-creds:
+            type: custom
+            volumeSpec:
+              secret:
+                secretName: git-creds
+                defaultMode: 0400
+                optional: true
     postgresql:
       enabled: true
       postgresqlUsername: home-assistant
