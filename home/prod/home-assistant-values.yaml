@@ -15,17 +15,18 @@ spec:
       repository: homeassistant/home-assistant
       tag: 2021.6.5
     ingress:
-      annotations:
-        external-dns.alpha.kubernetes.io/hostname: home-assistant.prod.mrv.thebends.org.
-        external-dns.alpha.kubernetes.io/target: prx03.prod.mrv.thebends.org.
-      hosts:
-        - host: home-assistant.prod.mrv.thebends.org
-          paths:
-            - path: /
-      tls:
-        - secretName: home-assistant-tls
-          hosts:
-            - home-assistant.prod.mrv.thebends.org
+      main:
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: home-assistant.prod.mrv.thebends.org.
+          external-dns.alpha.kubernetes.io/target: prx03.prod.mrv.thebends.org.
+        hosts:
+          - host: home-assistant.prod.mrv.thebends.org
+            paths:
+              - path: /
+        tls:
+          - secretName: home-assistant-tls
+            hosts:
+              - home-assistant.prod.mrv.thebends.org
     env:
       HASS_INTERNAL_URL: "https://home-assistant.prod.mrv.thebends.org"
       HASS_EXTERNAL_URL: "https://home-assistant.prod.mrv.thebends.org:18123"

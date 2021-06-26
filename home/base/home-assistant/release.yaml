@@ -24,10 +24,11 @@ spec:
   # https://github.com/k8s-at-home/charts/blob/master/charts/stable/home-assistant/values.yaml
   values:
     ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: haproxy-external
-        cert-manager.io/cluster-issuer: letsencrypt
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: haproxy-external
+          cert-manager.io/cluster-issuer: letsencrypt
     hostNetwork: true
     persistence:
       config:
