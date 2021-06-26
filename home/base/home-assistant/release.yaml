@@ -39,6 +39,7 @@ spec:
       nfs-music:
         enabled: true
         type: custom
+        mountPath: /mnt/music
         volumeSpec:
           nfs:
             server: sto01.prod.mrv.thebends.org
