@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - podmonitor.yaml
+  - rules.yaml
 generatorOptions:
   labels:
     grafana_dashboard: "1"
