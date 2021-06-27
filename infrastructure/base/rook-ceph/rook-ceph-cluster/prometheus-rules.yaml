@@ -6,6 +6,7 @@ metadata:
     prometheus: rook-ceph-rules
     role: alert-rules
   name: rook-ceph-prometheus-rules
+  namespace: rook-ceph
 spec:
   groups:
   - name: RookCephClusterRules
