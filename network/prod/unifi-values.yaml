@@ -11,8 +11,13 @@ spec:
       chart: unifi
       version: 2.0.4
   values:
+    livenessProbe:
+      initialDelaySeconds: 60
+      periodSeconds: 30
+      timeoutSeconds: 5
+      failureThreshold: 7
     readinessProbe:
-      initialDelaySeconds: 30
+      initialDelaySeconds: 60
       periodSeconds: 30
       timeoutSeconds: 5
       failureThreshold: 7
