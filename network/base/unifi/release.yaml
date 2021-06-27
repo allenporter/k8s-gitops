@@ -17,7 +17,7 @@ spec:
   interval: 5m
   install:
     remediation:
-      retries: 3
+      retries: 5
   test:
     enable: false
   # Default values
