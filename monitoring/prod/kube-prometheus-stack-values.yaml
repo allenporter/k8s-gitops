@@ -40,6 +40,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
         hosts:
           - a.prod.mrv.thebends.org
+        pathType: Prefix
         tls:
           - secretName: a-tls
             hosts:
