@@ -1,0 +1,20 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: rook-ceph-rules
+    role: alert-rules
+  name: rook-ceph-prometheus-rules
+spec:
+  groups:
+  - name: RookCephClusterRules
+    rules:
+    - alert: CephDown
+      expr: up{job="rook-ceph-mgr-external"} == 0
+      for: 10m
+      labels:
+        severity: page
+      annotations:
+        summary: "rook-ceph-mgr-external instance {{ $labels.instance }} is down"
+        description: "{{ $labels.instance }} of job {{ $labels.job }} is down for 10 minutes."
