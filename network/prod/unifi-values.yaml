@@ -63,4 +63,4 @@ spec:
             - unifi.prod.mrv.thebends.org
     persistence:
       enabled: true
-      size: 40Gi
+      existingClaim: unifi-shelf
