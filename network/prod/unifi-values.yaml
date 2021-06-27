@@ -16,11 +16,12 @@ spec:
       periodSeconds: 20
       timeoutSeconds: 5
       failureThreshold: 5
-    guiService:
-      type: LoadBalancer
-      loadBalancerIP: 10.10.25.20
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
+    #guiService:
+    #  type: LoadBalancer
+    #  loadBalancerIP: 10.10.25.20
+    #  externalTrafficPolicy: Local
+    #  annotations:
+    #    metallb.universe.tf/allow-shared-ip: unifi
     controllerService:
       type: LoadBalancer
       loadBalancerIP: 10.10.25.20
