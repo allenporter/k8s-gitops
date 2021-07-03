@@ -29,6 +29,7 @@ spec:
         annotations:
           kubernetes.io/ingress.class: haproxy-external
           cert-manager.io/cluster-issuer: letsencrypt
+          haproxy.org/forwarded-for: "true"
     hostNetwork: true
     persistence:
       config:
