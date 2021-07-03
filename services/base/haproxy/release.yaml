@@ -27,6 +27,8 @@ spec:
         syslog-server: "address:10.10.1.10,facility:local0,level:info"
       service:
         type: LoadBalancer
+        # Preserve source ip addresses
+        externalTrafficPolicy: Local
       logging:
         level: debug
     defaultBackend:
