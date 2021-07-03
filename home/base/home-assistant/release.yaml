@@ -25,6 +25,7 @@ spec:
   values:
     service:
       main:
+        type: ClusterIP
         externalTrafficPolicy: Local
     ingress:
       main:
