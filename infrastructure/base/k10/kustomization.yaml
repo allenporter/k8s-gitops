@@ -6,4 +6,5 @@ resources:
   - namespace.yaml
   - release.yaml
   - backup-pvc.yaml
-  - servicemonitor.yaml
+  - service-monitor.yaml
+  - prometheus-rule.yaml
