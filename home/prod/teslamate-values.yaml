@@ -9,21 +9,22 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: teslamate
-      version: 4.0.1
+      version: 5.0.0
   values:
     image:
       repository: teslamate/teslamate
       tag: 1.23.6
     virtualHost: teslamate.prod.mrv.thebends.org
     ingress:
-      annotations:
-        external-dns.alpha.kubernetes.io/hostname: teslamate.prod.mrv.thebends.org.
-        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
-      hosts:
-        - host: teslamate.prod.mrv.thebends.org
-          paths:
-            - path: /
-      tls:
-        - secretName: teslamate-tls
-          hosts:
-            - teslamate.prod.mrv.thebends.org
+      main:
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: teslamate.prod.mrv.thebends.org.
+          external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+        hosts:
+          - host: teslamate.prod.mrv.thebends.org
+            paths:
+              - path: /
+        tls:
+          - secretName: teslamate-tls
+            hosts:
+              - teslamate.prod.mrv.thebends.org

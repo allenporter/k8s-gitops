@@ -24,10 +24,11 @@ spec:
   # https://github.com/k8s-at-home/charts/blob/master/charts/stable/teslamate/values.yaml
   values:
     ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: haproxy
-        cert-manager.io/cluster-issuer: letsencrypt
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: haproxy
+          cert-manager.io/cluster-issuer: letsencrypt
     env:
       DATABASE_NAME: "teslamate"
       DATABASE_USER: "postgres"
