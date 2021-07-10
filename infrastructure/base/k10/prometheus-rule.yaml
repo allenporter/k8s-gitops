@@ -13,10 +13,10 @@ spec:
     rules:
     - alert: BackupJobsFailing
       annotations:
-        description: "Backup jobs failing for last to minutes"
+        description: "Backup jobs failing"
         summary: |-
-          "{{ $labels.application }} jobs has errors for last 10 mins for {{ $labels.policy }} policy"
-      expr: increase(catalog_actions_count{status="failed"}[10m]) > 0
+          "{{ $labels.application }} job has errors for last 10 mins for {{ $labels.policy }} policy"
+      expr: increase(catalog_actions_count{status="failed",type="backup"}[10m]) > 0
       for: 1m
       labels:
         severity: critical
