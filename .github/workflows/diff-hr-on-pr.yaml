@@ -3,9 +3,7 @@ on:
   pull_request:
     branches:
       - main
-      - "renovate/**"
-    paths:
-      - "clusters/**.yaml"
+      - 'renovate/**'
 env:
   conf_live_branch: main
   conf_allow_repeating_same_comment: true
