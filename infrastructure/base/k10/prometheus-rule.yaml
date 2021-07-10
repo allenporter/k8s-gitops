@@ -16,7 +16,7 @@ spec:
         description: "Backup jobs failing"
         summary: |-
           "{{ $labels.application }} job has errors for last 10 mins for {{ $labels.policy }} policy"
-      expr: increase(catalog_actions_count{status="failed",type="backup"}[10m]) > 0
+      expr: increase(catalog_actions_count{status="failed",type!~"retire"}[10m]) > 0
       for: 1m
       labels:
         severity: critical
