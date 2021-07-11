@@ -5,7 +5,7 @@ metadata:
   name: discord-info
   namespace: flux-system
 spec:
-  type: discord-info
+  type: discord
   channel: general
   username: Flux Bot
   # See https://toolkit.fluxcd.io/guides/notifications/
