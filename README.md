@@ -71,6 +71,8 @@ k8s-at-home folks:
   this. This runs as a nightly action to opt in any newly added `HelmRelease`.
 - See [onedr0p's Schedule - Update Flux](https://github.com/onedr0p/home-cluster/blob/main/.github/workflows/flux-schedule.yaml)
   for an example of how to use a GitHub action to update flux itself. My copy is here: [Schedule - Update Flux](.github/workflows/update-flux-schedule.yaml)
+- See [cubic3d's diff-hr-on-pr](https://gist.github.com/cubic3d/17b2c601549802501d4ca5a68dcc4db8) which will evaluate
+  the diff of a `HelmRelease`, which is helpful for spotting breaking changes. My copy is here: [Diff HelmReleases](.github/workflows/diff-hr-on-pr.yaml)
 
 ## Resources
 
