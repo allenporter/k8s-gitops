@@ -23,7 +23,7 @@ spec:
                 /
               sum(rate(grpc_server_handled_total{job=~".*etcd.*"}[5m])) without (grpc_type, grpc_code)
                 > 1
-      for: 10m
+      for: 30m
       labels:
         severity: warning
     - alert: etcdHighNumberOfFailedGRPCRequestsCustom
@@ -34,6 +34,6 @@ spec:
                 /
               sum(rate(grpc_server_handled_total{job=~".*etcd.*"}[5m])) without (grpc_type, grpc_code)
                 > 5
-      for: 5m
+      for: 15m
       labels:
         severity: critical
