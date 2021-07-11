@@ -18,7 +18,6 @@ Additional cluster setup not included in this repo includes:
   - [etcd](https://etcd.io/) with 3 nodes managed via ansible
   - [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/) provisioned via ansible
   - [haproxy](http://www.haproxy.org/) for load balancing kubernetes API via ansible
-  - [calico](https://docs.projectcalico.org/about/about-calico) for cluster internal networking via ansible
 
 The bare metal cluster follows best practices for a server [naming
 scheme](https://mnx.io/blog/a-proper-server-naming-scheme/) including specifying a geograph, environment (`dev` and `prod`) and a purpose and serial number per machine (e.g. `sto01`, `cfg01`, etc). A local DNS server is shared by the k8s cluster.
@@ -42,7 +41,9 @@ The key infrastructure components running within the cluster and managed by this
 src="https://docs.google.com/drawings/d/e/2PACX-1vSZh09V6luZjHGP7YWNVQM9tGQ69R7exD--vz7lknp6Z2OuMDItiVjTSJhjVN2Y-PPaoQoqx2x3D0Ey/pub?w=481&amp;h=374"
 align=right>
 
+  - [calico](https://docs.projectcalico.org/about/about-calico) for cluster internal networking
   - [rook-ceph](https://rook.io/): Provides persistent volumes, allowing any application to use the external ceph storage cluster.
+  - [kasten k10](https://docs.kasten.io/latest/install/index.html): Provides snapshots and export of backup to external nfs.
   - [metallb](https://metallb.universe.tf/): A load balancer for bare metal kubernetes.
   - [haproxy](https://github.com/haproxytech/kubernetes-ingress): Used for proxying services through kubernetes ingress, exposing any service through the LoadBalancer with TLS.
   - [external-dns](https://github.com/kubernetes-sigs/external-dns): Creates DNS entries on an external dns server for all relevant ingress services in the cluster. This relies on an existing local dns server outside of the cluster.
