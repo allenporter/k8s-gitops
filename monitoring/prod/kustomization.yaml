@@ -9,6 +9,7 @@ resources:
   - ../base/kube-prometheus-stack
   - ../base/notifications
   - ../base/flux-monitoring
+  - ../base/etcd-monitoring
 patchesStrategicMerge:
   - podinfo-values.yaml
   - speedtest-prometheus-values.yaml
