@@ -43,7 +43,7 @@ align=right>
 
   - [calico](https://docs.projectcalico.org/about/about-calico) for cluster internal networking
   - [rook-ceph](https://rook.io/): Provides persistent volumes, allowing any application to use the external ceph storage cluster.
-  - [kasten k10](https://docs.kasten.io/latest/install/index.html): Provides snapshots and export of backup to external nfs.
+  - [kasten k10](https://docs.kasten.io/latest/install/index.html): Provides snapshots and export of backup to external nfs. Requires `VolumeSnapshot` and kubernetes [Snapshot Controller](https://kubernetes-csi.github.io/docs/snapshot-controller.html) for `rook-ceph` snapshots.
   - [metallb](https://metallb.universe.tf/): A load balancer for bare metal kubernetes.
   - [haproxy](https://github.com/haproxytech/kubernetes-ingress): Used for proxying services through kubernetes ingress, exposing any service through the LoadBalancer with TLS.
   - [external-dns](https://github.com/kubernetes-sigs/external-dns): Creates DNS entries on an external dns server for all relevant ingress services in the cluster. This relies on an existing local dns server outside of the cluster.
