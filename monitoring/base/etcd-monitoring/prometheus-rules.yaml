@@ -17,12 +17,12 @@ spec:
     rules:
     - alert: etcdHighNumberOfFailedGRPCRequestsCustom
       annotations:
-        message: 'etcd cluster {{ $labels.job }}: {{ $value }}% of requests for {{ $labels.grpc_method }} failed on etcd instance {{`{{`}} $labels.instance {{`}}`}}.'
+        message: 'etcd cluster "{{ $labels.job }}": {{ $value }}% of requests for {{ $labels.grpc_method }} failed on etcd instance {{ $labels.instance }}.'
       expr: |-
-        100 * sum(rate(grpc_server_handled_total{job=~".*etcd.*", grpc_code!~"OK|Canceled"}[5m])) BY (job, instance, grpc_service, grpc_method)
-          /
-        sum(rate(grpc_server_handled_total{job=~".*etcd.*"}[5m])) BY (job, instance, grpc_service, grpc_method)
-          > 1
+              100 * sum(rate(grpc_server_handled_total{%(etcd_selector)s, grpc_code=~"Unknown|FailedPrecondition|ResourceExhausted|Internal|Unavailable|DataLoss|DeadlineExceeded"}[5m])) without (grpc_type, grpc_code)
+                /
+              sum(rate(grpc_server_handled_total{%(etcd_selector)s}[5m])) without (grpc_type, grpc_code)
+                > 1
       for: 10m
       labels:
         severity: warning
@@ -30,10 +30,10 @@ spec:
       annotations:
         message: 'etcd cluster {{ $labels.job }}: {{ $value }}% of requests for {{ $labels.grpc_method }} failed on etcd instance {{`{{`}} $labels.instance {{`}}`}}.'
       expr: |-
-        100 * sum(rate(grpc_server_handled_total{job=~".*etcd.*", grpc_code!~"OK|Canceled"}[5m])) BY (job, instance, grpc_service, grpc_method)
-          /
-        sum(rate(grpc_server_handled_total{job=~".*etcd.*"}[5m])) BY (job, instance, grpc_service, grpc_method)
-          > 5
+              100 * sum(rate(grpc_server_handled_total{%(etcd_selector)s, grpc_code=~"Unknown|FailedPrecondition|ResourceExhausted|Internal|Unavailable|DataLoss|DeadlineExceeded"}[5m])) without (grpc_type, grpc_code)
+                /
+              sum(rate(grpc_server_handled_total{%(etcd_selector)s}[5m])) without (grpc_type, grpc_code)
+                > 5
       for: 5m
       labels:
         severity: critical
