@@ -6,6 +6,7 @@ resources:
   - ../base/redis
   - ../base/rook-ceph
   - ../base/k10
+  - ../base/calico
 patchesStrategicMerge:
   - redis-values.yaml
   - rook-ceph-values.yaml
