@@ -13,3 +13,9 @@ spec:
       name: '*'
     - kind: HelmRelease
       name: '*'
+  exclusionList:
+    # Ignore transient failures on external dependencies and rely on prometheus
+    # alerting for stuck reconiciliations
+    - "error.*lookup github\\.com"
+    - "waiting.*socket"
+    - "TLS handshake timeout"
