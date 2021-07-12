@@ -12,8 +12,6 @@ spec:
       version: 16.12.2
   values:
     grafana:
-      deploymentStrategy:
-        type: Recreate
       ingress:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: g.dev.mrv.thebends.org.
