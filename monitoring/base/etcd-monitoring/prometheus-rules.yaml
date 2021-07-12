@@ -28,7 +28,7 @@ spec:
         severity: warning
     - alert: etcdHighNumberOfFailedGRPCRequestsCustom
       annotations:
-        message: 'etcd cluster {{ $labels.job }}: {{ $value }}% of requests for {{ $labels.grpc_method }} failed on etcd instance {{`{{`}} $labels.instance {{`}}`}}.'
+        message: 'etcd cluster "{{ $labels.job }}": {{ $value }}% of requests for {{ $labels.grpc_method }} failed on etcd instance {{ $labels.instance }}.'
       expr: |-
               100 * sum(rate(grpc_server_handled_total{job=~".*etcd.*", grpc_code=~"Unknown|FailedPrecondition|ResourceExhausted|Internal|Unavailable|DataLoss|DeadlineExceeded"}[5m])) without (grpc_type, grpc_code)
                 /
