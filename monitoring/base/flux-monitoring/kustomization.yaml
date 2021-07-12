@@ -4,7 +4,11 @@ kind: Kustomization
 namespace: flux-system
 resources:
   - podmonitor.yaml
-  - rules.yaml
+  - prometheus-rules.yaml
+  - discord-info.yaml
+  - discord-alert.yaml
+  - info.yaml
+  - error.yaml
 generatorOptions:
   labels:
     grafana_dashboard: "1"
