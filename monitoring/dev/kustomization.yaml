@@ -7,7 +7,6 @@ resources:
   - ../base/speedtest-prometheus
   - ../base/kubernetes-dashboard
   - ../base/kube-prometheus-stack
-  - ../base/notifications
   - ../base/flux-monitoring
   - ../base/etcd-monitoring
 patchesStrategicMerge:
