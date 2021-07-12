@@ -2,11 +2,11 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  creationTimestamp: null
+  name: flux-alert-rules
+  namespace: flux-system
   labels:
-    prometheus: example
+    prometheus: flux-rules
     role: alert-rules
-  name: prometheus-example-rules
 spec:
   groups:
   - name: GitOpsToolkit
