@@ -1,5 +1,7 @@
 appdirs==1.4.4
+argcomplete==1.12.3
 attrs==21.2.0
+backports.entry-points-selectable==1.1.0
 cfgv==3.3.0
 distlib==0.3.2
 filelock==3.0.12
@@ -9,6 +11,7 @@ identify==2.2.11
 iniconfig==1.1.1
 nodeenv==1.6.0
 packaging==21.0
+platformdirs==2.0.2
 pluggy==0.13.1
 pre-commit==2.13.0
 py==1.10.0
@@ -19,3 +22,5 @@ six==1.16.0
 smmap==4.0.0
 toml==0.10.2
 virtualenv==20.5.0
+xmltodict==0.12.0
+yq==2.12.2
