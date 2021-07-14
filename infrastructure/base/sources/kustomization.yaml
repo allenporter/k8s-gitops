@@ -17,3 +17,4 @@ resources:
   - blakeshome.yaml
   - itzg.yaml
   - kasten.yaml
+  - ingress-nginix.yaml
