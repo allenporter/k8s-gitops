@@ -85,7 +85,8 @@ spec:
         global:
           resolve_timeout: 5m
         route:
-          group_by: ['job']
+          # Avoid over grouping to ensure that alerts are delivered separately to fit under the discord limit
+          group_by: ['job', 'alertname', 'severity']
           group_wait: 30s
           group_interval: 5m
           repeat_interval: 12h
@@ -113,6 +114,9 @@ spec:
                 *Alert:* {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
               {{ if ne .Annotations.summary ""}}*Summary:* {{ .Annotations.summary }} {{ else if ne .Annotations.message ""}}*Message:* {{ .Annotations.message }} {{ else if ne .Annotations.description ""}}*Description:* {{ .Annotations.description }}{{ end }}
               {{ end }}
+              *Details:*
+                {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+                {{ end }}
         templates:
         - '/etc/alertmanager/config/*.tmpl'
   valuesFrom:
