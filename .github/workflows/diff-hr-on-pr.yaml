@@ -3,7 +3,8 @@ on:
   pull_request:
     branches:
       - main
-      - 'renovate/**'
+    paths:
+      - "**.yaml"
 env:
   conf_live_branch: main
   conf_allow_repeating_same_comment: true
@@ -27,13 +28,13 @@ jobs:
       - name: Keep HelmReleases only
         id: extract
         run: |
-          filtered=$(grep -zl "kind: HelmRelease.*registryUrl=" ${{ steps.filter.outputs.changed_files }} | \
-            jq -R '[.]' | \
-            jq -s -c add)
+          filtered=$(grep -zl "kind: HelmRelease.*registryUrl=" ${{ steps.filter.outputs.changed_files }} \
+            | jq -nR '[inputs | select(length>0)]')
           echo ::set-output name=files::${filtered}
   helm:
     name: Template HelmReleases
     runs-on: ubuntu-latest
+    if: ${{ needs.changes.outputs.files != '[]' }}
     needs:
       - changes
     strategy:
