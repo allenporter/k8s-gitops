@@ -1,0 +1,17 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nginx
+  namespace: nginx
+spec:
+  chart:
+    spec:
+      chart: ningress-nginx
+      version: 3.34.0
+  values:
+    controller:
+      service:
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: prx04.dev.mrv.thebends.org.
+        loadBalancerIP: "10.10.24.6"
