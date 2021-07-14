@@ -6,9 +6,11 @@ resources:
   - ../base/metallb/
   - ../base/external-dns/
   - ../base/certs/
+  - ../base/nginx/
   - namespace.yaml
 patchesStrategicMerge:
   - haproxy-values.yaml
   - haproxy-external-values.yaml
   - metallb-values.yaml
   - external-dns-values.yaml
+  - nginx-values.yaml
