@@ -7,7 +7,7 @@ resources:
   - ../base/external-dns/
   - ../base/certs/
   - ../base/nginx/
-  - ../base/traefik
+  - ../base/traefik/
   - namespace.yaml
 patchesStrategicMerge:
   - haproxy-values.yaml

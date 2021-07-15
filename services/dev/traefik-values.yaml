@@ -2,12 +2,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: trafik
+  name: traefik
   namespace: traefik
 spec:
   chart:
     spec:
-      chart: ingress-nginx
+      chart: traefik
       version: 10.0.2
   values:
     service:
