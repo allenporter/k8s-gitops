@@ -13,6 +13,7 @@ spec:
     service:
       annotations:
         external-dns.alpha.kubernetes.io/hostname: prx05.dev.mrv.thebends.org.
+      loadBalancerIP: "10.10.24.7"
       spec:
         externalIPs:
         - "10.10.24.7"

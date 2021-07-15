@@ -24,7 +24,8 @@ spec:
       enabled: true
     service:
       type: LoadBalancer
-      externalTrafficPolicy: Cluster
+      # Preserve source ip addresses
+      externalTrafficPolicy: Local
     globalArguments:
     - "--providers.kubernetesingress.ingressclass=traefik"
     - "--metrics.prometheus=true"
