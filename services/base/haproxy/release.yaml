@@ -33,3 +33,6 @@ spec:
         level: debug
     defaultBackend:
       enabled: false
+    ingressClassResource:
+      enabled: true
+      default: true
