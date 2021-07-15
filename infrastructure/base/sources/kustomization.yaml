@@ -18,3 +18,4 @@ resources:
   - itzg.yaml
   - kasten.yaml
   - ingress-nginix.yaml
+  - traefik.yaml
