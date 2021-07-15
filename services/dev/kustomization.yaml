@@ -7,6 +7,7 @@ resources:
   - ../base/external-dns/
   - ../base/certs/
   - ../base/nginx/
+  - ../base/traefik
   - namespace.yaml
 patchesStrategicMerge:
   - haproxy-values.yaml
@@ -14,3 +15,4 @@ patchesStrategicMerge:
   - metallb-values.yaml
   - external-dns-values.yaml
   - nginx-values.yaml
+  - traefik-values.yaml
