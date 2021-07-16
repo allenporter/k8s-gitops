@@ -5,7 +5,7 @@ metadata:
   name: podinfo-haproxy
   namespace: podinfo
 spec:
-  releaseName: podinfo
+  releaseName: podinfo-haproxy
   chart:
     spec:
       chart: podinfo
