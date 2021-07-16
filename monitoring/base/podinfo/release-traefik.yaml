@@ -2,10 +2,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: podinfo
+  name: podinfo-traefik
   namespace: podinfo
 spec:
-  releaseName: podinfo
+  releaseName: podinfo-traefik
   chart:
     spec:
       chart: podinfo
@@ -27,5 +27,5 @@ spec:
       enabled: true
       path: "/"
       annotations:
-        kubernetes.io/ingress.class: haproxy
+        kubernetes.io/ingress.class: nginx
         cert-manager.io/cluster-issuer: letsencrypt
