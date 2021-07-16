@@ -21,6 +21,6 @@ spec:
             - path: /
               pathType: ImplementationSpecific
       tls:
-        - secretName: podinfo-tls
+        - secretName: podinfo-haproxy-tls
           hosts:
             - podinfo-haproxy.dev.mrv.thebends.org

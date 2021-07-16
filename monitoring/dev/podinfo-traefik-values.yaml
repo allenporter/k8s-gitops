@@ -21,6 +21,6 @@ spec:
             - path: /
               pathType: ImplementationSpecific
       tls:
-        - secretName: podinfo-tls
+        - secretName: podinfo-traefik-tls
           hosts:
             - podinfo-traefik.dev.mrv.thebends.org
