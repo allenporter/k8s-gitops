@@ -10,7 +10,6 @@ resources:
   - ../base/flux-monitoring
   - ../base/etcd-monitoring
 patchesStrategicMerge:
-  - podinfo-values.yaml
   - podinfo-haproxy-values.yaml
   - podinfo-nginx-values.yaml
   - podinfo-traefik-values.yaml
