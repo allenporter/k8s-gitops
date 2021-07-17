@@ -10,9 +10,10 @@ resources:
   - ../base/flux-monitoring
   - ../base/etcd-monitoring
 patchesStrategicMerge:
-#  - podinfo-haproxy-values.yaml
-#  - podinfo-nginx-values.yaml
-#  - podinfo-traefik-values.yaml
+  - podinfo-values.yaml
+  - podinfo-haproxy-values.yaml
+  - podinfo-nginx-values.yaml
+  - podinfo-traefik-values.yaml
   - speedtest-prometheus-values.yaml
   - kubernetes-dashboard-values.yaml
   - kube-prometheus-stack-values.yaml
