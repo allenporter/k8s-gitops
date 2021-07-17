@@ -12,7 +12,3 @@ spec:
       version: 5.2.0
   values:
     domainFilters: ["dev.mrv.thebends.org"]
-    image:
-      repository: allenporter/external-dns
-      tag: dev
-      pullPolicy: Always
