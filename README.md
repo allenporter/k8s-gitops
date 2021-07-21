@@ -20,11 +20,11 @@ Additional cluster setup not included in this repo includes:
   - [haproxy](http://www.haproxy.org/) for load balancing kubernetes API via ansible
 
 The bare metal cluster follows best practices for a server [naming
-scheme](https://mnx.io/blog/a-proper-server-naming-scheme/) including specifying a geograph, environment (`dev` and `prod`) and a purpose and serial number per machine (e.g. `sto01`, `cfg01`, etc). A local DNS server is shared by the k8s cluster.
+scheme](https://mnx.io/blog/a-proper-server-naming-scheme/) including specifying a geography, environment (`dev` and `prod`) and a purpose and serial number per machine (e.g. `sto01`, `cfg01`, etc). A local DNS server is shared by the k8s cluster.
 
 ## Environments
 
-This repository manages everything else running within the k8s cluster (e.g. containers, load balancers, applications, etc). The repo follows the pattern in [flux2-kustomize-helm-example](https://github.com/fluxcd/flux2-kustomize-helm-example) where applications are specified with overrides for mtuliple environments which map to two seperate kubernetes clusters:
+This repository manages everything else running within the k8s cluster (e.g. containers, load balancers, applications, etc). The repo follows the pattern in [flux2-kustomize-helm-example](https://github.com/fluxcd/flux2-kustomize-helm-example) where applications are specified with overrides for multiple environments which map to two seperate kubernetes clusters:
 
 - `dev`: A separate instance for testing/validation for both new configuration and binary releases (e.g. nightly docker image builds)
 - `prod`: A production environment with stable binaries and better tested configuration.
