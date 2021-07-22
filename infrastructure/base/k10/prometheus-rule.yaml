@@ -20,3 +20,11 @@ spec:
       for: 1m
       labels:
         severity: critical
+    - alert: BackupJobsNotCompliant
+      annotations:
+        description: "Backups out of compliance"
+        summary: "{{ $labels.application }} backups out of compliance"
+      expr: dashboardbff_compliance_count{state="NotCompliant"} > 0
+      for: 120m
+      labels:
+        severity: critical
