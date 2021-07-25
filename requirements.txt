@@ -11,7 +11,7 @@ identify==2.2.11
 iniconfig==1.1.1
 nodeenv==1.6.0
 packaging==21.0
-platformdirs==2.0.2
+platformdirs==2.1.0
 pluggy==0.13.1
 pre-commit==2.13.0
 py==1.10.0
