@@ -8,6 +8,6 @@ spec:
   releaseName: minio
   chart:
     spec:
-      chart: minio
+      chart: minio-operator
       version: 4.1.7
   values:
