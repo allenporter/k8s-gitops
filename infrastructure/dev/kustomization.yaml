@@ -7,8 +7,10 @@ resources:
   - ../base/rook-ceph
   - ../base/k10
   - ../base/calico
+  - ../base/velero
 patchesStrategicMerge:
   - redis-values.yaml
   - rook-ceph-values.yaml
   - k10-values.yaml
   - backup-pvc.yaml
+  - velero-values.yaml
