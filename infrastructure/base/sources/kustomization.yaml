@@ -19,3 +19,4 @@ resources:
   - kasten.yaml
   - ingress-nginix.yaml
   - traefik.yaml
+  - vmware-tanzu.yaml
