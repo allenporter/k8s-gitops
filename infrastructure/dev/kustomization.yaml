@@ -8,9 +8,11 @@ resources:
   - ../base/k10
   - ../base/calico
   - ../base/velero
+  - ../base/minio
 patchesStrategicMerge:
   - redis-values.yaml
   - rook-ceph-values.yaml
   - k10-values.yaml
   - backup-pvc.yaml
   - velero-values.yaml
+  - minio-values.yaml

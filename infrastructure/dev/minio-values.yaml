@@ -1,0 +1,13 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minio
+  namespace: minio
+spec:
+  releaseName: minio
+  chart:
+    spec:
+      chart: minio
+      version: 4.1.7
+  values:
