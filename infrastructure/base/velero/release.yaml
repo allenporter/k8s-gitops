@@ -11,7 +11,7 @@ spec:
       chart: velero
       sourceRef:
         kind: HelmRepository
-        name: vimware-tanzu
+        name: vmware-tanzu
         namespace: flux-system
   interval: 1h0m0s
   install:
