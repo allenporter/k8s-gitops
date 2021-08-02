@@ -10,6 +10,7 @@ spec:
     spec:
       chart: velero
       version: 2.23.5
+  # Default values https://github.com/vmware-tanzu/helm-charts/blob/main/charts/velero/values.yaml
   values:
 # Placeholder configu:
 #    schedules:

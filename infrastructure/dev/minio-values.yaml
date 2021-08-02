@@ -11,3 +11,9 @@ spec:
       chart: minio-operator
       version: 4.1.7
   values:
+    console:
+      ingress:
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: minio.dev.mrv.thebends.org.
+          external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
+        host: minio.dev.mrv.thebends.org
