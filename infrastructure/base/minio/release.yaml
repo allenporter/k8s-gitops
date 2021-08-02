@@ -19,4 +19,12 @@ spec:
       retries: 5
   # Default values: https://github.com/minio/operator/blob/master/helm/minio-operator/values.yaml
   values:
+    console:
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: haproxy
+          cert-manager.io/cluster-issuer: letsencrypt
+        tls:
+        - minio-tls
     tenants:
