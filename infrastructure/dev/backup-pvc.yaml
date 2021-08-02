@@ -7,12 +7,3 @@ metadata:
 spec:
   nfs:
     path: /volume1/k10-backup-dev
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: velero-nfs-backup-pv
-  namespace: kasten-io
-spec:
-  nfs:
-    path: /volume1/velero-backup-dev
