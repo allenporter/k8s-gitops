@@ -1,0 +1,22 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: rook-ceph
+    role: alert-rules
+  name: rook-ceph
+  namespace: rook-ceph
+spec:
+  groups:
+  - name: rook-ceph.rules
+    rules:
+    - alert: DegradedPgs
+      annotations:
+        description: "Degraded Pgs"
+        summary: |-
+          "rook-ceph has degraded pgs for {{ $labels.service }}"
+      expr: sum without (instance, pool_id) (ceph_pg_degraded) > 0
+      for: 10m
+      labels:
+        severity: critical
