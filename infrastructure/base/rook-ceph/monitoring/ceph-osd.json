@@ -80,13 +80,6 @@
           "custom": {},
           "mappings": [
             {
-              "from": "null",
-              "id": 0,
-              "text": "N/A",
-              "to": "null",
-              "type": 2
-            },
-            {
               "from": "0",
               "id": 1,
               "text": "DOWN",
@@ -170,13 +163,6 @@
         "defaults": {
           "custom": {},
           "mappings": [
-            {
-              "from": "null",
-              "id": 0,
-              "text": "N/A",
-              "to": "null",
-              "type": 2
-            },
             {
               "from": "0",
               "id": 1,
