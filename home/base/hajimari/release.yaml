@@ -28,7 +28,16 @@ spec:
     hajimari:
       defaultEnable: true
       namespaceSelector:
-        matchNames: []
+        matchNames:
+          - frigate
+          - home-assistant
+          - kasten-io
+          - kubernetes-dashboard
+          - monitoring
+          - pihole
+          - podinfo
+          - teslamate
+          - unifi
     ingress:
       main:
         enabled: true
