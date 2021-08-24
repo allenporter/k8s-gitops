@@ -37,6 +37,22 @@ spec:
           - pihole
           - teslamate
           - unifi
+      customApps:
+        - name: sto01
+          url: https://sto01.prod.mrv.thebends.org
+          icon: nas
+        - name: vmm01
+          url: https://vmm01.prod.mrv.thebends.org
+          icon: server
+        - name: rtr01
+          url: https://rtr01.prod.mrv.thebends.org
+          icon: router-network
+        - name: swt01
+          url: https://swt01.prod.mrv.thebends.org
+          icon: switch
+        - name: swt02
+          url: https://swt02.prod.mrv.thebends.org
+          icon: switch
     ingress:
       main:
         enabled: true
