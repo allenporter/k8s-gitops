@@ -83,7 +83,7 @@ spec:
           command:
             - benji-command
             - enforce
-            - latest3,hours24,days14,months3
+            - latest3,hours24,days7,weeks4,months12,years3
             - 'labels["benji-backup.me/instance"] == "benji-k8s"'
         - name: cleanup
           schedule: "00 05 * * *"
