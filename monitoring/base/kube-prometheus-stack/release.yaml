@@ -29,8 +29,8 @@ spec:
         annotations:
           kubernetes.io/ingress.class: haproxy
           cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/icon: "chart-line"
-          hajimari.io/appName: "Grafana"
+          hajimari.io/icon: chart-line
+          hajimari.io/appName: Grafana
       deploymentStrategy:
         type: Recreate
       persistence:
@@ -67,8 +67,8 @@ spec:
         annotations:
           kubernetes.io/ingress.class: haproxy
           cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/icon: "database-clock"
-          hajimari.io/appName: "Prometheus"
+          hajimari.io/icon: database-clock
+          hajimari.io/appName: Prometheus
       prometheusSpec:
         ruleSelector: {}
         ruleNamespaceSelector: {}
@@ -85,8 +85,8 @@ spec:
         annotations:
           kubernetes.io/ingress.class: haproxy
           cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/icon: "bell-alert"
-          hajimari.io/appName: "Alertmanager"
+          hajimari.io/icon: bell-alert
+          hajimari.io/appName: Alertmanager
       config:
         global:
           resolve_timeout: 5m

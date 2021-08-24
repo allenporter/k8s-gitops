@@ -29,9 +29,11 @@ spec:
         annotations:
           kubernetes.io/ingress.class: haproxy
           cert-manager.io/cluster-issuer: letsencrypt
+          hajimari.io/icon: access-point
 
     ingress:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: haproxy
         cert-manager.io/cluster-issuer: letsencrypt
+        hajimari.io/enable: false
