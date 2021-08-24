@@ -11,7 +11,7 @@ spec:
       chart: ./charts/benji-k8s
       sourceRef:
         kind: GitRepository
-        name: benji-charts
+        name: benji-k8s
         namespace: flux-system
   interval: 1h0m0s
   install:
