@@ -5,13 +5,11 @@ resources:
   - ../base/sources
   - ../base/redis
   - ../base/rook-ceph
-  - ../base/k10
   - ../base/calico
   - ../base/benji
   - benji-secrets.yaml
 patchesStrategicMerge:
   - redis-values.yaml
   - rook-ceph-values.yaml
-  - k10-values.yaml
   - backup-pvc.yaml
   - benji-values.yaml

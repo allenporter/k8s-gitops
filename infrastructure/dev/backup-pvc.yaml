@@ -2,15 +2,6 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: k10-nfs-backup-pv
-  namespace: kasten-io
-spec:
-  nfs:
-    path: /volume1/k10-backup-dev
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
   name: k8s-nfs-backup-pv
   namespace: benji
 spec:
