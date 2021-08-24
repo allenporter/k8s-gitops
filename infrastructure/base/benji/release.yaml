@@ -95,10 +95,10 @@ spec:
       postgresqlDatabase: benji
   valuesFrom:
     - kind: Secret
-      name: postgresql-password
-      valuesKey: data
+      name: postgresql-secret
+      valuesKey: password
       targetPath: postgresql.postgresqlPassword
     - kind: Secret
-      name: postgresql-path
-      valuesKey: data
+      name: postgresql-secret
+      valuesKey: db-path
       targetPath: benji.configuration.databaseEngine
