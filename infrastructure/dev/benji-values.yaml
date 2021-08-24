@@ -16,3 +16,29 @@ spec:
         external-dns.alpha.kubernetes.io/hostname: benji.dev.mrv.thebends.org.
         external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
       host: benji.dev.mrv.thebends.org
+    benji:
+      crontab:
+        - name: backup-home-assistant
+          schedule: "00 10 * * *"
+          command:
+            - benji-backup-pvc
+            - --namespace
+            - home-assistant
+        - name: backup-monitoring
+          schedule: "00 10 * * *"
+          command:
+            - benji-backup-pvc
+            - --namespace
+            - monitoring
+        - name: enforce
+          schedule: "00 11 * * *"
+          command:
+            - benji-command
+            - enforce
+            - days14
+            - 'labels["benji-backup.me/instance"] == "benji-k8s"'
+        - name: cleanup
+          schedule: "00 12 * * *"
+          command:
+            - benji-command
+            - cleanup
