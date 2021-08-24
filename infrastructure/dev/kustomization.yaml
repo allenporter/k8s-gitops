@@ -14,3 +14,4 @@ patchesStrategicMerge:
   - k10-values.yaml
   - backup-pvc.yaml
   - benji-values.yaml
+  - benji-ceph-keyring.yaml
