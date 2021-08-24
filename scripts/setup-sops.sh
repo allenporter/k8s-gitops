@@ -45,9 +45,9 @@ EOF
 fi
 
 
-KEY_ID=$(gpg --list-secret-keys --keyid-format LONG  "${KEY_NAME}" | awk '/sec/{if (length($2) > 0) print $2}')
+KEY_ID=$(gpg --list-secret-keys --keyid-format LONG  "${KEY_NAME}" | awk '/^      [A-Z0-9]{40}/{if (length($1) > 0) print $1}')
 SOPS_KEY_FP=${KEY_ID##*/}
 
 gpg --export-secret-keys --armor "${SOPS_KEY_FP}" | kubectl create secret generic "${SECRET_NAME}" --namespace="${SECRET_NAMESPACE}" --from-file=${SECRET_KEY}=/dev/stdin
-
+echo Exporting key id "${SOPS_KEY_FP}"
 echo Secret key created at "${SECRET_NAMESPACE}/${SECRET_NAME}"
