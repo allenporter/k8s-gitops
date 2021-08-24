@@ -20,3 +20,4 @@ resources:
   - ingress-nginix.yaml
   - traefik.yaml
   - benji-k8s.yaml
+  - hajimari.yaml
