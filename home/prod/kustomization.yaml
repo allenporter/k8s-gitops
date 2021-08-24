@@ -6,7 +6,9 @@ resources:
   - ../base/teslamate
   - ../base/frigate
   - ../base/mosquitto
+  - ../base/hajimari
 patchesStrategicMerge:
   - home-assistant-values.yaml
   - teslamate-values.yaml
   - frigate-values.yaml
+  - hajimari-values.yaml
