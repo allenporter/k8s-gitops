@@ -5,4 +5,4 @@ creation_rules:
     pgp: B1A8C6842B46D1C8CCBA1F7E3A259C447D9BEDC8
   - path_regex: .*/prod/.*\.yaml
     encrypted_regex: ^(data|stringData)$
-    pgp: A2E52B22BF32AEA741211A8FEBC16033E8C0DD06
+    pgp: BF010A1EAF254C931DB47C39A6821796DB9EAB3D
