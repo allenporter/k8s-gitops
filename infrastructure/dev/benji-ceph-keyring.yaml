@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+data:
+  keyring: ENC[AES256_GCM,data:2dlTcjC1g5L0TsHcjlID8zD7eaO0sJAlNUJO1bZmkwfnlcrbLOmwmJ/oMiNGaYz9yMV2MaytdmZQz2wK4FWV/33BWI6QbhPCCky85QELZjIH65EZ,iv:7WHlFB5ZmLkD7Z+4oofm1Cg4nMHSxJ6l7G5q2SInQYc=,tag:OqH2pOQNttQKOfTFaBpExw==,type:str]
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: ceph-keyring
+  namespace: benji
+sops:
+  kms: []
+  gcp_kms: []
+  azure_kv: []
+  hc_vault: []
+  age: []
+  lastmodified: "2021-08-24T05:35:21Z"
+  mac: ENC[AES256_GCM,data:0MgP5x0anXjtm/3U+tx37Q/4DRzWzJIjBdIuOFb8k5c1Vpq41XpF7b5cxE++DwTqCR68ozqDg6uoDmzmFUe8J4VeytnM1anR1MKpHDMPil3th2zcA56Qvt27ZR+jMI9vUrHJgvRWkRG4XEjOob00ba5IlHq/UYFr/FRgpz57k3U=,iv:et+xZmW1TuLVNXeDA+o3Yf/SCtQgFDTUiPwr4WOAiNg=,tag:fc1cQdkAL6XqlzhCceds/g==,type:str]
+  pgp:
+    - created_at: "2021-08-24T05:35:21Z"
+      enc: |
+        -----BEGIN PGP MESSAGE-----
+
+        hQIMA4i68krkYe+LARAAgU/Ski4KrPMT1clXtATGjEnWqq23dpt6Oonq+uk49fDz
+        cZ9JUwdJMWEMwH4C2vFCWz4bWC1aSXnQ81R2oIqmo36JJOO3SwpHKDe3U9z+Ks8z
+        P4xIjbSM2uwKWZqon4zqwPsblykNBvjxqaGo1mGRc9pEdxYOHq6BmBzqqNP5hsZ/
+        FXAma+7mGVweXrDTGS8CSZcjjvoscs63VhbDG0WyhlUwKfqKo10m25yhCZWsQb3Q
+        YPBDG3fppjD/DhChFoX13TA9U9RXvFci6OMX4mMNuiqFKRE9P9dTJQUGnEhy6LdF
+        SKO84AEDfOVP3y483uEYLBimwBll7YaU+aNf3YR3MeeedbZdwD8UWI4gAsHvdt14
+        gpHIn/VQ/0+mhc/tGeuNuLreB6jHkd07tc9Dtz0wkak0970c39f/sz3q6nun0Ias
+        IANaGykyfAtP21Y6hu4lZW/AZWIaD+IEQlxmjsSKDoVdVSsrS9QhS93tXfWyeC5F
+        /TrZgc9C4Btvzr3JRPzKrjrs9/dUoEsWUAi9HcatGZ1HYv1fFQKh9+uvRjeuAJa0
+        Qut3LADVkjXqPd1OCQcNNTAJaApjxvhxKLRxSnXf+n6doe+AtaHJoQ43BOMx4PuD
+        iByYcrCV7XLnE4us0vw0lH9t59dBCuuKQAOwE2Ijdf9Yb967IyXfLX0y0j3pOkfU
+        aAEJAhUbCtBG9Rc/IrCReY9utdcZx1wG21hY18hshsIyjR1GDJubGvIpMogQLgAH
+        b5R8+d54gy1p3AO569vPBj/eD4szZxEa18UoALvC2w5CZ6LYXLW1qnkbz7ZSWZU5
+        suhUOhBFTxa4
+        =EGyv
+        -----END PGP MESSAGE-----
+      fp: 0DC308A34AF5341720C2A105EA2374A8509B82C6
+  encrypted_regex: ^(data|stringData)$
+  version: 3.7.1

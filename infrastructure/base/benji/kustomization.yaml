@@ -6,3 +6,4 @@ resources:
   - namespace.yaml
   - release.yaml
   - backup-pvc.yaml
+  - configmap.yaml
