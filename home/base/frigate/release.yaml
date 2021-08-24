@@ -24,6 +24,7 @@ spec:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: haproxy
+        hajimari.io/icon: video
     persistence:
       data:
         enabled: true
