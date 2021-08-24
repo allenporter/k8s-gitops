@@ -8,7 +8,7 @@ spec:
   releaseName: benji
   chart:
     spec:
-      chart: benji
+      chart: ./charts/benji-k8s
       version: 0.2.0
   values:
     ingress:
