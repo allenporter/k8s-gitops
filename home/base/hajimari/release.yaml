@@ -39,7 +39,7 @@ spec:
           - unifi
       customApps:
         - name: sto01
-          url: https://sto01.prod.mrv.thebends.org
+          url: http://sto01.prod.mrv.thebends.org:5000
           icon: nas
         - name: vmm01
           url: https://vmm01.prod.mrv.thebends.org
