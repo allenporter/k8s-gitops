@@ -7,8 +7,10 @@ resources:
   - ../base/rook-ceph
   - ../base/k10
   - ../base/calico
+  - ../base/benji
 patchesStrategicMerge:
   - redis-values.yaml
   - rook-ceph-values.yaml
   - k10-values.yaml
   - backup-pvc.yaml
+  - benji-values.yaml
