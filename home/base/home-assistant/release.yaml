@@ -30,6 +30,8 @@ spec:
           kubernetes.io/ingress.class: haproxy-external
           cert-manager.io/cluster-issuer: letsencrypt
           haproxy.org/forwarded-for: "true"
+          hajimari.io/icon: "home-assistant"
+          hajimari.io/appName: "Home Assistant"
     hostNetwork: true
     persistence:
       config:
@@ -66,6 +68,8 @@ spec:
           annotations:
             kubernetes.io/ingress.class: haproxy
             cert-manager.io/cluster-issuer: letsencrypt
+            hajimari.io/icon: "microsoft-visual-studio-code"
+            hajimari.io/appName: "HA VSCode"
     postgresql:
       enabled: true
       postgresqlUsername: home-assistant
