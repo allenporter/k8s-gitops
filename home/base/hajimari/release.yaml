@@ -27,6 +27,8 @@ spec:
       TZ: America/Los_Angeles
     hajimari:
       defaultEnable: true
+      namespaceSelector:
+        matchNames: []
     ingress:
       main:
         enabled: true
