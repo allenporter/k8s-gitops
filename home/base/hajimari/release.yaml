@@ -33,3 +33,8 @@ spec:
         annotations:
           kubernetes.io/ingress.class: haproxy
           cert-manager.io/cluster-issuer: letsencrypt
+    persistence:
+      data:
+        enabled: true
+        accessMode: ReadWriteOnce
+        size: 1Gi
