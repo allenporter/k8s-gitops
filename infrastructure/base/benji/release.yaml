@@ -35,7 +35,7 @@ spec:
             configuration:
               path: /backup-nfs
         ios:
-          - name: rbd-kube-pool
+          - name: kube-pool
             module: rbd
             configuration:
               cephConfigFile: /etc/ceph/ceph.conf
