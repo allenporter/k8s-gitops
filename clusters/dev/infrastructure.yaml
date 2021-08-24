@@ -11,7 +11,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  decription:
+  decryption:
     provider: sops
     secretRef:
       name: sops-gpg
