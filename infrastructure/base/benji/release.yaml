@@ -28,7 +28,6 @@ spec:
         pullPolicy: IfNotPresent
       configuration:
         configurationVersion: '1'
-        databaseEngine: sqlite:////tmp/benji.sqlite
         storages:
           - name: storage-1
             storageId: 1
@@ -90,3 +89,16 @@ spec:
           command:
             - benji-command
             - cleanup
+    postgresql:
+      enabled: true
+      postgresqlUsername: benji
+      postgresqlDatabase: benji
+  valuesFrom:
+    - kind: Secret
+      name: postgresql-password
+      valuesKey: data
+      targetPath: postgresql.postgresqlPassword
+    - kind: Secret
+      name: postgresql-path
+      valuesKey: data
+      targetPath: benji.configuration.databaseEngine

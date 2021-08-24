@@ -48,6 +48,8 @@ fi
 KEY_ID=$(gpg --list-secret-keys --keyid-format LONG  "${KEY_NAME}" | awk '/^      [A-Z0-9]{40}/{if (length($1) > 0) print $1}')
 SOPS_KEY_FP=${KEY_ID##*/}
 
+# Key can be imported with something like:
+# kubectl get secret sops-gpg -n flux-system -o jsonpath="{.data.sops\.asc}" | base64 --decode | gpg --import /dev/stdin
 gpg --export-secret-keys --armor "${SOPS_KEY_FP}" | kubectl create secret generic "${SECRET_NAME}" --namespace="${SECRET_NAMESPACE}" --from-file=${SECRET_KEY}=/dev/stdin
 echo Exporting key id "${SOPS_KEY_FP}"
 echo Secret key created at "${SECRET_NAMESPACE}/${SECRET_NAME}"
