@@ -35,7 +35,6 @@ spec:
           - kubernetes-dashboard
           - monitoring
           - pihole
-          - podinfo
           - teslamate
           - unifi
     ingress:
