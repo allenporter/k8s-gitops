@@ -36,4 +36,4 @@ spec:
       annotations:
         kubernetes.io/ingress.class: haproxy
         cert-manager.io/cluster-issuer: letsencrypt
-        hajimari.io/enable: false
+        hajimari.io/enable: "false"
