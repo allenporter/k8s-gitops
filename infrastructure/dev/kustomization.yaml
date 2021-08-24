@@ -8,7 +8,7 @@ resources:
   - ../base/k10
   - ../base/calico
   - ../base/benji
-  - benji-ceph-keyring.yaml
+  - benji-secrets.yaml
 patchesStrategicMerge:
   - redis-values.yaml
   - rook-ceph-values.yaml
