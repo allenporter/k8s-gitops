@@ -17,8 +17,6 @@ spec:
   install:
     remediation:
       retries: 3
-  upgrade:
-    crds: CreateReplace
   test:
     enable: true
   # Default values
