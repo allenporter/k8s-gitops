@@ -35,8 +35,8 @@ spec:
             configuration:
               path: /backup-nfs
         ios:
-          - name: kube-pool
-            module: rbd
+          - module: rbdaio
+            name: kube-pool
             configuration:
               cephConfigFile: /etc/ceph/ceph.conf
               clientIdentifier: admin
