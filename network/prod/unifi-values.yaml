@@ -77,7 +77,7 @@ spec:
             hosts:
               - unifi.prod.mrv.thebends.org
     persistence:
-      unifi-data:
+      unifi:
         enabled: true
         type: pvc
         existingClaim: unifi-shelf
