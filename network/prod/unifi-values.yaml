@@ -23,9 +23,41 @@ spec:
       failureThreshold: 7
     service:
       main:
+        enabled: true
         type: LoadBalancer
         externalTrafficPolicy: Local
         loadBalancerIP: 10.10.25.20
+        annotations:
+          metallb.universe.tf/allow-shared-ip: unifi
+        # Disable UDP ports, exported on a separate service below so that they
+        # can share a LoadBalancer IP
+        ports:
+          stun:
+            enabled: false
+          syslog:
+            enabled: false
+          discovery:
+            enabled: false
+      udp:
+        enabled: true
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        loadBalancerIP: 10.10.25.20
+        annotations:
+          metallb.universe.tf/allow-shared-ip: unifi
+        ports:
+          stun:
+            enabled: true
+            port: 3478
+            protocol: UDP
+          syslog:
+            enabled: true
+            port: 5514
+            protocol: UDP
+          discovery:
+            enabled: true
+            port: 10001
+            protocol: UDP
     ingress:
       main:
         enabled: true
