@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: unifi
-      version: 2.0.4
+      version: 3.1.0
   values:
     livenessProbe:
       initialDelaySeconds: 60
@@ -21,46 +21,62 @@ spec:
       periodSeconds: 30
       timeoutSeconds: 5
       failureThreshold: 7
-    guiService:
-      type: ClusterIP
-    controllerService:
-      type: LoadBalancer
-      loadBalancerIP: 10.10.25.20
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-      ingress:
+    service:
+      main:
+        enabled: true
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        loadBalancerIP: 10.10.25.20
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: unifi-controller.prod.mrv.thebends.org.
-          external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
-        hosts:
-          - unifi-controller.prod.mrv.thebends.org
-        tls:
-          - secretName: unifi-controller-tls
-            hosts:
-              - unifi-controller.prod.mrv.thebends.org
-    stunService:
-      loadBalancerIP: 10.10.25.20
-      externalTrafficPolicy: Local
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-    discoveryService:
-      type: LoadBalancer
-      loadBalancerIP: 10.10.25.20
-      externalTrafficPolicy: Local
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
+          metallb.universe.tf/allow-shared-ip: unifi
+        # Disable UDP ports, exported on a separate service below so that they
+        # can share a LoadBalancer IP
+        ports:
+          stun:
+            enabled: false
+          syslog:
+            enabled: false
+          discovery:
+            enabled: false
+      udp:
+        enabled: true
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        loadBalancerIP: 10.10.25.20
+        annotations:
+          metallb.universe.tf/allow-shared-ip: unifi
+        ports:
+          stun:
+            enabled: true
+            port: 3478
+            protocol: UDP
+          syslog:
+            enabled: true
+            port: 5514
+            protocol: UDP
+          discovery:
+            enabled: true
+            port: 10001
+            protocol: UDP
     ingress:
-      enabled: true
-      annotations:
-        external-dns.alpha.kubernetes.io/hostname: unifi.prod.mrv.thebends.org.
-        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
-        haproxy.org/server-ssl: "true"
-      hosts:
-        - unifi.prod.mrv.thebends.org
-      tls:
-        - secretName: unifi-tls
-          hosts:
-            - unifi.prod.mrv.thebends.org
+      main:
+        enabled: true
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: unifi.prod.mrv.thebends.org.
+          external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+          cert-manager.io/cluster-issuer: letsencrypt
+          hajimari.io/icon: access-point
+          haproxy.org/server-ssl: "true"
+        hosts:
+          - host: unifi.prod.mrv.thebends.org
+            paths:
+              - path: /
+        tls:
+          - secretName: unifi-tls
+            hosts:
+              - unifi.prod.mrv.thebends.org
     persistence:
-      enabled: true
-      existingClaim: unifi-shelf
+      unifi-data:
+        enabled: true
+        type: pvc
+        existingClaim: unifi-shelf
