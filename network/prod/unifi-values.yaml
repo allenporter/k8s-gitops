@@ -21,46 +21,26 @@ spec:
       periodSeconds: 30
       timeoutSeconds: 5
       failureThreshold: 7
-    guiService:
-      type: ClusterIP
-    controllerService:
-      type: LoadBalancer
-      loadBalancerIP: 10.10.25.20
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-      ingress:
+    service:
+      main:
+        type: LoadBalancer
+        externalTrafficPolicy: Local
+        loadBalancerIP: 10.10.25.20
+    ingress:
+      main:
+        enabled: true
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: unifi-controller.prod.mrv.thebends.org.
+          external-dns.alpha.kubernetes.io/hostname: unifi.prod.mrv.thebends.org.
           external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
         hosts:
-          - unifi-controller.prod.mrv.thebends.org
+          - host: unifi.prod.mrv.thebends.org
+            paths:
+              path: /
+              pathType: Prefix
         tls:
-          - secretName: unifi-controller-tls
+          - secretName: unifi-tls
             hosts:
-              - unifi-controller.prod.mrv.thebends.org
-    stunService:
-      loadBalancerIP: 10.10.25.20
-      externalTrafficPolicy: Local
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-    discoveryService:
-      type: LoadBalancer
-      loadBalancerIP: 10.10.25.20
-      externalTrafficPolicy: Local
-      annotations:
-        metallb.universe.tf/allow-shared-ip: unifi
-    ingress:
-      enabled: true
-      annotations:
-        external-dns.alpha.kubernetes.io/hostname: unifi.prod.mrv.thebends.org.
-        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
-        haproxy.org/server-ssl: "true"
-      hosts:
-        - unifi.prod.mrv.thebends.org
-      tls:
-        - secretName: unifi-tls
-          hosts:
-            - unifi.prod.mrv.thebends.org
+              - unifi.prod.mrv.thebends.org
     persistence:
       config:
         enabled: true
