@@ -64,6 +64,9 @@ spec:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: unifi.prod.mrv.thebends.org.
           external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+          cert-manager.io/cluster-issuer: letsencrypt
+          hajimari.io/icon: access-point
+          haproxy.org/server-ssl: "true"
         hosts:
           - host: unifi.prod.mrv.thebends.org
             paths:
