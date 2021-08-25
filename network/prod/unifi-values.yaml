@@ -62,6 +62,7 @@ spec:
       main:
         enabled: true
         annotations:
+          kubernetes.io/ingress.class: haproxy
           external-dns.alpha.kubernetes.io/hostname: unifi.prod.mrv.thebends.org.
           external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
           cert-manager.io/cluster-issuer: letsencrypt
