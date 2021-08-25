@@ -23,10 +23,11 @@ spec:
   # Default values
   # https://github.com/k8s-at-home/charts/blob/master/charts/stable/unifi/values.yaml
   values:
-    main:
-      enabled: true
-      ingressClassName: haproxy
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-        hajimari.io/icon: access-point
-        haproxy.org/server-ssl: "true"
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: haproxy
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          hajimari.io/icon: access-point
+          haproxy.org/server-ssl: "true"
