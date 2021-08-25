@@ -35,8 +35,7 @@ spec:
         hosts:
           - host: unifi.prod.mrv.thebends.org
             paths:
-              path: /
-              pathType: Prefix
+              - path: /
         tls:
           - secretName: unifi-tls
             hosts:
