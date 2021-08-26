@@ -7,4 +7,4 @@ configMapGenerator:
   # https://github.com/ceph/ceph/tree/master/monitoring
   - name: ceph-default-alerts
     files:
-      - ../../base/rook-ceph/monitoring/ceph/prometheus/alerts/ceph_default_alerts.yml
+      - ../../../ceph-monitoring/prometheus/alerts/ceph_default_alerts.yml
