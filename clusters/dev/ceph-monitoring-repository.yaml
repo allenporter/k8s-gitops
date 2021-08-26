@@ -20,5 +20,5 @@ spec:
   include:
     - repository:
         name: flux-system
-      fromPath: ceph/monitoring/
+      fromPath: monitoring/
       toPath: ./infrastructure/base/rook-ceph/monitoring/ceph/
