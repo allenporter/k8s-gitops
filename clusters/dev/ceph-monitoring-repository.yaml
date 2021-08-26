@@ -16,9 +16,9 @@ spec:
     # exclude all
     /*
     # include charts directory
-    !/ceph/monitoring
+    !/monitoring
   include:
     - repository:
         name: flux-system
       fromPath: monitoring/
-      toPath: ./infrastructure/base/rook-ceph/monitoring/ceph/
+      toPath: infrastructure/base/rook-ceph/monitoring/ceph/
