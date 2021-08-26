@@ -35,6 +35,8 @@ spec:
   include:
     - repository:
         name: ceph-monitoring
+      fromPath: monitoring
+      toPath: ceph-monitoring
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
