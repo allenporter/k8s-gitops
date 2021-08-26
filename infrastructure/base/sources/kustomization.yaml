@@ -21,4 +21,3 @@ resources:
   - traefik.yaml
   - benji-k8s.yaml
   - hajimari.yaml
-  - ceph-monitoring.yaml
