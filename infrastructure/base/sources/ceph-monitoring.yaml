@@ -1,0 +1,16 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: ceph-monitoring
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: https://github.com/ceph/ceph
+  ref:
+    tag: v15.2.14
+  ignore: |
+    # exclude all
+    /*
+    # include charts directory
+    !/ceph/monitoring
