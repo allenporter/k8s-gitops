@@ -16,6 +16,11 @@ KUSTOMIZE_FLAGS = []
 KUSTOMIZATION_KIND = "Kustomization"
 KUSTOMIZATION_API_VERSIONS = ["kustomize.toolkit.fluxcd.io/v1beta1"]
 
+EXCLUDE_FILES = {
+    # External repo not supported https://github.com/allenporter/k8s-gitops/issues/308
+    "./infrastructure/dev"
+}
+
 
 def run_command(command):
     """Run the specified command and return stdout."""
@@ -73,6 +78,7 @@ def kustomization_files():
             continue
         if "path" not in doc["spec"]:
             raise Exception(f"Invalid spec/path in doc {doc}")
+        path = doc["spec"]["path"]
         matches.append(doc["spec"]["path"])
     return matches
 
@@ -84,6 +90,10 @@ def test_kustomize_version():
 
 @pytest.mark.parametrize("filename", kustomization_files())
 def test_validate_kustomization_file(filename):
+    if filename in EXCLUDE_FILES:
+        pytest.skip("File excluded from tests")
+        return
+
     root = repo_root()
     full_path = f"{root}/{filename}"
     assert kustomize_build(full_path)
