@@ -21,8 +21,3 @@ configMapGenerator:
   - name: grafana-dashboard-ceph-pools
     files:
       - ceph-pools.json
-  # The ceph subdirectory is an included GitRepository that points to
-  # https://github.com/ceph/ceph/tree/master/monitoring
-  - name: ceph-default-alerts
-    files:
-      - ./ceph/prometheus/alerts/ceph_default_alerts.yml
