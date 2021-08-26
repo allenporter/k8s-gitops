@@ -22,5 +22,3 @@ spec:
   include:
     - repository:
         name: flux-system
-        namespace: flux-system
-      toPath: ceph
