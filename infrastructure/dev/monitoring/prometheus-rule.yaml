@@ -7,3 +7,4 @@ metadata:
     role: alert-rules
   name: ceph-default-rules
   namespace: rook-ceph
+spec:
