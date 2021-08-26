@@ -25,4 +25,4 @@ configMapGenerator:
   # https://github.com/ceph/ceph/tree/master/monitoring
   - name: ceph-default-alerts
     files:
-      - ceph/prometheus/alerts/ceph_default_alerts.yml
+      - ./ceph/prometheus/alerts/ceph_default_alerts.yml
