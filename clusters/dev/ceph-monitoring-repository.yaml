@@ -17,8 +17,9 @@ spec:
     /*
     # include charts directory
     !/monitoring
+    # exclude screenshot png files
+    /monitoring/grafana/screenshots
   include:
     - repository:
         name: flux-system
-      fromPath: monitoring/
-      toPath: infrastructure/base/rook-ceph/monitoring/ceph/
+      toPath: ceph
