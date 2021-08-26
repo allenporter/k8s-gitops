@@ -8,6 +8,7 @@ resources:
   - ../base/calico
   - ../base/benji
   - benji-secrets.yaml
+  - monitoring
 patchesStrategicMerge:
   - redis-values.yaml
   - rook-ceph-values.yaml
