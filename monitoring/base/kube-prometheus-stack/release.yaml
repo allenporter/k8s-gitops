@@ -79,6 +79,13 @@ spec:
         podMonitorSelector: {}
         podMonitorNamespaceSelector: {}
         podMonitorSelectorNilUsesHelmValues: false
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: "rook-ceph-block"
+              resources:
+                requests:
+                  storage: 20Gi
     alertmanager:
       ingress:
         enabled: true
@@ -87,6 +94,14 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: bell-alert
           hajimari.io/appName: Alertmanager
+      alertManagerSpec:
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: "rook-ceph-block"
+              resources:
+                requests:
+                  storage: 5Gi
       config:
         global:
           resolve_timeout: 5m
