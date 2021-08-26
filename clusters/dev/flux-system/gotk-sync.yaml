@@ -25,27 +25,3 @@ spec:
     kind: GitRepository
     name: flux-system
   validation: client
----
-# The ceph-monitoring repository is included info the main
-# flux repo so the rules can be included in the cluster. See
-# https://fluxcd.io/docs/components/source/gitrepositories/#including-gitrepository
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: GitRepository
-metadata:
-  name: ceph-monitoring
-  namespace: flux-system
-spec:
-  interval: 10m
-  url: https://github.com/ceph/ceph
-  ref:
-    tag: v15.2.14
-  ignore: |
-    # exclude all
-    /*
-    # include charts directory
-    !/ceph/monitoring
-  include:
-    - repository:
-        name: flux-system
-      fromPath:
-      toPath: infrastructure/base/rook-ceph/monitoring/ceph/
