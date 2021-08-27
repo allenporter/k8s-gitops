@@ -111,7 +111,7 @@ spec:
           resolve_timeout: 5m
         route:
           # Avoid over grouping to ensure that alerts are delivered separately to fit under the discord limit
-          group_by: ['job', 'alertname', 'severity', 'name', 'job_name']
+          group_by: ['job', 'alertname', 'severity', 'name', 'job_name', 'instance']
           group_wait: 30s
           group_interval: 5m
           repeat_interval: 12h
