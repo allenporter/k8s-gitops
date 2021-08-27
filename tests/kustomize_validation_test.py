@@ -16,10 +16,7 @@ KUSTOMIZE_FLAGS = []
 KUSTOMIZATION_KIND = "Kustomization"
 KUSTOMIZATION_API_VERSIONS = ["kustomize.toolkit.fluxcd.io/v1beta1"]
 
-EXCLUDE_FILES = {
-    # External repo not supported https://github.com/allenporter/k8s-gitops/issues/308
-    "./infrastructure/dev"
-}
+EXCLUDE_FILES = {}
 
 
 def run_command(command):
