@@ -84,10 +84,3 @@ spec:
         bearerTokenSecret:
           name: prometheus-bearer-token
           key: token
-  valuesFrom:
-    # Set a password with a command like:
-    #     kubectl create secret generic postgresql-password -n home-assistant --from-literal="data=MY-SECRET"
-    - kind: Secret
-      name: postgresql-password
-      valuesKey: data
-      targetPath: postgresql.postgresqlPassword

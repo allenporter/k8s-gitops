@@ -45,3 +45,10 @@ spec:
             - secretName: vscode-home-assistant-tls
               hosts:
                 - vscode-ha.prod.mrv.thebends.org
+  valuesFrom:
+    # Set a password with a command like:
+    #     kubectl create secret generic postgresql-password -n home-assistant --from-literal="data=MY-SECRET"
+    - kind: Secret
+      name: postgresql-password
+      valuesKey: data
+      targetPath: postgresql.postgresqlPassword

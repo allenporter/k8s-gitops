@@ -32,6 +32,9 @@ spec:
       HASS_INTERNAL_URL: "https://home-assistant.dev.mrv.thebends.org"
       HASS_EXTERNAL_URL: "https://home-assistant.dev.mrv.thebends.org:28123"
 
+    postgresql:
+      postgresqlPassword: ${HOME_ASSISTANT_POSTGRESQL_PWD}
+
     addons:
       codeserver:
         ingress:
