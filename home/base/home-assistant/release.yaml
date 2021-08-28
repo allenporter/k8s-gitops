@@ -74,6 +74,7 @@ spec:
       enabled: true
       postgresqlUsername: home-assistant
       postgresqlDatabase: home-assistant
+      postgresqlPassword: ${HOME_ASSISTANT_POSTGRESQL_PWD}
       persistence:
         enabled: true
     prometheus:
