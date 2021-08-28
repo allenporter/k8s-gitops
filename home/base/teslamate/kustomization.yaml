@@ -53,9 +53,10 @@ configMapGenerator:
   - name: grafana-dashboard-teslamate-trip
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/trip.json
-  - name: grafana-dashboard-teslamate-updates
-    files:
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/updates.json
+# Disabled since it causes issues with secret substitutions
+#  - name: grafana-dashboard-teslamate-updates
+#    files:
+#      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/updates.json
   - name: grafana-dashboard-teslamate-vampire-drain
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/vampire-drain.json
