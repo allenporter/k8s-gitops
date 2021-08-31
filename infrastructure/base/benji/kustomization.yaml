@@ -7,4 +7,3 @@ resources:
   - release.yaml
   - backup-pvc.yaml
   - configmap.yaml
-  - service-monitor.yaml
