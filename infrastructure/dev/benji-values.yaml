@@ -42,13 +42,3 @@ spec:
           command:
             - benji-command
             - cleanup
-    pushgateway:
-      serviceMonitor:
-        enabled: true
-        namespace: benji
-      # Save data into the persistent volume to preserve metrics across restarts
-      extraArgs:
-        - --persistence.file=/data/pushgateway.data
-        - --persistence.interval=5m
-      persistentVolume:
-        enabled: true
