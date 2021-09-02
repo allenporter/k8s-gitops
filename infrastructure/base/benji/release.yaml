@@ -76,6 +76,16 @@ spec:
       enabled: true
       postgresqlUsername: benji
       postgresqlDatabase: benji
+    pushgateway:
+      serviceMonitor:
+        enabled: true
+        namespace: benji
+      # Save data into the persistent volume to preserve metrics across restarts
+      extraArgs:
+        - --persistence.file=/data/pushgateway.data
+        - --persistence.interval=5m
+      persistentVolume:
+        enabled: true
   valuesFrom:
     - kind: Secret
       name: postgresql-secret
