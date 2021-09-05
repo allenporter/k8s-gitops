@@ -14,6 +14,8 @@ spec:
         name: prometheus-community
         namespace: flux-system
   interval: 5m
+  # Increase default to deal with extra time needed since adding persistence
+  timeout: 10m
   install:
     remediation:
       retries: 3
