@@ -77,7 +77,8 @@ spec:
       postgresqlPassword: ${HOME_ASSISTANT_POSTGRESQL_PWD}
       persistence:
         enabled: true
-    prometheus:
+    metrics:
+      enabled: true
       serviceMonitor:
         enabled: true
         # Set the token with:
@@ -85,3 +86,5 @@ spec:
         bearerTokenSecret:
           name: prometheus-bearer-token
           key: token
+      prometheusRule:
+        enabled: true
