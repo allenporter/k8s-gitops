@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://kubernetes.github.io/dashboard/
       chart: kubernetes-dashboard
-      version: 5.0.0
+      version: 5.0.1
   values:
     ingress:
       annotations:
