@@ -45,3 +45,5 @@ spec:
           type: cpu
         cpu2:
           type: cpu
+      cameras:
+        front:
