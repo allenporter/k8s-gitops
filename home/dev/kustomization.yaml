@@ -5,6 +5,6 @@ resources:
   - ../base/home-assistant
   - ../base/hajimari
   - rtsp-to-webrtc.yaml
-patchesStrategicMerge:
-  - home-assistant-values.yaml
-  - hajimari-values.yaml
+patches:
+  - path: home-assistant-values.yaml
+  - path: hajimari-values.yaml
