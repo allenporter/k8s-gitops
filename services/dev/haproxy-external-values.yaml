@@ -8,6 +8,7 @@ spec:
   chart:
     spec:
       # disabled-renovate: registryUrl=https://haproxytech.github.io/helm-charts
+      # renovate: registryUrl=https://haproxytech.github.io/helm-charts
       chart: kubernetes-ingress
       version: 1.17.0
   values:
