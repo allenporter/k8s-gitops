@@ -8,8 +8,8 @@ resources:
   - ../base/calico
   - ../base/benji
   - benji-secrets.yaml
-patchesStrategicMerge:
-  - redis-values.yaml
-  - rook-ceph-values.yaml
-  - backup-pvc.yaml
-  - benji-values.yaml
+patches:
+  - path: redis-values.yaml
+  - path: rook-ceph-values.yaml
+  - path: backup-pvc.yaml
+  - path: benji-values.yaml
