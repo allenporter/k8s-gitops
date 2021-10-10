@@ -7,9 +7,9 @@ metadata:
 spec:
   chart:
     spec:
-      # disabled-renovate: registryUrl=https://haproxytech.github.io/helm-charts
+      # renovate: registryUrl-disabled=https://haproxytech.github.io/helm-charts
       chart: kubernetes-ingress
-      version: 1.17.0
+      version: 1.6.7
   values:
     controller:
       service:
