@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ../base/minecraft
 patchesStrategicMerge:
-  - minecraft-values.yaml
+#  - minecraft-values.yaml
