@@ -14,7 +14,7 @@ spec:
     ingress:
       annotations:
         external-dns.alpha.kubernetes.io/hostname: podinfo-traefik.dev.mrv.thebends.org.
-        external-dns.alpha.kubernetes.io/target: prx04.dev.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/target: prx05.dev.mrv.thebends.org.
       hosts:
         - host: podinfo-traefik.dev.mrv.thebends.org
           paths:
