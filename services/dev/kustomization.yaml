@@ -9,10 +9,10 @@ resources:
   - ../base/nginx/
   - ../base/traefik/
   - namespace.yaml
-patchesStrategicMerge:
-  - haproxy-values.yaml
-  - haproxy-external-values.yaml
-  - metallb-values.yaml
-  - external-dns-values.yaml
-  - nginx-values.yaml
-  - traefik-values.yaml
+patches:
+  - path: haproxy-values.yaml
+  - path: haproxy-external-values.yaml
+  - path: metallb-values.yaml
+  - path: external-dns-values.yaml
+  - path: nginx-values.yaml
+  - path: traefik-values.yaml

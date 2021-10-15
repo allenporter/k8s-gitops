@@ -8,8 +8,8 @@ resources:
   - ../base/mosquitto
   - ../base/hajimari
   - home-assistant-experimental.yaml
-patchesStrategicMerge:
-  - home-assistant-values.yaml
-  - teslamate-values.yaml
-  - frigate-values.yaml
-  - hajimari-values.yaml
+patches:
+  - path: home-assistant-values.yaml
+  - path: teslamate-values.yaml
+  - path: frigate-values.yaml
+  - path: hajimari-values.yaml

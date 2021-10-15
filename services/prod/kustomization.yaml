@@ -6,8 +6,8 @@ resources:
   - ../base/metallb
   - ../base/external-dns
   - ../base/certs/
-patchesStrategicMerge:
-  - haproxy-values.yaml
-  - haproxy-external-values.yaml
-  - metallb-values.yaml
-  - external-dns-values.yaml
+patches:
+  - path: haproxy-values.yaml
+  - path: haproxy-external-values.yaml
+  - path: metallb-values.yaml
+  - path: external-dns-values.yaml
