@@ -7,6 +7,7 @@ resources:
   - ../base/frigate
   - ../base/mosquitto
   - ../base/hajimari
+  - home-assistant-experimental.yaml
 patchesStrategicMerge:
   - home-assistant-values.yaml
   - teslamate-values.yaml
