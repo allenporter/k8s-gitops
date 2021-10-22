@@ -11,6 +11,9 @@ spec:
       chart: unifi
       version: 4.2.3
   values:
+    image:
+      repository: jacobalberty/unifi
+      tag: v6.4.54
     livenessProbe:
       initialDelaySeconds: 60
       periodSeconds: 30
