@@ -47,3 +47,7 @@ spec:
           type: cpu
       cameras:
         front:
+          ffmpeg:
+          detect:
+            width: 1280
+            height: 720
