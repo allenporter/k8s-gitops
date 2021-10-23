@@ -9,6 +9,6 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: external-dns
-      version: 5.4.11
+      version: 5.4.13
   values:
     domainFilters: ["dev.mrv.thebends.org"]
