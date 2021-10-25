@@ -28,26 +28,3 @@ spec:
     persistence:
       data:
         enabled: true
-    config: |
-      mqtt:
-        host: mosquitto.mqtt
-        port: 1883
-        topic_prefix: frigate
-        client_id: frigate
-        user: mqtt_user
-        password: password
-        stats_interval: 60
-      objects:
-        track:
-        - person
-      detectors:
-        cpu1:
-          type: cpu
-        cpu2:
-          type: cpu
-      cameras:
-        front:
-          ffmpeg:
-          detect:
-            width: 1280
-            height: 720
