@@ -45,8 +45,9 @@ spec:
           type: cpu
       cameras:
         front:
-          inputs:
-            - path: https://home-assistant.prod.mrv.thebends.org/api/hls/example/playlist.m3u8
-              roles:
-                - detect
-                - rtmp
+          ffmpeg:
+            inputs:
+              - path: https://home-assistant.prod.mrv.thebends.org/api/hls/example/playlist.m3u8
+                roles:
+                  - detect
+                  - rtmp
