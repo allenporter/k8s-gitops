@@ -13,7 +13,7 @@ spec:
   values:
     image:
       repository: blakeblackshear/frigate
-      tag: 0.9.2-amd64
+      tag: 0.9.4-amd64
     virtualHost: frigate.prod.mrv.thebends.org
     ingress:
       annotations:
@@ -26,3 +26,28 @@ spec:
         - secretName: frigate-tls
           hosts:
             - frigate.prod.mrv.thebends.org
+    config: |
+      mqtt:
+        host: mosquitto.mqtt
+        port: 1883
+        topic_prefix: frigate
+        client_id: frigate
+        user: mqtt_user
+        password: password
+        stats_interval: 60
+      objects:
+        track:
+        - person
+      detectors:
+        cpu1:
+          type: cpu
+        cpu2:
+          type: cpu
+      cameras:
+        front:
+          ffmpeg:
+            inputs:
+              - path: https://home-assistant.prod.mrv.thebends.org/api/hls/example/playlist.m3u8
+                roles:
+                  - detect
+                  - rtmp
