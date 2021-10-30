@@ -1,21 +1,4 @@
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: rtsp-simple-server
-  namespace: stream
-spec:
-  clusterIP: None
-  ports:
-  - name: http
-    port: 8083
-    targetPort: http
-  publishNotReadyAddresses: true
-  selector:
-    app.kubernetes.io/instance: rtsp-simple-server
-    app.kubernetes.io/name: rtsp-simple-server
-  type: ClusterIP
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -46,24 +29,36 @@ spec:
           value: UTC
         image: aler9/rtsp-simple-server:v0.17.7
         imagePullPolicy: IfNotPresent
+        name: rtsp-simple-server
+        ports:
+        - containerPort: 8000
+          name: rtsp-rtp
+          protocol: UDP
+        - containerPort: 8001
+          name: rtsp-rtcp
+          protocol: UDP
+        - containerPort: 8554
+          name: rtsp
+          protocol: TCP
+        - containerPort: 1935
+          name: rtmp
+          protocol: TCP
+        - containerPort: 8888
+          name: hls
+          protocol: TCP
         livenessProbe:
           failureThreshold: 3
           initialDelaySeconds: 0
           periodSeconds: 10
           tcpSocket:
-            port: 8083
+            port: 8554
           timeoutSeconds: 1
-        name: rtsp-simple-server
-        ports:
-        - containerPort: 8083
-          name: http
-          protocol: TCP
         readinessProbe:
           failureThreshold: 3
           initialDelaySeconds: 0
           periodSeconds: 10
           tcpSocket:
-            port: 8083
+            port: 8554
           timeoutSeconds: 1
         securityContext:
         startupProbe:
@@ -71,8 +66,25 @@ spec:
           initialDelaySeconds: 0
           periodSeconds: 5
           tcpSocket:
-            port: 8083
+            port: 8554
           timeoutSeconds: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rtsp-simple-server
+  namespace: stream
+spec:
+  clusterIP: None
+  ports:
+  - name: http
+    port: 8554
+    targetPort: http
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/instance: rtsp-simple-server
+    app.kubernetes.io/name: rtsp-simple-server
+  type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -98,7 +110,7 @@ spec:
           service:
             name: rtsp-simple-server
             port:
-              number: 8083
+              number: 8554
         path: /
         pathType: Prefix
   tls:
