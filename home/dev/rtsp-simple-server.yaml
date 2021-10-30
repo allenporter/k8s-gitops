@@ -106,7 +106,7 @@ spec:
   publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/instance: rtsp-simple-server
-    app.kubernetes.io/name: rtsp-simple-server---
+    app.kubernetes.io/name: rtsp-simple-server
 ---
 apiVersion: v1
 kind: Service
