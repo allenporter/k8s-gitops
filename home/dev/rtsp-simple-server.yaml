@@ -78,7 +78,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: rtsp-simple-server
+  name: rtsp-simple-server-tcp
   namespace: stream
 spec:
   type: LoadBalancer
@@ -90,18 +90,10 @@ spec:
     port: 8000
     targetPort: rtsp-rtp
     protocol: TCP
-  - name: rtsp-rtp-udp
-    port: 8000
-    targetPort: rtsp-rtp
-    protocol: UDP
   - name: rtsp-rtcp
     port: 8001
     targetPort: rtsp-rtcp
     protocol: TCP
-  - name: rtsp-rtcp-udp
-    port: 8001
-    targetPort: rtsp-rtcp
-    protocol: UDP
   - name: rtsp
     port: 8554
     targetPort: rtsp
@@ -111,6 +103,28 @@ spec:
   - name: hls
     port: 8888
     targetPort: hls
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/instance: rtsp-simple-server
+    app.kubernetes.io/name: rtsp-simple-server---
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rtsp-simple-server-udp
+  namespace: stream
+spec:
+  type: LoadBalancer
+  loadBalancerIP: "10.10.24.8"
+  ports:
+  - name: rtsp-rtp-udp
+    port: 8000
+    targetPort: rtsp-rtp
+    protocol: UDP
+  - name: rtsp-rtcp-udp
+    port: 8001
+    targetPort: rtsp-rtcp
+    protocol: UDP
   publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/instance: rtsp-simple-server
