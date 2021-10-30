@@ -75,12 +75,12 @@ kind: Service
 metadata:
   name: rtsp-simple-server-tcp
   namespace: stream
-spec:
-  type: LoadBalancer
-  loadBalancerIP: "10.10.24.8"
   annotations:
     external-dns.alpha.kubernetes.io/hostname: rtsp.dev.mrv.thebends.org.
     metallb.universe.tf/allow-shared-ip: rtsp-simple-server-svc
+spec:
+  type: LoadBalancer
+  loadBalancerIP: "10.10.24.8"
   ports:
   - name: rtsp-rtp
     port: 8000
@@ -107,11 +107,11 @@ kind: Service
 metadata:
   name: rtsp-simple-server-udp
   namespace: stream
+  annotations:
+    metallb.universe.tf/allow-shared-ip: rtsp-simple-server-svc
 spec:
   type: LoadBalancer
   loadBalancerIP: "10.10.24.8"
-  annotations:
-    metallb.universe.tf/allow-shared-ip: rtsp-simple-server-svc
   ports:
   - name: rtsp-rtp-udp
     port: 8000
