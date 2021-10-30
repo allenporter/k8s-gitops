@@ -33,7 +33,13 @@ spec:
         ports:
         - containerPort: 8000
           name: rtsp-rtp
+          protocol: TCP
+        - containerPort: 8000
+          name: rtsp-rtp
           protocol: UDP
+        - containerPort: 8001
+          name: rtsp-rtcp
+          protocol: TCP
         - containerPort: 8001
           name: rtsp-rtcp
           protocol: UDP
@@ -75,45 +81,37 @@ metadata:
   name: rtsp-simple-server
   namespace: stream
 spec:
-  clusterIP: None
+  type: LoadBalancer
+  loadBalancerIP: "10.10.24.8"
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: rtsp.dev.mrv.thebends.org.
   ports:
-  - name: http
+  - name: rtsp-rtp
+    port: 8000
+    targetPort: rtsp-rtp
+    protocol: TCP
+  - name: rtsp-rtp
+    port: 8000
+    targetPort: rtsp-rtp
+    protocol: UDP
+  - name: rtsp-rtcp
+    port: 8001
+    targetPort: rtsp-rtcp
+    protocol: TCP
+  - name: rtsp-rtcp
+    port: 8001
+    targetPort: rtsp-rtcp
+    protocol: UDP
+  - name: rtsp
     port: 8554
-    targetPort: http
+    targetPort: rtsp
+  - name: rtmp
+    port: 1935
+    targetPort: rtmp
+  - name: hls
+    port: 8888
+    targetPort: hls
   publishNotReadyAddresses: true
   selector:
     app.kubernetes.io/instance: rtsp-simple-server
     app.kubernetes.io/name: rtsp-simple-server
-  type: ClusterIP
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/hostname: rtsp.dev.mrv.thebends.org.
-    external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org
-    hajimari.io/appName: RTSP Simple Server
-    hajimari.io/icon: view-stream
-    kubernetes.io/ingress.class: haproxy
-  labels:
-    app.kubernetes.io/instance: rtsp-simple-server
-    app.kubernetes.io/name: rtsp-simple-server
-  name: rtsp-simple-server
-  namespace: stream
-spec:
-  rules:
-  - host: rtsp.dev.mrv.thebends.org
-    http:
-      paths:
-      - backend:
-          service:
-            name: rtsp-simple-server
-            port:
-              number: 8554
-        path: /
-        pathType: Prefix
-  tls:
-  - hosts:
-    - rtsp.dev.mrv.thebends.org
-    secretName: rtsp-simple-server-tls
