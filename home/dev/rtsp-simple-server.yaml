@@ -81,14 +81,14 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/hostname: rtsp.dev.mrv.thebends.org.
     external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org
-    hajimari.io/appName: RTSP To WebRTC
+    hajimari.io/appName: RTSP Simple Server
     hajimari.io/icon: view-stream
     kubernetes.io/ingress.class: haproxy
   labels:
     app.kubernetes.io/instance: rtsp-simple-server
     app.kubernetes.io/name: rtsp-simple-server
   name: rtsp-simple-server
-  namespace: webrtc
+  namespace: stream
 spec:
   rules:
   - host: rtsp.dev.mrv.thebends.org
@@ -104,4 +104,4 @@ spec:
   tls:
   - hosts:
     - rtsp.prod.mrv.thebends.org
-    secretName: webrtc-to-rtsp-tls
+    secretName: rtsp-simple-server-tls
