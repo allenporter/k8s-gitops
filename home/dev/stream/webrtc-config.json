@@ -8,7 +8,7 @@
   "streams": {
     "FRONT_DOOR": {
       "on_demand": false,
-      "url": "rtsp://rtsp.dev.mrv.thebends.org/front_door"
+      "url": "rtsp://rtsp.dev.mrv.thebends.org:8554/front_door"
     }
   }
 }
