@@ -52,14 +52,14 @@ spec:
           initialDelaySeconds: 0
           periodSeconds: 10
           tcpSocket:
-            port: 8554
+            port: 8888
           timeoutSeconds: 1
         readinessProbe:
           failureThreshold: 3
           initialDelaySeconds: 0
           periodSeconds: 10
           tcpSocket:
-            port: 8554
+            port: 8888
           timeoutSeconds: 1
         securityContext:
         startupProbe:
@@ -67,7 +67,7 @@ spec:
           initialDelaySeconds: 0
           periodSeconds: 5
           tcpSocket:
-            port: 8554
+            port: 8888
           timeoutSeconds: 1
 ---
 apiVersion: v1
