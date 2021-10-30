@@ -33,25 +33,20 @@ spec:
         ports:
         - containerPort: 8000
           name: rtsp-rtp
-          protocol: TCP
         - containerPort: 8000
-          name: rtsp-rtp
+          name: rtsp-rtp-udp
           protocol: UDP
         - containerPort: 8001
-          name: rtsp-rtcp
-          protocol: TCP
+          name: rtsp-rtc
         - containerPort: 8001
-          name: rtsp-rtcp
+          name: rtsp-rtcp-udp
           protocol: UDP
         - containerPort: 8554
           name: rtsp
-          protocol: TCP
         - containerPort: 1935
           name: rtmp
-          protocol: TCP
         - containerPort: 8888
           name: hls
-          protocol: TCP
         livenessProbe:
           failureThreshold: 3
           initialDelaySeconds: 0
@@ -89,11 +84,9 @@ spec:
   - name: rtsp-rtp
     port: 8000
     targetPort: rtsp-rtp
-    protocol: TCP
   - name: rtsp-rtcp
     port: 8001
     targetPort: rtsp-rtcp
-    protocol: TCP
   - name: rtsp
     port: 8554
     targetPort: rtsp
