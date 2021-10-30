@@ -1,0 +1,14 @@
+{
+  "server": {
+    "http_port": ":8083",
+    "ice_servers": ["stun:stun.l.google.com:19302"],
+    "ice_username": "",
+    "ice_credential": ""
+  },
+  "streams": {
+    "FRONT_DOOR": {
+      "on_demand": false,
+      "url": "rtsp://rtsp.dev.mrv.thebends.org/front_door"
+    }
+  }
+}
