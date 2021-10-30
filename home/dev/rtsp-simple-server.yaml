@@ -90,7 +90,7 @@ spec:
     port: 8000
     targetPort: rtsp-rtp
     protocol: TCP
-  - name: rtsp-rtp
+  - name: rtsp-rtp-udp
     port: 8000
     targetPort: rtsp-rtp
     protocol: UDP
@@ -98,7 +98,7 @@ spec:
     port: 8001
     targetPort: rtsp-rtcp
     protocol: TCP
-  - name: rtsp-rtcp
+  - name: rtsp-rtcp-udp
     port: 8001
     targetPort: rtsp-rtcp
     protocol: UDP
