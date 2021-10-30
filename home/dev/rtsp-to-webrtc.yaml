@@ -2,13 +2,13 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: webrtc
+  name: stream
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: rtsp-to-webrtc
-  namespace: webrtc
+  namespace: stream
 spec:
   clusterIP: None
   ports:
@@ -28,7 +28,7 @@ metadata:
     app.kubernetes.io/instance: rtsp-to-webrtc
     app.kubernetes.io/name: rtsp-to-webrtc
   name: rtsp-to-webrtc
-  namespace: webrtc
+  namespace: stream
 spec:
   replicas: 1
   revisionHistoryLimit: 3
@@ -92,7 +92,7 @@ metadata:
     app.kubernetes.io/instance: rtsp-to-webrtc
     app.kubernetes.io/name: rtsp-to-webrtc
   name: rtsp-to-webrtc
-  namespace: webrtc
+  namespace: stream
 spec:
   rules:
   - host: rtsp-to-webrtc.dev.mrv.thebends.org
