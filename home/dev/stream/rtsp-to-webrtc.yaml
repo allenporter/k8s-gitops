@@ -74,7 +74,7 @@ spec:
           timeoutSeconds: 1
         volumeMounts:
         - name: config
-          mountPath: /config.json
+          mountPath: /go/src/app/config.json
           subPath: webrtc-config.json
       volumes:
       - name: config
