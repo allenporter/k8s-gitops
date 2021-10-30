@@ -102,5 +102,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - rtsp-to-webrtc.prod.mrv.thebends.org
+    - rtsp-to-webrtc.dev.mrv.thebends.org
     secretName: webrtc-to-rtsp-tls

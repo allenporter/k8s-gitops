@@ -103,5 +103,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - rtsp.prod.mrv.thebends.org
+    - rtsp.dev.mrv.thebends.org
     secretName: rtsp-simple-server-tls
