@@ -43,7 +43,7 @@ spec:
       - env:
         - name: TZ
           value: UTC
-        image: allenporter/rtsptowebrtc@sha256:26a78dcd643d7be9c8a4f8109f5507476555f0ac3d373ce0bc2ed43f4470b80e
+        image: allenporter/rtsptowebrtc@sha256:af24c6501d424e935f818f6d13227369a2ca18074a7077b0a898591bd1b28908
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
