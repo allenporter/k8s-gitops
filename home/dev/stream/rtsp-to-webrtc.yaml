@@ -39,6 +39,7 @@ spec:
         app.kubernetes.io/instance: rtsp-to-webrtc
         app.kubernetes.io/name: rtsp-to-webrtc
     spec:
+      hostNetwork: true
       containers:
       - env:
         - name: TZ
