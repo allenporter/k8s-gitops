@@ -61,5 +61,19 @@
       "stabilityDays": 1,
       "matchUpdateTypes": ["major", "minor"],
     },
+    {
+      "description": "Package requirements: minor updates are silent",
+      "matchFiles": ["requirements.txt],
+      "automerge": true,
+      "automergeType": "branch",
+      "matchUpdateTypes": ["minor", "patch"],
+    },
+    {
+      "description": "Package requirements: updated weekly",
+      "matchFiles": ["requirements.txt],
+      "extends": ["schedule:weekends"],
+      "stabilityDays": 1,
+      "matchUpdateTypes": ["major"],
+    },
   ],
 }
