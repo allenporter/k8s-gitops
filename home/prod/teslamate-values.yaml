@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: teslamate
-      version: 6.1.3
+      version: 6.2.0
   values:
     image:
       repository: teslamate/teslamate
