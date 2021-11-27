@@ -102,8 +102,6 @@ spec:
           hajimari.io/icon: bell-alert
           hajimari.io/appName: Alertmanager
       alertManagerSpec:
-        deploymentStrategy:
-          type: Recreate
         storage:
           volumeClaimTemplate:
             spec:
