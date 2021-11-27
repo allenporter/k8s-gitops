@@ -101,7 +101,7 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: bell-alert
           hajimari.io/appName: Alertmanager
-      alertManagerSpec:
+      alertmanagerSpec:
         storage:
           volumeClaimTemplate:
             spec:
