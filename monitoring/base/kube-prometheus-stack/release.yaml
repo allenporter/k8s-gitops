@@ -17,8 +17,11 @@ spec:
   # Increase default to deal with extra time needed since adding persistence
   timeout: 10m
   install:
+    crds: CreateReplace
     remediation:
       retries: 3
+  upgrade:
+    crds: CreateReplace
   test:
     enable: true
   # Default values
@@ -98,9 +101,7 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: bell-alert
           hajimari.io/appName: Alertmanager
-      alertManagerSpec:
-        deploymentStrategy:
-          type: Recreate
+      alertmanagerSpec:
         storage:
           volumeClaimTemplate:
             spec:
