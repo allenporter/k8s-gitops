@@ -5,10 +5,5 @@
     "ice_username": "",
     "ice_credential": ""
   },
-  "streams": {
-    "FRONT_DOOR": {
-      "on_demand": false,
-      "url": "rtsp://rtsp.dev.mrv.thebends.org:8554/front_door"
-    }
-  }
+  "streams": { }
 }

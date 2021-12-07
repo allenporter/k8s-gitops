@@ -9,11 +9,11 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: home-assistant
-      version: 11.0.5
+      version: 11.2.1
   values:
     image:
       repository: homeassistant/home-assistant
-      tag: 2021.10.6
+      tag: 2021.11.5
     ingress:
       main:
         annotations:

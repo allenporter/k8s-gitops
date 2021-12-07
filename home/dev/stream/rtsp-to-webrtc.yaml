@@ -39,11 +39,12 @@ spec:
         app.kubernetes.io/instance: rtsp-to-webrtc
         app.kubernetes.io/name: rtsp-to-webrtc
     spec:
+      hostNetwork: true
       containers:
       - env:
         - name: TZ
           value: UTC
-        image: allenporter/rtsptowebrtc@sha256:138918850448e499915c0d565f0ad5ad66cb68daf3119294b7fa1b1560020edb
+        image: allenporter/rtsptowebrtc@sha256:e42ae8998dbf4c8d5a03228e7d4b64a5bd9697af7c705f7398ec9cc05ea87742
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
