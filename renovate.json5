@@ -37,7 +37,7 @@
       "additionalBranchPrefix": "dev-",
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "excludePackagePatterns": [
-          # Skip updates until https://github.com/jacobalberty/unifi-docker/issues/495 is resolved
+          // Skip updates until https://github.com/jacobalberty/unifi-docker/issues/495 is resolved
           ".*unifi.*"
       ],
     },
