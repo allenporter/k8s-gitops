@@ -36,6 +36,7 @@
       "automergeType": "branch",
       "additionalBranchPrefix": "dev-",
       "matchUpdateTypes": ["minor", "patch", "digest"],
+      "excludePackagePatterns": [".*unifi.*"],
     },
     {
       "description": "dev: Major packages updated weekly",
