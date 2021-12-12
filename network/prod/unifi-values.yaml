@@ -14,6 +14,8 @@ spec:
     image:
       repository: jacobalberty/unifi
       tag: v6.5.54
+      # Due to force overwrite of 6.5.54 in https://github.com/jacobalberty/unifi-docker/issues/493
+      pullPolicy: Always
     livenessProbe:
       initialDelaySeconds: 60
       periodSeconds: 30
