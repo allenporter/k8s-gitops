@@ -26,6 +26,13 @@
     "fileMatch": [".*(release|values|components)\\.yaml$"],
   },
   "packageRules": [
+    {
+      "packagePatterns": [
+          // https://github.com/allenporter/k8s-gitops/issues/445
+          "^rook-ceph.*"
+      ],
+      "enabled": false,
+    },
     // Use different update schedules for dev and prod based on the type of
     // patch. Note that each rule needs its own brach prefix in order to
     // have a working space for evaluating the rules independently.
@@ -43,10 +50,6 @@
       "extends": ["schedule:weekends"],
       "additionalBranchPrefix": "dev-major",
       "matchUpdateTypes": ["major"],
-      "excludePackagePatterns": [
-          // https://github.com/allenporter/k8s-gitops/issues/445
-          "^rook-ceph.*"
-      ],
     },
     {
       "description": "prod: Patches are automatic after 1 day",
