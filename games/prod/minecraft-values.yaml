@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
       chart: minecraft
-      version: 3.6.1
+      version: 3.6.2
   values:
     image: itzg/minecraft-server
     imageTag: 2021.10.0
