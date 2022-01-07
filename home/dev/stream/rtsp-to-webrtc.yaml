@@ -44,7 +44,7 @@ spec:
       - env:
         - name: TZ
           value: UTC
-        image: allenporter/rtsptowebrtc@v0.0.2
+        image: ghcr.io/allenporter/amd64-rtsp-to-webrtc:0.0.6
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
