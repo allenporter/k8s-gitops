@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rtsp-to-webrtc
+  name: rtsp-to-webrtc-ha
   namespace: stream
 spec:
   clusterIP: None
@@ -12,39 +12,39 @@ spec:
     targetPort: http
   publishNotReadyAddresses: true
   selector:
-    app.kubernetes.io/instance: rtsp-to-webrtc
-    app.kubernetes.io/name: rtsp-to-webrtc
+    app.kubernetes.io/instance: rtsp-to-webrtc-ha
+    app.kubernetes.io/name: rtsp-to-webrtc-ha
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/instance: rtsp-to-webrtc
-    app.kubernetes.io/name: rtsp-to-webrtc
-  name: rtsp-to-webrtc
+    app.kubernetes.io/instance: rtsp-to-webrtc-ha
+    app.kubernetes.io/name: rtsp-to-webrtc-ha
+  name: rtsp-to-webrtc-ha
   namespace: stream
 spec:
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app.kubernetes.io/instance: rtsp-to-webrtc
-      app.kubernetes.io/name: rtsp-to-webrtc
+      app.kubernetes.io/instance: rtsp-to-webrtc-ha
+      app.kubernetes.io/name: rtsp-to-webrtc-ha
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app.kubernetes.io/instance: rtsp-to-webrtc
-        app.kubernetes.io/name: rtsp-to-webrtc
+        app.kubernetes.io/instance: rtsp-to-webrtc-ha
+        app.kubernetes.io/name: rtsp-to-webrtc-ha
     spec:
       hostNetwork: true
       containers:
       - env:
         - name: TZ
           value: UTC
-        image: allenporter/rtsptowebrtc@v0.0.2
+        mage: ghcr.io/allenporter/amd64-rtsp-to-webrtc:0.0.6
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -53,7 +53,7 @@ spec:
           tcpSocket:
             port: 8083
           timeoutSeconds: 1
-        name: rtsp-to-webrtc
+        name: rtsp-to-webrtc-ha
         ports:
         - containerPort: 8083
           name: http
@@ -73,43 +73,35 @@ spec:
           tcpSocket:
             port: 8083
           timeoutSeconds: 1
-        volumeMounts:
-        - name: config
-          mountPath: /go/src/app/config.json
-          subPath: webrtc-config.json
-      volumes:
-      - name: config
-        configMap:
-          name: webrtc-config
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/hostname: rtsp-to-webrtc.dev.mrv.thebends.org.
+    external-dns.alpha.kubernetes.io/hostname: rtsp-to-webrtc-ha.dev.mrv.thebends.org.
     external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org
     hajimari.io/appName: RTSP To WebRTC
     hajimari.io/icon: view-stream
     kubernetes.io/ingress.class: haproxy
   labels:
-    app.kubernetes.io/instance: rtsp-to-webrtc
-    app.kubernetes.io/name: rtsp-to-webrtc
-  name: rtsp-to-webrtc
+    app.kubernetes.io/instance: rtsp-to-webrtc-ha
+    app.kubernetes.io/name: rtsp-to-webrtc-ha
+  name: rtsp-to-webrtc-ha
   namespace: stream
 spec:
   rules:
-  - host: rtsp-to-webrtc.dev.mrv.thebends.org
+  - host: rtsp-to-webrtc-ha.dev.mrv.thebends.org
     http:
       paths:
       - backend:
           service:
-            name: rtsp-to-webrtc
+            name: rtsp-to-webrtc-ha
             port:
               number: 8083
         path: /
         pathType: Prefix
   tls:
   - hosts:
-    - rtsp-to-webrtc.dev.mrv.thebends.org
+    - rtsp-to-webrtc-ha.dev.mrv.thebends.org
     secretName: webrtc-to-rtsp-tls
