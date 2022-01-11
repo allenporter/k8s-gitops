@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://haproxytech.github.io/helm-charts
       chart: kubernetes-ingress
-      version: 1.17.11
+      version: 1.18.0
   values:
     controller:
       service:
