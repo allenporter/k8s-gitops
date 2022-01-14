@@ -11,3 +11,10 @@ spec:
       # renovate: registryUrl=https://charts.rook.io/release
       chart: rook-ceph
       version: v1.7.9
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  values:
+    crds:
+      enabled: true
