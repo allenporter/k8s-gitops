@@ -72,13 +72,6 @@ spec:
             cert-manager.io/cluster-issuer: letsencrypt
             hajimari.io/icon: microsoft-visual-studio-code
             hajimari.io/appName: HA VSCode
-    postgresql:
-      enabled: true
-      postgresqlUsername: home-assistant
-      postgresqlDatabase: home-assistant
-      postgresqlPassword: ${HOME_ASSISTANT_POSTGRESQL_PWD}
-      persistence:
-        enabled: true
 
     mariadb:
       enabled: true
