@@ -34,7 +34,8 @@ spec:
       DATABASE_NAME: "teslamate"
       DATABASE_USER: "postgres"
       DATABASE_HOST: "teslamate-postgresql"
-      DISABLE_MQTT: "true"
+      DISABLE_MQTT: "false"
+      MQTT_HOST: "mosquitto.mqtt"
     envValueFrom:
       DATABASE_PASS:
         secretKeyRef:
