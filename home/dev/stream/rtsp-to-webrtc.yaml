@@ -43,8 +43,8 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: UTC
-        image: ghcr.io/allenporter/amd64-rtsp-to-webrtc:0.0.6
+          value: America/Los_Angeles
+        image: ghcr.io/allenporter/amd64-rtsp-to-webrtc:1.0.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
