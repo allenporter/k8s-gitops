@@ -1,9 +1,0 @@
-{
-  "server": {
-    "http_port": ":8083",
-    "ice_servers": ["stun:stun.l.google.com:19302"],
-    "ice_username": "",
-    "ice_credential": ""
-  },
-  "streams": { }
-}

@@ -43,8 +43,8 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: UTC
-        image: ghcr.io/allenporter/amd64-rtsp-to-webrtc:0.0.6
+          value: America/Los_Angeles
+        image: ghcr.io/allenporter/amd64-rtsp-to-webrtc:1.0.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -73,14 +73,6 @@ spec:
           tcpSocket:
             port: 8083
           timeoutSeconds: 1
-        volumeMounts:
-        - name: config
-          mountPath: /go/src/app/config.json
-          subPath: webrtc-config.json
-      volumes:
-      - name: config
-        configMap:
-          name: webrtc-config
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
