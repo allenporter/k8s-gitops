@@ -4,8 +4,5 @@ kind: Kustomization
 namespace: stream
 resources:
   - rtsp-to-webrtc.yaml
+  - rtsp-to-web.yaml
   - rtsp-simple-server.yaml
-configMapGenerator:
-  - name: webrtc-config
-    files:
-      - webrtc-config.json
