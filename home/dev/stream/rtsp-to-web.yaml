@@ -58,6 +58,9 @@ spec:
         - containerPort: 8083
           name: http
           protocol: TCP
+        - containerPort: 5541
+          name: rtsp
+          protocol: TCP
         readinessProbe:
           failureThreshold: 3
           initialDelaySeconds: 0
@@ -105,3 +108,23 @@ spec:
   - hosts:
     - rtsp-to-web.dev.mrv.thebends.org
     secretName: rtsp-to-web-tls
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rtsp-to-web-rtsp
+  namespace: stream
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: rtsp-to-web-rtsp.dev.mrv.thebends.org.
+    metallb.universe.tf/allow-shared-ip: rtsp-to-web-svc
+spec:
+  type: LoadBalancer
+  loadBalancerIP: "10.10.24.9"
+  ports:
+  - name: rtsp
+    port: 554
+    targetPort: rtsp
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/instance: rtsp-to-web
+    app.kubernetes.io/name: rtsp-to-web
