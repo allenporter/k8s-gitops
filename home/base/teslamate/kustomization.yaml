@@ -14,9 +14,10 @@ configMapGenerator:
   - name: grafana-dashboard-teslamate-charge-level
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/charge-level.json
-  - name: grafana-dashboard-teslamate-charges
-    files:
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/charges.json
+# Issues with variable substitution
+#  - name: grafana-dashboard-teslamate-charges
+#    files:
+#      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/charges.json
   - name: grafana-dashboard-teslamate-charging-stats
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/charging-stats.json
