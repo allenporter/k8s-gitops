@@ -31,10 +31,10 @@ configMapGenerator:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/efficiency.json
   - name: grafana-dashboard-teslamate-internal-charge-details
     files:
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/internal-charge-details.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/internal/charge-details.json
   - name: grafana-dashboard-teslamate-internal-drive-details
     files:
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/internal-drive-details.json
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/internal/drive-details.json
   - name: grafana-dashboard-teslamate-locations
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/locations.json
