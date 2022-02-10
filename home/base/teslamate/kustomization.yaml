@@ -24,9 +24,9 @@ configMapGenerator:
   - name: grafana-dashboard-teslamate-drive-stats
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/drive-stats.json
-  - name: grafana-dashboard-teslamate-drives
-    files:
-      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/drives.json
+#  - name: grafana-dashboard-teslamate-drives
+#    files:
+#      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/drives.json
   - name: grafana-dashboard-teslamate-efficiency
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.0/grafana/dashboards/efficiency.json
