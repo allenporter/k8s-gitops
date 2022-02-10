@@ -14,19 +14,18 @@ configMapGenerator:
   - name: grafana-dashboard-teslamate-charge-level
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charge-level.json
-# Issues with variable substitution
-#  - name: grafana-dashboard-teslamate-charges
-#    files:
-#      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charges.json
+  - name: grafana-dashboard-teslamate-charges
+    files:
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charges.json
   - name: grafana-dashboard-teslamate-charging-stats
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charging-stats.json
   - name: grafana-dashboard-teslamate-drive-stats
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/drive-stats.json
-#  - name: grafana-dashboard-teslamate-drives
-#    files:
-#      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/drives.json
+  - name: grafana-dashboard-teslamate-drives
+    files:
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/drives.json
   - name: grafana-dashboard-teslamate-efficiency
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/efficiency.json
@@ -36,9 +35,9 @@ configMapGenerator:
   - name: grafana-dashboard-teslamate-internal-drive-details
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/internal/drive-details.json
-#  - name: grafana-dashboard-teslamate-locations
-#    files:
-#      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/locations.json
+  - name: grafana-dashboard-teslamate-locations
+    files:
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/locations.json
   - name: grafana-dashboard-teslamate-mileage
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/mileage.json
@@ -51,9 +50,9 @@ configMapGenerator:
   - name: grafana-dashboard-teslamate-states
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/states.json
-#  - name: grafana-dashboard-teslamate-trip
-#    files:
-#      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/trip.json
+  - name: grafana-dashboard-teslamate-trip
+    files:
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/trip.json
 # Disabled since it causes issues with secret substitutions
 #  - name: grafana-dashboard-teslamate-updates
 #    files:
