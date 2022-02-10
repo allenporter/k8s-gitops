@@ -7,12 +7,12 @@ distlib==0.3.4
 filelock==3.4.2
 gitdb==4.0.9
 GitPython==3.1.26
-identify==2.4.8
+identify==2.4.9
 iniconfig==1.1.1
 nodeenv==1.6.0
 packaging==21.3
 pathspec==0.9.0
-platformdirs==2.4.1
+platformdirs==2.5.0
 pluggy==1.0.0
 pre-commit==2.17.0
 py==1.11.0
