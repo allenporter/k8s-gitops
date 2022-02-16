@@ -38,6 +38,15 @@ spec:
       data:
         enabled: true
 
+    service:
+      dns-tcp:
+        annotations:
+            metallb.universe.tf/allow-shared-ip: adguard-home-svc
+      dns-udp:
+        annotations:
+            metallb.universe.tf/allow-shared-ip: adguard-home-svc
+
+
     ingress:
       main:
         enabled: true
