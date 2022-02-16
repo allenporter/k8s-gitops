@@ -29,11 +29,6 @@ spec:
       repository: adguard/adguardhome
       tag: v0.108.0-b.3
 
-    config:
-      parental_enabled: true
-      safesearch_enabled: true
-      safebrowsing_enabled: true
-
     persistence:
       data:
         enabled: true
