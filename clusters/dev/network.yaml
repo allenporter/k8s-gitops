@@ -14,3 +14,10 @@ spec:
     name: flux-system
   path: ./network/dev
   prune: true
+  postBuild:
+    substitute: {}
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings
+      - kind: Secret
+        name: cluster-secrets
