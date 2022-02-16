@@ -1,0 +1,47 @@
+# yamllint disable-file
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: adguard-home
+  namespace: adguard-home
+spec:
+  releaseName: adguard-home
+  chart:
+    spec:
+      chart: adguard-home
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    enable: false
+  # https://github.com/k8s-at-home/charts/blob/master/charts/stable/adguard-home/values.yaml
+  values:
+    env:
+      TZ: "America/Los_Angeles"
+
+    image:
+      repository: adguard/adguardhome
+      tag: v0.108.0-b.3
+
+    config:
+      parental_enabled: true
+      safesearch_enabled: true
+      safebrowsing_enabled: true
+
+    persistence:
+      data:
+        enabled: true
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: haproxy
+          cert-manager.io/cluster-issuer: letsencrypt
+          hajimari.io/icon: adguard-home

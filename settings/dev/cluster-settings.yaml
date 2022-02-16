@@ -5,4 +5,4 @@ metadata:
   namespace: flux-system
   name: cluster-settings
 data:
-  EXAMPLE: value
+  ADGUARD_HOME_IP: 10.10.24.12
