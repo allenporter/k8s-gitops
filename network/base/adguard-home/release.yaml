@@ -29,10 +29,6 @@ spec:
       repository: adguard/adguardhome
       tag: v0.108.0-b.3
 
-    persistence:
-      data:
-        enabled: true
-
     service:
       dns-tcp:
         annotations:
