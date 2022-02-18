@@ -15,3 +15,10 @@ spec:
   path: ./network/prod
   prune: true
   validation: client
+  postBuild:
+    substitute: {}
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings
+      - kind: Secret
+        name: cluster-secrets
