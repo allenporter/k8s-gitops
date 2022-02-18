@@ -25,19 +25,17 @@ spec:
     env:
       TZ: "America/Los_Angeles"
 
-    image:
-      repository: adguard/adguardhome
-      tag: v0.108.0-b.3
-
     service:
       dns-tcp:
         type: LoadBalancer
         externalTrafficPolicy: Local
+        loadBalancerIP: ${ADGUARD_HOME_IP}
         annotations:
             metallb.universe.tf/allow-shared-ip: adguard-home-svc
       dns-udp:
         type: LoadBalancer
         externalTrafficPolicy: Local
+        loadBalancerIP: ${ADGUARD_HOME_IP}
         annotations:
             metallb.universe.tf/allow-shared-ip: adguard-home-svc
 
@@ -49,3 +47,14 @@ spec:
           kubernetes.io/ingress.class: haproxy
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: adguard-home
+          external-dns.alpha.kubernetes.io/hostname: adguard-home.${CLUSTER}.mrv.thebends.org.
+          external-dns.alpha.kubernetes.io/target: prx02.${CLUSTER}.mrv.thebends.org.
+        hosts:
+          - host: adguard-home.${CLUSTER}.mrv.thebends.org
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: adguard-home-tls
+            hosts:
+              - adguard-home.${CLUSTER}.mrv.thebends.org

@@ -5,4 +5,5 @@ metadata:
   namespace: flux-system
   name: cluster-settings
 data:
+  CLUSTER: dev
   ADGUARD_HOME_IP: 10.10.24.12
