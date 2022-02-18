@@ -14,7 +14,7 @@ spec:
       dns-tcp:
         loadBalancerIP: 10.10.24.12
       dns-udp:
-        loadBalancerIP: 10.10.24.12
+        loadBalancerIP: ${ADGUARD_HOME_IP}
 
     ingress:
       main:
