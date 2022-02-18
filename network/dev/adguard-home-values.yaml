@@ -10,23 +10,6 @@ spec:
       chart: adguard-home
       version: 5.2.0
   values:
-    service:
-      dns-tcp:
-        loadBalancerIP: 10.10.24.12
-      dns-udp:
-        loadBalancerIP: ${ADGUARD_HOME_IP}
-
-    ingress:
-      main:
-        annotations:
-          external-dns.alpha.kubernetes.io/hostname: adguard-home.dev.mrv.thebends.org.
-          external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
-        hosts:
-          - host: adguard-home.dev.mrv.thebends.org
-            paths:
-              - path: /
-                pathType: Prefix
-        tls:
-          - secretName: adguard-home-tls
-            hosts:
-              - adguard-home.dev.mrv.thebends.org
+    image:
+      repository: adguard/adguardhome
+      tag: v0.108.0-b.3
