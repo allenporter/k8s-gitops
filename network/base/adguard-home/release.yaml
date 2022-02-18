@@ -31,9 +31,13 @@ spec:
 
     service:
       dns-tcp:
+        type: LoadBalancer
+        externalTrafficPolicy: Local
         annotations:
             metallb.universe.tf/allow-shared-ip: adguard-home-svc
       dns-udp:
+        type: LoadBalancer
+        externalTrafficPolicy: Local
         annotations:
             metallb.universe.tf/allow-shared-ip: adguard-home-svc
 
