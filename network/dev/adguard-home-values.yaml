@@ -12,9 +12,9 @@ spec:
   values:
     service:
       dns-tcp:
-        loadBalancerIP: ${ADGUARD_HOME_IP}
+        loadBalancerIP: 10.10.24.12
       dns-udp:
-        loadBalancerIP: ${ADGUARD_HOME_IP}
+        loadBalancerIP: 10.10.24.12
 
     ingress:
       main:
