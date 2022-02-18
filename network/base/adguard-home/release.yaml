@@ -47,14 +47,14 @@ spec:
           kubernetes.io/ingress.class: haproxy
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: adguard-home
-          external-dns.alpha.kubernetes.io/hostname: adguard-home.${CLUSTER}.mrv.thebends.org.
-          external-dns.alpha.kubernetes.io/target: prx02.${CLUSTER}.mrv.thebends.org.
+          external-dns.alpha.kubernetes.io/hostname: adguard-home.${DOMAIN}.
+          external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
         hosts:
-          - host: adguard-home.${CLUSTER}.mrv.thebends.org
+          - host: adguard-home.${DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - secretName: adguard-home-tls
             hosts:
-              - adguard-home.${CLUSTER}.mrv.thebends.org
+              - adguard-home.${DOMAIN}

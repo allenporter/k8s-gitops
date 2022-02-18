@@ -6,4 +6,5 @@ metadata:
   name: cluster-settings
 data:
   CLUSTER: dev
+  DOMAIN: dev.mrv.thebends.org
   ADGUARD_HOME_IP: 10.10.24.12
