@@ -44,7 +44,7 @@ spec:
       - env:
         - name: TZ
           value: America/Los_Angeles
-        image: ghcr.io/deepch/rtsptoweb:1.0.0
+        image: ghcr.io/deepch/rtsptoweb:v1.0.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
