@@ -9,3 +9,7 @@ spec:
     spec:
       chart: rtsp-to-web
       version: 1.0.0
+  values:
+    image:
+      repository: ghcr.io/deepch/rtsptoweb
+      tag: v2.0.0
