@@ -35,6 +35,7 @@ spec:
           - kubernetes-dashboard
           - monitoring
           - pihole
+          - rtsp-to-web
           - teslamate
           - unifi
       customApps:
