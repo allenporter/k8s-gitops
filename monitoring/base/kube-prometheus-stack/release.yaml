@@ -127,6 +127,9 @@ spec:
           - match:
               alertname: Watchdog
             receiver: 'null'
+          - match:
+              alertname: InfoInhibitor
+            receiver: 'null'
         receivers:
         - name: 'null'
         - name: 'discord'
