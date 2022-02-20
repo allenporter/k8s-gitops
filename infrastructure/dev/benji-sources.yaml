@@ -7,6 +7,8 @@ metadata:
 spec:
   interval: 10m
   url: https://github.com/allenporter/benji
+  ref:
+    branch: master
   ignore: |
     # exclude all
     /*
