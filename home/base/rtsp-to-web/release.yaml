@@ -19,8 +19,8 @@ spec:
       retries: 3
   values:
     ingress:
-      enabled: true
       main:
+        enabled: true
         annotations:
           external-dns.alpha.kubernetes.io/hostname: rtsp2web.${DOMAIN}.
           external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
