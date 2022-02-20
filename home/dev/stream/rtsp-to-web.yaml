@@ -82,8 +82,8 @@ kind: Ingress
 metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/hostname: rtsp-to-web.dev.mrv.thebends.org.
-    external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org
+    external-dns.alpha.kubernetes.io/hostname: rtsp-to-web.${DOMAIN}.
+    external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
     hajimari.io/appName: RTSP To WebRTC
     hajimari.io/icon: view-stream
     kubernetes.io/ingress.class: haproxy
@@ -94,7 +94,7 @@ metadata:
   namespace: stream
 spec:
   rules:
-  - host: rtsp-to-web.dev.mrv.thebends.org
+  - host: rtsp-to-web.${DOMAIN}
     http:
       paths:
       - backend:
@@ -106,7 +106,7 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - rtsp-to-web.dev.mrv.thebends.org
+    - rtsp-to-web.${DOMAIN}
     secretName: rtsp-to-web-tls
 ---
 apiVersion: v1
@@ -115,11 +115,11 @@ metadata:
   name: rtsp-to-web-rtsp
   namespace: stream
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: rtsp-to-web-rtsp.dev.mrv.thebends.org.
+    external-dns.alpha.kubernetes.io/hostname: rtsp-to-web-rtsp.${DOMAIN}.
     metallb.universe.tf/allow-shared-ip: rtsp-to-web-svc
 spec:
   type: LoadBalancer
-  loadBalancerIP: "10.10.24.9"
+  loadBalancerIP: ${RTSP_TO_WEB_IP}
   ports:
   - name: rtsp
     port: 554
