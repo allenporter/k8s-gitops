@@ -76,11 +76,11 @@ metadata:
   name: rtsp-simple-server-tcp
   namespace: stream
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: rtsp.dev.mrv.thebends.org.
+    external-dns.alpha.kubernetes.io/hostname: rtsp.${DOMAIN}.
     metallb.universe.tf/allow-shared-ip: rtsp-simple-server-svc
 spec:
   type: LoadBalancer
-  loadBalancerIP: "10.10.24.8"
+  loadBalancerIP: ${RTSP_SIMPLE_SERVER_IP}
   ports:
   - name: rtsp-rtp
     port: 8000
@@ -111,7 +111,7 @@ metadata:
     metallb.universe.tf/allow-shared-ip: rtsp-simple-server-svc
 spec:
   type: LoadBalancer
-  loadBalancerIP: "10.10.24.8"
+  loadBalancerIP: ${RTSP_SIMPLE_SERVER_IP}
   ports:
   - name: rtsp-rtp-udp
     port: 8000
