@@ -14,5 +14,5 @@ spec:
     controller:
       service:
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: prx04.dev.mrv.thebends.org.
-        loadBalancerIP: "10.10.24.6"
+          external-dns.alpha.kubernetes.io/hostname: prx04.${DOMAIN}.
+        loadBalancerIP: ${NGINX_INGRESS_IP}
