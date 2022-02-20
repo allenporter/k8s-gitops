@@ -1,0 +1,14 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: benji-k8s
+  namespace: flux-system
+spec:
+  interval: 10m
+  url: https://github.com/allenporter/benji
+  ignore: |
+    # exclude all
+    /*
+    # include charts directory
+    !/charts/benji-k8s
