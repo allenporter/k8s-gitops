@@ -18,6 +18,8 @@ spec:
     remediation:
       retries: 3
   values:
+    env:
+      TZ: America/Los_Angeles
     ingress:
       main:
         enabled: true
