@@ -5,6 +5,8 @@ resources:
   - ../base/home-assistant
   - ../base/hajimari
   - stream/
+  - ../base/rtsp-to-web
 patches:
   - path: home-assistant-values.yaml
   - path: hajimari-values.yaml
+  - path: rtsp-to-web-values.yaml

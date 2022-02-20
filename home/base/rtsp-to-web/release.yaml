@@ -1,0 +1,36 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: rtsp-to-web
+  namespace: rtsp-to-web
+spec:
+  releaseName: rtsp-to-web
+  chart:
+    spec:
+      chart: rtsp-to-web
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  values:
+    ingress:
+      enabled: true
+      main:
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: rtsp2web.${DOMAIN}.
+          external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
+          kubernetes.io/ingress.class: haproxy
+          hajimari.io/icon: video
+        hosts:
+          - host: rtsp2web.${DOMAIN}
+            paths:
+              - path: /
+        tls:
+          - secretName: rtsp-to-web-tls
+            hosts:
+              - rtsp2web.${DOMAIN}
