@@ -15,4 +15,4 @@ spec:
       service:
         annotations:
           external-dns.alpha.kubernetes.io/hostname: prx02.dev.mrv.thebends.org.
-        loadBalancerIP: "10.10.24.4"
+        loadBalancerIP: ${HAPROXY_INGRESS_IP}

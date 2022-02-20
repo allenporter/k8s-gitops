@@ -13,10 +13,10 @@ spec:
   values:
     service:
       annotations:
-        external-dns.alpha.kubernetes.io/hostname: prx05.dev.mrv.thebends.org.
-      loadBalancerIP: "10.10.24.7"
+        external-dns.alpha.kubernetes.io/hostname: prx05.${DOMAIN}.
+      loadBalancerIP: ${TRAEFIK_INGRESS_IP}
       spec:
         externalIPs:
-        - "10.10.24.7"
+        - ${TRAEFIK_INGRESS_IP}
     additionalArguments:
-    - "--providers.kubernetesingress.ingressendpoint.ip=10.10.24.7"
+    - "--providers.kubernetesingress.ingressendpoint.ip=${TRAEFIK_INGRESS_IP}"
