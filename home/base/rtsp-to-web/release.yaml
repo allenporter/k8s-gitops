@@ -22,15 +22,15 @@ spec:
       main:
         enabled: true
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: rtsp2web.${DOMAIN}.
+          external-dns.alpha.kubernetes.io/hostname: rtsp-to-web.${DOMAIN}.
           external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
           kubernetes.io/ingress.class: haproxy
           hajimari.io/icon: video
         hosts:
-          - host: rtsp2web.${DOMAIN}
+          - host: rtsp-to-web.${DOMAIN}
             paths:
               - path: /
         tls:
           - secretName: rtsp-to-web-tls
             hosts:
-              - rtsp2web.${DOMAIN}
+              - rtsp-to-web.${DOMAIN}
