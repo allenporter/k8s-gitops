@@ -7,9 +7,11 @@ resources:
   - ../base/frigate
   - ../base/mosquitto
   - ../base/hajimari
+  - ../base/rtsp-to-web
   - home-assistant-experimental.yaml
 patches:
   - path: home-assistant-values.yaml
   - path: teslamate-values.yaml
   - path: frigate-values.yaml
   - path: hajimari-values.yaml
+  - path: rtsp-to-web-values.yaml
