@@ -37,6 +37,7 @@ spec:
           - secretName: rtsp-to-web-tls
             hosts:
               - rtsp-to-web.${DOMAIN}
+    hostNetwork: true
     persistence:
       config:
         enabled: true
