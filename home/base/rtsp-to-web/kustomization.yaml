@@ -5,3 +5,7 @@ namespace: rtsp-to-web
 resources:
   - namespace.yaml
   - release.yaml
+configMapGenerator:
+  - name: rtsp-to-web-config
+    files:
+      - config.json
