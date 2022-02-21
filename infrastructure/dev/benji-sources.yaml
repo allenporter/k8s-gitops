@@ -9,6 +9,7 @@ spec:
   url: https://github.com/allenporter/benji
   ref:
     branch: master
+    tag:
   ignore: |
     # exclude all
     /*
