@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: metallb
-      version: 2.6.2
+      version: 2.6.8
   values:
     configInline:
       address-pools:
