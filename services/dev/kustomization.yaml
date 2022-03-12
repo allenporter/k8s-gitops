@@ -17,4 +17,6 @@ patches:
   - path: external-dns-values.yaml
   - path: nginx-values.yaml
   - path: traefik-values.yaml
-  - path: istio-values.yaml
+  - path: istio-base-values.yaml
+  - path: istiod-values.yaml
+  - path: istio-ingress-values.yaml
