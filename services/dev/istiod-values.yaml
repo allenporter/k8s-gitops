@@ -7,5 +7,5 @@ metadata:
 spec:
   chart:
     spec:
-      chart: istio-istiod
+      chart: istiod
       version: 1.2.0
