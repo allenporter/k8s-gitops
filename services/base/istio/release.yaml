@@ -8,7 +8,7 @@ spec:
   releaseName: istio-base
   chart:
     spec:
-      chart: istio/base
+      chart: istio-base
       sourceRef:
         kind: HelmRepository
         name: istio
@@ -27,7 +27,7 @@ spec:
   releaseName: istiod
   chart:
     spec:
-      chart: istio/istiod
+      chart: istio-istiod
       sourceRef:
         kind: HelmRepository
         name: istio
@@ -46,7 +46,7 @@ spec:
   releaseName: istio-ingress
   chart:
     spec:
-      chart: istio/gateway
+      chart: istio-gateway
       sourceRef:
         kind: HelmRepository
         name: istio
