@@ -7,5 +7,5 @@ metadata:
 spec:
   chart:
     spec:
-      chart: istio/gateway
+      chart: istio-gateway
       version: 1.0.0
