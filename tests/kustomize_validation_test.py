@@ -14,7 +14,10 @@ KUSTOMIZE_CONFIG = "kustomization.yaml"
 KUSTOMIZE_FLAGS = []
 
 KUSTOMIZATION_KIND = "Kustomization"
-KUSTOMIZATION_API_VERSIONS = ["kustomize.toolkit.fluxcd.io/v1beta1"]
+KUSTOMIZATION_API_VERSIONS = [
+    "kustomize.toolkit.fluxcd.io/v1beta1",
+    "kustomize.toolkit.fluxcd.io/v1beta2",
+]
 
 EXCLUDE_FILES = {}
 
