@@ -8,6 +8,7 @@ resources:
   - ../base/certs/
   - ../base/nginx/
   - ../base/traefik/
+  - ../base/istio/
   - namespace.yaml
 patches:
   - path: haproxy-values.yaml
@@ -16,3 +17,6 @@ patches:
   - path: external-dns-values.yaml
   - path: nginx-values.yaml
   - path: traefik-values.yaml
+  - path: istio-base-values.yaml
+  - path: istiod-values.yaml
+  - path: istio-ingress-values.yaml
