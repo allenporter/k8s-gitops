@@ -8,4 +8,4 @@ spec:
   chart:
     spec:
       chart: istiod
-      version: 1.2.0
+      version: 1.13.2
