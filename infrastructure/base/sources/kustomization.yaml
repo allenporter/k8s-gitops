@@ -13,7 +13,6 @@ resources:
   - grafana.yaml
   - jetstack.yaml
   - haproxytech.yaml
-  - mojo2600.yaml
   - blakeshome.yaml
   - itzg.yaml
   - kasten.yaml
