@@ -34,7 +34,7 @@ spec:
           - kasten-io
           - kubernetes-dashboard
           - monitoring
-          - pihole
+          - adguard-home
           - rtsp-to-web
           - teslamate
           - unifi

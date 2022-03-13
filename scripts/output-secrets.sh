@@ -65,9 +65,6 @@ echo export GRAFANA_ADMIN_PASSWORD=$(get_secret "grafana" "monitoring" "admin-pa
 # kubectl create secret generic prometheus-bearer-token -n home-assistant --from-literal="token=${PROMETHEUS_HA_BEARER_TOKEN}"
 echo export PROMETHEUS_HA_BEARER_TOKEN=$(get_secret "prometheus-bearer-token" "home-assistant" "token")
 
-# kubectl create secret generic pihole-password -n pihole --from-literal="password=${PIHOLE_ADMIN_PASSWORD}"
-echo export PIHOLE_ADMIN_PASSWORD=$(get_secret "pihole-password" "pihole" "password")
-
 # kubectl create secret generic minecraft-rcon-password -n minecraft --from-literal="password=${RCON_PASSWORD}"
 echo export RCON_PASSWORD=$(get_secret "minecraft-rcon-password" "minecraft" "password")
 
