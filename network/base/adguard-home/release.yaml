@@ -32,6 +32,8 @@ spec:
         loadBalancerIP: ${ADGUARD_HOME_IP}
         annotations:
             metallb.universe.tf/allow-shared-ip: adguard-home-svc
+            hajimari.io/icon: shield-link-variant
+            hajimari.io/appName: Adguard Home
       dns-udp:
         type: LoadBalancer
         externalTrafficPolicy: Local
