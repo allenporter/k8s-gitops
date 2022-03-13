@@ -7,4 +7,5 @@ metadata:
 data:
   CLUSTER: prod
   DOMAIN: prod.mrv.thebends.org
+  METALLB_IP_RANGE: 10.10.25.1-10.10.25.254
   ADGUARD_HOME_IP: 10.10.25.12
