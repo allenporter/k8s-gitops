@@ -16,4 +16,4 @@ spec:
       - name: generic-cluster-pool
         protocol: layer2
         addresses:
-        - 10.10.25.1-10.10.25.254
+        - ${METALLB_IP_RANGE}
