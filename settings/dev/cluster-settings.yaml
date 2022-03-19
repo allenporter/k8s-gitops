@@ -17,3 +17,5 @@ data:
   RTSP_TO_WEB_IP: 10.10.24.9
   # unused: 10.10.24.11 (formerly PIHOLE_IP)
   ADGUARD_HOME_IP: 10.10.24.12
+  ISTIO_INGRESS_IP: 10.10.24.13
+  ISTIO_HOSTNAME: prx06.dev.mrv.thebends.org.
