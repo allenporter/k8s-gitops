@@ -7,3 +7,4 @@ resources:
   - release-haproxy.yaml
   - release-nginx.yaml
   - release-traefik.yaml
+  - release-istio.yaml
