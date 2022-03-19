@@ -55,3 +55,10 @@ spec:
   install:
     remediation:
       retries: 3
+  values:
+    service:
+      loadBalancerIP: ${ISTIO_INGRESS_IP}
+      # Preserve source IP
+      externalTrafficPolicy: Local
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: ${ISTIO_HOSTNAME}.
