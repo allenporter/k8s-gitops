@@ -40,4 +40,4 @@ spec:
       tls:
         - secretName: podinfo-istio-tls
           hosts:
-            - podinfo-istio.{DOMAIN}
+            - podinfo-istio.${DOMAIN}
