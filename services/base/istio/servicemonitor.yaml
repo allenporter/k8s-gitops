@@ -27,4 +27,5 @@ spec:
     matchLabels:
       app: ingress
   endpoints:
-    - port: status-port
+    - port: http-envoy-prom
+      path: /stats/prometheus
