@@ -6,4 +6,3 @@ resources:
   - release.yaml
   - ingress-class.yaml
   - https://raw.githubusercontent.com/istio/istio/release-1.13/samples/addons/extras/prometheus-operator.yaml
-  - https://raw.githubusercontent.com/istio/istio/release-1.13/samples/addons/grafana.yaml
