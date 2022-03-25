@@ -50,17 +50,17 @@ spec:
         type: emptyDIr
     initContainers:
       copy:
-        - name: copy
-          image: busybox
-          command:
-            - "sh"
-            - "-c"
-            - |
-              if [ ! -f /config/config.json ]; then
-                cp /config-readonly/config.json /config/config.json
-              fi
-          volumeMounts:
-            - mountPath: /config-readonly
-              name: config-readonly
-            - mountPath: /config
-              name: config
+        name: copy
+        image: busybox
+        command:
+          - "sh"
+          - "-c"
+          - |
+            if [ ! -f /config/config.json ]; then
+              cp /config-readonly/config.json /config/config.json
+            fi
+        volumeMounts:
+          - mountPath: /config-readonly
+            name: config-readonly
+          - mountPath: /config
+            name: config
