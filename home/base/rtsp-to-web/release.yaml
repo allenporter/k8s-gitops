@@ -47,10 +47,9 @@ spec:
         name: rtsp-to-web-config
       config:
         enabled: true
-        type: emptyDIr
+        type: emptyDir
     initContainers:
       copy:
-        name: copy
         image: busybox
         command:
           - "sh"
@@ -64,3 +63,5 @@ spec:
             name: config-readonly
           - mountPath: /config
             name: config
+        securityContext:
+          runAsUser: 0
