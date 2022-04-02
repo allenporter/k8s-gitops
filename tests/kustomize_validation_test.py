@@ -19,6 +19,37 @@ KUSTOMIZATION_API_VERSIONS = [
     "kustomize.toolkit.fluxcd.io/v1beta2",
 ]
 
+# Track specific allowed API resources to assist in upgrades
+ALLOWED_API_RESOURCES = {
+    ("Alert", "notification.toolkit.fluxcd.io/v1beta1"),
+    ("CephCluster", "ceph.rook.io/v1"),
+    ("ConfigMap", "v1"),
+    ("ClusterIssuer", "cert-manager.io/v1"),
+    ("ClusterRole", "rbac.authorization.k8s.io/v1"),
+    ("ClusterRoleBinding", "rbac.authorization.k8s.io/v1"),
+    ("CustomResourceDefinition", "apiextensions.k8s.io/v1"),
+    ("DaemonSet", "apps/v1"),
+    ("Deployment", "apps/v1"),
+    ("GitRepository", "source.toolkit.fluxcd.io/v1beta2"),
+    ("HelmRelease", "helm.toolkit.fluxcd.io/v2beta1"),
+    ("HelmRepository", "source.toolkit.fluxcd.io/v1beta2"),
+    ("IngressClass", "networking.k8s.io/v1"),
+    ("Namespace", "v1"),
+    ("PersistentVolume", "v1"),
+    ("PersistentVolumeClaim", "v1"),
+    ("PodDisruptionBudget", "policy/v1beta1"),
+    ("PodMonitor", "monitoring.coreos.com/v1"),
+    ("PrometheusRule", "monitoring.coreos.com/v1"),
+    ("Provider", "notification.toolkit.fluxcd.io/v1beta1"),
+    ("Role", "rbac.authorization.k8s.io/v1"),
+    ("RoleBinding", "rbac.authorization.k8s.io/v1"),
+    ("Secret", "v1"),
+    ("ServiceAccount", "v1"),
+    ("ServiceMonitor", "monitoring.coreos.com/v1"),
+    ("StorageClass", "storage.k8s.io/v1"),
+    ("VolumeSnapshotClass", "snapshot.storage.k8s.io/v1"),
+}
+
 EXCLUDE_FILES = {}
 
 
@@ -40,6 +71,7 @@ def kustomize_grep(cluster_path, kind):
     """Loads all Kustomizations for a specific kind as a yaml object."""
     command = [KUSTOMIZE_BIN, "cfg", "grep", f"kind={kind}", cluster_path]
     doc_contents = run_command(command)
+    assert doc_contents
     for doc in yaml.safe_load_all(doc_contents):
         yield doc
 
@@ -96,4 +128,16 @@ def test_validate_kustomization_file(filename):
 
     root = repo_root()
     full_path = f"{root}/{filename}"
-    assert kustomize_build(full_path)
+
+    # Verify document is valid yaml
+    doc_contents = kustomize_build(full_path)
+    assert doc_contents
+
+    # Verify all resources are valid
+    for doc in yaml.safe_load_all(doc_contents):
+        if "kind" not in doc or "apiVersion" not in doc:
+            continue
+        assert (
+            doc["kind"],
+            doc["apiVersion"],
+        ) in ALLOWED_API_RESOURCES, "Resource version not in allow list: %s" % (doc)
