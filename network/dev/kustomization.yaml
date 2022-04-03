@@ -5,3 +5,4 @@ resources:
   - ../base/adguard-home
 patches:
   - path: adguard-home-values.yaml
+  - path: adguard-home2-values.yaml

@@ -3,10 +3,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: adguard-home
+  name: adguard-home2
   namespace: adguard-home
 spec:
-  releaseName: adguard-home
+  releaseName: adguard-home2
   chart:
     spec:
       chart: adguard-home
@@ -29,7 +29,7 @@ spec:
       dns-tcp:
         type: LoadBalancer
         externalTrafficPolicy: Local
-        loadBalancerIP: ${ADGUARD_HOME_IP}
+        loadBalancerIP: ${ADGUARD_HOME_2_IP}
         annotations:
             metallb.universe.tf/allow-shared-ip: adguard-home-svc
             hajimari.io/icon: shield-link-variant
@@ -37,7 +37,7 @@ spec:
       dns-udp:
         type: LoadBalancer
         externalTrafficPolicy: Local
-        loadBalancerIP: ${ADGUARD_HOME_IP}
+        loadBalancerIP: ${ADGUARD_HOME_2_IP}
         annotations:
             metallb.universe.tf/allow-shared-ip: adguard-home-svc
 
@@ -49,17 +49,17 @@ spec:
           kubernetes.io/ingress.class: haproxy
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: adguard-home
-          external-dns.alpha.kubernetes.io/hostname: dns01.${DOMAIN}.
+          external-dns.alpha.kubernetes.io/hostname: dns02.${DOMAIN}.
           external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
         hosts:
-          - host: dns01.${DOMAIN}
+          - host: dns02.${DOMAIN}
             paths:
               - path: /
                 pathType: Prefix
         tls:
-          - secretName: dns01-tls
+          - secretName: dns02-tls
             hosts:
-              - dns01.${DOMAIN}
+              - dns02.${DOMAIN}
 
     config: |
       bind_host: 0.0.0.0
