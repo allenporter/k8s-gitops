@@ -7,3 +7,4 @@ resources:
 patches:
   - path: unifi-values.yaml
   - path: adguard-home-values.yaml
+  - path: adguard-home2-values.yaml
