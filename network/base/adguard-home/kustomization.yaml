@@ -5,3 +5,4 @@ namespace: adguard-home
 resources:
   - namespace.yaml
   - release.yaml
+  - release2.yaml
