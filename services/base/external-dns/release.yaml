@@ -22,12 +22,12 @@ spec:
   # Default values
   # https://github.com/bitnami/charts/blob/master/bitnami/external-dns/values.yaml
   values:
-    fqdnTemplates: ["{{.Name}}.mrv.thebends.org."]
+    fqdnTemplates: ["{{.Name}}.${SITE_DOMAIN}."]
     provider: rfc2136
     txtOwnerId: "k8s"
     rfc2136:
-      host: "10.10.1.10"
-      zone: "mrv.thebends.org"
+      host: "${EXT_DNS_IP}"
+      zone: "${SITE_DOMAIN}"
       secretName: external-dns-key
       tsigSecretAlg: hmac-sha512
       tsigKeyname: external-dns-key
