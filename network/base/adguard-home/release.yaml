@@ -25,6 +25,9 @@ spec:
     env:
       TZ: "America/Los_Angeles"
 
+    nodeSelector:
+      target_node: pelican
+
     service:
       dns-tcp:
         type: LoadBalancer
