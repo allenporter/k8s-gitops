@@ -13,7 +13,7 @@ spec:
     enabled: true
     rulesNamespace: rook-ceph
     externalMgrEndpoints:
-      - ip: 10.10.20.5
-      - ip: 10.10.20.6
-      - ip: 10.10.20.7
+      - ip: ${CEPH1_IP}
+      - ip: ${CEPH2_IP}
+      - ip: ${CEPH3_IP}
     externalMgrPrometheusPort: 9283
