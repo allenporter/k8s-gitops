@@ -14,5 +14,5 @@ spec:
     controller:
       service:
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: prx03.prod.mrv.thebends.org.
-        loadBalancerIP: "10.10.25.5"
+          external-dns.alpha.kubernetes.io/hostname: prx03.${DOMAIN}.
+        loadBalancerIP: ${HAPROXY_EXT_INGRESS_IP}
