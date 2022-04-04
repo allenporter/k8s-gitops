@@ -14,3 +14,6 @@ spec:
     image:
       repository: adguard/adguardhome
       tag: v0.108.0-b.3
+
+    nodeSelector:
+      target_node: sonar  # vmm02.prod
