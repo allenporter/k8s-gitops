@@ -46,3 +46,7 @@ spec:
             - secretName: vscode-home-assistant-tls
               hosts:
                 - vscode-ha.dev.mrv.thebends.org
+
+    mariadb:
+      image:
+        debug: true
