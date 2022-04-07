@@ -50,3 +50,7 @@ spec:
     mariadb:
       image:
         debug: true
+      primary:
+        extraEnvVars:
+          - name: BITNAMI_DEBUG
+            value: "true"
