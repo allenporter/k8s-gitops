@@ -17,7 +17,7 @@ pluggy==1.0.0
 pre-commit==2.18.1
 py==1.11.0
 pyparsing==3.0.8
-pytest==7.1.1
+pytest==7.1.2
 PyYAML==6.0
 six==1.16.0
 smmap==4.0.0
