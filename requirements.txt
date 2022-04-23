@@ -20,7 +20,7 @@ pyparsing==3.0.8
 pytest==7.1.1
 PyYAML==6.0
 six==1.16.0
-smmap==4.0.0
+smmap==5.0.0
 toml==0.10.2
 typing-extensions==4.2.0
 virtualenv==20.14.1
