@@ -13,7 +13,7 @@ spec:
   values:
     image:
       repository: homeassistant/home-assistant
-      tag: 2022.5.0b1
+      tag: 2022.5.0b2
     ingress:
       main:
         annotations:
