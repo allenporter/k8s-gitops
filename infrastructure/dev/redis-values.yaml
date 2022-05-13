@@ -9,4 +9,4 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: redis
-      version: 16.9.3
+      version: 16.9.4
