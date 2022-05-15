@@ -9,10 +9,11 @@ spec:
     spec:
       # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
       chart: minecraft
-      version: 3.10.0
+      version: 4.0.0
   values:
-    image: itzg/minecraft-server
-    imageTag: 2021.10.0
+    image:
+      repository: itzg/minecraft-server
+      tag: 2021.10.0
     minecraftServer:
       motd: "Welcome to Minecraft!"
     serviceAnnotations:
