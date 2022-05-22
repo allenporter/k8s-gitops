@@ -17,6 +17,6 @@ spec:
     minecraftServer:
       motd: "Welcome to Minecraft!"
     serviceAnnotations:
-      external-dns.alpha.kubernetes.io/hostname: mc01.prod.mrv.thebends.org.
+      external-dns.alpha.kubernetes.io/hostname: mc01.${DOMAIN}.
     rconServiceAnnotations:
-      external-dns.alpha.kubernetes.io/hostname: mc01-admin.prod.mrv.thebends.org.
+      external-dns.alpha.kubernetes.io/hostname: mc01-admin.${DOMAIN}.
