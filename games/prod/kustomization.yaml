@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ../base/minecraft
 patches:
-#  - path: minecraft-values.yaml
+  - path: minecraft-values.yaml
