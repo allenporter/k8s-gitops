@@ -4,5 +4,4 @@ kind: Kustomization
 namespace: minecraft
 resources:
   - namespace.yaml
-# Disabled
-#  - release.yaml
+  - release.yaml
