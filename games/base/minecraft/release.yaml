@@ -35,8 +35,7 @@ spec:
       serviceType: LoadBalancer
       rcon:
         enabled: true
-        existingSecret: minecraft-rcon-password
-        secretKey: password
+        password: ${RCON_PWD}
     resources:
       requests:
         memory: 2048Mi
