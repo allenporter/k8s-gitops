@@ -9,4 +9,4 @@ spec:
     spec:
       # renovate: registryUrl=https://stefanprodan.github.io/podinfo
       chart: podinfo
-      version: 6.1.4
+      version: 6.1.5
