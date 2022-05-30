@@ -29,6 +29,7 @@ spec:
       repository: itzg/minecraft-server
       tag: 2022.6.0
     minecraftServer:
+      motd: "Welcome to PVP!"
       eula: "TRUE"
       version: "1.18.2"
       type: "VANILLA"
@@ -41,6 +42,9 @@ spec:
       rcon:
         enabled: true
         password: ${RCON_PWD}
+    persistence:
+      dataDir:
+        enabled: true
     resources:
       requests:
         memory: 2048Mi
