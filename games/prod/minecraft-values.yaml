@@ -15,7 +15,10 @@ spec:
       repository: itzg/minecraft-server
       tag: 2022.6.0
     minecraftServer:
-      motd: "Welcome to Minecraft!"
+      motd: "Welcome to Survival!"
+    persistence:
+      dataDir:
+        enabled: true
     serviceAnnotations:
       external-dns.alpha.kubernetes.io/hostname: mc01.${DOMAIN}.
     rconServiceAnnotations:
