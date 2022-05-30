@@ -27,7 +27,7 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
-      tag: 2022.6.0
+      tag: 2022.7.0
     minecraftServer:
       eula: "TRUE"
       version: "1.18.2"

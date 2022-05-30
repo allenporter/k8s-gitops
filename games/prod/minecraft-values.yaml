@@ -13,7 +13,7 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
-      tag: 2022.6.0
+      tag: 2022.7.0
     minecraftServer:
       motd: "Welcome to Minecraft!"
     serviceAnnotations:
