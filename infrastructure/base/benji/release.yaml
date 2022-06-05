@@ -74,8 +74,9 @@ spec:
           readOnly: true
     postgresql:
       enabled: true
-      postgresqlUsername: benji
-      postgresqlDatabase: benji
+      auth:
+        username: benji
+        database: benji
     pushgateway:
       serviceMonitor:
         enabled: true
@@ -90,7 +91,7 @@ spec:
     - kind: Secret
       name: postgresql-secret
       valuesKey: password
-      targetPath: postgresql.postgresqlPassword
+      targetPath: postgresql.auth.password
     - kind: Secret
       name: postgresql-secret
       valuesKey: db-path
