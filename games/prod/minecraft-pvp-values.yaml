@@ -27,13 +27,11 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
-      tag: 2022.8.0
+      tag: latest
     minecraftServer:
       motd: "Welcome to PVP!"
       eula: "TRUE"
-      version: "1.18"
       type: "PAPER"
-      paperDownloadUrl: https://papermc.io/api/v1/paper/1.18/latest/download
       pvp: true
       gameMode: survival
       # See https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft/
