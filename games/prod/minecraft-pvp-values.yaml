@@ -31,9 +31,9 @@ spec:
     minecraftServer:
       motd: "Welcome to PVP!"
       eula: "TRUE"
-      version: "1.18.2"
+      version: "1.18"
       type: "PAPER"
-      paperDownloadUrl: https://papermc.io/api/v1/paper/1.18.2/latest/download
+      paperDownloadUrl: https://papermc.io/api/v1/paper/1.18/latest/download
       pvp: true
       gameMode: survival
       # See https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft/
