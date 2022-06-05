@@ -50,15 +50,6 @@ spec:
                 - RBD_FEATURE_OBJECT_MAP
                 - RBD_FEATURE_FAST_DIFF
                 - RBD_FEATURE_DEEP_FLATTEN
-      postgresql:
-        enabled: true
-        auth:
-          enablePostgresUser: false
-          username: benji
-          database: benji
-          password: ${BENJI_POSTGRESQL_PWD}
-        persistence:
-          enabled: true
       volumes:
         - name: k8s-backup
           persistentVolumeClaim:
@@ -91,4 +82,13 @@ spec:
         - --persistence.file=/data/pushgateway.data
         - --persistence.interval=5m
       persistentVolume:
+        enabled: true
+    postgresql:
+      enabled: true
+      auth:
+        enablePostgresUser: false
+        username: benji
+        database: benji
+        password: ${BENJI_POSTGRESQL_PWD}
+      persistence:
         enabled: true
