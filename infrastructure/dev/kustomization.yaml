@@ -13,4 +13,3 @@ patches:
   - path: rook-ceph-values.yaml
   - path: backup-pvc.yaml
   - path: benji-values.yaml
-  - path: benji-sources.yaml
