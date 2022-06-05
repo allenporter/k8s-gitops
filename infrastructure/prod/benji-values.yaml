@@ -48,6 +48,12 @@ spec:
             - benji-backup-pvc
             - --namespace
             - frigate
+        - name: backup-minecraft
+          schedule: "25 11 * * *"
+          command:
+            - benji-backup-pvc
+            - --namespace
+            - minecraft
         - name: enforce
           schedule: "00 12 * * *"
           command:
