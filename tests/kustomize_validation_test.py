@@ -28,6 +28,7 @@ ALLOWED_API_RESOURCES = {
     ("ClusterRole", "rbac.authorization.k8s.io/v1"),
     ("ClusterRoleBinding", "rbac.authorization.k8s.io/v1"),
     ("CustomResourceDefinition", "apiextensions.k8s.io/v1"),
+    ("CronJob', 'batch/v1beta1"),
     ("DaemonSet", "apps/v1"),
     ("Deployment", "apps/v1"),
     ("GitRepository", "source.toolkit.fluxcd.io/v1beta2"),
