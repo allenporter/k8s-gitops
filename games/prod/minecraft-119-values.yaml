@@ -52,6 +52,6 @@ spec:
       limits:
         memory: 3072Mi
     serviceAnnotations:
-      external-dns.alpha.kubernetes.io/hostname: mc02.${DOMAIN}.
+      external-dns.alpha.kubernetes.io/hostname: mc03.${DOMAIN}.
     rconServiceAnnotations:
-      external-dns.alpha.kubernetes.io/hostname: mc02-admin.${DOMAIN}.
+      external-dns.alpha.kubernetes.io/hostname: mc03-admin.${DOMAIN}.
