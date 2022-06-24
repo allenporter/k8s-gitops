@@ -10,7 +10,6 @@ generatorOptions:
   labels:
     grafana_dashboard: "1"
 configMapGenerator:
-  # Note: These are currently not renovated
   - name: grafana-dashboard-teslamate-charge-level
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.22.0/grafana/dashboards/charge-level.json

@@ -18,6 +18,15 @@
       ],
       "datasourceTemplate": "helm",
     },
+    {
+      description: "Raw GitHub URL Regex manager",
+      "fileMatch": [".+\\.yaml$"],
+      matchStrings: [
+        "https:\\/\\/raw.githubusercontent.com\\/(?<depName>[\\w\\d\\-_]+\\/[\\w\\d\\-_]+)\\/(?<currentValue>[\\w\\d\\.\\-_]+)\\/.*",
+      ],
+      datasourceTemplate: "github-releases",
+      versioningTemplate: "semver",
+    },
   ],
   "helm-values": {
     // Match value files in HelmReleases. This is used so that renovate include
