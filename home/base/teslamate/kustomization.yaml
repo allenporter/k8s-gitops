@@ -7,6 +7,8 @@ resources:
   - release.yaml
   - grafana-datasource.yaml
 generatorOptions:
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
   labels:
     grafana_dashboard: "1"
 configMapGenerator:
@@ -52,10 +54,9 @@ configMapGenerator:
   - name: grafana-dashboard-teslamate-trip
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.1/grafana/dashboards/trip.json
-# Disabled since it causes issues with secret substitutions
-#  - name: grafana-dashboard-teslamate-updates
-#    files:
-#      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.1/grafana/dashboards/updates.json
+  - name: grafana-dashboard-teslamate-updates
+    files:
+      - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.1/grafana/dashboards/updates.json
   - name: grafana-dashboard-teslamate-vampire-drain
     files:
       - https://raw.githubusercontent.com/adriankumpf/teslamate/v1.26.1/grafana/dashboards/vampire-drain.json
