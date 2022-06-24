@@ -16,7 +16,7 @@ jobs:
       - name: Setup tools
         uses: ./.github/actions/tools
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: '3.8'
       - name: Install dependencies
