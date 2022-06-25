@@ -9,6 +9,6 @@ resources:
 - ../base/sources
 - ../base/redis
 - ../base/rook-ceph
-- ../base/calico
 - ../base/benji
 - benji-secrets.yaml
+- https://docs.projectcalico.org/archive/v3.21/manifests/calico.yaml
