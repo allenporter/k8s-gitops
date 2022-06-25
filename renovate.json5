@@ -27,16 +27,6 @@
       datasourceTemplate: "github-releases",
       versioningTemplate: "semver",
     },
-    {
-      description: "Calico manifest matcher",
-      "fileMatch": [".+\\.yaml$"],
-      matchStrings: [
-        "https:\\/\\/docs.projectcalico.org\\/archive\\/(?<currentValue>[\\w\\d\\.\\-_]+)\\/manifests.*",
-      ],
-      depNameTemplate: "projectcalico/calico",
-      datasourceTemplate: "github-releases",
-      versioningTemplate: "semver",
-    },
   ],
   "helm-values": {
     // Match value files in HelmReleases. This is used so that renovate include
