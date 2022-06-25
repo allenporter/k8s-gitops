@@ -39,6 +39,7 @@ ALLOWED_API_RESOURCES = {
     ("PersistentVolume", "v1"),
     ("PersistentVolumeClaim", "v1"),
     ("PodDisruptionBudget", "policy/v1beta1"),
+    ("PodDisruptionBudget", "policy/v1"),
     ("PodMonitor", "monitoring.coreos.com/v1"),
     ("PrometheusRule", "monitoring.coreos.com/v1"),
     ("Provider", "notification.toolkit.fluxcd.io/v1beta1"),
