@@ -3,5 +3,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - minecraft-119-values.yaml
+  - minecraft-05-values.yaml
   - minecraft-bedrock-survival-values.yaml
   - ../base/minecraft
