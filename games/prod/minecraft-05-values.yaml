@@ -2,10 +2,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: minecraft-119
+  name: minecraft-05
   namespace: minecraft
 spec:
-  releaseName: minecraft-119
+  releaseName: minecraft-05
   chart:
     spec:
       chart: minecraft
