@@ -44,6 +44,7 @@ spec:
         password: ${RCON_PWD}
     persistence:
       dataDir:
+        existingClaim: minecraft-119-world-datadir
         enabled: true
     resources:
       requests:
