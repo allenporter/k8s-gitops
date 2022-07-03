@@ -4,4 +4,3 @@ kind: Kustomization
 namespace: minecraft
 resources:
   - namespace.yaml
-  - release.yaml

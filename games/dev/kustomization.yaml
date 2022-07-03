@@ -4,5 +4,3 @@ kind: Kustomization
 namespace: minecraft
 resources:
   - ../base/minecraft/
-patches:
-#  - path: minecraft-values.yaml
