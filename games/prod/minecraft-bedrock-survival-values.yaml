@@ -32,7 +32,7 @@ spec:
       serverName: "Bedrock Survival"
       eula: "TRUE"
       version: "1.19.2.02"
-      pvp: true
+      ops: ${MINECRAFT_OPS}
       gameMode: survival
       memory: 2048M
       serviceType: LoadBalancer
