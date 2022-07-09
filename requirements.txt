@@ -26,4 +26,4 @@ typing-extensions==4.3.0
 virtualenv==20.15.1
 xmltodict==0.13.0
 yamllint==1.27.1
-yq==2.14.0
+yq==3.0.2
