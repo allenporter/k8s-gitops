@@ -27,7 +27,7 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
-      tag: 2022.9.0
+      tag: 2022.10.0
     minecraftServer:
       motd: "Welcome to PVP 1.19!"
       eula: "TRUE"
