@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: adguard-home
-      version: 5.5.0
+      version: 5.5.2
   values:
     image:
       repository: adguard/adguardhome
