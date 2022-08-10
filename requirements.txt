@@ -4,7 +4,7 @@ attrs==22.1.0
 backports.entry-points-selectable==1.1.1
 cfgv==3.3.1
 distlib==0.3.5
-filelock==3.7.1
+filelock==3.8.0
 gitdb==4.0.9
 GitPython==3.1.27
 identify==2.5.3
