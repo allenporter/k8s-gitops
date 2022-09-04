@@ -6,6 +6,7 @@ resources:
   - ../base/metallb
   - ../base/external-dns
   - ../base/certs/
+  - metallb-ip-pool.yaml
 patches:
   - path: haproxy-values.yaml
   - path: haproxy-external-values.yaml
