@@ -17,6 +17,9 @@ spec:
   install:
     remediation:
       retries: 3
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   # Default values
   # https://github.com/bitnami/charts/blob/master/bitnami/metallb/values.yaml
   values:
