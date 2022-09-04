@@ -126,6 +126,14 @@ def test_kustomize_version():
 
 @pytest.mark.parametrize("filename", kustomization_files())
 def test_validate_kustomization_file(filename):
+    # Hack for prometheus operator yaml
+    #   https://github.com/yaml/pyyaml/pull/635
+    #   https://github.com/yaml/pyyaml/issues/89
+    #   https://github.com/prometheus-operator/prometheus-operator/issues/4955
+    yaml.constructor.SafeConstructor.add_constructor(
+        "tag:yaml.org,2002:value", yaml.constructor.SafeConstructor.construct_yaml_str
+    )
+
     if filename in EXCLUDE_FILES:
         pytest.skip("File excluded from tests")
         return
