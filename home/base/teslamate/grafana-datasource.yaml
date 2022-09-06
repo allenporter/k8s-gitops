@@ -14,7 +14,7 @@ data:
       type: postgres
       url: teslamate-postgresql.teslamate:5432
       database: teslamate
-      user: teslamate
+      user: postgres
       password: teslamate
       access: proxy
       jsonData:
