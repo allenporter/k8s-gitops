@@ -36,6 +36,7 @@ spec:
       DATABASE_HOST: "teslamate-postgresql"
       DISABLE_MQTT: "false"
       MQTT_HOST: "mosquitto.mqtt"
+      ENCRYPTION_KEY: ${TESLAMATE_KEY}
     envValueFrom:
       DATABASE_PASS:
         secretKeyRef:
