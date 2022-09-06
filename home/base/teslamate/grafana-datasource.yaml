@@ -15,7 +15,7 @@ data:
       url: teslamate-postgresql.teslamate:5432
       database: teslamate
       user: postgres
-      password: teslamate
+      password: ${TESLAMATE_POSTGRESQL_PWD}
       access: proxy
       jsonData:
         sslmode: disable
