@@ -47,7 +47,7 @@ spec:
         database: teslamate
       primary:
         persistence:
-        enabled: true
+          enabled: true
   valuesFrom:
     - kind: Secret
       name: postgresql-password
