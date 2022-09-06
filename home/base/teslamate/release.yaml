@@ -43,11 +43,12 @@ spec:
           key: data
     postgresql:
       enabled: true
-      postgresqlDatabase: teslamate
+      auth:
+        database: teslamate
       persistence:
         enabled: true
   valuesFrom:
     - kind: Secret
       name: postgresql-password
       valuesKey: data
-      targetPath: postgresql.postgresqlPassword
+      targetPath: postgresql.auth.postgresPassword
