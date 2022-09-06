@@ -14,7 +14,11 @@ data:
       type: postgres
       url: teslamate-postgresql.teslamate:5432
       database: teslamate
-      # Special account greated just for grafana readonly access
+      # Create account w/ readonly access:
+      # $ kubectl exec -it teslamate-postgresql-0 -n teslamate -- bash
+      # $ psql -U postgres -h localhost -p 5432
+      # # CREATE USER teslamate WITH PASSWORD 'teslamate';
+      # and verify with \du+
       user: teslamate
       secureJsonData:
         password: ${TESLAMATE_READONLY_POSTGRES_PWD}
