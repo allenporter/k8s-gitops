@@ -31,21 +31,16 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: car-electric
     env:
-      DATABASE_NAME: "teslamate"
-      DATABASE_USER: "postgres"
       DATABASE_HOST: "teslamate-postgresql"
       DISABLE_MQTT: "false"
       MQTT_HOST: "mosquitto.mqtt"
       ENCRYPTION_KEY: ${TESLAMATE_KEY}
-    envValueFrom:
-      DATABASE_PASS:
-        secretKeyRef:
-          name: postgresql-password
-          key: data
     postgresql:
       enabled: true
       auth:
         database: teslamate
+        secretKeys:
+          adminPasswordKey: postgresl-password
       primary:
         persistence:
           enabled: true
