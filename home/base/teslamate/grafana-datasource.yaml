@@ -14,9 +14,12 @@ data:
       type: postgres
       url: teslamate-postgresql.teslamate:5432
       database: teslamate
-      user: postgres
-      password: ${TESLAMATE_POSTGRESQL_PWD}
+      # Special account greated just for grafana readonly access
+      user: teslamate
+      secureJsonData:
+        password: ${TESLAMATE_READONLY_POSTGRES_PWD}
       access: proxy
+      postgresVersion: 11
       jsonData:
         sslmode: disable
         timeInterval: 30s
