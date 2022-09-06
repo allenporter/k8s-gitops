@@ -45,7 +45,8 @@ spec:
       enabled: true
       auth:
         database: teslamate
-      persistence:
+      primary:
+        persistence:
         enabled: true
   valuesFrom:
     - kind: Secret
