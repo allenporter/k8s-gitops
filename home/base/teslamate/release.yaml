@@ -36,6 +36,7 @@ spec:
       DATABASE_HOST: "teslamate-postgresql"
       DISABLE_MQTT: "false"
       MQTT_HOST: "mosquitto.mqtt"
+      ENCRYPTION_KEY: ${TESLAMATE_KEY}
     envValueFrom:
       DATABASE_PASS:
         secretKeyRef:
@@ -43,11 +44,13 @@ spec:
           key: data
     postgresql:
       enabled: true
-      postgresqlDatabase: teslamate
-      persistence:
-        enabled: true
+      auth:
+        database: teslamate
+      primary:
+        persistence:
+          enabled: true
   valuesFrom:
     - kind: Secret
       name: postgresql-password
       valuesKey: data
-      targetPath: postgresql.postgresqlPassword
+      targetPath: postgresql.auth.postgresPassword
