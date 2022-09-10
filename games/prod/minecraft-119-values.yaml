@@ -32,7 +32,7 @@ spec:
       motd: "Welcome to PVP 1.19!"
       eula: "TRUE"
       type: "VANILLA"
-      version: "1.19"
+      version: "1.19.2"
       pvp: true
       ops: ${MINECRAFT_03_OPS}
       gameMode: survival

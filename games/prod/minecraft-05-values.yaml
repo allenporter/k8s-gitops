@@ -32,7 +32,7 @@ spec:
       motd: "mc05 creative flat"
       eula: "TRUE"
       type: "VANILLA"
-      version: "1.19"
+      version: "1.19.2"
       pvp: true
       ops: ${MINECRAFT_05_OPS}
       levelType: FLAT
