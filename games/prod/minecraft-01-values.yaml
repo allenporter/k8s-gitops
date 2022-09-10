@@ -48,7 +48,7 @@ spec:
         password: ${RCON_PWD}
     extraEnv:
       ENABLE_AUTOPAUSE: FALSE
-      SPIGET_RESOURCES: "8631,28140,6245,14754"
+      SPIGET_RESOURCES: "8631,28140,6245"
       MODS: "https://github.com/EssentialsX/Essentials/releases/download/2.19.6/EssentialsX-2.19.6.jar"
     persistence:
       dataDir:
