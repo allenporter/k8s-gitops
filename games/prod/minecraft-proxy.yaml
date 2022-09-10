@@ -1,0 +1,85 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minecraft-proxy
+  namespace: minecraft
+spec:
+  releaseName: minecraft-proxy
+  chart:
+    spec:
+      chart: minecraft-proxy
+      # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
+      version: 3.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: itzg
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    # Fix problem where helm fails to uninstall
+    enable: false
+
+  # https://github.com/itzg/minecraft-server-charts/blob/master/charts/minecraft-proxy/values.yaml
+  values:
+    image:
+      repository: itzg/bungeecord
+      tag: 2022.4.1
+    minecraftProxy:
+      type: WATERFALL
+      serviceType: LoadBalancer
+      externalTrafficPolicy: Local
+      config: |
+        player_limit: -1
+        ip_forward: true
+        permissions:
+          default:
+          - bungeecord.command.server
+          - bungeecord.command.list
+          - alert.trigger
+          - slashserver.lobby
+          - slashserver.survival
+          - slashserver.survival2
+          admin:
+          - bungeecord.command.alert
+          - bungeecord.command.end
+          - bungeecord.command.ip
+          - bungeecord.command.reload
+          - alert.receive
+          - alert.receive.firstjoin
+          - alert.command.toggle
+          - alert.command.reload
+          family:
+          - bungeecord.server.survival
+        timeout: 30000
+        log_pings: true
+        log_commands: false
+        online_mode: true
+        servers:
+          lobby:
+            motd: 'Woodgreen Lobby'
+            address: minecraft-01-minecraft:25565
+            restricted: false
+          survival03:
+            motd: 'Survival 03'
+            address: minecraft-119-minecraft:25565
+            restricted: false
+          creative-05:
+            motd: 'Creative Flat'
+            address: minecraft-05-minecraft:25565
+            restricted: false
+        listeners:
+        - query_port: 25577
+          motd: '&3Woodgreen &6&Llobby'
+          priorities:
+          - lobby
+          bind_local_address: true
+          tab_list: GLOBAL_PING
+          query_enabled: true
+          host: 0.0.0.0:25577
+        ping_passthrough: true
+    serviceAnnotations:
+      external-dns.alpha.kubernetes.io/hostname: mc.${DOMAIN}.
