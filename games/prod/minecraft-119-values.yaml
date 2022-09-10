@@ -29,10 +29,12 @@ spec:
       repository: itzg/minecraft-server
       tag: 2022.11.0
     minecraftServer:
-      motd: "Welcome to PVP 1.19!"
+      motd: "Survival PVP"
       eula: "TRUE"
-      type: "VANILLA"
-      version: "1.19.2"
+      type: "PAPER"
+      version: "LATEST"
+      forceReDownload: true
+      onlineMode: false
       pvp: true
       ops: ${MINECRAFT_03_OPS}
       gameMode: survival
@@ -43,6 +45,10 @@ spec:
       rcon:
         enabled: true
         password: ${RCON_PWD}
+    extraEnv:
+      ENABLE_AUTOPAUSE: FALSE
+      SPIGET_RESOURCES: "8631,28140,6245"
+      MODS: "https://github.com/EssentialsX/Essentials/releases/download/2.19.6/EssentialsX-2.19.6.jar"
     persistence:
       dataDir:
         existingClaim: minecraft-119-world-datadir
