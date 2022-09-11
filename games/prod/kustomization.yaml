@@ -7,5 +7,6 @@ resources:
   - minecraft-02-values.yaml
   - minecraft-119-values.yaml
   - minecraft-05-values.yaml
+  - minecraft-06-values.yaml
   - minecraft-bedrock-survival-values.yaml
   - ../base/minecraft
