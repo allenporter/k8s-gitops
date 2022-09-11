@@ -75,7 +75,7 @@ spec:
             motd: 'Creative Flat'
             address: mc05.${DOMAIN}:25565
             restricted: false
-          survival03:
+          survival06:
             motd: 'Survival 06'
             address: mc06.${DOMAIN}:25565
             restricted: false
