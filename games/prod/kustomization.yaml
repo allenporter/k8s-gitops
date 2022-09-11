@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - minecraft-proxy.yaml
   - minecraft-01-values.yaml
+  - minecraft-02-values.yaml
   - minecraft-119-values.yaml
   - minecraft-05-values.yaml
   - minecraft-bedrock-survival-values.yaml
