@@ -31,8 +31,10 @@ spec:
     minecraftServer:
       motd: "mc05 creative flat"
       eula: "TRUE"
-      type: "VANILLA"
-      version: "1.19.2"
+      type: "PAPER"
+      version: "LATEST"
+      forceReDownload: true
+      onlineMode: false
       pvp: true
       ops: ${MINECRAFT_05_OPS}
       levelType: FLAT
@@ -45,6 +47,10 @@ spec:
       rcon:
         enabled: true
         password: ${RCON_PWD}
+    extraEnv:
+      ENABLE_AUTOPAUSE: FALSE
+      SPIGET_RESOURCES: "8631,28140,6245,29595"
+      MODS: "https://github.com/EssentialsX/Essentials/releases/download/2.19.6/EssentialsX-2.19.6.jar"
     persistence:
       dataDir:
         enabled: true
