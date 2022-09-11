@@ -41,8 +41,10 @@ spec:
           - bungeecord.command.list
           - alert.trigger
           - slashserver.lobby
-          - slashserver.survival
-          - slashserver.survival2
+          - slashserver.survival02
+          - slashserver.survival03
+          - slashserver.creative05
+          - slashserver.survival06
           admin:
           - bungeecord.command.alert
           - bungeecord.command.end
@@ -52,8 +54,6 @@ spec:
           - alert.receive.firstjoin
           - alert.command.toggle
           - alert.command.reload
-          family:
-          - bungeecord.server.survival
         timeout: 30000
         log_pings: true
         log_commands: false
@@ -89,6 +89,9 @@ spec:
           query_enabled: true
           host: 0.0.0.0:25577
         ping_passthrough: true
+    persistence:
+      dataDir:
+        enabled: true
     extraEnv:
       SPIGET_PLUGINS: "29595"
     serviceAnnotations:
