@@ -13,4 +13,4 @@ spec:
   values:
     image:
       repository: ghcr.io/deepch/rtsptoweb
-      tag: v2.3.0
+      tag: 2.4.0
