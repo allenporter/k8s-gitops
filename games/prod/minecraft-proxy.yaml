@@ -45,6 +45,8 @@ spec:
           - slashserver.survival03
           - slashserver.creative05
           - slashserver.survival06
+          - slashserver.survival07
+          - slashserver.survival08
           admin:
           - bungeecord.command.alert
           - bungeecord.command.end
