@@ -50,4 +50,4 @@ spec:
     kubeEtcd:
       enabled: true
       endpoints:
-        - ${ETCD_IP}
+        - ${ETCD_IP}:2379
