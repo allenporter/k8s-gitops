@@ -51,3 +51,7 @@ spec:
       enabled: true
       endpoints:
         - ${ETCD_IP}
+      service:
+        enabled: true
+        port: 2379
+        targetPort: 2379
