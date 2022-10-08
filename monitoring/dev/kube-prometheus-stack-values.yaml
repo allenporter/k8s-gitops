@@ -50,4 +50,8 @@ spec:
     kubeEtcd:
       enabled: true
       endpoints:
-        - ${ETCD_IP}:2379
+        - ${ETCD_IP}
+      service:
+        enabled: true
+        port: 2379
+        targetPort: 2379
