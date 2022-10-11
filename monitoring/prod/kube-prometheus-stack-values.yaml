@@ -53,3 +53,7 @@ spec:
         - ${ETCD1_IP}
         - ${ETCD2_IP}
         - ${ETCD3_IP}
+      service:
+        enabled: true
+        port: 2379
+        targetPort: 2379
