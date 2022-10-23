@@ -27,7 +27,7 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
-      tag: 2022.11.0
+      tag: 2022.13.0
     minecraftServer:
       motd: "mc08"
       eula: "TRUE"
