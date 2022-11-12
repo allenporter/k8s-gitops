@@ -110,7 +110,7 @@ jobs:
           echo "::set-output name=message::$(echo "$message" | jq --raw-input --slurp)"
 
       - name: Add PR Comment
-        uses: mshick/add-pr-comment@v1
+        uses: mshick/add-pr-comment@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           allow-repeats: ${{ env.conf_allow_repeating_same_comment }}
