@@ -13,7 +13,7 @@ spec:
   values:
     image:
       repository: homeassistant/home-assistant
-      tag: dev@sha256:8801d74a689e7cc7f341f73d8e15cec151d06026dc298f385a081c7746abfa40
+      tag: dev@sha256:ec415c0ed4c90095e869a0af9b9c68dc54c19f26387fabdebbf7f614820f3295
     ingress:
       main:
         annotations:
