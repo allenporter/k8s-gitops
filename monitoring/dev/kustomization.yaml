@@ -3,7 +3,6 @@ kind: Kustomization
 patches:
 - path: podinfo-haproxy-values.yaml
 - path: podinfo-nginx-values.yaml
-- path: podinfo-traefik-values.yaml
 - path: podinfo-istio-values.yaml
 - path: speedtest-prometheus-values.yaml
 - path: kubernetes-dashboard-values.yaml

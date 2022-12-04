@@ -17,7 +17,6 @@ resources:
   - itzg.yaml
   - kasten.yaml
   - ingress-nginix.yaml
-  - traefik.yaml
   - benji-k8s.yaml
   - hajimari.yaml
   - istio.yaml
