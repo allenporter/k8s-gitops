@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM alpine:3.17
 ENV KUSTOMIZE_VERSION=4.1.2
 
 RUN apk add --no-cache curl
