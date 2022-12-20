@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mc02-mnt-pod
+  namespace: minecraft
+spec:
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: minecraft-02-minecraft-datadir
+  containers:
+    - name: task-pv-container
+      image: alpine
+      volumeMounts:
+        - mountPath: "/data"
+          name: task-pv-storage
+      command: ["/bin/sh"]
+      args: ["-c", "sleep 500000"]
