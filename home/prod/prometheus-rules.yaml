@@ -7,6 +7,7 @@ metadata:
     prometheus: nginx
     role: alert-rules
   name: home-assistant-prometheus-rules
+  namespace: home-assistant
 spec:
   groups:
   - name: HomeAssistantPrometheusRules
