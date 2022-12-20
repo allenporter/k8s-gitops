@@ -8,6 +8,7 @@ resources:
   - ../base/mosquitto
   - ../base/hajimari
   - ../base/rtsp-to-web
+  - prometheus-rules.yaml
 patches:
   - path: home-assistant-values.yaml
   - path: teslamate-values.yaml
