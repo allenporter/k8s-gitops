@@ -1,6 +1,6 @@
 appdirs==1.4.4
 argcomplete==2.0.0
-attrs==22.1.0
+attrs==22.2.0
 backports.entry-points-selectable==1.2.0
 cfgv==3.3.1
 distlib==0.3.6
