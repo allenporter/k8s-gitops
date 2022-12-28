@@ -5,7 +5,9 @@ resources:
   - ../base/home-assistant
   - ../base/hajimari
   - ../base/rtsp-to-web
+  - ../base/nextcloud
 patches:
   - path: home-assistant-values.yaml
   - path: hajimari-values.yaml
   - path: rtsp-to-web-values.yaml
+  - path: nextcloud-values.yaml

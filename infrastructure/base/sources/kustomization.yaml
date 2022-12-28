@@ -20,3 +20,4 @@ resources:
   - benji-k8s.yaml
   - hajimari.yaml
   - istio.yaml
+  - nextcloud.yaml
