@@ -8,12 +8,7 @@ spec:
   releaseName: benji
   chart:
     spec:
-      # renovate:
       chart: benji
-      sourceRef:
-        kind: HelmRepository
-        name: benji
-        namespace: flux-system
       version: 1.1.0
   values:
     ingress:
