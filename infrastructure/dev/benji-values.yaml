@@ -8,8 +8,13 @@ spec:
   releaseName: benji
   chart:
     spec:
-      chart: ./charts/benji-k8s
-      version: 1.0.0
+      # renovate:
+      chart: benji
+      sourceRef:
+        kind: HelmRepository
+        name: benji
+        namespace: flux-system
+      version: 1.1.0
   values:
     ingress:
       annotations:
