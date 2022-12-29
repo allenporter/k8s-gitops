@@ -8,10 +8,10 @@ spec:
   releaseName: benji
   chart:
     spec:
-      chart: ./charts/benji-k8s
+      chart: benji
       sourceRef:
-        kind: GitRepository
-        name: benji-k8s
+        kind: HelmRepository
+        name: benji
         namespace: flux-system
   interval: 1h0m0s
   install:
