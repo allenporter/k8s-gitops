@@ -36,7 +36,6 @@ spec:
             defaultMode: 0400
             optional: true
 
->>>>>>> Use an existing claim for home assistange storage (resizable)
     ingress:
       main:
         annotations:
