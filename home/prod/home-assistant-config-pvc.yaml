@@ -2,6 +2,22 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: home-assistant-config
+  namespace: home-assistant
+  finalizers:
+    - kubernetes.io/pvc-protection
+spec:
+  storageClassName: rook-ceph-block
+  volumeName: pvc-2d40ed91-1678-4ec8-89fe-a84147e56aa9
+  resources:
+    requests:
+      storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: home-assistant-storage-0
   namespace: home-assistant
   finalizers:
