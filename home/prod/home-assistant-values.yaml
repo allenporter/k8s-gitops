@@ -16,7 +16,7 @@ spec:
       tag: 2023.1.2
     persistence:
       config:
-        existingClaim: home-assistant-config
+        existingClaim: home-assistant-storage-0
         enabled: true
         mountPath: /config
     ingress:
