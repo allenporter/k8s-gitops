@@ -69,15 +69,7 @@ spec:
             hajimari.io/appName: HA VSCode
 
     mariadb:
-      enabled: true
-      auth:
-        database: home-assistant
-        username: home-assistant
-        password: ${HOME_ASSISTANT_MARIADB_USER_PWD}
-        rootPassword: ${HOME_ASSISTANT_MARIADB_ROOT_PWD}
-      primary:
-        persistence:
-          enabled: true
+      enabled: false
 
     metrics:
       enabled: true
