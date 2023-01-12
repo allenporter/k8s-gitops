@@ -17,7 +17,7 @@ spec:
 
     persistence:
       config:
-        exisitingClaim: home-assistange-storage-0
+        existingClaim: home-assistange-storage-0
         enabled: true
         mountPath: /config
 
