@@ -19,22 +19,6 @@ spec:
         exisitingClaim: home-assistange-storage-0
         enabled: true
         mountPath: /config
-      nfs-music:
-        enabled: true
-        type: custom
-        mountPath: /mnt/music
-        volumeSpec:
-          nfs:
-            server: sto01.prod.mrv.thebends.org
-            path: /volume1/music
-      ssh-creds:
-        enabled: true
-        type: custom
-        volumeSpec:
-          secret:
-            secretName: git-creds
-            defaultMode: 0400
-            optional: true
 
     ingress:
       main:
