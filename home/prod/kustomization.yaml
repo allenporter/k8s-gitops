@@ -9,6 +9,7 @@ resources:
   - ../base/hajimari
   - ../base/rtsp-to-web
   - prometheus-rules.yaml
+  - home-assistant-config-pvc.yaml
 patches:
   - path: home-assistant-values.yaml
   - path: teslamate-values.yaml
