@@ -6,6 +6,7 @@ resources:
   - ../base/hajimari
   - ../base/rtsp-to-web
   - ../base/nextcloud
+  - home-assistant-config-pvc.yaml
 patches:
   - path: home-assistant-values.yaml
   - path: hajimari-values.yaml

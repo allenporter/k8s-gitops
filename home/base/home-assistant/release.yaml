@@ -36,11 +36,6 @@ spec:
           hajimari.io/appName: Home Assistant
     hostNetwork: true
     persistence:
-      config:
-        enabled: true
-        mountPath: /config
-        accessMode: ReadWriteOnce
-        size: 5Gi
       nfs-music:
         enabled: true
         type: custom

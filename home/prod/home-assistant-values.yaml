@@ -14,6 +14,12 @@ spec:
     image:
       repository: homeassistant/home-assistant
       tag: 2023.1.2
+    persistence:
+      config:
+        enabled: true
+        mountPath: /config
+        accessMode: ReadWriteOnce
+        size: 5Gi
     ingress:
       main:
         annotations:

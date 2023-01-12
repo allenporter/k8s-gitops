@@ -14,6 +14,12 @@ spec:
     image:
       repository: homeassistant/home-assistant
       tag: dev@sha256:4b7c656b576522c3599b59b4c6ceed358211c731492609128f53fae82e190665
+    persistence:
+      config:
+        exisitingClaim: home-assistange-storage-0
+        enabled: true
+        mountPath: /config
+
     ingress:
       main:
         annotations:
