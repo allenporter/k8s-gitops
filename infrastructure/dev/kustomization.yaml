@@ -11,4 +11,4 @@ resources:
 - ../base/rook-ceph
 - ../base/benji
 - benji-secrets.yaml
-- https://raw.githubusercontent.com/projectcalico/calico/v3.24.5/manifests/calico.yaml
+- https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml
