@@ -11,8 +11,6 @@ spec:
     disable: true
   monitoring:
     enabled: true
-# Disabled namespace
-#    rulesNamespace: rook-ceph
     externalMgrEndpoints:
       - ip: ${CEPH1_IP}
       - ip: ${CEPH2_IP}

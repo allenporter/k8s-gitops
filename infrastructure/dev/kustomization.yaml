@@ -5,7 +5,6 @@ patches:
 - path: rook-ceph-values.yaml
 - path: backup-pvc.yaml
 - path: benji-values.yaml
-- path: rook-ceph-cluster.yaml
 resources:
 - ../base/sources
 - ../base/redis
