@@ -34,4 +34,7 @@ spec:
       tls:
         - secretName: helm-dashboard-tls
           hosts:
-            - helm-dashboard.${DOMAIN}
+            - host: helm-dashboard.${DOMAIN}
+              paths:
+                - path: /
+                  pathType: PathPrefix
