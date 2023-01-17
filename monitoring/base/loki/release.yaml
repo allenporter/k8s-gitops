@@ -54,4 +54,5 @@ spec:
           hosts:
             - loki.${DOMAIN}
     test:
-      enabled: false
+      enabled: true
+      prometheusAddress: "http://prometheus-operated.monitoring:9090"
