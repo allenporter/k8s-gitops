@@ -21,7 +21,7 @@ KUSTOMIZATION_API_VERSIONS = [
 
 # Track specific allowed API resources to assist in upgrades
 ALLOWED_API_RESOURCES = {
-    ("Alert", "notification.toolkit.fluxcd.io/v1beta1"),
+    ("Alert", "notification.toolkit.fluxcd.io/v1beta2"),
     ("CephCluster", "ceph.rook.io/v1"),
     ("ConfigMap", "v1"),
     ("ClusterIssuer", "cert-manager.io/v1"),
@@ -44,7 +44,7 @@ ALLOWED_API_RESOURCES = {
     ("PodDisruptionBudget", "policy/v1"),
     ("PodMonitor", "monitoring.coreos.com/v1"),
     ("PrometheusRule", "monitoring.coreos.com/v1"),
-    ("Provider", "notification.toolkit.fluxcd.io/v1beta1"),
+    ("Provider", "notification.toolkit.fluxcd.io/v1beta2"),
     ("Role", "rbac.authorization.k8s.io/v1"),
     ("RoleBinding", "rbac.authorization.k8s.io/v1"),
     ("Secret", "v1"),
