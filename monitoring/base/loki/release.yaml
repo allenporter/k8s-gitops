@@ -47,3 +47,5 @@ spec:
         - secretName: loki-tls
           hosts:
             - loki.${DOMAIN}
+    test:
+      enabled: false
