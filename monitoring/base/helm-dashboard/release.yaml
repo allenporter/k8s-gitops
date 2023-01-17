@@ -33,7 +33,7 @@ spec:
         - host: helm-dashboard.${DOMAIN}
           paths:
             - path: /
-              pathType: PathPrefix
+              pathType: Prefix
       tls:
         - secretName: helm-dashboard-tls
           hosts:
