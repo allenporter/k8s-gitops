@@ -30,11 +30,11 @@ spec:
         external-dns.alpha.kubernetes.io/hostname: helm-dashboard.${DOMAIN}.
         external-dns.alpha.kubernetes.io/target: helm-dashboard.${DOMAIN}.
       hosts:
-        - helm-dashboard.${DOMAIN}
+        - host: helm-dashboard.${DOMAIN}
+          paths:
+            - path: /
+              pathType: PathPrefix
       tls:
         - secretName: helm-dashboard-tls
           hosts:
-            - host: helm-dashboard.${DOMAIN}
-              paths:
-                - path: /
-                  pathType: PathPrefix
+            - loki.${DOMAIN}
