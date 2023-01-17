@@ -37,4 +37,4 @@ spec:
       tls:
         - secretName: helm-dashboard-tls
           hosts:
-            - loki.${DOMAIN}
+            - helm-dashboard.${DOMAIN}
