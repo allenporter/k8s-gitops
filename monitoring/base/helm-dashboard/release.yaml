@@ -28,7 +28,7 @@ spec:
       enabled: true
       annotations:
         external-dns.alpha.kubernetes.io/hostname: helm-dashboard.${DOMAIN}.
-        external-dns.alpha.kubernetes.io/target: helm-dashboard.${DOMAIN}.
+        external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
       hosts:
         - host: helm-dashboard.${DOMAIN}
           paths:
