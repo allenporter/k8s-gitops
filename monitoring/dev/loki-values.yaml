@@ -1,0 +1,11 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: loki
+  namespace: loki
+spec:
+  chart:
+    spec:
+      chart: loki
+      version: 3.10.0
