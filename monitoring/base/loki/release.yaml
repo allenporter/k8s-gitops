@@ -28,6 +28,7 @@ spec:
   # https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
   values:
     loki:
+      auth_enabled: false
       commonConfig:
         replication_factor: 1
       storage:
