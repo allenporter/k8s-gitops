@@ -5,3 +5,4 @@ namespace: loki
 resources:
   - namespace.yaml
   - release.yaml
+  - datasource.yaml
