@@ -7,6 +7,7 @@ patches:
 - path: speedtest-prometheus-values.yaml
 - path: kubernetes-dashboard-values.yaml
 - path: kube-prometheus-stack-values.yaml
+- path: loki-values.yaml
 resources:
 - namespace.yaml
 - ../base/podinfo
@@ -15,3 +16,4 @@ resources:
 - ../base/kube-prometheus-stack
 - ../base/flux-monitoring
 - ../base/etcd-monitoring
+- ../base/loki
