@@ -33,7 +33,12 @@ spec:
       storage:
         type: 'filesystem'
     ingress:
+      enabled: true
       annotations:
+        kubernetes.io/ingress.class: haproxy
+        cert-manager.io/cluster-issuer: letsencrypt
+        hajimari.io/icon: post
+        hajimari.io/appName: Loki
         external-dns.alpha.kubernetes.io/hostname: loki.${DOMAIN}.
         external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
       hosts:
