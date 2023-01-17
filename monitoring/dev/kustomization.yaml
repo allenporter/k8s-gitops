@@ -8,6 +8,7 @@ patches:
 - path: kubernetes-dashboard-values.yaml
 - path: kube-prometheus-stack-values.yaml
 - path: loki-values.yaml
+- path: helm-dashboard-values.yaml
 resources:
 - namespace.yaml
 - ../base/podinfo
@@ -17,3 +18,4 @@ resources:
 - ../base/flux-monitoring
 - ../base/etcd-monitoring
 - ../base/loki
+- ../base/helm-dashboard
