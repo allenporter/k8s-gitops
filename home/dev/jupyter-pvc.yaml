@@ -1,18 +1,19 @@
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotContent
 metadata:
-  name: home-assistant-storage-0
-  namespace: home-assistant
   finalizers:
-    - kubernetes.io/pvc-protection
+  - snapshot.storage.kubernetes.io/volumesnapshotcontent-bound-protection
+  name: manual-snapshot-2022-01-28-14-48
 spec:
-  storageClassName: rook-ceph-block
-  resources:
-    requests:
-      storage: 25Gi
-  accessModes:
-    - ReadWriteOnce
+  deletionPolicy: Delete
+  driver: rook-ceph.rbd.csi.ceph.com
+  source:
+    snapshotHandle: 0001-0009-rook-ceph-0000000000000002-be24cee5-9234-11ed-b651-da638e7592c7
+  volumeSnapshotClassName: csi-rbdplugin-snapclass
+  volumeSnapshotRef:
+    name: home-assistant-snapshot-0
+    namespace: jupyter
 ---
 # This snapshot exists so we can read the home assistant sql-lite database
 # from Jupyter like https://data.home-assistant.io/
@@ -20,18 +21,17 @@ apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
   name: home-assistant-snapshot-0
-  namespace: home-assistant
+  namespace: jupyter
 spec:
-  volumeSnapshotClassName: csi-rbdplugin-snapclass
   source:
-    persistentVolumeClaimName: home-assistant-storage-0
+    volumeSnapshotContentName: manual-snapshot-2022-01-28-14-48
 ---
 # Mount the snapshot as a PVC for jupyter
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: jupyter-home-assistant-storage-0
-  namespace: home-assistant
+  namespace: jupyter
 spec:
   storageClassName: rook-ceph-block
   dataSource:
@@ -42,4 +42,4 @@ spec:
     requests:
       storage: 25Gi
   accessModes:
-    - ReadOnlyMany
+  - ReadOnlyMany
