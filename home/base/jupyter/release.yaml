@@ -32,6 +32,9 @@ spec:
         external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
         hajimari.io/icon: library-books
         hajimari.io/appName: Jupyter Hub
+      ingressClassName: haproxy
+      hosts:
+        - jupyterhub.${DOMAIN}
       tls:
         - secretName: jupyterhub-tls
           hosts:
