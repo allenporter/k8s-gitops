@@ -19,8 +19,9 @@ spec:
       retries: 3
   # https://z2jh.jupyter.org/en/stable/resources/reference.html#helm-chart-configuration-reference
   values:
-    extraEnv:
-      TZ: America/Los_Angeles
+    hub:
+      extraEnv:
+        TZ: America/Los_Angeles
     ingress:
       enabled: true
       annotations:
