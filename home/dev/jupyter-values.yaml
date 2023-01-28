@@ -8,5 +8,5 @@ spec:
   chart:
     spec:
       # renovate
-      chart: jupyter
+      chart: jupyterhub
       version: 2.0.0
