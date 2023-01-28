@@ -23,3 +23,4 @@ resources:
   - istio.yaml
   - nextcloud.yaml
   - komodorio.yaml
+  - jupyterhub.yaml
