@@ -1,0 +1,12 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jupyterhub
+  namespace: jupyter
+spec:
+  chart:
+    spec:
+      # renovate
+      chart: jupyter
+      version: 2.0.0
