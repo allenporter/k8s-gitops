@@ -10,3 +10,13 @@ spec:
       # renovate
       chart: jupyterhub
       version: 2.0.0
+  values:
+    singleuser:
+      storage:
+        extraVolumes:
+          - name: home-assistant-snapshot
+            persistentVolumeClaim:
+              claimName: jupyter-home-assistant-storage-0
+        extraVolumeMounts:
+          - name: home-assistant-snapshot
+            mountPath: /homeassistant/
