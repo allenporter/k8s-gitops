@@ -8,8 +8,8 @@ spec:
   releaseName: minecraft-05
   chart:
     spec:
-      chart: minecraft
       # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
+      chart: minecraft
       version: 4.0.0
       sourceRef:
         kind: HelmRepository

@@ -8,8 +8,8 @@ spec:
   releaseName: minecraft-proxy
   chart:
     spec:
-      chart: minecraft-proxy
       # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
+      chart: minecraft-proxy
       version: 3.1.0
       sourceRef:
         kind: HelmRepository

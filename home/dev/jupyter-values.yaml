@@ -8,6 +8,7 @@ spec:
   chart:
     spec:
       # renovate
+      # renovate: registryUrl=https://jupyterhub.github.io/helm-chart/
       chart: jupyterhub
       version: 2.0.0
   values:
