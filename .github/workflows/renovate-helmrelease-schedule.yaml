@@ -11,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Renovate Helm Releases
-        uses: k8s-at-home/renovate-helm-releases@v1
+        uses: allenporter/renovate-helm-releases@v2
         with:
           cluster-path: './'
           debug: 'yes'
