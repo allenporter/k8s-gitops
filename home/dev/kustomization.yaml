@@ -8,7 +8,6 @@ resources:
   - ../base/nextcloud
   - ../base/jupyter
   - home-assistant-config-pvc.yaml
-  - jupyter-pvc.yaml
 patches:
   - path: home-assistant-values.yaml
   - path: hajimari-values.yaml

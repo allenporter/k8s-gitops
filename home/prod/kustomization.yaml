@@ -8,6 +8,7 @@ resources:
   - ../base/mosquitto
   - ../base/hajimari
   - ../base/rtsp-to-web
+  - ../base/jupyter
   - prometheus-rules.yaml
   - home-assistant-config-pvc.yaml
 patches:
@@ -16,3 +17,4 @@ patches:
   - path: frigate-values.yaml
   - path: hajimari-values.yaml
   - path: rtsp-to-web-values.yaml
+  - path: jupyter-values.yaml
