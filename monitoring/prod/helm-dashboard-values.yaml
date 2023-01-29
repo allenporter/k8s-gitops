@@ -1,0 +1,11 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: helm-dashboard
+  namespace: helm-dashboard
+spec:
+  chart:
+    spec:
+      chart: helm-dashboard
+      version: 0.1.2
