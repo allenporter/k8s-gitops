@@ -16,6 +16,8 @@ spec:
         extraVolumes:
           - name: home-assistant-snapshot
             persistentVolumeClaim:
+              # Volume from restored from a home-assistant backup
+              # https://github.com/allenporter/k8s-gitops/issues/867#issuecomment-1379843027
               claimName: jupyter-home-assistant-storage-0
         extraVolumeMounts:
           - name: home-assistant-snapshot
