@@ -8,5 +8,6 @@ spec:
   chart:
     spec:
       # renovate
+      # renovate: registryUrl=https://nextcloud.github.io/helm/
       chart: nextcloud
       version: 3.3.6
