@@ -51,6 +51,7 @@ ALLOWED_API_RESOURCES = {
     ("ServiceAccount", "v1"),
     ("ServiceMonitor", "monitoring.coreos.com/v1"),
     ("StorageClass", "storage.k8s.io/v1"),
+    ("VolumeSnapshot", "snapshot.storage.k8s.io/v1"),
     ("VolumeSnapshotClass", "snapshot.storage.k8s.io/v1"),
 }
 
