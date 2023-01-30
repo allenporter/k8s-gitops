@@ -13,6 +13,9 @@ import yaml
 from functools import cache
 from typing import Generator, Any
 
+
+logging.basicConfig(format="%(asctime)s %(name)s %(levelname)s %(message)s")
+
 _LOGGER = logging.getLogger(__name__)
 
 
@@ -77,6 +80,7 @@ EXCLUDE_FILES = {}
 
 def run_command(command: list[str], std_in: str | None = None) -> str:
     """Run the specified command and return stdout."""
+    _LOGGER.debug(command)
     proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (out, err) = proc.communicate(input=std_in)
     if proc.returncode:

@@ -28,6 +28,7 @@ _LOGGER = logging.getLogger(__name__)
 
 
 ENVS = ["prod", "dev"]
+EXCLUDE_FILES = {"crds"}
 
 # Path that contains cluster Kustomations
 KUSTOMIZATION_PATH_FORMAT = "clusters/{env}"
@@ -42,6 +43,7 @@ KUSTOMIZATION_PARAMS = [
     for filename in kustomization_files(
         repo_root() / KUSTOMIZATION_PATH_FORMAT.format(env=env)
     )
+    if filename not in EXCLUDE_FILES
 ]
 
 
