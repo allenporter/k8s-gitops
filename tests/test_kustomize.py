@@ -19,6 +19,7 @@ from .conftest import (
     kind,
     is_k8s,
     is_kind_allowed,
+    validate_resources,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -48,9 +49,4 @@ def kustomize_build_fixture(kustomize_file: str) -> list[dict[str, Any]]:
 
 def test_allowed_resource(resources: list[dict[str, Any]]) -> None:
     """Validate the resource."""
-    kinds = set(map(kind, filter(is_k8s, resources)))
-    assert any(kinds)  # Must have at least one resource or this is misconfigured
-
-    assert all(map(is_kind_allowed, kinds))
-    not_found = [kind for kind in kinds if not is_kind_allowed(kind)]
-    assert not not_found, "Resource version not in allow list"
+    validate_resources(resources)
