@@ -7,10 +7,9 @@ metadata:
 spec:
   chart:
     spec:
-      # renovate: registryUrl-DISASBLED=https://kubernetes.github.io/dashboard/
-      # Disabled until https://github.com/allenporter/k8s-gitops/issues/194 is fixed
+      # renovate: registryUrl=https://kubernetes.github.io/dashboard/
       chart: kubernetes-dashboard
-      version: 4.2.0
+      version: 6.0.0
   values:
     ingress:
       annotations:
