@@ -55,7 +55,6 @@ ALLOWED_API_RESOURCES = (
         ("GitRepository", "source.toolkit.fluxcd.io/v1beta2"),
         ("HorizontalPodAutoscaler", "autoscaling/v2"),
         ("Ingress", "networking.k8s.io/v1"),
-        ("Ingress", "networking.k8s.io/v1beta1"),
         ("IngressClass", "networking.k8s.io/v1"),
         ("IPAddressPool", "metallb.io/v1beta1"),
         ("L2Advertisement", "metallb.io/v1beta1"),
@@ -206,10 +205,10 @@ ALLOWED_INGRESS_ANNOTATIONS = {
 }
 
 
-def validate_ingress(ingress: dict[str, Any]) -> None:
+def validate_ingress(ingress: dict[str, Any]) -> bool:
     """Validate that the ingress is valid."""
     keys = ingress["metadata"].get("annotations", {}).keys()
-    assert not [key for key in keys if key not in ALLOWED_INGRESS_ANNOTATIONS]
+    return all([key for key in keys if key not in ALLOWED_INGRESS_ANNOTATIONS])
 
 
 VALIDATION_HOOKS: dict[Callable[[dict[str, Any]], None]] = {
@@ -217,20 +216,28 @@ VALIDATION_HOOKS: dict[Callable[[dict[str, Any]], None]] = {
 }
 
 
-def validate_resources(resources: dict[str, Any]) -> None:
+def validate_resources(resources: dict[str, Any]) -> bool:
     """Test method that asserts that resources are valid."""
     k8s_resources = [
         resource for resource in resources if resource is not None and is_k8s(resource)
     ]
 
     # Must have at least one valid resource
-    assert any(k8s_resources)
+    if not any(k8s_resources):
+        _LOGGER.error("Did not have at least one valid resource")
+        return False
 
     kinds = set(map(kind, k8s_resources))
+
     not_found = [kind for kind in kinds if not is_kind_allowed(kind)]
-    assert not not_found, "Resource version not in allow list"
+    if not_found:
+        _LOGGER.error("Resource version not in allow list: %s", not_found)
+        return False
 
     for k8s_resource in k8s_resources:
         key = kind(k8s_resource)[0]
         for hook in VALIDATION_HOOKS.get(key, []):
-            hook(k8s_resource)
+            if not hook(k8s_resource):
+                _LOGGER.debug("Valid hook for %s", key)
+                return False
+    return True
