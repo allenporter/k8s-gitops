@@ -20,6 +20,14 @@ repos:
   - id: remove-crlf
   - id: forbid-tabs
 - repo: https://github.com/psf/black
-  rev: 19.3b0
+  rev: 22.3.0
   hooks:
   - id: black
+- repo: local
+  hooks:
+  - id: manifest
+    name: manifest
+    entry: scripts/run-in-env.sh python3 -m scripts.manifest
+    language: script
+    files: ^(.+\.yaml)$
+    types: [text]
