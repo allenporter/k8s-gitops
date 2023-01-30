@@ -49,4 +49,4 @@ def kustomize_build_fixture(kustomize_file: str) -> list[dict[str, Any]]:
 
 def test_allowed_resource(resources: list[dict[str, Any]]) -> None:
     """Validate the resource."""
-    validate_resources(resources)
+    assert validate_resources(resources), "Invalid resources: {resources}"

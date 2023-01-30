@@ -176,7 +176,6 @@ def test_validate_helm_release(
 ):
     """Validate helm releases"""
 
-    resources = []
     for helm_release in helm_releases:
         assert "metadata" in helm_release
         name = helm_release["metadata"].get("name")
@@ -209,6 +208,6 @@ def test_validate_helm_release(
             values_yaml.write_text(yaml.dump(values))
             args.extend(["--values", str(values_yaml)])
         out = helm_command(args)
-        resources.extend(list(yaml.safe_load_all(out)))
-
-    validate_resources(resources)
+        assert validate_resources(
+            yaml.safe_load_all(out)
+        ), f"Invalid HelmRelease: {helm_release}"
