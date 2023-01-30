@@ -54,6 +54,8 @@ ALLOWED_API_RESOURCES = (
         ("EnvoyFilter", "networking.istio.io/v1alpha3"),
         ("GitRepository", "source.toolkit.fluxcd.io/v1beta2"),
         ("HorizontalPodAutoscaler", "autoscaling/v2"),
+        ("Ingress", "networking.k8s.io/v1"),
+        ("Ingress", "networking.k8s.io/v1beta1"),
         ("IngressClass", "networking.k8s.io/v1"),
         ("IPAddressPool", "metallb.io/v1beta1"),
         ("L2Advertisement", "metallb.io/v1beta1"),
@@ -78,11 +80,11 @@ ALLOWED_API_RESOURCES = (
 EXCLUDE_FILES = {}
 
 
-def run_command(command: list[str], std_in: str | None = None) -> str:
+def run_command(command: list[str]) -> str:
     """Run the specified command and return stdout."""
     _LOGGER.debug(command)
     proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    (out, err) = proc.communicate(input=std_in)
+    (out, err) = proc.communicate()
     if proc.returncode:
         _LOGGER.error(
             "Subprocess failed %s with return code %s", command, proc.returncode
@@ -188,3 +190,47 @@ def is_resource_allowed(resource: dict[str, Any]) -> bool:
 def is_kind_allowed(key: tuple[str, str]) -> bool:
     """Validate the resource is allowed."""
     return key in ALLOWED_API_RESOURCES or key[1] in ALLOWED_API_VERSIONS
+
+
+ALLOWED_INGRESS_ANNOTATIONS = {
+    "cert-manager.io/cluster-issuer",
+    "external-dns.alpha.kubernetes.io/hostname",
+    "external-dns.alpha.kubernetes.io/target",
+    "hajimari.io/icon",
+    "hajimari.io/appName",
+    "haproxy.org/server-ssl",
+    "haproxy.org/forwarded-for",
+    "kubernetes.io/ingress.class",
+    "nginx.ingress.kubernetes.io/backend-protocol",
+    "service.alpha.kubernetes.io/app-protocols",
+}
+
+
+def validate_ingress(ingress: dict[str, Any]) -> None:
+    """Validate that the ingress is valid."""
+    keys = ingress["metadata"].get("annotations", {}).keys()
+    assert not [key for key in keys if key not in ALLOWED_INGRESS_ANNOTATIONS]
+
+
+VALIDATION_HOOKS: dict[Callable[[dict[str, Any]], None]] = {
+    "Ingress": [validate_ingress]
+}
+
+
+def validate_resources(resources: dict[str, Any]) -> None:
+    """Test method that asserts that resources are valid."""
+    k8s_resources = [
+        resource for resource in resources if resource is not None and is_k8s(resource)
+    ]
+
+    # Must have at least one valid resource
+    assert any(k8s_resources)
+
+    kinds = set(map(kind, k8s_resources))
+    not_found = [kind for kind in kinds if not is_kind_allowed(kind)]
+    assert not not_found, "Resource version not in allow list"
+
+    for k8s_resource in k8s_resources:
+        key = kind(k8s_resource)[0]
+        for hook in VALIDATION_HOOKS.get(key, []):
+            hook(k8s_resource)
