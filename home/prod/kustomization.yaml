@@ -18,3 +18,4 @@ patches:
   - path: hajimari-values.yaml
   - path: rtsp-to-web-values.yaml
   - path: jupyter-values.yaml
+  - path: mosquitto-values.yaml
