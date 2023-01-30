@@ -22,12 +22,14 @@ from .conftest import (
     kind,
     is_kind_allowed,
     HELMRELEASE_KINDS,
+    validate_resources,
 )
 
 _LOGGER = logging.getLogger(__name__)
 
 
 ENVS = ["prod", "dev"]
+EXCLUDE_FILES = {"crds", "games/dev", "settings/dev", "settings/prod"}
 
 # Path that contains cluster Kustomations
 KUSTOMIZATION_PATH_FORMAT = "clusters/{env}"
@@ -42,6 +44,7 @@ KUSTOMIZATION_PARAMS = [
     for filename in kustomization_files(
         repo_root() / KUSTOMIZATION_PATH_FORMAT.format(env=env)
     )
+    if filename not in EXCLUDE_FILES
 ]
 
 
@@ -81,11 +84,11 @@ def tmp_config_path_fixture(tmp_path_factory: Any) -> Generator[Path, None, None
 
 
 @pytest.fixture(name="helm_raw_command", scope="module")
-def helm_raw_command_fixture(tmp_config_path: Path,) -> Callable[[...], Any]:
+def helm_raw_command_fixture(tmp_config_path: Path) -> Callable[[...], Any]:
     """Fixture that produces a helm command."""
     cache_dir = tmp_config_path / "cache"
 
-    def run(args: list[str], stdin: str | None = None) -> None:
+    def run(args: list[str]) -> None:
         return run_command(
             [
                 "helm",
@@ -142,7 +145,7 @@ def helm_command_fixture(
     """Fixture that produces a helm command."""
     repo_config_file = tmp_config_path / f"{env}-repo-config.yaml"
 
-    def run(args: list[str], stdin: str | None = None) -> None:
+    def run(args: list[str]) -> None:
         return helm_raw_command([*args, "--repository-config", repo_config_file])
 
     return run
@@ -167,10 +170,13 @@ def helm_releases_fixture(resources: list[dict[str, Any]]) -> list[dict[str, Any
 
 
 def test_validate_helm_release(
-    helm_releases: list[dict[str, Any]], helm_command: Callable[[...], Any]
+    helm_releases: list[dict[str, Any]],
+    helm_command: Callable[[...], Any],
+    tmp_config_path: Path,
 ):
     """Validate helm releases"""
 
+    resources = []
     for helm_release in helm_releases:
         assert "metadata" in helm_release
         name = helm_release["metadata"].get("name")
@@ -189,26 +195,20 @@ def test_validate_helm_release(
         assert "namespace" in source_ref
         repo = "%s-%s" % (source_ref["namespace"], source_ref["name"])
 
-        values = helm_release["spec"].get("values", "")
-
-        out = helm_command(
-            [
-                "template",
-                name,
-                f"{repo}/{chart_spec['chart']}",
-                "--version",
-                chart_spec["version"],
-            ]
-        )
-
-        content = list(yaml.safe_load_all(out))
-        k8s_resources = [
-            resource
-            for resource in content
-            if resource is not None and is_k8s(resource)
+        args = [
+            "template",
+            name,
+            f"{repo}/{chart_spec['chart']}",
+            "--debug",
+            "--version",
+            chart_spec["version"],
         ]
-        assert any(k8s_resources)
+        values = helm_release["spec"].get("values")
+        if values:
+            values_yaml = tmp_config_path / "values.yaml"
+            values_yaml.write_text(yaml.dump(values))
+            args.extend(["--values", str(values_yaml)])
+        out = helm_command(args)
+        resources.extend(list(yaml.safe_load_all(out)))
 
-        kinds = set(map(kind, k8s_resources))
-        not_found = [kind for kind in kinds if not is_kind_allowed(kind)]
-        assert not not_found, "Resource version not in allow list"
+    validate_resources(resources)
