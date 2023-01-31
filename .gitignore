@@ -6,4 +6,4 @@
 __pycache__
 venv
 .secrets
-ceph-monitoring
+*.egg-info/

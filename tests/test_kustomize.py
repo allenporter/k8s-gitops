@@ -11,34 +11,33 @@ import logging
 import yaml
 from typing import Generator, Any
 
+from scripts.manifest import manifest
+
 from .conftest import (
-    repo_root,
-    kustomization_files,
-    run_command,
     kustomize_build_resources,
     kind,
-    is_k8s,
     is_kind_allowed,
     validate_resources,
 )
 
 _LOGGER = logging.getLogger(__name__)
 
-EXCLUDE_FILES = {}
+
+KUSTOMIZATIONS = [
+    kustomization
+    for cluster in manifest.manifest().clusters
+    for kustomization in cluster.kustomizations
+]
 
 
-def test_kustomize_version():
-    command = ["kustomize", "version"]
-    _LOGGER.info(run_command(command))
-
-
-@pytest.fixture(name="kustomize_file", params=kustomization_files(repo_root()))
-def kustomize_files_fixture(request: Any, root: str) -> Generator[str, None, None]:
+@pytest.fixture(
+    name="kustomize_file",
+    params=[kustomization.full_path for kustomization in KUSTOMIZATIONS],
+    ids=(kustomization.path for kustomization in KUSTOMIZATIONS),
+)
+def kustomize_files_fixture(request: Any) -> Generator[str, None, None]:
     """Fixture that produces yaml document contents."""
-    if request.param in EXCLUDE_FILES:
-        pytest.skip("File excluded from tests")
-        return
-    return f"{root}/{request.param}"
+    return request.param
 
 
 @pytest.fixture(name="resources")
