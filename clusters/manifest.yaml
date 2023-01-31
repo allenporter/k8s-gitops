@@ -1,43 +1,443 @@
 spec:
 - kustomizations:
-  - name: certmanager
+  - helm_releases:
+    - name: cert-manager
+      namespace: cert-manager
+      repo_name: jetstack
+      repo_namespace: flux-system
+    helm_repos: []
+    name: certmanager
     path: ./certmanager/dev
-  - name: crds
+  - helm_releases: []
+    helm_repos: []
+    name: crds
     path: ./crds
-  - name: games
+  - helm_releases: []
+    helm_repos: []
+    name: games
     path: ./games/dev
-  - name: home
+  - helm_releases:
+    - name: hajimari
+      namespace: hajimari
+      repo_name: hajimari
+      repo_namespace: flux-system
+    - name: home-assistant
+      namespace: home-assistant
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    - name: jupyterhub
+      namespace: jupyter
+      repo_name: jupyterhub
+      repo_namespace: flux-system
+    - name: nextcloud
+      namespace: nextcloud
+      repo_name: nextcloud
+      repo_namespace: flux-system
+    - name: rtsp-to-web
+      namespace: rtsp-to-web
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    helm_repos: []
+    name: home
     path: ./home/dev
-  - name: infrastructure
+  - helm_releases:
+    - name: benji
+      namespace: benji
+      repo_name: benji
+      repo_namespace: flux-system
+    - name: redis
+      namespace: redis
+      repo_name: bitnami
+      repo_namespace: flux-system
+    - name: rook-ceph
+      namespace: rook-ceph
+      repo_name: rook-release
+      repo_namespace: flux-system
+    helm_repos:
+    - name: benji
+      namespace: flux-system
+      url: https://benji-backup.me/helm-charts/
+    - name: bitnami
+      namespace: flux-system
+      url: https://charts.bitnami.com/bitnami
+    - name: blakeshome
+      namespace: flux-system
+      url: https://blakeblackshear.github.io/blakeshome-charts/
+    - name: grafana
+      namespace: flux-system
+      url: https://grafana.github.io/helm-charts
+    - name: hajimari
+      namespace: flux-system
+      url: https://hajimari.io
+    - name: haproxytech
+      namespace: flux-system
+      url: https://haproxytech.github.io/helm-charts
+    - name: ingress-nginx
+      namespace: flux-system
+      url: https://kubernetes.github.io/ingress-nginx
+    - name: istio
+      namespace: flux-system
+      url: https://istio-release.storage.googleapis.com/charts
+    - name: itzg
+      namespace: flux-system
+      url: https://itzg.github.io/minecraft-server-charts/
+    - name: jetstack
+      namespace: flux-system
+      url: https://charts.jetstack.io
+    - name: jupyterhub
+      namespace: flux-system
+      url: https://jupyterhub.github.io/helm-chart/
+    - name: k8s-at-home
+      namespace: flux-system
+      url: https://k8s-at-home.com/charts/
+    - name: kasten
+      namespace: flux-system
+      url: https://charts.kasten.io/
+    - name: komodorio
+      namespace: flux-system
+      url: https://helm-charts.komodor.io
+    - name: kube-state-metrics
+      namespace: flux-system
+      url: https://kubernetes.github.io/kube-state-metrics
+    - name: kubernetes-dashboard
+      namespace: flux-system
+      url: https://kubernetes.github.io/dashboard/
+    - name: nextcloud
+      namespace: flux-system
+      url: https://nextcloud.github.io/helm/
+    - name: podinfo
+      namespace: flux-system
+      url: https://stefanprodan.github.io/podinfo
+    - name: prometheus-community
+      namespace: flux-system
+      url: https://prometheus-community.github.io/helm-charts
+    - name: rook-release
+      namespace: flux-system
+      url: https://charts.rook.io/release
+    name: infrastructure
     path: ./infrastructure/dev
-  - name: monitoring
+  - helm_releases:
+    - name: helm-dashboard
+      namespace: helm-dashboard
+      repo_name: komodorio
+      repo_namespace: flux-system
+    - name: kubernetes-dashboard
+      namespace: kubernetes-dashboard
+      repo_name: kubernetes-dashboard
+      repo_namespace: flux-system
+    - name: loki
+      namespace: loki
+      repo_name: grafana
+      repo_namespace: flux-system
+    - name: kube-prometheus-stack
+      namespace: monitoring
+      repo_name: prometheus-community
+      repo_namespace: flux-system
+    - name: speedtest-prometheus
+      namespace: monitoring
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    - name: podinfo-haproxy
+      namespace: podinfo
+      repo_name: podinfo
+      repo_namespace: flux-system
+    - name: podinfo-istio
+      namespace: podinfo
+      repo_name: podinfo
+      repo_namespace: flux-system
+    - name: podinfo-nginx
+      namespace: podinfo
+      repo_name: podinfo
+      repo_namespace: flux-system
+    helm_repos: []
+    name: monitoring
     path: ./monitoring/dev
-  - name: network
+  - helm_releases:
+    - name: adguard-home
+      namespace: adguard-home
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    - name: adguard-home2
+      namespace: adguard-home
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    helm_repos: []
+    name: network
     path: ./network/dev
-  - name: services
+  - helm_releases:
+    - name: external-dns
+      namespace: external-dns
+      repo_name: bitnami
+      repo_namespace: flux-system
+    - name: haproxy
+      namespace: haproxy
+      repo_name: haproxytech
+      repo_namespace: flux-system
+    - name: haproxy-external
+      namespace: haproxy
+      repo_name: haproxytech
+      repo_namespace: flux-system
+    - name: istio-ingress
+      namespace: istio-ingress
+      repo_name: istio
+      repo_namespace: flux-system
+    - name: istio-base
+      namespace: istio-system
+      repo_name: istio
+      repo_namespace: flux-system
+    - name: istiod
+      namespace: istio-system
+      repo_name: istio
+      repo_namespace: flux-system
+    - name: metallb
+      namespace: metallb
+      repo_name: bitnami
+      repo_namespace: flux-system
+    - name: nginx
+      namespace: nginx
+      repo_name: ingress-nginx
+      repo_namespace: flux-system
+    helm_repos: []
+    name: services
     path: ./services/dev
-  - name: settings
+  - helm_releases: []
+    helm_repos: []
+    name: settings
     path: ./settings/dev
   name: flux-system
   path: ./clusters/dev
 - kustomizations:
-  - name: certmanager
+  - helm_releases:
+    - name: cert-manager
+      namespace: cert-manager
+      repo_name: jetstack
+      repo_namespace: flux-system
+    helm_repos: []
+    name: certmanager
     path: ./certmanager/prod
-  - name: crds
+  - helm_releases: []
+    helm_repos: []
+    name: crds
     path: ./crds
-  - name: games
+  - helm_releases:
+    - name: minecraft-01
+      namespace: minecraft
+      repo_name: itzg
+      repo_namespace: flux-system
+    - name: minecraft-02
+      namespace: minecraft
+      repo_name: itzg
+      repo_namespace: flux-system
+    - name: minecraft-05
+      namespace: minecraft
+      repo_name: itzg
+      repo_namespace: flux-system
+    - name: minecraft-06
+      namespace: minecraft
+      repo_name: itzg
+      repo_namespace: flux-system
+    - name: minecraft-07
+      namespace: minecraft
+      repo_name: itzg
+      repo_namespace: flux-system
+    - name: minecraft-08
+      namespace: minecraft
+      repo_name: itzg
+      repo_namespace: flux-system
+    - name: minecraft-119
+      namespace: minecraft
+      repo_name: itzg
+      repo_namespace: flux-system
+    - name: minecraft-bedrock-survival
+      namespace: minecraft
+      repo_name: itzg
+      repo_namespace: flux-system
+    - name: minecraft-proxy
+      namespace: minecraft
+      repo_name: itzg
+      repo_namespace: flux-system
+    helm_repos: []
+    name: games
     path: ./games/prod
-  - name: home
+  - helm_releases:
+    - name: frigate
+      namespace: frigate
+      repo_name: blakeshome
+      repo_namespace: flux-system
+    - name: hajimari
+      namespace: hajimari
+      repo_name: hajimari
+      repo_namespace: flux-system
+    - name: home-assistant
+      namespace: home-assistant
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    - name: jupyterhub
+      namespace: jupyter
+      repo_name: jupyterhub
+      repo_namespace: flux-system
+    - name: mosquitto
+      namespace: mqtt
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    - name: rtsp-to-web
+      namespace: rtsp-to-web
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    - name: teslamate
+      namespace: teslamate
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    helm_repos: []
+    name: home
     path: ./home/prod
-  - name: infrastructure
+  - helm_releases:
+    - name: benji
+      namespace: benji
+      repo_name: benji
+      repo_namespace: flux-system
+    - name: redis
+      namespace: redis
+      repo_name: bitnami
+      repo_namespace: flux-system
+    - name: rook-ceph
+      namespace: rook-ceph
+      repo_name: rook-release
+      repo_namespace: flux-system
+    helm_repos:
+    - name: benji
+      namespace: flux-system
+      url: https://benji-backup.me/helm-charts/
+    - name: bitnami
+      namespace: flux-system
+      url: https://charts.bitnami.com/bitnami
+    - name: blakeshome
+      namespace: flux-system
+      url: https://blakeblackshear.github.io/blakeshome-charts/
+    - name: grafana
+      namespace: flux-system
+      url: https://grafana.github.io/helm-charts
+    - name: hajimari
+      namespace: flux-system
+      url: https://hajimari.io
+    - name: haproxytech
+      namespace: flux-system
+      url: https://haproxytech.github.io/helm-charts
+    - name: ingress-nginx
+      namespace: flux-system
+      url: https://kubernetes.github.io/ingress-nginx
+    - name: istio
+      namespace: flux-system
+      url: https://istio-release.storage.googleapis.com/charts
+    - name: itzg
+      namespace: flux-system
+      url: https://itzg.github.io/minecraft-server-charts/
+    - name: jetstack
+      namespace: flux-system
+      url: https://charts.jetstack.io
+    - name: jupyterhub
+      namespace: flux-system
+      url: https://jupyterhub.github.io/helm-chart/
+    - name: k8s-at-home
+      namespace: flux-system
+      url: https://k8s-at-home.com/charts/
+    - name: kasten
+      namespace: flux-system
+      url: https://charts.kasten.io/
+    - name: komodorio
+      namespace: flux-system
+      url: https://helm-charts.komodor.io
+    - name: kube-state-metrics
+      namespace: flux-system
+      url: https://kubernetes.github.io/kube-state-metrics
+    - name: kubernetes-dashboard
+      namespace: flux-system
+      url: https://kubernetes.github.io/dashboard/
+    - name: nextcloud
+      namespace: flux-system
+      url: https://nextcloud.github.io/helm/
+    - name: podinfo
+      namespace: flux-system
+      url: https://stefanprodan.github.io/podinfo
+    - name: prometheus-community
+      namespace: flux-system
+      url: https://prometheus-community.github.io/helm-charts
+    - name: rook-release
+      namespace: flux-system
+      url: https://charts.rook.io/release
+    name: infrastructure
     path: ./infrastructure/prod
-  - name: monitoring
+  - helm_releases:
+    - name: helm-dashboard
+      namespace: helm-dashboard
+      repo_name: komodorio
+      repo_namespace: flux-system
+    - name: kubernetes-dashboard
+      namespace: kubernetes-dashboard
+      repo_name: kubernetes-dashboard
+      repo_namespace: flux-system
+    - name: kube-prometheus-stack
+      namespace: monitoring
+      repo_name: prometheus-community
+      repo_namespace: flux-system
+    - name: speedtest-prometheus
+      namespace: monitoring
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    - name: podinfo-haproxy
+      namespace: podinfo
+      repo_name: podinfo
+      repo_namespace: flux-system
+    - name: podinfo-istio
+      namespace: podinfo
+      repo_name: podinfo
+      repo_namespace: flux-system
+    - name: podinfo-nginx
+      namespace: podinfo
+      repo_name: podinfo
+      repo_namespace: flux-system
+    helm_repos: []
+    name: monitoring
     path: ./monitoring/prod
-  - name: network
+  - helm_releases:
+    - name: adguard-home
+      namespace: adguard-home
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    - name: adguard-home2
+      namespace: adguard-home
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    - name: unifi
+      namespace: unifi
+      repo_name: k8s-at-home
+      repo_namespace: flux-system
+    helm_repos: []
+    name: network
     path: ./network/prod
-  - name: services
+  - helm_releases:
+    - name: external-dns
+      namespace: external-dns
+      repo_name: bitnami
+      repo_namespace: flux-system
+    - name: haproxy
+      namespace: haproxy
+      repo_name: haproxytech
+      repo_namespace: flux-system
+    - name: haproxy-external
+      namespace: haproxy
+      repo_name: haproxytech
+      repo_namespace: flux-system
+    - name: metallb
+      namespace: metallb
+      repo_name: bitnami
+      repo_namespace: flux-system
+    helm_repos: []
+    name: services
     path: ./services/prod
-  - name: settings
+  - helm_releases: []
+    helm_repos: []
+    name: settings
     path: ./settings/prod
   name: flux-system
   path: ./clusters/prod
