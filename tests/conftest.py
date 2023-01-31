@@ -13,20 +13,20 @@ import yaml
 from functools import cache
 from typing import Generator, Any
 
+from scripts.manifest import cmd
 
-logging.basicConfig(format="%(asctime)s %(name)s %(levelname)s %(message)s")
+
+_LOG_FMT = (
+    "%(asctime)s.%(msecs)03d %(levelname)s (%(threadName)s) [%(name)s] %(message)s"
+)
+logging.basicConfig(format=_LOG_FMT)
 
 _LOGGER = logging.getLogger(__name__)
 
 
 KUSTOMIZE_BIN = "kustomize"
-KUSTOMIZE_CONFIG = "kustomization.yaml"
 KUSTOMIZE_FLAGS = []
 
-KUSTOMIZATION_KINDS = {
-    ("Kustomization", "kustomize.toolkit.fluxcd.io/v1beta1"),
-    ("Kustomization", "kustomize.toolkit.fluxcd.io/v1beta2"),
-}
 HELMREPO_KINDS = {("HelmRepository", "source.toolkit.fluxcd.io/v1beta2")}
 HELMRELEASE_KINDS = {("HelmRelease", "helm.toolkit.fluxcd.io/v2beta1")}
 
@@ -76,32 +76,6 @@ ALLOWED_API_RESOURCES = (
     }
 )
 
-EXCLUDE_FILES = {}
-
-
-def run_command(command: list[str]) -> str:
-    """Run the specified command and return stdout."""
-    _LOGGER.debug(command)
-    proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    (out, err) = proc.communicate()
-    if proc.returncode:
-        _LOGGER.error(
-            "Subprocess failed %s with return code %s", command, proc.returncode
-        )
-        _LOGGER.info(out.decode("utf-8"))
-        _LOGGER.error(err.decode("utf-8"))
-        return None
-    return out.decode("utf-8")
-
-
-def kustomize_grep(cluster_path: Path, kind: str):
-    """Loads all Kustomizations for a specific kind as a yaml object."""
-    command = [KUSTOMIZE_BIN, "cfg", "grep", f"kind={kind}", str(cluster_path)]
-    doc_contents = run_command(command)
-    assert doc_contents
-    for doc in yaml.safe_load_all(doc_contents):
-        yield doc
-
 
 def kind_filter(kinds: set[tuple[str, str]]):
     """Return a yaml doc filter for specified resource type and version."""
@@ -116,7 +90,7 @@ def kustomize_build(filename: str) -> str:
     """Return kustomize build and return the string contents."""
     command = ["kustomize", "build", filename]
     command.extend(KUSTOMIZE_FLAGS)
-    return run_command(command)
+    return cmd.run_command(command)
 
 
 @cache
@@ -124,35 +98,6 @@ def kustomize_build_resources(filename: str) -> list[dict[str, Any]]:
     """Run kustomize build and return the parsed objects."""
     doc_contents = kustomize_build(filename)
     return list(yaml.safe_load_all(doc_contents))
-
-
-@cache
-def repo_root() -> Path:
-    git_repo = git.Repo(os.getcwd(), search_parent_directories=True)
-    return Path(git_repo.git.rev_parse("--show-toplevel"))
-
-
-@pytest.fixture(name="root", scope="session")
-def repo_root_fixture() -> str:
-    """Github repo root directory."""
-    return repo_root()
-
-
-@cache
-def kustomization_files(root: Path) -> list[str]:
-    """Return Kustomizations in the specified root."""
-    matches = []
-    yaml_docs = kustomize_grep(root, "Kustomization")
-    for doc in filter(kind_filter(KUSTOMIZATION_KINDS), yaml_docs):
-        if doc["metadata"]["name"] == "flux-system":
-            continue
-        if doc["spec"]["sourceRef"]["kind"] != "GitRepository":
-            continue
-        if "path" not in doc["spec"]:
-            raise Exception(f"Invalid spec/path in doc {doc}")
-        path = doc["spec"]["path"]
-        matches.append(path.lstrip("./"))
-    return matches
 
 
 @pytest.fixture(autouse=True, scope="session")

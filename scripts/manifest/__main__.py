@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 import datetime
-import git
+import dataclasses
 import os
 import sys
 import subprocess
@@ -15,79 +15,107 @@ import yaml
 from functools import cache
 from typing import Generator, Any
 
+from . import manifest, cmd
+
 
 _LOGGER = logging.getLogger(__name__)
 
 
 MANIFEST_FILE = Path("clusters/manifest.yaml")
 
-KUSTOMIZE_KIND = "Kustomization"
-KUSTOMIZE_API_VERSION = "kustomize.toolkit.fluxcd.io/v1beta2"
-KUSTOMIZE_NAME = "flux-system"
-
 KUSTOMIZE_BIN = "kustomize"
 
-HELMREPO_KINDS = {("HelmRepository", "source.toolkit.fluxcd.io/v1beta2")}
-HELMRELEASE_KINDS = {("HelmRelease", "helm.toolkit.fluxcd.io/v2beta1")}
+CLUSTER_KUSTOMIZE_KIND = "Kustomization"
+CLUSTER_KUSTOMIZE_VERSIONS = {"kustomize.toolkit.fluxcd.io/v1beta2"}
+# Flux cluster kustomizations
+CLUSTER_KUSTOMIZE_NAME = "flux-system"
+
+KUSTOMIZE_KIND = "Kustomization"
+KUSTOMIZE_VERSIONS = {"kustomize.toolkit.fluxcd.io/v1beta2"}
+
+HELM_REPO_KIND = "HelmRepository"
+HELM_REPO_VERSIONS = {"source.toolkit.fluxcd.io/v1beta2"}
+
+HELM_RELEASE_KIND = "HelmRelease"
+HELM_RELEASE_VERSIONS = {"helm.toolkit.fluxcd.io/v2beta1"}
 
 
-def repo_root() -> Path:
-    git_repo = git.Repo(os.getcwd(), search_parent_directories=True)
-    return Path(git_repo.git.rev_parse("--show-toplevel"))
+def kind_filter(kinds: set[tuple[str, str]]):
+    """Return a yaml doc filter for specified resource type."""
+
+    def func(doc):
+        return doc.get("kind") in kinds
+
+    return func
+
+
+def version_filter(versions: set[tuple[str, str]]):
+    """Return a yaml doc filter for specified resource version."""
+
+    def func(doc):
+        return doc.get("apiVersion") in versions
+
+    return func
+
+
+def get_cluster_docs(root: Path) -> Generator[dict[str, Any], None, None]:
+    """Return the Kustomization environments for flux clusters."""
+    out = cmd.run_piped_commands(
+        [
+            [KUSTOMIZE_BIN, "cfg", "grep", f"kind={CLUSTER_KUSTOMIZE_KIND}", str(root)],
+            [KUSTOMIZE_BIN, "cfg", "grep", f"metadata.name={CLUSTER_KUSTOMIZE_NAME}"],
+        ]
+    )
+    for doc in filter(
+        version_filter(CLUSTER_KUSTOMIZE_VERSIONS), yaml.safe_load_all(out)
+    ):
+        yield doc
 
 
 def get_kustomizations(root: Path) -> Generator[dict[str, Any], None, None]:
     """Return the Kustomization environments found in the cluster."""
-    cmd = [KUSTOMIZE_BIN, "cfg", "grep", f"kind={KUSTOMIZE_KIND}", str(root)]
-    p1 = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-    cmd2 = [
-        KUSTOMIZE_BIN,
-        "cfg",
-        "grep",
-        f"metadata.name={KUSTOMIZE_NAME}",
-        "--invert-match",
-    ]
-    p2 = subprocess.Popen(cmd2, stdin=p1.stdout, stdout=subprocess.PIPE)
-    p1.stdout.close()  # Allow p1 to receive a SIGPIPE if p2 exits.
-    (out, err) = p2.communicate()
-    if p2.returncode:
-        _LOGGER.error("Subprocess failed with return code %s", p2.returncode)
-        if out:
-            _LOGGER.info(out.decode("utf-8"))
-        if err:
-            _LOGGER.error(err.decode("utf-8"))
-        raise ValueError(f"Subprocess failed with return code: {p2.returncode}")
-
-    for doc in yaml.safe_load_all(out.decode("utf-8")):
+    out = cmd.run_piped_commands(
+        [
+            [KUSTOMIZE_BIN, "cfg", "grep", f"kind={KUSTOMIZE_KIND}", str(root)],
+            [
+                KUSTOMIZE_BIN,
+                "cfg",
+                "grep",
+                f"metadata.name={CLUSTER_KUSTOMIZE_NAME}",
+                "--invert-match",
+            ],
+        ]
+    )
+    for doc in filter(version_filter(KUSTOMIZE_VERSIONS), yaml.safe_load_all(out)):
         yield doc
 
 
-def get_cluster_docs(root: Path) -> Generator[dict[str, Any], None, None]:
-    """Return the Kustomization environments found in the cluster."""
-    cmd = [KUSTOMIZE_BIN, "cfg", "grep", f"kind={KUSTOMIZE_KIND}", str(root)]
-    p1 = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-    cmd2 = [KUSTOMIZE_BIN, "cfg", "grep", f"metadata.name={KUSTOMIZE_NAME}"]
-    p2 = subprocess.Popen(cmd2, stdin=p1.stdout, stdout=subprocess.PIPE)
-    p1.stdout.close()  # Allow p1 to receive a SIGPIPE if p2 exits.
-    (out, err) = p2.communicate()
-    if p2.returncode:
-        if out:
-            _LOGGER.info(out.decode("utf-8"))
-        if err:
-            _LOGGER.error(err.decode("utf-8"))
-        raise ValueError(f"Subprocess failed with return code: {p2.returncode}")
-
-    for doc in yaml.safe_load_all(out.decode("utf-8")):
+def get_helm_docs(root: Path) -> Generator[dict[str, Any], None, None]:
+    """Return an HelmRepository objects in the cluster."""
+    out = cmd.run_piped_commands(
+        [
+            [KUSTOMIZE_BIN, "build", str(root)],
+            [
+                KUSTOMIZE_BIN,
+                "cfg",
+                "grep",
+                f"kind=({HELM_REPO_KIND}|{HELM_RELEASE_KIND})",
+            ],
+        ]
+    )
+    for doc in filter(
+        version_filter(HELM_REPO_VERSIONS | HELM_RELEASE_VERSIONS),
+        yaml.safe_load_all(out),
+    ):
         yield doc
 
 
 def main() -> int:
     """Validate manifests."""
-    root = repo_root()
-    manifest_file = Path(root) / MANIFEST_FILE
-
+    logging.basicConfig(level=logging.DEBUG)
+    print("Processing repo:", manifest.repo_root())
     clusters = []
-    for cluster in get_cluster_docs(root):
+    for cluster in get_cluster_docs(manifest.repo_root()):
         if "metadata" not in cluster or "name" not in cluster["metadata"]:
             raise ValueError(f"Invalid Kustomization did not have metadata.name")
         if "spec" not in cluster or "path" not in cluster["spec"]:
@@ -95,14 +123,15 @@ def main() -> int:
         name = cluster["metadata"]["name"]
         path = cluster["spec"]["path"]
 
-        cluster_root = Path(root) / path.lstrip("./")
+        cluster_root = Path(manifest.repo_root()) / path.lstrip("./")
+        print("Processing cluster", cluster_root)
 
         kustomizations = []
         for kustomization in get_kustomizations(cluster_root):
             annotations = kustomization["metadata"].get("annotations", {})
             if (
                 orig_path := annotations.get("internal.config.kubernetes.io/path")
-            ) and orig_path.startswith(KUSTOMIZE_NAME):
+            ) and orig_path.startswith(CLUSTER_KUSTOMIZE_NAME):
                 continue
 
             if (
@@ -116,20 +145,38 @@ def main() -> int:
                 raise ValueError(
                     f"Invalid Kustomization did not have spec.path: {kustomization}"
                 )
-            kustomization_name = kustomization["metadata"]["name"]
             kustomization_path = kustomization["spec"]["path"]
-            assert kustomization_name in kustomization_path
+            print("Processing Kustomization", kustomization_path)
+            helm_docs = list(get_helm_docs(kustomization_path))
+            helm_repos = [
+                manifest.HelmRepository.from_doc(doc)
+                for doc in filter(kind_filter({HELM_REPO_KIND}), helm_docs)
+            ]
+            helm_releases = [
+                manifest.HelmRelease.from_doc(doc)
+                for doc in filter(kind_filter({HELM_RELEASE_KIND}), helm_docs)
+            ]
             kustomizations.append(
-                {
-                    "name": kustomization_name,
-                    "path": kustomization_path,
-                }
+                manifest.Kustomization(
+                    kustomization["metadata"]["name"],
+                    kustomization_path,
+                    helm_repos,
+                    helm_releases,
+                )
             )
 
-        clusters.append({"name": name, "path": path, "kustomizations": kustomizations})
+        clusters.append(
+            manifest.Cluster(
+                name=name,
+                path=path,
+                helm_repos=helm_repos,
+                kustomizations=kustomizations,
+            )
+        )
 
-    content = yaml.dump({"spec": clusters})
+    content = yaml.dump({"spec": [dataclasses.asdict(cluster) for cluster in clusters]})
 
+    manifest_file = manifest.manifest_file()
     if manifest_file.read_text() == content:
         return
 
