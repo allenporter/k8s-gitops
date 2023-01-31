@@ -1,0 +1,43 @@
+spec:
+- kustomizations:
+  - name: certmanager
+    path: ./certmanager/dev
+  - name: crds
+    path: ./crds
+  - name: games
+    path: ./games/dev
+  - name: home
+    path: ./home/dev
+  - name: infrastructure
+    path: ./infrastructure/dev
+  - name: monitoring
+    path: ./monitoring/dev
+  - name: network
+    path: ./network/dev
+  - name: services
+    path: ./services/dev
+  - name: settings
+    path: ./settings/dev
+  name: flux-system
+  path: ./clusters/dev
+- kustomizations:
+  - name: certmanager
+    path: ./certmanager/prod
+  - name: crds
+    path: ./crds
+  - name: games
+    path: ./games/prod
+  - name: home
+    path: ./home/prod
+  - name: infrastructure
+    path: ./infrastructure/prod
+  - name: monitoring
+    path: ./monitoring/prod
+  - name: network
+    path: ./network/prod
+  - name: services
+    path: ./services/prod
+  - name: settings
+    path: ./settings/prod
+  name: flux-system
+  path: ./clusters/prod
