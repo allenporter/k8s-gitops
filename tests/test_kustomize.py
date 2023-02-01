@@ -41,9 +41,9 @@ def kustomize_files_fixture(request: Any) -> Generator[str, None, None]:
 
 
 @pytest.fixture(name="resources")
-def kustomize_build_fixture(kustomize_file: str) -> list[dict[str, Any]]:
+async def kustomize_build_fixture(kustomize_file: str) -> list[dict[str, Any]]:
     """Fixture that runs kustomize build on kustomize inptus."""
-    return kustomize_build_resources(kustomize_file)
+    return await kustomize_build_resources(kustomize_file)
 
 
 def test_allowed_resource(resources: list[dict[str, Any]]) -> None:
