@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import aiofiles
+import asyncio
 import pytest
 import datetime
 import git
@@ -25,6 +27,10 @@ from .conftest import (
 
 _LOGGER = logging.getLogger(__name__)
 
+KUSTOMIZE_BIN = "kustomize"
+HELM_RELEASE_KIND = "HelmRelease"
+HELM_RELEASE_VERSIONS = {"helm.toolkit.fluxcd.io/v2beta1"}
+
 
 MANIFEST = manifest.manifest()
 KUSTOMIZATION_PARAMS = [
@@ -44,12 +50,12 @@ def tmp_config_path_fixture(tmp_path_factory: Any) -> Generator[Path, None, None
 
 
 @pytest.fixture(name="helm_raw_command", scope="module")
-def helm_raw_command_fixture(tmp_config_path: Path) -> Callable[[...], Any]:
+def helm_raw_command_fixture(tmp_config_path: Path) -> Callable[[...], Awaitable[Any]]:
     """Fixture that produces a helm command."""
     cache_dir = tmp_config_path / "cache"
 
-    def run(args: list[str]) -> None:
-        return cmd.run_command(
+    async def run(args: list[str]) -> None:
+        return await cmd.run_command(
             [
                 "helm",
                 *args,
@@ -64,16 +70,17 @@ def helm_raw_command_fixture(tmp_config_path: Path) -> Callable[[...], Any]:
 
 
 @pytest.fixture(autouse=True, scope="module")
-def helm_update_repo_cache_fixture(
-    tmp_config_path: Path, helm_raw_command: Callable[[...], Any]
+async def helm_update_repo_cache_fixture(
+    tmp_config_path: Path, helm_raw_command: Callable[[...], Awaitable[Any]]
 ) -> None:
     """Fixture to update the helm repository for all environments."""
 
     for cluster in MANIFEST.clusters:
         repo_config_file = tmp_config_path / f"{slugify(cluster.path)}-repo-config.yaml"
-        repo_config_file.write_text(yaml.dump(HELM_REPOS[cluster.path]))
-        assert helm_raw_command(
-            ["repo", "update", "--repository-config", repo_config_file]
+        content = yaml.dump(HELM_REPOS[cluster.path])
+        await asyncio.to_thread(repo_config_file.write_text, content)
+        assert await helm_raw_command(
+            ["repo", "update", "--repository-config", str(repo_config_file)]
         )
 
 
@@ -88,53 +95,62 @@ def test_config_fixture(request: Any) -> tuple[str, str] | None:
 
 
 @pytest.fixture(name="cluster_path")
-def env_fixture(test_config: tuple[str, str]) -> str:
+def cluster_path_fixture(test_config: tuple[str, str]) -> str:
     """Fixture returns the current k8s environment under test."""
     return test_config[0]
 
 
 @pytest.fixture(name="kustomization_file")
-def kustomization_file_fixture(test_config: tuple[str, str] | None) -> str | None:
+def kustomization_file_fixture(test_config: tuple[str, Path] | None) -> Path:
     """Fixture that produces the current kustomization file."""
     return test_config[1]
 
 
 @pytest.fixture(name="helm_command")
 def helm_command_fixture(
-    tmp_config_path: Path, cluster_path: str, helm_raw_command: Callable[[...], Any]
+    tmp_config_path: Path,
+    cluster_path: str,
+    helm_raw_command: Callable[[...], Awaitable[Any]],
 ) -> Callable[[...], Any]:
     """Fixture that produces a helm command."""
     repo_config_file = tmp_config_path / f"{slugify(cluster_path)}-repo-config.yaml"
 
-    def run(args: list[str]) -> None:
-        return helm_raw_command([*args, "--repository-config", repo_config_file])
+    async def run(args: list[str]) -> None:
+        return await helm_raw_command(
+            [*args, "--repository-config", str(repo_config_file)]
+        )
 
     return run
 
 
-@pytest.fixture(name="resources")
-def kustomize_build_fixture(kustomization_file: str) -> list[dict[str, Any]] | None:
-    """Fixture that runs kustomize build on kustomize inptus."""
-    return kustomize_build_resources(kustomization_file)
-
-
 @pytest.fixture(name="helm_releases")
-def helm_releases_fixture(resources: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Fixture to produce HelmReleases in the module."""
-    # TODO: Replace with kustomize grep and pipe
-    return list(filter(kind_filter(HELMRELEASE_KINDS), resources))
+async def get_helm_docs(kustomization_file: Path) -> list[dict[str, Any]]:
+    """Return an HelmRelease objects in the cluster."""
+    out = await cmd.run_piped_commands(
+        [
+            [KUSTOMIZE_BIN, "build", str(kustomization_file)],
+            [
+                KUSTOMIZE_BIN,
+                "cfg",
+                "grep",
+                f"kind={HELM_RELEASE_KIND}",
+            ],
+        ]
+    )
+    return list(yaml.safe_load_all(out))
 
 
-def test_validate_helm_release(
+async def test_validate_helm_release(
     helm_releases: list[dict[str, Any]],
-    helm_command: Callable[[...], Any],
+    helm_command: Callable[[...], Awaitable[Any]],
     tmp_config_path: Path,
 ):
     """Validate helm releases"""
-
+    cmds = []
     for helm_release in helm_releases:
+        metadata = helm_release["metadata"]
         assert "metadata" in helm_release
-        name = helm_release["metadata"].get("name")
+        name = f"{metadata['namespace']}-{metadata['name']}"
 
         assert "spec" in helm_release
         assert "chart" in helm_release["spec"]
@@ -149,7 +165,6 @@ def test_validate_helm_release(
         assert "name" in source_ref
         assert "namespace" in source_ref
         repo = "%s-%s" % (source_ref["namespace"], source_ref["name"])
-
         args = [
             "template",
             name,
@@ -160,10 +175,18 @@ def test_validate_helm_release(
         ]
         values = helm_release["spec"].get("values")
         if values:
-            values_yaml = tmp_config_path / "values.yaml"
-            values_yaml.write_text(yaml.dump(values))
-            args.extend(["--values", str(values_yaml)])
-        out = helm_command(args)
-        assert validate_resources(
-            yaml.safe_load_all(out)
-        ), f"Invalid HelmRelease: {helm_release}"
+            values_file = (
+                tmp_config_path / f"{slugify(name)}-{slugify(repo)}-values.yaml"
+            )
+            async with aiofiles.open(values_file, mode="w") as f:
+                await f.write(yaml.dump(values))
+            args.extend(["--values", str(values_file)])
+        cmds.append(args)
+
+    tasks = []
+    for cmd in cmds:
+        tasks.append(helm_command(cmd))
+
+    results = await asyncio.gather(*tasks)
+    for result in results:
+        assert validate_resources(yaml.safe_load_all(result)), f"Invalid HelmRelease"

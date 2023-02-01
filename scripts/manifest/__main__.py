@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import pytest
 import datetime
 import dataclasses
@@ -58,9 +59,9 @@ def version_filter(versions: set[tuple[str, str]]):
     return func
 
 
-def get_cluster_docs(root: Path) -> Generator[dict[str, Any], None, None]:
+async def get_cluster_docs(root: Path) -> Generator[dict[str, Any], None, None]:
     """Return the Kustomization environments for flux clusters."""
-    out = cmd.run_piped_commands(
+    out = await cmd.run_piped_commands(
         [
             [KUSTOMIZE_BIN, "cfg", "grep", f"kind={CLUSTER_KUSTOMIZE_KIND}", str(root)],
             [KUSTOMIZE_BIN, "cfg", "grep", f"metadata.name={CLUSTER_KUSTOMIZE_NAME}"],
@@ -72,9 +73,9 @@ def get_cluster_docs(root: Path) -> Generator[dict[str, Any], None, None]:
         yield doc
 
 
-def get_kustomizations(root: Path) -> Generator[dict[str, Any], None, None]:
+async def get_kustomizations(root: Path) -> Generator[dict[str, Any], None, None]:
     """Return the Kustomization environments found in the cluster."""
-    out = cmd.run_piped_commands(
+    out = await cmd.run_piped_commands(
         [
             [KUSTOMIZE_BIN, "cfg", "grep", f"kind={KUSTOMIZE_KIND}", str(root)],
             [
@@ -90,9 +91,9 @@ def get_kustomizations(root: Path) -> Generator[dict[str, Any], None, None]:
         yield doc
 
 
-def get_helm_docs(root: Path) -> Generator[dict[str, Any], None, None]:
+async def get_helm_docs(root: Path) -> Generator[dict[str, Any], None, None]:
     """Return an HelmRepository objects in the cluster."""
-    out = cmd.run_piped_commands(
+    out = await cmd.run_piped_commands(
         [
             [KUSTOMIZE_BIN, "build", str(root)],
             [
@@ -110,12 +111,12 @@ def get_helm_docs(root: Path) -> Generator[dict[str, Any], None, None]:
         yield doc
 
 
-def main() -> int:
+async def main() -> int:
     """Validate manifests."""
     logging.basicConfig(level=logging.DEBUG)
     print("Processing repo:", manifest.repo_root())
     clusters = []
-    for cluster in get_cluster_docs(manifest.repo_root()):
+    async for cluster in get_cluster_docs(manifest.repo_root()):
         if "metadata" not in cluster or "name" not in cluster["metadata"]:
             raise ValueError(f"Invalid Kustomization did not have metadata.name")
         if "spec" not in cluster or "path" not in cluster["spec"]:
@@ -127,7 +128,7 @@ def main() -> int:
         print("Processing cluster", cluster_root)
 
         kustomizations = []
-        for kustomization in get_kustomizations(cluster_root):
+        async for kustomization in get_kustomizations(cluster_root):
             annotations = kustomization["metadata"].get("annotations", {})
             if (
                 orig_path := annotations.get("internal.config.kubernetes.io/path")
@@ -147,7 +148,7 @@ def main() -> int:
                 )
             kustomization_path = kustomization["spec"]["path"]
             print("Processing Kustomization", kustomization_path)
-            helm_docs = list(get_helm_docs(kustomization_path))
+            helm_docs = list([doc async for doc in get_helm_docs(kustomization_path)])
             helm_repos = [
                 manifest.HelmRepository.from_doc(doc)
                 for doc in filter(kind_filter({HELM_REPO_KIND}), helm_docs)
@@ -174,14 +175,18 @@ def main() -> int:
             )
         )
 
-    content = yaml.dump({"spec": [dataclasses.asdict(cluster) for cluster in clusters]})
+    content = yaml.dump(
+        {"spec": [dataclasses.asdict(cluster) for cluster in clusters]},
+        sort_keys=False,
+        explicit_start=True,
+    )
 
     manifest_file = manifest.manifest_file()
-    if manifest_file.read_text() == content:
+    if await asyncio.to_thread(manifest_file.read_text) == content:
         return
 
-    manifest_file.write_text(content)
+    await asyncio.to_thread(manifest_file.write_text, content)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(asyncio.run(main()))

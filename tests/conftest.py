@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import pytest
 import datetime
 import git
@@ -77,6 +78,13 @@ ALLOWED_API_RESOURCES = (
 )
 
 
+@pytest.fixture(scope="module")
+def event_loop(request):
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+    yield loop
+    loop.close()
+
+
 def kind_filter(kinds: set[tuple[str, str]]):
     """Return a yaml doc filter for specified resource type and version."""
 
@@ -86,17 +94,16 @@ def kind_filter(kinds: set[tuple[str, str]]):
     return func
 
 
-def kustomize_build(filename: str) -> str:
+async def kustomize_build(filename: Path) -> str:
     """Return kustomize build and return the string contents."""
-    command = ["kustomize", "build", filename]
+    command = ["kustomize", "build", str(filename)]
     command.extend(KUSTOMIZE_FLAGS)
-    return cmd.run_command(command)
+    return await cmd.run_command(command)
 
 
-@cache
-def kustomize_build_resources(filename: str) -> list[dict[str, Any]]:
+async def kustomize_build_resources(filename: Path) -> list[dict[str, Any]]:
     """Run kustomize build and return the parsed objects."""
-    doc_contents = kustomize_build(filename)
+    doc_contents = await kustomize_build(filename)
     return list(yaml.safe_load_all(doc_contents))
 
 

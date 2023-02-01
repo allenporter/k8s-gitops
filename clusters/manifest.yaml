@@ -1,22 +1,28 @@
+---
 spec:
-- kustomizations:
-  - helm_releases:
+- name: flux-system
+  path: ./clusters/dev
+  kustomizations:
+  - name: certmanager
+    path: ./certmanager/dev
+    helm_repos: []
+    helm_releases:
     - name: cert-manager
       namespace: cert-manager
       repo_name: jetstack
       repo_namespace: flux-system
-    helm_repos: []
-    name: certmanager
-    path: ./certmanager/dev
-  - helm_releases: []
-    helm_repos: []
-    name: crds
+  - name: crds
     path: ./crds
-  - helm_releases: []
     helm_repos: []
-    name: games
+    helm_releases: []
+  - name: games
     path: ./games/dev
-  - helm_releases:
+    helm_repos: []
+    helm_releases: []
+  - name: home
+    path: ./home/dev
+    helm_repos: []
+    helm_releases:
     - name: hajimari
       namespace: hajimari
       repo_name: hajimari
@@ -37,22 +43,8 @@ spec:
       namespace: rtsp-to-web
       repo_name: k8s-at-home
       repo_namespace: flux-system
-    helm_repos: []
-    name: home
-    path: ./home/dev
-  - helm_releases:
-    - name: benji
-      namespace: benji
-      repo_name: benji
-      repo_namespace: flux-system
-    - name: redis
-      namespace: redis
-      repo_name: bitnami
-      repo_namespace: flux-system
-    - name: rook-ceph
-      namespace: rook-ceph
-      repo_name: rook-release
-      repo_namespace: flux-system
+  - name: infrastructure
+    path: ./infrastructure/dev
     helm_repos:
     - name: benji
       namespace: flux-system
@@ -114,9 +106,23 @@ spec:
     - name: rook-release
       namespace: flux-system
       url: https://charts.rook.io/release
-    name: infrastructure
-    path: ./infrastructure/dev
-  - helm_releases:
+    helm_releases:
+    - name: benji
+      namespace: benji
+      repo_name: benji
+      repo_namespace: flux-system
+    - name: redis
+      namespace: redis
+      repo_name: bitnami
+      repo_namespace: flux-system
+    - name: rook-ceph
+      namespace: rook-ceph
+      repo_name: rook-release
+      repo_namespace: flux-system
+  - name: monitoring
+    path: ./monitoring/dev
+    helm_repos: []
+    helm_releases:
     - name: helm-dashboard
       namespace: helm-dashboard
       repo_name: komodorio
@@ -149,10 +155,10 @@ spec:
       namespace: podinfo
       repo_name: podinfo
       repo_namespace: flux-system
+  - name: network
+    path: ./network/dev
     helm_repos: []
-    name: monitoring
-    path: ./monitoring/dev
-  - helm_releases:
+    helm_releases:
     - name: adguard-home
       namespace: adguard-home
       repo_name: k8s-at-home
@@ -161,10 +167,10 @@ spec:
       namespace: adguard-home
       repo_name: k8s-at-home
       repo_namespace: flux-system
+  - name: services
+    path: ./services/dev
     helm_repos: []
-    name: network
-    path: ./network/dev
-  - helm_releases:
+    helm_releases:
     - name: external-dns
       namespace: external-dns
       repo_name: bitnami
@@ -197,29 +203,29 @@ spec:
       namespace: nginx
       repo_name: ingress-nginx
       repo_namespace: flux-system
-    helm_repos: []
-    name: services
-    path: ./services/dev
-  - helm_releases: []
-    helm_repos: []
-    name: settings
+  - name: settings
     path: ./settings/dev
-  name: flux-system
-  path: ./clusters/dev
-- kustomizations:
-  - helm_releases:
+    helm_repos: []
+    helm_releases: []
+- name: flux-system
+  path: ./clusters/prod
+  kustomizations:
+  - name: certmanager
+    path: ./certmanager/prod
+    helm_repos: []
+    helm_releases:
     - name: cert-manager
       namespace: cert-manager
       repo_name: jetstack
       repo_namespace: flux-system
-    helm_repos: []
-    name: certmanager
-    path: ./certmanager/prod
-  - helm_releases: []
-    helm_repos: []
-    name: crds
+  - name: crds
     path: ./crds
-  - helm_releases:
+    helm_repos: []
+    helm_releases: []
+  - name: games
+    path: ./games/prod
+    helm_repos: []
+    helm_releases:
     - name: minecraft-01
       namespace: minecraft
       repo_name: itzg
@@ -256,10 +262,10 @@ spec:
       namespace: minecraft
       repo_name: itzg
       repo_namespace: flux-system
+  - name: home
+    path: ./home/prod
     helm_repos: []
-    name: games
-    path: ./games/prod
-  - helm_releases:
+    helm_releases:
     - name: frigate
       namespace: frigate
       repo_name: blakeshome
@@ -288,22 +294,8 @@ spec:
       namespace: teslamate
       repo_name: k8s-at-home
       repo_namespace: flux-system
-    helm_repos: []
-    name: home
-    path: ./home/prod
-  - helm_releases:
-    - name: benji
-      namespace: benji
-      repo_name: benji
-      repo_namespace: flux-system
-    - name: redis
-      namespace: redis
-      repo_name: bitnami
-      repo_namespace: flux-system
-    - name: rook-ceph
-      namespace: rook-ceph
-      repo_name: rook-release
-      repo_namespace: flux-system
+  - name: infrastructure
+    path: ./infrastructure/prod
     helm_repos:
     - name: benji
       namespace: flux-system
@@ -365,9 +357,23 @@ spec:
     - name: rook-release
       namespace: flux-system
       url: https://charts.rook.io/release
-    name: infrastructure
-    path: ./infrastructure/prod
-  - helm_releases:
+    helm_releases:
+    - name: benji
+      namespace: benji
+      repo_name: benji
+      repo_namespace: flux-system
+    - name: redis
+      namespace: redis
+      repo_name: bitnami
+      repo_namespace: flux-system
+    - name: rook-ceph
+      namespace: rook-ceph
+      repo_name: rook-release
+      repo_namespace: flux-system
+  - name: monitoring
+    path: ./monitoring/prod
+    helm_repos: []
+    helm_releases:
     - name: helm-dashboard
       namespace: helm-dashboard
       repo_name: komodorio
@@ -396,10 +402,10 @@ spec:
       namespace: podinfo
       repo_name: podinfo
       repo_namespace: flux-system
+  - name: network
+    path: ./network/prod
     helm_repos: []
-    name: monitoring
-    path: ./monitoring/prod
-  - helm_releases:
+    helm_releases:
     - name: adguard-home
       namespace: adguard-home
       repo_name: k8s-at-home
@@ -412,10 +418,10 @@ spec:
       namespace: unifi
       repo_name: k8s-at-home
       repo_namespace: flux-system
+  - name: services
+    path: ./services/prod
     helm_repos: []
-    name: network
-    path: ./network/prod
-  - helm_releases:
+    helm_releases:
     - name: external-dns
       namespace: external-dns
       repo_name: bitnami
@@ -432,12 +438,7 @@ spec:
       namespace: metallb
       repo_name: bitnami
       repo_namespace: flux-system
-    helm_repos: []
-    name: services
-    path: ./services/prod
-  - helm_releases: []
-    helm_repos: []
-    name: settings
+  - name: settings
     path: ./settings/prod
-  name: flux-system
-  path: ./clusters/prod
+    helm_repos: []
+    helm_releases: []
