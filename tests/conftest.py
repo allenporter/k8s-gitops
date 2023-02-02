@@ -25,9 +25,6 @@ logging.basicConfig(format=_LOG_FMT)
 _LOGGER = logging.getLogger(__name__)
 
 
-KUSTOMIZE_BIN = "kustomize"
-KUSTOMIZE_FLAGS = []
-
 HELMREPO_KINDS = {("HelmRepository", "source.toolkit.fluxcd.io/v1beta2")}
 HELMRELEASE_KINDS = {("HelmRelease", "helm.toolkit.fluxcd.io/v2beta1")}
 
