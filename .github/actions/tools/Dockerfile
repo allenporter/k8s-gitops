@@ -1,7 +1,7 @@
 FROM alpine:3.17
 
 ENV KUSTOMIZE_VERSION=4.1.2
-ENV KYVERNO_VERSION=v1.7.2
+ENV KYVERNO_VERSION=v1.9.0
 
 RUN apk add --no-cache curl
 
@@ -17,4 +17,4 @@ RUN curl -sLf https://github.com/kyverno/kyverno/releases/download/${KYVERNO_VER
     && chmod +x /usr/local/bin/kyverno \
     && rm -fr kyverno-cli.tar.gz
 
-CMD ["kustomize", "version"]
+CMD kustomize version ; kyverno version
