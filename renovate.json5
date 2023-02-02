@@ -43,8 +43,8 @@
   "packageRules": [
     {
       "packagePatterns": [
-          // https://github.com/allenporter/k8s-gitops/issues/445
-          "^rook-ceph.*"
+          # https://github.com/kubernetes/ingress-nginx/issues/9569
+          "^nginx.*"
       ],
       "enabled": false,
     },
