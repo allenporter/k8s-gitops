@@ -19,6 +19,8 @@ spec:
   install:
     remediation:
       retries: 3
+  upgrade:
+    disableWait: true
   test:
     # Fix problem where helm fails to uninstall
     enable: false
