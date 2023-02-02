@@ -46,6 +46,6 @@ async def kustomize_build_fixture(kustomize_file: str) -> list[dict[str, Any]]:
     return await kustomize_build_resources(kustomize_file)
 
 
-def test_allowed_resource(resources: list[dict[str, Any]]) -> None:
+async def test_allowed_resource(resources: list[dict[str, Any]]) -> None:
     """Validate the resource."""
-    assert validate_resources(resources), "Invalid resources: {resources}"
+    assert await validate_resources(resources), "Invalid resources: {resources}"

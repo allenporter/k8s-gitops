@@ -168,7 +168,7 @@ VALIDATION_HOOKS: dict[Callable[[dict[str, Any]], None]] = {
 }
 
 
-def validate_resources(resources: dict[str, Any]) -> bool:
+async def validate_resources(resources: dict[str, Any]) -> bool:
     """Test method that asserts that resources are valid."""
     k8s_resources = [
         resource for resource in resources if resource is not None and is_k8s(resource)
@@ -192,4 +192,5 @@ def validate_resources(resources: dict[str, Any]) -> bool:
             if not hook(k8s_resource):
                 _LOGGER.debug("Valid hook for %s", key)
                 return False
+
     return True
