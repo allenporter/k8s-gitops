@@ -25,9 +25,6 @@ logging.basicConfig(format=_LOG_FMT)
 _LOGGER = logging.getLogger(__name__)
 
 
-KUSTOMIZE_BIN = "kustomize"
-KUSTOMIZE_FLAGS = []
-
 HELMREPO_KINDS = {("HelmRepository", "source.toolkit.fluxcd.io/v1beta2")}
 HELMRELEASE_KINDS = {("HelmRelease", "helm.toolkit.fluxcd.io/v2beta1")}
 
@@ -96,9 +93,7 @@ def kind_filter(kinds: set[tuple[str, str]]):
 
 async def kustomize_build(filename: Path) -> str:
     """Return kustomize build and return the string contents."""
-    command = ["kustomize", "build", str(filename)]
-    command.extend(KUSTOMIZE_FLAGS)
-    return await cmd.run_command(command)
+    return await cmd.run_command(["kustomize", "build", str(filename)])
 
 
 async def kustomize_build_resources(filename: Path) -> list[dict[str, Any]]:
@@ -168,7 +163,7 @@ VALIDATION_HOOKS: dict[Callable[[dict[str, Any]], None]] = {
 }
 
 
-def validate_resources(resources: dict[str, Any]) -> bool:
+async def validate_resources(resources: dict[str, Any]) -> bool:
     """Test method that asserts that resources are valid."""
     k8s_resources = [
         resource for resource in resources if resource is not None and is_k8s(resource)
@@ -192,4 +187,5 @@ def validate_resources(resources: dict[str, Any]) -> bool:
             if not hook(k8s_resource):
                 _LOGGER.debug("Valid hook for %s", key)
                 return False
+
     return True

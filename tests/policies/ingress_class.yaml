@@ -1,0 +1,38 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: restrict-ingress-classes
+  annotations:
+    policies.kyverno.io/title: Restrict Ingress Classes
+    policies.kyverno.io/category: Sample
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/subject: Ingress
+    policies.kyverno.io/description: >-
+      Ingress class annotations should no longer be used, and instead use the IngressClass
+      resource.
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+  - name: forbid-ingress-annotations
+    match:
+      resources:
+        kinds:
+        - Ingress
+    validate:
+      message: "Found kubernetes.io/ingress.class annotation"
+      pattern:
+        metadata:
+          annotations:
+            X(kubernetes.io/ingress.class): "null"
+  - name: validate-ingress-class
+    match:
+      resources:
+        kinds:
+        - Ingress
+    validate:
+      message: "Unknown IngressClass"
+      pattern:
+        =(spec):
+          =(ingressClass): "null | haproxy | haproxy-external | nginx | istio"

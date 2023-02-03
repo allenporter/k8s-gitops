@@ -29,11 +29,11 @@ spec:
       main:
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: haproxy-external
           cert-manager.io/cluster-issuer: letsencrypt
           haproxy.org/forwarded-for: "true"
           hajimari.io/icon: home-assistant
           hajimari.io/appName: Home Assistant
+        ingressClassName: haproxy-external
     hostNetwork: true
     persistence:
       nfs-music:
@@ -63,7 +63,6 @@ spec:
         ingress:
           enabled: true
           annotations:
-            kubernetes.io/ingress.class: haproxy
             cert-manager.io/cluster-issuer: letsencrypt
             hajimari.io/icon: microsoft-visual-studio-code
             hajimari.io/appName: HA VSCode

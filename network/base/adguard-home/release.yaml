@@ -46,7 +46,6 @@ spec:
       main:
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: haproxy
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: adguard-home
           external-dns.alpha.kubernetes.io/hostname: dns01.${DOMAIN}.

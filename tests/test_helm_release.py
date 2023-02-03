@@ -169,6 +169,7 @@ async def test_validate_helm_release(
             "template",
             name,
             f"{repo}/{chart_spec['chart']}",
+            "--skip-crds",  # Reduce size of output
             "--debug",
             "--version",
             chart_spec["version"],
@@ -183,10 +184,23 @@ async def test_validate_helm_release(
             args.extend(["--values", str(values_file)])
         cmds.append(args)
 
-    tasks = []
-    for cmd in cmds:
-        tasks.append(helm_command(cmd))
-
-    results = await asyncio.gather(*tasks)
+    results = await asyncio.gather(*[helm_command(cmd) for cmd in cmds])
     for result in results:
-        assert validate_resources(yaml.safe_load_all(result)), f"Invalid HelmRelease"
+        docs = list(yaml.safe_load_all(result))
+        assert await validate_resources(docs), "Invalid HelmRelease"
+
+        results_file = tmp_config_path / "values.yaml"
+        async with aiofiles.open(results_file, mode="w") as f:
+            await f.write(yaml.dump_all(docs))
+
+        await cmd.run_piped_commands(
+            [
+                [
+                    "kyverno",
+                    "apply",
+                    "tests/policies/",
+                    "--resource",
+                    str(results_file),
+                ]
+            ]
+        )
