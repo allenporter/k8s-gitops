@@ -196,7 +196,7 @@ async def test_validate_helm_release(
         await cmd.run_piped_commands(
             [
                 [
-                    "/usr/bin/kyverno",
+                    "kyverno",
                     "apply",
                     "tests/policies/",
                     "--resource",
