@@ -23,7 +23,7 @@ spec:
       hosts:
         - host: frigate.prod.mrv.thebends.org
           paths:
-            - path: /
+            - '/'
       tls:
         - secretName: frigate-tls
           hosts:
