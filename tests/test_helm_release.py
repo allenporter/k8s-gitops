@@ -194,5 +194,13 @@ async def test_validate_helm_release(
             await f.write(yaml.dump_all(docs))
 
         await cmd.run_piped_commands(
-            [["kyverno", "apply", "tests/policies/", "--resource", str(results_file)]]
+            [
+                [
+                    "/usr/bin/kyverno",
+                    "apply",
+                    "tests/policies/",
+                    "--resource",
+                    str(results_file),
+                ]
+            ]
         )
