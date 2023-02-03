@@ -41,3 +41,6 @@ spec:
         - secretName: helm-dashboard-tls
           hosts:
             - helm-dashboard.${DOMAIN}
+    dashboard:
+      persistence:
+        storageClass: rook-ceph-block
