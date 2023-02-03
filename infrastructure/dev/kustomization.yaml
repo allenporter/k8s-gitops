@@ -5,6 +5,7 @@ patches:
 - path: rook-ceph-values.yaml
 - path: backup-pvc.yaml
 - path: benji-values.yaml
+- path: kyverno-values.yaml
 resources:
 - ../base/sources
 - ../base/redis
@@ -12,3 +13,4 @@ resources:
 - ../base/benji
 - benji-secrets.yaml
 - https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml
+- ../base/kyverno
