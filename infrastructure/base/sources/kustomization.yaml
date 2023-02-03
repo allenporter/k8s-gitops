@@ -24,3 +24,4 @@ resources:
   - nextcloud.yaml
   - komodorio.yaml
   - jupyterhub.yaml
+  - kyverno.yaml
