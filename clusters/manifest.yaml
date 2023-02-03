@@ -94,6 +94,9 @@ spec:
     - name: kubernetes-dashboard
       namespace: flux-system
       url: https://kubernetes.github.io/dashboard/
+    - name: kyverno
+      namespace: flux-system
+      url: https://kyverno.github.io/kyverno/
     - name: nextcloud
       namespace: flux-system
       url: https://nextcloud.github.io/helm/
@@ -345,6 +348,9 @@ spec:
     - name: kubernetes-dashboard
       namespace: flux-system
       url: https://kubernetes.github.io/dashboard/
+    - name: kyverno
+      namespace: flux-system
+      url: https://kyverno.github.io/kyverno/
     - name: nextcloud
       namespace: flux-system
       url: https://nextcloud.github.io/helm/
