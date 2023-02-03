@@ -93,9 +93,7 @@ def kind_filter(kinds: set[tuple[str, str]]):
 
 async def kustomize_build(filename: Path) -> str:
     """Return kustomize build and return the string contents."""
-    command = ["kustomize", "build", str(filename)]
-    command.extend(KUSTOMIZE_FLAGS)
-    return await cmd.run_command(command)
+    return await cmd.run_command(["kustomize", "build", str(filename)])
 
 
 async def kustomize_build_resources(filename: Path) -> list[dict[str, Any]]:
