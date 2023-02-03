@@ -18,3 +18,4 @@ spec:
   values:
     crds:
       enabled: true
+    logLevel: DEBUG
