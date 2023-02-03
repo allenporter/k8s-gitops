@@ -28,7 +28,6 @@ spec:
       path: "/"
       className: istio
       annotations:
-        kubernetes.io/ingress.class: istio
         cert-manager.io/cluster-issuer: letsencrypt
         external-dns.alpha.kubernetes.io/hostname: podinfo-istio.${DOMAIN}.
         external-dns.alpha.kubernetes.io/target: ${ISTIO_HOSTNAME}.

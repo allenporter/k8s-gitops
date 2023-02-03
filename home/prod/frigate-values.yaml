@@ -16,19 +16,18 @@ spec:
       tag: 0.10.1-amd64
     virtualHost: frigate.prod.mrv.thebends.org
     ingress:
-      main:
-        annotations:
-          external-dns.alpha.kubernetes.io/hostname: frigate.prod.mrv.thebends.org.
-          external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
-          cert-manager.io/cluster-issuer: letsencrypt
-        hosts:
-          - host: frigate.prod.mrv.thebends.org
-            paths:
-              - path: /
-        tls:
-          - secretName: frigate-tls
-            hosts:
-              - frigate.prod.mrv.thebends.org
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: frigate.prod.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+        cert-manager.io/cluster-issuer: letsencrypt
+      hosts:
+        - host: frigate.prod.mrv.thebends.org
+          paths:
+            - path: /
+      tls:
+        - secretName: frigate-tls
+          hosts:
+            - frigate.prod.mrv.thebends.org
     config: |
       mqtt:
         host: mosquitto.mqtt

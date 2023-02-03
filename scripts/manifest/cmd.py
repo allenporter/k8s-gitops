@@ -28,11 +28,12 @@ async def run_piped_commands(cmds: list[list[str]]) -> str:
         out, err = await proc.communicate(stdin)
         if proc.returncode:
             if out:
-                _LOGGER.info(out.decode("utf-8"))
+                _LOGGER.error(out.decode("utf-8"))
             if err:
                 _LOGGER.error(err.decode("utf-8"))
             raise CommandException(
-                "Subprocess failed %s with return code %s" % (cmd_text, proc.returncode)
+                "Subprocess failed %s with return code %s, see error log"
+                % (cmd_text, proc.returncode)
             )
         stdin = out
     return out.decode("utf-8")

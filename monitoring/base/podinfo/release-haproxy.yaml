@@ -27,5 +27,5 @@ spec:
       enabled: true
       path: "/"
       annotations:
-        kubernetes.io/ingress.class: haproxy
+        className: haproxy
         cert-manager.io/cluster-issuer: letsencrypt

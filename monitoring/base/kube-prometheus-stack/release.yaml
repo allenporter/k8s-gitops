@@ -32,7 +32,6 @@ spec:
       ingress:
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: haproxy
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: chart-line
           hajimari.io/appName: Grafana
@@ -70,7 +69,6 @@ spec:
       ingress:
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: haproxy
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: database-clock
           hajimari.io/appName: Prometheus
@@ -97,7 +95,6 @@ spec:
       ingress:
         enabled: true
         annotations:
-          kubernetes.io/ingress.class: haproxy
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: bell-alert
           hajimari.io/appName: Alertmanager
