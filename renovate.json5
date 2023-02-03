@@ -44,7 +44,7 @@
     {
       "packagePatterns": [
           // https://github.com/kubernetes/ingress-nginx/issues/9569
-          "^nginx.*"
+          "^ingress-nginx.*"
       ],
       "enabled": false,
     },
