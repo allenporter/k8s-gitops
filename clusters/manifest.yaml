@@ -114,6 +114,10 @@ spec:
       namespace: benji
       repo_name: benji
       repo_namespace: flux-system
+    - name: kyverno
+      namespace: kyverno
+      repo_name: kyverno
+      repo_namespace: flux-system
     - name: redis
       namespace: redis
       repo_name: bitnami
