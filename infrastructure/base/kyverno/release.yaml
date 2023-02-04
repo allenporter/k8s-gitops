@@ -22,7 +22,7 @@ spec:
     serviceMonitor:
       enabled: true
     grafana:
-      enabled:
+      enabled: true
     backgroundController:
       serviceMonitor:
         enabled: true
