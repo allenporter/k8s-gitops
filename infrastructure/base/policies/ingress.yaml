@@ -25,7 +25,8 @@ spec:
       pattern:
         metadata:
           annotations:
-            X(kubernetes.io/ingress.class): "null"
+            #X(kubernetes.io/ingress.class): "null"
+            kubernetes.io/ingress.class: "foo"
   - name: validate-ingress-class
     match:
       resources:
