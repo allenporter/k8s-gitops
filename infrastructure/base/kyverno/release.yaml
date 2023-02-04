@@ -19,3 +19,10 @@ spec:
   # https://github.com/kyverno/kyverno/blob/main/charts/kyverno/values.yaml
   values:
     replicaCount: 3
+    serviceMonitor:
+      enabled: true
+    grafana:
+      enabled:
+    backgroundController:
+      serviceMonitor:
+        enabled: true
