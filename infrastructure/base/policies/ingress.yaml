@@ -24,7 +24,7 @@ spec:
       message: "Found kubernetes.io/ingress.class annotation"
       pattern:
         metadata:
-          annotations:
+          =(annotations):
             X(kubernetes.io/ingress.class): "null"
   - name: validate-ingress-class
     match:
