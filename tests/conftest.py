@@ -47,6 +47,7 @@ ALLOWED_API_RESOURCES = (
         ("ClusterIssuer", "cert-manager.io/v1"),
         ("ClusterRole", "rbac.authorization.k8s.io/v1"),
         ("ClusterRoleBinding", "rbac.authorization.k8s.io/v1"),
+        ("ClusterPolicy", "kyverno.io/v1"),
         ("CustomResourceDefinition", "apiextensions.k8s.io/v1"),
         ("CronJob", "batch/v1beta1"),
         ("EnvoyFilter", "networking.istio.io/v1alpha3"),
