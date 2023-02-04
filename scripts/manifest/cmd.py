@@ -19,6 +19,7 @@ async def run_piped_commands(cmds: list[list[str]]) -> str:
     out = None
     for cmd in cmds:
         cmd_text = " ".join([shlex.quote(arg) for arg in cmd])
+        _LOGGER.debug("Running command: %s", cmd_text)
         proc = await asyncio.create_subprocess_shell(
             cmd_text,
             stdin=subprocess.PIPE,
