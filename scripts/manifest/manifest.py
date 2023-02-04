@@ -51,6 +51,11 @@ class HelmRelease:
             raise ValueError(f"Invalid {cls} missing sourceRef fields: {doc}")
         return cls(name, namespace, source_ref["name"], source_ref["namespace"])
 
+    @property
+    def id(self) -> str:
+        """Identifier for the HelmRelease in tests."""
+        return f"{self.namespace}-{self.name}"
+
 
 @dataclass
 class HelmRepository:
@@ -75,6 +80,11 @@ class HelmRepository:
             raise ValueError(f"Invalid {cls} missing spec.url: {doc}")
         return cls(name, namespace, url)
 
+    @property
+    def id(self) -> str:
+        """Identifier for the HelmRepository in tests."""
+        return f"{self.namespace}-{self.name}"
+
 
 @dataclass
 class Kustomization:
@@ -89,6 +99,11 @@ class Kustomization:
     def full_path(self) -> Path:
         """Return the full cluster path for this object."""
         return repo_root() / self.path
+
+    @property
+    def id(self) -> str:
+        """Identifier for the Kustomization in tests"""
+        return f"{self.path}"
 
 
 @dataclass
@@ -118,6 +133,11 @@ class Cluster:
             "generated": now.isoformat(),
             "repositories": repos,
         }
+
+    @property
+    def id(self) -> str:
+        """Identifier for the Cluster in tests."""
+        return f"{self.path}"
 
 
 class Manifest(BaseModel):
