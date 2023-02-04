@@ -30,6 +30,7 @@ _LOGGER = logging.getLogger(__name__)
 KUSTOMIZE_BIN = "kustomize"
 HELM_RELEASE_KIND = "HelmRelease"
 HELM_RELEASE_VERSIONS = {"helm.toolkit.fluxcd.io/v2beta1"}
+POLICY_DIR = "infrastructure/base/policies"
 
 
 MANIFEST = manifest.manifest()
@@ -193,14 +194,12 @@ async def test_validate_helm_release(
         async with aiofiles.open(results_file, mode="w") as f:
             await f.write(yaml.dump_all(docs))
 
-        await cmd.run_piped_commands(
+        await cmd.run_command(
             [
-                [
-                    "kyverno",
-                    "apply",
-                    "tests/policies/",
-                    "--resource",
-                    str(results_file),
-                ]
+                "kyverno",
+                "apply",
+                POLICY_DIR,
+                "--resource",
+                str(results_file),
             ]
         )
