@@ -20,10 +20,6 @@ spec:
       - resources:
           kinds:
           - "*"
-    exclude:
-      all:
-      - resources:
-          kinds:
     preconditions:
       all:
       - key: "{{ request.operation || 'BACKGROUND' }}"
