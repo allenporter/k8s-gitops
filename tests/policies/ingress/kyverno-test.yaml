@@ -1,5 +1,5 @@
 ---
-name: ingress-classes
+name: ingress
 resources:
 - ingress.yaml
 policies:
@@ -20,7 +20,6 @@ results:
   result: fail
   resources:
   - example-unknown-ingressclass
-
 # Stop using deprecated annotations
 - policy: restrict-ingress-classes
   rule: forbid-ingress-annotations
