@@ -11,14 +11,9 @@ import logging
 import yaml
 from typing import Generator, Any
 
-from scripts.manifest import manifest
+from scripts.manifest import manifest, cmd
 
-from .conftest import (
-    kustomize_build_resources,
-    kind,
-    is_kind_allowed,
-    validate_resources,
-)
+from .conftest import POLICY_DIR
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -40,12 +35,19 @@ def kustomize_files_fixture(request: Any) -> Generator[str, None, None]:
     return request.param
 
 
-@pytest.fixture(name="resources")
-async def kustomize_build_fixture(kustomize_file: str) -> list[dict[str, Any]]:
-    """Fixture that runs kustomize build on kustomize inptus."""
-    return await kustomize_build_resources(kustomize_file)
-
-
-async def test_allowed_resource(resources: list[dict[str, Any]]) -> None:
-    """Validate the resource."""
-    assert await validate_resources(resources), f"Invalid resources: {resources}"
+async def test_validate_policies(kustomize_file: Path) -> None:
+    """Validate resources against kyverno policies."""
+    await cmd.run_piped_commands(
+        [
+            ["kustomize", "build", str(kustomize_file)],
+            # Exclude secrets which kyverno may have a problem handling
+            ["kustomize", "cfg", "grep", "--invert-match", "kind=Secret"],
+            [
+                "kyverno",
+                "apply",
+                POLICY_DIR,
+                "--resource",
+                "-",
+            ],
+        ]
+    )

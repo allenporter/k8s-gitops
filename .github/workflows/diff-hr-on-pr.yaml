@@ -76,6 +76,7 @@ jobs:
           resources_live=$(echo "$hr_live_values" | \
             helm template "$hr_live_chart" \
             live/"$hr_live_chart" \
+            --skip-crds \
             --version "$hr_live_version" -f -)
           echo "$resources_live"
           echo "#####################################################"
@@ -83,6 +84,7 @@ jobs:
           resources_pr=$(echo "$hr_pr_values" | \
             helm template "$hr_pr_chart" \
             pr/"$hr_pr_chart" \
+            --skip-crds \
             --version "$hr_pr_version" -f -)
           echo "$resources_pr"
           echo "#####################################################"

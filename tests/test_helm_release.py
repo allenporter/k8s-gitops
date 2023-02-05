@@ -18,12 +18,7 @@ import yaml
 from scripts.manifest import manifest, cmd
 
 from .conftest import (
-    kustomize_build_resources,
-    kind_filter,
-    kind,
-    is_kind_allowed,
-    HELMRELEASE_KINDS,
-    validate_resources,
+    POLICY_DIR,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -31,7 +26,6 @@ _LOGGER = logging.getLogger(__name__)
 KUSTOMIZE_BIN = "kustomize"
 HELM_RELEASE_KIND = "HelmRelease"
 HELM_RELEASE_VERSIONS = {"helm.toolkit.fluxcd.io/v2beta1"}
-POLICY_DIR = "infrastructure/base/policies"
 
 
 MANIFEST = manifest.manifest()
@@ -209,9 +203,3 @@ async def test_validate_helm_release(
             ],
         ]
     )
-
-    # Run helm template command and apply local tests
-    # TODO: Remove this and replace with full kyverno policies
-    result = await cmd.run_command(args)
-    docs = list(yaml.safe_load_all(result))
-    assert await validate_resources(docs), "Invalid HelmRelease"
