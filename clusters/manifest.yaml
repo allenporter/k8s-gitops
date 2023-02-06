@@ -1,5 +1,5 @@
 ---
-spec:
+clusters:
 - name: flux-system
   path: ./clusters/dev
   kustomizations:
