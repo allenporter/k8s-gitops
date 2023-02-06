@@ -16,7 +16,8 @@ import yaml
 from functools import cache
 from typing import Generator, Any
 
-from . import manifest, cmd
+from flux_local import manifest, repo
+from flux_local import kustomize
 
 
 _LOGGER = logging.getLogger(__name__)
@@ -61,62 +62,57 @@ def version_filter(versions: set[tuple[str, str]]):
 
 async def get_cluster_docs(root: Path) -> Generator[dict[str, Any], None, None]:
     """Return the Kustomization environments for flux clusters."""
-    out = await cmd.run_piped_commands(
-        [
-            [KUSTOMIZE_BIN, "cfg", "grep", f"kind={CLUSTER_KUSTOMIZE_KIND}", str(root)],
-            [KUSTOMIZE_BIN, "cfg", "grep", f"metadata.name={CLUSTER_KUSTOMIZE_NAME}"],
-        ]
+    cmd = kustomize.grep(f"kind={CLUSTER_KUSTOMIZE_KIND}", root).grep(
+        f"metadata.name={CLUSTER_KUSTOMIZE_NAME}"
     )
-    for doc in filter(
-        version_filter(CLUSTER_KUSTOMIZE_VERSIONS), yaml.safe_load_all(out)
-    ):
+    objects = await cmd.objects()
+    for doc in filter(version_filter(CLUSTER_KUSTOMIZE_VERSIONS), objects):
         yield doc
 
 
 async def get_kustomizations(root: Path) -> Generator[dict[str, Any], None, None]:
     """Return the Kustomization environments found in the cluster."""
-    out = await cmd.run_piped_commands(
-        [
-            [KUSTOMIZE_BIN, "cfg", "grep", f"kind={KUSTOMIZE_KIND}", str(root)],
-            [
-                KUSTOMIZE_BIN,
-                "cfg",
-                "grep",
-                f"metadata.name={CLUSTER_KUSTOMIZE_NAME}",
-                "--invert-match",
-            ],
-        ]
+    cmd = kustomize.grep(f"kind={KUSTOMIZE_KIND}", root).grep(
+        f"metadata.name={CLUSTER_KUSTOMIZE_NAME}", invert=True
     )
-    for doc in filter(version_filter(KUSTOMIZE_VERSIONS), yaml.safe_load_all(out)):
+    objects = await cmd.objects()
+    for doc in filter(version_filter(KUSTOMIZE_VERSIONS), objects):
         yield doc
 
 
 async def get_helm_docs(root: Path) -> Generator[dict[str, Any], None, None]:
     """Return an HelmRepository objects in the cluster."""
-    out = await cmd.run_piped_commands(
-        [
-            [KUSTOMIZE_BIN, "build", str(root)],
-            [
-                KUSTOMIZE_BIN,
-                "cfg",
-                "grep",
-                f"kind=({HELM_REPO_KIND}|{HELM_RELEASE_KIND})",
-            ],
-        ]
-    )
+    cmd = kustomize.build(root).grep(f"kind=({HELM_REPO_KIND}|{HELM_RELEASE_KIND})")
+    objects = await cmd.objects()
     for doc in filter(
         version_filter(HELM_REPO_VERSIONS | HELM_RELEASE_VERSIONS),
-        yaml.safe_load_all(out),
+        objects,
     ):
         yield doc
+
+
+def manifest_file() -> Path:
+    """Return the path to the manifest file."""
+    root = repo.repo_root()
+    return Path(root) / MANIFEST_FILE
+
+
+def build_manifest() -> Manifest:
+    """Return the contents of the manifest file."""
+    contents = manifest_file().read_text()
+    doc = next(yaml.load_all(contents, Loader=yaml.Loader))
+    if "spec" not in doc:
+        raise ValueError("Manifest file malformed, missing 'spec'")
+    return Manifest(clusters=doc["spec"])
 
 
 async def main() -> int:
     """Validate manifests."""
     logging.basicConfig(level=logging.DEBUG)
-    print("Processing repo:", manifest.repo_root())
+    root = repo.repo_root()
+    print("Processing repo:", repo.repo_root())
     clusters = []
-    async for cluster in get_cluster_docs(manifest.repo_root()):
+    async for cluster in get_cluster_docs(root):
         if "metadata" not in cluster or "name" not in cluster["metadata"]:
             raise ValueError(f"Invalid Kustomization did not have metadata.name")
         if "spec" not in cluster or "path" not in cluster["spec"]:
@@ -124,7 +120,7 @@ async def main() -> int:
         name = cluster["metadata"]["name"]
         path = cluster["spec"]["path"]
 
-        cluster_root = Path(manifest.repo_root()) / path.lstrip("./")
+        cluster_root = root / path.lstrip("./")
         print("Processing cluster", cluster_root)
 
         kustomizations = []
@@ -181,11 +177,11 @@ async def main() -> int:
         explicit_start=True,
     )
 
-    manifest_file = manifest.manifest_file()
-    if await asyncio.to_thread(manifest_file.read_text) == content:
+    mfile = manifest_file()
+    if await asyncio.to_thread(mfile.read_text) == content:
         return
 
-    await asyncio.to_thread(manifest_file.write_text, content)
+    await asyncio.to_thread(mfile.write_text, content)
 
 
 if __name__ == "__main__":
