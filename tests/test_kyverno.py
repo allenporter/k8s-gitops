@@ -10,7 +10,7 @@ policy tests.
 See `infrastructure/base/policies/` for the actual policies.
 """
 
-from scripts.manifest import cmd
+from flux_local import command
 
 
 POLICY_TEST_DIR = "tests/policies"
@@ -18,7 +18,7 @@ POLICY_TEST_DIR = "tests/policies"
 
 async def test_policies() -> None:
     """Run tests against the policies themselves."""
-    await cmd.run_command(
+    await command.run(
         [
             "kyverno",
             "test",

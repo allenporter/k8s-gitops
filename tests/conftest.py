@@ -4,16 +4,8 @@ from __future__ import annotations
 
 import asyncio
 import pytest
-import datetime
-import os
-from pathlib import Path
-import subprocess
 import logging
 import yaml
-from functools import cache
-from typing import Generator, Any
-
-from scripts.manifest import cmd
 
 
 _LOG_FMT = (
@@ -21,16 +13,10 @@ _LOG_FMT = (
 )
 logging.basicConfig(format=_LOG_FMT)
 
-_LOGGER = logging.getLogger(__name__)
-
 
 # Note: We should really only build policies included in the kustomize build, similar
 # to how we manage helm releases.
 POLICY_DIR = "infrastructure/base/policies"
-
-
-HELMREPO_KINDS = {("HelmRepository", "source.toolkit.fluxcd.io/v1beta2")}
-HELMRELEASE_KINDS = {("HelmRelease", "helm.toolkit.fluxcd.io/v2beta1")}
 
 
 @pytest.fixture(scope="module")
