@@ -2,7 +2,7 @@
 GitPython==3.1.30
 aiofiles==22.1.0
 iniconfig==2.0.0
-flux-local==0.0.2
+flux-local==0.0.3
 pip==23.0
 platformdirs==2.6.2
 pre-commit==3.0.4
