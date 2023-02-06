@@ -113,14 +113,8 @@ async def main() -> int:
     print("Processing repo:", repo.repo_root())
     clusters = []
     async for cluster in get_cluster_docs(root):
-        if "metadata" not in cluster or "name" not in cluster["metadata"]:
-            raise ValueError(f"Invalid Kustomization did not have metadata.name")
-        if "spec" not in cluster or "path" not in cluster["spec"]:
-            raise ValueError(f"Invalid Kustomization did not have spec.path: {doc}")
-        name = cluster["metadata"]["name"]
-        path = cluster["spec"]["path"]
-
-        cluster_root = root / path.lstrip("./")
+        cluster_doc = manifest.Cluster.from_doc(cluster)
+        cluster_root = root / cluster_doc.path.lstrip("./")
         print("Processing cluster", cluster_root)
 
         kustomizations = []
@@ -130,46 +124,20 @@ async def main() -> int:
                 orig_path := annotations.get("internal.config.kubernetes.io/path")
             ) and orig_path.startswith(CLUSTER_KUSTOMIZE_NAME):
                 continue
-
-            if (
-                "metadata" not in kustomization
-                or "name" not in kustomization["metadata"]
-            ):
-                raise ValueError(
-                    f"Invalid Kustomization did not have metadata.name: {kustomization}"
-                )
-            if "spec" not in kustomization or "path" not in kustomization["spec"]:
-                raise ValueError(
-                    f"Invalid Kustomization did not have spec.path: {kustomization}"
-                )
-            kustomization_path = kustomization["spec"]["path"]
-            print("Processing Kustomization", kustomization_path)
-            helm_docs = list([doc async for doc in get_helm_docs(kustomization_path)])
-            helm_repos = [
+            doc = manifest.Kustomization.from_doc(kustomization)
+            print("Processing Kustomization", doc.path)
+            helm_docs = list([doc async for doc in get_helm_docs(doc.path)])
+            doc.helm_repos = [
                 manifest.HelmRepository.from_doc(doc)
                 for doc in filter(kind_filter({HELM_REPO_KIND}), helm_docs)
             ]
-            helm_releases = [
+            doc.helm_releases = [
                 manifest.HelmRelease.from_doc(doc)
                 for doc in filter(kind_filter({HELM_RELEASE_KIND}), helm_docs)
             ]
-            kustomizations.append(
-                manifest.Kustomization(
-                    kustomization["metadata"]["name"],
-                    kustomization_path,
-                    helm_repos,
-                    helm_releases,
-                )
-            )
+            cluster_doc.kustomizations.append(doc)
 
-        clusters.append(
-            manifest.Cluster(
-                name=name,
-                path=path,
-                helm_repos=helm_repos,
-                kustomizations=kustomizations,
-            )
-        )
+        clusters.append(cluster_doc)
 
     await manifest.update_manifest(
         manifest_file(), manifest.Manifest(clusters=clusters)
