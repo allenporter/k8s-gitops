@@ -171,17 +171,9 @@ async def main() -> int:
             )
         )
 
-    content = yaml.dump(
-        {"spec": [dataclasses.asdict(cluster) for cluster in clusters]},
-        sort_keys=False,
-        explicit_start=True,
+    await manifest.update_manifest(
+        manifest_file(), manifest.Manifest(clusters=clusters)
     )
-
-    mfile = manifest_file()
-    if await asyncio.to_thread(mfile.read_text) == content:
-        return
-
-    await asyncio.to_thread(mfile.write_text, content)
 
 
 if __name__ == "__main__":
