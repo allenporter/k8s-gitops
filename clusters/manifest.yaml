@@ -1,5 +1,5 @@
 ---
-spec:
+clusters:
 - name: flux-system
   path: ./clusters/dev
   kustomizations:
@@ -11,7 +11,6 @@ spec:
       namespace: cert-manager
       chart:
         name: cert-manager
-        version: v1.11.0
         repo_name: jetstack
         repo_namespace: flux-system
   - name: crds
@@ -30,35 +29,30 @@ spec:
       namespace: hajimari
       chart:
         name: hajimari
-        version: 2.0.2
         repo_name: hajimari
         repo_namespace: flux-system
     - name: home-assistant
       namespace: home-assistant
       chart:
         name: home-assistant
-        version: 13.4.2
         repo_name: k8s-at-home
         repo_namespace: flux-system
     - name: jupyterhub
       namespace: jupyter
       chart:
         name: jupyterhub
-        version: 2.0.0
         repo_name: jupyterhub
         repo_namespace: flux-system
     - name: nextcloud
       namespace: nextcloud
       chart:
         name: nextcloud
-        version: 3.4.5
         repo_name: nextcloud
         repo_namespace: flux-system
     - name: rtsp-to-web
       namespace: rtsp-to-web
       chart:
         name: rtsp-to-web
-        version: 2.2.2
         repo_name: k8s-at-home
         repo_namespace: flux-system
   - name: infrastructure
@@ -132,28 +126,24 @@ spec:
       namespace: benji
       chart:
         name: benji
-        version: 1.1.0
         repo_name: benji
         repo_namespace: flux-system
     - name: kyverno
       namespace: kyverno
       chart:
         name: kyverno
-        version: v2.7.0
         repo_name: kyverno
         repo_namespace: flux-system
     - name: redis
       namespace: redis
       chart:
         name: redis
-        version: 17.7.1
         repo_name: bitnami
         repo_namespace: flux-system
     - name: rook-ceph
       namespace: rook-ceph
       chart:
         name: rook-ceph
-        version: v1.10.10
         repo_name: rook-release
         repo_namespace: flux-system
   - name: monitoring
@@ -164,56 +154,48 @@ spec:
       namespace: helm-dashboard
       chart:
         name: helm-dashboard
-        version: 0.1.3
         repo_name: komodorio
         repo_namespace: flux-system
     - name: kubernetes-dashboard
       namespace: kubernetes-dashboard
       chart:
         name: kubernetes-dashboard
-        version: 6.0.0
         repo_name: kubernetes-dashboard
         repo_namespace: flux-system
     - name: loki
       namespace: loki
       chart:
         name: loki
-        version: 4.4.2
         repo_name: grafana
         repo_namespace: flux-system
     - name: kube-prometheus-stack
       namespace: monitoring
       chart:
         name: kube-prometheus-stack
-        version: 44.3.1
         repo_name: prometheus-community
         repo_namespace: flux-system
     - name: speedtest-prometheus
       namespace: monitoring
       chart:
         name: speedtest-prometheus
-        version: 2.2.1
         repo_name: k8s-at-home
         repo_namespace: flux-system
     - name: podinfo-haproxy
       namespace: podinfo
       chart:
         name: podinfo
-        version: 6.3.3
         repo_name: podinfo
         repo_namespace: flux-system
     - name: podinfo-istio
       namespace: podinfo
       chart:
         name: podinfo
-        version: 6.3.3
         repo_name: podinfo
         repo_namespace: flux-system
     - name: podinfo-nginx
       namespace: podinfo
       chart:
         name: podinfo
-        version: 6.3.3
         repo_name: podinfo
         repo_namespace: flux-system
   - name: network
@@ -224,14 +206,12 @@ spec:
       namespace: adguard-home
       chart:
         name: adguard-home
-        version: 5.5.2
         repo_name: k8s-at-home
         repo_namespace: flux-system
     - name: adguard-home2
       namespace: adguard-home
       chart:
         name: adguard-home
-        version: 5.5.2
         repo_name: k8s-at-home
         repo_namespace: flux-system
   - name: services
@@ -242,56 +222,48 @@ spec:
       namespace: external-dns
       chart:
         name: external-dns
-        version: 6.13.2
         repo_name: bitnami
         repo_namespace: flux-system
     - name: haproxy
       namespace: haproxy
       chart:
         name: kubernetes-ingress
-        version: 1.27.1
         repo_name: haproxytech
         repo_namespace: flux-system
     - name: haproxy-external
       namespace: haproxy
       chart:
         name: kubernetes-ingress
-        version: 1.27.1
         repo_name: haproxytech
         repo_namespace: flux-system
     - name: istio-ingress
       namespace: istio-ingress
       chart:
         name: gateway
-        version: 1.16.2
         repo_name: istio
         repo_namespace: flux-system
     - name: istio-base
       namespace: istio-system
       chart:
         name: base
-        version: 1.16.2
         repo_name: istio
         repo_namespace: flux-system
     - name: istiod
       namespace: istio-system
       chart:
         name: istiod
-        version: 1.16.2
         repo_name: istio
         repo_namespace: flux-system
     - name: metallb
       namespace: metallb
       chart:
         name: metallb
-        version: 4.1.14
         repo_name: bitnami
         repo_namespace: flux-system
     - name: nginx
       namespace: nginx
       chart:
         name: ingress-nginx
-        version: 4.4.2
         repo_name: ingress-nginx
         repo_namespace: flux-system
   - name: settings
@@ -309,7 +281,6 @@ spec:
       namespace: cert-manager
       chart:
         name: cert-manager
-        version: v1.11.0
         repo_name: jetstack
         repo_namespace: flux-system
   - name: crds
@@ -324,63 +295,54 @@ spec:
       namespace: minecraft
       chart:
         name: minecraft
-        version: 4.5.0
         repo_name: itzg
         repo_namespace: flux-system
     - name: minecraft-02
       namespace: minecraft
       chart:
         name: minecraft
-        version: 4.5.0
         repo_name: itzg
         repo_namespace: flux-system
     - name: minecraft-05
       namespace: minecraft
       chart:
         name: minecraft
-        version: 4.5.0
         repo_name: itzg
         repo_namespace: flux-system
     - name: minecraft-06
       namespace: minecraft
       chart:
         name: minecraft
-        version: 4.5.0
         repo_name: itzg
         repo_namespace: flux-system
     - name: minecraft-07
       namespace: minecraft
       chart:
         name: minecraft
-        version: 4.5.0
         repo_name: itzg
         repo_namespace: flux-system
     - name: minecraft-08
       namespace: minecraft
       chart:
         name: minecraft
-        version: 4.5.0
         repo_name: itzg
         repo_namespace: flux-system
     - name: minecraft-119
       namespace: minecraft
       chart:
         name: minecraft
-        version: 4.5.0
         repo_name: itzg
         repo_namespace: flux-system
     - name: minecraft-bedrock-survival
       namespace: minecraft
       chart:
         name: minecraft-bedrock
-        version: 2.0.2
         repo_name: itzg
         repo_namespace: flux-system
     - name: minecraft-proxy
       namespace: minecraft
       chart:
         name: minecraft-proxy
-        version: 3.2.0
         repo_name: itzg
         repo_namespace: flux-system
   - name: home
@@ -391,49 +353,42 @@ spec:
       namespace: frigate
       chart:
         name: frigate
-        version: 7.0.0
         repo_name: blakeshome
         repo_namespace: flux-system
     - name: hajimari
       namespace: hajimari
       chart:
         name: hajimari
-        version: 2.0.2
         repo_name: hajimari
         repo_namespace: flux-system
     - name: home-assistant
       namespace: home-assistant
       chart:
         name: home-assistant
-        version: 13.4.2
         repo_name: k8s-at-home
         repo_namespace: flux-system
     - name: jupyterhub
       namespace: jupyter
       chart:
         name: jupyterhub
-        version: 2.0.0
         repo_name: jupyterhub
         repo_namespace: flux-system
     - name: mosquitto
       namespace: mqtt
       chart:
         name: mosquitto
-        version: 4.8.2
         repo_name: k8s-at-home
         repo_namespace: flux-system
     - name: rtsp-to-web
       namespace: rtsp-to-web
       chart:
         name: rtsp-to-web
-        version: 2.2.2
         repo_name: k8s-at-home
         repo_namespace: flux-system
     - name: teslamate
       namespace: teslamate
       chart:
         name: teslamate
-        version: 7.1.2
         repo_name: k8s-at-home
         repo_namespace: flux-system
   - name: infrastructure
@@ -507,28 +462,24 @@ spec:
       namespace: benji
       chart:
         name: benji
-        version: 1.1.0
         repo_name: benji
         repo_namespace: flux-system
     - name: kyverno
       namespace: kyverno
       chart:
         name: kyverno
-        version: v2.7.0
         repo_name: kyverno
         repo_namespace: flux-system
     - name: redis
       namespace: redis
       chart:
         name: redis
-        version: 17.6.0
         repo_name: bitnami
         repo_namespace: flux-system
     - name: rook-ceph
       namespace: rook-ceph
       chart:
         name: rook-ceph
-        version: v1.9.9
         repo_name: rook-release
         repo_namespace: flux-system
   - name: monitoring
@@ -539,49 +490,42 @@ spec:
       namespace: helm-dashboard
       chart:
         name: helm-dashboard
-        version: 0.1.3
         repo_name: komodorio
         repo_namespace: flux-system
     - name: kubernetes-dashboard
       namespace: kubernetes-dashboard
       chart:
         name: kubernetes-dashboard
-        version: 6.0.0
         repo_name: kubernetes-dashboard
         repo_namespace: flux-system
     - name: kube-prometheus-stack
       namespace: monitoring
       chart:
         name: kube-prometheus-stack
-        version: 44.3.1
         repo_name: prometheus-community
         repo_namespace: flux-system
     - name: speedtest-prometheus
       namespace: monitoring
       chart:
         name: speedtest-prometheus
-        version: 2.2.1
         repo_name: k8s-at-home
         repo_namespace: flux-system
     - name: podinfo-haproxy
       namespace: podinfo
       chart:
         name: podinfo
-        version: 6.3.3
         repo_name: podinfo
         repo_namespace: flux-system
     - name: podinfo-istio
       namespace: podinfo
       chart:
         name: podinfo
-        version: 6.3.3
         repo_name: podinfo
         repo_namespace: flux-system
     - name: podinfo-nginx
       namespace: podinfo
       chart:
         name: podinfo
-        version: 6.3.3
         repo_name: podinfo
         repo_namespace: flux-system
   - name: network
@@ -592,21 +536,18 @@ spec:
       namespace: adguard-home
       chart:
         name: adguard-home
-        version: 5.5.2
         repo_name: k8s-at-home
         repo_namespace: flux-system
     - name: adguard-home2
       namespace: adguard-home
       chart:
         name: adguard-home
-        version: 5.5.2
         repo_name: k8s-at-home
         repo_namespace: flux-system
     - name: unifi
       namespace: unifi
       chart:
         name: unifi
-        version: 5.1.2
         repo_name: k8s-at-home
         repo_namespace: flux-system
   - name: services
@@ -617,28 +558,24 @@ spec:
       namespace: external-dns
       chart:
         name: external-dns
-        version: 6.13.2
         repo_name: bitnami
         repo_namespace: flux-system
     - name: haproxy
       namespace: haproxy
       chart:
         name: kubernetes-ingress
-        version: 1.27.1
         repo_name: haproxytech
         repo_namespace: flux-system
     - name: haproxy-external
       namespace: haproxy
       chart:
         name: kubernetes-ingress
-        version: 1.27.1
         repo_name: haproxytech
         repo_namespace: flux-system
     - name: metallb
       namespace: metallb
       chart:
         name: metallb
-        version: 4.1.14
         repo_name: bitnami
         repo_namespace: flux-system
   - name: settings
