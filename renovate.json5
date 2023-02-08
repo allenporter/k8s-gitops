@@ -41,23 +41,23 @@
     ]
   },
   "packageRules": [
-    {
-      "packagePatterns": [
-          // https://github.com/kubernetes/ingress-nginx/issues/9569
-          "^ingress-nginx.*"
-      ],
-      "enabled": false,
-    },
     // Use different update schedules for dev and prod based on the type of
     // patch. Note that each rule needs its own brach prefix in order to
     // have a working space for evaluating the rules independently.
     {
-      "description": "dev: Minor updates are automatic",
+      "description": "dev: Patches are automatic",
       "matchPaths": ["**/dev/*"],
       "automerge": true,
       "automergeType": "branch",
       "additionalBranchPrefix": "dev-",
-      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "matchUpdateTypes": ["patch", "digest"],
+    },
+    {
+      "description": "dev: Minor updates automerged",
+      "matchPaths": ["**/dev/*"],
+      "automerge": true,
+      "additionalBranchPrefix": "dev-minor",
+      "matchUpdateTypes": ["minor"],
     },
     {
       "description": "dev: Major packages updated weekly",
@@ -74,6 +74,15 @@
       "stabilityDays": 1,
       "additionalBranchPrefix": "prod-patch",
       "matchUpdateTypes": ["patch"],
+    },
+    {
+      "description": "prod: Minor updates automerged weekly",
+      "matchPaths": ["**/prod/**"],
+      "automerge": true,
+      "extends": ["schedule:weekends"],
+      "additionalBranchPrefix": "prod-minor",
+      "stabilityDays": 1,
+      "matchUpdateTypes": ["minor"],
     },
     {
       "description": "prod: Packages updated weekly",
@@ -94,6 +103,7 @@
       "description": "Package requirements: updated weekly",
       "matchFiles": ["requirements.txt"],
       "extends": ["schedule:weekends"],
+      "automerge": true,
       "stabilityDays": 1,
       "matchUpdateTypes": ["major"],
     },
