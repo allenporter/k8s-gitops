@@ -12,7 +12,7 @@ import logging
 import yaml
 from typing import Generator, Any
 
-from flux_local import manifest, kustomize, repo
+from flux_local import manifest, kustomize, git_repo
 
 from .conftest import POLICY_DIR
 
@@ -30,7 +30,9 @@ KUSTOMIZATIONS = [
 
 @pytest.fixture(
     name="kustomize_file",
-    params=[repo.repo_root() / kustomization.path for kustomization in KUSTOMIZATIONS],
+    params=[
+        git_repo.repo_root() / kustomization.path for kustomization in KUSTOMIZATIONS
+    ],
     ids=(kustomization.path for kustomization in KUSTOMIZATIONS),
 )
 def kustomize_files_fixture(request: Any) -> Generator[str, None, None]:

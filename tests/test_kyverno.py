@@ -19,9 +19,11 @@ POLICY_TEST_DIR = "tests/policies"
 async def test_policies() -> None:
     """Run tests against the policies themselves."""
     await command.run(
-        [
-            "kyverno",
-            "test",
-            POLICY_TEST_DIR,
-        ],
+        command.Command(
+            [
+                "kyverno",
+                "test",
+                POLICY_TEST_DIR,
+            ]
+        ),
     )
