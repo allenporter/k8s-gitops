@@ -111,7 +111,7 @@ def helm_fixture(
 async def load_helm_release(test_config: Param) -> dict[str, Any]:
     """Return an HelmRelease objects in the cluster."""
     cmd = (
-        kustomize.build(str(test_config.kustomization.path))
+        kustomize.build(Path(test_config.kustomization.path))
         .grep(f"metadata.namespace=^{test_config.helm_release.namespace}$")
         .grep(f"metadata.name=^{test_config.helm_release.name}$")
         .grep(f"kind=^{HELM_RELEASE_KIND}$")
