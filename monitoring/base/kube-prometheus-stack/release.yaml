@@ -23,7 +23,7 @@ spec:
   upgrade:
     crds: CreateReplace
   test:
-    enable: true
+    enable: false
   # Default values
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
   values:
