@@ -16,7 +16,7 @@ import yaml
 from functools import cache
 from typing import Generator, Any
 
-from flux_local import repo
+from flux_local import git_repo
 from flux_local import kustomize
 from flux_local.manifest import update_manifest
 
@@ -30,7 +30,8 @@ MANIFEST_FILE = Path("clusters/manifest.yaml")
 async def main() -> int:
     """Validate manifests."""
     logging.basicConfig(level=logging.DEBUG)
-    manifest = await repo.build_manifest()
+    query = git_repo.ResourceSelector()
+    manifest = await git_repo.build_manifest()
     await update_manifest(MANIFEST_FILE, manifest)
 
 
