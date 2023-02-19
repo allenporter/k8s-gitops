@@ -4,6 +4,7 @@ clusters:
   path: ./clusters/dev
   kustomizations:
   - name: certmanager
+    namespace: flux-system
     path: ./certmanager/dev
     helm_repos: []
     helm_releases:
@@ -14,14 +15,17 @@ clusters:
         repo_name: jetstack
         repo_namespace: flux-system
   - name: crds
+    namespace: flux-system
     path: ./crds
     helm_repos: []
     helm_releases: []
   - name: games
+    namespace: flux-system
     path: ./games/dev
     helm_repos: []
     helm_releases: []
   - name: home
+    namespace: flux-system
     path: ./home/dev
     helm_repos: []
     helm_releases:
@@ -56,6 +60,7 @@ clusters:
         repo_name: k8s-at-home
         repo_namespace: flux-system
   - name: infrastructure
+    namespace: flux-system
     path: ./infrastructure/dev
     helm_repos:
     - name: benji
@@ -147,6 +152,7 @@ clusters:
         repo_name: rook-release
         repo_namespace: flux-system
   - name: monitoring
+    namespace: flux-system
     path: ./monitoring/dev
     helm_repos: []
     helm_releases:
@@ -199,6 +205,7 @@ clusters:
         repo_name: podinfo
         repo_namespace: flux-system
   - name: network
+    namespace: flux-system
     path: ./network/dev
     helm_repos: []
     helm_releases:
@@ -215,6 +222,7 @@ clusters:
         repo_name: k8s-at-home
         repo_namespace: flux-system
   - name: services
+    namespace: flux-system
     path: ./services/dev
     helm_repos: []
     helm_releases:
@@ -267,6 +275,7 @@ clusters:
         repo_name: ingress-nginx
         repo_namespace: flux-system
   - name: settings
+    namespace: flux-system
     path: ./settings/dev
     helm_repos: []
     helm_releases: []
@@ -274,6 +283,7 @@ clusters:
   path: ./clusters/prod
   kustomizations:
   - name: certmanager
+    namespace: flux-system
     path: ./certmanager/prod
     helm_repos: []
     helm_releases:
@@ -284,10 +294,12 @@ clusters:
         repo_name: jetstack
         repo_namespace: flux-system
   - name: crds
+    namespace: flux-system
     path: ./crds
     helm_repos: []
     helm_releases: []
   - name: games
+    namespace: flux-system
     path: ./games/prod
     helm_repos: []
     helm_releases:
@@ -346,6 +358,7 @@ clusters:
         repo_name: itzg
         repo_namespace: flux-system
   - name: home
+    namespace: flux-system
     path: ./home/prod
     helm_repos: []
     helm_releases:
@@ -392,6 +405,7 @@ clusters:
         repo_name: k8s-at-home
         repo_namespace: flux-system
   - name: infrastructure
+    namespace: flux-system
     path: ./infrastructure/prod
     helm_repos:
     - name: benji
@@ -483,6 +497,7 @@ clusters:
         repo_name: rook-release
         repo_namespace: flux-system
   - name: monitoring
+    namespace: flux-system
     path: ./monitoring/prod
     helm_repos: []
     helm_releases:
@@ -529,6 +544,7 @@ clusters:
         repo_name: podinfo
         repo_namespace: flux-system
   - name: network
+    namespace: flux-system
     path: ./network/prod
     helm_repos: []
     helm_releases:
@@ -551,6 +567,7 @@ clusters:
         repo_name: k8s-at-home
         repo_namespace: flux-system
   - name: services
+    namespace: flux-system
     path: ./services/prod
     helm_repos: []
     helm_releases:
@@ -579,6 +596,7 @@ clusters:
         repo_name: bitnami
         repo_namespace: flux-system
   - name: settings
+    namespace: flux-system
     path: ./settings/prod
     helm_repos: []
     helm_releases: []
