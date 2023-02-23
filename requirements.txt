@@ -4,7 +4,7 @@ aiofiles==23.1.0
 iniconfig==2.0.0
 flux-local==0.5.1
 pip==23.0.1
-pre-commit==3.0.4
+pre-commit==3.1.0
 py==1.11.0
 pytest==7.2.1
 PyYAML==6.0
