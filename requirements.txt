@@ -1,4 +1,4 @@
-flux-local==0.5.2
+flux-local==0.5.3
 pip==23.0.1
 pre-commit==3.1.0
 py==1.11.0
