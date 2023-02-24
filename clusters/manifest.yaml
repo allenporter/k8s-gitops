@@ -1,6 +1,7 @@
 ---
 clusters:
 - name: flux-system
+  namespace: flux-system
   path: ./clusters/dev
   kustomizations:
   - name: certmanager
@@ -280,6 +281,7 @@ clusters:
     helm_repos: []
     helm_releases: []
 - name: flux-system
+  namespace: flux-system
   path: ./clusters/prod
   kustomizations:
   - name: certmanager
