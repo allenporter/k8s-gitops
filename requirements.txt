@@ -1,17 +1,7 @@
--e .
-GitPython==3.1.31
-aiofiles==23.1.0
-iniconfig==2.0.0
 flux-local==0.5.2
 pip==23.0.1
 pre-commit==3.1.0
 py==1.11.0
-pytest==7.2.1
-PyYAML==6.0
-pydantic==1.10.5
-pytest-asyncio==0.20.3
-python-slugify==8.0.0
-typing-extensions==4.5.0
 virtualenv==20.19.0
 yamllint==1.29.0
 yq==3.1.1
