@@ -174,12 +174,6 @@ clusters:
         name: kubernetes-dashboard
         repo_name: kubernetes-dashboard
         repo_namespace: flux-system
-    - name: loki
-      namespace: loki
-      chart:
-        name: loki
-        repo_name: grafana
-        repo_namespace: flux-system
     - name: kube-prometheus-stack
       namespace: monitoring
       chart:
