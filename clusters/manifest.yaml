@@ -15,6 +15,11 @@ clusters:
         name: cert-manager
         repo_name: jetstack
         repo_namespace: flux-system
+  - name: flux-system
+    namespace: flux-system
+    path: ./clusters/dev
+    helm_repos: []
+    helm_releases: []
   - name: crds
     namespace: flux-system
     path: ./crds
@@ -295,6 +300,11 @@ clusters:
         name: cert-manager
         repo_name: jetstack
         repo_namespace: flux-system
+  - name: flux-system
+    namespace: flux-system
+    path: ./clusters/prod
+    helm_repos: []
+    helm_releases: []
   - name: crds
     namespace: flux-system
     path: ./crds
