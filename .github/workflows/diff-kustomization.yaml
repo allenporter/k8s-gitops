@@ -34,7 +34,7 @@ jobs:
       - name: flux-local diff ks
         id: diff
         run: |
-          cd pr && flux-local diff ks -o yaml --path-orig ../live > kustomization-diffs.yaml
+          cd pr && flux-local diff ks -o yaml --unified 6 --path-orig ../live > kustomization-diffs.yaml
           delimiter="$(openssl rand -hex 8)"
           diffs=$(yq '.[] | {path: .path, namespace: .namespace, name: .name}' kustomization-diffs.yaml | jq -s '.')
           echo "kustomizations<<${delimiter}" >> $GITHUB_OUTPUT
