@@ -62,9 +62,11 @@ jobs:
         id: diff
         run: |
           kustomization_data=$(cat kustomization-diffs.yaml | yq -j | jq -c '.[] | select(.path == "infrastructure/prod")' | jq -r '.diffs[].diff_markdown + "\n"')
-
           echo ${kustomization_data}
-          echo "kustomization_data=${kustomization_data}" >> $GITHUB_ENV
+          delimiter="$(openssl rand -hex 8)"
+          echo "kustomization_data<<<${delimiter}" >> $GITHUB_ENV
+          echo "${kustomization_data}" >> $GITHUB_ENV
+          echo "${delimiter}" >> $GITHUB_ENV
 
       - name: PR Comments
         uses: mshick/add-pr-comment@v2
