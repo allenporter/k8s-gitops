@@ -61,7 +61,7 @@ jobs:
       - name: read kustomization diff
         id: diff
         run: |
-          kustomization_data=$(cat kustomization-diffs.yaml | yq -j | jq -c '.[] | select(.path == "infrastructure/prod")' | jq -r '.diffs[].diff_markdown + "\n"'
+          kustomization_data=$(cat kustomization-diffs.yaml | yq -j | jq -c '.[] | select(.path == "infrastructure/prod")' | jq -r '.diffs[].diff_markdown + "\n"')
 
           echo ${kustomization_data}
           echo "kustomization_data=${kustomization_data}" >> $GITHUB_ENV
