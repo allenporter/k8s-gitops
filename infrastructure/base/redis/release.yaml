@@ -19,7 +19,7 @@ spec:
   values:
     auth:
       enabled: false
-    architecture: standalone
+    architecture: standalone2
     master:
       persistence:
         enabled: false
