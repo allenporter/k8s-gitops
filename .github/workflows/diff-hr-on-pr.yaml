@@ -7,7 +7,6 @@ on:
       - "**.yaml"
 env:
   conf_live_branch: main
-  conf_allow_repeating_same_comment: true
 jobs:
   changes:
     name: Detect changes
@@ -115,5 +114,5 @@ jobs:
         uses: mshick/add-pr-comment@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          allow-repeats: ${{ env.conf_allow_repeating_same_comment }}
+          message-id: ${{ matrix.file }}
           message: "${{ fromJSON(steps.diff.outputs.message) }}"
