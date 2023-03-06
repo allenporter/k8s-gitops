@@ -88,9 +88,6 @@ jobs:
       - name: read kustomization diff
         id: diff
         run: |
-          yq --version
-          jq --version
-          cat kustomization-diffs.yaml
           kustomization_data=$(yq '.' kustomization-diffs.yaml | jq ".[] | select(.kustomization_path == \"${{ matrix.kustomization.path }}\") " | jq -r '.diffs[].diff + "\n"')
           echo ${kustomization_data}
           delimiter="$(openssl rand -hex 8)"
@@ -135,7 +132,6 @@ jobs:
       - name: read helmrelease diff
         id: diff
         run: |
-          cat helmrelease-diffs.yaml
           helmrelease_data=$(yq '.' helmrelease-diffs.yaml | jq ".[] | select(.cluster_path == \"${{ matrix.helmrelease.path }}\") | select(.namespace == \"${{ matrix.helmrelease.namespace }}\") | select(.name == \"${{ matrix.helmrelease.name }}\")" | jq -r '.diffs[].diff + "\n"')
           echo ${helmrelease_data}
           delimiter="$(openssl rand -hex 8)"
