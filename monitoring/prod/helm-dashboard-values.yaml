@@ -9,4 +9,4 @@ spec:
     spec:
       # renovate: registryUrl=https://helm-charts.komodor.io
       chart: helm-dashboard
-      version: 0.1.5
+      version: 0.1.6
