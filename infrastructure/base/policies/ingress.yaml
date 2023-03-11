@@ -76,3 +76,31 @@ spec:
           - key: tls
             operator: AnyNotIn
             value: "{{ request.object.spec.keys(@) }}"
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: restrict-cluster-issuer
+  annotations:
+    policies.kyverno.io/title: Restrict Ingress Cluster Issuers to allowed set
+    policies.kyverno.io/category: Sample
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/subject: Ingress
+    policies.kyverno.io/description: >-
+      Ingress annotations for cert-manager cluster issuer may only appoint to the allowed
+      set.
+spec:
+  validationFailureAction: audit
+  background: true
+  rules:
+  - name: validate-cluster-issuer
+    match:
+      resources:
+        kinds:
+        - Ingress
+    validate:
+      message: "You must have a valid cert-manager.io/cluster-issuer annotation"
+      pattern:
+        metadata:
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
