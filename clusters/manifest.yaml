@@ -15,21 +15,25 @@ clusters:
         name: cert-manager
         repo_name: jetstack
         repo_namespace: flux-system
+    cluster_policies: []
   - name: flux-system
     namespace: flux-system
     path: ./clusters/dev
     helm_repos: []
     helm_releases: []
+    cluster_policies: []
   - name: crds
     namespace: flux-system
     path: ./crds
     helm_repos: []
     helm_releases: []
+    cluster_policies: []
   - name: games
     namespace: flux-system
     path: ./games/dev
     helm_repos: []
     helm_releases: []
+    cluster_policies: []
   - name: home
     namespace: flux-system
     path: ./home/dev
@@ -65,6 +69,7 @@ clusters:
         name: rtsp-to-web
         repo_name: k8s-at-home
         repo_namespace: flux-system
+    cluster_policies: []
   - name: infrastructure
     namespace: flux-system
     path: ./infrastructure/dev
@@ -132,6 +137,9 @@ clusters:
     - name: rook-release
       namespace: flux-system
       url: https://charts.rook.io/release
+    - name: weave-works
+      namespace: flux-system
+      url: https://helm.gitops.weave.works
     helm_releases:
     - name: benji
       namespace: benji
@@ -157,6 +165,15 @@ clusters:
         name: rook-ceph
         repo_name: rook-release
         repo_namespace: flux-system
+    cluster_policies:
+    - name: check-deprecated-apis
+      namespace: kyverno
+    - name: limit-resources
+      namespace: kyverno
+    - name: require-ingress-https
+      namespace: kyverno
+    - name: restrict-ingress-classes
+      namespace: kyverno
   - name: monitoring
     namespace: flux-system
     path: ./monitoring/dev
@@ -204,6 +221,13 @@ clusters:
         name: podinfo
         repo_name: podinfo
         repo_namespace: flux-system
+    - name: weave-gitops
+      namespace: weave-gitops
+      chart:
+        name: weave-gitops
+        repo_name: weave-works
+        repo_namespace: flux-system
+    cluster_policies: []
   - name: network
     namespace: flux-system
     path: ./network/dev
@@ -221,6 +245,7 @@ clusters:
         name: adguard-home
         repo_name: k8s-at-home
         repo_namespace: flux-system
+    cluster_policies: []
   - name: services
     namespace: flux-system
     path: ./services/dev
@@ -274,11 +299,13 @@ clusters:
         name: ingress-nginx
         repo_name: ingress-nginx
         repo_namespace: flux-system
+    cluster_policies: []
   - name: settings
     namespace: flux-system
     path: ./settings/dev
     helm_repos: []
     helm_releases: []
+    cluster_policies: []
 - name: flux-system
   namespace: flux-system
   path: ./clusters/prod
@@ -294,16 +321,19 @@ clusters:
         name: cert-manager
         repo_name: jetstack
         repo_namespace: flux-system
+    cluster_policies: []
   - name: flux-system
     namespace: flux-system
     path: ./clusters/prod
     helm_repos: []
     helm_releases: []
+    cluster_policies: []
   - name: crds
     namespace: flux-system
     path: ./crds
     helm_repos: []
     helm_releases: []
+    cluster_policies: []
   - name: games
     namespace: flux-system
     path: ./games/prod
@@ -363,6 +393,7 @@ clusters:
         name: minecraft-proxy
         repo_name: itzg
         repo_namespace: flux-system
+    cluster_policies: []
   - name: home
     namespace: flux-system
     path: ./home/prod
@@ -410,6 +441,7 @@ clusters:
         name: teslamate
         repo_name: k8s-at-home
         repo_namespace: flux-system
+    cluster_policies: []
   - name: infrastructure
     namespace: flux-system
     path: ./infrastructure/prod
@@ -477,6 +509,9 @@ clusters:
     - name: rook-release
       namespace: flux-system
       url: https://charts.rook.io/release
+    - name: weave-works
+      namespace: flux-system
+      url: https://helm.gitops.weave.works
     helm_releases:
     - name: benji
       namespace: benji
@@ -502,6 +537,7 @@ clusters:
         name: rook-ceph
         repo_name: rook-release
         repo_namespace: flux-system
+    cluster_policies: []
   - name: monitoring
     namespace: flux-system
     path: ./monitoring/prod
@@ -549,6 +585,7 @@ clusters:
         name: podinfo
         repo_name: podinfo
         repo_namespace: flux-system
+    cluster_policies: []
   - name: network
     namespace: flux-system
     path: ./network/prod
@@ -572,6 +609,7 @@ clusters:
         name: unifi
         repo_name: k8s-at-home
         repo_namespace: flux-system
+    cluster_policies: []
   - name: services
     namespace: flux-system
     path: ./services/prod
@@ -601,8 +639,10 @@ clusters:
         name: metallb
         repo_name: bitnami
         repo_namespace: flux-system
+    cluster_policies: []
   - name: settings
     namespace: flux-system
     path: ./settings/prod
     helm_repos: []
     helm_releases: []
+    cluster_policies: []
