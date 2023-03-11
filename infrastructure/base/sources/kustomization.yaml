@@ -25,3 +25,4 @@ resources:
   - komodorio.yaml
   - jupyterhub.yaml
   - kyverno.yaml
+  - weave-works.yaml
