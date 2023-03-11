@@ -20,6 +20,7 @@ results:
   result: fail
   resources:
   - example-unknown-ingressclass
+
 # Stop using deprecated annotations
 - policy: restrict-ingress-classes
   rule: forbid-ingress-annotations
@@ -34,3 +35,18 @@ results:
   result: fail
   resources:
   - example-with-annotation
+
+# Validate cluster issuer
+- policy: restrict-cluster-issuer
+  rule: validate-cluster-issuer
+  kind: Ingress
+  result: pass
+  resources:
+  - example-ingressclass
+  - example-default-ingressclass
+- policy: restrict-cluster-issuer
+  rule: validate-cluster-issuer
+  kind: Ingress
+  result: fail
+  resources:
+  - example-unknown-cluster-issuer

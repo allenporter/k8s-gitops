@@ -172,6 +172,8 @@ clusters:
       namespace: kyverno
     - name: require-ingress-https
       namespace: kyverno
+    - name: restrict-cluster-issuer
+      namespace: kyverno
     - name: restrict-ingress-classes
       namespace: kyverno
   - name: monitoring

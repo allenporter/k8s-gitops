@@ -4,6 +4,8 @@ kind: Ingress
 metadata:
   name: example-default-ingressclass
   namespace: ns
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
   - host: example.hsot
@@ -26,6 +28,8 @@ kind: Ingress
 metadata:
   name: example-ingressclass
   namespace: ns
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   ingressClass: haproxy
   rules:
@@ -51,6 +55,7 @@ metadata:
   namespace: ns
   annotations:
     kubernetes.io/ingress.class: haproxy
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
   - host: example.hsot
@@ -73,10 +78,36 @@ kind: Ingress
 metadata:
   name: example-unknown-ingressclass
   namespace: ns
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   ingressClass: foo
   rules:
   - host: example.hsot
+    http:
+      paths:
+      - backend:
+          service:
+            name: example
+            port:
+              number: 8083
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - example-host
+    secretName: example-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-unknown-cluster-issuer
+  namespace: ns
+  annotations:
+    cert-manager.io/cluster-issuer: invalid
+spec:
+  rules:
+  - host: example.host
     http:
       paths:
       - backend:
