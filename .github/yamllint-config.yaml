@@ -1,5 +1,6 @@
 ignore: |
   .github
+  monitoring/dev/weave-gitops-secret.yaml
 extends: default
 rules:
   truthy:
