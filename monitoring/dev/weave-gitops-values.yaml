@@ -14,4 +14,4 @@ spec:
     adminUser:
       create: true
       username: ${WEAVE_GITOPS_USERNAME}
-      password: ${WEAVE_GITOPS_PASSWORD}
+      passwordHash: ${WEAVE_GITOPS_PASSWORD}
