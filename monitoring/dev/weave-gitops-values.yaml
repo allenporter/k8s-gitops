@@ -7,5 +7,6 @@ metadata:
 spec:
   chart:
     spec:
+      # renovate: registryUrl=https://helm.gitops.weave.works
       chart: weave-gitops
       version: 4.0.15
