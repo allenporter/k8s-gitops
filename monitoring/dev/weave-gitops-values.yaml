@@ -10,3 +10,8 @@ spec:
       # renovate: registryUrl=https://helm.gitops.weave.works
       chart: weave-gitops
       version: 4.0.15
+  values:
+    adminUser:
+      create: true
+      username: ${WEAVE_GITOPS_USERNAME}
+      passwordHash: ${WEAVE_GITOPS_PASSWORD}
