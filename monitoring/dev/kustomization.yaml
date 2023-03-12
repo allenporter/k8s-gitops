@@ -20,4 +20,3 @@ resources:
 - ../base/etcd-monitoring
 - ../base/helm-dashboard
 - ../base/weave-gitops
-- weave-gitops-secret.yaml
