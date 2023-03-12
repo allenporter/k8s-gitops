@@ -67,6 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - diffs
+    if: ${{ needs.diffs.outputs.ksdiff_output != [] }}
     strategy:
       matrix:
         kustomization: ${{ fromJson(needs.diffs.outputs.ksdiff_output) }}
@@ -111,6 +112,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - diffs
+    if: ${{ needs.diffs.outputs.hrdiff_output != [] }}
     strategy:
       matrix:
         helmrelease: ${{ fromJson(needs.diffs.outputs.hrdiff_output) }}
