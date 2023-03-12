@@ -587,6 +587,12 @@ clusters:
         name: podinfo
         repo_name: podinfo
         repo_namespace: flux-system
+    - name: weave-gitops
+      namespace: weave-gitops
+      chart:
+        name: weave-gitops
+        repo_name: weave-works
+        repo_namespace: flux-system
     cluster_policies: []
   - name: network
     namespace: flux-system
