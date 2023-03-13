@@ -27,7 +27,7 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
-      tag: 2023.1.0
+      tag: 2023.2.0
     minecraftServer:
       motd: "Woodgreen Lobby"
       eula: "TRUE"
