@@ -8,7 +8,6 @@ patches:
 - path: speedtest-prometheus-values.yaml
 - path: kubernetes-dashboard-values.yaml
 - path: kube-prometheus-stack-values.yaml
-- path: helm-dashboard-values.yaml
 - path: weave-gitops-values.yaml
 resources:
 - namespace.yaml
@@ -18,5 +17,4 @@ resources:
 - ../base/kube-prometheus-stack
 - ../base/flux-monitoring
 - ../base/etcd-monitoring
-- ../base/helm-dashboard
 - ../base/weave-gitops
