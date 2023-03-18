@@ -113,9 +113,6 @@ clusters:
     - name: kasten
       namespace: flux-system
       url: https://charts.kasten.io/
-    - name: komodorio
-      namespace: flux-system
-      url: https://helm-charts.komodor.io
     - name: kube-state-metrics
       namespace: flux-system
       url: https://kubernetes.github.io/kube-state-metrics
@@ -181,12 +178,6 @@ clusters:
     path: ./monitoring/dev
     helm_repos: []
     helm_releases:
-    - name: helm-dashboard
-      namespace: helm-dashboard
-      chart:
-        name: helm-dashboard
-        repo_name: komodorio
-        repo_namespace: flux-system
     - name: kubernetes-dashboard
       namespace: kubernetes-dashboard
       chart:
@@ -487,9 +478,6 @@ clusters:
     - name: kasten
       namespace: flux-system
       url: https://charts.kasten.io/
-    - name: komodorio
-      namespace: flux-system
-      url: https://helm-charts.komodor.io
     - name: kube-state-metrics
       namespace: flux-system
       url: https://kubernetes.github.io/kube-state-metrics
@@ -545,12 +533,6 @@ clusters:
     path: ./monitoring/prod
     helm_repos: []
     helm_releases:
-    - name: helm-dashboard
-      namespace: helm-dashboard
-      chart:
-        name: helm-dashboard
-        repo_name: komodorio
-        repo_namespace: flux-system
     - name: kubernetes-dashboard
       namespace: kubernetes-dashboard
       chart:
