@@ -22,7 +22,6 @@ resources:
   - hajimari.yaml
   - istio.yaml
   - nextcloud.yaml
-  - komodorio.yaml
   - jupyterhub.yaml
   - kyverno.yaml
   - weave-works.yaml
