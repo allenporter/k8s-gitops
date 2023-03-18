@@ -19,6 +19,8 @@ spec:
   install:
     remediation:
       retries: 3
+  upgrade:
+    force: true  # Ensure old PVC is not holding
   test:
     enable: true
   # Default values
