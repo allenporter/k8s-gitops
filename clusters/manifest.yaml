@@ -80,9 +80,6 @@ clusters:
     - name: bitnami
       namespace: flux-system
       url: https://charts.bitnami.com/bitnami
-    - name: blakeshome
-      namespace: flux-system
-      url: https://blakeblackshear.github.io/blakeshome-charts/
     - name: grafana
       namespace: flux-system
       url: https://grafana.github.io/helm-charts
@@ -392,12 +389,6 @@ clusters:
     path: ./home/prod
     helm_repos: []
     helm_releases:
-    - name: frigate
-      namespace: frigate
-      chart:
-        name: frigate
-        repo_name: blakeshome
-        repo_namespace: flux-system
     - name: hajimari
       namespace: hajimari
       chart:
@@ -445,9 +436,6 @@ clusters:
     - name: bitnami
       namespace: flux-system
       url: https://charts.bitnami.com/bitnami
-    - name: blakeshome
-      namespace: flux-system
-      url: https://blakeblackshear.github.io/blakeshome-charts/
     - name: grafana
       namespace: flux-system
       url: https://grafana.github.io/helm-charts

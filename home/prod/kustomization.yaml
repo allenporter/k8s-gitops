@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - ../base/home-assistant
   - ../base/teslamate
-  - ../base/frigate
   - ../base/mosquitto
   - ../base/hajimari
   - ../base/rtsp-to-web
@@ -14,7 +13,6 @@ resources:
 patches:
   - path: home-assistant-values.yaml
   - path: teslamate-values.yaml
-  - path: frigate-values.yaml
   - path: hajimari-values.yaml
   - path: rtsp-to-web-values.yaml
   - path: jupyter-values.yaml
