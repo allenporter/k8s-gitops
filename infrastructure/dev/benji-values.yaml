@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://benji-backup.me/helm-charts/
       chart: benji
-      version: 1.1.0
+      version: 1.2.0
   values:
     ingress:
       annotations:
