@@ -24,4 +24,5 @@ data:
   UNIFI_CONTROLLER_IP: 10.10.25.20
   ESSENTIALS_URL: https://github.com/EssentialsX/Essentials/releases/download/2.19.7/EssentialsX-2.19.7.jar
   COREPROTECT_URL: https://cdn.modrinth.com/data/Lu3KuzdV/versions/mvLpRWww/CoreProtect-21.3.jar
-  SPIGOT_RESOURCES: 28140,6245,29595
+  # Luck Perms, Placeholder API, Warp System, Via Version
+  SPIGOT_RESOURCES: 28140,6245,29595,19254
