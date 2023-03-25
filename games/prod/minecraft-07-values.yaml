@@ -52,7 +52,7 @@ spec:
     extraEnv:
       ENABLE_AUTOPAUSE: FALSE
       SPIGET_RESOURCES: "28140,6245,29595,62480,74429"
-      MODS: "https://github.com/EssentialsX/Essentials/releases/download/2.19.6/EssentialsX-2.19.6.jar,https://cdn.modrinth.com/data/Lu3KuzdV/versions/mvLpRWww/CoreProtect-21.3.jar"
+      MODS: "https://github.com/EssentialsX/Essentials/releases/download/2.19.7/EssentialsX-2.19.7.jar,https://cdn.modrinth.com/data/Lu3KuzdV/versions/mvLpRWww/CoreProtect-21.3.jar"
     persistence:
       dataDir:
         enabled: true
