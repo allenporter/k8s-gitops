@@ -43,3 +43,6 @@ spec:
           command:
             - benji-command
             - cleanup
+    postgresql:
+      image:
+        tag: 14.5.0-debian-11-r35
