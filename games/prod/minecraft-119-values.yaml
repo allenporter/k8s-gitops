@@ -34,8 +34,8 @@ spec:
       motd: "Survival PVP"
       eula: "TRUE"
       type: "PAPER"
-      version: "LATEST"
-      forceReDownload: true
+      version: ${MINECRAFT_VERSION}
+      forceReDownload: false
       onlineMode: false
       pvp: true
       ops: ${MINECRAFT_03_OPS}
