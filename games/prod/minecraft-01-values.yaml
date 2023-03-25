@@ -32,8 +32,8 @@ spec:
       motd: "Woodgreen Lobby"
       eula: "TRUE"
       type: "PAPER"
-      version: "LATEST"
-      forceReDownload: true
+      version: ${MINECRAFT_VERSION}
+      forceReDownload: false
       onlineMode: false
       difficulty: peaceful
       gameMod: adventure

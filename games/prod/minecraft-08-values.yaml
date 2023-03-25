@@ -34,8 +34,8 @@ spec:
       motd: "mc08"
       eula: "TRUE"
       type: "PAPER"
-      version: "LATEST"
-      forceReDownload: true
+      version: ${MINECRAFT_VERSION}
+      forceReDownload: false
       onlineMode: false
       pvp: false
       ops: ${MINECRAFT_08_OPS}
