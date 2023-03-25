@@ -51,8 +51,8 @@ spec:
         password: ${RCON_PWD}
     extraEnv:
       ENABLE_AUTOPAUSE: FALSE
-      SPIGET_RESOURCES: "28140,6245,29595,74429"
-      MODS: "https://github.com/EssentialsX/Essentials/releases/download/2.19.6/EssentialsX-2.19.6.jar,https://cdn.modrinth.com/data/Lu3KuzdV/versions/mvLpRWww/CoreProtect-21.3.jar"
+      SPIGET_RESOURCES: ${SPIGOT_RESOURCES},74429
+      MODS: ${ESSENTIALS_URL},${COREPROTECT_URL}
     persistence:
       dataDir:
         enabled: true
