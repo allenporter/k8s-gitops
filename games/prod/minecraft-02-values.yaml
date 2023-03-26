@@ -58,10 +58,10 @@ spec:
         enabled: true
     resources:
       requests:
-        memory: 2048Mi
-        cpu: 250m
+        memory: 4500Mi
+        cpu: 1000m
       limits:
-        memory: 3072Mi
+        memory: 5000Mi
     serviceAnnotations:
       external-dns.alpha.kubernetes.io/hostname: mc02.${DOMAIN}.
     rconServiceAnnotations:
