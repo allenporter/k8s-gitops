@@ -56,6 +56,7 @@ spec:
     persistence:
       dataDir:
         enabled: true
+        Size: 10Gi
     resources:
       requests:
         memory: 8905Mi
