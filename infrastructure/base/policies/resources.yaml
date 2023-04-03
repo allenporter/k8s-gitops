@@ -12,7 +12,7 @@ metadata:
       cluster in check.
 spec:
   validationFailureAction: audit
-  background: true
+  background: false
   rules:
   - name: allowlist
     match:
