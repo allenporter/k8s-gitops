@@ -32,18 +32,8 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: chart-line
           hajimari.io/appName: Grafana
-      # Increase probe tolerance for slow db migrations
-      livenessProbe:
-        failureThreshold: 20
-      readinessProbe:
-        initialDelaySeconds: 60
-        timeoutSeconds: 10
-        periodSeconds: 30
-        failureThreshold: 20
-      deploymentStrategy:
-        type: Recreate
       persistence:
-        enabled: true
+        enabled: false
       sidecar:
         dashboards:
           enabled: true
