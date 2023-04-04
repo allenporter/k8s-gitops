@@ -32,6 +32,15 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: chart-line
           hajimari.io/appName: Grafana
+          external-dns.alpha.kubernetes.io/hostname: g.${DOMAIN}.
+          external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
+        hosts:
+          - g.${DOMAIN}
+        pathType: Prefix
+        tls:
+          - secretName: g-tls
+            hosts:
+              - g.${DOMAIN}
       persistence:
         enabled: false
       sidecar:
@@ -60,6 +69,10 @@ spec:
       enabled: false
     kubeEtcd:
       enabled: true
+      service:
+        enabled: true
+        port: 2379
+        targetPort: 2379
     prometheus:
       ingress:
         enabled: true
@@ -67,6 +80,15 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: database-clock
           hajimari.io/appName: Prometheus
+          external-dns.alpha.kubernetes.io/hostname: p.${DOMAIN}.
+          external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
+        hosts:
+          - p.${DOMAIN}
+        pathType: Prefix
+        tls:
+          - secretName: p-tls
+            hosts:
+              - p.${DOMAIN}
       prometheusSpec:
         ruleSelector: {}
         ruleNamespaceSelector: {}
@@ -93,6 +115,15 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: bell-alert
           hajimari.io/appName: Alertmanager
+          external-dns.alpha.kubernetes.io/hostname: a.${DOMAIN}.
+          external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
+        hosts:
+          - a.${DOMAIN}
+        pathType: Prefix
+        tls:
+          - secretName: a-tls
+            hosts:
+              - a.${DOMAIN}
       alertmanagerSpec:
         storage:
           volumeClaimTemplate:
@@ -112,39 +143,39 @@ spec:
           repeat_interval: 12h
           receiver: 'discord'
           routes:
-          - match:
-              severity: warning
-            continue: true
-            receiver: discord
-          - match:
-              alertname: Watchdog
-            receiver: 'null'
-          - match:
-              alertname: InfoInhibitor
-            receiver: 'null'
+            - match:
+                severity: warning
+              continue: true
+              receiver: discord
+            - match:
+                alertname: Watchdog
+              receiver: 'null'
+            - match:
+                alertname: InfoInhibitor
+              receiver: 'null'
         receivers:
-        - name: 'null'
-        - name: 'discord'
-          slack_configs:
-          - channel: '#alerts'
-            icon_url: https://avatars3.githubusercontent.com/u/3380462
-            username: 'Prometheus'
-            send_resolved: true
-            title: |-
-              [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }} {{ else if ne .CommonAnnotations.message ""}}{{ .CommonAnnotations.message }} {{ else if ne .CommonAnnotations.description ""}}{{ .CommonAnnotations.description }} {{ else }}{{ .CommonLabels.alertname }}{{ end }}
-            text: >-
-              {{ range .Alerts -}}
-                *Alert:* {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
-                {{ if ne .Annotations.summary ""}}*Summary:* {{ .Annotations.summary }} {{ else if ne .Annotations.message ""}}*Message:* {{ .Annotations.message }} {{ else if ne .Annotations.description ""}}*Description:* {{ .Annotations.description }}{{ end }}
-                *Details:*
-                {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-                {{ end }}
-              {{ end }}
+          - name: 'null'
+          - name: 'discord'
+            slack_configs:
+              - channel: '#alerts'
+                icon_url: https://avatars3.githubusercontent.com/u/3380462
+                username: 'Prometheus'
+                send_resolved: true
+                title: |-
+                  [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }} {{ else if ne .CommonAnnotations.message ""}}{{ .CommonAnnotations.message }} {{ else if ne .CommonAnnotations.description ""}}{{ .CommonAnnotations.description }} {{ else }}{{ .CommonLabels.alertname }}{{ end }}
+                text: >-
+                  {{ range .Alerts -}}
+                    *Alert:* {{ .Annotations.title }}{{ if .Labels.severity }} - `{{ .Labels.severity }}`{{ end }}
+                    {{ if ne .Annotations.summary ""}}*Summary:* {{ .Annotations.summary }} {{ else if ne .Annotations.message ""}}*Message:* {{ .Annotations.message }} {{ else if ne .Annotations.description ""}}*Description:* {{ .Annotations.description }}{{ end }}
+                    *Details:*
+                    {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+                    {{ end }}
+                  {{ end }}
         templates:
-        - '/etc/alertmanager/config/*.tmpl'
+          - '/etc/alertmanager/config/*.tmpl'
   valuesFrom:
-  # kubectl -n monitoring create secret generic discord-alert --from-literal=address=https://xxx
-  - kind: Secret
-    name: discord-alert
-    valuesKey: address
-    targetPath: alertmanager.config.global.slack_api_url
+    # kubectl -n monitoring create secret generic discord-alert --from-literal=address=https://xxx
+    - kind: Secret
+      name: discord-alert
+      valuesKey: address
+      targetPath: alertmanager.config.global.slack_api_url
