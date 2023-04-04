@@ -17,12 +17,8 @@ spec:
   # Increase default to deal with extra time needed since adding persistence
   timeout: 10m
   install:
-    crds: CreateReplace
     remediation:
       retries: 5
-  upgrade:
-    crds: CreateReplace
-    force: true
   test:
     enable: false
   # Default values
