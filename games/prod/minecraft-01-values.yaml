@@ -22,6 +22,8 @@ spec:
   test:
     # Fix problem where helm fails to uninstall
     enable: false
+  upgrade:
+    disableWait: true
   # Default values
   # https://github.com/itzg/minecraft-server-charts/blob/master/charts/minecraft/values.yaml
   values:
