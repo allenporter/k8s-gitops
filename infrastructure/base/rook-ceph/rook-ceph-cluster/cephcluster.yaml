@@ -15,5 +15,4 @@ spec:
       - ip: ${CEPH1_IP}
       - ip: ${CEPH2_IP}
       - ip: ${CEPH3_IP}
-      - ip: ${CEPH4_IP}
     externalMgrPrometheusPort: 9283
