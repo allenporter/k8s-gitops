@@ -7,7 +7,7 @@ metadata:
 data:
   ceph.conf: |
     [global]
-    mon_host = ${CEPH1_IP} ${CEPH2_IP} ${CEPH3_IP} ${CEPH4_IP}
+    mon_host = ${CEPH1_IP} ${CEPH2_IP} ${CEPH3_IP}
 
     [client.admin]
     keyring = /etc/ceph/keyring
