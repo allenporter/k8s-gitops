@@ -9,4 +9,4 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.bitnami.com/bitnami
       chart: metallb
-      version: 4.1.23
+      version: 4.2.0
