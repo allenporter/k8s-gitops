@@ -13,7 +13,7 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
-      tag: 2023.2.0
+      tag: 2023.3.0
     minecraftServer:
       motd: "Welcome to Minecraft! [dev]"
     serviceAnnotations:
