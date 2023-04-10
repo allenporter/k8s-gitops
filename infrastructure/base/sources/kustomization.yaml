@@ -24,3 +24,4 @@ resources:
   - jupyterhub.yaml
   - kyverno.yaml
   - weave-works.yaml
+  - bjw-s-helm-charts.yaml
