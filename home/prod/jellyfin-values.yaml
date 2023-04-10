@@ -13,3 +13,9 @@ spec:
     image:
       repository: jellyfin/jellyfin
       tag: 10.8.9
+    persistence:
+      media:
+        enabled: true
+        type: nfs
+        path: /volume1/media
+        server: sto01.${DOMAIN}
