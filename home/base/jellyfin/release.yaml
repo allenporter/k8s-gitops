@@ -1,0 +1,63 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jellyfin
+  namespace: jellyfin
+spec:
+  releaseName: jellyfin
+  chart:
+    spec:
+      chart: app-template
+      interval: 15m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    # Fix problem where helm fails to uninstall
+    enable: false
+  values:
+    image:
+      repository: jellyfin/jellyfin
+      pullPolicy: IfNotPresent
+    env:
+      TZ: America/Los_Angeles
+    hostNetwork: true
+    service:
+      main:
+        ports:
+          http:
+            port: 8096
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+          haproxy.org/forwarded-for: "true"
+          hajimari.io/icon: dvr
+          hajimari.io/appName: Jellyfin
+          external-dns.alpha.kubernetes.io/hostname: jellyfin.${DOMAIN}.
+          external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
+        hosts:
+          - host: jellyfin.${DOMAIN}
+            paths:
+              - path: /
+        tls:
+          - secretName: jellyfin-tls
+            hosts:
+              - jellyfin.${DOMAIN}
+    persistence:
+      config:
+        enabled: true
+        type: pvc
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        mountPath: /config
+      cache:
+        enabled: true
+        type: emptyDir
