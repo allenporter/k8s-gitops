@@ -80,6 +80,9 @@ clusters:
     - name: bitnami
       namespace: flux-system
       url: https://charts.bitnami.com/bitnami
+    - name: bjw-s-helm-charts
+      namespace: flux-system
+      url: https://bjw-s.github.io/helm-charts/
     - name: grafana
       namespace: flux-system
       url: https://grafana.github.io/helm-charts
@@ -401,6 +404,12 @@ clusters:
         name: home-assistant
         repo_name: k8s-at-home
         repo_namespace: flux-system
+    - name: jellyfin
+      namespace: jellyfin
+      chart:
+        name: app-template
+        repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
     - name: jupyterhub
       namespace: jupyter
       chart:
@@ -436,6 +445,9 @@ clusters:
     - name: bitnami
       namespace: flux-system
       url: https://charts.bitnami.com/bitnami
+    - name: bjw-s-helm-charts
+      namespace: flux-system
+      url: https://bjw-s.github.io/helm-charts/
     - name: grafana
       namespace: flux-system
       url: https://grafana.github.io/helm-charts

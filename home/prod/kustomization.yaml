@@ -8,6 +8,7 @@ resources:
   - ../base/hajimari
   - ../base/rtsp-to-web
   - ../base/jupyter
+  - ../base/jellyfin
   - prometheus-rules.yaml
   - home-assistant-config-pvc.yaml
 patches:
@@ -17,3 +18,4 @@ patches:
   - path: rtsp-to-web-values.yaml
   - path: jupyter-values.yaml
   - path: mosquitto-values.yaml
+  - path: jellyfin-values.yaml
