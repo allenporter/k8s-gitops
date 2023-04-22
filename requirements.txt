@@ -1,5 +1,5 @@
 flux-local==1.1.3
-pip==23.1
+pip==23.1.1
 pre-commit==3.2.2
 py==1.11.0
 virtualenv==20.22.0
