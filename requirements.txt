@@ -4,4 +4,4 @@ pre-commit==3.2.2
 py==1.11.0
 virtualenv==20.22.0
 yamllint==1.31.0
-yq==3.2.1
+yq==3.2.2
