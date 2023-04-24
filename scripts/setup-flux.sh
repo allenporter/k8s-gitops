@@ -17,6 +17,11 @@ if [ -z "${GITHUB_TOKEN}" ]; then
   exit 1
 fi
 
+if [ -z "${GITHUB_REOP}" ]; then
+  echo "Required env GITHUB_REOP not set"
+  exit 1
+fi
+
 which ${FLUX}
 if [ $? != 0 ]; then
   curl -s https://toolkit.fluxcd.io/install.sh | sudo bash
