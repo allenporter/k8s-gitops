@@ -1,0 +1,8 @@
+---
+- name: Schedule fstrim crontab weekly
+  cron:
+    name: "Trim filesystem to reclaim space"
+    special_time: weekly
+    user: root
+    job: "fstrim -av"
+    cron_file: "fstrim"

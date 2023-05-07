@@ -1,0 +1,8 @@
+---
+- name: Ensure all required packages are installed.
+  apt:
+    name: [
+      # For network diagnostics
+      "net-tools",
+    ]
+    state: latest

@@ -1,0 +1,12 @@
+#!/usr/bin/env ansible-playbook
+---
+- hosts: vmm
+  become: yes
+  serial: 1
+  roles:
+  - vmm_updates
+
+- hosts: vmm
+  become: yes
+  roles:
+  - common

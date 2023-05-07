@@ -1,0 +1,4 @@
+---
+- name: Set Timezone
+  community.general.timezone:
+    name: America/Los_Angeles
