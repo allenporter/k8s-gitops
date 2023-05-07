@@ -1,0 +1,9 @@
+---
+- name: Update package sources
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400  # one day
+
+- name: Apply server distribution updates
+  apt:
+    upgrade: dist

@@ -1,0 +1,15 @@
+---
+- name: fstrim
+  import_tasks: fstrim.yaml
+
+- name: Timezone
+  import_tasks: timezone.yaml
+
+- name: DNS
+  import_tasks: dns.yaml
+
+- name: Python
+  import_tasks: python.yaml
+
+- name: SSH Keys
+  import_tasks: ssh_keys.yaml
