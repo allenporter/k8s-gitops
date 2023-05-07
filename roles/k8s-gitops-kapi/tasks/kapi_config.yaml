@@ -1,0 +1,8 @@
+---
+- name: Sync admin config to local environment
+  fetch:
+    src: /etc/kubernetes/admin.conf
+    dest: "{{ env_dir }}/{{ groups['kapi'][0] }}.config"
+    flat: yes
+  when: root_node is defined and root_node == "true"
+  run_once: true

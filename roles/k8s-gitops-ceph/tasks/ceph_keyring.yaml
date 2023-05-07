@@ -1,0 +1,18 @@
+---
+- name: Check if configuration exists
+  stat:
+    path: "{{ env_dir }}/ceph.keyring"
+  delegate_to: localhost
+  register: st
+
+- name: Generate ceph keyring
+  shell: ceph auth get-or-create client.admin && echo
+  register: ceph_keyring
+  when: st.stat.exists == False
+
+- name: Write ceph config to local environment
+  copy:
+    content: "{{ ceph_keyring.stdout }}"
+    dest: "{{ env_dir }}/ceph.keyring"
+  delegate_to: localhost
+  when: st.stat.exists == False
