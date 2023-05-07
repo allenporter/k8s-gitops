@@ -1,5 +1,6 @@
 # Setup
 
+
 ## Flux
 
 The k8s cluster itself is bootstrapped using ansible in another repo, where
@@ -27,3 +28,15 @@ just manages setup of ceph for use within kuberntes.
 ```
 $ scripts/setup-ceph.sh
 ```
+
+## Bootstrapping the environment
+
+The following commands will setup ~/.env/ with appropriate configuration for k8s-gitops-env iamge:
+```
+$ ENV_INVENTORY_ROOT=/workspaces/homelab/hosts
+$ ansible-playbook plays/k8s-gitops-env.yaml -i ${ENV_INVENTORY_ROOT}/prod/inventory.yaml 
+$ ansible-playbook plays/k8s-gitops-env.yaml -i ${ENV_INVENTORY_ROOT}/dev/inventory.yaml 
+```
+
+You must set `ENV_INVENTORY_ROOT` in your environment persistently since it will be used
+by scripts to set up the environment when running `prod` or `dev`.
