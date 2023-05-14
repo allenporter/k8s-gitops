@@ -31,4 +31,5 @@ jobs:
           kyverno test tests/policies/
       - name: Test cluster (flux-local)
         run: |
-          flux-local test --enable-helm --enable-kyverno --api-versions policy/v1/PodDisruptionBudget
+          flux-local test --enable-helm --enable-kyverno --api-versions policy/v1/PodDisruptionBudget --path clusters/dev
+          flux-local test --enable-helm --enable-kyverno --api-versions policy/v1/PodDisruptionBudget --path clusters/prod
