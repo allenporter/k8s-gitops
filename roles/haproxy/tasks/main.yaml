@@ -1,0 +1,20 @@
+---
+- name: Kubernetes control plane - Gather facts for haproxy
+  hosts: kapi
+  gather_facts: yes
+
+- hosts: prx
+  become: yes
+  import_tasks: packages.yaml
+
+- hosts: prx
+  become: yes
+  vars:
+    # for haproxy-k8s
+    cert_dir: /etc/haproxy/certs
+  import_tasks: certs.yaml
+
+- hosts: prx
+  become: yes
+  import_tasks: config.yaml
+

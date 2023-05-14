@@ -1,0 +1,6 @@
+---
+- name: Restart haproxy
+  service:
+    name: haproxy
+    daemon_reload: yes
+    state: restarted
