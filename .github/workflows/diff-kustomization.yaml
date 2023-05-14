@@ -12,13 +12,14 @@ jobs:
   diffs:
     name: Compute diffs
     runs-on: ubuntu-latest
-    strategy_matrix:
-      cluster_path:
-        - clusters/dev
-        - clusters/prod
-      resource:
-        - helmrelease
-        - kustomization
+    strategy:
+      matrix:
+        cluster_path:
+          - clusters/dev
+          - clusters/prod
+        resource:
+          - helmrelease
+          - kustomization
     steps:
       - uses: allenporter/flux-local-action/diff@master
         id: diff
