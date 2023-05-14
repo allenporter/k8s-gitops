@@ -32,7 +32,7 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           message-id: ${{ matrix.cluster_path }}/${{ matrix.resource }}
-          message-failure: Unable to post kustomization diff
+          message-failure: Unable to post diff
           message: |
             ```diff
             ${{ steps.diff.outputs.diff }}
