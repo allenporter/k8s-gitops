@@ -1,8 +1,8 @@
 #!/usr/bin/env ansible-playbook
 ---
-- hosts: prx
-  become: yes
+- hosts: prx,kube,kapi
   roles:
+  - updates
   - common
 
 - hosts: prx,kapi
