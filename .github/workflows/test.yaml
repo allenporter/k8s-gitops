@@ -9,6 +9,11 @@ on:
       - main
 jobs:
   flux_tests:
+    strategy:
+      matrix:
+        cluster_path:
+          - clusters/dev
+          - clusters/prod
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -16,13 +21,7 @@ jobs:
       - name: flux-local test dev cluster
         uses: allenporter/flux-local-action/test@v1
         with:
-          path: clusters/dev
-          enable-helm: true
-          enable-kyverno: true
-      - name: flux-local test prod cluster
-        uses: allenporter/flux-local-action/test@v1
-        with:
-          path: clusters/prod
+          path: ${{ matrix.cluster_path }}
           enable-helm: true
           enable-kyverno: true
 
