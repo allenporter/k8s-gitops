@@ -12,142 +12,27 @@ jobs:
   diffs:
     name: Compute diffs
     runs-on: ubuntu-latest
-    outputs:
-      ksdiff_output: "${{ steps.ksdiff.outputs.kustomizations }}"
-      hrdiff_output: "${{ steps.hrdiff.outputs.helmreleases }}"
+    strategy_matrix:
+      cluster_path:
+        - clusters/dev
+        - clusters/prod
+      resource:
+        - helmrelease
+        - kustomization
     steps:
-      - name: Checkout PR branch
-        uses: actions/checkout@v3
-        with:
-          path: pr
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ env.python_version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r pr/requirements.txt
-      - name: Checkout live branch
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ env.conf_live_branch }}
-          path: live
-      - name: flux-local diff ks
-        id: ksdiff
-        run: |
-          (cd pr && flux-local diff ks -o yaml --unified 6 --path-orig ../live) > kustomization-diffs.yaml
-          delimiter="$(openssl rand -hex 8)"
-          diffs=$(yq '.' kustomization-diffs.yaml | jq '.[] | {path: .kustomization_path, namespace: .namespace, name: .name}' | jq -s '.')
-          echo "${diffs}"
-          echo "kustomizations<<${delimiter}" >> $GITHUB_OUTPUT
-          echo "${diffs}" >> $GITHUB_OUTPUT
-          echo "${delimiter}" >> $GITHUB_OUTPUT
-      - uses: actions/upload-artifact@v3
-        with:
-          name: kustomization-diffs
-          path: kustomization-diffs.yaml
-      - name: flux-local diff hr
-        id: hrdiff
-        run: |
-          (cd pr && flux-local diff hr -A -o yaml --unified 6 --path-orig ../live) > helmrelease-diffs.yaml
-          delimiter="$(openssl rand -hex 8)"
-          diffs=$(yq '.' helmrelease-diffs.yaml | jq '.[] | {path: .cluster_path, namespace: .namespace, name: .name}' | jq -s '.')
-          echo "${diffs}"
-          echo "helmreleases<<${delimiter}" >> $GITHUB_OUTPUT
-          echo "${diffs}" >> $GITHUB_OUTPUT
-          echo "${delimiter}" >> $GITHUB_OUTPUT
-      - uses: actions/upload-artifact@v3
-        with:
-          name: helmrelease-diffs
-          path: helmrelease-diffs.yaml
-
-  kustomization:
-    name: Kustomization
-    runs-on: ubuntu-latest
-    needs:
-      - diffs
-    if: ${{ needs.diffs.outputs.ksdiff_output != '' && toJson(fromJson(needs.diffs.outputs.ksdiff_output)) != '[]' }}
-    strategy:
-      matrix:
-        kustomization: ${{ fromJson(needs.diffs.outputs.ksdiff_output) }}
-      fail-fast: false
-    steps:
-      - name: Checkout PR branch
-        uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ env.python_version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - uses: actions/download-artifact@v3
-        with:
-          name: kustomization-diffs
-      - name: read kustomization diff
+      - uses: allenporter/flux-local-action/diff@master
         id: diff
-        run: |
-          kustomization_data=$(yq '.' kustomization-diffs.yaml | jq ".[] | select(.kustomization_path == \"${{ matrix.kustomization.path }}\") " | jq -r '.diffs[].diff + "\n"')
-          echo ${kustomization_data}
-          delimiter="$(openssl rand -hex 8)"
-          echo "kustomization_data<<${delimiter}" >> $GITHUB_ENV
-          echo "${kustomization_data}" >> $GITHUB_ENV
-          echo "${delimiter}" >> $GITHUB_ENV
-
+        with:
+          path: ${{ matrix.cluster_path }}
+          resource: ${{ matrix.resource }}
       - name: PR Comments
         uses: mshick/add-pr-comment@v2
+        if: ${{ steps.diff.diff_output != '' }}       
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message-id: ${{ matrix.kustomization.path }}
+          message-id: ${{ matrix.cluster_path }}/${{ matrix.resource }}
           message-failure: Unable to post kustomization diff
           message: |
             ```diff
-            ${{ env.kustomization_data }}
-            ```
-
-  helmrelease:
-    name: HelmRelease
-    runs-on: ubuntu-latest
-    needs:
-      - diffs
-    if: ${{ needs.diffs.outputs.hrdiff_output != '' && toJson(fromJson(needs.diffs.outputs.hrdiff_output)) != '[]' }}
-    strategy:
-      matrix:
-        helmrelease: ${{ fromJson(needs.diffs.outputs.hrdiff_output) }}
-      fail-fast: false
-    steps:
-      - name: Checkout PR branch
-        uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ env.python_version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - uses: actions/download-artifact@v3
-        with:
-          name: helmrelease-diffs
-      - name: read helmrelease diff
-        id: diff
-        run: |
-          helmrelease_data=$(yq '.' helmrelease-diffs.yaml | jq ".[] | select(.cluster_path == \"${{ matrix.helmrelease.path }}\") | select(.namespace == \"${{ matrix.helmrelease.namespace }}\") | select(.name == \"${{ matrix.helmrelease.name }}\")" | jq -r '.diffs[].diff + "\n"')
-          echo ${helmrelease_data}
-          delimiter="$(openssl rand -hex 8)"
-          echo "helmrelease_data<<${delimiter}" >> $GITHUB_ENV
-          echo "${helmrelease_data}" >> $GITHUB_ENV
-          echo "${delimiter}" >> $GITHUB_ENV
-
-      - name: PR Comments
-        uses: mshick/add-pr-comment@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message-id: ${{ matrix.helmrelease.cluster_path }}-${{ matrix.helmrelease.namespace }}-${{ matrix.helmrelease.name }}
-          message-failure: Unable to post helmrelease diff
-          message: |
-            ```diff
-            ${{ env.helmrelease_data }}
+            ${{ steps.diff.diff_output }}
             ```
