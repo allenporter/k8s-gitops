@@ -1,6 +1,0 @@
-#!/usr/bin/env ansible-playbook
----
-- hosts: all,!rtr,!sto,!swt,!vmm,!wifi,!dhcp,!cfg  # Skip stacked etcd hosts
-  roles:
-  - updates
-  - common
