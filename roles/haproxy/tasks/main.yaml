@@ -17,4 +17,3 @@
 - hosts: prx
   become: yes
   import_tasks: config.yaml
-

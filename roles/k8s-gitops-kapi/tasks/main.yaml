@@ -1,5 +1,3 @@
 ---
 - name: Kubernetes Configuration
   import_tasks: kapi_config.yaml
-
-

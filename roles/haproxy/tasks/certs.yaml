@@ -13,7 +13,7 @@
     - { src: "{{ prod_thebends_privkey_path }}", dest: "prod_thebends_privkey.pem" }
     - { src: "{{ prod_thebends_fullchain_path }}", dest: "prod_thebends_fullchain.pem" }
   notify:
-   - Restart haproxy
+    - Restart haproxy
 
 - name: Create prod.thebends pem file
   shell:
@@ -21,4 +21,4 @@
     chdir: "{{ cert_dir }}"
     creates: "{{ cert_dir }}/prod_thebends_haproxy.pem"
   notify:
-   - Restart haproxy
+    - Restart haproxy
