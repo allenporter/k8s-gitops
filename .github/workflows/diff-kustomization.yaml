@@ -28,12 +28,12 @@ jobs:
           resource: ${{ matrix.resource }}
       - name: PR Comments
         uses: mshick/add-pr-comment@v2
-        if: ${{ steps.diff.diff_output != '' }}       
+        if: ${{ steps.diff.diff != '' }}       
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           message-id: ${{ matrix.cluster_path }}/${{ matrix.resource }}
           message-failure: Unable to post kustomization diff
           message: |
             ```diff
-            ${{ steps.diff.diff_output }}
+            ${{ steps.diff.diff }}
             ```
