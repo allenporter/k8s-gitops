@@ -17,13 +17,13 @@ jobs:
         run: |
           kyverno test tests/policies/
       - name: Test dev cluster
-        uses: allenporter/flux-local/test@v0
+        uses: allenporter/flux-local-action/test@v0
         with:
           path: clusters/dev
           enable_helm: true
           enable_kyverno: true
       - name: Test prod cluster
-        uses: allenporter/flux-local/test@v0
+        uses: allenporter/flux-local-action/test@v0
         with:
           path: clusters/prod
           enable_helm: true
