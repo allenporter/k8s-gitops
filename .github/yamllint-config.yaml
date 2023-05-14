@@ -1,6 +1,8 @@
 ignore: |
   .github
+  **/*secrets.yaml
   monitoring/dev/weave-gitops-secret.yaml
+  venv
 extends: default
 rules:
   truthy:
@@ -17,3 +19,4 @@ rules:
   indentation:
     spaces: 2
     indent-sequences: consistent
+  new-line-at-end-of-file: disable

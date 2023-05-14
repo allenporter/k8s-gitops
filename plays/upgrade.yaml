@@ -6,7 +6,7 @@
   tasks:
   - name: Check if upgrade is available
     command: do-release-upgrade --check-dist-upgrade-only
-    ignore_errors: True
+    ignore_errors: true
     register: upgrade_available
 
   - name: Skip if no upgrade needed
@@ -18,8 +18,8 @@
       repo: "{{ item }}"
       state: absent
     loop:
-      - deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
-      - deb https://apt.kubernetes.io/ kubernetes-xenial main
+    - deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+    - deb https://apt.kubernetes.io/ kubernetes-xenial main
     register: k8s_apt_repo
 
   - name: Disable 3rd party sources to allow upgrade
@@ -27,7 +27,7 @@
       repo: "{{ item }}"
       state: absent
     loop:
-      - deb https://baltocdn.com/helm/stable/debian/ all main
+    - deb https://baltocdn.com/helm/stable/debian/ all main
     register: helm_apt_repo
 
   - name: Update package sources
@@ -58,8 +58,8 @@
       repo: "{{ item }}"
       state: present
     loop:
-      - deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable
-      - deb https://apt.kubernetes.io/ kubernetes-xenial main
+    - deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable
+    - deb https://apt.kubernetes.io/ kubernetes-xenial main
     when: k8s_apt_repo.changed
 
   - name: Re-enable 3rd party sources to allow upgrade
@@ -67,7 +67,7 @@
       repo: "{{ item }}"
       state: present
     loop:
-      - deb https://baltocdn.com/helm/stable/debian/ all main
+    - deb https://baltocdn.com/helm/stable/debian/ all main
     when: helm_apt_repo.changed
 
   - name: Reboot host and wait for it to restart

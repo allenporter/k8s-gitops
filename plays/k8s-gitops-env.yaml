@@ -1,8 +1,8 @@
 #!/usr/bin/env ansible-playbook
 #
 # Used for bootstrapping the initial environment variables:
-#   ansible-playbook plays/k8s-gitops-env.yaml -i /workspaces/homelab/hosts/prod/inventory.yaml 
-#   ansible-playbook plays/k8s-gitops-env.yaml -i /workspaces/homelab/hosts/dev/inventory.yaml 
+#   ansible-playbook plays/k8s-gitops-env.yaml -i /workspaces/homelab/hosts/prod/inventory.yaml
+#   ansible-playbook plays/k8s-gitops-env.yaml -i /workspaces/homelab/hosts/dev/inventory.yaml
 ---
 - name: Bootstrap k8s-gitops Environment (Ceph)
   hosts: vmm
