@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: flux-local test dev cluster
+      - name: flux-local test
         uses: allenporter/flux-local-action/test@v2
         with:
           path: ${{ matrix.cluster_path }}
