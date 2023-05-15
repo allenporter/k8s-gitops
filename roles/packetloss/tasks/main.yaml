@@ -1,0 +1,12 @@
+---
+- meta: end_host
+  when: not(disable_offload_iface is defined)
+
+- name: Packages
+  import_tasks: packages.yaml
+
+- name: Disable offload
+  import_tasks: disable-offload.yaml
+
+- name: Install ifup hooks
+  import_tasks: ifup-hooks.yaml

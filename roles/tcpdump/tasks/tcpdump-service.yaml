@@ -1,0 +1,21 @@
+---
+- name: Make tcpdump directory
+  file:
+    path: "{{ tcpdump_dir }}"
+    state: directory
+    mode: '0777'
+
+- name: Install tcpdump service
+  template:
+    src: tcpdump.service.j2
+    dest: /etc/systemd/system/tcpdump.service
+  when: tcpdump_iface is defined
+
+# Currently disabled as packet loss has been solved
+- name: Disable tcpdump service
+  systemd:
+    name: tcpdump
+    state: stopped
+    enabled: yes
+    daemon_reload: yes
+  when: tcpdump_iface is defined

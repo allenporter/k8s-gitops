@@ -1,0 +1,11 @@
+- name: Install segmentation offload hook
+  copy:
+    src: disable-offload.sh
+    dest: "{{ ifup_dir }}/disable-offload"
+    mode: 0755
+
+- name: Disable segmentation offload now
+  command: "{{ ifup_dir }}/disable-offload"
+  environment:
+    IFACE: "{{ item }}"
+  with_items: "{{ disable_offload_iface.split(',') }}"

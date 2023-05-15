@@ -1,9 +1,11 @@
 #!/usr/bin/env ansible-playbook
 ---
 - hosts: prx,kube,kapi
+  become: yes
   roles:
   - updates
   - common
+  - packetloss
 
 - hosts: prx,kapi
   become: yes

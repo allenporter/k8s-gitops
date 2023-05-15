@@ -7,3 +7,4 @@
   - common
   - pve-exporter
   - prometheus
+  - packetloss

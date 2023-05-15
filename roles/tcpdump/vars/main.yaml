@@ -1,0 +1,5 @@
+---
+tcpdump_dir: "/var/lib/tcpdump"
+tcpdump_bin: "/usr/bin/tcpdump"
+tcpdump_output_path: "{{ tcpdump_dir }}/{{ inventory_hostname }}.%%Y%%m%%d-%%H%%M.%%S.pcap"
+tcpdump_filter: "port 2380"
