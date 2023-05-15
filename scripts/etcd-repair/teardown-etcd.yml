@@ -1,3 +1,4 @@
+---
 - hosts: cfg
   vars_prompt:
     - name: teardown_etcd
@@ -15,7 +16,8 @@
 
     - name: Ensure all required packages are installed.
       apt:
-        name: [ "etcd-server" ]
+        name:
+          - etcd-server
         state: absent
 
     - name: Remove etcd state
