@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: flux-local test dev cluster
-        uses: allenporter/flux-local-action/test@v1
+        uses: allenporter/flux-local-action/test@v2
         with:
           path: ${{ matrix.cluster_path }}
           enable-helm: true
