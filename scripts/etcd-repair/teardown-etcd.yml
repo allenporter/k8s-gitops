@@ -1,0 +1,30 @@
+---
+- hosts: cfg
+  vars_prompt:
+    - name: teardown_etcd
+      prompt: "This will destory etcd.  Press return to continue, or ctrl-c to abort"
+      private: no
+
+- hosts: cfg
+  become: yes
+  tasks:
+    - name: Stop etcd service
+      systemd:
+        name: etcd
+        enabled: no
+        state: stopped
+
+    - name: Ensure all required packages are installed.
+      apt:
+        name:
+          - etcd-server
+        state: absent
+
+    - name: Remove etcd state
+      shell:
+        cmd: rm -fr /var/lib/etcd/*
+
+    - name: Remove etcd config / environment variables
+      file:
+        path: /etc/default/etcd
+        state: absent
