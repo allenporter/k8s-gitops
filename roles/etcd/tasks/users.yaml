@@ -1,0 +1,13 @@
+---
+- name: Add etcd group
+  user:
+    name: etcd
+    state: present
+
+- name: Add etcd user
+  user:
+    name: etcd
+    group: etcd
+    shell: /usr/sbin/nologin
+    state: present
+    home: /var/lib/etcd/

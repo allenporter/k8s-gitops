@@ -1,0 +1,34 @@
+---
+- name: Check etcd version
+  shell: "/usr/bin/etcd --version || /bin/echo 'etcd Version: 0'"
+  register: results
+
+- set_fact:
+    installed_version: "{{ results.stdout | regex_search(regexp,'\\1') | first }}"
+  vars:
+    regexp: 'etcd Version: (\S+)'
+
+- debug:
+    var: installed_version
+  when:
+    - installed_version is defined
+
+- name: download etcd
+  unarchive:
+    src: "{{ download_url }}/v{{ etcd_version }}/etcd-v{{ etcd_version }}-linux-amd64.tar.gz"
+    dest: /usr/bin
+    remote_src: yes
+  when:
+    - installed_version != etcd_version
+
+- name: symlink etcd
+  file:
+    src: "/usr/bin/etcd-v{{ etcd_version }}-linux-amd64/{{ item }}"
+    dest: "/usr/bin/{{ item }}"
+    state: link
+  with_items:
+    - etcd
+    - etcdctl
+  when:
+    - installed_version != etcd_version
+  notify: restart etcd
