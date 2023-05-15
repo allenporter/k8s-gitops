@@ -40,3 +40,18 @@ $ ansible-playbook plays/k8s-gitops-env.yaml -i ${ENV_INVENTORY_ROOT}/dev/invent
 
 You must set `ENV_INVENTORY_ROOT` in your environment persistently since it will be used
 by scripts to set up the environment when running `prod` or `dev`.
+
+## Secrets
+
+The following GCP secrets must be set with the gcloud role account set with `Secret Accessor`:
+
+For provisioning VMs:
+- dns-terraform-key
+- proxmox-terraform-prov-api-key
+
+For bootstrapping flux:
+- flux-k8s-gitops-github-token
+
+For bootstrapping out of cluster prometheus:
+- proxmox-prometheus-pve-exporter-api-key
+- alertmanager-gmail-secret

@@ -1,0 +1,49 @@
+---
+- name: Install configuration
+  template:
+    src: prometheus.tmpl.yaml
+    dest: "{{ config_dir }}/prometheus.yml"
+  register: config
+
+- name: Install rules
+  copy:
+    src: "{{ item }}.yaml"
+    dest: "{{ config_dir }}/{{ item }}.yml"
+  with_items:
+    - cluster_rules
+    - ceph_rules
+  notify: restart prometheus
+
+- name: Alertmanager authentication
+  gcp_secret:
+    project: "{{ lookup('ansible.builtin.env', 'GCLOUD_PROJECT_ID') }}"
+    secret: "{{ gcp_gmail_secret_id }}"
+    version: "{{ gcp_gmail_secret_version }}"
+  register: gcp_gmail_secret
+
+- name: Install template rules
+  vars:
+    email_token: "{{ gcp_gmail_secret.secret }}"
+  template:
+    src: "{{ item }}.tmpl.yaml"
+    dest: "{{ config_dir }}/{{ item }}.yml"
+  with_items:
+    - alertmanager
+    - prometheus
+  notify: restart prometheus
+
+- name: Verify configuration
+  command: "promtool check config {{ config_dir }}/{{ item }}"
+  any_errors_fatal: true
+  with_items:
+    - prometheus.yml
+
+- name: Verify rules
+  command: "promtool check rules {{ config_dir }}/{{ item }}"
+  with_items:
+    - cluster_rules.yml
+
+- name: Verify alertmanager configuration
+  command: "amtool check-config {{ config_dir }}/{{ item }}"
+  with_items:
+    - alertmanager.yml

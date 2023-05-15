@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+---
+- hosts: mon
+  become: yes
+  roles:
+  - updates
+  - common
+  - pve-exporter
+  - prometheus

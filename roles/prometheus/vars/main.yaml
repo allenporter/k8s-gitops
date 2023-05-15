@@ -1,0 +1,5 @@
+---
+config_dir: /etc/prometheus
+email_username: allen.porter
+gcp_gmail_secret_id: alertmanager-gmail-secret
+gcp_gmail_secret_version: 1

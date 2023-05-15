@@ -1,0 +1,4 @@
+---
+config_dir: /var/lib/pve-exporter
+gcp_pve_secret_id: proxmox-prometheus-pve-exporter-api-key
+gcp_pve_secret_version: 1

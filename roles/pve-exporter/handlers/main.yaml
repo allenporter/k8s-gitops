@@ -1,0 +1,7 @@
+---
+- name: restart prometheus-pve-exporter systemd
+  systemd:
+    name: prometheus-pve-exporter
+    enabled: yes
+    daemon_reload: yes
+    state: restarted
