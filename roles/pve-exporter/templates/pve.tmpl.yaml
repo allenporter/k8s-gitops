@@ -1,0 +1,5 @@
+default:
+    user: prometheus@pve
+    token_name: prometheus-pve-exporter
+    token_value: {{ secret }}
+    verify_ssl: false

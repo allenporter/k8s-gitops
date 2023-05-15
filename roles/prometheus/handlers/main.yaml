@@ -1,0 +1,10 @@
+---
+- name: restart prometheus
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+    daemon_reload: yes
+    state: restarted
+  with_items:
+    - prometheus
+    - prometheus-alertmanager

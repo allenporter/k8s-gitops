@@ -1,0 +1,61 @@
+---
+groups:
+- name: cluster_rules
+  rules:
+  - alert: EtcdDown
+    expr: up{job="etcd"} == 0
+    for: 10m
+    labels:
+      severity: page
+    annotations:
+      summary: "etcd instance {{ $labels.instance }} is down"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} is down for 10 minutes."
+  - alert: EtcdNoLeader
+    expr: etcd_server_has_leader{job="etcd"} == 0
+    for: 10m
+    labels:
+      severity: page
+    annotations:
+      summary: "etcd instance {{ $labels.instance }} has no leader"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has no leader for 10 minutes."
+  - alert: PveDown
+    expr: up{job="pve"} == 0
+    for: 10m
+    labels:
+      severity: page
+    annotations:
+      summary: "pve instance {{ $labels.instance }} is down"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} is down for 10 minutes."
+  - alert: PveInstanceDown
+    # Ignore vm templates
+    expr: pve_up{job="pve",id!~"qemu/9.*"} == 0
+    for: 10m
+    labels:
+      severity: page
+    annotations:
+      summary: "pve instance {{ $labels.instance }} is down"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} is down for 10 minutes."
+  - alert: PveDiskUsage
+    expr: pve_disk_usage_bytes{id=~"storage/.*"} / pve_disk_size_bytes{id=~"storage/.*"} > 0.87
+    for: 10m
+    labels:
+      severity: page
+    annotations:
+      summary: "pve storage 87% full {{ $labels.id }} on {{ $labels.instance }}."
+      description: "Storage {{ $labels.instance }} is > 80% full on {{ $labels.isntance}}."
+  - alert: PveDiskUsage90Percent
+    expr: pve_disk_usage_bytes{id=~"storage/.*"} / pve_disk_size_bytes{id=~"storage/.*"} > 0.9
+    for: 10m
+    labels:
+      severity: page
+    annotations:
+      summary: "pve storage 90% full {{ $labels.id }} on {{ $labels.instance }}."
+      description: "Storage {{ $labels.instance }} is > 80% full on {{ $labels.isntance}}."
+  - alert: PveDiskUsage95Percent
+    expr: pve_disk_usage_bytes{id=~"storage/.*"} / pve_disk_size_bytes{id=~"storage/.*"} > 0.95
+    for: 10m
+    labels:
+      severity: page
+    annotations:
+      summary: "pve storage 95% full {{ $labels.id }} on {{ $labels.instance }}."
+      description: "Storage {{ $labels.instance }} is > 80% full on {{ $labels.isntance}}."
