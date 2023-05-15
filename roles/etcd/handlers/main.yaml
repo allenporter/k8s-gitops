@@ -1,0 +1,9 @@
+---
+- name: restart etcd
+  systemd:
+    name: etcd
+    enabled: yes
+    daemon_reload: yes
+    # Block until the service becomes active
+    no_block: no
+    state: restarted

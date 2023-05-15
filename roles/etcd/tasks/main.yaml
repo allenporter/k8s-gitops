@@ -1,0 +1,9 @@
+---
+- name: Packages
+  import_tasks: packages.yaml
+
+- name: Users
+  import_tasks: users.yaml
+
+- name: Configuration
+  import_tasks: configuration.yaml

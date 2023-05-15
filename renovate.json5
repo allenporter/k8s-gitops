@@ -1,6 +1,7 @@
 {
   "extends": [
     "config:base",
+    "regexManagers:dockerfileVersions",
   ],
   "timezone": "America/Los_Angeles",
   "assignees": ["allenporter"],
@@ -26,6 +27,12 @@
       datasourceTemplate: "github-releases",
       versioningTemplate: "semver",
     },
+    {
+      "fileMatch": [".+\\.yaml$"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s(?:ENV|ARG) .+?_version: (?<currentValue>.+?)\\s"
+      ]
+    }
   ],
   "helm-values": {
     // Match value files in HelmReleases. This is used so that renovate include
