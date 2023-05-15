@@ -10,3 +10,5 @@
   become: yes
   roles:
   - common
+  - packetloss
+  - tcpdump

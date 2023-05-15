@@ -1,6 +1,8 @@
 #!/usr/bin/env ansible-playbook
 ---
 - hosts: ssh
+  become: yes
   roles:
   - updates
   - common
+  - packetloss

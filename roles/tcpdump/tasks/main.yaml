@@ -1,0 +1,9 @@
+---
+- name: Prune
+  import_tasks: prune.yaml
+
+- name: Packages
+  import_tasks: packages.yaml
+
+- name: tcpdump service
+  import_tasks: tcpdump-service.yaml
