@@ -46,9 +46,8 @@
         path: "/var/lib/etcd/member"
         state: absent
 
-
     - debug: var=remove
- 
+
 - hosts: cfg
   any_errors_fatal: yes
   tasks:
