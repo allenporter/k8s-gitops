@@ -1,6 +1,7 @@
 ignore: |
   .github
   **/*secrets.yaml
+  **/*tmpl.yaml
   monitoring/dev/weave-gitops-secret.yaml
   venv
 extends: default
