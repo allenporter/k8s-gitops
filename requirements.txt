@@ -1,6 +1,6 @@
 flux-local==1.1.3
 pip==23.1.2
-pre-commit==3.3.1
+pre-commit==3.3.2
 py==1.11.0
 virtualenv==20.23.0
 yamllint==1.31.0
