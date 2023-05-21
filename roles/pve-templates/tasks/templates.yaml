@@ -16,4 +16,3 @@
   when: vm_template_id is defined
   register: create_template
   changed_when: "'Creating' in create_template.stdout"
-

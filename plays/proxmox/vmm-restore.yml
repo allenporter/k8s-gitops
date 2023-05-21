@@ -5,9 +5,9 @@
   hosts: vmm
   become: yes
   vars_prompt:
-    - name: restore_ts
-      prompt: "This destorys a node.  Enter restore timestamp suffix from backup file"
-      private: no
+  - name: restore_ts
+    prompt: "This destorys a node.  Enter restore timestamp suffix from backup file"
+    private: false
   vars:
     backup_dir: "/mnt/pve/vm-backup/hosts"
   tasks:
@@ -33,11 +33,10 @@
       that: "{{ backup_ssh_file.stat.exists }}"
 
   # Phase 1: Restore ssh
-    
   - name: Stopping proxmox services
     service:
       name: "{{ item }}"
-      state: stopped    
+      state: stopped
     loop:
     - pvestatd
     - pvedaemon
@@ -80,9 +79,11 @@
       state: link
       force: yes
     loop:
-      - { src: '/etc/pve/priv/authorized_keys', dest: '/root/.ssh/authorized_keys' }
-      - { src: '/etc/pve/priv/authorized_keys', dest: '/root/.ssh/authorized_keys.orig' }
-  
+    - src: /etc/pve/priv/authorized_keys
+      dest: /root/.ssh/authorized_keys
+    - src: /etc/pve/priv/authorized_keys
+      dest: /root/.ssh/authorized_keys.orig
+
   - name: Restarting proxmox services
     service:
       name: "{{ item }}"

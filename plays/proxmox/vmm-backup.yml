@@ -7,9 +7,9 @@
   vars:
     backup_dir: "/mnt/pve/vm-backup/hosts"
   vars_prompt:
-    - name: backup_prompt
-      prompt: "This will stop services to take a backup.  Press return to continue, or ctrl-c to abort"
-      private: no
+  - name: backup_prompt
+    prompt: "This will stop services to take a backup.  Press return to continue, or ctrl-c to abort"
+    private: false
   tasks:
 
   - shell: date +%Y%m%d%H%M%S
@@ -28,11 +28,10 @@
   - name: Stopping proxmox services
     service:
       name: "{{ item }}"
-      state: stopped    
+      state: stopped
     loop:
     - pvestatd
     - pvedaemon
-
 
   - name: Backup ssh configuration
     archive:
@@ -47,7 +46,7 @@
   - name: Stopping proxmox services
     service:
       name: "{{ item }}"
-      state: stopped    
+      state: stopped
     loop:
     - corosync
     - pve-cluster
@@ -67,4 +66,3 @@
     - pvedaemon
     - corosync
     - pve-cluster
-
