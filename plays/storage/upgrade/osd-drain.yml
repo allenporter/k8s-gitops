@@ -6,7 +6,7 @@
   vars_prompt:
   - name: upgrade_prompt
     prompt: "Upgrade about to start. Press return to continue, or ctrl-c to abort"
-    private: no
+    private: false
   tasks:
   - name: Disable ceph OSD drains (setting noout)
     command: ceph osd set noout

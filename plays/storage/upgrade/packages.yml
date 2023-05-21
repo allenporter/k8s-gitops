@@ -1,3 +1,4 @@
+---
 - hosts: vmm
   gather_facts: yes
   become: yes
@@ -5,7 +6,7 @@
   vars_prompt:
   - name: upgrade_prompt
     prompt: "Upgrade about to start. Press return to continue, or ctrl-c to abort"
-    private: no
+    private: false
   tasks:
   - name: Add ceph repository
     ansible.builtin.apt_repository:
@@ -17,8 +18,8 @@
       repo: "deb http://download.proxmox.com/debian/ceph-{{ item }} bullseye main"
       state: absent
     with_items:
-      - pacific
-      - octopus
+    - pacific
+    - octopus
 
 - hosts: vmm
   gather_facts: yes
@@ -33,4 +34,3 @@
   - name: Upgrade packages
     apt:
       upgrade: full
-
