@@ -1,0 +1,28 @@
+---
+- hosts: kapi,kube
+  become: yes
+  become_user: root
+  vars:
+    kubelet_dir: /var/lib/kubelet
+    join_cmd_dir: "{{ kubelet_dir }}/join-commands/"
+  tasks:
+  - include_tasks: read_cmds.yml
+    when: root_node is defined and root_node == "true"
+
+  - name: Setup ipv4
+    script: ip4-forward.sh
+
+  # Note, run "kubeadm reset" to clear this state
+  - name: Join control plane nodes
+    shell:
+      cmd: "$(echo {{ join_cmd['content'] | b64decode }}) --control-plane --certificate-key $(echo {{ cert_key['content'] | b64decode }})"
+      creates: "{{ kubelet_dir }}/config.yaml"
+    when: (root_node is not defined or root_node == "false") and
+          (control_plane is defined and control_plane == "true")
+
+  # Note, run "kubeadm reset" to clear this state
+  - name: Join worker nodes
+    shell:
+      cmd: "{{ join_cmd['content'] | b64decode }}"
+      creates: "{{ kubelet_dir }}/config.yaml"
+    when: control_plane is not defined or control_plane == "false"

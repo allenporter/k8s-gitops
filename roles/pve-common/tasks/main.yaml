@@ -1,0 +1,9 @@
+---
+- name: Packages
+  import_tasks: packages.yaml
+
+- name: Administrative
+  import_tasks: admin.yaml
+
+- name: Logging
+  import_tasks: logging.yaml

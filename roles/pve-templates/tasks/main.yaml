@@ -1,0 +1,3 @@
+---
+- name: Templates
+  import_tasks: templates.yaml

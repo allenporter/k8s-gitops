@@ -1,0 +1,14 @@
+---
+# Included by the main provisioning plays.  This is needed to workaround
+# run_once behavior https://github.com/ansible/ansible/issues/23594
+- name: Read join command
+  slurp:
+    src: "{{ join_cmd_dir }}/join-cmd"
+  run_once: true
+  register: join_cmd
+
+- name: Read control plane certificate
+  slurp:
+    src: "{{ join_cmd_dir }}/certificate-key"
+  run_once: true
+  register: cert_key
