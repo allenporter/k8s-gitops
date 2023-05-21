@@ -1,0 +1,162 @@
+---
+- hosts: localhost
+  vars:
+    version: 1.24.9
+    pkg_version: 1.24.9-00
+  tasks:
+  - name: Assign kubernetes version
+    set_fact:
+      version: "{{ version }}"
+      pkg_version: "{{ pkg_version }}"
+    delegate_to: localhost
+
+- hosts: kapi,kube
+  become: yes
+  become_user: root
+  vars:
+    # This will fail if localhost was not added to the play
+    version: "{{ hostvars['localhost']['version'] }}"
+    pkg_version: "{{ hostvars['localhost']['pkg_version'] }}"
+  tasks:
+  - name: Get ubuntu codename
+    shell: lsb_release -c | awk '{ print $2 }'
+    register: codename_out
+
+  - name: Set codename
+    ansible.builtin.set_fact:
+      codename: "{{ codename_out.stdout }}"
+
+  - name: Repository key
+    apt_key:
+      url: "{{ item }}"
+      state: present
+    loop:
+    - https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    - https://download.docker.com/linux/ubuntu/gpg
+
+  - name: Verify required repositories
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable
+      state: present
+    when: codename == "jammy"
+
+  - name: Verify required repositories
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+      state: present
+    when: codename == "focal"
+
+  - name: Remove old repositories
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable
+      state: absent
+    when: codename == "focal"
+
+  - name: Remove old repositories
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+      state: absent
+    when: codename == "jammy"
+
+  - name: Verify required repositories
+    apt_repository:
+      repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+      state: present
+
+  - name: "Update kubelet to {{ version }}"
+    apt:
+      name: "{{ item }}"
+      state: present
+      # Uncomment for downgrade
+      force: true
+      update_cache: yes
+      force_apt_get: yes
+      # cache_valid_time: 86400  # one day
+    with_items:
+    - "kubeadm={{ pkg_version }}"
+    - "kubelet={{ pkg_version }}"
+    - "kubectl={{ pkg_version }}"
+
+  - name: Block kubernetes upgrades
+    dpkg_selections:
+      name: "{{ item }}"
+      selection: hold
+    with_items:
+    - kubelet
+    - kubeadm
+    - kubectl
+
+  - name: Remove old kubernetes packages
+    apt:
+      name:
+      - docker.io
+      - containerd
+      - docker-ce
+      - docker-ce-cli
+      - docker-compose-plugin
+      state: absent
+      purge: true
+
+  - name: Configure node ip
+    lineinfile:
+      path: /etc/default/kubelet
+      line: "KUBELET_EXTRA_ARGS=--node-ip={{ node_ip }}"
+      create: true
+
+  - name: Install required containerd packages
+    apt:
+      name:
+      - containerd.io
+      state: present
+
+  - name: Configure default containerd config
+    shell: containerd config default | tee /etc/containerd/config.toml
+
+  - name: PrepareConfigure Kubelet Runtime
+    file:
+      path: /var/lib/kubelet/
+      state: directory
+
+  - name: Configure Kubelet Runtime
+    copy:
+      src: kubeadm-flags.env
+      dest: /var/lib/kubelet/kubeadm-flags.env
+
+  - name: Check group
+    command: stat -fc %T /sys/fs/cgroup/
+    register: cgroup
+
+  - name: Set Cgroup driver to systemd
+    lineinfile:
+      insertafter: '.*\[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options\]$'
+      line: '            SystemdCgroup = false'
+      state: absent
+      path: /etc/containerd/config.toml
+    when: cgroup.stdout == "cgroup2fs"
+
+  - name: Enable containerd
+    service:
+      name: containerd
+      state: restarted
+      enabled: yes
+    loop:
+
+  - name: Pull latest kubernetes images
+    command: kubeadm config images pull
+
+- hosts: kapi,kube
+  become: yes
+  become_user: root
+  serial: 1
+  tasks:
+  - name: Restart kubelet
+    service:
+      name: kubelet
+      daemon_reload: yes
+      state: restarted
+
+- hosts: kapi,kube
+  become: yes
+  tasks:
+  - import_tasks:
+      file: verify-nfs.yml

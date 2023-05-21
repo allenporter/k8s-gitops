@@ -6,7 +6,7 @@
   vars_prompt:
   - name: restart_mgr_prompt
     prompt: "About to restart managers. Press return to continue, or ctrl-c to abort"
-    private: no
+    private: false
 
 - hosts: vmm
   become: yes
