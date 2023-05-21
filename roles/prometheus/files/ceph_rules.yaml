@@ -190,7 +190,7 @@ groups:
             increase(node_network_receive_drop_total{device!~"lo",instance=~"vmm.*"}[1m]) +
             increase(node_network_transmit_drop_total{device!~"lo",insttance=~"vmm.*"}[1m])
           ) >= 10
-        for: 30m
+        for: 60m
         labels:
           severity: warning
           type: ceph_default
@@ -212,7 +212,7 @@ groups:
             increase(node_network_receive_errs_total{device!~"lo"}[1m]) +
             increase(node_network_transmit_errs_total{device!~"lo"}[1m])
           ) >= 10
-        for: 30m
+        for: 60m
         labels:
           severity: warning
           type: ceph_default
