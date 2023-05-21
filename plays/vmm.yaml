@@ -5,10 +5,11 @@
   serial: 1
   roles:
   - vmm_updates
+  - pve-certs
 
 - hosts: vmm
   become: yes
   roles:
-  - common
   - packetloss
   - tcpdump
+  - common

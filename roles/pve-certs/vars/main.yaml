@@ -1,0 +1,3 @@
+---
+cert_dir: /var/lib/certs
+pve_cert_dir: "/etc/pve/nodes/{{ vmm_node }}"

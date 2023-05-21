@@ -1,3 +1,4 @@
+---
 - name: Install segmentation offload hook
   copy:
     src: disable-offload.sh

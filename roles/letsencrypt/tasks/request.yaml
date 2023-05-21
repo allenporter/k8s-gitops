@@ -1,0 +1,16 @@
+---
+- name: Create certs directory
+  file:
+    path: "{{ cert_dir }}"
+    state: directory
+    mode: "0600"
+
+- name: Generate an OpenSSL private key
+  community.crypto.openssl_privatekey:
+    path: "{{ cert_dir }}/{{ inventory_hostname }}.pem"
+
+- name: Generate an OpenSSL Certificate Signing Request
+  community.crypto.openssl_csr:
+    path: "{{ cert_dir }}/{{ inventory_hostname }}.csr"
+    privatekey_path: "{{ cert_dir }}/{{ inventory_hostname }}.pem"
+    common_name: "{{ inventory_hostname }}.{{ cert_domain }}"
