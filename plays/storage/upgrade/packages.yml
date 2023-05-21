@@ -3,9 +3,9 @@
   become: yes
   become_user: root
   vars_prompt:
-    - name: upgrade_prompt
-      prompt: "Upgrade about to start. Press return to continue, or ctrl-c to abort"
-      private: no
+  - name: upgrade_prompt
+    prompt: "Upgrade about to start. Press return to continue, or ctrl-c to abort"
+    private: no
   tasks:
   - name: Add ceph repository
     ansible.builtin.apt_repository:

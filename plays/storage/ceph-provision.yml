@@ -1,6 +1,5 @@
 # Installation of ceph
 ---
-
 - hosts: vmm
   gather_facts: yes
   become: yes
@@ -20,8 +19,8 @@
   - name: Create directories
     command: mkdir /var/lib/ceph/{{ item }}
     with_items:
-      - mon
-      - mgr
+    - mon
+    - mgr
     ignore_errors: yes
 
   - name: Create ceph monitors

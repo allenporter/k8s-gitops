@@ -4,9 +4,9 @@
   become: yes
   become_user: root
   vars_prompt:
-    - name: restart_osd_prompt
-      prompt: "About to restart OSDs. Press return to continue, or ctrl-c to abort"
-      private: no
+  - name: restart_osd_prompt
+    prompt: "About to restart OSDs. Press return to continue, or ctrl-c to abort"
+    private: false
 
 - hosts: vmm
   become: yes

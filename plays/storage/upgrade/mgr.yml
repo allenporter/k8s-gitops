@@ -4,9 +4,9 @@
   become: yes
   become_user: root
   vars_prompt:
-    - name: restart_mgr_prompt
-      prompt: "About to restart managers. Press return to continue, or ctrl-c to abort"
-      private: no
+  - name: restart_mgr_prompt
+    prompt: "About to restart managers. Press return to continue, or ctrl-c to abort"
+    private: no
 
 - hosts: vmm
   become: yes

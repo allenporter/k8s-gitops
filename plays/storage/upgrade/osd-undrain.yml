@@ -4,9 +4,9 @@
   become: yes
   become_user: root
   vars_prompt:
-    - name: enable_drain_prompt
-      prompt: "About to unset noout. Press return to continue, or ctrl-c to abort"
-      private: no
+  - name: enable_drain_prompt
+    prompt: "About to unset noout. Press return to continue, or ctrl-c to abort"
+    private: no
   tasks:
   - name: Unsetting noout flag
     command: ceph osd unset noout
