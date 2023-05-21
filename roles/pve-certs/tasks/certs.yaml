@@ -1,0 +1,28 @@
+---
+- name: Generate host certificates
+  import_role:
+    name: letsencrypt
+  register: letsencrypt
+
+- name: Rename certificates
+  copy:
+    src: "{{ cert_dir }}/{{ item.src }}"
+    dest: "{{ cert_dir }}/{{ item.dest }}"
+    remote_src: true
+  with_items:
+    - src: "{{ inventory_hostname }}-fullchain.crt"
+      dest: pveproxy-ssl.pem
+    - src: "{{ inventory_hostname }}.pem"
+      dest: pveproxy-ssl.key
+  register: certs
+
+- name: Install to final location
+  # Uses command instead of copy to avoid creating other temp files on the
+  # pve filesystem, which would fail.
+  command:
+    cmd: "cp {{ cert_dir }}/{{ item }} {{ pve_cert_dir }}/{{ item }}"
+  with_items:
+    - pveproxy-ssl.pem
+    - pveproxy-ssl.key
+  when: certs is changed
+  notify: Restart pveproxy

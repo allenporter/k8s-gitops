@@ -4,11 +4,12 @@
   become: yes
   serial: 1
   roles:
-  - vmm_updates
+  #- vmm_updates
+  - pve-certs
 
-- hosts: vmm
-  become: yes
-  roles:
-  - common
-  - packetloss
-  - tcpdump
+# - hosts: vmm
+#   become: yes
+#   roles:
+#   - packetloss
+#   - tcpdump
+#   - common

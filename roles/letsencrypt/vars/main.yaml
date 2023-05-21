@@ -1,0 +1,8 @@
+---
+gcp_letsencrypt_secret_id: letsencrypt-account-key
+gcp_letsencrypt_secret_version: 1
+cert_remaining_days: 30
+cert_domain: mrv.thebends.org
+managed_zone:
+  name: thebends-mrv
+  dnsName: mrv.thebends.org.

@@ -7,7 +7,7 @@
   - common
   - packetloss
 
-- hosts: prx,kapi
+- hosts: prx
   become: yes
   roles:
   - haproxy

@@ -55,3 +55,6 @@ For bootstrapping flux:
 For bootstrapping out of cluster prometheus:
 - proxmox-prometheus-pve-exporter-api-key
 - alertmanager-gmail-secret
+
+For anything that requires certs
+- letsencrypt-account-key - this is a certbot private jwk key, but can be replaced with pem key if needed in the future (it is converted to pem in ansible role)

@@ -1,0 +1,65 @@
+---
+- name: Letsencypt account key
+  gcp_secret:
+    project: "{{ lookup('ansible.builtin.env', 'GCLOUD_PROJECT_ID') }}"
+    secret: "{{ gcp_letsencrypt_secret_id }}"
+    version: "{{ gcp_letsencrypt_secret_version }}"
+  register: gcp_letsencrypt_secret
+
+- name: Create a challenge
+  acme_certificate:
+    acme_version: 2
+    acme_directory: https://acme-v02.api.letsencrypt.org/directory
+    account_key_content: "{{ gcp_letsencrypt_secret.secret | jwk_to_pem }}"
+    modify_account: no
+    csr: "{{ cert_dir }}/{{ inventory_hostname }}.csr"
+    dest: "{{ cert_dir }}/{{ inventory_hostname }}.crt"
+    fullchain_dest: "{{ cert_dir }}/{{ inventory_hostname }}-fullchain.crt"
+    challenge: dns-01
+    remaining_days: "{{ cert_remaining_days }}"
+  register: challenge
+
+- name: Update DNS Challenge
+  vars:
+    zone: "{{ inventory_hostname }}.{{ cert_domain }}"
+    challenge_data: "{{ challenge.challenge_data[zone]['dns-01'] }}"
+  block:
+    - debug:
+        msg: "Updating '{{ challenge_data.record }}' to '{{ challenge_data.resource_value }}'"
+
+    - name: Update DNS record
+      google.cloud.gcp_dns_resource_record_set:
+        name: "{{ challenge_data.record }}."
+        managed_zone: "{{ managed_zone }}"
+        type: TXT
+        ttl: 60
+        target: "{{ challenge_data.resource_value }}"
+        project: "{{ lookup('ansible.builtin.env', 'GCLOUD_PROJECT_ID') }}"
+        state: present
+        auth_kind: "serviceaccount"
+        service_account_file: "{{ lookup('ansible.builtin.env', 'GOOGLE_APPLICATION_CREDENTIALS') }}"
+      delegate_to: localhost
+
+    - name: Wait for a TXT entry to appear
+      community.dns.wait_for_txt:
+        records:
+          - name: "{{ challenge_data.record }}"
+            values: "{{ challenge_data.resource_value }}"
+            mode: equals
+        always_ask_default_resolver: false  # Use the authoritative nameservers
+      delegate_to: localhost
+  when: challenge is changed
+
+- name: Validate the challenge and retrieve certificates
+  acme_certificate:
+    acme_version: 2
+    acme_directory: https://acme-v02.api.letsencrypt.org/directory
+    account_key_content: "{{ gcp_letsencrypt_secret.secret | jwk_to_pem }}"    
+    csr: "{{ cert_dir }}/{{ inventory_hostname }}.csr"
+    dest: "{{ cert_dir }}/{{ inventory_hostname }}.crt"
+    fullchain_dest: "{{ cert_dir }}/{{ inventory_hostname }}-fullchain.crt"
+    chain_dest: "{{ cert_dir }}/{{ inventory_hostname }}-intermediate.crt"
+    challenge: dns-01
+    remaining_days: "{{ cert_remaining_days }}"
+    data: "{{ challenge }}"
+  when: challenge is changed
