@@ -1,21 +1,19 @@
 ---
 - name: Update haproxy config
   template:
-    src: "{{ item }}"
-    dest: "/etc/haproxy/{{ item }}"
-  loop:
-  - haproxy-k8s.cfg
+    src: "haproxy-k8s.cfg"
+    dest: "/etc/haproxy/haproxy-k8s.cfg"
   notify:
   - Restart haproxy
 
 - name: Update haproxy config
   lineinfile:
     path: /etc/default/haproxy
-    line: EXTRAOPTS="-f /etc/haproxy/haproxy-k8s.cfg -f /etc/haproxy/haproxy-ha-dev.cfg"
+    line: EXTRAOPTS="-f /etc/haproxy/haproxy-k8s.cfg"
     state: present
   notify:
   - Restart haproxy
 
 - name: Verify configuration
   shell:
-    cmd: /usr/sbin/haproxy -c -V -f /etc/haproxy/haproxy.cfg -f /etc/haproxy/haproxy-k8s.cfg -f /etc/haproxy/haproxy-ha-dev.cfg
+    cmd: /usr/sbin/haproxy -c -V -f /etc/haproxy/haproxy.cfg -f /etc/haproxy/haproxy-k8s.cfg
