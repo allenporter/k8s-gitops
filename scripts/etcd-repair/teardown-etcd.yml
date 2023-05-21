@@ -3,7 +3,7 @@
   vars_prompt:
     - name: teardown_etcd
       prompt: "This will destory etcd.  Press return to continue, or ctrl-c to abort"
-      private: no
+      private: false
 
 - hosts: cfg
   become: yes
@@ -11,7 +11,7 @@
     - name: Stop etcd service
       systemd:
         name: etcd
-        enabled: no
+        enabled: false
         state: stopped
 
     - name: Ensure all required packages are installed.

@@ -1,0 +1,20 @@
+---
+- hosts: vmm
+  become: yes
+  become_user: root
+  serial: 1
+  tasks:
+  - name: Restart ceph monitors
+    ansible.builtin.systemd:
+      state: restarted
+      name: "{{ ceph_mon_service }}"
+
+  - name: View ceph upgrade status
+    command: ceph mon dump
+    register: mon_dump_restart
+
+  - debug:
+      var: mon_dump_restart.stdout_lines
+
+  - pause:
+      prompt: "Wait for healthy monitor, check status"

@@ -1,0 +1,17 @@
+---
+- hosts: vmm
+  become: yes
+  become_user: root
+  serial: 1
+  tasks:
+  - name: Restart CephFS Metadata services
+    ansible.builtin.systemd:
+      state: restarted
+      name: "{{ ceph_mds_service }}"
+
+  - name: View ceph status
+    command: ceph status
+    register: mds_restart
+
+  - debug:
+      var: mds_restart.stdout_lines

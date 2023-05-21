@@ -1,0 +1,40 @@
+---
+- hosts: vmm
+  gather_facts: yes
+  become: yes
+  become_user: root
+  tasks:
+  - name: Ceph monitors
+    command: ceph mon dump
+    register: mon_dump
+
+  - name: Check bluestore_fsck_quick_fix_on_mount
+    command: ceph config get osd bluestore_fsck_quick_fix_on_mount
+    register: quick_fix
+
+  - debug:
+      var: mon_dump.stdout_lines
+
+  - debug:
+      var: quick_fix.stdout_lines
+
+- name: Ceph OSD drain
+  import_playbook: osd-drain.yml
+
+- name: Upgrade packages
+  import_playbook: packages.yml
+
+- name: Restart monitors
+  import_playbook: mon.yml
+
+- name: Restart managers
+  import_playbook: mgr.yml
+
+- name: Restart OSDs
+  import_playbook: osd.yml
+
+- name: Restart CephFS Metadata services
+  import_playbook: mds.yml
+
+- name: Ceph OSD undrain
+  import_playbook: osd-undrain.yml
