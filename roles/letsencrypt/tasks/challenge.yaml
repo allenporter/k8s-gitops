@@ -11,7 +11,7 @@
     acme_version: 2
     acme_directory: https://acme-v02.api.letsencrypt.org/directory
     account_key_content: "{{ gcp_letsencrypt_secret.secret | jwk_to_pem }}"
-    modify_account: no
+    modify_account: false
     csr: "{{ cert_dir }}/{{ inventory_hostname }}.csr"
     dest: "{{ cert_dir }}/{{ inventory_hostname }}.crt"
     fullchain_dest: "{{ cert_dir }}/{{ inventory_hostname }}-fullchain.crt"
@@ -54,7 +54,7 @@
   acme_certificate:
     acme_version: 2
     acme_directory: https://acme-v02.api.letsencrypt.org/directory
-    account_key_content: "{{ gcp_letsencrypt_secret.secret | jwk_to_pem }}"    
+    account_key_content: "{{ gcp_letsencrypt_secret.secret | jwk_to_pem }}"
     csr: "{{ cert_dir }}/{{ inventory_hostname }}.csr"
     dest: "{{ cert_dir }}/{{ inventory_hostname }}.crt"
     fullchain_dest: "{{ cert_dir }}/{{ inventory_hostname }}-fullchain.crt"
