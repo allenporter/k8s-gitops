@@ -16,3 +16,7 @@
   when: vm_template_id is defined
   register: create_template
   changed_when: "'Creating' in create_template.stdout"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9a9f0e5c (Immport plays from private repo and cleanup ad-hoc plays)
