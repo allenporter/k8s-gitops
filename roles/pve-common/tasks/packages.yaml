@@ -2,5 +2,5 @@
 - name: Ensure all required packages are installed.
   apt:
     name:
-    - net-tools
+    - sudo
     state: latest
