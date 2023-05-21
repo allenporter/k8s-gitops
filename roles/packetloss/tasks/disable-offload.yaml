@@ -9,3 +9,5 @@
   environment:
     IFACE: "{{ item }}"
   with_items: "{{ disable_offload_iface.split(',') }}"
+  register: disable_offload
+  changed_when: "'UPDATED' in disable_offload.stdout"
