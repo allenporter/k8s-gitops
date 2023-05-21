@@ -7,9 +7,9 @@
   #- vmm_updates
   - pve-certs
 
-# - hosts: vmm
-#   become: yes
-#   roles:
-#   - packetloss
-#   - tcpdump
-#   - common
+- hosts: vmm
+  become: yes
+  roles:
+  - packetloss
+  - tcpdump
+  - common
