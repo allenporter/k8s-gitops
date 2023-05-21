@@ -1,0 +1,29 @@
+---
+- hosts: vmm
+  become: yes
+  tasks:
+  - name: Update network interface
+    blockinfile:
+      path: /etc/network/interfaces
+      block: |
+        auto {{ ceph_cluster_iface }}
+        iface {{ ceph_cluster_iface }} inet static
+          address {{ ceph_cluster_ip }}
+          post-up echo 0 > /proc/sys/net/ipv4/ip_forward
+          post-up echo 0 > /proc/sys/net/ipv4/conf/{{ ceph_cluster_iface }}/proxy_arp
+    when: ceph_cluster_iface is defined
+
+  - name: Bring down interface
+    command:
+      cmd: "ifdown {{ ceph_cluster_iface }}"
+    when: ceph_cluster_iface is defined
+
+  - name: Flush ceph private network
+    command:
+      cmd: "ip addr flush dev {{ ceph_cluster_iface }}"
+    when: ceph_cluster_iface is defined
+
+  - name: Bring up interface
+    command:
+      cmd: "ifup {{ ceph_cluster_iface }}"
+    when: ceph_cluster_iface is defined

@@ -1,0 +1,47 @@
+# Installation of ceph
+---
+
+- hosts: vmm
+  gather_facts: yes
+  become: yes
+  become_user: root
+  tasks:
+  - name: Install ceph packages
+    command: pveceph install
+    args:
+      stdin: "y"
+
+  - name: Create initial Ceph configuration
+    command: pveceph init --network {{ ceph_net }} --cluster-network {{ ceph_cluster_net }}
+
+  - name: Create directories
+    command: systemctl restart pvestatd
+
+  - name: Create directories
+    command: mkdir /var/lib/ceph/{{ item }}
+    with_items:
+      - mon
+      - mgr
+    ignore_errors: yes
+
+  - name: Create ceph monitors
+    command: pveceph mon create --mon-address {{ ip }}
+    ignore_errors: yes
+
+  - name: Create ceph manager
+    command: pveceph mgr create
+    ignore_errors: yes
+
+  - name: Create OSDs
+    command: pveceph osd create {{ ceph_disk }}
+    ignore_errors: yes
+
+  - name: Create Ceph pool
+    command: pveceph pool create "kube-pool"
+    ignore_errors: yes
+
+  - name: Create Metadata server
+    command: pveceph mds create
+
+- name: Prometheus
+  import_playbook: ceph-prometheus.yml

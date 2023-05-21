@@ -1,0 +1,36 @@
+- hosts: vmm
+  gather_facts: yes
+  become: yes
+  become_user: root
+  vars_prompt:
+    - name: upgrade_prompt
+      prompt: "Upgrade about to start. Press return to continue, or ctrl-c to abort"
+      private: no
+  tasks:
+  - name: Add ceph repository
+    ansible.builtin.apt_repository:
+      repo: "deb http://download.proxmox.com/debian/ceph-{{ ceph_version }} bullseye main"
+      state: present
+
+  - name: Remove old ceph repositories
+    ansible.builtin.apt_repository:
+      repo: "deb http://download.proxmox.com/debian/ceph-{{ item }} bullseye main"
+      state: absent
+    with_items:
+      - pacific
+      - octopus
+
+- hosts: vmm
+  gather_facts: yes
+  become: yes
+  become_user: root
+  serial: 1
+  tasks:
+  - name: Update package list
+    apt:
+      update_cache: yes
+
+  - name: Upgrade packages
+    apt:
+      upgrade: full
+

@@ -1,0 +1,29 @@
+---
+- hosts: vmm
+  gather_facts: yes
+  become: yes
+  become_user: root
+  vars_prompt:
+    - name: restart_mgr_prompt
+      prompt: "About to restart managers. Press return to continue, or ctrl-c to abort"
+      private: no
+
+- hosts: vmm
+  become: yes
+  become_user: root
+  serial: 1
+  tasks:
+  - name: Reset failure status
+    command: "systemctl reset-failed {{ ceph_mgr_service }}"
+
+  - name: Restart ceph managers
+    ansible.builtin.systemd:
+      state: restarted
+      name: "{{ ceph_mgr_service }}"
+
+  - name: View ceph upgrade status
+    command: ceph -s
+    register: mgr_restart
+
+  - debug:
+      var: mgr_restart.stdout_lines
