@@ -7,6 +7,7 @@ patches:
 - path: backup-pvc.yaml
 - path: benji-values.yaml
 - path: kyverno-values.yaml
+- path: tf-controller-values.yaml
 resources:
 - ../base/sources
 - ../base/redis
@@ -16,3 +17,4 @@ resources:
 - https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/calico.yaml
 - ../base/kyverno
 - ../base/policies
+- ../base/tf-controller
