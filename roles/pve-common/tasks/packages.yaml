@@ -3,4 +3,5 @@
   apt:
     name:
     - sudo
+    - lldpd
     state: latest
