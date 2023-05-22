@@ -1,0 +1,12 @@
+---
+- name: Pacakages
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python
+  import_tasks: packages.yaml
+
+- name: Service
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python
+  import_tasks: service.yaml

@@ -1,0 +1,3 @@
+---
+gcp_edgeos_encrypted_password_key: rtr01-encrypted-password
+local_config_dir: "{{ lookup('env', 'HOME') }}/.config/edgeos"
