@@ -24,11 +24,13 @@
   delegate_to: localhost
 
 - name: Create build directory
+  delegate_to: localhost
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   file:
     path: "{{ local_config_dir }}"
     state: directory
     mode: "0700"
-  delegate_to: localhost
 
 - name: Build configuration
   vars:
@@ -36,6 +38,7 @@
     dyndns_login: "{{ gcp_dyndns_login.secret }}"
     dyndns_password: "{{ gcp_dyndns_password.secret }}"
     # Needed since there is no inventory entry for localhost
+    ansible_python_interpreter: /usr/bin/python3
   delegate_to: localhost
   template:
     src: "{{ item }}.j2"

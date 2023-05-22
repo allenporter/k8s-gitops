@@ -1,7 +1,5 @@
 ---
 - name: Push configuration
-  vars:
-    ansible_connection: "network_cli"
   edgeos_config:
     src: "{{ local_config_dir }}/{{ item }}"
     save: yes

@@ -1,5 +1,4 @@
 ---
-ansible_python_interpreter: /usr/bin/python
 node_exporter_dir: /usr/bin/node-exporter
 node_exporter: /usr/bin/node_exporter
 # renovate: datasource=github-releases depName=prometheus/node_exporter

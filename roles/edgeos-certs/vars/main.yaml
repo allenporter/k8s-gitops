@@ -1,0 +1,4 @@
+---
+cert_dir: "{{ lookup('env', 'HOME') }}/.config/certs"
+staging_cert_dir: /var/lib/certs
+edgeos_cert_dir: /etc/lighttpd
