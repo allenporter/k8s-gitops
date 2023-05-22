@@ -1,0 +1,12 @@
+---
+- hosts: rtr
+  gather_facts: no
+  become: no
+  roles:
+  - edgeos-config
+
+- hosts: rtr
+  gather_facts: no
+  become: yes
+  roles:
+  - edgeos-node-exporter

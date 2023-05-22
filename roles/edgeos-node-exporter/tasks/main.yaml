@@ -1,0 +1,6 @@
+---
+- name: Pacakages
+  import_tasks: packages.yaml
+
+- name: Service
+  import_tasks: service.yaml

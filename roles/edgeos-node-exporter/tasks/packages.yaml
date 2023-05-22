@@ -1,0 +1,21 @@
+---
+- name: Make node exporter directory
+  file:
+    path: "{{ node_exporter_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Extract node exporter
+  unarchive:
+    src: "{{ edgeos_exporter_url }}"
+    dest: "{{ node_exporter_dir }}"
+    remote_src: yes
+    creates: "{{ node_exporter_dir }}/{{ edgeos_exporter_file }}/node_exporter"
+  notify: Restart node-exporter 
+
+- name: Symlink node exporter
+  file:
+    src: "{{ node_exporter_dir }}/{{ edgeos_exporter_file }}/node_exporter"
+    dest: "{{ node_exporter }}"
+    state: link
+  notify: Restart node-exporter

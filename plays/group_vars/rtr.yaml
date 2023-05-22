@@ -1,0 +1,6 @@
+---
+remote_user: admin
+dyndns_server: domains.google.com
+domain: thebends.org
+ext_domain: ext.thebends.org
+site_domain: mrv.thebends.org

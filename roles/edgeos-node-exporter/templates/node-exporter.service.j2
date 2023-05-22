@@ -1,0 +1,12 @@
+[Unit]
+Description=NodeExporter
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart={{ node_exporter }} --collector.systemd --collector.logind --no-collector.bonding --no-collector.hwmon --no-collector.infiniband --no-collector.ipvs --no-collector.mdadm --no-collector.nfs --no-collector.nfsd --no-collector.powersupplyclass --no-collector.zfs --no-collector.xfs --no-collector.thermal_zone --no-collector.schedstat --no-collector.rapl --no-collector.btrfs --no-collector.bcache --no-collector.cpufreq --no-collector.edac
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

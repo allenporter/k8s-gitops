@@ -1,0 +1,47 @@
+---
+- name: Login password
+  gcp_secret:
+    project: "{{ lookup('ansible.builtin.env', 'GCLOUD_PROJECT_ID') }}"
+    secret: "{{ gcp_edgeos_encrypted_password_key }}"
+    version: 1
+  register: gcp_encrypted_password
+  delegate_to: localhost
+
+- name: Dyndns login
+  gcp_secret:
+    project: "{{ lookup('ansible.builtin.env', 'GCLOUD_PROJECT_ID') }}"
+    secret: dyndns-login
+    version: 1
+  register: gcp_dyndns_login
+  delegate_to: localhost
+
+- name: Dyndns password
+  gcp_secret:
+    project: "{{ lookup('ansible.builtin.env', 'GCLOUD_PROJECT_ID') }}"
+    secret: dyndns-password
+    version: 1
+  register: gcp_dyndns_password
+  delegate_to: localhost
+
+- name: Create build directory
+  file:
+    path: "{{ local_config_dir }}"
+    state: directory
+    mode: "0700"
+  delegate_to: localhost
+
+- name: Build configuration
+  vars:
+    encrypted_password: "{{ gcp_encrypted_password.secret }}"
+    dyndns_login: "{{ gcp_dyndns_login.secret }}"
+    dyndns_password: "{{ gcp_dyndns_password.secret }}"
+    # Needed since there is no inventory entry for localhost
+  delegate_to: localhost
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ local_config_dir }}/{{ item }}"
+  loop:
+  - "edgeos-{{ inventory_hostname }}.cfg"
+  when:
+  - ansible_network_os == "edgeos"
+  notify: Push configuration
