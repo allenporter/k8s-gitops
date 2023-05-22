@@ -5,6 +5,8 @@
     secret: "{{ gcp_letsencrypt_secret_id }}"
     version: "{{ gcp_letsencrypt_secret_version }}"
   register: gcp_letsencrypt_secret
+  delegate_to: localhost
+  run_once: true
 
 - name: Create a challenge
   acme_certificate:

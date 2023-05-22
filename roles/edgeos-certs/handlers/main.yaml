@@ -1,0 +1,9 @@
+---
+- name: Restart htthpd server
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python
+  service:
+    name: lighttpd
+    daemon_reload: yes
+    state: restarted

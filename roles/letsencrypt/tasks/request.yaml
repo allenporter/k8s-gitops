@@ -3,7 +3,7 @@
   file:
     path: "{{ cert_dir }}"
     state: directory
-    mode: "0600"
+    mode: "0700"
 
 - name: Generate an OpenSSL private key
   community.crypto.openssl_privatekey:

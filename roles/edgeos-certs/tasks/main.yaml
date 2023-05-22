@@ -1,0 +1,21 @@
+---
+- name: Permissions
+  become: yes
+  import_tasks: permissions.yaml
+  vars:
+    ansible_python_interpreter: /usr/bin/python
+  when:
+  - ansible_network_os == "edgeos"
+
+- name: Certificates
+  import_tasks: certs.yaml
+  when:
+  - ansible_network_os == "edgeos"
+
+- name: Configuration
+  become: yes
+  import_tasks: config.yaml
+  vars:
+    ansible_python_interpreter: /usr/bin/python
+  when:
+  - ansible_network_os == "edgeos"

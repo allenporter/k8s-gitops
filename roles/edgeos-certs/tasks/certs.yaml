@@ -1,0 +1,9 @@
+---
+- name: Generate host certificates
+  become: false
+  delegate_to: localhost
+  vars:
+    # Needed since there is no inventory entry for localhost
+    ansible_python_interpreter: /usr/bin/python3
+  import_role:
+    name: letsencrypt

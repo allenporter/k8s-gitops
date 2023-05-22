@@ -8,3 +8,4 @@ yq==3.2.2
 google-cloud-secret-manager==2.16.1
 PyJWT==2.7.0
 dnspython==2.3.0
+ansible-pylibssh==1.1.0

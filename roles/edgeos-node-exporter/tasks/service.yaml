@@ -1,0 +1,6 @@
+---
+- name: Configure node exporter service
+  template:
+    src: node-exporter.service.j2
+    dest: /lib/systemd/system/node-exporter.service
+  notify: Restart node-exporter

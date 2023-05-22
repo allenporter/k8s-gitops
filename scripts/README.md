@@ -58,3 +58,8 @@ For bootstrapping out of cluster prometheus:
 
 For anything that requires certs
 - letsencrypt-account-key - this is a certbot private jwk key, but can be replaced with pem key if needed in the future (it is converted to pem in ansible role)
+
+For network configuration:
+- dyndns-login
+- dyndns-password
+- rtr01-encrypted-password

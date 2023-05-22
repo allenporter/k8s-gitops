@@ -1,0 +1,17 @@
+---
+- name: Copy certificates
+  copy:
+    src: "{{ cert_dir }}/{{ item }}"
+    dest: "{{ staging_cert_dir }}/{{ item }}"
+    mode: "0600"
+  with_items:
+    - "{{ inventory_hostname }}-fullchain.crt"
+    - "{{ inventory_hostname }}.pem"
+  register: certs_updates
+
+- name: Combine certificates
+  shell:
+    cmd: "cat {{ inventory_hostname }}-fullchain.crt {{ inventory_hostname }}.pem | tee {{ edgeos_cert_dir }}/server.pem"
+    chdir: "{{ staging_cert_dir }}"
+  when: certs_updates is changed
+  notify: Restart htthpd server

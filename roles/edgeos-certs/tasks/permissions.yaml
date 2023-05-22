@@ -1,0 +1,13 @@
+---
+- name: Staging directory permissions
+  file:
+    path: "{{ staging_cert_dir }}"
+    state: directory
+    mode: "0700"
+
+- name: Certificate permissions
+  file:
+    path: "{{ edgeos_cert_dir }}/server.pem"
+    state: file
+    mode: "0600"
+  ignore_errors: true

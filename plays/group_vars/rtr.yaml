@@ -1,0 +1,7 @@
+---
+remote_user: admin
+ansible_python_interpreter: /usr/bin/python
+dyndns_server: domains.google.com
+domain: thebends.org
+ext_domain: ext.thebends.org
+site_domain: mrv.thebends.org
