@@ -26,3 +26,4 @@ resources:
   - weave-works.yaml
   - bjw-s-helm-charts.yaml
   - tf-controller.yaml
+  - homelab.yaml

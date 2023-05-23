@@ -1,0 +1,16 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: homelab
+  namespace: flux-system
+spec:
+  interval: 30s
+  url: https://github.com/allenporter/homelab
+  ref:
+    branch: main
+  # See instructions for generating ssh keys and using as deploy keys:
+  # https://fluxcd.io/flux/components/source/gitrepositories/#ssh-authentication
+  # https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+  secretRef:
+    name: terraform-homelab-key

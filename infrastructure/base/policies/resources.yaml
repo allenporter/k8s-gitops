@@ -45,6 +45,8 @@ spec:
         - notification.toolkit.fluxcd.io/v1beta2 Provider
         - source.toolkit.fluxcd.io/v1beta2 GitRepository
         - source.toolkit.fluxcd.io/v1beta2 HelmRepository
+        # Terraform
+        - infra.contrib.fluxcd.io/v1alpha1 Terraform
         # Ceph
         - ceph.rook.io/v1 CephCluster
         - cert-manager.io/v1 ClusterIssuer
