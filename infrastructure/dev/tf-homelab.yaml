@@ -3,7 +3,7 @@ apiVersion: infra.contrib.fluxcd.io/v1alpha1
 kind: Terraform
 metadata:
   name: homelab
-  namespace: flux-system
+  namespace: tf-controller
 spec:
   interval: 1m
   # Only detect drifts
