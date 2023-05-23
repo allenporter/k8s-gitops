@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30s
-  url: https://github.com/allenporter/homelab
+  url: ssh://git@github.com/allenporter/homelab.git
   ref:
     branch: main
   # See instructions for generating ssh keys and using as deploy keys:
