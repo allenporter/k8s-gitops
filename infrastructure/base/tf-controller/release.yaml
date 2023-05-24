@@ -20,5 +20,9 @@ spec:
     crds: CreateReplace
   # https://github.com/weaveworks/tf-controller/blob/main/charts/tf-controller/values.yaml
   values:
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
     awsPackage:
       install: false
