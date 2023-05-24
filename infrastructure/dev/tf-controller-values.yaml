@@ -10,3 +10,14 @@ spec:
     spec:
       chart: tf-controller
       version: 0.11.0
+  values:
+    extraEnv:
+    - GOOGLE_APPLICATION_CREDENTIALS: /config/gcloud-service-account.json
+    volumes:
+    - name: tf-gcloud-secret
+      secret:
+        secretName: tf-gcloud-secret
+    volumeMounts:
+    - name: tf-gcloud-secret
+      mountPath: /config/
+      readOnly: true
