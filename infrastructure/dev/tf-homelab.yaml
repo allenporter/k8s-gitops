@@ -6,6 +6,7 @@ metadata:
   namespace: tf-controller
 spec:
   interval: 1m
+  alwaysCleanupRunnerPod: false
   approvePlan: disable
   path: ./hosts/dev/
   sourceRef:
@@ -31,3 +32,5 @@ spec:
       - name: tf-gcloud-secret
         mountPath: /config/
         readOnly: true
+  writeOutputsToSecret:
+    name: homelab-output
