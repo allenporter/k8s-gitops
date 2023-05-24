@@ -6,10 +6,22 @@ metadata:
   namespace: tf-controller
 spec:
   interval: 1m
-  # Only detect drifts
-  approvePlan: disable
+  approvePlan: ""
   path: ./hosts/dev/
   sourceRef:
     kind: GitRepository
     name: homelab
     namespace: flux-system
+  runnerPodTemplate:
+    spec:
+      env:
+      - name: GOOGLE_APPLICATION_CREDENTIALS
+        value: /config/gcloud-service-account.json
+      volumes:
+      - name: tf-gcloud-secret
+        secret:
+          secretName: tf-gcloud-secret
+      volumeMounts:
+      - name: tf-gcloud-secret
+        mountPath: /config/
+        readOnly: true
