@@ -19,3 +19,4 @@ resources:
 - ../base/policies
 - ../base/tf-controller
 - tf-homelab.yaml
+- tf-gcloud-secrets.yaml
