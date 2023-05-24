@@ -6,12 +6,18 @@ metadata:
   namespace: tf-controller
 spec:
   interval: 1m
-  approvePlan: ""
+  approvePlan: disable
   path: ./hosts/dev/
   sourceRef:
     kind: GitRepository
     name: homelab
     namespace: flux-system
+  backendConfig:
+    customConfiguration: |
+      backend "gcs" {
+        bucket = "woodgreen-tfstate-dev"
+        prefix = "terraform/state"
+      }
   runnerPodTemplate:
     spec:
       env:
