@@ -14,9 +14,9 @@ spec:
   values:
     ingress:
       annotations:
-        external-dns.alpha.kubernetes.io/hostname: benji2.dev.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/hostname: benji.dev.mrv.thebends.org.
         external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
-      host: benji2.dev.mrv.thebends.org
+      host: benji.dev.mrv.thebends.org
     benji:
       crontab:
         - name: backup-home-assistant
