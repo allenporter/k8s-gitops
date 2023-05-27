@@ -21,7 +21,7 @@ jobs:
           - helmrelease
           - kustomization
     steps:
-      - uses: allenporter/flux-local-action/diff@v2
+      - uses: allenporter/flux-local/action/diff@main
         id: diff
         with:
           path: ${{ matrix.cluster_path }}
