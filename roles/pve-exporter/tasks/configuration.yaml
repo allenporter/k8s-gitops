@@ -6,7 +6,7 @@
 
 - name: Configure proxmox-pve-exporter service
   template:
-    src: prometheus-pve-exporter.tmpl.service
+    src: prometheus-pve-exporter.service.j2
     dest: /etc/systemd/system/prometheus-pve-exporter.service
   notify: restart prometheus-pve-exporter systemd
 
@@ -21,6 +21,6 @@
   vars:
     secret: "{{ pve_exporter.secret }}"
   template:
-    src: pve.tmpl.yaml
+    src: pve.yaml.j2
     dest: "{{ config_dir }}/pve.yml"
   notify: restart prometheus-pve-exporter systemd
