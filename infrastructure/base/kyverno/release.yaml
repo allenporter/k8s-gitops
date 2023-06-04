@@ -16,7 +16,12 @@ spec:
   install:
     remediation:
       retries: 3
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   # https://github.com/kyverno/kyverno/blob/main/charts/kyverno/values.yaml
+  # See https://kyverno.io/docs/installation/methods/#high-availability for recommended
+  # replica configuration
   values:
     replicaCount: 3
     serviceMonitor:
@@ -24,5 +29,10 @@ spec:
     grafana:
       enabled: true
     backgroundController:
+      replicaCount: 2
       serviceMonitor:
         enabled: true
+    cleanupController:
+      replicaCount: 2
+    reportsController:
+      replicaCount: 2
