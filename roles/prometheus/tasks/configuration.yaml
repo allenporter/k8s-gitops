@@ -1,7 +1,7 @@
 ---
 - name: Install configuration
   template:
-    src: prometheus.tmpl.yaml
+    src: prometheus.yaml.j2
     dest: "{{ config_dir }}/prometheus.yml"
   register: config
 
@@ -25,7 +25,7 @@
   vars:
     email_token: "{{ gcp_gmail_secret.secret }}"
   template:
-    src: "{{ item }}.tmpl.yaml"
+    src: "{{ item }}.yaml.j2"
     dest: "{{ config_dir }}/{{ item }}.yml"
   with_items:
     - alertmanager
