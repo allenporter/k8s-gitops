@@ -9,4 +9,4 @@ spec:
     spec:
       # renovate: registryUrl=https://istio-release.storage.googleapis.com/charts
       chart: istiod
-      version: 1.17.2
+      version: 1.17.3
