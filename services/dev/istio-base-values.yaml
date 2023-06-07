@@ -9,4 +9,4 @@ spec:
     spec:
       # renovate: registryUrl=https://istio-release.storage.googleapis.com/charts
       chart: base
-      version: 1.17.3
+      version: 1.18.0
