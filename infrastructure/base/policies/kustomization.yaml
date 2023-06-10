@@ -5,4 +5,5 @@ namespace: kyverno
 resources:
   - ingress.yaml
   - resources.yaml
-  - https://raw.githubusercontent.com/kyverno/policies/main/best-practices/check-deprecated-apis/check-deprecated-apis.yaml
+  # Disable deprecated API check #1179
+  # - https://raw.githubusercontent.com/kyverno/policies/main/best-practices/check-deprecated-apis/check-deprecated-apis.yaml
