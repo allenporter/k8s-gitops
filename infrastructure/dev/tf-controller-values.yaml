@@ -8,5 +8,6 @@ spec:
   releaseName: tf-controller
   chart:
     spec:
+      # renovate: registryUrl=https://weaveworks.github.io/tf-controller/
       chart: tf-controller
       version: 0.11.0
