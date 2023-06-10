@@ -10,3 +10,20 @@ spec:
       # renovate: registryUrl=https://kyverno.github.io/kyverno/
       chart: kyverno
       version: 3.0.1
+  values:
+    upgrade:
+      fromV2: true
+    admissionController:
+      replicas: 3
+      serviceMonitor:
+        enabled: true
+    grafana:
+      enabled: true
+    backgroundController:
+      replicas: 2
+      serviceMonitor:
+        enabled: true
+    cleanupController:
+      replicas: 2
+    reportsController:
+      replicas: 2
