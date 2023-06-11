@@ -13,7 +13,7 @@ spec:
   values:
     image:
       repository: jacobalberty/unifi
-      tag: v7.3.83
+      tag: v7.4.156
     livenessProbe:
       initialDelaySeconds: 60
       periodSeconds: 30
