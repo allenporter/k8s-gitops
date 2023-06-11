@@ -11,6 +11,9 @@ spec:
       chart: kyverno
       version: 3.0.1
   values:
+    features:
+      admissionReports:
+        enabled: false
     upgrade:
       fromV2: true
     admissionController:
@@ -27,3 +30,7 @@ spec:
       replicas: 2
     reportsController:
       replicas: 2
+      serviceMonitor:
+        enabled: true
+      tracing:
+        enabled: true
