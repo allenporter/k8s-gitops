@@ -34,3 +34,7 @@ spec:
         enabled: true
       tracing:
         enabled: true
+      resources:
+        limits:
+          # Increase default to avoid OOMs
+          memory: 512Mi
