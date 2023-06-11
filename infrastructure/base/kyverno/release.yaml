@@ -36,7 +36,3 @@ spec:
       replicaCount: 2
     reportsController:
       replicaCount: 2
-      resources:
-        limits:
-          # Increase default to avoid OOMs
-          memory: 256Mi
