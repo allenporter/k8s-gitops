@@ -194,8 +194,6 @@ clusters:
         repo_name: tf-controller
         repo_namespace: flux-system
     cluster_policies:
-    - name: check-deprecated-apis
-      namespace: kyverno
     - name: limit-resources
       namespace: kyverno
     - name: require-ingress-https
