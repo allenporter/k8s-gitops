@@ -13,7 +13,7 @@ spec:
   values:
     image:
       repository: homeassistant/home-assistant
-      tag: 2023.6.1
+      tag: 2023.6.2
     persistence:
       config:
         existingClaim: home-assistant-storage-0
