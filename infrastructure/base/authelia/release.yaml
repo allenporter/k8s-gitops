@@ -57,5 +57,3 @@ spec:
           enabled: true
         smtp:
           enabled: false
-    persistence:
-      enabled: true
