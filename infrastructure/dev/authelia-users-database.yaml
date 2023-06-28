@@ -4,15 +4,15 @@ metadata:
     name: users-database
     namespace: authelia
 data:
-    users_database.yml: ENC[AES256_GCM,data:vGwjLbPVbqKGFItt8i57pYnAUdyqDNkFHahg9xXhS/pTXO7OqTzTGBEZhxfATq0hAa9qeAizpln47cvocFh/6I41GOCyELSI0qkqr9QLVmPOPSCHDX0ReIQFXfY3qinAT7zT1N0kmhkIZU6ZAiRFoN51QopVtRIrG1zErgwBNyJ9DywWuxu3z8iy1FDeR/A0keWKCQzF++SBI3uOJMN10ie4y0nTGYJ1ExEVDLITRIo5grnjX1wStwyw4pwXnv2yW5Sqr8vhwRBfXraMjeU+UiqR8R6xvdk88a+kq9//YfMaZXGKPh/k6lbW+ATNJbE2UQ7m1VXUeuUniUdFHVl9QwtRphbjWy/YBahNixdXtBuv+BzQzmRaQabFOusCAELP94XW2KMSVrk=,iv:Wr3stS6gPP5A+fqzCqZEVJ2F77g2BvoaD5TXud56UDw=,tag:1XVdbM5Z9LVE/lMdGoXrRA==,type:str]
+    users_database.yml: ENC[AES256_GCM,data:2Uts8vGbU30Qb5uX15GkkIIlS4U7PsF/FjjN1GQMT2yRYqJCugtuSYDow3GxOhfgQ1xbAeu5XjuWrnLuYa+yGyGmULUprquoSUFPwtEr0dzvlBMfFbcLRerfVE6oDNHBJwbms+2JjXuLmR4uJf+cCSLJmiXd1z7/ZGQ0rA/UqJ1hUxgK6tZgqU4lWCWadEo9+mD9MmT1OXkJBg9xzRAuFWigO570ye/QEvYysTzKiQzmr36ijbtx5hWxP5Rmd/gubEUqNK6HgNSlZt5vo0W38EWe4tyhPXhr9e81kjxQGhBu8uVzbVv6Dn/fmKlLQpcVpYfGXSQpicnupU/BnbfXDENsldsAIJdgPfjYhveDtv5YvFpYGz/Y9v4VhcPfTkh5rZIr8rf1,iv:Xm9zpoFhneRU0+ULlEOClPl4gvMlfLzrYh+C/f9DLyk=,tag:Xo9Um78Cd2Ed9YBlCSTp9g==,type:str]
 sops:
     kms: []
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2023-06-28T05:49:37Z"
-    mac: ENC[AES256_GCM,data:t0iEE2rVAQWVQJ6gwEUU9LUiI5nZhW7AOZWnhb0VKA/onS5n//oTvJc8Gr89qTJ0sJ7RfViMg4+NlHwzg3qIyjSr9JNfxIHG4FhOrYQYpPhl1HmNScGFEx8Ml1yVQL75y4PlVtZX0iYg2FkB3tTBoqTNcwhh6I5rab7zc8lsiUY=,iv:5U9pPx/PekX8T/0cJOqRH/pd4GS9mAZkCp1QgZwnmjY=,tag:6xnQju9b2d/UsdwfZJu2vQ==,type:str]
+    lastmodified: "2023-06-28T06:13:19Z"
+    mac: ENC[AES256_GCM,data:3ody6imdtYT5ct/2uPLk6MJnun02hO1Q8PJprQMBCpsnp+SmWKXXV5nvILgDJ+kCm1/HPXGxtRPt3QL/uG2fnyL8RvwpnXNlkSMwXg6aCY5oojrV9u0CIpcWM3gPllCIkh7JA6MjuE10FcduQhNHzCT9GWaURr+MH9Xf8oeH7Rk=,iv:pA98L7jSZkhryOYZn4xCkIwDlff7lqxyFVvNZiXluYI=,tag:oDpwTSsGD+dFb/alRHY7PQ==,type:str]
     pgp:
         - created_at: "2023-06-28T05:46:33Z"
           enc: |
