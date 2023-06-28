@@ -46,13 +46,13 @@ spec:
           enabled: true
         redis:
           enabled: false
-      storage:
-        local:
-          enabled: true
-        postgres:
-          enabeld: false
-      notifier:
-        file:
-          enabled: true
-        smtp:
-          enabled: false
+    storage:
+      local:
+        enabled: true
+      postgres:
+        enabeld: false
+    notifier:
+      file:
+        enabled: true
+      smtp:
+        enabled: false
