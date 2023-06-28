@@ -12,11 +12,11 @@ spec:
   values:
     pod:
       extraVolumeMounts:
-        - name: authelia-users
-          mountPath: /config
+        - name: users-database
+          mountPath: /configi
           subPath: users_database.yml
           readOnly: true
       extraVolumes:
-        - name: authelia-users
+        - name: users-database
           configMap:
             name: authelia-users
