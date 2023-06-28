@@ -22,4 +22,4 @@ resources:
 - tf-homelab.yaml
 - tf-gcloud-secrets.yaml
 - ../base/authelia
-- authelia-users-configmap.yaml
+- authelia-users-database.yaml

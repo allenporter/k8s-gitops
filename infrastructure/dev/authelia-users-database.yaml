@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: users-database
+    namespace: authelia
+data:
+    users_database.yml: ENC[AES256_GCM,data:vGwjLbPVbqKGFItt8i57pYnAUdyqDNkFHahg9xXhS/pTXO7OqTzTGBEZhxfATq0hAa9qeAizpln47cvocFh/6I41GOCyELSI0qkqr9QLVmPOPSCHDX0ReIQFXfY3qinAT7zT1N0kmhkIZU6ZAiRFoN51QopVtRIrG1zErgwBNyJ9DywWuxu3z8iy1FDeR/A0keWKCQzF++SBI3uOJMN10ie4y0nTGYJ1ExEVDLITRIo5grnjX1wStwyw4pwXnv2yW5Sqr8vhwRBfXraMjeU+UiqR8R6xvdk88a+kq9//YfMaZXGKPh/k6lbW+ATNJbE2UQ7m1VXUeuUniUdFHVl9QwtRphbjWy/YBahNixdXtBuv+BzQzmRaQabFOusCAELP94XW2KMSVrk=,iv:Wr3stS6gPP5A+fqzCqZEVJ2F77g2BvoaD5TXud56UDw=,tag:1XVdbM5Z9LVE/lMdGoXrRA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-06-28T05:49:37Z"
+    mac: ENC[AES256_GCM,data:t0iEE2rVAQWVQJ6gwEUU9LUiI5nZhW7AOZWnhb0VKA/onS5n//oTvJc8Gr89qTJ0sJ7RfViMg4+NlHwzg3qIyjSr9JNfxIHG4FhOrYQYpPhl1HmNScGFEx8Ml1yVQL75y4PlVtZX0iYg2FkB3tTBoqTNcwhh6I5rab7zc8lsiUY=,iv:5U9pPx/PekX8T/0cJOqRH/pd4GS9mAZkCp1QgZwnmjY=,tag:6xnQju9b2d/UsdwfZJu2vQ==,type:str]
+    pgp:
+        - created_at: "2023-06-28T05:46:33Z"
+          enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMAwS2ffBZfHTuAQ//XIU1O1JqBlYDxQ5UxE12tQIU2+lWS3atsnflOxSaXotJ
+            ivXLhyRHo89z8nC0PnztqrmI+wFqJY90DXFyupUGOnEvySsJNAw2FLn2btzxDqDe
+            SrwW3J1e74cgUeOgE/o1cmZFobFlMI1VxMGUW3AiLE307pVv3MbxL1oYigU+fGcY
+            oDglL5X6nTqex+BwcFx4+GcNts9cOli61fKkV478RRzLGU3NfgkudGQfIffJ9Sa9
+            OM/DYxXSx78LmBd/Qp94JRdvBEM4M2rtY/zIm5pTFJxpsrwF0hZh8RjtNa4UVnTt
+            eAAmgymfdld54Zzrt71wi85ypUIvZymHyURLZzWQavw5YgckoFOMKwB0BuPWv+Bz
+            azsnOynbdV3W00ZVvS9GQqq9W8/Bv/vv9IiU4zM4WPkj5y33CZj1k4wOmRM7PXYb
+            VffGUxUMUZIxmmO3OAslvKEixYFFIVV2toW82eY0U+wfnx/O2pcI8sAInlNxEyCU
+            1ATpZEpV7xsjIh+S9TX+Xz1Pwpq9vBvseUOUD0/O/TBRMS8kqoUh7B8hcd6goODK
+            Tuifre+0k6wmsWp4pn9jONz/4wKEyeLK8mpc60MYa43BSDyjqHrpDqPpDu7BYmED
+            LFl2/9DD2I1udPvxPNsvuTp9V5FBrmu1NompMABhKahS22nkuGowj+sXWdKrdOLU
+            aAEJAhCEFhgIjjEySuaJuXv9BhBIfypkzM1XlAk3zpMvgIpf0lmF7gUJdBH0Eqsq
+            9UxRjbXahrvXZTx7eqmaUxFbx+6j0780Z1daTvRuO/RQjcxGgcFDnSXBOdsLfico
+            WypURuPDq6ag
+            =alWm
+            -----END PGP MESSAGE-----
+          fp: B1A8C6842B46D1C8CCBA1F7E3A259C447D9BEDC8
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1
