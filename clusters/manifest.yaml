@@ -16,15 +16,15 @@ clusters:
         repo_name: jetstack
         repo_namespace: flux-system
     cluster_policies: []
-  - name: flux-system
-    namespace: flux-system
-    path: ./clusters/dev
-    helm_repos: []
-    helm_releases: []
-    cluster_policies: []
   - name: crds
     namespace: flux-system
     path: ./crds
+    helm_repos: []
+    helm_releases: []
+    cluster_policies: []
+  - name: flux-system
+    namespace: flux-system
+    path: ./clusters/dev
     helm_repos: []
     helm_releases: []
     cluster_policies: []
@@ -74,6 +74,10 @@ clusters:
     namespace: flux-system
     path: ./infrastructure/dev
     helm_repos:
+    - name: authelia
+      namespace: flux-system
+      url: https://charts.authelia.com
+      repo_type: default
     - name: benji
       namespace: flux-system
       url: https://benji-backup.me/helm-charts/
@@ -163,6 +167,12 @@ clusters:
       url: https://helm.gitops.weave.works
       repo_type: default
     helm_releases:
+    - name: authelia
+      namespace: authelia
+      chart:
+        name: authelia
+        repo_name: authelia
+        repo_namespace: flux-system
     - name: benji
       namespace: benji
       chart:
@@ -344,15 +354,15 @@ clusters:
         repo_name: jetstack
         repo_namespace: flux-system
     cluster_policies: []
-  - name: flux-system
-    namespace: flux-system
-    path: ./clusters/prod
-    helm_repos: []
-    helm_releases: []
-    cluster_policies: []
   - name: crds
     namespace: flux-system
     path: ./crds
+    helm_repos: []
+    helm_releases: []
+    cluster_policies: []
+  - name: flux-system
+    namespace: flux-system
+    path: ./clusters/prod
     helm_repos: []
     helm_releases: []
     cluster_policies: []
@@ -468,6 +478,10 @@ clusters:
     namespace: flux-system
     path: ./infrastructure/prod
     helm_repos:
+    - name: authelia
+      namespace: flux-system
+      url: https://charts.authelia.com
+      repo_type: default
     - name: benji
       namespace: flux-system
       url: https://benji-backup.me/helm-charts/
