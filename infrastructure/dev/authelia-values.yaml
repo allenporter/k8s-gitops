@@ -13,7 +13,7 @@ spec:
     pod:
       extraVolumeMounts:
         - name: users-database
-          mountPath: /configi
+          mountPath: /config/users_database.yml
           subPath: users_database.yml
           readOnly: true
       extraVolumes:
