@@ -51,9 +51,11 @@ spec:
         local:
           enabled: true
         postgres:
-          enabeld: false
+          enabled: false
       notifier:
         filesystem:
           enabled: true
         smtp:
           enabled: false
+    persistence:
+      enabled: true
