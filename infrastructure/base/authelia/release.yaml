@@ -52,7 +52,7 @@ spec:
         postgres:
           enabeld: false
       notifier:
-        file:
+        filesystem:
           enabled: true
         smtp:
           enabled: false
