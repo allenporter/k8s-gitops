@@ -8,6 +8,7 @@ patches:
 - path: benji-values.yaml
 - path: kyverno-values.yaml
 - path: tf-controller-values.yaml
+- path: authelia-values.yaml
 resources:
 - ../base/sources
 - ../base/redis
@@ -20,3 +21,4 @@ resources:
 - ../base/tf-controller
 - tf-homelab.yaml
 - tf-gcloud-secrets.yaml
+- ../base/authelia
