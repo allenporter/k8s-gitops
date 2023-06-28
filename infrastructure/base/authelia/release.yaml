@@ -23,8 +23,8 @@ spec:
       enabled: true
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
-        hajimari.io/icon: chart-line
-        hajimari.io/appName: Grafana
+        hajimari.io/icon: login
+        hajimari.io/appName: Authelia
         external-dns.alpha.kubernetes.io/hostname: authelia.${DOMAIN}.
         external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
       subdomain: authelia
