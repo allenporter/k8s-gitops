@@ -3,6 +3,7 @@ ignore: |
   **/*secrets.yaml
   **/*tmpl.yaml
   monitoring/dev/weave-gitops-secret.yaml
+  infrastructure/dev/authelia-users-configmap.yaml
   venv
 extends: default
 rules:

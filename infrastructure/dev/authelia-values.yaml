@@ -9,3 +9,14 @@ spec:
     spec:
       chart: authelia
       version: 0.8.57
+  values:
+    pod:
+      extraVolumeMounts:
+        - name: authelia-users
+          mountPath: /config
+          subPath: users_database.yml
+          readOnly: true
+      extraVolumes:
+        - name: authelia-users
+          configMap:
+            name: authelia-users
