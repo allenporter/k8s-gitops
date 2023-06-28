@@ -1,0 +1,11 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authelia
+spec:
+  releaseName: authelia
+  chart:
+    spec:
+      chart: authelia
+      version: 0.8.57

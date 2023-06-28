@@ -27,3 +27,4 @@ resources:
   - bjw-s-helm-charts.yaml
   - tf-controller.yaml
   - homelab.yaml
+  - authelia.yaml
