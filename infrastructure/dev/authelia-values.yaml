@@ -19,4 +19,4 @@ spec:
       extraVolumes:
         - name: users-database
           configMap:
-            name: authelia-users
+            name: users-database
