@@ -44,6 +44,7 @@ spec:
           enabled: false
         file:
           enabled: true
+      session:
         redis:
           enabled: false
       storage:
