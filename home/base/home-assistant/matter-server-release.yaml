@@ -34,6 +34,8 @@ spec:
     service:
       main:
         ports:
+          http:
+            enabled: false
           websocket:
             enabled: true
             port: 5580
