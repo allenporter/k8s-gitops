@@ -19,3 +19,4 @@ patches:
   - path: jupyter-values.yaml
   - path: mosquitto-values.yaml
   - path: jellyfin-values.yaml
+  - path: matter-server-values.yaml

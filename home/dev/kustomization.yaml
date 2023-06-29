@@ -14,3 +14,4 @@ patches:
   - path: rtsp-to-web-values.yaml
   - path: nextcloud-values.yaml
   - path: jupyter-values.yaml
+  - path: matter-server-values.yaml

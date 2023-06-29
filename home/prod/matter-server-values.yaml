@@ -1,0 +1,11 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: matter-server
+  namespace: home-assistant
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
