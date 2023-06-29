@@ -49,6 +49,7 @@ spec:
               - path: /
                 pathType: Prefix
         annotations:
+          haproxy.org/ssl-redirect: "false"
           external-dns.alpha.kubernetes.io/hostname: matter-server.${DOMAIN}.
           external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
 
