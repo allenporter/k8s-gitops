@@ -7,5 +7,6 @@ metadata:
 spec:
   chart:
     spec:
+      # renovate: registryUrl=https://bjw-s.github.io/helm-charts/
       chart: app-template
       version: 1.5.1
