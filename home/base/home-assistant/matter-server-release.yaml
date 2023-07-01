@@ -49,9 +49,13 @@ spec:
               - path: /
                 pathType: Prefix
         annotations:
-          haproxy.org/ssl-redirect: "false"
+          cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/hostname: matter-server.${DOMAIN}.
           external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
+        tls:
+          - secretName: matter-server-tls
+            hosts:
+              - matter-server.${DOMAIN}
 
     hostNetwork: true
 
