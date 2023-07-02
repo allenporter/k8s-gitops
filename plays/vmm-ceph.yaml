@@ -1,0 +1,7 @@
+#!/usr/bin/env ansible-playbook
+---
+- hosts: vmm
+  become: yes
+  roles:
+  - role: pve-ceph
+    when: ceph_disk is defined

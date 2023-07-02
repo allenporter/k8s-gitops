@@ -6,6 +6,7 @@
 ---
 - name: Bootstrap k8s-gitops Environment (Ceph)
   hosts: vmm
+  become: yes
   vars_files:
     - vars.yaml
   roles:

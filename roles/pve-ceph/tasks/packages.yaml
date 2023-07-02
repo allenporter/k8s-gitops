@@ -1,5 +1,7 @@
 ---
-- name: Install ceph packages
-  command: pveceph install
-  args:
-    stdin: "y"
+- name: Verify ceph installed
+  stat:
+    path: /usr/bin/ceph
+  register: p
+  changed_when: not p.stat.exists
+  notify: install ceph
