@@ -7,3 +7,6 @@
 
 - name: Logging
   import_tasks: logging.yaml
+
+- name: Cluster SSH configuration
+  import_tasks: ssh.yaml
