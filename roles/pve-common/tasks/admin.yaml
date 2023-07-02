@@ -1,5 +1,5 @@
 ---
-- name: Ensure user accounts exist.
+- name: Ensure user accounts exist
   user:
     name: "{{ provision_user }}"
     groups: sudo
@@ -10,7 +10,7 @@
     name: "{{ provision_user }}"
     shell: /bin/bash
 
-- name: "Allow admin users to sudo without a password"
+- name: Allow admin users to sudo without a password
   lineinfile:
     dest: "/etc/sudoers"
     state: "present"

@@ -1,7 +1,7 @@
 ---
 - name: Copy public keys
   lineinfile:
-    dest: "~/.ssh/authorized_keys"
+    dest: "~{{ provision_user }}/.ssh/authorized_keys"
     line: "{{ item }}"
     create: yes
   with_items:

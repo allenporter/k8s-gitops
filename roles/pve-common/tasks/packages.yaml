@@ -1,5 +1,5 @@
 ---
-- name: Ensure all required packages are installed.
+- name: Ensure all required packages are installed
   apt:
     name:
     - sudo
