@@ -9,9 +9,17 @@
       state: absent
     - repo: deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
       state: present
+
+
+- name: Prepare repositories
+  apt_repository:
+    repo: "{{ item.repo }}"
+    state: "{{ item.state }}"
+  with_items:
     - repo: "deb http://download.proxmox.com/debian/ceph-{{ ceph_version }} bullseye main"
       state: present
     - repo: "deb http://download.proxmox.com/debian/ceph-pacific bullseye main"
       state: absent
     - repo: "deb http://download.proxmox.com/debian/ceph-octopus bullseye main"
       state: absent
+  when: ceph_version is defined
