@@ -7,7 +7,7 @@
   register: st
 
 - name: Generate ceph keyring
-  shell: ceph auth get-or-create client.admin && echo && echo
+  shell: ceph auth get-or-create client.admin
   register: ceph_keyring
   run_once: yes
   when: st.stat.exists == False

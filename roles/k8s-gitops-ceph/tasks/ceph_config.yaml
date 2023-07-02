@@ -7,7 +7,7 @@
   register: st
 
 - name: Generate ceph config
-  shell: ceph config generate-minimal-conf && echo && echo
+  shell: ceph config generate-minimal-conf
   register: ceph_config
   run_once: yes
   when: st.stat.exists == False
