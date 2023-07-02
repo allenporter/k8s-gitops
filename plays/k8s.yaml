@@ -6,6 +6,7 @@
   - updates
   - common
   - packetloss
+  - matter-server
 
 - hosts: prx
   become: yes
