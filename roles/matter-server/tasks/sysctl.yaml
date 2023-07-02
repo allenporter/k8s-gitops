@@ -1,0 +1,13 @@
+---
+- name: Configure net.ipv6.config
+  ansible.posix.sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    sysctl_set: true
+    state: present
+    reload: true
+  with_items:
+    - name: net.ipv6.conf.eth0.accept_ra
+      value: 0
+    - name: net.ipv6.conf.eth0.accept_ra_rt_info_max_plen
+      value: 64
