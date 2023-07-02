@@ -4,6 +4,10 @@ on:
   pull_request:
     branches:
     - main
+    paths:
+      - Dockerfile
+      - requirements.txt
+      - scripts/home/**
   release:
     types:
     - created
