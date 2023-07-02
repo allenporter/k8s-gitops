@@ -1,3 +1,6 @@
 ---
+- name: Packages
+  import_tasks: packages.yaml
+
 - name: Certificates
   import_tasks: certs.yaml
