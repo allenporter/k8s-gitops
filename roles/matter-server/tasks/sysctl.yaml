@@ -8,6 +8,6 @@
     reload: true
   with_items:
     - name: net.ipv6.conf.eth0.accept_ra
-      value: 1
+      value: 0
     - name: net.ipv6.conf.eth0.accept_ra_rt_info_max_plen
       value: 64
