@@ -15,7 +15,7 @@
 - hosts: vmm
   become: yes
   serial: 1
-  roles: 
+  roles:
   - pve-certs
 
 - hosts: vmm
