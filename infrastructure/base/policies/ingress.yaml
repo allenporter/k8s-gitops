@@ -13,6 +13,7 @@ metadata:
       resource.
 spec:
   validationFailureAction: audit
+  failurePolicy: Ignore
   background: true
   rules:
   - name: forbid-ingress-annotations
