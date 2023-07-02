@@ -1,0 +1,11 @@
+---
+- name: restart network iface
+  command:
+    cmd: "{{ item }}"
+  with_items:
+    - "ifdown {{ ceph_cluster_iface }}"
+    - "ip addr flush dev {{ ceph_cluster_iface }}"
+    - "ifup {{ ceph_cluster_iface }}"
+
+- name: restart pvestatd
+  command: systemctl restart pvestatd
