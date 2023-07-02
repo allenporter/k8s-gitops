@@ -1,4 +1,5 @@
 #!/usr/bin/env ansible-playbook
+# Subset of `vmm.yaml` just concerned with ceph roles
 ---
 - hosts: vmm
   become: yes

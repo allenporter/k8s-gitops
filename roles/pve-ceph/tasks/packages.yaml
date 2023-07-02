@@ -1,7 +1,10 @@
 ---
 - name: Verify ceph installed
   stat:
-    path: /usr/bin/ceph
+    path: /usr/bin/ceph-mgr
   register: p
   changed_when: not p.stat.exists
   notify: install ceph
+
+- name: Flush handlers
+  meta: flush_handlers
