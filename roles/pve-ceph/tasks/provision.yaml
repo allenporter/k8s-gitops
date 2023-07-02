@@ -1,0 +1,37 @@
+---
+- name: Create initial Ceph configuration
+  command: pveceph init --network {{ ceph_net }} --cluster-network {{ ceph_cluster_net }}
+  notify: restart pvestatd
+
+- name: Create directories
+  file:
+    path: /var/lib/ceph/{{ item }}
+    state: directory
+  with_items:
+  - mon
+  - mgr
+
+- name: Create ceph monitors
+  command: pveceph mon create --mon-address {{ ip }}
+  ignore_errors: yes
+
+- name: Create ceph manager
+  command: pveceph mgr create
+  ignore_errors: yes
+
+- name: Create OSDs
+  command: pveceph osd create {{ ceph_disk }}
+  ignore_errors: yes
+
+- name: Create Ceph pool
+  command: pveceph pool create "kube-pool"
+  ignore_errors: yes
+
+- name: Create Metadata server
+  command: pveceph mds create
+  ignore_errors: yes
+
+# See https://docs.ceph.com/en/latest/mgr/prometheus/
+- name: Create prometheus server
+  command: ceph mgr module enable prometheus
+  ignore_errors: yes

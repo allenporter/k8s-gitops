@@ -1,0 +1,5 @@
+---
+- name: Install ceph packages
+  command: pveceph install
+  args:
+    stdin: "y"
