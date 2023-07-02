@@ -5,14 +5,23 @@
   serial: 1
   roles:
   - pve-updates
-  - pve-certs
 
 - hosts: vmm
   become: yes
   roles:
   - pve-common
+  - common
+
+- hosts: vmm
+  become: yes
+  serial: 1
+  roles:
+  - pve-certs
+
+- hosts: vmm
+  become: yes
+  roles:
   - pve-ceph
   - pve-templates
   - packetloss
   - tcpdump
-  - common
