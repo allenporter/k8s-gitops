@@ -1,3 +1,3 @@
 ---
-env_dir: ~/.env
+env_dir: /home/admin/.env
 inventory_dir: /workspaces/homelab/hosts

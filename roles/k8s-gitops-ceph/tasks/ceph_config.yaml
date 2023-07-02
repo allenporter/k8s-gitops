@@ -3,16 +3,19 @@
   stat:
     path: "{{ env_dir }}/ceph.conf"
   delegate_to: localhost
+  run_once: yes
   register: st
 
 - name: Generate ceph config
-  shell: ceph config generate-minimal-conf && echo
+  shell: ceph config generate-minimal-conf && echo && echo
   register: ceph_config
+  run_once: yes
   when: st.stat.exists == False
 
 - name: Write ceph config to local environment
   copy:
-    content: "{{ ceph_config.stdout }}"
+    content: "{{ ceph_config.stdout }}\n"
     dest: "{{ env_dir }}/ceph.conf"
   delegate_to: localhost
+  run_once: yes
   when: st.stat.exists == False

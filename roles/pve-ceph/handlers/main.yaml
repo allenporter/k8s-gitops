@@ -7,5 +7,42 @@
     - "ip addr flush dev {{ ceph_cluster_iface }}"
     - "ifup {{ ceph_cluster_iface }}"
 
+- name: install ceph
+  command: "pveceph install --version {{ ceph_version }}"
+  args:
+    stdin: "y"
+
+- name: Create initial Ceph configuration
+  command: pveceph init --network {{ ceph_net }} --cluster-network {{ ceph_cluster_net }}
+  listen: create ceph config
+
 - name: restart pvestatd
   command: systemctl restart pvestatd
+  listen: create ceph config
+
+- name: create ceph mon
+  command: pveceph mon create --mon-address {{ ip }}
+  ignore_errors: yes
+
+- name: create ceph mgr
+  command: pveceph mgr create
+  ignore_errors: yes
+
+- name: Create ceph osd
+  command: pveceph osd create {{ ceph_disk }}
+  ignore_errors: yes
+  listen: create ceph osd
+
+- name: Create ceph pool
+  command: pveceph pool create "kube-pool"
+  ignore_errors: yes
+  listen: create ceph osd
+
+- name: create ceph mds
+  command: pveceph mds create
+  ignore_errors: yes
+
+# See https://docs.ceph.com/en/latest/mgr/prometheus/
+- name: create ceph prometheus
+  command: ceph mgr module enable prometheus
+  ignore_errors: yes
