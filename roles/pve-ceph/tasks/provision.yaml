@@ -1,35 +1,41 @@
 ---
-- name: Create initial Ceph configuration
-  command: pveceph init --network {{ ceph_net }} --cluster-network {{ ceph_cluster_net }}
-  notify: restart pvestatd
-
-- name: Create directories
+- name: Verify ceph directories
   file:
     path: /var/lib/ceph/{{ item }}
     state: directory
   with_items:
   - mon
   - mgr
+  notify: create ceph config
 
-- name: Create ceph monitors
-  command: pveceph mon create --mon-address {{ ip }}
-  ignore_errors: yes
+- name: Populate service facts
+  service_facts:
 
-- name: Create ceph manager
-  command: pveceph mgr create
-  ignore_errors: yes
+- name: Verify ceph mon
+  debug:
+  changed_when: "ceph_mon_service not in ansible_facts.services"
+  notify: create ceph mon
 
-- name: Create OSDs
-  command: pveceph osd create {{ ceph_disk }}
-  ignore_errors: yes
+- name: Verify ceph mgr
+  debug:
+    msg: Verify ceph services
+  changed_when: "ceph_mgr_service not in ansible_facts.services"
+  notify: create ceph mgr
 
-- name: Create Ceph pool
-  command: pveceph pool create "kube-pool"
-  ignore_errors: yes
+- name: Verify ceph osd
+  debug:
+    msg: Verify ceph services
+  changed_when: "ceph_osd_service not in ansible_facts.services"
+  notify: create ceph osd
 
-- name: Create Metadata server
-  command: pveceph mds create
-  ignore_errors: yes
+- name: Verify ceph mds
+  debug:
+    msg: Verify ceph services
+  changed_when: "ceph_mds_service not in ansible_facts.services"
+  notify: create ceph mds
+
+- name: Flush handlers
+  meta: flush_handlers
 
 # See https://docs.ceph.com/en/latest/mgr/prometheus/
 - name: Create prometheus server
