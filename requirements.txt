@@ -17,7 +17,7 @@ python-terraform==0.10.1
 pytoml==0.1.21
 requests==2.31.0
 semantic-version==2.10.0
-typing-extensions==4.7.0
+typing-extensions==4.7.1
 urllib3==2.0.3
 virtualenv==20.23.1
 yamllint==1.32.0
