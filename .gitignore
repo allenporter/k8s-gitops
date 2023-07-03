@@ -1,9 +1,18 @@
-.env
-.env.dev
-.env.prod
+# Python
 .swp
 .tox
 __pycache__
 venv
 .secrets
 *.egg-info/
+
+# VS Code files for those working on multiple tools
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local configuration
+.env/*
