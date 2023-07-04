@@ -10,6 +10,7 @@
 	],
 	"remoteUser": "admin",
 	"containerEnv": {
+		"GNUPGHOME": "/home/admin/.env/.gpupg",
 		"CEPH_CONF": "/home/admin/.env/ceph.conf",
 		"CEPH_ARGS": "--keyring=/home/admin/.env/ceph.keyring",
 		"GOOGLE_APPLICATION_CREDENTIALS": "/home/admin/.env/gcloud-service-account.json",
