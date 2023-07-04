@@ -98,6 +98,14 @@ RUN cd /usr/local/bin/ && \
     chmod +x jq
 RUN jq --version
 
+# renovate: datasource=github-releases depName=getsops/sops
+ARG SOPS_VERSION=v3.7.3
+RUN cd /usr/local/bin/ && \
+    curl -OL https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64 && \
+    mv sops-${SOPS_VERSION}.linux.amd64 sops && \
+    chmod +x sops
+RUN sops --version
+
 # Cleanup from previous steps
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
