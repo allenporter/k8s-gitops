@@ -64,6 +64,10 @@ For network configuration:
 - dyndns-password
 - rtr01-encrypted-password
 
+For sops:
+- sops-k8s-gitops-dev
+- sops-k8s-gitops-prod
+
 # SOPS
 
 See https://fluxcd.io/flux/guides/mozilla-sops/ for instructions on setting up.

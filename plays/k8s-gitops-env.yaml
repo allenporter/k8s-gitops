@@ -26,3 +26,10 @@
     - vars.yaml
   roles:
     - k8s-gitops-env
+
+- name: Bootstrap sops Environment Variables
+  hosts: localhost
+  vars_files:
+    - vars.yaml
+  roles:
+    - k8s-gitops-sops
