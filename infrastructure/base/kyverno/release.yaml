@@ -23,16 +23,30 @@ spec:
   # See https://kyverno.io/docs/installation/methods/#high-availability for recommended
   # replica configuration
   values:
-    replicaCount: 3
-    serviceMonitor:
-      enabled: true
+    features:
+      admissionReports:
+        enabled: false
+    upgrade:
+      fromV2: true
+    admissionController:
+      replicas: 3
+      serviceMonitor:
+        enabled: true
     grafana:
       enabled: true
     backgroundController:
-      replicaCount: 2
+      replicas: 2
       serviceMonitor:
         enabled: true
     cleanupController:
-      replicaCount: 2
+      replicas: 2
     reportsController:
-      replicaCount: 2
+      replicas: 2
+      serviceMonitor:
+        enabled: true
+      tracing:
+        enabled: true
+      resources:
+        limits:
+          # Increase default to avoid OOMs
+          memory: 512Mi
