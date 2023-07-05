@@ -25,9 +25,7 @@ spec:
       repository: ghcr.io/home-assistant-libs/python-matter-server
       pullPolicy: IfNotPresent
       tag: 3.6.3
-    args:
-      - --log-level
-      - debug
+
     strategy:
       type: Recreate
 
