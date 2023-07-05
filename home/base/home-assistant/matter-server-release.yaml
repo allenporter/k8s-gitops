@@ -20,8 +20,6 @@ spec:
   test:
     # Fix problem where helm fails to uninstall
     enable: false
-  # Default values
-  # https://github.com/k8s-at-home/charts/blob/master/charts/stable/home-assistant/values.yaml
   values:
     image:
       repository: ghcr.io/home-assistant-libs/python-matter-server
