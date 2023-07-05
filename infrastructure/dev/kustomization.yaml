@@ -6,7 +6,6 @@ patches:
 - path: rook-ceph-values.yaml
 - path: backup-pvc.yaml
 - path: benji-values.yaml
-- path: kyverno-values.yaml
 - path: tf-controller-values.yaml
 resources:
 - ../base/sources
@@ -15,7 +14,6 @@ resources:
 - ../base/benji
 - benji-secrets.yaml
 - https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/calico.yaml
-- ../base/kyverno
 - ../base/policies
 - ../base/tf-controller
 - tf-homelab.yaml
