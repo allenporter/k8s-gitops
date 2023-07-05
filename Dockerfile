@@ -73,7 +73,7 @@ RUN mkdir -p /src && \
 RUN helm version
 
 # renovate: datasource=github-releases depName=fluxcd/flux2
-ARG FLUX_CLI_VERSION=0.41.2
+ARG FLUX_CLI_VERSION=2.0.0-rc.5
 RUN mkdir -p /src && \
     cd /src && \
     curl -OL https://github.com/fluxcd/flux2/releases/download/v${FLUX_CLI_VERSION}/flux_${FLUX_CLI_VERSION}_linux_amd64.tar.gz && \
