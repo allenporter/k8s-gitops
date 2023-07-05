@@ -72,8 +72,8 @@ RUN mkdir -p /src && \
     rm -fr /src
 RUN helm version
 
-# renovate: datasource=github-releases depName=fluxcd/flux2
-ARG FLUX_CLI_VERSION=v2.0.0
+# renovate: datasource=github-releases depName=fluxcd/flux2 extractVersion=^v(?<version>.+)$
+ARG FLUX_CLI_VERSION=2.0.0
 RUN mkdir -p /src && \
     cd /src && \
     curl -OL https://github.com/fluxcd/flux2/releases/download/v${FLUX_CLI_VERSION}/flux_${FLUX_CLI_VERSION}_linux_amd64.tar.gz && \
@@ -108,10 +108,13 @@ RUN sops --version
 
 # renovate: datasource=github-releases depName=kyverno/kyverno
 ARG KYVERNO_VERSION=v1.10.0
-RUN cd /usr/local/bin/ && \
-    curl -OL https://github.com/kyverno/kyverno/releases/download/${KYVERNO_VERSION}/kyverno-cli_${KYVERNO_VERSION}_linux_arm64.tar.gz && \
-    tar -xvf kyverno-cli_${KYVERNO_VERSION}_linux_arm64.tar.gz kyverno && \
-    chmod +x kyverno
+RUN mkdir -p /src && \
+    cd /src && \
+    curl -OL https://github.com/kyverno/kyverno/releases/download/${KYVERNO_VERSION}/kyverno-cli_${KYVERNO_VERSION}_linux_x86_64.tar.gz && \
+    tar xf kyverno-cli_${KYVERNO_VERSION}_linux_x86_64.tar.gz && \
+    cp kyverno /usr/local/bin/kyverno && \
+    chmod +x /usr/local/bin/kyverno && \
+    rm -fr /src
 RUN kyverno version
 
 # Cleanup from previous steps
