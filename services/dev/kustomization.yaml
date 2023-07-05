@@ -10,6 +10,8 @@ resources:
   - ../base/istio/
   - namespace.yaml
   - metallb-ip-pool.yaml
+  - ../base/authelia
+  - authelia-users-database.yaml
 patches:
   - path: haproxy-values.yaml
   - path: haproxy-external-values.yaml
@@ -19,3 +21,4 @@ patches:
   - path: istio-base-values.yaml
   - path: istiod-values.yaml
   - path: istio-ingress-values.yaml
+  - path: authelia-values.yaml
