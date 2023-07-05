@@ -41,10 +41,11 @@ spec:
         value:
         # Flux & Helm
         - helm.toolkit.fluxcd.io/v2beta1 HelmRelease
-        - kustomize.toolkit.fluxcd.io/v1beta2 Kustomization
+        - kustomize.toolkit.fluxcd.io/v1 Kustomization
         - notification.toolkit.fluxcd.io/v1beta2 Alert
         - notification.toolkit.fluxcd.io/v1beta2 Provider
-        - source.toolkit.fluxcd.io/v1beta2 GitRepository
+        - notification.toolkit.fluxcd.io/v1 Receiver
+        - source.toolkit.fluxcd.io/v1 GitRepository
         - source.toolkit.fluxcd.io/v1beta2 HelmRepository
         # Terraform
         - infra.contrib.fluxcd.io/v1alpha1 Terraform
