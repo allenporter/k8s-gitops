@@ -14,7 +14,6 @@ resources:
 - ../base/benji
 - benji-secrets.yaml
 - https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/calico.yaml
-- ../base/policies
 - ../base/tf-controller
 - tf-homelab.yaml
 - tf-gcloud-secrets.yaml
