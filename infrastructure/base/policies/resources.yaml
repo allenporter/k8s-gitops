@@ -12,6 +12,7 @@ metadata:
       cluster in check.
 spec:
   validationFailureAction: audit
+  failurePolicy: Ignore
   background: false
   rules:
   - name: allowlist
