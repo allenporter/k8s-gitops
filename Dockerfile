@@ -109,8 +109,8 @@ RUN sops --version
 # renovate: datasource=github-releases depName=kyverno/kyverno
 ARG KYVERNO_VERSION=v1.10.0
 RUN cd /usr/local/bin/ && \
-    curl -OL https://github.com/kyverno/kyverno/releases/download/${KYVERNO_VERSION}/kyverno-cli_${KYVERNO_VERSION}_linux_arm64.tar.gz && \
-    tar -xvf kyverno-cli_${KYVERNO_VERSION}_linux_arm64.tar.gz kyverno && \
+    curl -OL https://github.com/kyverno/kyverno/releases/download/${KYVERNO_VERSION}/kyverno-cli_${KYVERNO_VERSION}_linux_amd64.tar.gz && \
+    tar -xvf kyverno-cli_${KYVERNO_VERSION}_linux_amd64.tar.gz kyverno && \
     chmod +x kyverno
 RUN kyverno version
 
