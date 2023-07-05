@@ -10,3 +10,7 @@ spec:
       # renovate: registryUrl=https://bjw-s.github.io/helm-charts/
       chart: app-template
       version: 1.5.1
+  values:
+    args:
+      - --log-level
+      - debug
