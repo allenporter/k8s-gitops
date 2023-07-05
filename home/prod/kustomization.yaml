@@ -7,7 +7,6 @@ resources:
   - ../base/mosquitto
   - ../base/hajimari
   - ../base/rtsp-to-web
-  - ../base/jupyter
   - ../base/jellyfin
   - prometheus-rules.yaml
   - home-assistant-config-pvc.yaml
@@ -16,7 +15,6 @@ patches:
   - path: teslamate-values.yaml
   - path: hajimari-values.yaml
   - path: rtsp-to-web-values.yaml
-  - path: jupyter-values.yaml
   - path: mosquitto-values.yaml
   - path: jellyfin-values.yaml
   - path: matter-server-values.yaml

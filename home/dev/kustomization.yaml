@@ -6,12 +6,10 @@ resources:
   - ../base/hajimari
   - ../base/rtsp-to-web
   - ../base/nextcloud
-  - ../base/jupyter
   - home-assistant-config-pvc.yaml
 patches:
   - path: home-assistant-values.yaml
   - path: hajimari-values.yaml
   - path: rtsp-to-web-values.yaml
   - path: nextcloud-values.yaml
-  - path: jupyter-values.yaml
   - path: matter-server-values.yaml
