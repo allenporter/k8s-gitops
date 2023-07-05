@@ -8,7 +8,6 @@ resources:
   - ../base/benji
   - benji-secrets.yaml
   - https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/calico.yaml
-  - ../base/policies
 patches:
   - path: redis-values.yaml
   - path: rook-ceph-values.yaml
