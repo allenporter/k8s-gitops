@@ -17,4 +17,3 @@ resources:
 - ../base/tf-controller
 - tf-homelab.yaml
 - tf-gcloud-secrets.yaml
-- ../base/policies
