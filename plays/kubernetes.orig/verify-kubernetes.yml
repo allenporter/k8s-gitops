@@ -1,26 +1,12 @@
 ---
-- hosts: localhost
-  vars:
-    version: 1.24.9
-    pkg_version: 1.24.9-00
-  tasks:
-  - name: Assign kubernetes version
-    set_fact:
-      version: "{{ version }}"
-      pkg_version: "{{ pkg_version }}"
-    delegate_to: localhost
-
 - hosts: kapi,kube
   become: yes
   become_user: root
-  vars:
-    # This will fail if localhost was not added to the play
-    version: "{{ hostvars['localhost']['version'] }}"
-    pkg_version: "{{ hostvars['localhost']['pkg_version'] }}"
   tasks:
   - name: Get ubuntu codename
     shell: lsb_release -c | awk '{ print $2 }'
     register: codename_out
+    fail_when: codename != "jammy"
 
   - name: Set codename
     ansible.builtin.set_fact:
@@ -31,71 +17,12 @@
       url: "{{ item }}"
       state: present
     loop:
-    - https://packages.cloud.google.com/apt/doc/apt-key.gpg
     - https://download.docker.com/linux/ubuntu/gpg
 
   - name: Verify required repositories
     apt_repository:
       repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable
       state: present
-    when: codename == "jammy"
-
-  - name: Verify required repositories
-    apt_repository:
-      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
-      state: present
-    when: codename == "focal"
-
-  - name: Remove old repositories
-    apt_repository:
-      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable
-      state: absent
-    when: codename == "focal"
-
-  - name: Remove old repositories
-    apt_repository:
-      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
-      state: absent
-    when: codename == "jammy"
-
-  - name: Verify required repositories
-    apt_repository:
-      repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
-      state: present
-
-  - name: "Update kubelet to {{ version }}"
-    apt:
-      name: "{{ item }}"
-      state: present
-      # Uncomment for downgrade
-      force: true
-      update_cache: yes
-      force_apt_get: yes
-      # cache_valid_time: 86400  # one day
-    with_items:
-    - "kubeadm={{ pkg_version }}"
-    - "kubelet={{ pkg_version }}"
-    - "kubectl={{ pkg_version }}"
-
-  - name: Block kubernetes upgrades
-    dpkg_selections:
-      name: "{{ item }}"
-      selection: hold
-    with_items:
-    - kubelet
-    - kubeadm
-    - kubectl
-
-  - name: Remove old kubernetes packages
-    apt:
-      name:
-      - docker.io
-      - containerd
-      - docker-ce
-      - docker-ce-cli
-      - docker-compose-plugin
-      state: absent
-      purge: true
 
   - name: Configure node ip
     lineinfile:

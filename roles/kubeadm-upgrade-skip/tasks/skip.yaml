@@ -1,0 +1,11 @@
+---
+- name: Verify node is ready
+  command: "kubectl get nodes {{ ansible_hostname }} --kubeconfig={{ kube_config }}"
+  register: get_nodes
+  delegate_to: localhost
+  failed_when: "' Ready ' not in get_nodes.stdout"
+  changed_when: "' Ready ' in get_nodes.stdout"
+
+- name: Skip if already upgraded
+  meta: end_host
+  when: "('v' + k8s_version) in get_nodes.stdout"

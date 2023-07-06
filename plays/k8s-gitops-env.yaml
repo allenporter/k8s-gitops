@@ -8,28 +8,28 @@
   hosts: vmm
   become: yes
   vars_files:
-    - vars.yaml
+  - vars.yaml
   roles:
-    - k8s-gitops-ceph
+  - k8s-gitops-ceph
 
 - name: Bootstrap k8s-gitops Environment (Kubernetes)
   hosts: kapi
   become: yes
   vars_files:
-    - vars.yaml
+  - vars.yaml
   roles:
-    - k8s-gitops-kapi
+  - k8s-gitops-kapi
 
 - name: Bootstrap k8s-gitops Environment Variables
   hosts: localhost
   vars_files:
-    - vars.yaml
+  - vars.yaml
   roles:
-    - k8s-gitops-env
+  - k8s-gitops-env
 
 - name: Bootstrap sops Environment Variables
   hosts: localhost
   vars_files:
-    - vars.yaml
+  - vars.yaml
   roles:
-    - k8s-gitops-sops
+  - k8s-gitops-sops

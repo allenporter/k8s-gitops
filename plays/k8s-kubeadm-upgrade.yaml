@@ -1,0 +1,34 @@
+#!/usr/bin/env ansible-playbook
+# Based on:
+# https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/
+#
+# See k8s_version in vars.yaml
+---
+- hosts: kapi,kube
+  become: yes
+  serial: 1
+  vars:
+    kube_config: "{{ env_dir }}/{{ groups['kapi'][0] }}.config"
+    # To find the latest version supported:
+    #   apt update
+    #   apt-cache madison kubeadm
+    # find the latest 1.25 version in the list
+    # it should look like 1.25.x-00, where x is the latest patch
+    k8s_version: 1.25.11
+    k8s_pkg_version: 1.25.11-00
+  vars_files:
+  - vars.yaml
+  roles:
+  - k8s-repository
+  - kubeadm-upgrade-skip
+  - kubeadm-update
+  - role: kubeadm-upgrade-plan
+    when: root_node is defined and root_node == "true"
+  - kubeadm-upgrade
+  - kubeadm-update-hold
+
+# Verify all nodes have packages held even if skipped
+- hosts: kapi,kube
+  become: yes
+  roles:
+  - kubeadm-update-hold
