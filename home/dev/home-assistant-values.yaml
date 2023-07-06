@@ -12,7 +12,7 @@ spec:
       version: 13.4.2
   values:
     image:
-      repository: homeassistant/home-assistant
+      repository: ghcr.io/home-assistant/home-assistant
       tag: dev@sha256:02201e6e8d836d30011ae17a448a086244212d696b4c8f8939f4e9f9ecc7e88b
 
     persistence:
