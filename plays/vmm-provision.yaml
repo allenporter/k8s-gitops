@@ -1,6 +1,6 @@
 #!/usr/bin/env ansible-playbook
 # Play to provision a host the first time it boots:
-#   ansible-playbook plays/proxmox/provision.yaml --ask-pass -u root -l vmm02.prod
+#   ansible-playbook plays/vmm-provision.yaml --ask-pass -u root -l vmm02.prod
 # This will ensure the admin user exists and ssh keys are installed for future
 # maintainence (e.g. normal vmm plays)
 ---
