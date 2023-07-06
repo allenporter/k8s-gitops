@@ -1,0 +1,8 @@
+---
+- name: Uncordon the node
+  delegate_to: localhost
+  command: "kubectl uncordon {{ ansible_hostname }} --kubeconfig={{ kube_config }}"
+
+- name: Pause
+  ansible.builtin.pause:
+    seconds: 15

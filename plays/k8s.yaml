@@ -1,5 +1,11 @@
 #!/usr/bin/env ansible-playbook
 ---
+- hosts: kaip,kube
+  become: yes
+  roles:
+  - kubeadm-update-hold
+  - k8s-repository
+
 - hosts: prx,kube,kapi
   become: yes
   roles:

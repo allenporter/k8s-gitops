@@ -1,0 +1,5 @@
+---
+- name: Verify kubeadm installed version
+  command: kubeadm version -o short
+  register: kubeadm_version 
+  failed_when: "('v' + k8s_version) != kubeadm_version.stdout"

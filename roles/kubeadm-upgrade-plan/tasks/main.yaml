@@ -1,0 +1,6 @@
+---
+- name: Verify
+  import_tasks: verify.yaml
+
+- name: Plan
+  import_tasks: plan.yaml
