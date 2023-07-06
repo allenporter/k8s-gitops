@@ -7,3 +7,6 @@
 
 - name: cgroup
   import_tasks: cgroup.yaml
+
+- name: Files
+  import_tasks: files.yaml
