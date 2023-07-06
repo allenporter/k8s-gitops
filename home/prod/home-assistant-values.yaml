@@ -12,7 +12,7 @@ spec:
       version: 13.4.2
   values:
     image:
-      repository: homeassistant/home-assistant
+      repository: ghcr.io/home-assistant/home-assistant
       tag: 2023.7.0
     persistence:
       config:
