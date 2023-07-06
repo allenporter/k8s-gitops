@@ -1,8 +1,0 @@
-#!/usr/bin/env ansible-playbook
-# Subset of `vmm.yaml` just concerned with ceph roles
----
-- hosts: vmm
-  become: yes
-  roles:
-  - role: pve-ceph
-    when: ceph_disk is defined
