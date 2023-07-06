@@ -1,9 +1,0 @@
----
-- hosts: vmm
-  gather_facts: yes
-  become: yes
-  become_user: root
-  tasks:
-  # See https://docs.ceph.com/en/latest/mgr/prometheus/
-  - name: Create prometheus server
-    command: ceph mgr module enable prometheus
