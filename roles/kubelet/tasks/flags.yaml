@@ -1,0 +1,11 @@
+---
+- name: Configure node ip
+  lineinfile:
+    path: /etc/default/kubelet
+    line: "KUBELET_EXTRA_ARGS=--node-ip={{ node_ip }}"
+    create: true
+
+- name: Configure Kubelet Runtime
+  copy:
+    src: kubeadm-flags.env
+    dest: /var/lib/kubelet/kubeadm-flags.env
