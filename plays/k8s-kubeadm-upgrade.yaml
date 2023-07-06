@@ -17,7 +17,7 @@
     k8s_version: 1.25.11
     k8s_pkg_version: 1.25.11-00
   vars_files:
-    - vars.yaml
+  - vars.yaml
   roles:
   - k8s-repository
   - kubeadm-upgrade-skip

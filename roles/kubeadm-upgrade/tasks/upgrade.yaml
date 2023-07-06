@@ -1,7 +1,7 @@
 ---
 - name: Verify kubeadm installed version
   command: kubeadm version -o short
-  register: kubeadm_version 
+  register: kubeadm_version
   failed_when: "('v' + k8s_version) != kubeadm_version.stdout"
 
 # For the root control plane node
@@ -12,7 +12,7 @@
 
 - debug:
     var: upgrade_root.stdout_lines
-  when: root_node is defined and root_node == "true"  
+  when: root_node is defined and root_node == "true"
 
 # For other control plane nodes or worker nodes
 - name: "Upgrade node to {{ k8s_version }}"
