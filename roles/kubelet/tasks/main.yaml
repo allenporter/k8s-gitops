@@ -1,0 +1,9 @@
+---
+- name: Flags
+  import_tasks: flags.yaml
+
+- name: Annotations
+  import_tasks: annotations.yaml
+
+- name: cgroup
+  import_tasks: cgroup.yaml
