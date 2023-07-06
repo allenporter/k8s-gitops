@@ -20,8 +20,8 @@
     - vars.yaml
   roles:
   - k8s-repository
-  - kubeadm-update
   - kubeadm-upgrade-skip
+  - kubeadm-update
   - role: kubeadm-upgrade-plan
     when: root_node is defined and root_node == "true"
   - kubeadm-upgrade
