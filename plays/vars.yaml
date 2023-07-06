@@ -5,7 +5,6 @@ kube_config: "{{ env_dir }}/{{ groups['kapi'][0] }}.config"
 # To find the latest version supported:
 #   apt update
 #   apt-cache madison kubeadm
-# find the latest 1.25 version in the list
 # it should look like 1.25.x-00, where x is the latest patch
-k8s_version: 1.25.11
-k8s_pkg_version: 1.25.11-00
+k8s_version: 1.26.6
+k8s_pkg_version: "{{ k8s_version }}-00"

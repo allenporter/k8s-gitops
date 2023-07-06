@@ -1,5 +1,5 @@
 ---
-- name: Allow kubeadm package updates
+- name: Allow kubernetes package updates
   dpkg_selections:
     name: "{{ item }}"
     selection: install
