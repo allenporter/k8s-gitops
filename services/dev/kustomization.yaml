@@ -7,7 +7,6 @@ resources:
   - ../base/external-dns/
   - ../base/certs/
   - ../base/nginx/
-  - ../base/istio/
   - namespace.yaml
   - metallb-ip-pool.yaml
   - ../base/authelia
@@ -18,7 +17,4 @@ patches:
   - path: metallb-values.yaml
   - path: external-dns-values.yaml
   - path: nginx-values.yaml
-  - path: istio-base-values.yaml
-  - path: istiod-values.yaml
-  - path: istio-ingress-values.yaml
   - path: authelia-values.yaml

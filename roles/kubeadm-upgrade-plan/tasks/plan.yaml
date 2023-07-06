@@ -1,0 +1,12 @@
+---
+- name: Check upgrade plan
+  command: kubeadm upgrade plan
+  when: root_node is defined and root_node == "true"
+  register: upgrade_plan
+
+- debug:
+    var: upgrade_plan.stdout_lines
+  when: root_node is defined and root_node == "true"
+
+- pause:
+    prompt: "Upgrade to {{ k8s_version }}? Press return to continue, or ctrl-c to abort"
