@@ -1,0 +1,11 @@
+---
+- name: Get Node Label
+  delegate_to: localhost
+  shell: "kubectl get node {{ ansible_hostname }} --kubeconfig={{ kube_config }} -o yaml | yq '.metadata.labels.target_node'"
+  register: label_result
+  changed_when: false
+
+- name: Update Node labels
+  command: "kubectl label nodes {{ ansible_hostname }} target_node={{ target_node }} --kubeconfig={{ kube_config }}"
+  delegate_to: localhost
+  when: "target_node not in label_result.stdout"

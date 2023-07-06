@@ -3,7 +3,8 @@
   delegate_to: localhost
   shell: "kubectl get node {{ ansible_hostname }} --kubeconfig={{ kube_config }} -o yaml | yq '.metadata.annotations'"
   register: annotation_result
-
+  changed_when: false
+  
 - name: Update Node annotations
   delegate_to: localhost
   shell: "kubectl annotate node {{ ansible_hostname }} kubeadm.alpha.kubernetes.io/cri-socket=unix:///run/containerd/containerd.sock --overwrite --kubeconfig={{ kube_config }}"
