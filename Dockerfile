@@ -63,7 +63,7 @@ RUN mkdir -p /usr/local/lib/ && \
     /usr/local/lib/google-cloud-sdk/install.sh --quiet --usage-reporting=false --rc-path=/etc/profile
 
 # renovate: datasource=github-releases depName=helm/helm
-ARG HELM_CLI_VERSION=v3.12.1
+ARG HELM_CLI_VERSION=v3.12.2
 RUN mkdir -p /src && \
     cd /src && \
     curl -OL https://get.helm.sh/helm-${HELM_CLI_VERSION}-linux-amd64.tar.gz && \
