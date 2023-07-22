@@ -27,7 +27,7 @@ spec:
   values:
     image:
       repository: itzg/minecraft-bedrock-server
-      tag: 2022.1.0
+      tag: 2023.7.1
     minecraftServer:
       serverName: "Bedrock Survival"
       eula: "TRUE"
