@@ -35,7 +35,7 @@ spec:
       serviceType: LoadBalancer
       externalTrafficPolicy: Local
       config: |
-        player_limit: -1
+        player_limit: 10
         ip_forward: true
         permissions:
           default:
@@ -45,7 +45,6 @@ spec:
           - slashserver.lobby
           - slashserver.survival02
           - slashserver.survival03
-          - slashserver.creative05
           - slashserver.survival06
           - slashserver.survival07
           - slashserver.survival08
