@@ -107,6 +107,7 @@ spec:
           - secretName: p-tls
             hosts:
               - p.${DOMAIN}
+      prometheusSpec:
         ruleSelector: {}
         ruleNamespaceSelector: {}
         ruleSelectorNilUsesHelmValues: false
