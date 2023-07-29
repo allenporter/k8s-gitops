@@ -31,7 +31,7 @@ spec:
       repository: itzg/minecraft-server
       tag: 2023.7.1
     minecraftServer:
-      motd: "Survival PVP"
+      motd: "Survival (PVP)"
       eula: "TRUE"
       type: "PAPER"
       version: ${MINECRAFT_VERSION}

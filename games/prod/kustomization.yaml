@@ -6,7 +6,6 @@ resources:
   - minecraft-01-values.yaml
   - minecraft-02-values.yaml
   - minecraft-119-values.yaml
-  - minecraft-05-values.yaml
   - minecraft-06-values.yaml
   - minecraft-07-values.yaml
   - minecraft-08-values.yaml

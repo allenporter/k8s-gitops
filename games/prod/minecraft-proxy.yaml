@@ -68,27 +68,23 @@ spec:
             address: mc01.${DOMAIN}:25565
             restricted: false
           survival02:
-            motd: 'Survival 02'
+            motd: 'Woodgreen Realm / Royal Hall'
             address: mc02.${DOMAIN}:25565
             restricted: false
           survival03:
-            motd: 'Survival 03'
+            motd: 'Survival (PVP)'
             address: mc03.${DOMAIN}:25565
             restricted: false
-          creative05:
-            motd: 'Creative Flat'
-            address: mc05.${DOMAIN}:25565
-            restricted: false
           survival06:
-            motd: 'Survival 06'
+            motd: 'Skylight'
             address: mc06.${DOMAIN}:25565
             restricted: false
           survival07:
-            motd: 'Survival 07'
+            motd: 'Games Lobby'
             address: mc07.${DOMAIN}:25565
             restricted: false
           survival08:
-            motd: 'Survival 08'
+            motd: 'Survival (No PVP)'
             address: mc08.${DOMAIN}:25565
             restricted: false
         listeners:
