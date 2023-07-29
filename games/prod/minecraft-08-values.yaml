@@ -31,10 +31,10 @@ spec:
       repository: itzg/minecraft-server
       tag: 2023.7.1
     minecraftServer:
-      motd: "mc08"
+      motd: "Survival (No PVP)"
       eula: "TRUE"
       type: "PAPER"
-      version: ${MINECRAFT_VERSION}
+      version: 1.20.1  #${MINECRAFT_VERSION}
       forceReDownload: false
       onlineMode: false
       pvp: false

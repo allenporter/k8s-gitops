@@ -31,7 +31,7 @@ spec:
       repository: itzg/minecraft-server
       tag: 2023.7.1
     minecraftServer:
-      motd: "mc06"
+      motd: "Skylight"
       eula: "TRUE"
       type: "PAPER"
       version: ${MINECRAFT_VERSION}
@@ -51,7 +51,7 @@ spec:
         password: ${RCON_PWD}
     extraEnv:
       ENABLE_AUTOPAUSE: FALSE
-      SPIGET_RESOURCES: ${SPIGOT_RESOURCES},62480
+      SPIGET_RESOURCES: ${SPIGOT_RESOURCES}
       MODS: ${ESSENTIALS_URL},${COREPROTECT_URL}
     persistence:
       dataDir:
