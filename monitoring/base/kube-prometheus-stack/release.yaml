@@ -73,11 +73,6 @@ spec:
         enabled: true
         port: 2379
         targetPort: 2379
-      serviceMonitor:
-        metricRelabelings:
-          - source_labels: [__name__]
-            regex: "etcd_request_duration_seconds_bucket" # 12k
-            action: drop
     kubeApiServer:
       enabled: true
       serviceMonitor:
@@ -90,6 +85,9 @@ spec:
             action: drop
           - source_labels: [__name__]
             regex: "apiserver_response_sizes_bucket" # 3k
+            action: drop
+          - source_labels: [__name__]
+            regex: "etcd_request_duration_seconds_bucket" # 12k
             action: drop
     prometheus:
       ingress:
@@ -108,6 +106,7 @@ spec:
             hosts:
               - p.${DOMAIN}
       prometheusSpec:
+        enableAdminAPI: true
         ruleSelector: {}
         ruleNamespaceSelector: {}
         ruleSelectorNilUsesHelmValues: false
