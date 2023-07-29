@@ -73,6 +73,24 @@ spec:
         enabled: true
         port: 2379
         targetPort: 2379
+      serviceMonitor:
+        metricRelabelings:
+          - source_labels: [__name__]
+            regex: "etcd_request_duration_seconds_bucket" # 12k
+            action: drop
+    kubeApiServer:
+      enabled: true
+      serviceMonitor:
+        metricRelabelings:
+          - source_labels: [__name__]
+            regex: "apiserver_request_sli_duration_seconds_bucket" # 14k
+            action: drop
+          - source_labels: [__name__]
+            regex: "apiserver_request_duration_seconds_bucket" # 10k
+            action: drop
+          - source_labels: [__name__]
+            regex: "apiserver_response_sizes_bucket" # 3k
+            action: drop
     prometheus:
       ingress:
         enabled: true
@@ -89,22 +107,6 @@ spec:
           - secretName: p-tls
             hosts:
               - p.${DOMAIN}
-      prometheusSpec:
-        additionalScrapeConfigs:
-          # Drop high cardinality metrics that are not currently used for alerts
-          metric_relabel_configs:
-            - source_labels: [__name__]
-              regex: "apiserver_request_sli_duration_seconds_bucket" # 14k
-              action: drop
-            - source_labels: [__name__]
-              regex: "apiserver_request_duration_seconds_bucket" # 10k
-              action: drop
-            - source_labels: [__name__]
-              regex: "apiserver_response_sizes_bucket" # 3k
-              action: drop
-            - source_labels: [__name__]
-              regex: "etcd_request_duration_seconds_bucket" # 12k
-              action: drop
         ruleSelector: {}
         ruleNamespaceSelector: {}
         ruleSelectorNilUsesHelmValues: false
