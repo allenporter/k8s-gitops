@@ -4,7 +4,7 @@ aiohttp==3.8.5
 ansible-pylibssh==1.1.0
 ansible==8.2.0
 cryptography==41.0.3
-dnspython==2.4.1
+dnspython==2.4.2
 flux-local==3.1.1
 google-cloud-secret-manager==2.16.3
 hostdb==1.1.2
