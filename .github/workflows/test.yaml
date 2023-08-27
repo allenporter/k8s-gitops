@@ -14,7 +14,7 @@ jobs:
         cluster_path:
           - clusters/dev
           - clusters/prod
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -26,7 +26,7 @@ jobs:
           enable-kyverno: true
 
   policy_tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
