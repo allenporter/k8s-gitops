@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 48.3.6
+      version: 48.6.0
   values:
     kubeEtcd:
       endpoints:
