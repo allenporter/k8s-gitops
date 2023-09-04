@@ -8,5 +8,6 @@
       dir_path: "{{ local_config_dir }}"
   loop:
   - "edgeos-{{ inventory_hostname }}.cfg"
+  connection: network_cli
   when:
   - ansible_network_os == "edgeos"
