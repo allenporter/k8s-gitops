@@ -74,7 +74,7 @@
     },
     {
       "description": "prod: Patches are automatic after 1 day",
-      "matchPaths": ["**/prod/**"],
+      "matchPaths": ["**/prod/**", ".github/workflows/**"],
       "automerge": true,
       "automergeType": "branch",
       "stabilityDays": 1,
@@ -83,7 +83,7 @@
     },
     {
       "description": "prod: Minor updates automerged weekly",
-      "matchPaths": ["**/prod/**"],
+      "matchPaths": ["**/prod/**", ".github/workflows/**"],
       "automerge": true,
       "extends": ["schedule:weekends"],
       "additionalBranchPrefix": "prod-minor",
@@ -92,7 +92,7 @@
     },
     {
       "description": "prod: Packages updated weekly",
-      "matchPaths": ["**/prod/**"],
+      "matchPaths": ["**/prod/**", ".github/workflows/**"],
       "extends": ["schedule:weekends"],
       "additionalBranchPrefix": "prod-",
       "stabilityDays": 1,
