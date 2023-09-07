@@ -12,7 +12,7 @@ paramiko==3.3.1
 pip==23.2.1
 pre-commit==3.4.0
 py==1.11.0
-pytest==7.4.1
+pytest==7.4.2
 python-terraform==0.10.1
 pytoml==0.1.21
 requests==2.31.0
