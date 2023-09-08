@@ -19,7 +19,7 @@ requests==2.31.0
 semantic-version==2.10.0
 typing-extensions==4.7.1
 urllib3==2.0.4
-virtualenv==20.24.4
+virtualenv==20.24.5
 yamllint==1.32.0
 yarl==1.9.2
 yq==3.2.2
