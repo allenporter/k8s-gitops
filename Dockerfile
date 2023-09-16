@@ -99,7 +99,7 @@ RUN cd /usr/local/bin/ && \
 RUN jq --version
 
 # renovate: datasource=github-releases depName=getsops/sops
-ARG SOPS_VERSION=v3.7.3
+ARG SOPS_VERSION=v3.8.0
 RUN cd /usr/local/bin/ && \
     curl -OL https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64 && \
     mv sops-${SOPS_VERSION}.linux.amd64 sops && \
