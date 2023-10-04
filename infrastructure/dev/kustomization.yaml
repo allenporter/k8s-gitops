@@ -13,7 +13,7 @@ resources:
 - ../base/rook-ceph
 - ../base/benji
 - benji-secrets.yaml
-- https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/calico.yaml
+- https://raw.githubusercontent.com/projectcalico/calico/v3.26.2/manifests/calico.yaml
 - ../base/tf-controller
 - tf-homelab.yaml
 - tf-gcloud-secrets.yaml
