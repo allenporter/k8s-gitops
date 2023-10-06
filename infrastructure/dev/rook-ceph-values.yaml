@@ -10,6 +10,6 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.rook.io/release
       chart: rook-ceph
-      version: v1.12.4
+      version: v1.12.5
   values:
     logLevel: DEBUG
