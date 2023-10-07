@@ -7,7 +7,7 @@ resources:
   - ../base/rook-ceph
   - ../base/benji
   - benji-secrets.yaml
-  - https://raw.githubusercontent.com/projectcalico/calico/v3.26.2/manifests/calico.yaml
+  - https://raw.githubusercontent.com/projectcalico/calico/v3.26.3/manifests/calico.yaml
 patches:
   - path: redis-values.yaml
   - path: rook-ceph-values.yaml
