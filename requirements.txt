@@ -10,7 +10,7 @@ google-cloud-secret-manager==2.16.4
 hostdb==1.1.2
 paramiko==3.3.1
 pip==23.2.1
-pre-commit==3.4.0
+pre-commit==3.5.0
 py==1.11.0
 pytest==7.4.2
 python-terraform==0.10.1
