@@ -9,7 +9,7 @@ flux-local==3.1.1
 google-cloud-secret-manager==2.16.4
 hostdb==1.1.2
 paramiko==3.3.1
-pip==23.3
+pip==23.3.1
 pre-commit==3.5.0
 py==1.11.0
 pytest==7.4.2
