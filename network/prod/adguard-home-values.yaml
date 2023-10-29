@@ -16,4 +16,4 @@ spec:
       tag: v0.108.0-b.3
 
     nodeSelector:
-      target_node: pelican  # vmm01.prod
+      target_node: buffalo
