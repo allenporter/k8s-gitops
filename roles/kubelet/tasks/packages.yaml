@@ -5,7 +5,7 @@
     selection: install
   with_items:
   - containerd
-  - kubelet 
+  - kubelet
   - kubectl
 
 - name: Update package sources
