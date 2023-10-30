@@ -44,7 +44,7 @@
     name: "kubelet={{ k8s_pkg_version }}"
     state: present
     # Uncomment for downgrade
-    force: true
+    #force: true
     update_cache: yes
     force_apt_get: yes
     cache_valid_time: 86400  # one day

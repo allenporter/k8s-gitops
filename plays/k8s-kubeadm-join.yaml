@@ -26,3 +26,10 @@
   - vars.yaml
   roles:
   - kubeadm-join
+
+- hosts: kapi,kube
+  become: yes
+  vars_files:
+  - vars.yaml
+  roles:
+  - kubelet-node
