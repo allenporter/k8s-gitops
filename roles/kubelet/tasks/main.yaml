@@ -11,5 +11,8 @@
 - name: Packages
   import_tasks: packages.yaml
 
+- name: Containerd Config
+  import_tasks: containerd_config.yaml
+
 - name: Files
   import_tasks: files.yaml
