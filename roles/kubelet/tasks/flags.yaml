@@ -5,6 +5,14 @@
     line: "KUBELET_EXTRA_ARGS=--node-ip={{ node_ip }}"
     create: true
 
+- name: Configure Kublet Directory
+  file:
+    path: /var/lib/kubelet/
+    state: directory
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: Configure Kubelet Runtime
   copy:
     src: kubeadm-flags.env

@@ -4,3 +4,4 @@
   register: cgroup
   changed_when: cgroup.stdout != "cgroup2fs"
   failed_when: cgroup.stdout != "cgroup2fs"
+  notify: restart containerd
