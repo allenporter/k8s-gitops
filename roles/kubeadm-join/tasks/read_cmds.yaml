@@ -1,0 +1,17 @@
+---
+- name: Verify kubeadm installed version
+  command: kubeadm version -o short
+  register: kubeadm_version
+  failed_when: "('v' + k8s_version) != kubeadm_version.stdout"
+
+- name: Read join command
+  slurp:
+    src: "{{ join_cmd_dir }}/join-cmd"
+  run_once: true
+  register: join_cmd
+
+- name: Read control plane certificate
+  slurp:
+    src: "{{ join_cmd_dir }}/certificate-key"
+  run_once: true
+  register: cert_key

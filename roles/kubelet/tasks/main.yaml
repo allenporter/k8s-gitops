@@ -2,14 +2,14 @@
 - name: Flags
   import_tasks: flags.yaml
 
-- name: Annotations
-  import_tasks: annotations.yaml
-
-- name: Labels
-  import_tasks: labels.yaml
+- name: IP Forwarding
+  import_tasks: ip_forward.yaml
 
 - name: cgroup
   import_tasks: cgroup.yaml
+
+- name: Packages
+  import_tasks: packages.yaml
 
 - name: Files
   import_tasks: files.yaml

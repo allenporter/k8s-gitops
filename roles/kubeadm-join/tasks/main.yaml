@@ -1,0 +1,12 @@
+---
+- name: Skip
+  import_tasks: skip.yaml
+
+- name: Refresh Certs
+  import_tasks: refresh_certs.yaml
+
+- name: Read join commands
+  import_tasks: read_cmds.yaml
+
+- name: Join
+  import_tasks: join.yaml

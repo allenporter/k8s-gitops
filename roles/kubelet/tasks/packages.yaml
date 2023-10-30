@@ -1,0 +1,60 @@
+---
+- name: Allow package updates
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: install
+  with_items:
+  - containerd
+  - kubelet
+  - kubectl
+
+- name: Update package sources
+  apt:
+    update_cache: yes
+
+- name: "Update containerd to {{ containerd_version }}"
+  apt:
+    name: "containerd={{ containerd_version }}"
+    state: present
+    # Uncomment for downgrade
+    # force: true
+    update_cache: yes
+    force_apt_get: yes
+    cache_valid_time: 86400  # one day
+  notify: restart containerd
+
+- name: Enable containerd
+  service:
+    name: containerd
+    state: started
+    enabled: yes
+
+- name: "Update kubectl to {{ k8s_pkg_version }}"
+  apt:
+    name: "kubectl={{ k8s_pkg_version }}"
+    state: present
+    # Uncomment for downgrade
+    #force: true
+    update_cache: yes
+    force_apt_get: yes
+    cache_valid_time: 86400  # one day
+
+- name: "Update kubelet to {{ k8s_pkg_version }}"
+  apt:
+    name: "kubelet={{ k8s_pkg_version }}"
+    state: present
+    # Uncomment for downgrade
+    #force: true
+    update_cache: yes
+    force_apt_get: yes
+    cache_valid_time: 86400  # one day
+  notify: restart kubelet
+
+- name: Prevent package updates
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  with_items:
+  - containerd
+  - kubelet
+  - kubectl

@@ -8,6 +8,7 @@
   - kubeadm-update-hold
   - k8s-repository
   - kubelet
+  - kubelet-node
 
 - hosts: prx,kube,kapi
   become: yes

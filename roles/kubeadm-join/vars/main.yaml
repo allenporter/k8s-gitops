@@ -1,0 +1,4 @@
+---
+kubelet_dir: /var/lib/kubelet
+join_cmd_dir: "{{ kubelet_dir }}/join-commands/"
+kubeadm_config: /etc/kubernetes/kubeadm-config.yml
