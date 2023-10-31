@@ -16,3 +16,6 @@
 
 - name: Files
   import_tasks: files.yaml
+
+- name: nfs
+  import_tasks: nfs.yaml
