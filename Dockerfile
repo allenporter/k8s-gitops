@@ -14,7 +14,7 @@ RUN apt-get update --fix-missing && \
         netcat
 
 # Version supported by base image
-ARG GO_VERSION=1.18
+ARG GO_VERSION=1.19
 RUN apt-get install -y \
         golang-${GO_VERSION} \
         git
