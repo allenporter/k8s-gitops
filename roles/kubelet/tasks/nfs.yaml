@@ -1,0 +1,18 @@
+---
+- name: Install nfs packages
+  apt:
+    name: nfs-common
+    state: present
+
+- name: Mount filesystemsd
+  mount:
+    fstype: nfs
+    opts: defaults
+    state: mounted
+    src: "{{ nfs_server }}:{{ item.src }}"
+    path: "{{ item.path }}"
+  with_items:
+    - src: "{{ k8s_backup_nfs }}"
+      path: /mnt/k8s-backup
+    - src: /volume1/music
+      path: /mnt/music
