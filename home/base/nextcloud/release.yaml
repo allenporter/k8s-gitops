@@ -38,3 +38,8 @@ spec:
       host: ${NEXTCLOUD_HOST}
       username: ${NEXTCLOUD_USERNAME}
       password: ${NEXTCLOUD_PASSWORD}
+    readinessProbe:
+      # Startup takes longer than expected for this chart
+      initialDelaySeconds: 60
+      periodSeconds: 60
+      failureThreshold: 5
