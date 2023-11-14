@@ -29,7 +29,7 @@ spec:
   values:
     image:
       repository: itzg/minecraft-server
-      tag: 2023.10.1
+      tag: 2023.11.0
     minecraftServer:
       motd: "Games Lobby"
       eula: "TRUE"
