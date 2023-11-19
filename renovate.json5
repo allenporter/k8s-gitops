@@ -45,7 +45,7 @@
     "fileMatch": [
         "clusters/dev/flux-system/.+\\.yaml$",
         "clusters/prod/flux-system/.+\\.yaml$"
-        # Match base releases and overlays
+        // Match base releases and overlays
         "-values\\.yaml$",
         "release\\.yaml$",
     ]
