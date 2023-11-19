@@ -1,4 +1,4 @@
 ---
-# renovate: datasource=github-releases depName=etcd-io/etcd extractVersion=^v(?<version>.+)
+# renovate: datasource=github-releases depName=etcd-io/etcd
 etcd_version: 3.5.9
 download_url: https://storage.googleapis.com/etcd
