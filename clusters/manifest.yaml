@@ -322,12 +322,6 @@ clusters:
         name: minecraft
         repo_name: itzg
         repo_namespace: flux-system
-    - name: minecraft-05
-      namespace: minecraft
-      chart:
-        name: minecraft
-        repo_name: itzg
-        repo_namespace: flux-system
     - name: minecraft-06
       namespace: minecraft
       chart:
@@ -350,12 +344,6 @@ clusters:
       namespace: minecraft
       chart:
         name: minecraft
-        repo_name: itzg
-        repo_namespace: flux-system
-    - name: minecraft-bedrock-survival
-      namespace: minecraft
-      chart:
-        name: minecraft-bedrock
         repo_name: itzg
         repo_namespace: flux-system
     - name: minecraft-proxy
