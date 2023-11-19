@@ -17,7 +17,7 @@
         // Don't use for OCI repositories
         "infrastructure/dev/redis-values.yaml",
         "infrastructure/prod/redis-values.yaml",
-      ]
+      ],
       "matchStrings": [
         "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
       ],
