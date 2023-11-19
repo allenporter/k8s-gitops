@@ -7,6 +7,11 @@ spec:
   releaseName: redis
   chart:
     spec:
-      # renovate: registryUrl=oci://registry-1.docker.io/bitnamicharts
       chart: redis
       version: 17.11.3
+      # disabled by moving below chart/version
+      # renovate: registryUrl=oci://registry-1.docker.io/bitnamicharts
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
