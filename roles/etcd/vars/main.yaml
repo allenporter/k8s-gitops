@@ -1,4 +1,4 @@
 ---
 # renovate: datasource=github-releases depName=etcd-io/etcd
-etcd_version: 3.5.9
+etcd_version: 3.5.10
 download_url: https://storage.googleapis.com/etcd
