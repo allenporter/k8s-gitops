@@ -13,6 +13,11 @@
       // tells renovate how to parse it. The annotation itself is added by the
       // renovate-helm-releases github action.
       "fileMatch": [".+\\.yaml$"],
+      "ignorePaths": [
+        // Don't use for OCI repositories
+        "infrastructure/dev/redis-values.yaml",
+        "infrastructure/prod/redis-values.yaml",
+      ]
       "matchStrings": [
         "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
       ],
