@@ -13,6 +13,13 @@ repos:
   - id: end-of-file-fixer
   - id: trailing-whitespace
   - id: check-merge-conflict
+- repo: https://gitlab.com/bmares/check-json5
+  rev: v1.0.0
+  hooks:
+  - id: check-json5
+    files: ^(.+\.json5)$
+    types:
+    - file
 - repo: https://github.com/Lucas-C/pre-commit-hooks
   rev: v1.5.4
   hooks:
