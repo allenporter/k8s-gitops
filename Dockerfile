@@ -13,9 +13,11 @@ RUN apt-get update --fix-missing && \
         sshpass \
         netcat
 
-# Version supported by base image
-ARG GO_VERSION=1.18
-RUN apt-get install -y \
+
+ARG GO_VERSION=1.19
+RUN add-apt-repository ppa:longsleep/golang-backports && \
+    apt-get update && \
+    apt-get install -y \
         golang-${GO_VERSION} \
         git
 ENV PATH $PATH:/usr/lib/go-${GO_VERSION}/bin
