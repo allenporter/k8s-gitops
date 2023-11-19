@@ -118,7 +118,7 @@ RUN mkdir -p /src && \
 RUN kyverno version
 
 # renovate: datasource=github-releases depName=yannh/kubeconform
-ARG KUBECONFORM_VERSION=v0.6.3
+ARG KUBECONFORM_VERSION=v0.6.4
 RUN cd /usr/local/bin/ && \
     curl -OL https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz && \
     tar xf kubeconform-linux-amd64.tar.gz && \
