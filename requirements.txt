@@ -5,7 +5,7 @@ ansible-pylibssh==1.1.0
 ansible==8.6.1
 cryptography==41.0.5
 dnspython==2.4.2
-flux-local==3.1.1
+flux-local==3.2.0
 google-cloud-secret-manager==2.16.4
 hostdb==1.1.2
 paramiko==3.3.1
