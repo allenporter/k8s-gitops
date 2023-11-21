@@ -21,5 +21,5 @@ typing-extensions==4.8.0
 urllib3==2.1.0
 virtualenv==20.24.6
 yamllint==1.33.0
-yarl==1.9.2
+yarl==1.9.3
 yq==3.2.3
