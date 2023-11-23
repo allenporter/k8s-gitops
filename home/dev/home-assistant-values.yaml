@@ -13,7 +13,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-assistant/home-assistant
-      tag: dev@sha256:26debf24ba47d6aef7f77fd9417e580c258a2b48d3e7f8b761d2a5f09a072659
+      tag: dev@sha256:15912d70a913ad055354d2334731b864c1f49858cb1457eda783cafc17a30540
 
     persistence:
       config:
