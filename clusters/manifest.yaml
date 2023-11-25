@@ -309,49 +309,7 @@ clusters:
     namespace: flux-system
     path: ./games/prod
     helm_repos: []
-    helm_releases:
-    - name: minecraft-01
-      namespace: minecraft
-      chart:
-        name: minecraft
-        repo_name: itzg
-        repo_namespace: flux-system
-    - name: minecraft-02
-      namespace: minecraft
-      chart:
-        name: minecraft
-        repo_name: itzg
-        repo_namespace: flux-system
-    - name: minecraft-06
-      namespace: minecraft
-      chart:
-        name: minecraft
-        repo_name: itzg
-        repo_namespace: flux-system
-    - name: minecraft-07
-      namespace: minecraft
-      chart:
-        name: minecraft
-        repo_name: itzg
-        repo_namespace: flux-system
-    - name: minecraft-08
-      namespace: minecraft
-      chart:
-        name: minecraft
-        repo_name: itzg
-        repo_namespace: flux-system
-    - name: minecraft-119
-      namespace: minecraft
-      chart:
-        name: minecraft
-        repo_name: itzg
-        repo_namespace: flux-system
-    - name: minecraft-proxy
-      namespace: minecraft
-      chart:
-        name: minecraft-proxy
-        repo_name: itzg
-        repo_namespace: flux-system
+    helm_releases: []
     cluster_policies: []
   - name: home
     namespace: flux-system
