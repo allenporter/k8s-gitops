@@ -1,4 +1,17 @@
 ---
+- name: Allow old package updates
+  dpkg_selections:
+    name: containerd.io
+    selection: install
+
+- name: Remove old packages
+  apt:
+    name: containerd.io
+    state: absent
+    update_cache: yes
+    force_apt_get: yes
+    cache_valid_time: 86400  # one day
+
 - name: Allow package updates
   dpkg_selections:
     name: "{{ item }}"
