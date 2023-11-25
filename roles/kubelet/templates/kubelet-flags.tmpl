@@ -1,0 +1,1 @@
+KUBELET_EXTRA_ARGS=--node-ip={{ node_ip }} --kube-reserved=cpu=200m,memory=200Mi --system-reserved=cpu=200m,memory=200Mi,ephemeral-storage=1Gi --eviction-hard=memory.available<300Mi,nodefs.available<10% --enforce-node-allocatable=pods"

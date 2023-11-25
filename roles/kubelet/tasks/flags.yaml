@@ -1,9 +1,9 @@
 ---
-- name: Configure node ip
-  lineinfile:
-    path: /etc/default/kubelet
-    line: "KUBELET_EXTRA_ARGS=--node-ip={{ node_ip }}"
-    create: true
+- name: Configure kubelet flags
+  template:
+    src: kubelet-flags.tmpl
+    dest: /etc/default/kubelet
+  notify: restart kubelet
 
 - name: Configure Kublet Directory
   file:
