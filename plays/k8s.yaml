@@ -11,6 +11,8 @@
   # This only runs for nodes that already exist, and is run at end of join
   # commands. Comment out when provisioning new nodes
   - kubelet-node
+  - role: kubelet-gpu
+    when: nvidia_gpu is defined and nvidia_gpu == "true"
 
 - hosts: prx,kube,kapi
   become: yes
