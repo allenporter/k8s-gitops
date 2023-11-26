@@ -1,9 +1,15 @@
 ---
+- name: Grab the swap space used (in megabytes)
+  shell: free -m | grep Swap | awk '{print $2}'
+  register: swap_used
+
 - name: Remove swapfile from /etc/fstab
   mount:
-    name: "{{ item }}"
+    name: swap
     fstype: swap
     state: absent
-  with_items:
-    - swap
-  notify: disable swap
+  when: (swap_used.stdout_lines[0] | int) > 0
+
+- name: disable swap
+  command: swapoff -a
+  when: (swap_used.stdout_lines[0] | int) > 0
