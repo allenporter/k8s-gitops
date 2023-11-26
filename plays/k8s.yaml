@@ -8,6 +8,8 @@
   - kubeadm-update-hold
   - k8s-repository
   - kubelet
+  # This only runs for nodes that already exist, and is run at end of join
+  # commands. Comment out when provisioning new nodes
   - kubelet-node
 
 - hosts: prx,kube,kapi
