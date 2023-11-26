@@ -1,4 +1,7 @@
 ---
+- name: Swap
+  import_tasks: swap.yaml
+
 - name: Flags
   import_tasks: flags.yaml
 
@@ -19,6 +22,3 @@
 
 - name: nfs
   import_tasks: nfs.yaml
-
-- name: Swap
-  import_tasks: swap.yaml

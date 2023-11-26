@@ -9,7 +9,7 @@
 
 - name: Check container runtime configuration
   stat:
-    path: "{{ containerd_conf }}"
+    path: "{{ containerd_config_file }}"
   register: config_check
 
 - name: Default containerd config
