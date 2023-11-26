@@ -1,27 +1,33 @@
 ---
 - name: Create containerd config directory
   file:
-    path: /etc/containerd/
+    path: "{{ containerd_config_dir }}"
     state: directory
     owner: root
     group: root
     mode: '0655'
 
+- name: Check container runtime configuration
+  stat:
+    path: "{{ containerd_conf }}"
+  register: config_check
 
 - name: Default containerd config
   command: containerd config default
   register: default_config
-
+  when: not config_check.stat.exists
 
 - name: Update containerd configuration
   ansible.builtin.copy:
     content: "{{default_config.stdout}}"
-    dest: /etc/containerd/config.toml
+    dest: "{{ containerd_config_file }}"
+  when: not config_check.stat.exists
   notify: restart containerd
 
 - name: Update SystemdCgroup
   replace:
-    path: /etc/containerd/config.toml
+    path: "{{ containerd_config_file }}"
     regexp: "SystemdCgroup = false"
     replace: "SystemdCgroup = true"
+  when: not config_check.stat.exists
   notify: restart containerd
