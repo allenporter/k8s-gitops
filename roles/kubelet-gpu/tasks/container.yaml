@@ -9,3 +9,17 @@
   shell: nvidia-ctk runtime configure --runtime=containerd
   notify: restart containerd
   when: config_check.changed
+
+- name: Check nvidia is default runtime
+  ansible.builtin.shell: "grep 'default_runtime_name = \"nvidia\"' {{ containerd_config_file }}"
+  changed_when: default_check.rc != 0
+  failed_when: false
+  register: default_check
+
+- name: Configure nvidia container as default runtime
+  lineinfile:
+    path: "{{ containerd_config_file }}"
+    regexp: "^      default_runtime_name = .*"
+    line: "      default_runtime_name = \"nvidia\""
+  notify: restart containerd
+  when: default_check.changed
