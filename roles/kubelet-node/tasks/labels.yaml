@@ -14,4 +14,3 @@
   command: "kubectl label nodes {{ ansible_hostname }} accelerator=nvidia --kubeconfig={{ kube_config }}"
   delegate_to: localhost
   when: "nvidia_gpu is defined and 'accelerator: nvidia' not in label_result.stdout"
-
