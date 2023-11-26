@@ -128,6 +128,9 @@ clusters:
     - name: nextcloud
       namespace: flux-system
       url: https://nextcloud.github.io/helm/
+    - name: nvdp
+      namespace: flux-system
+      url: https://nvidia.github.io/k8s-device-plugin
     - name: podinfo
       namespace: flux-system
       url: https://stefanprodan.github.io/podinfo
@@ -417,6 +420,9 @@ clusters:
     - name: nextcloud
       namespace: flux-system
       url: https://nextcloud.github.io/helm/
+    - name: nvdp
+      namespace: flux-system
+      url: https://nvidia.github.io/k8s-device-plugin
     - name: podinfo
       namespace: flux-system
       url: https://stefanprodan.github.io/podinfo
@@ -438,6 +444,12 @@ clusters:
       chart:
         name: benji
         repo_name: benji
+        repo_namespace: flux-system
+    - name: nvdp
+      namespace: nvidia-device-plugin
+      chart:
+        name: nvidia-device-plugin
+        repo_name: nvdp
         repo_namespace: flux-system
     - name: redis
       namespace: redis

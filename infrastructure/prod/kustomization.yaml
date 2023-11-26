@@ -6,6 +6,7 @@ resources:
   - ../base/redis
   - ../base/rook-ceph
   - ../base/benji
+  - nvidia-device-plugin
   - benji-secrets.yaml
   - https://raw.githubusercontent.com/projectcalico/calico/v3.26.4/manifests/calico.yaml
 patches:
