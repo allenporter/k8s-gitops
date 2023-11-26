@@ -1,0 +1,35 @@
+---
+# Need to add a check to verify the driver version:
+#
+# - name: Check installed version
+#   shell: "cat /proc/driver/nvidia/version | echo ' Kernel Module 0.00.00'"
+#   register: results
+#
+# - set_fact:
+#     installed_version: "{{ results.stdout | regex_search(regexp, '\\1') | first }}"
+#   vars:
+#     regexp: '.*Kernel Module  (\S{3}).*'
+#
+# - debug:
+#     var: installed_version
+#   when:
+#     - installed_version is defined
+
+- name: Determine kernel version
+  shell: "uname -r"
+  register: uname_result
+
+- name: "Install server driver {{ nvidia_driver_version }}"
+  shell: "ubuntu-drivers install --gpgpu nvidia:{{ nvidia_driver_version }}-server"
+  # when:
+  #   - installed_version != nvidia_driver_version
+
+- name: "Install server utils {{ nvidia_driver_version }}"
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - dkms
+    - "nvidia-dkms-{{ nvidia_driver_version }}"
+    - "nvidia-utils-{{ nvidia_driver_version }}-server"
+    - "linux-headers-{{ uname_result.stdout }}"

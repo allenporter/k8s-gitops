@@ -1,0 +1,10 @@
+---
+- name: Check container runtime configuration
+  ansible.builtin.shell: grep 'containerd.runtimes.nvidia' /etc/containerd/config.toml
+  changed_when: false
+  register: config_check
+
+- name: Configure the container runtime
+  shell: nvidia-ctk runtime configure --runtime=containerd
+  notify: restart containerd
+  when: config_check.changed
