@@ -1,11 +1,16 @@
 ---
 - name: Get Node Label
   delegate_to: localhost
-  shell: "kubectl get node {{ ansible_hostname }} --kubeconfig={{ kube_config }} -o yaml | yq '.metadata.labels.target_node'"
+  shell: "kubectl get node {{ ansible_hostname }} --kubeconfig={{ kube_config }} -o yaml | yq '.metadata.labels'"
   register: label_result
   changed_when: false
 
-- name: Update Node labels
+- name: Update Target Node labels
   command: "kubectl label nodes {{ ansible_hostname }} target_node={{ target_node }} --kubeconfig={{ kube_config }}"
   delegate_to: localhost
   when: "target_node is defined and target_node not in label_result.stdout"
+
+- name: Update GPU Node labels
+  command: "kubectl label nodes {{ ansible_hostname }} accelerator=nvidia --kubeconfig={{ kube_config }}"
+  delegate_to: localhost
+  when: "nvidia_gpu is defined and 'accelerator: nvidia' not in label_result.stdout"
