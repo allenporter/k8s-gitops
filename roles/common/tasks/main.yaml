@@ -1,4 +1,7 @@
 ---
+- name: Admin
+  import_tasks: admin.yaml
+
 - name: fstrim
   import_tasks: fstrim.yaml
 

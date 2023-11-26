@@ -1,0 +1,13 @@
+---
+- name: Ensure account is sudo user
+  user:
+    name: "{{ ansible_user }}"
+    groups: sudo
+    append: yes
+
+- name: Allow admin users to sudo without a password
+  lineinfile:
+    dest: "/etc/sudoers"
+    state: "present"
+    regexp: "^%sudo"
+    line: "%sudo ALL=(ALL:ALL) NOPASSWD: ALL"
