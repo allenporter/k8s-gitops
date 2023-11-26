@@ -8,4 +8,4 @@
 - name: Update Node labels
   command: "kubectl label nodes {{ ansible_hostname }} target_node={{ target_node }} --kubeconfig={{ kube_config }}"
   delegate_to: localhost
-  when: "target_node not in label_result.stdout"
+  when: "target_node is defined and target_node not in label_result.stdout"

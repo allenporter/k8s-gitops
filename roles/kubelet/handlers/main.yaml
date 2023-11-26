@@ -8,3 +8,6 @@
   service:
     name: containerd
     state: restarted
+
+- name: disable swap
+  command: swapoff -a
