@@ -13,7 +13,7 @@ spec:
   values:
     image:
       repository: teslamate/teslamate
-      tag: 1.27.4
+      tag: 1.28.1
     virtualHost: teslamate.prod.mrv.thebends.org
     ingress:
       main:
