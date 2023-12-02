@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     proxmox = {
-      source  = "telmate/proxmox"
-      version = "2.9.14"
+      source  = "TheGameProfi/proxmox"
+      version = "2.9.15"
     }
   }
 }
@@ -68,6 +68,7 @@ resource "proxmox_vm_qemu" "proxmox-vmm" {
       network,
       qemu_os,
       startup,
+      hostpci
     ]
   }
 }
