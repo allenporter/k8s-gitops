@@ -68,6 +68,7 @@ resource "proxmox_vm_qemu" "proxmox-vmm" {
       network,
       qemu_os,
       startup,
+      hostpci
     ]
   }
 }
