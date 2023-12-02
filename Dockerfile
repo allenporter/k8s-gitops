@@ -1,5 +1,5 @@
 
-FROM ubuntu:jammy-20231004
+FROM ubuntu:jammy-20231128
 
 RUN apt-get update --fix-missing && \
     apt-get upgrade -y && \
