@@ -26,7 +26,7 @@ spec:
     replicaCount: 1
 
     deployment:
-      image: quay.io/go-skynet/local-ai:latest
+      image: quay.io/go-skynet/local-ai:master-cublas-cuda11
       env:
         threads: 4
         context_size: 512
