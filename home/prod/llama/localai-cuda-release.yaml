@@ -24,7 +24,7 @@ spec:
   # Default values at https://github.com/go-skynet/helm-charts
   values:
     replicaCount: 1
-  
+
     deployment:
       image: quay.io/go-skynet/local-ai:latest
       env:
@@ -71,6 +71,6 @@ spec:
         - path: /
           pathType: ImplementationSpecific
       tls:
-       - secretName: local-ai-cuda-tls
-         hosts:
-         - local-ai-cuda.${DOMAIN}
+      - secretName: local-ai-cuda-tls
+        hosts:
+        - local-ai-cuda.${DOMAIN}
