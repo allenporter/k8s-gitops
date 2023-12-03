@@ -343,6 +343,12 @@ clusters:
         name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
+    - name: llama-cpp-server
+      namespace: llama
+      chart:
+        name: app-template
+        repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
     - name: mosquitto
       namespace: mqtt
       chart:
