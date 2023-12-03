@@ -28,9 +28,9 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/getumbrel/llama-gpt-ui
+              repository: ghcr.io/allenporter/llama-gpt-ui
               pullPolicy: IfNotPresent
-              tag: latest@sha256:6722d8a05a7b3d59f9b8091c749a1531674186a62dab3042d812cf7f25e92e83
+              tag: v0.1.1
             env:
             - name: OPENAI_API_HOST
               value: http://llama-cpp-server:8000
