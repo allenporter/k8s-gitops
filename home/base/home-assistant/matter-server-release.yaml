@@ -17,9 +17,7 @@ spec:
   install:
     remediation:
       retries: 3
-  test:
-    # Fix problem where helm fails to uninstall
-    enable: false
+
   values:
     controllers:
       main:
