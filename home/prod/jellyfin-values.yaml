@@ -11,9 +11,14 @@ spec:
       chart: app-template
       version: 2.3.0
   values:
-    image:
-      repository: jellyfin/jellyfin
-      tag: 10.8.13
+    controllers:
+      main:
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: jellyfin/jellyfin
+              tag: 10.8.13
     persistence:
       media:
         enabled: true
