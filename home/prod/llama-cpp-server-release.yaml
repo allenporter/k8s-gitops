@@ -63,14 +63,14 @@ spec:
         hosts:
         - host: llama-server.${DOMAIN}
           paths:
-            - path: /
-              service:
-                name: main
-                port: http
+          - path: /
+            service:
+              name: main
+              port: http
         tls:
         - secretName: jellyfin-tls
           hosts:
-            - jellyfin.${DOMAIN}
+          - jellyfin.${DOMAIN}
 
     persistence:
       config:
