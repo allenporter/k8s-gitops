@@ -21,13 +21,16 @@ spec:
     # Fix problem where helm fails to uninstall
     enable: false
   values:
-    image:
-      repository: ghcr.io/home-assistant-libs/python-matter-server
-      pullPolicy: IfNotPresent
-      tag: 4.0.2
+    controllers:
+      main:
+        strategy: Recreate
 
-    strategy:
-      type: Recreate
+        containers:
+          main:
+            image:
+              repository: ghcr.io/home-assistant-libs/python-matter-server
+              pullPolicy: IfNotPresent
+              tag: 4.0.2
 
     service:
       main:
@@ -46,6 +49,9 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: websocket
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           external-dns.alpha.kubernetes.io/hostname: matter-server.${DOMAIN}.
@@ -61,7 +67,7 @@ spec:
     persistence:
       config:
         enabled: true
-        type: pvc
+        type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 1Gi
         mountPath: /data
