@@ -82,9 +82,9 @@ spec:
               name: main
               port: http
         tls:
-        - secretName: jellyfin-tls
+        - secretName: llama-cpp-server-tls
           hosts:
-          - jellyfin.${DOMAIN}
+          - llama-cpp-server.${DOMAIN}
 
     persistence:
       config:
