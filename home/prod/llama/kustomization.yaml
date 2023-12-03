@@ -5,3 +5,4 @@ resources:
 - namespace.yaml
 - llama-cpp-server-release.yaml
 - llama-gpt-ui-release.yaml
+- localai-cuda-release.yaml
