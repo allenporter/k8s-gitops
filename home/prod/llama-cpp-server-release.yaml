@@ -79,7 +79,7 @@ spec:
         tls:
         - secretName: llama-cpp-server-tls
           hosts:
-          - llama-cpp-server.${DOMAIN}
+          - llama-server.${DOMAIN}
 
     persistence:
       config:
