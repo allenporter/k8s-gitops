@@ -21,10 +21,12 @@ spec:
     # Fix problem where helm fails to uninstall
     enable: false
   values:
-    image:
-      repository: ghcr.io/home-assistant-libs/python-matter-server
-      pullPolicy: IfNotPresent
-      tag: 4.0.2
+    containers:
+      main:
+        image:
+          repository: ghcr.io/home-assistant-libs/python-matter-server
+          pullPolicy: IfNotPresent
+          tag: 4.0.2
 
     strategy:
       type: Recreate
