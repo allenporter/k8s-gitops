@@ -79,6 +79,3 @@ spec:
         accessMode: ReadWriteOnce
         size: 40Gi
         mountPath: /data/models
-      cache:
-        enabled: true
-        type: emptyDir
