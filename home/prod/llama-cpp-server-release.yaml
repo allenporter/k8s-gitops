@@ -43,6 +43,20 @@ spec:
               value: mistral-7b-inst
             - name: MODEL_URL
               value: https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q4_K_M.gguf
+            probes:
+              # Use default liveness and readiness probes. A custom startup probe
+              # is used to allow for a long wait on initial download of a model.
+              startup:
+                enabled: true
+                custom: true
+                type: TCP
+                spec:
+                  initialDelaySeconds: 60
+                  timeoutSeconds: 3
+                  # Wait 30 minutes for initial model download
+                  periodSeconds: 60
+                  failureThreshold: 30
+
 
     service:
       main:
