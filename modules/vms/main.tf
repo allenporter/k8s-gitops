@@ -1,13 +1,13 @@
 terraform {
   required_providers {
     proxmox = {
-      source  = "bpg/proxmox"
-      version = "0.39.0"
+      source  = "telmate/proxmox"
+      version = "2.9.14"
     }
   }
 }
 
-resource "proxmox_vm_qemu" "proxmox-vmm" {
+resource "proxmox_virtual_environment_network_linux_bridge" "proxmox-vmm" {
   for_each    = var.vms
   name        = each.key
   target_node = each.value.target_node
