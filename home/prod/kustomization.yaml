@@ -10,7 +10,9 @@ resources:
   - ../base/jellyfin
   - prometheus-rules.yaml
   - home-assistant-config-pvc.yaml
+  - llama-namespace.yaml
   - llama-cpp-server-release.yaml
+  - llama-gpt-ui-release.yaml
 patches:
   - path: home-assistant-values.yaml
   - path: teslamate-values.yaml
