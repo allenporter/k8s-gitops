@@ -21,15 +21,16 @@ spec:
     # Fix problem where helm fails to uninstall
     enable: false
   values:
-    containers:
+    controllers:
       main:
-        image:
-          repository: ghcr.io/home-assistant-libs/python-matter-server
-          pullPolicy: IfNotPresent
-          tag: 4.0.2
+        strategy: Recreate
 
-    strategy:
-      type: Recreate
+        containers:
+          main:
+            image:
+              repository: ghcr.io/home-assistant-libs/python-matter-server
+              pullPolicy: IfNotPresent
+              tag: 4.0.2
 
     service:
       main:
@@ -63,7 +64,7 @@ spec:
     persistence:
       config:
         enabled: true
-        type: pvc
+        type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 1Gi
         mountPath: /data
