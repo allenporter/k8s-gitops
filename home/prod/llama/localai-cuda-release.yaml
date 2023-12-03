@@ -1,0 +1,76 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: local-ai-cuda
+  namespace: llama
+spec:
+  releaseName: local-ai-cuda
+  chart:
+    spec:
+      chart: local-ai
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: go-skynet
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    # Fix problem where helm fails to uninstall
+    enable: false
+  # Default values at https://github.com/go-skynet/helm-charts
+  values:
+    replicaCount: 1
+  
+    deployment:
+      image: quay.io/go-skynet/local-ai:latest
+      env:
+        threads: 4
+        context_size: 512
+      modelsPath: "/data/models"
+
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+
+    models:
+      forceDownload: false
+      list:
+      - url: "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q4_K_M.gguf"
+
+    persistence:
+      pvc:
+        enabled: true
+        size: 40Gi
+        accessModes:
+        - ReadWriteOnce
+        annotations: {}
+      hostPath:
+        enabled: true
+        path: "/data/models"
+
+    service:
+      type: ClusterIP
+      port: 80
+
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        haproxy.org/forwarded-for: "true"
+        hajimari.io/icon: transform
+        hajimari.io/appName: LocalAI GPU
+        external-dns.alpha.kubernetes.io/hostname: local-ai-cuda.${DOMAIN}.
+        external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
+      hosts:
+      - host: local-ai-cuda.${DOMAIN}
+        paths:
+        - path: /
+          pathType: ImplementationSpecific
+      tls:
+       - secretName: local-ai-cuda-tls
+         hosts:
+         - local-ai-cuda.${DOMAIN}

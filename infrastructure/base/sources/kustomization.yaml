@@ -29,3 +29,4 @@ resources:
   - homelab.yaml
   - authelia.yaml
   - nvdp.yaml
+  - go-skynet.yaml
