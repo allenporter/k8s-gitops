@@ -16,8 +16,14 @@ spec:
         namespace: flux-system
   interval: 5m
   install:
+    disableWait: true
     remediation:
       retries: 3
+  upgrade:
+    disableWait: true
+  uninstall:
+    timeout: 10s
+    disableWait: true
   test:
     # Fix problem where helm fails to uninstall
     enable: false
@@ -26,6 +32,7 @@ spec:
     replicaCount: 1
 
     deployment:
+      # See https://localai.io/basics/getting_started/#container-images
       image: quay.io/go-skynet/local-ai:master-cublas-cuda11
       env:
         threads: 4
