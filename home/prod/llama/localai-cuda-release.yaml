@@ -48,9 +48,7 @@ spec:
         accessModes:
         - ReadWriteOnce
         annotations: {}
-      hostPath:
-        enabled: true
-        path: "/data/models"
+        storageClass: rook-ceph-block
 
     service:
       type: ClusterIP
