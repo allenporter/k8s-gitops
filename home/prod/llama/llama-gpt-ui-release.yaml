@@ -33,7 +33,7 @@ spec:
               tag: v0.1.1
             env:
             - name: OPENAI_API_HOST
-              value: http://llama-cpp-server:8000
+              value: http://local-ai-cuda
             - name: OPENAI_API_KEY
               value: sk-XXXXXXXXXXXXXXXXXXXX
 
