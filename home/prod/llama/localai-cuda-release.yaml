@@ -33,7 +33,7 @@ spec:
 
     deployment:
       # See https://localai.io/basics/getting_started/#container-images
-      image: quay.io/go-skynet/local-ai:master-cublas-cuda11
+      image: quay.io/go-skynet/local-ai:master-cublas-cuda12-core
       env:
         threads: 4
         context_size: 512
