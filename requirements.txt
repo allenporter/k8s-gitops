@@ -2,7 +2,7 @@ PyJWT==2.8.0
 PyYAML==6.0.1
 aiohttp==3.9.1
 ansible-pylibssh==1.1.0
-ansible==9.0.1
+ansible==9.1.0
 cryptography==41.0.7
 dnspython==2.4.2
 flux-local==3.2.0
