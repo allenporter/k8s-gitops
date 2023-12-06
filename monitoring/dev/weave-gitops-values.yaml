@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.gitops.weave.works
       chart: weave-gitops
-      version: 4.0.35
+      version: 4.0.36
   values:
     adminUser:
       create: true
