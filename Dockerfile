@@ -28,7 +28,7 @@ RUN apt-get install -y ceph-common
 RUN ceph --version
 
 # renovate: datasource=github-releases depName=etcd-io/etcd
-ARG ETCD_VERSION=v3.5.10
+ARG ETCD_VERSION=v3.5.11
 RUN mkdir -p /src && \
     cd /src && \
     curl -OL https://github.com/etcd-io/etcd/archive/refs/tags/${ETCD_VERSION}.zip && \
