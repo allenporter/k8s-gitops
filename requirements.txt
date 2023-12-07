@@ -6,7 +6,7 @@ ansible==9.1.0
 cryptography==41.0.7
 dnspython==2.4.2
 flux-local==3.2.0
-google-cloud-secret-manager==2.16.4
+google-cloud-secret-manager==2.17.0
 hostdb==1.1.2
 paramiko==3.3.1
 pip==23.3.1
