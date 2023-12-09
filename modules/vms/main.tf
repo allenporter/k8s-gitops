@@ -11,9 +11,6 @@ resource "proxmox_vm_qemu" "proxmox-vmm" {
   for_each    = var.vms
   name        = each.key
   target_node = each.value.target_node
-  clone       = lookup(each.value, "clone", "ubuntu-template")
-  full_clone  = false
-  clone_wait  = 15
   onboot      = true
   oncreate    = true
   tablet      = false  # Reduces CPU usage
@@ -40,6 +37,12 @@ resource "proxmox_vm_qemu" "proxmox-vmm" {
     id   = 0
     type = "socket"
   }
+
+  clone {
+    vm_id = lookup(each.value, "clone_vm_id")
+    full = false
+  }
+  clone_wait  = 15
 
   disk {
     type         = "scsi"
