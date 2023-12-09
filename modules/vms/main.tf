@@ -9,8 +9,9 @@ terraform {
 
 resource "proxmox_virtual_environment_vm" "proxmox-vmm" {
   for_each    = var.vms
-  node_name        = each.key
-  target_node = each.value.target_node
+  name        = each.key
+  node_name   = each.value.target_node
+  on_boot     = true
 
   initialization {
     datastore_id = "vm-pool"
