@@ -16,7 +16,7 @@ resource "proxmox_virtual_environment_vm" "proxmox-vmm" {
     datastore_id = "vm-pool"
     ip_config {
       ipv4 {
-        address = format("ip=%s/16, each.value.ip)
+        address = format("ip=%s/16", each.value.ip)
         gateawy = var.cloud_init.gateway
       }
     }
@@ -50,7 +50,7 @@ resource "proxmox_virtual_environment_vm" "proxmox-vmm" {
 
   disk {
     interface    = "scsi0"
-    datastore_id = lookup(each.value, "disk_storage", "vm-pool")
+    datastore_id = lookup(each.value, "disk_storage", "vm-pool") 
     size         = lookup(each.value, "disk_size", "200G")
     discard      = "on"
   }
