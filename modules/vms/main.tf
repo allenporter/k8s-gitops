@@ -7,9 +7,9 @@ terraform {
   }
 }
 
-resource "proxmox_vm_qemu" "proxmox-vmm" {
+resource "proxmox_virtual_environment_vm" "proxmox-vmm" {
   for_each    = var.vms
-  name        = each.key
+  node_name        = each.key
   target_node = each.value.target_node
   onboot      = true
   oncreate    = true
@@ -45,7 +45,7 @@ resource "proxmox_vm_qemu" "proxmox-vmm" {
   clone_wait  = 15
 
   disk {
-    type         = "scsi"
+    interface    = "scsi0"
     storage      = lookup(each.value, "disk_storage", "vm-pool")
     size         = lookup(each.value, "disk_size", "200G")
     backup       = true
