@@ -27,7 +27,7 @@ resource "proxmox_virtual_environment_vm" "proxmox-vmm" {
     }
     user_account {
       username = var.cloud_init.provision_user
-      keys = var.cloud_init.provision_ssh_keys
+      keys = split("\n", var.cloud_init.provision_ssh_keys)
     }
   }
 
