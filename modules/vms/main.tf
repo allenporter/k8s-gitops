@@ -11,42 +11,46 @@ resource "proxmox_virtual_environment_vm" "proxmox-vmm" {
   for_each    = var.vms
   node_name        = each.key
   target_node = each.value.target_node
-  onboot      = true
-  oncreate    = true
-  tablet      = false  # Reduces CPU usage
 
-  os_type      = "cloud-init"
-  ipconfig0    = format("ip=%s/16,gw=%s", each.value.ip, var.cloud_init.gateway)
-  nameserver   = var.cloud_init.nameserver
-  searchdomain = var.cloud_init.searchdomain
-  ciuser       = var.cloud_init.provision_user
-  sshkeys      = var.cloud_init.provision_ssh_keys
+  initialization {
+    datastore_id = "vm-pool"
+    ip_config {
+      ipv4 {
+        address = format("ip=%s/16, each.value.ip)
+        gateawy = var.cloud_init.gateway
+      }
+    }
+    dns {
+      domain = var.cloud_init.searchdomain
+      server = var.cloud_init.nameserver
+    }
+    user_account = var.cloud_init.provision_user
+    keys = var.cloud_init.provision_ssh_keys
+  }
 
   # Operator must manually apply changes
   automatic_reboot = lookup(each.value, "automatic_reboot", true)
 
-  cores  = lookup(each.value, "cpus", null)
-  memory = lookup(each.value, "memory", 2048)
-
-  # Specified explicitly so that it does not always show as an update
-  bootdisk = "scsi0"
-  scsihw   = "virtio-scsi-pci"
+  cpu {
+    cores  = lookup(each.value, "cpus", null)
+  }
+  memory{
+    dedicated = lookup(each.value, "memory", 2048)
+  }
 
   # Needed otherwise ubuntu-server hangs
-  serial {
-    id   = 0
-    type = "socket"
+  serial_device {
+    device = "socket"
   }
 
   clone {
     vm_id = lookup(each.value, "clone_vm_id")
     full = false
   }
-  clone_wait  = 15
 
   disk {
     interface    = "scsi0"
-    storage      = lookup(each.value, "disk_storage", "vm-pool")
+    datastore_id = lookup(each.value, "disk_storage", "vm-pool")
     size         = lookup(each.value, "disk_size", "200G")
     backup       = true
     discard      = "on"
