@@ -1,8 +1,8 @@
 terraform {
   required_providers {
     proxmox = {
-      source  = "TheGameProfi/proxmox"
-      version = "2.9.15"
+      source  = "bpg/proxmox"
+      version = "0.39.0"
     }
   }
 }
