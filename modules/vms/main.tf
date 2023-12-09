@@ -71,9 +71,6 @@ resource "proxmox_virtual_environment_vm" "proxmox-vmm" {
   # Workaround: variables that change every time
   lifecycle {
     ignore_changes = [
-      network,
-      qemu_os,
-      startup,
     ]
   }
 }
