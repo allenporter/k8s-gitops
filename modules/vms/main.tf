@@ -17,19 +17,18 @@ resource "proxmox_virtual_environment_vm" "proxmox-vmm" {
     ip_config {
       ipv4 {
         address = format("ip=%s/16", each.value.ip)
-        gateawy = var.cloud_init.gateway
+        gateway = var.cloud_init.gateway
       }
     }
     dns {
       domain = var.cloud_init.searchdomain
       server = var.cloud_init.nameserver
     }
-    user_account = var.cloud_init.provision_user
-    keys = var.cloud_init.provision_ssh_keys
+    user_account {
+      username = var.cloud_init.provision_user
+      keys = var.cloud_init.provision_ssh_keys
+    }
   }
-
-  # Operator must manually apply changes
-  automatic_reboot = lookup(each.value, "automatic_reboot", true)
 
   cpu {
     cores  = lookup(each.value, "cpus", null)
