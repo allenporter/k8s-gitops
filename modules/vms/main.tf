@@ -52,7 +52,6 @@ resource "proxmox_virtual_environment_vm" "proxmox-vmm" {
     interface    = "scsi0"
     datastore_id = lookup(each.value, "disk_storage", "vm-pool")
     size         = lookup(each.value, "disk_size", "200G")
-    backup       = true
     discard      = "on"
   }
 
