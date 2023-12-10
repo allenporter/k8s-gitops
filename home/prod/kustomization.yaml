@@ -2,7 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ../base/home-assistant
   - ../base/teslamate
   - ../base/mosquitto
   - ../base/hajimari
@@ -12,7 +11,6 @@ resources:
   - home-assistant-config-pvc.yaml
   - llama/
 patches:
-  - path: home-assistant-values.yaml
   - path: teslamate-values.yaml
   - path: hajimari-values.yaml
   - path: rtsp-to-web-values.yaml
