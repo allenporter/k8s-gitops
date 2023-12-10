@@ -7,6 +7,7 @@ spec:
   releaseName: nvdp
   chart:
     spec:
+      # renovate: registryUrl=https://nvidia.github.io/k8s-device-plugin
       chart: nvidia-device-plugin
       version: 0.14.3
       sourceRef:
