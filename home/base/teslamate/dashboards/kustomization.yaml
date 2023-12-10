@@ -1,0 +1,60 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+configMapGenerator:
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/charge-level.json
+  name: grafana-dashboard-teslamate-charge-level
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/charges.json
+  name: grafana-dashboard-teslamate-charges
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/charging-stats.json
+  name: grafana-dashboard-teslamate-charging-stats
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/drive-stats.json
+  name: grafana-dashboard-teslamate-drive-stats
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/drives.json
+  name: grafana-dashboard-teslamate-drives
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/efficiency.json
+  name: grafana-dashboard-teslamate-efficiency
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/internal/charge-details.json
+  name: grafana-dashboard-teslamate-internal-charge-details
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/internal/drive-details.json
+  name: grafana-dashboard-teslamate-internal-drive-details
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/locations.json
+  name: grafana-dashboard-teslamate-locations
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/mileage.json
+  name: grafana-dashboard-teslamate-mileage
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/overview.json
+  name: grafana-dashboard-teslamate-overview
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/projected-range.json
+  name: grafana-dashboard-teslamate-protected-range
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/states.json
+  name: grafana-dashboard-teslamate-states
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/trip.json
+  name: grafana-dashboard-teslamate-trip
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/updates.json
+  name: grafana-dashboard-teslamate-updates
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/vampire-drain.json
+  name: grafana-dashboard-teslamate-vampire-drain
+- files:
+  - localized-files/raw.githubusercontent.com/adriankumpf/teslamate/v1.27.4/grafana/dashboards/visited.json
+  name: grafana-dashboard-teslamate-visited
+generatorOptions:
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
+  labels:
+    grafana_dashboard: "1"
+kind: Kustomization
+namespace: teslamate
