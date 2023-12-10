@@ -1,0 +1,14 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+generatorOptions:
+  labels:
+    grafana_dashboard: "1"
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
+configMapGenerator:
+  - name: grafana-dashboard-control-plane
+    files:
+      - https://raw.githubusercontent.com/fluxcd/flux2/v2.1.2/manifests/monitoring/monitoring-config/dashboards/control-plane.json
+      - https://raw.githubusercontent.com/fluxcd/flux2/v2.1.2/manifests/monitoring/monitoring-config/dashboards/cluster.json

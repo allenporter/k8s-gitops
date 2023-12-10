@@ -8,7 +8,7 @@ resources:
   - ../base/benji
   - nvidia-device-plugin
   - benji-secrets.yaml
-  - https://raw.githubusercontent.com/projectcalico/calico/v3.26.4/manifests/calico.yaml
+  - calico
 patches:
   - path: redis-values.yaml
   - path: rook-ceph-values.yaml

@@ -4,6 +4,7 @@ ignore: |
   **/*secret.yaml
   **/*tmpl.yaml
   **/authelia-users-database.yaml
+  **/localized-files/**
   venv
 extends: default
 rules:
