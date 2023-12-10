@@ -1,5 +1,10 @@
 ---
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: home-assistant
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: home-assistant-storage-0
