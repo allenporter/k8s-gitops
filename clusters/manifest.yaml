@@ -6,7 +6,7 @@ clusters:
   kustomizations:
   - name: certmanager
     namespace: flux-system
-    path: ./certmanager/dev
+    path: certmanager/dev
     helm_repos: []
     helm_releases:
     - name: cert-manager
@@ -16,27 +16,27 @@ clusters:
         repo_name: jetstack
         repo_namespace: flux-system
     cluster_policies: []
-  - name: flux-system
+  - name: crds
     namespace: flux-system
-    path: ./clusters/dev
+    path: crds
     helm_repos: []
     helm_releases: []
     cluster_policies: []
-  - name: crds
+  - name: flux-system
     namespace: flux-system
-    path: ./crds
+    path: clusters/dev
     helm_repos: []
     helm_releases: []
     cluster_policies: []
   - name: games
     namespace: flux-system
-    path: ./games/dev
+    path: games/dev
     helm_repos: []
     helm_releases: []
     cluster_policies: []
   - name: home
     namespace: flux-system
-    path: ./home/dev
+    path: home/dev
     helm_repos: []
     helm_releases:
     - name: hajimari
@@ -72,80 +72,108 @@ clusters:
     cluster_policies: []
   - name: infrastructure
     namespace: flux-system
-    path: ./infrastructure/dev
+    path: infrastructure/dev
     helm_repos:
     - name: authelia
       namespace: flux-system
       url: https://charts.authelia.com
+      repo_type: default
     - name: benji
       namespace: flux-system
       url: https://benji-backup.me/helm-charts/
+      repo_type: default
     - name: bitnami
       namespace: flux-system
       url: oci://registry-1.docker.io/bitnamicharts
+      repo_type: oci
     - name: bjw-s-helm-charts
       namespace: flux-system
       url: https://bjw-s.github.io/helm-charts/
+      repo_type: default
+    - name: go-skynet
+      namespace: flux-system
+      url: https://go-skynet.github.io/helm-charts/
+      repo_type: default
     - name: grafana
       namespace: flux-system
       url: https://grafana.github.io/helm-charts
+      repo_type: default
     - name: hajimari
       namespace: flux-system
       url: https://hajimari.io
+      repo_type: default
     - name: haproxytech
       namespace: flux-system
       url: https://haproxytech.github.io/helm-charts
+      repo_type: default
     - name: ingress-nginx
       namespace: flux-system
       url: https://kubernetes.github.io/ingress-nginx
+      repo_type: default
     - name: istio
       namespace: flux-system
       url: https://istio-release.storage.googleapis.com/charts
+      repo_type: default
     - name: itzg
       namespace: flux-system
       url: https://itzg.github.io/minecraft-server-charts/
+      repo_type: default
     - name: jetstack
       namespace: flux-system
       url: https://charts.jetstack.io
+      repo_type: default
     - name: jupyterhub
       namespace: flux-system
       url: https://jupyterhub.github.io/helm-chart/
+      repo_type: default
     - name: k8s-at-home
       namespace: flux-system
       url: https://k8s-at-home.com/charts/
+      repo_type: default
     - name: kasten
       namespace: flux-system
       url: https://charts.kasten.io/
+      repo_type: default
     - name: kube-state-metrics
       namespace: flux-system
       url: https://kubernetes.github.io/kube-state-metrics
+      repo_type: default
     - name: kubernetes-dashboard
       namespace: flux-system
       url: https://kubernetes.github.io/dashboard/
+      repo_type: default
     - name: kyverno
       namespace: flux-system
       url: https://kyverno.github.io/kyverno/
+      repo_type: default
     - name: nextcloud
       namespace: flux-system
       url: https://nextcloud.github.io/helm/
+      repo_type: default
     - name: nvdp
       namespace: flux-system
       url: https://nvidia.github.io/k8s-device-plugin
+      repo_type: default
     - name: podinfo
       namespace: flux-system
       url: https://stefanprodan.github.io/podinfo
+      repo_type: default
     - name: prometheus-community
       namespace: flux-system
       url: https://prometheus-community.github.io/helm-charts
+      repo_type: default
     - name: rook-release
       namespace: flux-system
       url: https://charts.rook.io/release
+      repo_type: default
     - name: tf-controller
       namespace: flux-system
       url: https://weaveworks.github.io/tf-controller/
+      repo_type: default
     - name: weave-works
       namespace: flux-system
       url: https://helm.gitops.weave.works
+      repo_type: default
     helm_releases:
     - name: benji
       namespace: benji
@@ -174,7 +202,7 @@ clusters:
     cluster_policies: []
   - name: monitoring
     namespace: flux-system
-    path: ./monitoring/dev
+    path: monitoring/dev
     helm_repos: []
     helm_releases:
     - name: kubernetes-dashboard
@@ -216,7 +244,7 @@ clusters:
     cluster_policies: []
   - name: network
     namespace: flux-system
-    path: ./network/dev
+    path: network/dev
     helm_repos: []
     helm_releases:
     - name: adguard-home
@@ -234,7 +262,7 @@ clusters:
     cluster_policies: []
   - name: services
     namespace: flux-system
-    path: ./services/dev
+    path: services/dev
     helm_repos: []
     helm_releases:
     - name: authelia
@@ -276,7 +304,7 @@ clusters:
     cluster_policies: []
   - name: settings
     namespace: flux-system
-    path: ./settings/dev
+    path: settings/dev
     helm_repos: []
     helm_releases: []
     cluster_policies: []
@@ -286,7 +314,7 @@ clusters:
   kustomizations:
   - name: certmanager
     namespace: flux-system
-    path: ./certmanager/prod
+    path: certmanager/prod
     helm_repos: []
     helm_releases:
     - name: cert-manager
@@ -296,27 +324,27 @@ clusters:
         repo_name: jetstack
         repo_namespace: flux-system
     cluster_policies: []
-  - name: flux-system
+  - name: crds
     namespace: flux-system
-    path: ./clusters/prod
+    path: crds
     helm_repos: []
     helm_releases: []
     cluster_policies: []
-  - name: crds
+  - name: flux-system
     namespace: flux-system
-    path: ./crds
+    path: clusters/prod
     helm_repos: []
     helm_releases: []
     cluster_policies: []
   - name: games
     namespace: flux-system
-    path: ./games/prod
+    path: games/prod
     helm_repos: []
     helm_releases: []
     cluster_policies: []
   - name: home
     namespace: flux-system
-    path: ./home/prod
+    path: home/prod
     helm_repos: []
     helm_releases:
     - name: hajimari
@@ -324,18 +352,6 @@ clusters:
       chart:
         name: hajimari
         repo_name: hajimari
-        repo_namespace: flux-system
-    - name: home-assistant
-      namespace: home-assistant
-      chart:
-        name: home-assistant
-        repo_name: k8s-at-home
-        repo_namespace: flux-system
-    - name: matter-server
-      namespace: home-assistant
-      chart:
-        name: app-template
-        repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
     - name: jellyfin
       namespace: jellyfin
@@ -348,6 +364,18 @@ clusters:
       chart:
         name: app-template
         repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
+    - name: llama-gpt-ui
+      namespace: llama
+      chart:
+        name: app-template
+        repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
+    - name: local-ai-cuda
+      namespace: llama
+      chart:
+        name: local-ai
+        repo_name: go-skynet
         repo_namespace: flux-system
     - name: mosquitto
       namespace: mqtt
@@ -370,80 +398,108 @@ clusters:
     cluster_policies: []
   - name: infrastructure
     namespace: flux-system
-    path: ./infrastructure/prod
+    path: infrastructure/prod
     helm_repos:
     - name: authelia
       namespace: flux-system
       url: https://charts.authelia.com
+      repo_type: default
     - name: benji
       namespace: flux-system
       url: https://benji-backup.me/helm-charts/
+      repo_type: default
     - name: bitnami
       namespace: flux-system
       url: oci://registry-1.docker.io/bitnamicharts
+      repo_type: oci
     - name: bjw-s-helm-charts
       namespace: flux-system
       url: https://bjw-s.github.io/helm-charts/
+      repo_type: default
+    - name: go-skynet
+      namespace: flux-system
+      url: https://go-skynet.github.io/helm-charts/
+      repo_type: default
     - name: grafana
       namespace: flux-system
       url: https://grafana.github.io/helm-charts
+      repo_type: default
     - name: hajimari
       namespace: flux-system
       url: https://hajimari.io
+      repo_type: default
     - name: haproxytech
       namespace: flux-system
       url: https://haproxytech.github.io/helm-charts
+      repo_type: default
     - name: ingress-nginx
       namespace: flux-system
       url: https://kubernetes.github.io/ingress-nginx
+      repo_type: default
     - name: istio
       namespace: flux-system
       url: https://istio-release.storage.googleapis.com/charts
+      repo_type: default
     - name: itzg
       namespace: flux-system
       url: https://itzg.github.io/minecraft-server-charts/
+      repo_type: default
     - name: jetstack
       namespace: flux-system
       url: https://charts.jetstack.io
+      repo_type: default
     - name: jupyterhub
       namespace: flux-system
       url: https://jupyterhub.github.io/helm-chart/
+      repo_type: default
     - name: k8s-at-home
       namespace: flux-system
       url: https://k8s-at-home.com/charts/
+      repo_type: default
     - name: kasten
       namespace: flux-system
       url: https://charts.kasten.io/
+      repo_type: default
     - name: kube-state-metrics
       namespace: flux-system
       url: https://kubernetes.github.io/kube-state-metrics
+      repo_type: default
     - name: kubernetes-dashboard
       namespace: flux-system
       url: https://kubernetes.github.io/dashboard/
+      repo_type: default
     - name: kyverno
       namespace: flux-system
       url: https://kyverno.github.io/kyverno/
+      repo_type: default
     - name: nextcloud
       namespace: flux-system
       url: https://nextcloud.github.io/helm/
+      repo_type: default
     - name: nvdp
       namespace: flux-system
       url: https://nvidia.github.io/k8s-device-plugin
+      repo_type: default
     - name: podinfo
       namespace: flux-system
       url: https://stefanprodan.github.io/podinfo
+      repo_type: default
     - name: prometheus-community
       namespace: flux-system
       url: https://prometheus-community.github.io/helm-charts
+      repo_type: default
     - name: rook-release
       namespace: flux-system
       url: https://charts.rook.io/release
+      repo_type: default
     - name: tf-controller
       namespace: flux-system
       url: https://weaveworks.github.io/tf-controller/
+      repo_type: default
     - name: weave-works
       namespace: flux-system
       url: https://helm.gitops.weave.works
+      repo_type: default
     helm_releases:
     - name: benji
       namespace: benji
@@ -472,7 +528,7 @@ clusters:
     cluster_policies: []
   - name: monitoring
     namespace: flux-system
-    path: ./monitoring/prod
+    path: monitoring/prod
     helm_repos: []
     helm_releases:
     - name: kubernetes-dashboard
@@ -514,7 +570,7 @@ clusters:
     cluster_policies: []
   - name: network
     namespace: flux-system
-    path: ./network/prod
+    path: network/prod
     helm_repos: []
     helm_releases:
     - name: adguard-home
@@ -538,7 +594,7 @@ clusters:
     cluster_policies: []
   - name: services
     namespace: flux-system
-    path: ./services/prod
+    path: services/prod
     helm_repos: []
     helm_releases:
     - name: external-dns
@@ -568,7 +624,7 @@ clusters:
     cluster_policies: []
   - name: settings
     namespace: flux-system
-    path: ./settings/prod
+    path: settings/prod
     helm_repos: []
     helm_releases: []
     cluster_policies: []
