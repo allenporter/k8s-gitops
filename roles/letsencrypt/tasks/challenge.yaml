@@ -21,6 +21,10 @@
     remaining_days: "{{ cert_remaining_days }}"
   register: challenge
 
+- debug:
+    msg: "Challenge Data: {{ challenge.challenge_data }}'"
+
+
 - name: Update DNS Challenge
   vars:
     zone: "{{ inventory_hostname }}.{{ cert_domain }}"
@@ -50,7 +54,7 @@
             mode: equals
         always_ask_default_resolver: false  # Use the authoritative nameservers
       delegate_to: localhost
-  when: challenge is changed
+  when: challenge is changed and zone in challenge.challenge_data
 
 - name: Validate the challenge and retrieve certificates
   acme_certificate:
