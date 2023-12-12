@@ -25,34 +25,51 @@ spec:
     controllers:
       main:
         strategy: Recreate
+        initContainers:
+          download-model:
+            image:
+              repository: busybox
+              tag: 1.36.1
+              pullPolicy: IfNotPresent
+            command: ["/bin/sh", "-c"]
+            args:
+            - |
+              MODEL_DIR=/data/models
+              FORCE_DOWNLOAD=false
+              URLS="https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q4_K_M.gguf"
+
+              mkdir -p "$MODEL_DIR"
+
+              # Split urls on commas
+              echo "$URLS" | awk -F, '{for (i=1; i<=NF; i++) print $i}' | while read -r line; do
+                  url=$(echo "$line" | awk '{print $1}')
+
+                  if [ -n "$url" ]; then
+                      filename=$(basename "$url" .bin)
+
+                      if [ "$FORCE_DOWNLOAD" = false ] && [ -f "$MODEL_DIR/$filename" ]; then
+                          echo "File $filename already exists. Skipping download."
+                          continue
+                      fi
+                      rm -f "$MODEL_DIR/$filename"
+
+                      echo "Downloading $filename"
+                      wget "$url" -O "$MODEL_DIR/$filename"
+
+                      if [ "$?" -ne 0 ]; then
+                          echo "Download failed."
+                      else
+                          echo "Download completed."
+                      fi
+                  fi
+              done
+
         containers:
           main:
             image:
-              repository: ghcr.io/allenporter/llama-cpp-server
+              repository: ghcr.io/allenporter/llama-cpp-server-simple
               pullPolicy: IfNotPresent
-              tag: v0.0.1
-            env:
-            - name: MODEL_DIR
-              value: /data/models
-            - name: MODEL_NAME
-              value: mistral-7b-inst
-            - name: MODEL_URL
-              value: https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q4_K_M.gguf
-            probes:
-              # Use default liveness and readiness probes. A custom startup probe
-              # is used to allow for a long wait on initial download of a model.
-              # Wait 30 minutes for initial model download
-              startup:
-                enabled: true
-                custom: true
-                spec:
-                  initialDelaySeconds: 60
-                  timeoutSeconds: 1
-                  periodSeconds: 60
-                  failureThreshold: 30
-                  tcpSocket:
-                    port: 8000
-
+              tag: v0.1.0
     service:
       main:
         ports:
