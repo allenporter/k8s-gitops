@@ -110,5 +110,7 @@ spec:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 40Gi
-        mountPath: /data/models
+        globalMounts:
+        - path: /data
+          readOnly: false
         retain: true
