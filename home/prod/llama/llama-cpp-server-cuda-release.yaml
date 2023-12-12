@@ -76,7 +76,7 @@ spec:
             - name: MODEL_NAME
               value: mistral-7b-instruct-v0.1.Q4_K_M
             - name: N_GPU_LAYERS
-              value: 20
+              value: 35
             resources:
               limits:
                 nvidia.com/gpu: 1
