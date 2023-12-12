@@ -25,18 +25,13 @@ spec:
     controllers:
       main:
         strategy: Recreate
-        containers:
-          main:
-            image:
-              repository: ghcr.io/allenporter/llama-cpp-server-cuda
-              pullPolicy: IfNotPresent
-              tag: v0.1.0
         initContainers:
-        - name: download-model
-          image: busybox
-          imagePullPolicy: IfNotPresent
-          command: ["/bin/sh", "-c"]
-          args:
+          download-model:
+            image:
+              repository: busybox
+              pullPolicy: IfNotPresent
+            command: ["/bin/sh", "-c"]
+            args:
             - |
               MODEL_DIR=/data/models
               FORCE_DOWNLOAD=false
@@ -67,10 +62,14 @@ spec:
                       fi
                   fi
               done
-          volumeMounts:
-          - mountPath: /data
-            name: data
 
+        containers:
+          main:
+            image:
+              repository: ghcr.io/allenporter/llama-cpp-server-cuda
+              pullPolicy: IfNotPresent
+              tag: v0.1.0
+  
     service:
       main:
         ports:
