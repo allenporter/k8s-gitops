@@ -113,3 +113,4 @@ spec:
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 40Gi
+        retain: true
