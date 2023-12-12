@@ -2,10 +2,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: llama-cpp-server
+  name: llama-cpp-server-cuda
   namespace: llama
 spec:
-  releaseName: llama-cpp-server
+  releaseName: llama-cpp-server-cuda
   chart:
     spec:
       chart: app-template
@@ -67,9 +67,10 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/allenporter/llama-cpp-server-simple
+              repository: ghcr.io/allenporter/llama-cpp-server-cuda
               pullPolicy: IfNotPresent
               tag: v0.1.0
+
     service:
       main:
         ports:
@@ -83,11 +84,11 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           haproxy.org/forwarded-for: "true"
           hajimari.io/icon: transform
-          hajimari.io/appName: LLama.cpp Server
-          external-dns.alpha.kubernetes.io/hostname: llama-server.${DOMAIN}.
+          hajimari.io/appName: LLama.cpp Cuda Server
+          external-dns.alpha.kubernetes.io/hostname: llama-server-cuda.${DOMAIN}.
           external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
         hosts:
-        - host: llama-server.${DOMAIN}
+        - host: llama-server-cuda.${DOMAIN}
           paths:
           - path: /
             service:
@@ -96,12 +97,14 @@ spec:
         tls:
         - secretName: llama-cpp-server-tls
           hosts:
-          - llama-server.${DOMAIN}
+          - llama-server-cuda.${DOMAIN}
+        resources:
+          limits:
+            nvidia.com/gpu: 1
 
     persistence:
-      config:
+      data:
         enabled: true
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 40Gi
-        mountPath: /data/models
