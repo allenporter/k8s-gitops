@@ -5,4 +5,5 @@
     - sudo
     - lldpad
     - net-tools
+    - chrony
     state: latest
