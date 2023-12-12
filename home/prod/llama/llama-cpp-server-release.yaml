@@ -29,6 +29,7 @@ spec:
           download-model:
             image:
               repository: busybox
+              tag: 1.36.1
               pullPolicy: IfNotPresent
             command: ["/bin/sh", "-c"]
             args:
