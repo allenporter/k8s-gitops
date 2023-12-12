@@ -111,3 +111,4 @@ spec:
         accessMode: ReadWriteOnce
         size: 40Gi
         mountPath: /data/models
+        retain: true
