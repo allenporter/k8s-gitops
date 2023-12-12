@@ -103,7 +103,7 @@ spec:
               name: main
               port: http
         tls:
-        - secretName: llama-cpp-server-tls
+        - secretName: llama-cpp-server-cuda-tls
           hosts:
           - llama-server-cuda.${DOMAIN}
 
