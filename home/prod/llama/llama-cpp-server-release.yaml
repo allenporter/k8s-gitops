@@ -70,6 +70,12 @@ spec:
               repository: ghcr.io/allenporter/llama-cpp-server-simple
               pullPolicy: IfNotPresent
               tag: v0.1.0
+            env:
+            - name: MODEL_DIR
+              value: /data/models
+            - name: MODEL_NAME
+              value: mistral-7b-instruct-v0.1.Q4_K_M
+
     service:
       main:
         ports:
