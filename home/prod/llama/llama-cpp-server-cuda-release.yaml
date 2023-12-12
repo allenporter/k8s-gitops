@@ -75,6 +75,9 @@ spec:
               value: /data/models
             - name: MODEL_NAME
               value: mistral-7b-instruct-v0.1.Q4_K_M
+            resources:
+              limits:
+                nvidia.com/gpu: 1
 
     service:
       main:
@@ -103,9 +106,6 @@ spec:
         - secretName: llama-cpp-server-tls
           hosts:
           - llama-server-cuda.${DOMAIN}
-        resources:
-          limits:
-            nvidia.com/gpu: 1
 
     persistence:
       data:

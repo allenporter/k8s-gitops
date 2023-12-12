@@ -6,4 +6,3 @@ resources:
 - llama-cpp-server-release.yaml
 - llama-cpp-server-cuda-release.yaml
 - llama-gpt-ui-release.yaml
-- localai-cuda-release.yaml
