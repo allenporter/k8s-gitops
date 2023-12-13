@@ -36,7 +36,7 @@ spec:
             - |
               MODEL_DIR=/data/models
               FORCE_DOWNLOAD=false
-              URLS="https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q4_K_M.gguf"
+              URLS="https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q5_K_M.gguf"
 
               mkdir -p "$MODEL_DIR"
 
@@ -74,7 +74,7 @@ spec:
             - name: MODEL_DIR
               value: /data/models
             - name: MODEL_NAME
-              value: mistral-7b-instruct-v0.1.Q4_K_M
+              value: mistral-7b-instruct-v0.1.Q5_K_M
             - name: N_GPU_LAYERS
               value: 35
             resources:
