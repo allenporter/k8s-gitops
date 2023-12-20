@@ -18,8 +18,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Flux CLI
+        uses: fluxcd/flux2/action@v2.2.1
       - name: flux-local test
-        uses: allenporter/flux-local/action/test@main
+        uses: allenporter/flux-local/action/test@4.0.0
         with:
           path: ${{ matrix.cluster_path }}
           enable-helm: true
