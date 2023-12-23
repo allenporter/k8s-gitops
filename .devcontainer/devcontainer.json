@@ -4,10 +4,13 @@
 		"context": "..",
 		"dockerfile": "../Dockerfile"
 	},
+	"workspaceMount": "source=k8s-gitops-workspace,target=/workspaces,type=volume",
+	"workspaceFolder": "/workspaces/",
 	"mounts": [
 		"source=${localEnv:HOME}/Development/homelab,target=/workspaces/homelab,type=bind,consistency=cached",
 		"source=${localWorkspaceFolder}/.env/,target=/home/admin/.env/,type=bind,consistency=cached",
 	],
+	"postCreateCommand": "sudo chown admin /workspaces",
 	"remoteUser": "admin",
 	"containerEnv": {
 		"GNUPGHOME": "/home/admin/.env/.gpupg",
