@@ -7,6 +7,5 @@ metadata:
 spec:
   chart:
     spec:
-      # renovate: registryUrl=oci://registry-1.docker.io/bitnamicharts
       chart: metallb
       version: 0.13.12
