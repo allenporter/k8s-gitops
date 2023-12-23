@@ -31,3 +31,4 @@ resources:
   - nvdp.yaml
   - go-skynet.yaml
   - metallb.yaml
+  - backube.yaml
