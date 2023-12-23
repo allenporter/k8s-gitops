@@ -39,13 +39,6 @@ RUN mkdir -p /src && \
     rm -fr /src
 RUN etcdctl version
 
-# renovate: datasource=github-releases depName=kubernetes/kubernetes versioning=kubernetes-api
-ARG KUBECTL_VERSION=v1.27.0
-RUN cd /usr/local/bin/ && \
-    curl -OL https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl && \
-    chmod +x kubectl
-RUN kubectl version --client=true
-
 # renovate: datasource=github-releases depName=hashicorp/terraform extractVersion=^v(?<version>.+)$
 ARG TERRAFORM_VERSION=1.6.6
 RUN mkdir -p /src && \
@@ -64,33 +57,11 @@ RUN mkdir -p /usr/local/lib/ && \
     tar xf google-cloud-cli-${GCLOUD_CLI_VERSION}-linux-x86_64.tar.gz && \
     /usr/local/lib/google-cloud-sdk/install.sh --quiet --usage-reporting=false --rc-path=/etc/profile
 
-# renovate: datasource=github-releases depName=helm/helm
-ARG HELM_CLI_VERSION=v3.13.3
-RUN mkdir -p /src && \
-    cd /src && \
-    curl -OL https://get.helm.sh/helm-${HELM_CLI_VERSION}-linux-amd64.tar.gz && \
-    tar xf helm-${HELM_CLI_VERSION}-linux-amd64.tar.gz && \
-    cp linux-amd64/helm /usr/local/bin/helm && \
-    rm -fr /src
-RUN helm version
-
-# renovate: datasource=github-releases depName=fluxcd/flux2 extractVersion=^v(?<version>.+)$
-ARG FLUX_CLI_VERSION=2.2.2
-RUN mkdir -p /src && \
-    cd /src && \
-    curl -OL https://github.com/fluxcd/flux2/releases/download/v${FLUX_CLI_VERSION}/flux_${FLUX_CLI_VERSION}_linux_amd64.tar.gz && \
-    tar xf flux_${FLUX_CLI_VERSION}_linux_amd64.tar.gz && \
-    cp flux /usr/local/bin/flux && \
-    rm -fr /src
-RUN flux version --client
-
-# renovate: datasource=github-releases depName=kubernetes-sigs/kustomize
-ARG KUSTOMIZE_VERSION=v5.0.3
-RUN cd /usr/local/bin/ && \
-    curl -OL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz && \
-    tar xf kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz && \
-    chmod +x kustomize
-RUN kustomize version
+COPY --from=docker.io/bitnami/kubectl:1.28.5            /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
+COPY --from=registry.k8s.io/kustomize/kustomize:v5.3.0  /app/kustomize                   /usr/local/bin/kustomize
+COPY --from=ghcr.io/kyverno/kyverno-cli:v1.10.7         /ko-app/kubectl-kyverno          /usr/local/bin/kyverno
+COPY --from=docker.io/alpine/helm:3.13.3                /usr/bin/helm                    /usr/local/bin/helm
+COPY --from=ghcr.io/fluxcd/flux-cli:v2.2.2              /usr/local/bin/flux              /usr/local/bin/flux
 
 # renovate: datasource=github-releases depName=stedolan/jq
 ARG JQ_VERSION=1.6
@@ -107,17 +78,6 @@ RUN cd /usr/local/bin/ && \
     mv sops-${SOPS_VERSION}.linux.amd64 sops && \
     chmod +x sops
 RUN sops --version
-
-# renovate: datasource=github-releases depName=kyverno/kyverno
-ARG KYVERNO_VERSION=v1.11.1
-RUN mkdir -p /src && \
-    cd /src && \
-    curl -OL https://github.com/kyverno/kyverno/releases/download/${KYVERNO_VERSION}/kyverno-cli_${KYVERNO_VERSION}_linux_x86_64.tar.gz && \
-    tar xf kyverno-cli_${KYVERNO_VERSION}_linux_x86_64.tar.gz && \
-    cp kyverno /usr/local/bin/kyverno && \
-    chmod +x /usr/local/bin/kyverno && \
-    rm -fr /src
-RUN kyverno version
 
 # renovate: datasource=github-releases depName=yannh/kubeconform
 ARG KUBECONFORM_VERSION=v0.6.4
