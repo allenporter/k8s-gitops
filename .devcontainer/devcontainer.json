@@ -2,7 +2,7 @@
 	"name": "k8s-gitops-env Dockerfile",
 	"build": {
 		"context": "..",
-		"dockerfile": "../Dockerfile"
+		"dockerfile": "./Dockerfile"
 	},
 	"workspaceMount": "source=k8s-gitops-workspace,target=/workspaces,type=volume",
 	"workspaceFolder": "/workspaces/",
