@@ -9,4 +9,4 @@ spec:
     spec:
       # renovate: registryUrl=oci://registry-1.docker.io/bitnamicharts
       chart: metallb
-      version: 4.5.3
+      version: 0.13.12
