@@ -57,7 +57,7 @@ RUN mkdir -p /usr/local/lib/ && \
     tar xf google-cloud-cli-${GCLOUD_CLI_VERSION}-linux-x86_64.tar.gz && \
     /usr/local/lib/google-cloud-sdk/install.sh --quiet --usage-reporting=false --rc-path=/etc/profile
 
-COPY --from=docker.io/bitnami/kubectl:1.28.5            /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
+COPY --from=docker.io/bitnami/kubectl:1.29.0            /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
 COPY --from=registry.k8s.io/kustomize/kustomize:v5.3.0  /app/kustomize                   /usr/local/bin/kustomize
 COPY --from=ghcr.io/kyverno/kyverno-cli:v1.10.7         /ko-app/kubectl-kyverno          /usr/local/bin/kyverno
 COPY --from=docker.io/alpine/helm:3.13.3                /usr/bin/helm                    /usr/local/bin/helm
