@@ -23,3 +23,5 @@ spec:
   # Default values
   # https://github.com/bitnami/charts/blob/master/bitnami/metallb/values.yaml
   values:
+    crds:
+      enabled: true
