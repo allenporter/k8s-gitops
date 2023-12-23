@@ -11,7 +11,7 @@ spec:
       chart: metallb
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: metallb
         namespace: flux-system
   interval: 5m
   install:
@@ -23,3 +23,5 @@ spec:
   # Default values
   # https://github.com/bitnami/charts/blob/master/bitnami/metallb/values.yaml
   values:
+    crds:
+      enabled: true
