@@ -22,8 +22,7 @@ spec:
   # Default values
   # https://github.com/kubernetes-sigs/external-dns/blob/master/charts/external-dns/values.yaml
   values:
-    provider:
-      name: rfc2136
+    provider: rfc2136
     txtOwnerId: "k8s-external-dns"
     logLevel: debug
     env:
