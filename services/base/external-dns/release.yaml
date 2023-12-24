@@ -38,9 +38,9 @@ spec:
         value: external-dns-key
       - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET_ALG
         valueFrom:
-            secretKeyRef:
-              name: external-dns-tsig-secret
-              key: rfc2136_tsig_secret_alg
+          secretKeyRef:
+            name: external-dns-tsig-secret
+            key: rfc2136_tsig_secret_alg
       - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
         valueFrom:
           secretKeyRef:
