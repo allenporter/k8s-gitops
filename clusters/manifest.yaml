@@ -28,12 +28,6 @@ clusters:
     helm_repos: []
     helm_releases: []
     cluster_policies: []
-  - name: games
-    namespace: flux-system
-    path: games/dev
-    helm_repos: []
-    helm_releases: []
-    cluster_policies: []
   - name: home
     namespace: flux-system
     path: home/dev
@@ -78,6 +72,10 @@ clusters:
       namespace: flux-system
       url: https://charts.authelia.com
       repo_type: default
+    - name: backube
+      namespace: flux-system
+      url: https://backube.github.io/helm-charts/
+      repo_type: default
     - name: benji
       namespace: flux-system
       url: https://benji-backup.me/helm-charts/
@@ -89,6 +87,10 @@ clusters:
     - name: bjw-s-helm-charts
       namespace: flux-system
       url: https://bjw-s.github.io/helm-charts/
+      repo_type: default
+    - name: external-dns
+      namespace: flux-system
+      url: https://kubernetes-sigs.github.io/external-dns/
       repo_type: default
     - name: go-skynet
       namespace: flux-system
@@ -146,6 +148,10 @@ clusters:
       namespace: flux-system
       url: https://kyverno.github.io/kyverno/
       repo_type: default
+    - name: metallb
+      namespace: flux-system
+      url: https://metallb.github.io/metallb
+      repo_type: default
     - name: nextcloud
       namespace: flux-system
       url: https://nextcloud.github.io/helm/
@@ -198,6 +204,12 @@ clusters:
       chart:
         name: tf-controller
         repo_name: tf-controller
+        repo_namespace: flux-system
+    - name: volsync
+      namespace: volsync-system
+      chart:
+        name: volsync
+        repo_name: backube
         repo_namespace: flux-system
     cluster_policies: []
   - name: monitoring
@@ -275,7 +287,7 @@ clusters:
       namespace: external-dns
       chart:
         name: external-dns
-        repo_name: bitnami
+        repo_name: external-dns
         repo_namespace: flux-system
     - name: haproxy
       namespace: haproxy
@@ -293,7 +305,7 @@ clusters:
       namespace: metallb
       chart:
         name: metallb
-        repo_name: bitnami
+        repo_name: metallb
         repo_namespace: flux-system
     - name: nginx
       namespace: nginx
@@ -336,12 +348,6 @@ clusters:
     helm_repos: []
     helm_releases: []
     cluster_policies: []
-  - name: games
-    namespace: flux-system
-    path: games/prod
-    helm_repos: []
-    helm_releases: []
-    cluster_policies: []
   - name: home
     namespace: flux-system
     path: home/prod
@@ -377,12 +383,6 @@ clusters:
         name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
-    - name: local-ai-cuda
-      namespace: llama
-      chart:
-        name: local-ai
-        repo_name: go-skynet
-        repo_namespace: flux-system
     - name: mosquitto
       namespace: mqtt
       chart:
@@ -410,6 +410,10 @@ clusters:
       namespace: flux-system
       url: https://charts.authelia.com
       repo_type: default
+    - name: backube
+      namespace: flux-system
+      url: https://backube.github.io/helm-charts/
+      repo_type: default
     - name: benji
       namespace: flux-system
       url: https://benji-backup.me/helm-charts/
@@ -421,6 +425,10 @@ clusters:
     - name: bjw-s-helm-charts
       namespace: flux-system
       url: https://bjw-s.github.io/helm-charts/
+      repo_type: default
+    - name: external-dns
+      namespace: flux-system
+      url: https://kubernetes-sigs.github.io/external-dns/
       repo_type: default
     - name: go-skynet
       namespace: flux-system
@@ -478,6 +486,10 @@ clusters:
       namespace: flux-system
       url: https://kyverno.github.io/kyverno/
       repo_type: default
+    - name: metallb
+      namespace: flux-system
+      url: https://metallb.github.io/metallb
+      repo_type: default
     - name: nextcloud
       namespace: flux-system
       url: https://nextcloud.github.io/helm/
@@ -530,6 +542,12 @@ clusters:
       chart:
         name: rook-ceph
         repo_name: rook-release
+        repo_namespace: flux-system
+    - name: volsync
+      namespace: volsync-system
+      chart:
+        name: volsync
+        repo_name: backube
         repo_namespace: flux-system
     cluster_policies: []
   - name: monitoring
@@ -607,7 +625,7 @@ clusters:
       namespace: external-dns
       chart:
         name: external-dns
-        repo_name: bitnami
+        repo_name: external-dns
         repo_namespace: flux-system
     - name: haproxy
       namespace: haproxy
@@ -625,7 +643,13 @@ clusters:
       namespace: metallb
       chart:
         name: metallb
-        repo_name: bitnami
+        repo_name: metallb
+        repo_namespace: flux-system
+    - name: nginx
+      namespace: nginx
+      chart:
+        name: ingress-nginx
+        repo_name: ingress-nginx
         repo_namespace: flux-system
     cluster_policies: []
   - name: settings
