@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: unifi-restic-config
-  namespace: volsync-system
+  namespace: unifi
 type: Opaque
 stringData:
   RESTIC_REPOSITORY: ${RESTIC_REPOSITORY_BASE}:/unifi
