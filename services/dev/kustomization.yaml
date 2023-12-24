@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - ../base/haproxy/
   - ../base/metallb/
-  - ../base/external-dns/
   - ../base/certs/
   - ../base/nginx/
   - namespace.yaml
