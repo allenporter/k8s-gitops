@@ -10,7 +10,6 @@ resources:
   - benji-secrets.yaml
   - calico
   - ../base/volsync
-  - restic-config-secret.yaml
 patches:
   - path: redis-values.yaml
   - path: rook-ceph-values.yaml
