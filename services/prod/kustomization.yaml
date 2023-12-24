@@ -8,9 +8,9 @@ resources:
   - ../base/certs
   - ../base/nginx
   - metallb-ip-pool.yaml
-  - nginx-values.yaml
 patches:
   - path: haproxy-values.yaml
   - path: haproxy-external-values.yaml
   - path: metallb-values.yaml
   - path: external-dns-values.yaml
+  - path: nginx-values.yaml
