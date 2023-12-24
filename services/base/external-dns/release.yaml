@@ -11,7 +11,7 @@ spec:
       chart: external-dns
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: external-dns
         namespace: flux-system
   interval: 5m
   install:
@@ -20,23 +20,27 @@ spec:
   test:
     enable: true
   # Default values
-  # https://github.com/bitnami/charts/blob/master/bitnami/external-dns/values.yaml
+  # https://github.com/kubernetes-sigs/external-dns/blob/master/charts/external-dns/values.yaml
   values:
-    fqdnTemplates: ["{{.Name}}.${SITE_DOMAIN}."]
     provider: rfc2136
-    txtOwnerId: "k8s"
-    rfc2136:
-      host: "${EXT_DNS_IP}"
-      zone: "${SITE_DOMAIN}"
-      secretName: external-dns-key
-      tsigSecretAlg: hmac-sha512
-      tsigKeyname: external-dns-key
-    # See https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/rfc2136.md
-    # Key is rfc2136_tsig_secret
-    createSecret: false
-    metrics:
-      enabled: true
-    interval: "30s"
-    annotations:
-      meta.helm.sh/release-namespace: external-dns
+    txtOwnerId: "k8s-external-dns"
     logLevel: debug
+    env:
+      - name: EXTERNAL_DNS_RFC2136_HOST
+        value: "${EXT_DNS_IP}"
+      - name: EXTERNAL_DNS_RFC2136_PORT
+        value: "53"
+      - name: EXTERNAL_DNS_RFC2136_ZONE
+        value: "${SITE_DOMAIN}"
+      - name: EXTERNAL_DNS_RFC2136_TSIG_AXFR
+        value: "true"
+      - name: EXTERNAL_DNS_RFC2136_TSIG_KEYNAME
+        value: external-dns-key
+      - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET_ALG
+        value: hmac-sha256
+      - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
+        value: "${EXTERNAL_DNS_RFC2136_SECRET}"
+    policy: sync
+    sources: ["ingress"]
+    serviceMonitor:
+      enabled: true
