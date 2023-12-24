@@ -1,4 +1,16 @@
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+    name: unifi-restic-config
+    namespace: volsync-system
+type: Opaque
+stringData:
+    RESTIC_REPOSITORY: ${RESTIC_REPOSITORY_BASE}:/unifi
+    RESTIC_PASSWORD: ${RESTIC_PASSWORD}
+    GOOGLE_PROJECT_ID: ${RESTIC_GOOGLE_PROJECT_ID}
+    GOOGLE_APPLICATION_CREDENTIALS: ${RESTIC_GOOGLE_APPLICATION_CREDENTIALS}
+---
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
@@ -11,7 +23,7 @@ spec:
     schedule: "0 0 * * *"
   restic:
     pruneIntervalDays: 14
-    repository: restic-config
+    repository: unifi-restic-config
     retain:
       daily: 5
       weekly: 4

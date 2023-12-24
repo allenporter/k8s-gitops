@@ -21,3 +21,5 @@ spec:
         name: cluster-settings
       - kind: Secret
         name: cluster-secrets
+      - kind: Secret
+        name: cluster-string-secrets

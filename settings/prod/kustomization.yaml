@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - cluster-settings.yaml
   - cluster-secrets.yaml
+  - cluster-string-secrets.yaml
