@@ -7,8 +7,7 @@ metadata:
 spec:
   chart:
     spec:
-      # renovate: registryUrl=oci://registry-1.docker.io/bitnamicharts
       chart: external-dns
-      version: 6.20.3
+      version: 1.13.1
   values:
     domainFilters: ["dev.mrv.thebends.org"]
