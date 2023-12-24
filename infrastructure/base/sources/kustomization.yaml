@@ -32,3 +32,4 @@ resources:
   - go-skynet.yaml
   - metallb.yaml
   - backube.yaml
+  - external-dns.yaml
