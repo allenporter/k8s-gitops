@@ -1,0 +1,19 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: unifi-backup
+spec:
+  sourcePVC: unifi-shelf
+  trigger:
+    # Take a backup daily
+    schedule: "0 0 * * *"
+  restic:
+    pruneIntervalDays: 14
+    repository: restic-config
+    retain:
+      daily: 5
+      weekly: 4
+      monthly: 2
+      yearly: 1
+    copyMethod: Clone

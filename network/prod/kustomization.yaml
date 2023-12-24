@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ../base/unifi
   - ../base/adguard-home
+  - unifi-backup.yaml
 patches:
   - path: unifi-values.yaml
   - path: adguard-home-values.yaml
