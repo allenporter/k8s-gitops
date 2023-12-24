@@ -37,7 +37,10 @@ spec:
       - name: EXTERNAL_DNS_RFC2136_TSIG_KEYNAME
         value: external-dns-key
       - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET_ALG
-        value: hmac-sha512
+        valueFrom:
+            secretKeyRef:
+              name: external-dns-tsig-secret
+              key: rfc2136_tsig_secret_alg
       - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
         valueFrom:
           secretKeyRef:
