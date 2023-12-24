@@ -8,6 +8,7 @@ resources:
   - ../base/certs
   - ../base/nginx
   - metallb-ip-pool.yaml
+  - external-dns-tsig-secret.yaml
 patches:
   - path: haproxy-values.yaml
   - path: haproxy-external-values.yaml

@@ -39,7 +39,10 @@ spec:
       - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET_ALG
         value: hmac-sha256
       - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
-        value: "${EXTERNAL_DNS_RFC2136_SECRET}"
+        valueFrom:
+          secretKeyRef:
+            name: external-dns-tsig-secret
+            key: rfc2136_tsig_secret
     policy: sync
     sources: ["ingress"]
     serviceMonitor:
