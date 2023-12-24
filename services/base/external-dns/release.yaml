@@ -24,6 +24,7 @@ spec:
   values:
     provider: rfc2136
     txtOwnerId: "k8s"
+    txtPrefix: "k8s."
     logLevel: debug
     env:
       - name: EXTERNAL_DNS_RFC2136_HOST
