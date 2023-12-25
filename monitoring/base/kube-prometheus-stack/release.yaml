@@ -191,8 +191,7 @@ spec:
         templates:
           - '/etc/alertmanager/config/*.tmpl'
   valuesFrom:
-    # kubectl -n monitoring create secret generic discord-alert --from-literal=address=https://xxx
     - kind: Secret
-      name: discord-alert
-      valuesKey: address
+      name: discord-urls
+      valuesKey: alert-url
       targetPath: alertmanager.config.global.slack_api_url

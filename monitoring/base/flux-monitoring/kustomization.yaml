@@ -5,6 +5,7 @@ namespace: flux-system
 resources:
   - podmonitor.yaml
   - prometheus-rules.yaml
+  - discord-urls.yaml
   - discord-info.yaml
   - discord-alert.yaml
   - info.yaml
