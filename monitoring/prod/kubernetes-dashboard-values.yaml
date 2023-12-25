@@ -13,11 +13,11 @@ spec:
   values:
     ingress:
       annotations:
-        external-dns.alpha.kubernetes.io/hostname: kubernetes-dashboard.prod.mrv.thebends.org.
-        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/hostname: kubernetes-dashboard.${DOMAIN}.
+        external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
       hosts:
-        - kubernetes-dashboard.prod.mrv.thebends.org
+        - kubernetes-dashboard.${DOMAIN}
       tls:
         - secretName: kubernetes-dashboard-tls
           hosts:
-            - kubernetes-dashboard.prod.mrv.thebends.org
+            - kubernetes-dashboard.${DOMAIN}
