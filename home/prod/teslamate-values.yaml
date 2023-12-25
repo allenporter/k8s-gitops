@@ -14,17 +14,17 @@ spec:
     image:
       repository: teslamate/teslamate
       tag: 1.28.2
-    virtualHost: teslamate.prod.mrv.thebends.org
+    virtualHost: teslamate.${DOMAIN}
     ingress:
       main:
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: teslamate.prod.mrv.thebends.org.
-          external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+          external-dns.alpha.kubernetes.io/hostname: teslamate.${DOMAIN}.
+          external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
         hosts:
-          - host: teslamate.prod.mrv.thebends.org
+          - host: teslamate.${DOMAIN}
             paths:
               - path: /
         tls:
           - secretName: teslamate-tls
             hosts:
-              - teslamate.prod.mrv.thebends.org
+              - teslamate.${DOMAIN}

@@ -14,9 +14,9 @@ spec:
   values:
     ingress:
       annotations:
-        external-dns.alpha.kubernetes.io/hostname: benji.prod.mrv.thebends.org.
-        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
-      host: benji.prod.mrv.thebends.org
+        external-dns.alpha.kubernetes.io/hostname: benji.${DOMAIN}.
+        external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
+      host: benji.${DOMAIN}
     benji:
       crontab:
         - name: backup-monitoring
