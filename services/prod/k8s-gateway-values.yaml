@@ -20,4 +20,3 @@ spec:
     spec:
       chart: k8s-gateway
       version: 2.1.0
-
