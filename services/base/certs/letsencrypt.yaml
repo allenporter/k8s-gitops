@@ -19,4 +19,4 @@ spec:
           project: ${CLOUD_DNS_PROJECT_ID}
           serviceAccountSecretRef:
             name: clouddns-dns01-solver-svc-acct
-            key: key.json
+            key: credentials
