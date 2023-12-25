@@ -10,6 +10,8 @@ resources:
   - ../base/flux-monitoring
   - ../base/etcd-monitoring
   - ../base/weave-gitops
+  - flux-discord-urls-secret.yaml
+  - prometheus-discord-urls-secret.yaml
 patches:
   - path: podinfo-haproxy-values.yaml
   - path: podinfo-nginx-values.yaml
