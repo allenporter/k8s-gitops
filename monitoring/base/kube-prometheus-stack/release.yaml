@@ -55,7 +55,6 @@ spec:
       env:
         GF_EXPLORE_ENABLED: true
       admin:
-        # See scripts/
         existingSecret: "grafana"
     coreDns:
       enabled: false
