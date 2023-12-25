@@ -1,6 +1,6 @@
 set firewall all-ping enable
 set firewall broadcast-ping disable
-set firewall group network-group clients description 'Most general network machine clients'
+set firewall group network-group clients description 'Network machine clients'
 set firewall group network-group clients network 10.10.38.0/24
 set firewall ipv6-receive-redirects disable
 set firewall ipv6-src-route disable
@@ -15,11 +15,9 @@ set firewall name WAN_IN rule 10 state related enable
 set firewall name WAN_IN rule 20 action drop
 set firewall name WAN_IN rule 20 description 'Drop invalid state'
 set firewall name WAN_IN rule 20 state invalid enable
-set firewall name WAN_IN rule 21 action accept
-set firewall name WAN_IN rule 21 description ha-dev
-set firewall name WAN_IN rule 21 destination port 28123
-set firewall name WAN_IN rule 21 log disable
-set firewall name WAN_IN rule 21 protocol tcp
+
+delete firewall name WAN_IN rule 21
+
 set firewall name WAN_LOCAL default-action drop
 set firewall name WAN_LOCAL description 'WAN to router'
 set firewall name WAN_LOCAL rule 10 action accept
@@ -129,10 +127,7 @@ set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mappi
 {% endif %}
 {% endif %}
 {% endfor %}
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping milan ip-address 10.10.22.18
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping milan mac-address 'd2:66:b4:ff:3e:2e'
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping pepper ip-address 10.10.22.19
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping pepper mac-address 'f6:3f:be:b7:dd:01'
+
 set service dhcp-server static-arp disable
 set service dhcp-server use-dnsmasq disable
 
@@ -142,6 +137,7 @@ set service dns dynamic interface eth0 service dyndns password {{ dyndns_passwor
 set service dns dynamic interface eth0 service dyndns protocol dyndns2
 set service dns dynamic interface eth0 service dyndns server {{ dyndns_server }}
 
+delete service dns forwarding
 set service dns forwarding cache-size 500
 set service dns forwarding listen-on switch0
 set service dns forwarding listen-on eth1
@@ -149,9 +145,10 @@ set service dns forwarding listen-on eth2
 set service dns forwarding listen-on eth3
 set service dns forwarding listen-on eth4
 set service dns forwarding name-server 8.8.8.8
-
 set service dns forwarding options server=/{{ site_domain }}/10.10.1.10
 set service dns forwarding options server=/10.10.in-addr.arpa/10.10.1.10
+set service dns forwarding options server=/{{ k8s_domain }}/{{ k8s_dns1_ip }}
+set service dns forwarding options server=/{{ k8s_domain }}/{{ k8s_dns2_ip }}
 set service dns forwarding options 'dhcp-host=24:5a:4c:13:ae:c0,set:LAN,set:AP,10.10.35.2,mega'
 set service dns forwarding options no-hosts
 set service dns forwarding options no-negcache
@@ -159,19 +156,6 @@ set service dns forwarding system
 set service gui http-port 80
 set service gui https-port 443
 set service gui older-ciphers enable
-
-set service nat rule 5010 description 'masquerade for WAN'
-set service nat rule 5010 outbound-interface eth0
-set service nat rule 5010 type masquerade
-set service nat rule 5012 description 'eth2 pihole dns redirect'
-set service nat rule 5012 destination port 53
-set service nat rule 5012 log disable
-set service nat rule 5012 outbound-interface eth2
-set service nat rule 5012 outside-address address 10.10.25.11
-set service nat rule 5012 outside-address port 53
-set service nat rule 5012 protocol tcp_udp
-set service nat rule 5012 source group network-group clients
-set service nat rule 5012 type source
 
 delete set service snmp
 set service snmp community woodgreen authorization ro
