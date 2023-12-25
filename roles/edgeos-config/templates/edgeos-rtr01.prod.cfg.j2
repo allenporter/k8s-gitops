@@ -1,6 +1,6 @@
 set firewall all-ping enable
 set firewall broadcast-ping disable
-set firewall group network-group clients description 'Most general network machine clients'
+set firewall group network-group clients description 'Network machine clients'
 set firewall group network-group clients network 10.10.38.0/24
 set firewall ipv6-receive-redirects disable
 set firewall ipv6-src-route disable
@@ -152,6 +152,8 @@ set service dns forwarding name-server 8.8.8.8
 
 set service dns forwarding options server=/{{ site_domain }}/10.10.1.10
 set service dns forwarding options server=/10.10.in-addr.arpa/10.10.1.10
+set service dns forwarding options server=/{{ k8s_domain }}/{{ k8s_dns1_ip }}
+set service dns forwarding options server=/{{ k8s_domain }}/{{ k8s_dns2_ip }}
 set service dns forwarding options 'dhcp-host=24:5a:4c:13:ae:c0,set:LAN,set:AP,10.10.35.2,mega'
 set service dns forwarding options no-hosts
 set service dns forwarding options no-negcache

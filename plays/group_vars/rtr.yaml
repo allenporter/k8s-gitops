@@ -5,3 +5,6 @@ dyndns_server: domains.google.com
 domain: thebends.org
 ext_domain: ext.thebends.org
 site_domain: mrv.thebends.org
+k8s_domain: k8s.mrv.thebends.org
+k8s_dns1_ip: 10.10.25.1
+k8s_dns2_ip: 10.10.25.2
