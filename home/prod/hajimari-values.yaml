@@ -17,13 +17,13 @@ spec:
     ingress:
       main:
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: hajimari.prod.mrv.thebends.org.
-          external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+          external-dns.alpha.kubernetes.io/hostname: hajimari.${DOMAIN}.
+          external-dns.alpha.kubernetes.io/target: prx02${DOMAIN}.
         hosts:
-          - host: hajimari.prod.mrv.thebends.org
+          - host: hajimari.${DOMAIN}
             paths:
               - path: /
         tls:
           - secretName: hajimari-tls
             hosts:
-              - hajimari.prod.mrv.thebends.org
+              - hajimari.${DOMAIN}

@@ -13,14 +13,14 @@ spec:
   values:
     ingress:
       annotations:
-        external-dns.alpha.kubernetes.io/hostname: podinfo-haproxy.prod.mrv.thebends.org.
-        external-dns.alpha.kubernetes.io/target: prx02.prod.mrv.thebends.org.
+        external-dns.alpha.kubernetes.io/hostname: podinfo-haproxy.${DOMAIN}.
+        external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
       hosts:
-        - host: podinfo-haproxy.prod.mrv.thebends.org
+        - host: podinfo-haproxy.${DOMAIN}
           paths:
             - path: /
               pathType: ImplementationSpecific
       tls:
         - secretName: podinfo-tls
           hosts:
-            - podinfo-haproxy.prod.mrv.thebends.org
+            - podinfo-haproxy.${DOMAIN}
