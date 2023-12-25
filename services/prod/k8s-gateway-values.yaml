@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: k8s-gateway-1
+  namespace: k8s-gateway
+spec:
+  chart:
+    spec:
+      chart: k8s-gateway
+      version: 2.1.0
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: k8s-gateway-2
+  namespace: k8s-gateway
+spec:
+  chart:
+    spec:
+      chart: k8s-gateway
+      version: 2.1.0
+
