@@ -132,6 +132,10 @@ clusters:
       namespace: flux-system
       url: https://k8s-at-home.com/charts/
       repo_type: default
+    - name: k8s-gateway
+      namespace: flux-system
+      url: https://ori-edge.github.io/k8s_gateway/
+      repo_type: default
     - name: kasten
       namespace: flux-system
       url: https://charts.kasten.io/
@@ -172,10 +176,6 @@ clusters:
       namespace: flux-system
       url: https://charts.rook.io/release
       repo_type: default
-    - name: tf-controller
-      namespace: flux-system
-      url: https://weaveworks.github.io/tf-controller/
-      repo_type: default
     - name: weave-works
       namespace: flux-system
       url: https://helm.gitops.weave.works
@@ -198,12 +198,6 @@ clusters:
       chart:
         name: rook-ceph
         repo_name: rook-release
-        repo_namespace: flux-system
-    - name: tf-controller
-      namespace: tf-controller
-      chart:
-        name: tf-controller
-        repo_name: tf-controller
         repo_namespace: flux-system
     - name: volsync
       namespace: volsync-system
@@ -282,12 +276,6 @@ clusters:
       chart:
         name: authelia
         repo_name: authelia
-        repo_namespace: flux-system
-    - name: external-dns
-      namespace: external-dns
-      chart:
-        name: external-dns
-        repo_name: external-dns
         repo_namespace: flux-system
     - name: haproxy
       namespace: haproxy
@@ -470,6 +458,10 @@ clusters:
       namespace: flux-system
       url: https://k8s-at-home.com/charts/
       repo_type: default
+    - name: k8s-gateway
+      namespace: flux-system
+      url: https://ori-edge.github.io/k8s_gateway/
+      repo_type: default
     - name: kasten
       namespace: flux-system
       url: https://charts.kasten.io/
@@ -509,10 +501,6 @@ clusters:
     - name: rook-release
       namespace: flux-system
       url: https://charts.rook.io/release
-      repo_type: default
-    - name: tf-controller
-      namespace: flux-system
-      url: https://weaveworks.github.io/tf-controller/
       repo_type: default
     - name: weave-works
       namespace: flux-system
@@ -621,12 +609,6 @@ clusters:
     path: services/prod
     helm_repos: []
     helm_releases:
-    - name: external-dns
-      namespace: external-dns
-      chart:
-        name: external-dns
-        repo_name: external-dns
-        repo_namespace: flux-system
     - name: haproxy
       namespace: haproxy
       chart:
@@ -638,6 +620,18 @@ clusters:
       chart:
         name: kubernetes-ingress
         repo_name: haproxytech
+        repo_namespace: flux-system
+    - name: k8s-gateway-1
+      namespace: k8s-gateway
+      chart:
+        name: k8s-gateway
+        repo_name: k8s-gateway
+        repo_namespace: flux-system
+    - name: k8s-gateway-2
+      namespace: k8s-gateway
+      chart:
+        name: k8s-gateway
+        repo_name: k8s-gateway
         repo_namespace: flux-system
     - name: metallb
       namespace: metallb

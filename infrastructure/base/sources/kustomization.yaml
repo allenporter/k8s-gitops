@@ -25,8 +25,6 @@ resources:
   - kyverno.yaml
   - weave-works.yaml
   - bjw-s-helm-charts.yaml
-  - tf-controller.yaml
-  - homelab.yaml
   - authelia.yaml
   - nvdp.yaml
   - go-skynet.yaml
