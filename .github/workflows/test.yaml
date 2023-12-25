@@ -21,7 +21,7 @@ jobs:
       - name: Setup Flux CLI
         uses: fluxcd/flux2/action@v2.2.2
       - name: flux-local test
-        uses: allenporter/flux-local/action/test@4.2.0
+        uses: allenporter/flux-local/action/test@4.2.1
         with:
           path: ${{ matrix.cluster_path }}
           enable-helm: true
