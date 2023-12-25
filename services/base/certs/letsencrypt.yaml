@@ -16,7 +16,7 @@ spec:
     solvers:
     - dns01:
         cloudDNS:
-          project: tokyo-drake-260404
+          project: ${CLOUD_DNS_PROJECT_ID}
           serviceAccountSecretRef:
             name: clouddns-dns01-solver-svc-acct
             key: key.json
