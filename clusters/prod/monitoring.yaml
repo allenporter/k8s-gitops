@@ -14,6 +14,10 @@ spec:
     name: flux-system
   path: ./monitoring/prod
   prune: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
   postBuild:
     substitute: {}
     substituteFrom:
