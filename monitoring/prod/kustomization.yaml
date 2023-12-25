@@ -10,6 +10,7 @@ resources:
   - ../base/flux-monitoring
   - ../base/etcd-monitoring
   - ../base/weave-gitops
+  - discord-urls.yaml
 patches:
   - path: podinfo-haproxy-values.yaml
   - path: podinfo-nginx-values.yaml

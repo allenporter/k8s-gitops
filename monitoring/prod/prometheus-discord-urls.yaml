@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: discord-urls
+    namespace: monitoring
+type: Opaque
+stringData:
+    alert-url: ENC[AES256_GCM,data:U3tpPG/qc+Xh3OrgOziF0uUrjxANglNVUMBGsq9ovRrPySUiKF3an3Swpk/gXSTSozC9gCGy39PLONFvtmBKfE4Vp0HF0zE8r0kCLk9ROd465jqMRwAKRJkGrl6ONuL6o4z5pKirAouL8B2GeMi9tu2Pvk/pvp5I,iv:95mXg5alxKbz2FyhyAcAtFk9Fl3rY3KZ+ltZWs0oAzs=,tag:feBoIPLekhj/vFfxbDMm2g==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-12-25T22:08:18Z"
+    mac: ENC[AES256_GCM,data:OUxlH7cbag7qXceXC59/C0tBE3lqRWx6/XCIZU17/X6FZLx/DhtmuWdz+L4nq95pA8oE9iuPvk/mpyvCn8mBdvQCAtmK2U+C8PM/WnJIvWcyE3V3ZrX4rerJTRzmZfrtt1VsVEh09Whzy7OvyU1Eb0KdA/HavQTeSHd8KUkdivc=,iv:HBqW02/Xo1rt0hBAgyxRAI94yRFyP4uzmRZ2EOucNYY=,tag:JmwtyBJE8YpH0xNcsOlz9g==,type:str]
+    pgp:
+        - created_at: "2023-12-25T22:07:32Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMAzRcKY9JrotYAQ/9Gz1wTIehEsGv7E+SfXzKNQoC5EzxiKoDBwWXBQFl4y/6
+            mXyk/Qkmf+xjtY/H45eS3iZ9SI+ImmPbi8f1mE0bd6m2rn1N33VlQXOaYn4jg82H
+            18SYYfpBehyFtd3aOpfpGHw2QVBSh7yGnK3m9Fig8Sen34uzF1HfRfMfdD4BI+Tm
+            9Uapa2C1HhXZIMMGAdsv103wmxkOPumpZOgkBsPnNDq50KnEEkuZNOW+/J5z5ki6
+            E9e+hYKyvU7zsxu7SQ4/ZcIlAJLpa5QrTh3gAXLhTpBZxn4LY15onnV/eT/vBh84
+            4Lr05OWGDQcMJB35ssBxvpVxuDKymKAwkD2GXj0D38zkduRvFP6qXqztvcgp8pwa
+            o7jFF5EBSzlDxp+XwtVvHbY1uO8OvVQWyr0djFtI7YNns/IGcvDuOZJHn4WokOuH
+            yZMcf/x5BrhFXKD/zPbF3e/N0WjDFsbeYkiP3GT7ST2pPqnQ+BMeCm7Z2inPZiF5
+            VzhqY2a5UWcvplw/RpoURJRI0VwNuAVOg9okWzObR6PK0zU0qCpGYYu3sOPJvHQx
+            u0MXDWsJ/3jiwrMdTOx8+kkp2mer0thayiWVX9dVFB+tEgN4fzAFNIDstvPagcYZ
+            qrXfeHYN5MQWbU4p1IePtPtcrxCFLRsMwYvfPc4yFWsMZIgtbP3/kljPHYsZ++XS
+            XAFJd/wpXDFTtMMAw/OwpMkvt0jQhEUzmIg6p9oXLTOeLxiZrbYISQwT1PxlcgU5
+            yKsPQjfZGCxbDWzBRKza5RAqehPziMHTmAnaORA+comZqw3niwbW3+HIty/S
+            =6JTT
+            -----END PGP MESSAGE-----
+          fp: BF010A1EAF254C931DB47C39A6821796DB9EAB3D
+    encrypted_regex: ^(data|stringData)$
+    version: 3.8.1
