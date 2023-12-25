@@ -6,7 +6,6 @@ patches:
 - path: rook-ceph-values.yaml
 - path: backup-pvc.yaml
 - path: benji-values.yaml
-- path: tf-controller-values.yaml
 - path: volsync-values.yaml
 resources:
 - ../base/sources
@@ -15,7 +14,4 @@ resources:
 - ../base/benji
 - benji-secrets.yaml
 - calico
-- ../base/tf-controller
-- tf-homelab.yaml
-- tf-gcloud-secrets.yaml
 - ../base/volsync
