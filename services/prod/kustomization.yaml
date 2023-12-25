@@ -8,6 +8,7 @@ resources:
   - ../base/nginx
   - ../base/k8s-gateway
   - metallb-ip-pool.yaml
+  - cert-manager-cloud-dns-secret.yaml
 patches:
   - path: haproxy-values.yaml
   - path: haproxy-external-values.yaml

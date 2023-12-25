@@ -1,9 +1,0 @@
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: discord-urls
-  namespace: monitoring
-type: Opaque
-stringData:
-  alert-url: ${PROMETHEUS_ALERT_WEBHOOK_URL}
