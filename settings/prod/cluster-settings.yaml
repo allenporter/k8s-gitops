@@ -7,7 +7,7 @@ metadata:
 data:
   CLUSTER: prod
   SITE_DOMAIN: mrv.thebends.org
-  DOMAIN: prod.mrv.thebends.org
+  DOMAIN: k8s.mrv.thebends.org
   EXT_DNS_IP: 10.10.1.10
   CEPH1_IP: 10.10.20.5
   CEPH2_IP: 10.10.20.6
