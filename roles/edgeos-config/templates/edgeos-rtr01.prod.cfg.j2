@@ -123,7 +123,7 @@ set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 start 10.10.
 set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping {{ hostvars[host].inventory_hostname }} ip-address {{ hostvars[host].ip }}
 set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping {{ host }} mac-address '{{ hostvars[host].mac }}'
 {% if 'dhcp_dns' in hostvars[host] %}
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping {{ host }} static-mapping-parameters 'option domain-name-servers {{ hostvars[host].dhcp_dns }};'
+set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping {{ host }} static-mapping-parameters 'option domain-name-servers {{ dhcp_dns_ip }};'
 {% endif %}
 {% endif %}
 {% endfor %}
