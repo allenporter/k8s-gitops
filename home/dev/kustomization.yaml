@@ -12,4 +12,3 @@ patches:
   - path: hajimari-values.yaml
   - path: rtsp-to-web-values.yaml
   - path: nextcloud-values.yaml
-  - path: matter-server-values.yaml

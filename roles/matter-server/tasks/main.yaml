@@ -1,3 +1,0 @@
----
-- name: Config systctl
-  import_tasks: sysctl.yaml
