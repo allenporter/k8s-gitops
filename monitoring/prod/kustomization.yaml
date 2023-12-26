@@ -1,20 +1,19 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
-  - namespace.yaml
-  - ../base/podinfo
-  - ../base/speedtest-prometheus
-  - ../base/kubernetes-dashboard
-  - ../base/kube-prometheus-stack
-  - ../base/flux-monitoring
-  - ../base/etcd-monitoring
-  - ../base/weave-gitops
-  - flux-discord-urls-secret.yaml
 patches:
-  - path: podinfo-haproxy-values.yaml
-  - path: podinfo-nginx-values.yaml
-  - path: speedtest-prometheus-values.yaml
-  - path: kubernetes-dashboard-values.yaml
-  - path: kube-prometheus-stack-values.yaml
-  - path: weave-gitops-values.yaml
+- path: podinfo-haproxy-values.yaml
+- path: podinfo-nginx-values.yaml
+- path: speedtest-prometheus-values.yaml
+- path: kubernetes-dashboard-values.yaml
+- path: kube-prometheus-stack-values.yaml
+- path: weave-gitops-values.yaml
+resources:
+- namespace.yaml
+- ../base/podinfo
+- ../base/speedtest-prometheus
+- ../base/kubernetes-dashboard
+- ../base/kube-prometheus-stack
+- ../base/flux-monitoring
+- ../base/etcd-monitoring
+- ../base/weave-gitops
+- flux-discord-urls-secret.yaml

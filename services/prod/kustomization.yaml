@@ -1,17 +1,16 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
-  - ../base/haproxy
-  - ../base/metallb
-  - ../base/certs
-  - ../base/nginx
-  - ../base/k8s-gateway
-  - metallb-ip-pool.yaml
-  - cert-manager-cloud-dns-secret.yaml
 patches:
-  - path: haproxy-values.yaml
-  - path: haproxy-external-values.yaml
-  - path: metallb-values.yaml
-  - path: nginx-values.yaml
-  - path: k8s-gateway-values.yaml
+- path: haproxy-values.yaml
+- path: haproxy-external-values.yaml
+- path: metallb-values.yaml
+- path: nginx-values.yaml
+- path: k8s-gateway-values.yaml
+resources:
+- ../base/haproxy
+- ../base/metallb
+- ../base/certs
+- ../base/nginx
+- ../base/k8s-gateway
+- metallb-ip-pool.yaml
+- cert-manager-cloud-dns-secret.yaml
