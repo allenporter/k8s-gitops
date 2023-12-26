@@ -98,6 +98,9 @@ spec:
         - secretName: unifi-tls
           hosts:
           - unifi.${DOMAIN}
+        - secretName: unifi-prod-tls
+          hosts:
+          - unifi.prod.${SITE_DOMAIN}
 
     persistence:
       config:
