@@ -14,7 +14,7 @@ metadata:
   name: home-assistant
   namespace: home-assistant
 spec:
-  ingressClassName: nginx
+  ingressClassName: haproxy-external
   rules:
   - host: home-assistant.prod.${SITE_DOMAIN}
     http:
