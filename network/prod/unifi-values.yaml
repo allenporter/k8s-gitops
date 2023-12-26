@@ -7,26 +7,30 @@ metadata:
 spec:
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: unifi
-      version: 5.1.2
+      chart: app-template
+      version: 2.4.0
   values:
-    image:
-      repository: jacobalberty/unifi
-      tag: v7.5.176
-    livenessProbe:
-      initialDelaySeconds: 60
-      periodSeconds: 30
-      timeoutSeconds: 5
-      failureThreshold: 7
-    readinessProbe:
-      initialDelaySeconds: 60
-      periodSeconds: 30
-      timeoutSeconds: 5
-      failureThreshold: 7
+    controllers:
+      main:
+        type: statefulset
+        containers:
+          main:
+            image:
+              repository: jacobalberty/unifi
+              tag: v7.5.176
+            env:
+              TZ: America/Los_Angeles
+              RUNAS_UID0: "false"
+              UNIFI_UID: "999"
+              UNIFI_GID: "999"
+              JVM_INIT_HEAP_SIZE:
+              JVM_MAX_HEAP_SIZE: 1024M
+            resources:
+              requests:
+                memory: 1.2Gi
+                cpu: 50m
     service:
       main:
-        enabled: true
         type: LoadBalancer
         externalTrafficPolicy: Local
         loadBalancerIP: ${UNIFI_CONTROLLER_IP}
@@ -35,20 +39,25 @@ spec:
         # Disable UDP ports, exported on a separate service below so that they
         # can share a LoadBalancer IP
         ports:
-          stun:
+          http:
+            port: 8443
+            protocol: HTTPS
+          controller:
+            enabled: true
+            port: 8080
+            protocol: TCP
+          portal-http:
             enabled: false
-          syslog:
+            port: 8880
+            protocol: HTTP
+          portal-https:
             enabled: false
-          discovery:
-            enabled: false
-      udp:
-        enabled: true
-        type: LoadBalancer
-        externalTrafficPolicy: Local
-        loadBalancerIP: ${UNIFI_CONTROLLER_IP}
-        annotations:
-          metallb.universe.tf/allow-shared-ip: unifi
-        ports:
+            port: 8843
+            protocol: HTTPS
+          speedtest:
+            enabled: true
+            port: 6789
+            protocol: TCP
           stun:
             enabled: true
             port: 3478
@@ -61,25 +70,33 @@ spec:
             enabled: true
             port: 10001
             protocol: UDP
+
+
     ingress:
       main:
         enabled: true
+        className: nginx
         annotations:
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           external-dns.alpha.kubernetes.io/hostname: unifi.${DOMAIN}.
           external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: access-point
           haproxy.org/server-ssl: "true"
         hosts:
-          - host: unifi.${DOMAIN}
-            paths:
-              - path: /
+        - host: unifi.${DOMAIN}
+          paths:
+          - path: /
+            service:
+              name: main
+              port: http
         tls:
-          - secretName: unifi-tls
-            hosts:
-              - unifi.${DOMAIN}
+        - secretName: unifi-tls
+          hosts:
+          - unifi.${DOMAIN}
+
     persistence:
-      data:
-        enabled: true
-        type: pvc
+      config:
         existingClaim: unifi-shelf
+        globalMounts:
+        - path: /unifi

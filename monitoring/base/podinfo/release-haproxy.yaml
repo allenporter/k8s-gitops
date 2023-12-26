@@ -27,5 +27,4 @@ spec:
       enabled: true
       path: "/"
       annotations:
-        className: haproxy
         cert-manager.io/cluster-issuer: letsencrypt

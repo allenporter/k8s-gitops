@@ -9,10 +9,10 @@ spec:
   releaseName: unifi
   chart:
     spec:
-      chart: unifi
+      chart: app-template
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-helm-charts
         namespace: flux-system
   interval: 5m
   install:
