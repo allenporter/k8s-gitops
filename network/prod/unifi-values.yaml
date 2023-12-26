@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 5.1.2
+      version: 2.4.0
   values:
     controllers:
       main:
