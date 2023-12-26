@@ -6,6 +6,7 @@ patches:
 - path: backup-pvc.yaml
 - path: benji-values.yaml
 - path: volsync-values.yaml
+- path: cnpg-values.yaml
 resources:
 - ../base/sources
 - ../base/redis
@@ -15,3 +16,4 @@ resources:
 - benji-secrets.yaml
 - calico
 - ../base/volsync
+- ../base/cnpg
