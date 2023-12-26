@@ -14,4 +14,5 @@ resources:
 - home-assistant-config-pvc.yaml
 - home-assistant-service.yaml
 - llama/
-- teslamate-secrets.yaml
+- teslamate-pg-cluster.yaml
+- teslamate-pg-secrets.yaml
