@@ -287,12 +287,6 @@ clusters:
         name: kubernetes-ingress
         repo_name: haproxytech
         repo_namespace: flux-system
-    - name: haproxy-external
-      namespace: haproxy
-      chart:
-        name: kubernetes-ingress
-        repo_name: haproxytech
-        repo_namespace: flux-system
     - name: metallb
       namespace: metallb
       chart:
