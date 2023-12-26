@@ -34,8 +34,8 @@ clusters:
     - name: teslamate
       namespace: teslamate
       chart:
-        name: teslamate
-        repo_name: k8s-at-home
+        name: app-template
+        repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
     - name: mosquitto
       namespace: mqtt

@@ -1,0 +1,19 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: teslamate-pg-cluster
+spec:
+  instances: 2
+
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+      secret:
+        name: teslamate-pg-secret
+
+  storage:
+    size: 5Gi
+  monitoring:
+    enablePodMonitor: true
