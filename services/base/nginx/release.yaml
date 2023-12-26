@@ -60,6 +60,8 @@ spec:
       ingressClass: nginx-external
       ingressClassResource:
         enabled: true
+        name: nginx-external
+        controller
       service:
         type: LoadBalancer
         # Preserve source ip addresses
