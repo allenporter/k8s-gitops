@@ -14,7 +14,7 @@ spec:
         name: teslamate-pg-secret
   enableSuperuserAccess: true  # Required for creating extensions
   superuserSecret:
-    name: teslamate-pg-superuser-secret
+    name: teslamate-superuser-secret
   storage:
     size: 5Gi
   monitoring:
