@@ -29,4 +29,4 @@ data:
   COREPROTECT_URL: https://cdn.modrinth.com/data/Lu3KuzdV/versions/mvLpRWww/CoreProtect-21.3.jar
   # Luck Perms, Placeholder API, Warp System, Via Version
   SPIGOT_RESOURCES: 28140,6245,29595,19254
-  EXT_HOME_ASSISTANT_NAME: campus.mrv.thenbends.org
+  EXT_HOME_ASSISTANT_NAME: campus.mrv.thebends.org
