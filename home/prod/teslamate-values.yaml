@@ -7,24 +7,18 @@ metadata:
 spec:
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: teslamate
-      version: 7.1.2
+      chart: app-template
+      version: 2.4.0
   values:
-    image:
-      repository: teslamate/teslamate
-      tag: 1.28.2
-    virtualHost: teslamate.${DOMAIN}
-    ingress:
+    controllers:
       main:
-        annotations:
-          external-dns.alpha.kubernetes.io/hostname: teslamate.${DOMAIN}.
-          external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
-        hosts:
-          - host: teslamate.${DOMAIN}
-            paths:
-              - path: /
-        tls:
-          - secretName: teslamate-tls
-            hosts:
-              - teslamate.${DOMAIN}
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16.1
+        containers:
+          main:
+            image:
+              repository: teslamate/teslamate
+              tag: 1.28.2
