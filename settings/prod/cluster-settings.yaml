@@ -22,12 +22,5 @@ data:
   HAPROXY_EXT_INGRESS_IP: 10.10.25.5
   NGINX_INGRESS_IP: 10.10.25.6
   NGINX_EXT_INGRESS_IP: 10.10.25.7
-  ADGUARD_HOME_IP: 10.10.25.10
-  ADGUARD_HOME_2_IP: 10.10.25.11
   UNIFI_CONTROLLER_IP: 10.10.25.20
-  MINECRAFT_VERSION: 1.19.3
-  ESSENTIALS_URL: https://github.com/EssentialsX/Essentials/releases/download/2.19.7/EssentialsX-2.19.7.jar
-  COREPROTECT_URL: https://cdn.modrinth.com/data/Lu3KuzdV/versions/mvLpRWww/CoreProtect-21.3.jar
-  # Luck Perms, Placeholder API, Warp System, Via Version
-  SPIGOT_RESOURCES: 28140,6245,29595,19254
   EXT_HOME_ASSISTANT_NAME: campus.mrv.thebends.org
