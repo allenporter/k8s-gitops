@@ -190,6 +190,10 @@ clusters:
       namespace: flux-system
       url: https://ori-edge.github.io/k8s_gateway/
       repo_type: default
+    - name: cnpg
+      namespace: flux-system
+      url: https://cloudnative-pg.github.io/charts
+      repo_type: default
     helm_releases:
     - name: redis
       namespace: redis
@@ -220,6 +224,12 @@ clusters:
       chart:
         name: volsync
         repo_name: backube
+        repo_namespace: flux-system
+    - name: cnpg
+      namespace: cnpg-system
+      chart:
+        name: cloudnative-pg
+        repo_name: cnpg
         repo_namespace: flux-system
     cluster_policies: []
   - name: monitoring
