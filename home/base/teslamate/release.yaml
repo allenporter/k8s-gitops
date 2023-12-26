@@ -23,14 +23,6 @@ spec:
   values:
     controllers:
       main:
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/onedr0p/postgres-init
-              pullPolicy: IfNotPresent
-            envFrom:
-              - secretRef:
-                  name: teslamate-secret
         containers:
           main:
             image:
@@ -42,7 +34,7 @@ spec:
               MQTT_HOST: "mosquitto.mqtt"
             envFrom:
               - secretRef:
-                  name: teslamate-secret
+                  name: teslamate-env-secret
     service:
       main:
         ports:
