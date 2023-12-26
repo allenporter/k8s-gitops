@@ -26,7 +26,7 @@ spec:
               number: 8123
         path: /
         pathType: ImplementationSpecific
-    tls:
-    - secretName: home-assistant-tls
-      hosts:
-      - home-assistant.prod.mrv.thebends.org
+  tls:
+  - secretName: home-assistant-tls
+    hosts:
+    - home-assistant.prod.mrv.thebends.org
