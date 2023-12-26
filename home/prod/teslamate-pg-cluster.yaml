@@ -12,7 +12,9 @@ spec:
       owner: app
       secret:
         name: teslamate-pg-secret
-  enableSuperuserAccess: true  # For creating extensions
+  enableSuperuserAccess: true  # Required for creating extensions
+  superuserSecret:
+    name: teslamate-pg-superuser-secret
   storage:
     size: 5Gi
   monitoring:
