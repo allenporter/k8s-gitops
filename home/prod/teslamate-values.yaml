@@ -12,11 +12,6 @@ spec:
   values:
     controllers:
       main:
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/onedr0p/postgres-init
-              tag: 16.1
         containers:
           main:
             image:
