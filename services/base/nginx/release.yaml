@@ -33,4 +33,4 @@ spec:
         serviceMonitor:
           enabled: true
     defaultBackend:
-      enabled: false
+      enabled: true

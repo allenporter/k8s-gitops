@@ -1,18 +1,17 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
-  - ../base/sources
-  - ../base/redis
-  - ../base/rook-ceph
-  - ../base/benji
-  - nvidia-device-plugin
-  - benji-secrets.yaml
-  - calico
-  - ../base/volsync
 patches:
-  - path: redis-values.yaml
-  - path: rook-ceph-values.yaml
-  - path: backup-pvc.yaml
-  - path: benji-values.yaml
-  - path: volsync-values.yaml
+- path: redis-values.yaml
+- path: rook-ceph-values.yaml
+- path: backup-pvc.yaml
+- path: benji-values.yaml
+- path: volsync-values.yaml
+resources:
+- ../base/sources
+- ../base/redis
+- ../base/rook-ceph
+- ../base/benji
+- nvidia-device-plugin
+- benji-secrets.yaml
+- calico
+- ../base/volsync

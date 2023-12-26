@@ -1,18 +1,18 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
-  - ../base/teslamate
-  - ../base/mosquitto
-  - ../base/hajimari
-  - ../base/rtsp-to-web
-  - ../base/jellyfin
-  - prometheus-rules.yaml
-  - home-assistant-config-pvc.yaml
-  - llama/
 patches:
-  - path: teslamate-values.yaml
-  - path: hajimari-values.yaml
-  - path: rtsp-to-web-values.yaml
-  - path: mosquitto-values.yaml
-  - path: jellyfin-values.yaml
+- path: teslamate-values.yaml
+- path: hajimari-values.yaml
+- path: rtsp-to-web-values.yaml
+- path: mosquitto-values.yaml
+- path: jellyfin-values.yaml
+resources:
+- ../base/teslamate
+- ../base/mosquitto
+- ../base/hajimari
+- ../base/rtsp-to-web
+- ../base/jellyfin
+- prometheus-rules.yaml
+- home-assistant-config-pvc.yaml
+- home-assistant-service.yaml
+- llama/

@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  type: ExternalName
+  externalName: ${EXT_HOME_ASSISTANT_NAME}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: home-assistant.prod.${SITE_DOMAIN}
+    http:
+      paths:
+      - backend:
+          service:
+            name: http
+            port:
+              number: 8123
+        path: /
+        pathType: ImplementationSpecific
+    tls:
+    - secretName: home-assistant-tls
+      hosts:
+      - home-assistant.prod.mrv.thebends.org

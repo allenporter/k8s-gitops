@@ -24,7 +24,7 @@ spec:
       ingressClass: haproxy
       ingressClassResource:
         name: haproxy
-        default: true
+        default: false
       config:
         ssl-redirect: "true"
         syslog-server: "address:10.10.1.10,facility:local0,level:info"
