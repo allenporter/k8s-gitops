@@ -8,10 +8,10 @@ spec:
   releaseName: teslamate
   chart:
     spec:
-      chart: teslamate
+      chart: app-template
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s-helm-charts
         namespace: flux-system
   interval: 5m
   install:
@@ -20,38 +20,43 @@ spec:
   test:
     # Fix problem where helm fails to uninstall
     enable: false
-  # Default values
-  # https://github.com/k8s-at-home/charts/blob/master/charts/stable/teslamate/values.yaml
   values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: teslamate/teslamate
+              pullPolicy: IfNotPresent
+            env:
+              TZ: America/Los_Angeles
+              DISABLE_MQTT: "false"
+              MQTT_HOST: "mosquitto.mqtt"
+            envFrom:
+              - secretRef:
+                  name: teslamate-env-secret
+    service:
+      main:
+        ports:
+          http:
+            port: 4000
     ingress:
       main:
         enabled: true
+        className: nginx
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: car-electric
-    env:
-      DATABASE_HOST: "teslamate-postgresql"
-      DISABLE_MQTT: "false"
-      MQTT_HOST: "mosquitto.mqtt"
-      ENCRYPTION_KEY: ${TESLAMATE_KEY}
-    envValueFrom:
-      DATABASE_PASS:
-        secretKeyRef:
-          name: postgresql-password
-          key: data
-    postgresql:
-      enabled: true
-      auth:
-        database: teslamate
-        existingSecret: postgresql-password
-        secretKeys:
-          adminPasswordKey: data
-          userPasswordKey: data
-      primary:
-        persistence:
-          enabled: true
-  valuesFrom:
-    - kind: Secret
-      name: postgresql-password
-      valuesKey: data
-      targetPath: postgresql.auth.postgresPassword
+          external-dns.alpha.kubernetes.io/hostname: teslamate.${DOMAIN}.
+          external-dns.alpha.kubernetes.io/target: prx04.${DOMAIN}.
+        hosts:
+          - host: teslamate.${DOMAIN}
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - secretName: teslamate-tls
+            hosts:
+              - teslamate.${DOMAIN}
