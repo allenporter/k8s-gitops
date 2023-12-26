@@ -13,6 +13,7 @@ venv
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+.decrypted~*
 
 # Local configuration
 .env/*
