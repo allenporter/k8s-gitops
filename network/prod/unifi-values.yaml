@@ -70,8 +70,6 @@ spec:
             enabled: true
             port: 10001
             protocol: UDP
-
-
     ingress:
       main:
         enabled: true
@@ -85,6 +83,12 @@ spec:
           haproxy.org/server-ssl: "true"
         hosts:
         - host: unifi.${DOMAIN}
+          paths:
+          - path: /
+            service:
+              name: main
+              port: http
+        - host: unifi.prod.${SITE_DOMAIN}
           paths:
           - path: /
             service:
