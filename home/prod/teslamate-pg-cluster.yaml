@@ -6,14 +6,16 @@ metadata:
   namespace: teslamate
 spec:
   instances: 2
-
   bootstrap:
     initdb:
       database: app
       owner: app
       secret:
         name: teslamate-pg-secret
-
+  postgresql:
+    shared_preload_libraries:
+    - cube
+    - earthdistance
   storage:
     size: 5Gi
   monitoring:
