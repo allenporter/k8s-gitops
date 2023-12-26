@@ -49,12 +49,6 @@ clusters:
         name: hajimari
         repo_name: hajimari
         repo_namespace: flux-system
-    - name: rtsp-to-web
-      namespace: rtsp-to-web
-      chart:
-        name: rtsp-to-web
-        repo_name: k8s-at-home
-        repo_namespace: flux-system
     - name: jellyfin
       namespace: jellyfin
       chart:
@@ -278,20 +272,8 @@ clusters:
     - name: unifi
       namespace: unifi
       chart:
-        name: unifi
-        repo_name: k8s-at-home
-        repo_namespace: flux-system
-    - name: adguard-home
-      namespace: adguard-home
-      chart:
-        name: adguard-home
-        repo_name: k8s-at-home
-        repo_namespace: flux-system
-    - name: adguard-home2
-      namespace: adguard-home
-      chart:
-        name: adguard-home
-        repo_name: k8s-at-home
+        name: app-template
+        repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
     cluster_policies: []
   - name: services
@@ -318,6 +300,12 @@ clusters:
         repo_name: metallb
         repo_namespace: flux-system
     - name: nginx
+      namespace: nginx
+      chart:
+        name: ingress-nginx
+        repo_name: ingress-nginx
+        repo_namespace: flux-system
+    - name: nginx-external
       namespace: nginx
       chart:
         name: ingress-nginx

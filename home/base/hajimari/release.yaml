@@ -29,13 +29,8 @@ spec:
       defaultEnable: true
       namespaceSelector:
         matchNames:
-          - frigate
-          - home-assistant
-          - kasten-io
           - kubernetes-dashboard
           - monitoring
-          - adguard-home
-          - rtsp-to-web
           - teslamate
           - unifi
       customApps:
