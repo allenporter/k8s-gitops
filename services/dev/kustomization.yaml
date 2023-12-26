@@ -12,7 +12,6 @@ resources:
   - authelia-users-database.yaml
 patches:
   - path: haproxy-values.yaml
-  - path: haproxy-external-values.yaml
   - path: metallb-values.yaml
   - path: nginx-values.yaml
   - path: authelia-values.yaml
