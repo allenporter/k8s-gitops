@@ -8,4 +8,3 @@ resources:
 - ../base/unifi
 - ../base/adguard-home
 - unifi-backup.yaml
-- unifi-service.yaml
