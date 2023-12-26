@@ -12,10 +12,9 @@ spec:
       owner: app
       secret:
         name: teslamate-pg-secret
-  postgresql:
-    shared_preload_libraries:
-    - cube
-    - earthdistance
+      postInitSQL:
+        - CREATE EXTENSION IF NOT EXISTS cube
+        - CREATE EXTENSION IF NOT EXISTS earthdistance
   storage:
     size: 5Gi
   monitoring:
