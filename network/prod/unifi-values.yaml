@@ -93,7 +93,7 @@ spec:
         tls:
         - secretName: unifi-tls
           hosts:
-            - unifi.${DOMAIN}
+          - unifi.${DOMAIN}
 
     persistence:
       config:
