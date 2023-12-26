@@ -5,4 +5,3 @@ namespace: home-assistant
 resources:
   - namespace.yaml
   - release.yaml
-  - matter-server-release.yaml
