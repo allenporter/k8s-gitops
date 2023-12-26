@@ -32,3 +32,4 @@ resources:
   - backube.yaml
   - external-dns.yaml
   - k8s-gateway.yaml
+  - cnpg.yaml
