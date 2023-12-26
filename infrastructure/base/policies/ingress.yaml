@@ -36,7 +36,7 @@ spec:
       message: "Unknown IngressClass"
       pattern:
         =(spec):
-          =(ingressClass): "null | haproxy | haproxy-external | nginx | istio"
+          =(ingressClass): "null | haproxy | nginx | nginx-external"
 ---
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
