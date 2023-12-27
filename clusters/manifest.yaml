@@ -178,10 +178,6 @@ clusters:
       namespace: flux-system
       url: https://backube.github.io/helm-charts/
       repo_type: default
-    - name: external-dns
-      namespace: flux-system
-      url: https://kubernetes-sigs.github.io/external-dns/
-      repo_type: default
     - name: k8s-gateway
       namespace: flux-system
       url: https://ori-edge.github.io/k8s_gateway/

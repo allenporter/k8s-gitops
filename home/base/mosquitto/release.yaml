@@ -40,6 +40,7 @@ spec:
       ext:
         controller: main
         annotations:
+          # k8s_gateway annotation for non-http server
           external-dns.alpha.kubernetes.io/hostname: mqtt.${DOMAIN}
         type: LoadBalancer
         ports:

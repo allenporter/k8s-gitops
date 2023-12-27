@@ -28,8 +28,6 @@ spec:
       enabled: true
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
-        external-dns.alpha.kubernetes.io/hostname: weave-gitops.${DOMAIN}.
-        external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
       hosts:
         - host: weave-gitops.${DOMAIN}
           paths:

@@ -90,8 +90,6 @@ spec:
           haproxy.org/forwarded-for: "true"
           hajimari.io/icon: transform
           hajimari.io/appName: LLama.cpp Server
-          external-dns.alpha.kubernetes.io/hostname: llama-server.${DOMAIN}.
-          external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
         hosts:
         - host: llama-server.${DOMAIN}
           paths:

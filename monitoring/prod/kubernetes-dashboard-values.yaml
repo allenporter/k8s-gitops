@@ -12,9 +12,6 @@ spec:
       version: 6.0.8
   values:
     ingress:
-      annotations:
-        external-dns.alpha.kubernetes.io/hostname: kubernetes-dashboard.${DOMAIN}.
-        external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
       hosts:
         - kubernetes-dashboard.${DOMAIN}
       tls:
