@@ -39,11 +39,13 @@ spec:
             port: 1883
       ext:
         controller: main
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: mqtt.${DOMAIN}
         type: LoadBalancer
-        loadBalancerIP: ${MQTT_IP}
         ports:
           http:
             port: 1883
+            targetPort: 1883
 
     persistence:
       data:
