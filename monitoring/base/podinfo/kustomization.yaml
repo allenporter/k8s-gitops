@@ -4,5 +4,4 @@ kind: Kustomization
 namespace: podinfo
 resources:
   - namespace.yaml
-  - release-haproxy.yaml
-  - release-nginx.yaml
+  - release.yaml
