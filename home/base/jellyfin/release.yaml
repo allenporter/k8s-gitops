@@ -43,7 +43,6 @@ spec:
         enabled: true
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          haproxy.org/forwarded-for: "true"
           hajimari.io/icon: dvr
           hajimari.io/appName: Jellyfin
         hosts:

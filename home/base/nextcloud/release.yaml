@@ -24,7 +24,6 @@ spec:
     ingress:
       enabled: true
       annotations:
-        haproxy.org/forwarded-for: "true"
         cert-manager.io/cluster-issuer: letsencrypt
         hajimari.io/icon: cloud
         hajimari.io/appName: Nextcloud
