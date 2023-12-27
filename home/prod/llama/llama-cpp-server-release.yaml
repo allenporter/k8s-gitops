@@ -87,7 +87,6 @@ spec:
         enabled: true
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          haproxy.org/forwarded-for: "true"
           hajimari.io/icon: transform
           hajimari.io/appName: LLama.cpp Server
         hosts:
