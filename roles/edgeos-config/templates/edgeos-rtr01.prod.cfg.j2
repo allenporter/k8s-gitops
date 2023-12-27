@@ -114,7 +114,6 @@ delete service dhcp-server shared-network-name LAN
 set service dhcp-server shared-network-name LAN authoritative enable
 set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 default-router 10.10.1.1
 set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 dns-server 10.10.1.1
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 dns-server 10.10.1.10
 set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 domain-name {{ site_domain }}
 set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 lease 86400
 set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 start 10.10.38.101 stop 10.10.38.250
