@@ -25,6 +25,7 @@ spec:
       ingressClassResource:
         enabled: true
         name: nginx
+        default: true
         controllerValue: "k8s.io/ingress-nginx"
       service:
         type: LoadBalancer
