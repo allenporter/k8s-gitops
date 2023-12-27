@@ -33,6 +33,10 @@ spec:
           - monitoring
           - teslamate
           - unifi
+          - jellyfin
+          - llama
+          - unifi
+          - weave-gitops
       customApps:
         - name: sto01
           url: http://sto01.prod.mrv.thebends.org:5000
