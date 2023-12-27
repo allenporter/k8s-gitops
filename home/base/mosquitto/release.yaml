@@ -37,17 +37,13 @@ spec:
         ports:
           http:
             port: 1883
-    ingress:
-      main:
-        enabled: true
-        className: nginx
-        hosts:
-          - host: mqtt.${DOMAIN}
-            paths:
-              - path: /
-                service:
-                  name: main
-                  port: http
+      ext:
+        type: LoadBalancer
+        loadBalancerIP: ${MQTT_IP}
+        ports:
+          http:
+            port: 1883
+
     persistence:
       data:
         enabled: true
