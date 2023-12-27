@@ -61,7 +61,8 @@ spec:
       config:
         enabled: true
         type: persistentVolumeClaim
-        existingClaim: jellyfin-config
+        accessMode: ReadWriteOnce
+        size: 1Gi
         mountPath: /config
       cache:
         enabled: true
