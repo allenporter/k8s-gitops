@@ -17,8 +17,6 @@ spec:
   install:
     remediation:
       retries: 3
-  # Default values
-  # https://github.com/k8s-at-home/charts/blob/master/charts/stable/mosquitto/values.yaml
   values:
     controllers:
       main:
@@ -53,7 +51,9 @@ spec:
     persistence:
       data:
         enabled: true
-        existingClaim: mosquitto-data
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
         globalMounts:
           - path: /mosquitto/data
       mosquitto-config:
