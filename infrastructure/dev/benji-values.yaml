@@ -13,9 +13,6 @@ spec:
       version: 2.0.0
   values:
     ingress:
-      annotations:
-        external-dns.alpha.kubernetes.io/hostname: benji.dev.mrv.thebends.org.
-        external-dns.alpha.kubernetes.io/target: prx02.dev.mrv.thebends.org.
       host: benji.dev.mrv.thebends.org
     benji:
       crontab:

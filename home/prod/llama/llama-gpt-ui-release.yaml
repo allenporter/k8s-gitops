@@ -51,8 +51,6 @@ spec:
           haproxy.org/forwarded-for: "true"
           hajimari.io/icon: transform
           hajimari.io/appName: LLama GPT
-          external-dns.alpha.kubernetes.io/hostname: llama-gpt.${DOMAIN}.
-          external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
         hosts:
         - host: llama-gpt.${DOMAIN}
           paths:

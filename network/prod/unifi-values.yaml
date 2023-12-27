@@ -76,8 +76,6 @@ spec:
         className: nginx
         annotations:
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-          external-dns.alpha.kubernetes.io/hostname: unifi.${DOMAIN}.
-          external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: access-point
           haproxy.org/server-ssl: "true"

@@ -46,8 +46,6 @@ spec:
           haproxy.org/forwarded-for: "true"
           hajimari.io/icon: dvr
           hajimari.io/appName: Jellyfin
-          external-dns.alpha.kubernetes.io/hostname: jellyfin.${DOMAIN}.
-          external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
         hosts:
           - host: jellyfin.${DOMAIN}
             paths:

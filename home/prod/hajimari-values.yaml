@@ -16,9 +16,6 @@ spec:
       tag: v0.3.1
     ingress:
       main:
-        annotations:
-          external-dns.alpha.kubernetes.io/hostname: hajimari.${DOMAIN}.
-          external-dns.alpha.kubernetes.io/target: prx02${DOMAIN}.
         hosts:
           - host: hajimari.${DOMAIN}
             paths:

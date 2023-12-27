@@ -26,8 +26,6 @@ spec:
       annotations:
         haproxy.org/forwarded-for: "true"
         cert-manager.io/cluster-issuer: letsencrypt
-        external-dns.alpha.kubernetes.io/hostname: nextcloud.${DOMAIN}.
-        external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
         hajimari.io/icon: cloud
         hajimari.io/appName: Nextcloud
       tls:
