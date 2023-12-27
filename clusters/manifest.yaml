@@ -86,10 +86,6 @@ clusters:
       namespace: flux-system
       url: oci://registry-1.docker.io/bitnamicharts
       repo_type: oci
-    - name: k8s-at-home
-      namespace: flux-system
-      url: https://k8s-at-home.com/charts/
-      repo_type: default
     - name: kubernetes-dashboard
       namespace: flux-system
       url: https://kubernetes.github.io/dashboard/
