@@ -20,6 +20,4 @@ spec:
       retries: 5
   test:
     enable: false
-  # Default values
-  # https://github.com/k8s-at-home/charts/blob/master/charts/stable/unifi/values.yaml
   values:
