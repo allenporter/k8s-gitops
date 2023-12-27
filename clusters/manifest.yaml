@@ -40,7 +40,7 @@ clusters:
     - name: mosquitto
       namespace: mqtt
       chart:
-        name: mosquitto
+        name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
     - name: hajimari
@@ -248,12 +248,6 @@ clusters:
       chart:
         name: podinfo
         repo_name: podinfo
-        repo_namespace: flux-system
-    - name: speedtest-prometheus
-      namespace: monitoring
-      chart:
-        name: speedtest-prometheus
-        repo_name: k8s-at-home
         repo_namespace: flux-system
     - name: kubernetes-dashboard
       namespace: kubernetes-dashboard
