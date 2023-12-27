@@ -47,8 +47,6 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
           hajimari.io/icon: car-electric
-          external-dns.alpha.kubernetes.io/hostname: teslamate.${DOMAIN}.
-          external-dns.alpha.kubernetes.io/target: prx04.${DOMAIN}.
         hosts:
           - host: teslamate.${DOMAIN}
             paths:

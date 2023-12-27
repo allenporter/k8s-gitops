@@ -12,9 +12,6 @@ spec:
       version: 6.5.4
   values:
     ingress:
-      annotations:
-        external-dns.alpha.kubernetes.io/hostname: podinfo-nginx.${DOMAIN}.
-        external-dns.alpha.kubernetes.io/target: prx04.${DOMAIN}.
       hosts:
         - host: podinfo-nginx.${DOMAIN}
           paths:

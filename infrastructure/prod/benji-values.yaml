@@ -13,9 +13,6 @@ spec:
       version: 2.0.0
   values:
     ingress:
-      annotations:
-        external-dns.alpha.kubernetes.io/hostname: benji.${DOMAIN}.
-        external-dns.alpha.kubernetes.io/target: prx02.${DOMAIN}.
       host: benji.${DOMAIN}
     benji:
       crontab:

@@ -13,6 +13,4 @@ spec:
   values:
     controller:
       service:
-        annotations:
-          external-dns.alpha.kubernetes.io/hostname: prx02.${DOMAIN}.
         loadBalancerIP: ${HAPROXY_INGRESS_IP}
