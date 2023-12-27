@@ -33,7 +33,7 @@ spec:
                 cpu: 5m
                 memory: 4Mi
               limits:
-                memory: 16Mi
+                memory: 32Mi
     service:
       main:
         ports:
@@ -51,12 +51,12 @@ spec:
                   name: main
                   port: http
     persistence:
-      config:
+      data:
         enabled: true
         existingClaim: mosquitto-data
         globalMounts:
           - path: /mosquitto/data
-      config-file:
+      mosquitto-config:
         type: configMap
         name: mosquitto-config
         advancedMounts:
