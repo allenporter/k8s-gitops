@@ -41,7 +41,7 @@ clusters:
       namespace: mqtt
       chart:
         name: mosquitto
-        repo_name: k8s-at-home
+        repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
     - name: hajimari
       namespace: hajimari

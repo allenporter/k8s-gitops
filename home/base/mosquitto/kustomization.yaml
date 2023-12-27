@@ -5,3 +5,4 @@ namespace: mqtt
 resources:
   - namespace.yaml
   - release.yaml
+  - configmap.yaml
