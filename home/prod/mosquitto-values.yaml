@@ -8,5 +8,13 @@ spec:
   chart:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: mosquitto
-      version: 4.8.2
+      chart: app-template
+      version: 2.4.0
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: docker.io/library/eclipse-mosquitto
+              tag: 2.0.14
