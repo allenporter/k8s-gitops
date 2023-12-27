@@ -233,12 +233,6 @@ clusters:
     path: monitoring/prod
     helm_repos: []
     helm_releases:
-    - name: podinfo-haproxy
-      namespace: podinfo
-      chart:
-        name: podinfo
-        repo_name: podinfo
-        repo_namespace: flux-system
     - name: podinfo-nginx
       namespace: podinfo
       chart:
