@@ -38,6 +38,7 @@ spec:
           http:
             port: 1883
       ext:
+        controller: main
         type: LoadBalancer
         loadBalancerIP: ${MQTT_IP}
         ports:
