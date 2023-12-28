@@ -44,5 +44,5 @@ repos:
     name: kairosctl
     entry: scripts/run-in-env.sh kairosctl validate bootstrap/kairos/cloud-config.yaml
     language: script
-    files: ^(.*cloud-config\.yaml)$
+    files: ^(bootstrap/kairos/cloud-config.yaml)$
     types: [text]

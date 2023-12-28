@@ -19,10 +19,3 @@ stages:
     sysctl:
       fs.inotify.max_user_instances: 8192
       fs.inotify.max_user_watches: 524288
-
-boot:
-- name: "Set up various kube environment variables"
-  environment:
-    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
-    CONTAINERD_ADDRESS: /run/k3s/containerd/containerd.sock
-    CONTAINERD_NAMESPACE: k8s.io
