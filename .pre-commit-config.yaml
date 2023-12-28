@@ -38,3 +38,11 @@ repos:
     language: script
     files: ^(.+\.yaml)$
     types: [text]
+- repo: local
+  hooks:
+  - id: kairosctl
+    name: kairosctl
+    entry: scripts/run-in-env.sh kairosctl validate bootstrap/kairos/cloud-config.yaml
+    language: script
+    files: ^(.*cloud-config\.yaml)$
+    types: [text]
