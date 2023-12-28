@@ -1,0 +1,20 @@
+name: Kairos Config Validator
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Validate Kairos Config
+        uses: docker://ghcr.io/tyzbit/kairosctl:v2.3.1   
+        with:
+          args: >-
+            kairosctl validate bootstrap/kairos/cloud-config.yaml
