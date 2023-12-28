@@ -17,4 +17,4 @@ jobs:
         uses: docker://ghcr.io/tyzbit/kairosctl:v2.3.1   
         with:
           args: >-
-            /usr/local/bin/kairos validate bootstrap/kairos/cloud-config.yaml
+            kairosctl validate bootstrap/kairos/cloud-config.yaml
