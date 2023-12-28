@@ -11,14 +11,6 @@ users:
   - github:allenporter
 k3s:
   enabled: true
-bundles:
-- targets:
-  - run://quay.io/kairos/community-bundles:flux_latest
-flux:
-  github:
-    owner: allenporter
-    repository: k8s-gitops
-    path: clusters/prod
 
 stages:
   initramfs:
