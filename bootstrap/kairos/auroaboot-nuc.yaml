@@ -1,0 +1,3 @@
+---
+# renovate: datasource=github-releases depName=allenporter/kairos-distros
+container_image: ghcr.io/allenporter/kairos-ubuntu-intel-nuc:v0.1.0
