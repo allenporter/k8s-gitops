@@ -15,8 +15,8 @@ Run an AuroraBoot container in the same network as the boxes with these argument
 ```
 docker run --rm  -ti \
     -v ${PWD}/bootstrap/kairos:/config \
-    -v ${PWD}/bootstrap/kairos/state:/state \
+    -v ${PWD}/bootstrap/kairos/tmp:/tmp \
     quay.io/kairos/auroraboot \
     --cloud-config /config/cloud-config.yaml \
-    /config/auroraboot-config.yaml
+    /config/auroraboot-nuc.yaml
 ```
