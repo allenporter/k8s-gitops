@@ -88,6 +88,14 @@ RUN cd /usr/local/bin/ && \
     chmod +x kubeconform
 RUN kubeconform -v
 
+# renovate: datasource=github-releases depName=kairos/provider-kairos
+ARG KAIROS_VERSION=v2.6.1
+RUN cd /usr/local/bin/ && \
+    curl -OL https://github.com/kairos-io/provider-kairos/releases/download/${KAIROS_VERSION}/kairosctl-${KAIROS_VERSION}-linux-amd64.tar.gz && \
+    tar xf kairosctl-${KAIROS_VERSION}-linux-amd64.tar.gz && \
+    chmod +x kairosctl
+RUN kairosctl -v
+
 # Cleanup from previous steps
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
