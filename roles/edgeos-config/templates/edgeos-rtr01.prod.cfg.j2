@@ -126,6 +126,8 @@ set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mappi
 {% endif %}
 {% endif %}
 {% endfor %}
+set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 bootfile-server 10.10.1.10
+set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 bootfile-name boot.ipxe
 
 set service dhcp-server static-arp disable
 set service dhcp-server use-dnsmasq disable
