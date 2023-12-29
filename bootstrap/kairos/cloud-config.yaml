@@ -2,14 +2,16 @@
 ---
 install:
   auto: true
-  device: "auto"
+  device: auto
   reboot: true
+
 users:
-- name: "admin"
+- name: admin
   groups:
   - admin
   ssh_authorized_keys:
   - github:allenporter
+
 k3s:
   enabled: true
 

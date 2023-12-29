@@ -17,3 +17,4 @@ venv
 
 # Local configuration
 .env/*
+**/build/*
