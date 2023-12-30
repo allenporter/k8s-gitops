@@ -17,7 +17,7 @@ machines:
   description: EdgeSwitch 24 Lite
   ip: 10.10.1.4
   mac: e0:63:da:26:7e:f9
-- host: morph:
+- host: morph
   desc: Netgear GS108PEv3 8-port Gigabit Switch Smart Managed w/ 4-port PoE
   ip: 10.10.1.5,
   mac: 94:a6:7e:53:10:4d,
@@ -86,7 +86,7 @@ machines:
   mac: 1c:69:7a:6d:2a:70
 - host: sonar
   ip: 10.10.20.6
-  mac: 1c:69:7a:6d:2a:b1 
+  mac: 1c:69:7a:6d:2a:b1
 - host: buffalo
   ip: 10.10.20.8
   mac: 1c:69:7a:a6:f1:21
