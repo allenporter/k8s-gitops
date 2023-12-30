@@ -1,5 +1,11 @@
 #cloud-config
 ---
+install:
+  device: "/dev/sda"
+  # Operator needs to ensure propper boot order
+  reboot: false
+  auto: true
+
 hostname: metal-{{ trunc 4 .MachineID }}
 users:
 - name: admin
