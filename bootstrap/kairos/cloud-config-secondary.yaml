@@ -1,0 +1,28 @@
+#cloud-config
+---
+install:
+  device: "/dev/sda"
+  reboot: true
+  poweroff: true
+  auto: true
+
+users:
+- name: admin
+  groups:
+  - admin
+  ssh_authorized_keys:
+  - github:allenporter
+
+stages:
+  initramfs:
+  - name: Increase number of open files
+    sysctl:
+      fs.inotify.max_user_instances: 8192
+      fs.inotify.max_user_watches: 524288
+
+k3s:
+  enabled: true
+  args:
+  - --server https://10.10.21.101:6443
+  env:
+    K3S_TOKEN: "t0ken_g0es_h3re"

@@ -2,8 +2,8 @@
 artifact_version: v2.4.3
 # renovate: datasource=github-releases depName=kairos/releases
 release_version: v2.4.3
-flavor: ubuntu
-flavor_release: 22.04
+flavor: debian
+flavor_release: bookworm
 repository: kairos-io/kairos
 disable_http_server: true
 disable_netboot: true
