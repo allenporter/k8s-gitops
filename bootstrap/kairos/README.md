@@ -1,4 +1,4 @@
-# bootstrap
+# kairos
 
 Configuration needed for bootstrapping the cluster. This directory is for
 deploying a clustering following the [Kairos High Availability](https://kairos.io/docs/examples/ha/)
