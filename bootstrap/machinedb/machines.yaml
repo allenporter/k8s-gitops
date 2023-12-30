@@ -1,0 +1,103 @@
+---
+machines:
+
+# Routers
+- host: mineral
+  description: ERX Router
+  ip: 10.10.1.1
+  hardware_labels:
+  - edgeos
+
+# Network gear
+- host: belgium
+  description: Netgear JGS516PE 16-port Gigabit Smart Managed with 8-port PoE
+  ip: 10.10.1.2
+  mac: 38:94:ed:b8:9e:07
+- host: gabriel
+  description: EdgeSwitch 24 Lite
+  ip: 10.10.1.4
+  mac: e0:63:da:26:7e:f9
+- host: morph
+  desc: Netgear GS108PEv3 8-port Gigabit Switch Smart Managed w/ 4-port PoE
+  ip: 10.10.1.5,
+  mac: 94:a6:7e:53:10:4d,
+- host: serpent
+  desc: Netgear GS108PEv3 8-port Gigabit Switch Smart Managed w/ 4-port PoE
+  ip: 10.10.1.6
+  mac: 94:a6:7e:53:10:46
+- host: wonder
+  desc: Netgear GS305E 5-port Gigabit Switch Smart Managed
+  ip: 10.10.1.7
+  mac: 9c:c9:eb:0f:4f:00
+
+# Wireless gear
+- host: mega
+  desc: Unifi U6-Lite AP
+  mac: 24:5a:4c:13:ae:c
+  ip: 10.10.35.2
+- host: mile
+  desc: Unifi U6-Lite AP
+  mac: 24:5a:4c:13:7f:ac
+  ip: 10.10.35.3
+- host: politic
+  desc: Unifi U6-Lite AP
+  mac: 24:5a:4c:13:a6:c4
+  ip: 10.10.35.4
+- host: summer
+  desc: Unifi U6-Lite AP
+  mac: 24:5a:4c:13:ae:94
+  ip: 10.10.35.5
+- host: race
+  desc: Unifi U6-Extender
+  mac: d0:21:f9:f1:c0:50
+  ip: 10.10.35.6
+
+# Special hostname for unifi device discovery.
+- host: unifi
+  desc: Unifi Controller
+  # Configured LoadBalancer IP with MetalLB in k8s
+  ip: 10.10.25.20
+# Additional alias allocated to the controller
+- host: shelf
+  desc: Unifi Controller
+
+# Storage servers
+- host: garden
+  desc: Synology DS918+
+  ip: 10.10.1.10
+  mac: 00:11:32:c5:0b:48
+- host: garden-if2
+  desc: Synology DS918+
+  ip: 10.10.1.11
+  mac: 00:11:32:c5:0b:47
+
+# Services
+- host: campus
+  ip: 10.10.1.20
+  mac: 8c:dc:d4:4f:7b:e0
+- host: market"
+  ip: 10.10.1.80
+  mac: e0:d5:5e:e5:25:be
+  hardware_labels:
+  - nvidia_gpu
+# Virtualization Hosts
+- host: pelican
+  ip: 10.10.20.5
+  mac: 1c:69:7a:6d:2a:70
+- host: sonar
+  ip: 10.10.20.6
+  mac: 1c:69:7a:6d:2a:b1
+- host: buffalo
+  ip: 10.10.20.8
+  mac: 1c:69:7a:a6:f1:21
+
+# kairos demo servers
+- host: kairos-demo-1
+  mac: bc:24:11:45:fa:df
+  ip: 10.10.21.101
+- host: kairos-demo-2
+  mac: bc:24:11:88:02:7a
+  ip: 10.10.21.102
+- host: kairos-demo-3
+  mac: bc:24:11:a3:ca:2b
+  ip: 10.10.21.103
