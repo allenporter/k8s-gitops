@@ -1,16 +1,14 @@
 #!/bin/bash
 
-: ${CLOUD_CONFIG:="cloud-config.yml"}
-: ${CONFIG:="auroraboot.yml"}
-: ${BUILD_DIR:="build"}
+KAIROS_DIR="${PWD}/bootstrap/kairos"
 
-BOOTSTRAP="${PWD}/bootstrap/kairos"
+: ${CONFIG:="auroraboot.yaml"}
+: ${BUILD_DIR:="${KAIROS_DIR}/build"}
 
 docker run --rm -ti \
-    -v ${BOOTSTRAP}:/config \
-    -v ${BOOTSTRAP}/${BUILD_DIR}:/tmp/build \
+    -v ${KAIROS_DIR}:/config \
+    -v ${BUILD_DIR}:/tmp/build \
     -v kairos-tmp:/tmp \
     quay.io/kairos/auroraboot:v0.2.7 \
     --debug \
-    --cloud-config /config/${CLOUD_CONFIG} \
     /config/${CONFIG}
