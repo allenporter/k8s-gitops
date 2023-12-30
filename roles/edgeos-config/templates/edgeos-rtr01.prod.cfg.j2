@@ -126,8 +126,16 @@ set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mappi
 {% endif %}
 {% endif %}
 {% endfor %}
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 bootfile-server 10.10.1.10
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 bootfile-name boot.ipxe
+
+# Assignments for kairos demos
+set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping kairos-demo-1 ip-address 10.10.21.101
+set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping kairos-demo-1 mac-address 'bc:24:11:45:fa:df'
+set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping kairos-demo-2 ip-address 10.10.21.102
+set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping kairos-demo-2 mac-address 'bc:24:11:88:02:7a'
+set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping kairos-demo-2 ip-address 10.10.21.103
+set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping kairos-demo-2 mac-address 'bc:24:11:a3:ca:2b'
+
+
 
 set service dhcp-server static-arp disable
 set service dhcp-server use-dnsmasq disable
