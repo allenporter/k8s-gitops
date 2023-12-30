@@ -12,14 +12,11 @@ See [Network booting](https://kairos.io/docs/installation/netboot/#use-auroraboo
 
 Build primary image:
 ```bash
+$ ISO_DIR=/Volumes/platform-images/template/iso
+# Build primary image
 $ CLOUD_CONFIG=cloud-config-primary.yaml CONFIG=auroraboot.yaml bootstrap/kairos/build-image.sh
-$ ISO_DIR=/Volumes/platform-images/template/iso
 $ cp bootstrap/kairos/build/kairos.iso.custom.iso ${ISO_DIR}/kairos-primary.iso
-```
-
-Build secondary image:
-```bash
+# Build secondary image
 $ CLOUD_CONFIG=cloud-config-secondary.yaml CONFIG=auroraboot.yaml bootstrap/kairos/build-image.sh
-$ ISO_DIR=/Volumes/platform-images/template/iso
 $ cp bootstrap/kairos/build/kairos.iso.custom.iso ${ISO_DIR}/kairos-secondary.iso
 ```
