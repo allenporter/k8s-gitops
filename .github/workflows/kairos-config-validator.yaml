@@ -10,6 +10,12 @@ jobs:
   validate:
     name: Validate
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cloud_config_path:
+          - bootstrap/kairos/cloud-config-primary.yaml
+          - bootstrap/kairos/cloud-config-secondary.yaml
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,4 +23,4 @@ jobs:
         uses: docker://ghcr.io/tyzbit/kairosctl:v2.3.1   
         with:
           args: >-
-            kairosctl validate bootstrap/kairos/cloud-config.yaml
+            kairosctl validate ${{ matrix.cloud_config_path }}
