@@ -9,7 +9,7 @@ example.
 Bootstrapping the cluster requires the following steps:
 
 - Hosts configured with mac address + ip assignments in the dhcp server.
-- cloud-config-seconary.yaml updated with the ip address of the primary server.
+- `cloud-config-seconary.yaml` updated with the ip address of the primary server.
 - Build images (see below)
 - Boot up the primary server with the primary iso
 - Boot up the secondary servers with the secondary iso
@@ -17,7 +17,7 @@ Bootstrapping the cluster requires the following steps:
 
 ## Build images
 
-See [Network booting](https://kairos.io/docs/installation/netboot/#use-auroraboot) for more details on Auroraboot and building images (not netboot).
+See [AuroraBoot](https://kairos.io/docs/reference/auroraboot/) for more details on Auroraboot and building images (not using netboot).
 
 Build primary image and copy to an iso directory:
 ```bash
