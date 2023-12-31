@@ -33,15 +33,6 @@ from the CLI. The `.devcontainer` has some default mounts including the private 
 inventory and `.env` which is a local directory for local secret storage. More detail on
 bootstrapping can be found in `scripts/` and `plays/k8s-gitops-env.yaml` performs the secret setup.
 
-## Environments
-
-This repository manages everything else running within the k8s cluster (e.g. containers, load balancers, applications, etc). The repo follows the pattern in [flux2-kustomize-helm-example](https://github.com/fluxcd/flux2-kustomize-helm-example) where applications are specified with overrides for multiple environments which map to two seperate kubernetes clusters:
-
-- `dev`: A separate instance for testing/validation for both new configuration and binary releases (e.g. nightly docker image builds)
-- `prod`: A production environment with stable binaries and better tested configuration.
-
-While this is not a high criticality system, having multiple environments makes it easier to move quickly and risk making mistakes in the dev environment first (then getting distracted and leaving it broken for a bit) without harming prod. See [kubernetes: Configure Access to Multiple Clusters](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) for details.
-
 ## Cluster Infrastructure
 
 The key infrastructure components running within the cluster are:

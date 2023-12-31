@@ -17,5 +17,4 @@
   vars_files:
   - vars.yaml
   roles:
-  - k8s-gitops-env
   - k8s-gitops-sops

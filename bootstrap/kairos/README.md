@@ -14,3 +14,9 @@ Bootstrapping the cluster requires the following steps:
 - Ensure machine boot order & `reboot` flags are set as appropriate
 - Boot up the primary server with the primary iso
 - Boot up the secondary servers with the secondary iso
+
+## Building isos
+
+```
+$ ansible-playbook -i localhost, --connection=local  bootstrap/kairos/bootstrap.yaml
+```
