@@ -12,7 +12,8 @@ RUN apt-get update --fix-missing && \
         python3-pip \
         sshpass \
         netcat \
-        mkisofs
+        mkisofs \
+        age
 
 
 ARG GO_VERSION=1.19
