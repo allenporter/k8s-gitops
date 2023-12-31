@@ -7,8 +7,8 @@
     container_version: v0.1.0
     output_dir: "{{ playbook_dir }}/build"
     containers:
-    - name: ubuntu-nuc
-      image: ghcr.io/allenporter/kairos-ubuntu-nuc:{{ container_version }}
+    - name: ubuntu-intel-nuc
+      image: ghcr.io/allenporter/kairos-ubuntu-intel-nuc:{{ container_version }}
     - name: ubuntu-nvidia
       image: ghcr.io/allenporter/kairos-ubuntu-nvidia:{{ container_version }}
     datasources:

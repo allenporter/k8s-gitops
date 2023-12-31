@@ -1,14 +1,14 @@
 ---
-- name: Build AuroraBoot container
+- name: "Build AuroraBoot container {{ container_image }}"
   vars:
     state_dir: "/tmp/auroaboot"
   shell:
     cmd: >-
-      docker run --rm -ti \
+      docker run --rm \
           -v "{{ build_dir }}:{{ state_dir }}/build" \
           -v "kairos-tmp:/tmp" \
           quay.io/kairos/auroraboot:{{ auroraboot_version }} \
-          --set "container_image={{ container_image }}}" \
+          --set "container_image={{ container_image }}" \
           --set "disable_http_server=true" \
           --set "disable_netboot=true" \
           --set "state_dir={{ state_dir }}" \
@@ -16,5 +16,5 @@
 
 - name: "Save iso output file {{ output_iso_file }}"
   copy:
-    src: "{{ build_dir }}/kairos.iso"
+    src: "{{ build_dir }}/build/kairos.iso"
     dest: "{{ output_iso_file }}"

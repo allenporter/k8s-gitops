@@ -12,7 +12,6 @@
 
 - name: Build container iso
   vars:
-    #: "{{ item }}"
     build_dir: "{{ tempdirs.path }}/{{ item.name }}"
     container_image: "{{ item.image }}"
     output_iso_file: "{{ output_dir }}/kairos-{{ item.name }}-{{ container_version }}.iso"
