@@ -9,9 +9,6 @@ set -e
 rm -fr crds
 kustomize localize localize/crds crds
 
-rm -fr infrastructure/dev/calico
-kustomize localize localize/calico/dev infrastructure/dev/calico
-
 rm -fr infrastructure/prod/calico
 kustomize localize localize/calico/prod infrastructure/prod/calico
 
