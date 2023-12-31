@@ -1,3 +1,0 @@
----
-ifup_dir: /etc/network/if-up.d
-hook_dir: /etc/networkd-dispatcher/routable.d
