@@ -1,8 +1,8 @@
 ---
 creation_rules:
-  - path_regex: .*/dev/.*\.yaml
-    encrypted_regex: ^(data|stringData)$
-    pgp: B1A8C6842B46D1C8CCBA1F7E3A259C447D9BEDC8
   - path_regex: .*/prod/.*\.yaml
     encrypted_regex: ^(data|stringData)$
     pgp: BF010A1EAF254C931DB47C39A6821796DB9EAB3D
+# age public key
+# created: 2023-12-31T23:09:35Z
+# public key: age1neakthxhftzns63tmvmpsn0rl4wfzzhsdcucm0a84et24azgxdyqrkagxg
