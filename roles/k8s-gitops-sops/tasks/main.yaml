@@ -1,0 +1,3 @@
+---
+- name: SOps Configuration
+  import_tasks: sops_config.yaml
