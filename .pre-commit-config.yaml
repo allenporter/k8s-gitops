@@ -34,7 +34,7 @@ repos:
   hooks:
   - id: manifest
     name: manifest
-    entry: scripts/run-in-env.sh scripts/update-manifest.sh
+    entry: hack/run-in-env.sh hack/update-manifest.sh
     language: script
     files: ^(.+\.yaml)$
     types: [text]
@@ -42,7 +42,7 @@ repos:
   hooks:
   - id: kairosctl
     name: kairosctl
-    entry: scripts/run-in-env.sh kairosctl validate bootstrap/kairos/cloud-config.yaml
+    entry: hack/run-in-env.sh kairosctl validate bootstrap/kairos/cloud-config.yaml
     language: script
     files: ^(bootstrap/kairos/cloud-config.yaml)$
     types: [text]

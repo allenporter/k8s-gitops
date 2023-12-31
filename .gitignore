@@ -5,6 +5,7 @@ __pycache__
 venv
 .secrets
 *.egg-info/
+.pytest_cache/
 
 # VS Code files for those working on multiple tools
 .vscode/*
