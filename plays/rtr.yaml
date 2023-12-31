@@ -3,13 +3,5 @@
   gather_facts: false
   roles:
   - edgeos-config
-
-- hosts: rtr
-  gather_facts: false
-  roles:
   - edgeos-certs
-
-- hosts: rtr
-  gather_facts: false
-  roles:
   - edgeos-node-exporter
