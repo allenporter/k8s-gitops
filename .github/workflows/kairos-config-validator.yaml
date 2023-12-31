@@ -13,8 +13,8 @@ jobs:
     strategy:
       matrix:
         cloud_config_path:
-          - bootstrap/kairos/cloud-config-primary.yaml
-          - bootstrap/kairos/cloud-config-secondary.yaml
+          - bootstrap/kairos/roles/datasource-iso/files/cloud-config-kapi-primary.yaml
+          - bootstrap/kairos/roles/datasource-iso/files/cloud-config-kapi-secondary.yaml
 
     steps:
       - name: Checkout

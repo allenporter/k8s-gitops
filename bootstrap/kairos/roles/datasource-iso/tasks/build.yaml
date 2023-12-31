@@ -1,0 +1,25 @@
+---
+- name: Create iso build
+  ansible.builtin.file:
+    path: "{{ item_build_dir }}"
+    state: directory
+  run_once: true
+
+- name: Create meta-data
+  ansible.builtin.file:
+    path: "{{ item_build_dir }}/meta-data"
+    state: touch
+
+- name: Copy cloud-config.yaml
+  copy:
+    src: "cloud-config-{{ source }}.yaml"
+    dest: "{{ item_build_dir }}/user-data"
+
+- name: Make iso
+  shell:
+    cmd: "mkisofs -output {{ iso_file }} -volid cidata -joliet -rock {{ item_build_dir }}/meta-data {{ item_build_dir }}/user-data"
+
+- name: "Save iso output file {{ iso_file }}"
+  copy:
+    src: "{{ iso_file }}"
+    dest: "{{ output_dir }}"

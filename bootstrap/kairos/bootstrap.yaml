@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  vars:
+    # renovate: datasource=github-releases depName=kairos-io/AuroraBoot
+    auroraboot_version: v0.2.7
+    # renovate: datasource=github-releases depName=allenporter/kairos-distros
+    container_version: v0.1.0
+    output_dir: "{{ playbook_dir }}/build"
+    containers:
+    - name: ubuntu-nuc
+      image: ghcr.io/allenporter/kairos-ubuntu-nuc:{{ container_version }}
+    - name: ubuntu-nvidia
+      image: ghcr.io/allenporter/kairos-ubuntu-nvidia:{{ container_version }}
+    datasources:
+    - kapi-primary
+    - kapi-secondary
+    # Add workers in the future
+    # - kube
+  roles:
+  - datasource-iso
+  - container-iso
