@@ -18,3 +18,4 @@ venv
 # Local configuration
 .env/*
 **/build/*
+.DS_Store
