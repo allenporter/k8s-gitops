@@ -1,9 +1,0 @@
----
-- name: Restart pveproxy
-  systemd:
-    name: "{{ item }}"
-    state: restarted
-    daemon_reload: yes
-  loop:
-    - pveproxy
-    - rsyslog

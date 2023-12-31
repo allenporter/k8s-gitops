@@ -1,4 +1,0 @@
----
-nfs_server: sto01.prod.mrv.thebends.org
-containerd_config_dir: /etc/containerd
-containerd_config_file: /etc/containerd/config.toml

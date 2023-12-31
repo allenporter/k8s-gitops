@@ -1,3 +1,0 @@
----
-- name: Skip
-  import_tasks: skip.yaml

@@ -1,4 +1,0 @@
----
-- name: Drain node
-  delegate_to: localhost
-  command: "kubectl drain {{ ansible_hostname }} --kubeconfig={{ kube_config }} --ignore-daemonsets --delete-emptydir-data=true --force"

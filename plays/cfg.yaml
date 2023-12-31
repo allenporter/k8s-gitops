@@ -1,7 +1,0 @@
-#!/usr/bin/env ansible-playbook
----
-- hosts: cfg
-  become: yes
-  serial: 1
-  roles:
-  - etcd

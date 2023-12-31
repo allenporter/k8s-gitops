@@ -1,7 +1,0 @@
----
-- name: Configure storage
-  copy:
-    src: "storage.cfg"
-    dest: "/etc/pve/storage.cfg"
-  # Replicated storage across all nodes
-  run_once: true

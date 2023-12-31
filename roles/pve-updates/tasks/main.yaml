@@ -1,6 +1,0 @@
----
-- name: Repositories
-  import_tasks: repositories.yaml
-
-- name: Updates
-  import_tasks: updates.yaml

@@ -1,6 +1,0 @@
----
-- name: Install Packages
-  apt:
-    name:
-      - tcpdump
-    state: present

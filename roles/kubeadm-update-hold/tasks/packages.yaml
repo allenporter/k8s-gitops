@@ -1,9 +1,0 @@
----
-- name: Prevent future accidental kubeadm updates
-  dpkg_selections:
-    name: "{{ item }}"
-    selection: hold
-  with_items:
-  - kubeadm
-  - kubectl
-  - kubelet

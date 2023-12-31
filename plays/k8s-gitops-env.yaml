@@ -4,16 +4,8 @@
 #   ansible-playbook plays/k8s-gitops-env.yaml -i /workspaces/homelab/hosts/prod/inventory.yaml
 #   ansible-playbook plays/k8s-gitops-env.yaml -i /workspaces/homelab/hosts/dev/inventory.yaml
 ---
-- name: Bootstrap k8s-gitops Environment (Ceph)
+- name: Bootstrap k8s-gitops Environment
   hosts: vmm
-  become: yes
-  vars_files:
-  - vars.yaml
-  roles:
-  - k8s-gitops-ceph
-
-- name: Bootstrap k8s-gitops Environment (Kubernetes)
-  hosts: kapi
   become: yes
   vars_files:
   - vars.yaml
@@ -26,10 +18,4 @@
   - vars.yaml
   roles:
   - k8s-gitops-env
-
-- name: Bootstrap sops Environment Variables
-  hosts: localhost
-  vars_files:
-  - vars.yaml
-  roles:
   - k8s-gitops-sops

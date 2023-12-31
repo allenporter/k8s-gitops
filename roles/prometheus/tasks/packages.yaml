@@ -1,8 +1,0 @@
----
-- name: Install packages
-  apt:
-    name:
-      - prometheus
-      - prometheus-alertmanager
-      - python3-pip
-    state: present

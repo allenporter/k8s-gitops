@@ -1,5 +1,0 @@
----
-- name: Configure syslog
-  copy:
-    src: syslog-remote-logging.conf
-    dest: /etc/rsyslog.d/remote-logging.conf
