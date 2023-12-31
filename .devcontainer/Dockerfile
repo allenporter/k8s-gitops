@@ -11,7 +11,8 @@ RUN apt-get update --fix-missing && \
         bind9-dnsutils \
         python3-pip \
         sshpass \
-        netcat
+        netcat \
+        mkisofs
 
 
 ARG GO_VERSION=1.19
@@ -112,7 +113,7 @@ RUN addgroup --system ${GROUPNAME} && \
     apt-get install -y sudo && \
     echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} && \
     chmod 0440 /etc/sudoers.d/${USERNAME}
- 
+
 USER admin
 
 # Install inventory plugins and other startup items
