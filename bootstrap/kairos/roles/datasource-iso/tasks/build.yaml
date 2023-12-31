@@ -18,6 +18,7 @@
 - name: Make iso
   shell:
     cmd: "mkisofs -output {{ iso_file }} -volid cidata -joliet -rock {{ item_build_dir }}/meta-data {{ item_build_dir }}/user-data"
+  creates: "{{ iso_file }}"
 
 - name: "Save iso output file {{ iso_file }}"
   copy:

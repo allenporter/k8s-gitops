@@ -1,10 +1,4 @@
 ---
-- name: Create temporary build directory
-  ansible.builtin.tempfile:
-    state: directory
-    suffix: build
-  register: tempdirs
-
 - name: Create output directory
   ansible.builtin.file:
     path: "{{ output_dir }}"
@@ -12,7 +6,7 @@
 
 - name: Build container iso
   vars:
-    build_dir: "{{ tempdirs.path }}/{{ item.name }}"
+    build_dir: "{{ output_dir }}/tmp-{{ item.name }}"
     container_image: "{{ item.image }}"
     output_iso_file: "{{ output_dir }}/kairos-{{ item.name }}-{{ container_version }}.iso"
   include_tasks: build.yaml
