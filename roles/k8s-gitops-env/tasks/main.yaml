@@ -1,3 +1,0 @@
----
-- name: Environment Configuration
-  import_tasks: env.yaml
