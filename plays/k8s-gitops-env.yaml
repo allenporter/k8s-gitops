@@ -7,7 +7,7 @@
 - name: Bootstrap k8s-gitops Environment
   hosts: vmm
   become: yes
-  vars_files:	
+  vars_files:
   - vars.yaml
   roles:
   - k8s-gitops-kapi
