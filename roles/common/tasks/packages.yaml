@@ -1,6 +1,0 @@
----
-- name: Ensure all required packages are installed.
-  apt:
-    name:
-    - net-tools
-    state: latest

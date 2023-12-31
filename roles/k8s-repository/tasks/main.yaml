@@ -1,3 +1,0 @@
----
-- name: Repository
-  import_tasks: repository.yaml

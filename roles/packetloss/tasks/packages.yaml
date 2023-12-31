@@ -1,5 +1,0 @@
----
-- name: Install ethtool
-  apt:
-    name: ethtool
-    state: present

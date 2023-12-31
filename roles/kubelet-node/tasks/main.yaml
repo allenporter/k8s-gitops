@@ -1,6 +1,0 @@
----
-- name: Annotations
-  import_tasks: annotations.yaml
-
-- name: Labels
-  import_tasks: labels.yaml

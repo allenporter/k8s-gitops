@@ -1,6 +1,0 @@
----
-sops_secrets:
-  - secret_id: sops-k8s-gitops-dev
-    secret_version: 1
-  - secret_id: sops-k8s-gitops-prod
-    secret_version: 1
