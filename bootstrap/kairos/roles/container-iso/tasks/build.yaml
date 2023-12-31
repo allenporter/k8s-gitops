@@ -1,4 +1,10 @@
 ---
+- name: Check if output iso already exists
+  stat:
+    path: "{{ output_iso_file }}"
+  register: output_iso_stat
+  changed_when: false
+
 - name: "Build AuroraBoot container {{ container_image }}"
   vars:
     state_dir: "/tmp/auroaboot"
@@ -13,8 +19,10 @@
           --set "disable_netboot=true" \
           --set "state_dir={{ state_dir }}" \
           --debug
+  when: not output_iso_stat.stat.exists
 
 - name: "Save iso output file {{ output_iso_file }}"
   copy:
-    src: "{{ build_dir }}/build/kairos.iso"
+    src: "{{ build_dir }}/kairos.iso"
     dest: "{{ output_iso_file }}"
+  when: not output_iso_stat.stat.exists
