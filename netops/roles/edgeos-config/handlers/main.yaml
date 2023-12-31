@@ -1,0 +1,13 @@
+---
+# - name: Push configuration
+#   edgeos_config:
+#     src: "{{ local_config_dir }}/{{ item }}"
+#     save: yes
+#     backup: yes
+#     backup_options:
+#       dir_path: "{{ local_config_dir }}"
+#   loop:
+#   - "edgeos-{{ inventory_hostname }}.cfg"
+#   connection: network_cli
+#   when:
+#   - ansible_network_os == "edgeos"
