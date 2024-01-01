@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  vars:
+    output_dir: "{{ playbook_dir }}/build"
+    datasources:
+    - name: kapi-primary
+      primary: true
+    - name: kapi-secondary
+      secondary: true
+    - name: kube
+  roles:
+  - datasource-iso
