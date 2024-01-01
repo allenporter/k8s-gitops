@@ -19,7 +19,9 @@
 		"GOOGLE_APPLICATION_CREDENTIALS": "/home/admin/.env/gcloud-service-account.json",
 		"ANSIBLE_ROLES_PATH": "/workspaces/k8s-gitops/roles/",
 		// Used to set up ansible inventory prefixes based on prod/dev environment
-		"ENV_INVENTORY_ROOT": "/workspaces/homelab/hosts"
+		"ENV_INVENTORY_ROOT": "/workspaces/homelab/hosts",
+		"SOPS_AGE_KEY_FILE": "/home/admin/.env/k8s-gitops-age-key.txt"
+
 	},
 	"runArgs": [
 		"--dns-search=mrv.thebends.org"
