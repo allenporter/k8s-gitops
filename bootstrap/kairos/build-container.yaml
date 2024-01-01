@@ -11,11 +11,5 @@
       image: ghcr.io/allenporter/kairos-ubuntu-intel-nuc:{{ container_version }}
     - name: ubuntu-nvidia
       image: ghcr.io/allenporter/kairos-ubuntu-nvidia:{{ container_version }}
-    datasources:
-    - kapi-primary
-    - kapi-secondary
-    # Add workers in the future
-    # - kube
   roles:
-  - datasource-iso
   - container-iso

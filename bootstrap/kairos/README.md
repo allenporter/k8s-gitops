@@ -15,8 +15,15 @@ Bootstrapping the cluster requires the following steps:
 - Boot up the primary server with the primary iso
 - Boot up the secondary servers with the secondary iso
 
-## Building isos
+## Building contiainer isos
 
 ```
-$ ansible-playbook -i localhost, --connection=local  bootstrap/kairos/bootstrap.yaml
+$ ansible-playbook -i localhost, --connection=local  bootstrap/kairos/build-container.yaml
+```
+
+
+## Building cloud config isos
+
+```
+$ ansible-playbook -i localhost, --connection=local  bootstrap/kairos/build-cloud-config.yaml
 ```
