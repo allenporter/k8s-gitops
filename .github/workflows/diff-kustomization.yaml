@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         cluster_path:
-          - clusters/prod
+          - kubernetes/clusters/prod
         resource:
           - helmrelease
           - kustomization

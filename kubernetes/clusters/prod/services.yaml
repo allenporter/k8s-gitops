@@ -16,7 +16,7 @@ spec:
     provider: sops
     secretRef:
       name: sops-gpg
-  path: ./services/prod
+  path: ./kubernetes/services/prod
   prune: true
   postBuild:
     substitute: {}

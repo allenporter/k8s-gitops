@@ -43,7 +43,7 @@
   },
   "flux": {
     "fileMatch": [
-        "clusters/prod/flux-system/.+\\.yaml$",
+        "kubernetes/clusters/prod/flux-system/.+\\.yaml$",
         // Match base releases and overlays
         "-values\\.yaml$",
         "release\\.yaml$",

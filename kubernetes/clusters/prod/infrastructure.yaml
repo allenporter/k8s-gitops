@@ -2,22 +2,21 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: monitoring
+  name: infrastructure
   namespace: flux-system
 spec:
   interval: 10m0s
   dependsOn:
-    - name: infrastructure
-    - name: services
+    - name: crds
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./monitoring/prod
-  prune: true
   decryption:
     provider: sops
     secretRef:
       name: sops-gpg
+  path: ./kubernetes/infrastructure/prod
+  prune: true
   postBuild:
     substitute: {}
     substituteFrom:

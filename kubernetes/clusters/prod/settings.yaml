@@ -2,14 +2,16 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: certmanager
+  name: settings
   namespace: flux-system
 spec:
-  interval: 10m0s
-  dependsOn:
-    - name: infrastructure
+  interval: 5m0s
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./certmanager/prod
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+  path: ./kubernetes/settings/prod
   prune: true
