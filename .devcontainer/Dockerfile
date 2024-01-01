@@ -118,7 +118,7 @@ RUN addgroup --system ${GROUPNAME} && \
 USER admin
 
 # Install inventory plugins and other startup items
-COPY --chown=admin:admin scripts/home/ /home/admin/
+COPY --chown=admin:admin bootstrap/env/home/ /home/admin/
 
 # Ansible "unsupported locale setting"
 ENV LANG="C.UTF-8"

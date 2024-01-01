@@ -1,6 +1,0 @@
----
-- name: Certificate Request
-  import_tasks: request.yaml
-
-- name: Challenge
-  import_tasks: challenge.yaml

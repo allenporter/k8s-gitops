@@ -8,7 +8,7 @@ on:
       - .devcontainer/Dockerfile
       - .github/workflows/docker-publish.yaml
       - requirements.txt
-      - scripts/home/**
+      - bootstrap/env/home/**
   release:
     types:
     - created

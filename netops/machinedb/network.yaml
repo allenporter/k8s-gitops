@@ -1,0 +1,6 @@
+---
+dns_zone: mrv.thebends.org
+reverse_zone: 10.10.in-addr.arpa.
+gateawy: 10.10.1.1
+nameservers:
+- 10.10.1.1

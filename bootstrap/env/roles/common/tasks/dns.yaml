@@ -1,0 +1,7 @@
+---
+- name: Configure dns search domain ndots
+  lineinfile:
+    path: /etc/resolv.conf
+    search_string: 'options ndots:2'
+    line: options ndots:2
+    state: present
