@@ -12,10 +12,11 @@
     - name: ubuntu-nvidia
       image: ghcr.io/allenporter/kairos-ubuntu-nvidia:{{ container_version }}
     datasources:
-    - kapi-primary
-    - kapi-secondary
-    # Add workers in the future
-    # - kube
+    - name: kapi-primary
+      primary: true
+    - name: kapi-secondary
+      secondary: true
+    - name: kube
   roles:
   - datasource-iso
   - container-iso

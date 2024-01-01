@@ -1,5 +1,5 @@
 ---
-- name: Create iso build
+- name: "Create iso build {{ name }}"
   ansible.builtin.file:
     path: "{{ item_build_dir }}"
     state: directory
@@ -10,15 +10,24 @@
     path: "{{ item_build_dir }}/meta-data"
     state: touch
 
-- name: Copy cloud-config.yaml
-  copy:
-    src: "cloud-config-{{ source }}.yaml"
+- name: k3s_token
+  shell:
+    cmd: "sops -d {{ k3s_token_file }} | yq -r .k3s_token"
+  register: k3s_token_output
+
+- debug: var=k3s_token
+
+- name: "Template cloud-config.yaml {{ name }}"
+  vars:
+    k3s_token: "{{ k3s_token_output.stdout }}"
+  template:
+    src: "cloud-config.yaml.tmpl"
     dest: "{{ item_build_dir }}/user-data"
 
-- name: Make iso
+- name: "Make iso {{ name }}"
   shell:
     cmd: "mkisofs -output {{ iso_file }} -volid cidata -joliet -rock {{ item_build_dir }}/meta-data {{ item_build_dir }}/user-data"
-  creates: "{{ iso_file }}"
+    creates: "{{ iso_file }}"
 
 - name: "Save iso output file {{ iso_file }}"
   copy:
