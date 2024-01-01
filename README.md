@@ -28,10 +28,10 @@ The primary VMs in the layer of the cluster below k8s include:
 
 ## CLI Toolchain
 
-This repository contains a `Dockerfile` which is the environment used to manage the k8s cluster
+This repository contains a `.devcontainer` which is the environment used to manage the k8s cluster
 from the CLI. The `.devcontainer` has some default mounts including the private terraform
 inventory and `.env` which is a local directory for local secret storage. More detail on
-bootstrapping can be found in `scripts/` and `plays/k8s-gitops-env.yaml` performs the secret setup.
+bootstrapping can be found in `bootstrap/env` and `k8s-gitops-env.yaml` performs the secret setup.
 
 ## Cluster Infrastructure
 

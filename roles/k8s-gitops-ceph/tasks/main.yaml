@@ -1,6 +1,0 @@
----
-- name: Ceph Configuration
-  import_tasks: ceph_config.yaml
-
-- name: Ceph Keyring
-  import_tasks: ceph_keyring.yaml
