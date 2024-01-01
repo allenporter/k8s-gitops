@@ -2,17 +2,21 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: network
+  name: home
   namespace: flux-system
 spec:
   interval: 10m0s
   dependsOn:
+    - name: settings
     - name: infrastructure
-    - name: services
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./network/prod
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg
+  path: ./kubernetes/home/prod
   prune: true
   postBuild:
     substitute: {}
