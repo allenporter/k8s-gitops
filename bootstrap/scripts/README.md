@@ -16,7 +16,7 @@ multi-cluster kubernetes configuration.
 
 ```
 # Set up the flux environment based on GITHUB_REPO, GITHUB_USER, GITHUB_TOKEN
-$ scripts/setup-flux.sh
+$ bootstrap/scripts/setup-flux.sh
 ```
 
 ## Secrets
