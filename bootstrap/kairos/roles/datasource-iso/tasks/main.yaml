@@ -13,8 +13,13 @@
 
 - name: Build image
   vars:
-    source: "{{ item }}"
-    item_build_dir: "{{ tempdirs.path }}/{{ item }}"
-    iso_file: "{{ output_dir }}/kairos-{{ item }}.iso"
+    name: "{{ item.name }}"
+    control_plane: "{{ item.control_plane }}"
+    item_build_dir: "{{ tempdirs.path }}/{{ item.name }}"
+    # Uncomment to preserve output directory
+    #item_build_dir: "{{ output_dir }}/{{ item.name }}"
+    iso_file: "{{ output_dir }}/kairos-{{ item.name }}.iso"
+    primary: "{{ item.primary is defined and item.primary }}"
+    secondary: "{{ item.secondary is defined and item.secondary }}"
   include_tasks: build.yaml
   with_items: "{{ datasources }}"
