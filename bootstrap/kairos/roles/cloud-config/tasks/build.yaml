@@ -1,0 +1,49 @@
+---
+# - name: Create temporary build directory
+#   ansible.builtin.tempfile:
+#     state: directory
+#     suffix: build
+#   register: tempdirs
+#   delegate_to: localhost
+#
+#- set_fact:
+#    output_dir: "{{ tempdirs.path }}"
+
+# Uncoment for local testing
+- set_fact:
+    output_dir: "{{ playbook_dir }}/build"
+
+- name: Create output directory
+  ansible.builtin.file:
+    path: "{{ output_dir }}/{{ inventory_hostname }}"
+    state: directory
+  delegate_to: localhost
+
+- name: k3s_token
+  shell:
+    cmd: "sops -d {{ k3s_token_file }} | yq -r .k3s_token"
+  register: k3s_token_output
+  run_once: true
+  delegate_to: localhost
+
+- name: "Template cloud-config.yaml"
+  vars:
+    k3s_token: "{{ k3s_token_output.stdout }}"
+  template:
+    src: "{{ item.name }}.tmpl"
+    dest: "{{ output_dir }}/{{ inventory_hostname }}/{{ item.name }}"
+  with_items:
+  - name: 90_install.yaml
+  - name: 93_k3s_kapi_primary.yaml
+    requires: kapi_primary
+  - name: 93_k3s_kapi_secondary.yaml
+    requires: kapi_secondary
+  - name: 93_k3s_kube_worker.yaml
+    requires: kube_worker
+  when: item.requires is not defined or cloud_configs|select("equalto", item.requires)
+  delegate_to: localhost
+
+- name: "Validate cloud-config.yaml"
+  shell:
+    cmd: "kairosctl validate {{ output_dir }}/{{ inventory_hostname }}/*"
+  delegate_to: localhost

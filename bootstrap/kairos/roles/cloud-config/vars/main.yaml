@@ -1,0 +1,4 @@
+---
+k3s_token_file: "{{ playbook_dir }}/roles/cloud-config/vars/k3s-token-secret.yaml"
+# renovate: datasource=git-tags extractVersion=^linux-firmware-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+linux_firmware_version: 20231030

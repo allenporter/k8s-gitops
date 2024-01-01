@@ -1,0 +1,34 @@
+---
+kairos:
+  hosts:
+    kapi01:
+      ansible_host: 10.10.100.1
+      cloud_configs:
+      - kapi_primary
+      node_labels:
+      - accelerator=intel
+    kapi02:
+      ansible_host: 10.10.100.2
+      cloud_configs:
+      - kapi_secondary
+      node_labels:
+      - accelerator=intel
+    kapi03:
+      ansible_host: 10.10.100.3
+      cloud_configs:
+      - kapi_secondary
+      node_labels:
+      - accelerator=intel
+    kube01:
+      ansible_host: 10.10.100.4
+      cloud_configs:
+      - kube_worker
+      node_labels:
+      - accelerator=nvidia
+  vars:
+    # Default passwords during installation only
+    ansible_user: kairos
+    ansible_password: kairos
+    primary_server_ip: 10.10.100.1
+    ssh_authorized_keys:
+    - github:allenporter

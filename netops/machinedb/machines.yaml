@@ -75,29 +75,18 @@ machines:
 - host: campus
   ip: 10.10.1.20
   mac: 8c:dc:d4:4f:7b:e0
-- host: market"
-  ip: 10.10.1.80
+# Compte cluster
+- host: pelican
+  ip: 10.10.100.1
+  mac: 1c:69:7a:6d:2a:70
+- host: sonar
+  ip: 10.10.100.2
+  mac: 1c:69:7a:6d:2a:b1
+- host: buffalo
+  ip: 10.10.100.3
+  mac: 1c:69:7a:a6:f1:21
+- host: market
+  ip: 10.10.100.4
   mac: e0:d5:5e:e5:25:be
   hardware_labels:
   - nvidia_gpu
-# Virtualization Hosts
-- host: pelican
-  ip: 10.10.20.5
-  mac: 1c:69:7a:6d:2a:70
-- host: sonar
-  ip: 10.10.20.6
-  mac: 1c:69:7a:6d:2a:b1
-- host: buffalo
-  ip: 10.10.20.8
-  mac: 1c:69:7a:a6:f1:21
-
-# kairos demo servers
-- host: kairos-demo-1
-  mac: bc:24:11:45:fa:df
-  ip: 10.10.21.101
-- host: kairos-demo-2
-  mac: bc:24:11:88:02:7a
-  ip: 10.10.21.102
-- host: kairos-demo-3
-  mac: bc:24:11:a3:ca:2b
-  ip: 10.10.21.103

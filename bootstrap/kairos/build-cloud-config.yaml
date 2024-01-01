@@ -1,12 +1,7 @@
 ---
-- hosts: localhost
+- hosts: kairos
+  gather_facts: false
   vars:
-    output_dir: "{{ playbook_dir }}/build"
-    datasources:
-    - name: kapi-primary
-      primary: true
-    - name: kapi-secondary
-      secondary: true
-    - name: kube
+    output_dir: "{{ playbook_dir }}/build/{{ ansible_hostname }}"
   roles:
-  - datasource-iso
+  - cloud-config
