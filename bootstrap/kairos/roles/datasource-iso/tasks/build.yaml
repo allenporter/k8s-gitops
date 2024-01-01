@@ -24,6 +24,10 @@
     src: "cloud-config.yaml.tmpl"
     dest: "{{ item_build_dir }}/user-data"
 
+- name: "Validate cloud-config.yaml {{ name }}"
+  shell:
+    cmd: "kairosctl validate {{ item_build_dir }}/user-data"
+
 - name: "Make iso {{ name }}"
   shell:
     cmd: "mkisofs -output {{ iso_file }} -volid cidata -joliet -rock {{ item_build_dir }}/meta-data {{ item_build_dir }}/user-data"
