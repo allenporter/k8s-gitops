@@ -1,0 +1,13 @@
+#cloud-config
+---
+k3s:
+  enabled: true
+  args:
+  - --cluster-init
+  - --disable traefik,servicelb
+  - --disable-network-policy
+  {% for item in node_labels -%}
+  - --node-label {{ item }}
+  {% endfor -%}
+  env:
+    K3S_TOKEN: {{ k3s_token }}
