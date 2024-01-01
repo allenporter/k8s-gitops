@@ -1,10 +1,10 @@
 ---
 clusters:
-- path: clusters/prod
+- path: kubernetes/clusters/prod
   kustomizations:
   - name: certmanager
     namespace: flux-system
-    path: certmanager/prod
+    path: kubernetes/certmanager/prod
     helm_repos: []
     helm_releases:
     - name: cert-manager
@@ -16,19 +16,19 @@ clusters:
     cluster_policies: []
   - name: crds
     namespace: flux-system
-    path: crds
+    path: kubernetes/crds
     helm_repos: []
     helm_releases: []
     cluster_policies: []
   - name: flux-system
     namespace: flux-system
-    path: clusters/prod
+    path: kubernetes/clusters/prod
     helm_repos: []
     helm_releases: []
     cluster_policies: []
   - name: home
     namespace: flux-system
-    path: home/prod
+    path: kubernetes/home/prod
     helm_repos: []
     helm_releases:
     - name: teslamate
@@ -76,7 +76,7 @@ clusters:
     cluster_policies: []
   - name: infrastructure
     namespace: flux-system
-    path: infrastructure/prod
+    path: kubernetes/infrastructure/prod
     helm_repos:
     - name: podinfo
       namespace: flux-system
@@ -226,7 +226,7 @@ clusters:
     cluster_policies: []
   - name: monitoring
     namespace: flux-system
-    path: monitoring/prod
+    path: kubernetes/monitoring/prod
     helm_repos: []
     helm_releases:
     - name: podinfo-nginx
@@ -256,7 +256,7 @@ clusters:
     cluster_policies: []
   - name: network
     namespace: flux-system
-    path: network/prod
+    path: kubernetes/network/prod
     helm_repos: []
     helm_releases:
     - name: unifi
@@ -268,7 +268,7 @@ clusters:
     cluster_policies: []
   - name: services
     namespace: flux-system
-    path: services/prod
+    path: kubernetes/services/prod
     helm_repos: []
     helm_releases:
     - name: haproxy
@@ -310,7 +310,7 @@ clusters:
     cluster_policies: []
   - name: settings
     namespace: flux-system
-    path: settings/prod
+    path: kubernetes/settings/prod
     helm_repos: []
     helm_releases: []
     cluster_policies: []
