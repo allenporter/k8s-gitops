@@ -1,4 +1,4 @@
 # bootstrap
 
-This contains the necessary tooling for building the lower level infrastructure
-of the cluster.
+This contains the necessary development environment and the infrastructure
+for initial build of the cluster.
