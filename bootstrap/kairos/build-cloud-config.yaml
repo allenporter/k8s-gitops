@@ -2,6 +2,6 @@
 - hosts: kairos
   gather_facts: false
   vars:
-    output_dir: "{{ playbook_dir }}/build/{{ ansible_hostname }}"
+    output_dir: "{{ playbook_dir }}/build/"
   roles:
   - cloud-config

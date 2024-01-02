@@ -5,6 +5,7 @@ install:
   # Operator needs to ensure propper boot order
   reboot: false
   auto: true
+  poweroff: true
 
 {% raw -%}
 hostname: metal-{{ trunc 4 .MachineID }}
