@@ -1,11 +1,11 @@
-#cloud-config
----
-k3s-agent:
+k3s:
   enabled: true
   args:
+  - --cluster-init
+  - --disable traefik,servicelb
+  - --disable-network-policy
   {% for item in node_labels -%}
   - --node-label {{ item }}
   {% endfor -%}
   env:
     K3S_TOKEN: {{ k3s_token }}
-    K3S_URL: https://{{ primary_server_ip }}:6443
