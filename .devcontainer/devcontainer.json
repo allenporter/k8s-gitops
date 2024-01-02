@@ -9,6 +9,7 @@
 	"mounts": [
 		"source=${localEnv:HOME}/Development/homelab,target=/workspaces/homelab,type=bind,consistency=cached",
 		"source=${localWorkspaceFolder}/.env/,target=/home/admin/.env/,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/Documents,target=/workspaces/documents,type=bind,consistency=cached",
 	],
 	"postCreateCommand": "sudo chown admin /workspaces",
 	"remoteUser": "admin",
