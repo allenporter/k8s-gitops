@@ -32,7 +32,7 @@ Bootstrapping the cluster requires the following steps:
 The boostrap uses a "manual install" mode to keep the process of building and
 distributing configuration files as simple as possible. The process is non-interactive.
 
-1. Update `bootstrap/kairos/inventory/hosts.yaml` with the right hosts and any necessary future hardware labels.
+1. Update `bootstrap/kairos/inventory/hosts.yaml` with ip and hardware labels (for future use).
 
 1. Boot the node using the image, starting with primary control plane node.
 
@@ -41,7 +41,7 @@ distributing configuration files as simple as possible. The process is non-inter
     $ export ANSIBLE_CONFIG=bootstrap/kairos/ansible.cfg
     $ ansible-playbook bootstrap/kairos/build-cloud-config.yaml -l kapi01
     ```
-1. Initiate a Manual Install (not currently automated with ansible)
+1. Start a [Manual Installation](https://kairos.io/docs/installation/manual/), which is a non-interactive setup:
     ```
     # Login with a password of `kairos`. This takes around 3-4 minutes.
     $ ssh kairos@10.10.100.1 'sudo kairos-agent manual-install ./kapi01-cloud-config.yaml'
@@ -62,7 +62,7 @@ $ ANSIBLE_CONFIG=bootstrap/kairos/ansible.cfg ansible-playbook bootstrap/kairos/
 
 This sets up the kubeconfig file where the devcontainer enviroment is ready to access it, e.g.
 ```
-$ export KUBECONFIG=~/.env/kubeconfig.yaml  # For example; already handled by devcontainer
+$ export KUBECONFIG=~/.env/kubeconfig.yaml  # Already handled by devcontainer
 $ kubectl get pods -A
 NAMESPACE     NAME                                       READY   STATUS    RESTARTS     AGE
 kube-system   calico-kube-controllers-5fc7d6cf67-qbgh5   1/1     Running   1 (9h ago)   9h
