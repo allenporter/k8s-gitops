@@ -1,34 +1,32 @@
 ---
 kairos:
   hosts:
+    # Cluster management plane hosts
     kapi01:
       ansible_host: 10.10.100.1
-      cloud_configs:
-      - kapi_primary
+      k3s_api_server: true
+      primary: true
       node_labels:
       - accelerator=intel
     kapi02:
       ansible_host: 10.10.100.2
-      cloud_configs:
-      - kapi_secondary
+      k3s_api_server: true
       node_labels:
       - accelerator=intel
     kapi03:
       ansible_host: 10.10.100.3
-      cloud_configs:
-      - kapi_secondary
+      k3s_api_server: true
       node_labels:
       - accelerator=intel
     kube01:
       ansible_host: 10.10.100.4
-      cloud_configs:
-      - kube_worker
+      k3s_worker: true
       node_labels:
       - accelerator=nvidia
   vars:
-    # Default passwords during installation only
-    ansible_user: kairos
-    ansible_password: kairos
+    # Management plane
     primary_server_ip: 10.10.100.1
     ssh_authorized_keys:
     - github:allenporter
+    # Control plane
+    kube_vip_ip: 10.10.101.1
