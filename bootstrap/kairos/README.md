@@ -35,27 +35,22 @@ $ ANSIBLE_CONFIG=bootstrap/kairos/ansible.cfg ansible-playbook bootstrap/kairos/
 ...
 # Perform manual install. Login with a password of `kairos`. This takes ~4 minutes at most.
 $ ssh kairos@10.10.100.1 'sudo kairos-agent manual-install ./kapi01-cloud-config.yaml'
+# Pull out the usb stick and boot the new OS
 $ ssh kairos@10.10.100.1 'sudo reboot -f'
 ```
+Repeat for other nodes.
+
 Note: The secondary nodes have to wait for the primary to be setup before starting install.
+
+## Control Plane
+
+Set up access to the control plane, importing the cluster configuration to use
+kube-vip to access the cluster.
+```
+$ ANSIBLE_CONFIG=bootstrap/kairos/ansible.cfg ansible-playbook bootstrap/kairos/kubeconfig-env.yaml  -l kapi01
+```
 
 ## Wipe a node
 
 See [Reset a node](https://kairos.io/docs/reference/reset/#remotely-via-command-line) for
 instructions on remotely resetting from the command line back to the original image.
-
-## Plan
-
-- [x] create a build directory for each host w/ ansible
-- [ ] test each image in docker
-- [ ] Prepare /dev/nvme0n1 for ceph
-
-## Verify manifests & bundles
-
-/var/lib/rancher/k3s/server/manifests/
-
-## Boot record
-
-- node 1) needs reinstall
-- node 2) needs reinstall
-- node 3) needs reinstall
