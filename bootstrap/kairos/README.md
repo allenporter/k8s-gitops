@@ -3,17 +3,16 @@
 Automation for bootstraping a 3+ node [k3s](http://k3s.io) cluster using [Kairos](https://kairos.io)
 and [Ansible](https://www.ansible.com/).
 
-This cluster has the following properties:
-- Immutable cluster worker images that can be [Upgraded from Kubernetes](https://kairos.io/docs/upgrade/kubernetes/)
+The cluster foundation has the following attributes:
 - [High Availability](https://kairos.io/docs/examples/ha/) k3s cluster with 3+ nodes
-- Automation for initial secure join process using Ansible to distribute [SOPS](https://github.com/getsops/sops) and [Age](https://github.com/FiloSottile/age)
+- Immutable node images that are [Upgradable from Kubernetes](https://kairos.io/docs/upgrade/kubernetes/)
+- Automated initial secure join process using Ansible to distribute [SOPS](https://github.com/getsops/sops) and [Age](https://github.com/FiloSottile/age)
 - High Availability control plane entrypoint using [kube-vip](https://kube-vip.io/)
-- Simple cluster network via [Calico](https://docs.tigera.io/calico/latest/about/)
+- Simple to deploy networking using [Calico](https://docs.tigera.io/calico/latest/about/)
 
 Once bootstraped, the cluster is managed by [Flux](https://fluxcd.io/) including handling
-any updates of the above components. As a result, this cluster uses the bare minimum
-configuration and does not try to have unified configuration management with
-other parts of the cluster.
+any updates of the above components. As a result, the bootstrap configuration is
+minimal and not directly integrated with other parts of the cluster inventory.
 
 References:
 - [Trying out Kairos](https://tyzbit.blog/trying-out-kairos) as a starting point to learn about Kairos
