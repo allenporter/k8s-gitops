@@ -3,7 +3,7 @@ if [ "X${GOOGLE_APPLICATION_CREDENTIALS}" != "X" ]; then
     export GCLOUD_PROJECT_ID=$(jq --raw-output '.project_id' ${GOOGLE_APPLICATION_CREDENTIALS})
 fi
 
-KUBECONFIG="${HOME}/.env/kubeconfig.yaml"
+export KUBECONFIG="${HOME}/.env/kubeconfig.yaml"
 
 # No default ansible inventory at the moment
 # ANSIBLE_INVENTORY="${ENV_INVENTORY_ROOT}/prod/inventory.yaml"
