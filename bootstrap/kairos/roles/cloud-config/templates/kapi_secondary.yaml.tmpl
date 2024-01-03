@@ -1,9 +1,10 @@
 k3s:
   enabled: true
   args:
-  - --cluster-init
+  - --server https://{{ primary_server_ip }}:6443
   - --disable traefik,servicelb
   - --disable-network-policy
+  - --flannel-backend none
   {% for item in node_labels -%}
   - --node-label {{ item }}
   {% endfor -%}

@@ -1,0 +1,9 @@
+write_files:
+{% for manifest in manifests %}
+- path: /var/lib/rancher/k3s/server/manifests/{{ manifest.filename }}
+  permissions: "0644"
+  content: |-
+    {% for line in manifest.content.split('\n') %}
+    {{ line }}
+    {% endfor %}
+{% endfor %}

@@ -1,10 +1,12 @@
 ---
 kairos:
   hosts:
+    # Cluster management plane hosts
     kapi01:
       ansible_host: 10.10.100.1
       cloud_configs:
       - kapi_primary
+      - manifests
       node_labels:
       - accelerator=intel
     kapi02:
@@ -26,9 +28,15 @@ kairos:
       node_labels:
       - accelerator=nvidia
   vars:
-    # Default passwords during installation only
-    ansible_user: kairos
-    ansible_password: kairos
     primary_server_ip: 10.10.100.1
+
+    # Cluster control plane
+    kube_vip_ip: 10.10.101.1
+
+    # Cluster services
+    metallb_ip_range: 10.10.101.100-10.10.101.254
     ssh_authorized_keys:
     - github:allenporter
+    flux_github_owner: allenporter
+    flux_github_repository: k8s-gitops
+    flux_github_path: kubernetes/clusters/prod/

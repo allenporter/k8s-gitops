@@ -26,6 +26,21 @@
   run_once: true
   delegate_to: localhost
 
+- name: "Render manifest templates"
+  vars:
+    manifest_contents: []
+  set_fact:
+    manifests: >
+      {{
+        manifest_contents +
+        [{
+            "content": lookup('template', 'manifests/{{ item }}.tmpl'),
+            "filename": item,
+        }]
+      }}
+  with_items:
+  - kube_vip.yaml
+
 - name: "Template cloud-config.yaml"
   vars:
     k3s_token: "{{ k3s_token_output.stdout }}"
@@ -33,13 +48,15 @@
     src: "{{ item.name }}.tmpl"
     dest: "{{ temp_dir }}/{{ item.name }}"
   with_items:
-  - name: install.yaml
-  - name: k3s_kapi_primary.yaml
+  - name: 00_install.yaml
+  - name: kapi_primary.yaml
     requires: kapi_primary
-  - name: k3s_kapi_secondary.yaml
+  - name: kapi_secondary.yaml
     requires: kapi_secondary
-  - name: k3s_kube_worker.yaml
+  - name: kube_worker.yaml
     requires: kube_worker
+  - name: manifests.yaml
+    requires: manifests
   when: item.requires is not defined or cloud_configs|select("equalto", item.requires)
   delegate_to: localhost
 

@@ -1,4 +1,14 @@
 ---
+# For cloud_config.yaml templates to boostrap the management plane
 k3s_token_file: "{{ playbook_dir }}/roles/cloud-config/vars/k3s-token-secret.yaml"
-# renovate: datasource=git-tags extractVersion=^linux-firmware-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
-linux_firmware_version: 20231030
+kubeconfig: /etc/rancher/k3s/k3s.yaml
+# Kairos container image default username and password, pre-install
+ansible_user: kairos
+ansible_password: kairos
+
+# renovate: datasource=github-releases depName=kube-vip/kube-vip
+kube_vip_version: v0.6.4
+# renovate: datasource=github-releases depName=metallb/metallb
+metallb_version: 0.13.12
+# renovate: datasource=github-releases depName=projectcalico/calico
+calico_version: 3.27.0
