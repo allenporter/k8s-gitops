@@ -56,6 +56,6 @@ instructions on remotely resetting from the command line back to the original im
 
 ## Boot record
 
-- node 1) old install
-- node 2) old install
-- node 3) old install
+- node 1) needs reinstall
+- node 2) needs reinstall
+- node 3) needs reinstall

@@ -4,27 +4,23 @@ kairos:
     # Cluster management plane hosts
     kapi01:
       ansible_host: 10.10.100.1
-      cloud_configs:
-      - kapi_primary
-      - manifests
+      k3s_api_server: true
+      primary: true
       node_labels:
       - accelerator=intel
     kapi02:
       ansible_host: 10.10.100.2
-      cloud_configs:
-      - kapi_secondary
+      k3s_api_server: true
       node_labels:
       - accelerator=intel
     kapi03:
       ansible_host: 10.10.100.3
-      cloud_configs:
-      - kapi_secondary
+      k3s_api_server: true
       node_labels:
       - accelerator=intel
     kube01:
       ansible_host: 10.10.100.4
-      cloud_configs:
-      - kube_worker
+      k3s_worker: true
       node_labels:
       - accelerator=nvidia
   vars:

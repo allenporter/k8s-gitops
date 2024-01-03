@@ -39,30 +39,14 @@
         }]
       }}
   with_items:
-  - kube_vip.yaml
+  - kube-vip.yaml
 
 - name: "Template cloud-config.yaml"
   vars:
     k3s_token: "{{ k3s_token_output.stdout }}"
   template:
-    src: "{{ item.name }}.tmpl"
-    dest: "{{ temp_dir }}/{{ item.name }}"
-  with_items:
-  - name: 00_install.yaml
-  - name: kapi_primary.yaml
-    requires: kapi_primary
-  - name: kapi_secondary.yaml
-    requires: kapi_secondary
-  - name: kube_worker.yaml
-    requires: kube_worker
-  - name: manifests.yaml
-    requires: manifests
-  when: item.requires is not defined or cloud_configs|select("equalto", item.requires)
-  delegate_to: localhost
-
-- name: "Build combined cloud-config.yaml"
-  shell:
-    cmd: "cat {{ temp_dir }}/*.yaml > {{ build_file }}"
+    src: "cloud_config.yaml.tmpl"
+    dest: "{{ build_file }}"
   delegate_to: localhost
 
 - name: "Validate cloud-config.yaml"
@@ -70,7 +54,7 @@
     cmd: "kairosctl validate {{ build_file }}"
   delegate_to: localhost
 
-- name: "Copy cloud-config to kairos machine"
-  ansible.builtin.copy:
-    src: "{{ build_file }}"
-    dest: "/home/{{ ansible_user }}/"
+# - name: "Copy cloud-config to kairos machine"
+#   ansible.builtin.copy:
+#     src: "{{ build_file }}"
+#     dest: "/home/{{ ansible_user }}/"

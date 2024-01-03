@@ -1,0 +1,78 @@
+#cloud-config
+---
+install:
+  device: "/dev/sda"
+  # Operator needs to ensure propper boot order
+  reboot: false
+  auto: true
+  poweroff: true
+
+{% raw -%}
+hostname: metal-{{ trunc 4 .MachineID }}
+{% endraw %}
+users:
+- name: admin
+  groups:
+  - admin
+  ssh_authorized_keys: {{ ssh_authorized_keys }}
+
+{% if k3s_api_server | default(false) %}
+k3s:
+  enabled: true
+  args:
+  {% if primary is defined and primary -%}
+  - --cluster-init
+  {% else -%}
+  - --server https://{{ primary_server_ip }}:6443
+  {% endif -%}
+  - --disable traefik,servicelb
+  - --disable-network-policy
+  - --flannel-backend none
+  - --tls-san {{ kube_vip_ip }}
+  {% for item in node_labels -%}
+  - --node-label {{ item }}
+  {% endfor -%}
+  env:
+    K3S_TOKEN: {{ k3s_token }}
+{% endif -%}
+  
+{% if k3s_worker | default(false) %}
+k3s-agent:
+  enabled: true
+  args:
+  {% for item in node_labels -%}
+  - --node-label {{ item }}
+  {% endfor -%}
+  env:
+    K3S_TOKEN: {{ k3s_token }}
+    K3S_URL: https://{{ primary_server_ip }}:6443
+{% endif %}
+
+{% if primary | default(false) %}
+write_files:
+{% for manifest in manifests %}
+- path: /var/lib/rancher/k3s/server/manifests/{{ manifest.filename }}
+  permissions: "0600"
+  content: |-
+    {% for line in manifest.content.split('\n') %}
+    {{ line }}
+    {% endfor %}
+{%- endfor %}
+{%- endif %}
+
+stages:
+  # https://github.com/derailed/k9s/issues/1399
+  initramfs:
+  - name: Increase number of open files
+    sysctl:
+      fs.inotify.max_user_instances: "8192"
+      fs.inotify.max_user_watches: "524288"
+
+  {% if primary | default(false) -%}
+  after-install-chroot:
+  - name: 
+    downloads:
+    # Calico community bundle does not work on ubunutu
+    - url: {{ calico_url }}
+      path: /var/lib/rancher/k3s/server/manifests/calico.yaml
+  {% endif -%}
