@@ -28,12 +28,9 @@ kairos:
       node_labels:
       - accelerator=nvidia
   vars:
+    # Management plane
     primary_server_ip: 10.10.100.1
-
-    # Cluster control plane
-    kube_vip_ip: 10.10.101.1
-
-    # Cluster services
-    metallb_ip_range: 10.10.101.100-10.10.101.254
     ssh_authorized_keys:
     - github:allenporter
+    # Control plane
+    kube_vip_ip: 10.10.101.1

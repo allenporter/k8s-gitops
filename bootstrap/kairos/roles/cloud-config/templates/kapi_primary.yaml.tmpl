@@ -10,18 +10,3 @@ k3s:
   {% endfor -%}
   env:
     K3S_TOKEN: {{ k3s_token }}
-
-bundles:
-- targets:
-  - run://quay.io/kairos/community-bundles:calico_latest
-  - run://quay.io/kairos/community-bundles:metallb_latest
-
-calico:
-  values:
-    cni:
-      type: Calico
-  version: {{ calico_version }}
-
-metallb:
-  version: {{ metallb_version }}
-  address_pool: {{ metallb_ip_range }}

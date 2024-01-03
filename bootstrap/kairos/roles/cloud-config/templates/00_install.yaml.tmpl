@@ -23,9 +23,6 @@ initramfs:
     fs.inotify.max_user_instances: "8192"
     fs.inotify.max_user_watches: "524288"
 
-# Note: Manifests are written in /var/lib/rancher/k3s/server/manifests/
-fail_on_bundles_errors: true
-
 boot:
 - name: Set environment variables
   environment:
