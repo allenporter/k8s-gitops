@@ -10,5 +10,4 @@ ansible_password: kairos
 kube_vip_version: v0.6.4
 # renovate: datasource=github-releases depName=metallb/metallb
 metallb_version: 0.13.12
-# renovate: datasource=github-releases depName=projectcalico/calico
-calico_version: 3.27.0
+calico_url: https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/calico.yaml

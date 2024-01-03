@@ -37,4 +37,3 @@ kairos:
     metallb_ip_range: 10.10.101.100-10.10.101.254
     ssh_authorized_keys:
     - github:allenporter
- 

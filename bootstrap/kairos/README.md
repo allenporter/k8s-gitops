@@ -34,11 +34,9 @@ Build and push `cloud-config.yaml` to a node then initiate a manual install:
 $ ANSIBLE_CONFIG=bootstrap/kairos/ansible.cfg ansible-playbook bootstrap/kairos/build-cloud-config.yaml -l kapi01
 ...
 # Perform manual install. Login with a password of `kairos`. This takes ~4 minutes at most.
-$ ssh kairos@10.10.100.1
-...
-10.10.1.100$ sudo kairos-agent manual-install ./kapi01-cloud-config.yaml
+$ ssh kairos@10.10.100.1 'sudo kairos-agent manual-install ./kapi01-cloud-config.yaml'
+$ ssh kairos@10.10.100.1 'sudo reboot -f'
 ```
-
 Note: The secondary nodes have to wait for the primary to be setup before starting install.
 
 ## Wipe a node
@@ -51,3 +49,13 @@ instructions on remotely resetting from the command line back to the original im
 - [x] create a build directory for each host w/ ansible
 - [ ] test each image in docker
 - [ ] Prepare /dev/nvme0n1 for ceph
+
+## Verify manifests & bundles
+
+/var/lib/rancher/k3s/server/manifests/
+
+## Boot record
+
+- node 1) old install
+- node 2) old install
+- node 3) old install

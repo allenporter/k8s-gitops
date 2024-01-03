@@ -1,3 +1,10 @@
+after-install-chroot:
+- name: 
+  downloads:
+  # Calico community bundle does not work on ubunutu
+  - url: {{ calico_url }}
+    path: /var/lib/rancher/k3s/server/manifests/calico.yaml
+
 write_files:
 {% for manifest in manifests %}
 - path: /var/lib/rancher/k3s/server/manifests/{{ manifest.filename }}
