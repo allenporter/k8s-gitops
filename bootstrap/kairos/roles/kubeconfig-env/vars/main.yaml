@@ -1,0 +1,3 @@
+---
+env_dir: /home/admin/.env
+kubeconfig: /etc/rancher/k3s/k3s.yaml

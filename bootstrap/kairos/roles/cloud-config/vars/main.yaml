@@ -1,7 +1,6 @@
 ---
 # For cloud_config.yaml templates to boostrap the management plane
 k3s_token_file: "{{ playbook_dir }}/roles/cloud-config/vars/k3s-token-secret.yaml"
-kubeconfig: /etc/rancher/k3s/k3s.yaml
 # Kairos container image default username and password, pre-install
 ansible_user: kairos
 ansible_password: kairos

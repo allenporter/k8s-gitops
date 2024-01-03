@@ -35,6 +35,7 @@ $ ANSIBLE_CONFIG=bootstrap/kairos/ansible.cfg ansible-playbook bootstrap/kairos/
 ...
 # Perform manual install. Login with a password of `kairos`. This takes ~4 minutes at most.
 $ ssh kairos@10.10.100.1 'sudo kairos-agent manual-install ./kapi01-cloud-config.yaml'
+# Pull out the usb stick and boot the new OS
 $ ssh kairos@10.10.100.1 'sudo reboot -f'
 ```
 Note: The secondary nodes have to wait for the primary to be setup before starting install.
@@ -54,8 +55,4 @@ instructions on remotely resetting from the command line back to the original im
 
 /var/lib/rancher/k3s/server/manifests/
 
-## Boot record
-
-- node 1) needs reinstall
-- node 2) needs reinstall
-- node 3) needs reinstall
+## Access
