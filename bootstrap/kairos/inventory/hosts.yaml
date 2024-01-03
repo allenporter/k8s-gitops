@@ -37,6 +37,4 @@ kairos:
     metallb_ip_range: 10.10.101.100-10.10.101.254
     ssh_authorized_keys:
     - github:allenporter
-    flux_github_owner: allenporter
-    flux_github_repository: k8s-gitops
-    flux_github_path: kubernetes/clusters/prod/
+ 

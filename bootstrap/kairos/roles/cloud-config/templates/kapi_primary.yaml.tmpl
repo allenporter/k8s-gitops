@@ -15,21 +15,13 @@ bundles:
 - targets:
   - run://quay.io/kairos/community-bundles:calico_latest
   - run://quay.io/kairos/community-bundles:metallb_latest
-  - run://quay.io/kairos/community-bundles:flux_latest
 
 calico:
+  values:
+    cni:
+      type: Calico
   version: {{ calico_version }}
 
 metallb:
   version: {{ metallb_version }}
   address_pool: {{ metallb_ip_range }}
-
-flux:
-  github:
-    owner: {{ flux_github_owner }}
-    repository: {{ flux_github_repository }}
-    path: {{ flux_github_path }}
-    network-policy: "false"
-    # bootstrap for a public repository on a personal account
-    personal: true
-    private: false
