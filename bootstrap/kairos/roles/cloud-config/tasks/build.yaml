@@ -54,7 +54,7 @@
     cmd: "kairosctl validate {{ build_file }}"
   delegate_to: localhost
 
-# - name: "Copy cloud-config to kairos machine"
-#   ansible.builtin.copy:
-#     src: "{{ build_file }}"
-#     dest: "/home/{{ ansible_user }}/"
+- name: "Copy cloud-config to kairos machine"
+  ansible.builtin.copy:
+    src: "{{ build_file }}"
+    dest: "/home/{{ ansible_user }}/"
