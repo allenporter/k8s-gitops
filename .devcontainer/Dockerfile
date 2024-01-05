@@ -98,6 +98,16 @@ RUN cd /usr/local/bin/ && \
     chmod +x kairosctl
 RUN kairosctl -v
 
+# renovate: datasource=github-releases depName=go-task/task
+ARG TASK_VERSION=v3.33.1
+RUN mkdir /usr/local/go-task && \
+    cd /usr/local/go-task/ && \
+    curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_arm64.tar.gz && \
+    tar xf task_linux_arm64.tar.gz && \
+    cp task /usr/local/bin/task && \
+    chmod +x /usr/local/bin/task
+RUN task --version
+
 # Cleanup from previous steps
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -114,6 +124,9 @@ RUN addgroup --system ${GROUPNAME} && \
     apt-get install -y sudo && \
     echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} && \
     chmod 0440 /etc/sudoers.d/${USERNAME}
+
+# Prepare devcontainer workspaces
+RUN mkdir /workspaces && chown admin /workspaces
 
 USER admin
 
