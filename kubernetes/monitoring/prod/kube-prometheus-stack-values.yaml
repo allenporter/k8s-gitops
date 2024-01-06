@@ -11,8 +11,3 @@ spec:
       chart: kube-prometheus-stack
       version: 55.6.0
   values:
-    kubeEtcd:
-      endpoints:
-        - ${ETCD1_IP}
-        - ${ETCD2_IP}
-        - ${ETCD3_IP}
