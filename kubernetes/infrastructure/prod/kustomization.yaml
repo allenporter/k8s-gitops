@@ -11,6 +11,5 @@ resources:
 - ../base/redis
 - ../base/rook-ceph
 - nvidia-device-plugin
-- calico
 - ../base/volsync
 - ../base/cnpg
