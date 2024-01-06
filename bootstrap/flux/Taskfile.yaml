@@ -18,4 +18,8 @@ tasks:
 
   install-flux:
     cmds:
-      - kustomize build bootstrap/flux/manifests/ | kubectl apply -f -
+      - kustomize build manifests/ | kubectl apply -f -
+
+  install-flux-system-ks:
+    cmds:
+      - kubectl apply -f ../../kubernetes/clusters/prod/flux-system/gotk-sync.yaml

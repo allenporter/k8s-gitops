@@ -12,19 +12,23 @@ Before starting this step have:
 1. Create the namespace
 
     ```
-    $ task create-namespace
+    $ task --dir bootstrap/flux/ create-namespace
     ```
 
 1. Initialize secrets for SOPS. The current setup uses a key with age .
     ```
-    $ task bootstrap-sops-key
+    $ task --dir bootstrap/flux/ bootstrap-sops-key
     ```
 
-1. Install flux. The following is equivalent to `flux install` plus creating the `flux-system`
-Kustomization that points at `kubernetes/clusters/prod`:
+1. Install flux. The following is equivalent to `flux install`.
     ```
-    $ task install-flux
+    $ task --dir bootstrap/flux/ install-flux
     ```
+1. Bootstrap the flux-system kustomization which creates the Kustomization that points at `kubernetes/clusters/prod`:
+    ```
+    $ task --dir bootstrap/flux/ install-flux-system-ks
+    ```
+
 
 ## References
 
