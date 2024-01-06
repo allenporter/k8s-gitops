@@ -43,7 +43,6 @@ align=right>
 
   - [calico](https://docs.projectcalico.org/about/about-calico) for cluster internal networking
   - [rook-ceph](https://rook.io/): Provides persistent volumes, allowing any application to use the external ceph storage cluster.
-  - [benji](https://benji-backup.me/): Provides snapshots and export of backup to external nfs. Requires `VolumeSnapshot` and kubernetes [Snapshot Controller](https://kubernetes-csi.github.io/docs/snapshot-controller.html) for `rook-ceph` snapshots.
   - [metallb](https://metallb.universe.tf/): A load balancer for bare metal kubernetes.
   - [ingress-nginx](https://github.com/kubernetes/ingress-nginx): Used for proxying services through kubernetes ingress, exposing any service through the LoadBalancer with TLS.
   - [k8s_gateay](https://github.com/ori-edge/k8s_gateway): DNS server for all relevant ingress services in the cluster. This relies on an existing local dns server outside of the cluster to perform forwwarding.

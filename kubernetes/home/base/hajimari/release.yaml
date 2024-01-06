@@ -31,7 +31,6 @@ spec:
         matchNames:
           - kubernetes-dashboard
           - monitoring
-          - teslamate
           - unifi
           - jellyfin
           - llama

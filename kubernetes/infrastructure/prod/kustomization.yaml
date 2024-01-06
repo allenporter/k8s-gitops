@@ -4,17 +4,13 @@ kind: Kustomization
 patches:
 - path: redis-values.yaml
 - path: rook-ceph-values.yaml
-- path: backup-pvc.yaml
-- path: benji-values.yaml
 - path: volsync-values.yaml
 - path: cnpg-values.yaml
 resources:
 - ../base/sources
 - ../base/redis
 - ../base/rook-ceph
-- ../base/benji
 - nvidia-device-plugin
-- benji-secrets.yaml
 - calico
 - ../base/volsync
 - ../base/cnpg
