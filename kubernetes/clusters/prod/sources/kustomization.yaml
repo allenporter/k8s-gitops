@@ -15,8 +15,6 @@ resources:
   - itzg.yaml
   - kasten.yaml
   - ingress-nginix.yaml
-  - benji.yaml
-  - benji-k8s.yaml
   - hajimari.yaml
   - istio.yaml
   - nextcloud.yaml
