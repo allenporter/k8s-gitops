@@ -7,17 +7,11 @@ set -e
 
 LOCALIZE_DIR="hack/localize"
 
-rm -fr crds
-kustomize localize ${LOCALIZE_DIR}/crds crds
+rm -fr kubernetes/crds
+kustomize localize ${LOCALIZE_DIR}/crds kubernetes/crds
 
-rm -fr infrastructure/prod/calico
-kustomize localize ${LOCALIZE_DIR}/calico/prod infrastructure/prod/calico
+rm -fr kubernetes/cluster_network/prod/calico
+kustomize localize ${LOCALIZE_DIR}/calico/prod kubernetes/cluster_network/prod/calico
 
-rm -fr monitoring/base/flux-monitoring/dashboards
-kustomize localize ${LOCALIZE_DIR}/flux-monitoring monitoring/base/flux-monitoring/dashboards
-
-rm -fr infrastructure/base/rook-ceph/snapshot-controller
-kustomize localize ${LOCALIZE_DIR}/snapshot-controller infrastructure/base/rook-ceph/snapshot-controller
-
-rm -fr home/base/teslamate/dashboards
-kustomize localize ${LOCALIZE_DIR}/teslamate-monitoring home/base/teslamate/dashboards
+rm -fr kubernetes/monitoring/base/flux-monitoring/dashboards
+kustomize localize ${LOCALIZE_DIR}/flux-monitoring kubernetes/monitoring/base/flux-monitoring/dashboards

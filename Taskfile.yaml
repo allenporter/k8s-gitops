@@ -1,0 +1,7 @@
+---
+version: '3'
+
+tasks:
+  localize:
+    cmds:
+      - hack/localize/localize.sh
