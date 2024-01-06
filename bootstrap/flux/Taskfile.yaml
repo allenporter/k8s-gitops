@@ -18,4 +18,4 @@ tasks:
 
   install-flux:
     cmds:
-      - kustomize build ../../kubernetes/clusters/prod/flux-system/ | kubectl apply -f -
+      - kustomize build bootstrap/flux/manifests/ | kubectl apply -f -
