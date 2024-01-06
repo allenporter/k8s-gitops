@@ -1,0 +1,16 @@
+# The cluster network has no other dependencies since it is really initiated
+# at bootstrap time. This kustomization only provides updates on the existing
+# installed version.
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: network
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./kubernetes/cluster_network/prod
+  prune: true
