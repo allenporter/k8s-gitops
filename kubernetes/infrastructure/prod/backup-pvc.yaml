@@ -1,9 +1,0 @@
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: k8s-nfs-backup-pv
-  namespace: benji
-spec:
-  nfs:
-    path: /volume1/k8s-backup
