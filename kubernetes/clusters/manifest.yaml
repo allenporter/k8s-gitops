@@ -118,3 +118,9 @@ clusters:
       repo_type: default
     helm_releases: []
     cluster_policies: []
+  - name: network
+    namespace: flux-system
+    path: kubernetes/cluster_network/prod
+    helm_repos: []
+    helm_releases: []
+    cluster_policies: []
