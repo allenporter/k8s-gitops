@@ -2,6 +2,12 @@
 clusters:
 - path: kubernetes/clusters/prod
   kustomizations:
+  - name: crds
+    namespace: flux-system
+    path: kubernetes/crds
+    helm_repos: []
+    helm_releases: []
+    cluster_policies: []
   - name: flux-system
     namespace: flux-system
     path: kubernetes/clusters/prod
@@ -53,10 +59,6 @@ clusters:
     - name: ingress-nginx
       namespace: flux-system
       url: https://kubernetes.github.io/ingress-nginx
-      repo_type: default
-    - name: benji
-      namespace: flux-system
-      url: https://benji-backup.me/helm-charts/
       repo_type: default
     - name: hajimari
       namespace: flux-system
