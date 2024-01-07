@@ -1,15 +1,13 @@
-# ---
-# apiVersion: kustomize.toolkit.fluxcd.io/v1
-# kind: Kustomization
-# metadata:
-#   name: certmanager
-#   namespace: flux-system
-# spec:
-#   interval: 10m0s
-#   dependsOn:
-#     - name: infrastructure
-#   sourceRef:
-#     kind: GitRepository
-#     name: flux-system
-#   path: ./kubernetes/certmanager/prod
-#   prune: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: certmanager
+  namespace: flux-system
+spec:
+  interval: 60m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./kubernetes/certmanager/prod
+  prune: true
