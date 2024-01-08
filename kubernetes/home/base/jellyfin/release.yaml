@@ -43,8 +43,6 @@ spec:
         enabled: true
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/icon: dvr
-          hajimari.io/appName: Jellyfin
         hosts:
           - host: jellyfin.${DOMAIN}
             paths:

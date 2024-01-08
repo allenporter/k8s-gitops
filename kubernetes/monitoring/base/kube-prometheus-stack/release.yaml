@@ -30,8 +30,6 @@ spec:
         enabled: true
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/icon: chart-line
-          hajimari.io/appName: Grafana
         hosts:
           - g.${DOMAIN}
         pathType: Prefix
@@ -91,8 +89,6 @@ spec:
         enabled: true
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/icon: database-clock
-          hajimari.io/appName: Prometheus
         hosts:
           - p.${DOMAIN}
         pathType: Prefix
@@ -125,8 +121,6 @@ spec:
         enabled: true
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/icon: bell-alert
-          hajimari.io/appName: Alertmanager
         hosts:
           - a.${DOMAIN}
         pathType: Prefix

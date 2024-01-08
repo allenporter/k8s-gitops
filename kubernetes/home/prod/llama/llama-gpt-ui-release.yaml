@@ -48,8 +48,6 @@ spec:
         enabled: true
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/icon: transform
-          hajimari.io/appName: LLama GPT
         hosts:
         - host: llama-gpt.${DOMAIN}
           paths:
