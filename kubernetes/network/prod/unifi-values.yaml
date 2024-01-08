@@ -77,7 +77,6 @@ spec:
         annotations:
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/icon: access-point
           haproxy.org/server-ssl: "true"
         hosts:
         - host: unifi.${DOMAIN}

@@ -2,12 +2,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 patches:
-- path: redis-values.yaml
 - path: rook-ceph-values.yaml
 - path: volsync-values.yaml
 - path: cnpg-values.yaml
 resources:
-- ../base/redis
 - ../base/rook-ceph
 - nvidia-device-plugin
 - ../base/volsync

@@ -2,16 +2,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 patches:
-- path: podinfo-values.yaml
 - path: kubernetes-dashboard-values.yaml
 - path: kube-prometheus-stack-values.yaml
 - path: weave-gitops-values.yaml
 resources:
 - namespace.yaml
-- ../base/podinfo
 - ../base/kubernetes-dashboard
 - ../base/kube-prometheus-stack
 - ../base/flux-monitoring
-- ../base/etcd-monitoring
 - ../base/weave-gitops
 - flux-discord-urls-secret.yaml

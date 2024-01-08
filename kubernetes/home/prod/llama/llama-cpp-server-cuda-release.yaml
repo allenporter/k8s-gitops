@@ -92,8 +92,6 @@ spec:
         enabled: true
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
-          hajimari.io/icon: transform
-          hajimari.io/appName: LLama.cpp Cuda Server
         hosts:
         - host: llama-server-cuda.${DOMAIN}
           paths:
