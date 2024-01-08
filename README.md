@@ -6,49 +6,43 @@ This is a Flux/Gitops managed k8s cluster following the model used by [k8s@home]
 
 ## Bare Metal
 
-The lowest level of the cluster is running [Proxmox](https://www.proxmox.com) with
-[Ubuntu Server](https://ubuntu.com/server) VMs provisioned with
-[Terraform](https://www.terraform.io/). All of those are configured using
-[Ansible](https://www.ansible.com/). The machine inventory is managed by
-[hostdb](https://github.com/allenporter/hostdb) which manages hostname assignment
-and allows Terraform and Ansible to interoperate on the same inventory.
+The cluster is provisioned as [Kairos](https://kairos.io) high availability [k3s](http://k3s.io) using [kube-vip](https://kube-vip.io/) and [Calico](https://docs.tigera.io/calico/latest/about/) for simple to deploy cluster networking.
 
-<img
-src="https://docs.google.com/drawings/d/e/2PACX-1vQSdj_iQgONocRCS5xzm-SGVDlHUF5PFnhRMoef2jgxjehC9hKFuafqKDzUIznGV9FOEWNEFlnstKSt/pub?w=433&amp;h=379"
-align=right>
+The nodes have a mix of accelerators.
 
-The bare metal cluster follows best practices for a server [naming
-scheme](https://mnx.io/blog/a-proper-server-naming-scheme/) including specifying a geography, environment (`dev` and `prod`) and a purpose and serial number per machine (e.g. `sto01`, `cfg01`, etc). A local DNS server is shared by the k8s cluster.
+See [bootstrap](/bootstrap/kairos/) for more background on provisioning of bare
+metal nodes.
 
-The primary VMs in the layer of the cluster below k8s include:
-
-  - [etcd](https://etcd.io/) with 3 nodes
-  - [kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/) for setup of the k8s API and workers
-  - [haproxy](http://www.haproxy.org/) for load balancing kubernetes API
-
-## CLI Toolchain
+## Development Toolchain
 
 This repository contains a `.devcontainer` which is the environment used to manage the k8s cluster
 from the CLI. The `.devcontainer` has some default mounts including the private terraform
 inventory and `.env` which is a local directory for local secret storage. More detail on
 bootstrapping can be found in `bootstrap/env` and `k8s-gitops-env.yaml` performs the secret setup.
 
-## Cluster Infrastructure
+## Network Operations
 
-The key infrastructure components running within the cluster are:
+The cluster follows best practices for a server [naming scheme](https://mnx.io/blog/a-proper-server-naming-scheme/)
+including specifying a geography, environment (`dev` and `prod`) and a purpose
+and serial number per machine (e.g. `sto01`, `cfg01`, etc). DNS for machines are
+managed outside of the cluster.
 
-<img
-src="https://docs.google.com/drawings/d/e/2PACX-1vSZh09V6luZjHGP7YWNVQM9tGQ69R7exD--vz7lknp6Z2OuMDItiVjTSJhjVN2Y-PPaoQoqx2x3D0Ey/pub?w=481&amp;h=374"
-align=right>
+## Services & Naming
 
-  - [calico](https://docs.projectcalico.org/about/about-calico) for cluster internal networking
-  - [rook-ceph](https://rook.io/): Provides persistent volumes, allowing any application to use the external ceph storage cluster.
+Reliable, secure, and discoverable services are provided by the following:
   - [metallb](https://metallb.universe.tf/): A load balancer for bare metal kubernetes.
   - [ingress-nginx](https://github.com/kubernetes/ingress-nginx): Used for proxying services through kubernetes ingress, exposing any service through the LoadBalancer with TLS.
   - [k8s_gateay](https://github.com/ori-edge/k8s_gateway): DNS server for all relevant ingress services in the cluster. This relies on an existing local dns server outside of the cluster to perform forwwarding.
   - [cert-manager](https://cert-manager.io/docs/): Creates TLS certs using LetsEncrypt for each service in the cluster. Uses `dns01` on a DNS server managed outside of the cluster.
 
-This setup results in load balancing, TLS, ingress services for any application that needs it just by adding annotations.
+## Storage
+
+The key storage components running within the cluster are:
+
+  - [rook-ceph](https://rook.io/): Provides persistent volumes, allowing any application to use the external ceph storage cluster.
+  - [volsync](https://volsync.readthedocs.io/en/stable/): Backup and restore for persistent volumes.
+  - [democratic-csi](https://github.com/democratic-csi/democratic-csi): For other non-standard
+  volumes (local, nfs, smb, etc)
 
 ## Updates
 
