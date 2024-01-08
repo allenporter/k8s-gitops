@@ -29,8 +29,6 @@ spec:
       enabled: true
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
-        hajimari.io/icon: "kubernetes"
-        hajimari.io/appName: "Kubernetes Dashboard"
     extraArgs:
       # Default timeout of 15 minutes is too short. Use 15 days instead
       - --token-ttl=1296000

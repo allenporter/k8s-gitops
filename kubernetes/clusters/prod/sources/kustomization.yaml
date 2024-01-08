@@ -3,29 +3,16 @@ apiversion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: flux-system
 resources:
-  - podinfo.yaml
-  - bitnami.yaml
-  - kubernetes-dashboard.yaml
-  - prometheus-community.yaml
-  - kube-state-metrics.yaml
-  - rook-release.yaml
-  - grafana.yaml
-  - jetstack.yaml
-  - haproxytech.yaml
-  - itzg.yaml
-  - kasten.yaml
-  - ingress-nginix.yaml
-  - hajimari.yaml
-  - istio.yaml
-  - nextcloud.yaml
-  - jupyterhub.yaml
-  - kyverno.yaml
-  - weave-works.yaml
-  - bjw-s-helm-charts.yaml
-  - authelia.yaml
-  - nvdp.yaml
-  - go-skynet.yaml
-  - metallb.yaml
   - backube.yaml
+  - bjw-s-helm-charts.yaml
+  - grafana.yaml
+  - ingress-nginix.yaml
+  - jetstack.yaml
+  - kube-state-metrics.yaml
+  - kubernetes-dashboard.yaml
   - k8s-gateway.yaml
-  - cnpg.yaml
+  - metallb.yaml
+  - nvdp.yaml
+  - prometheus-community.yaml
+  - rook-release.yaml
+  - weave-works.yaml

@@ -12,10 +12,6 @@ clusters:
     namespace: flux-system
     path: kubernetes/clusters/prod
     helm_repos:
-    - name: podinfo
-      namespace: flux-system
-      url: https://stefanprodan.github.io/podinfo
-      repo_type: default
     - name: bitnami
       namespace: flux-system
       url: oci://registry-1.docker.io/bitnamicharts
@@ -44,25 +40,9 @@ clusters:
       namespace: flux-system
       url: https://charts.jetstack.io
       repo_type: default
-    - name: haproxytech
-      namespace: flux-system
-      url: https://haproxytech.github.io/helm-charts
-      repo_type: default
-    - name: itzg
-      namespace: flux-system
-      url: https://itzg.github.io/minecraft-server-charts/
-      repo_type: default
-    - name: kasten
-      namespace: flux-system
-      url: https://charts.kasten.io/
-      repo_type: default
     - name: ingress-nginx
       namespace: flux-system
       url: https://kubernetes.github.io/ingress-nginx
-      repo_type: default
-    - name: hajimari
-      namespace: flux-system
-      url: https://hajimari.io
       repo_type: default
     - name: istio
       namespace: flux-system
