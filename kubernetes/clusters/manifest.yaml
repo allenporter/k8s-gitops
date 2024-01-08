@@ -2,105 +2,95 @@
 clusters:
 - path: kubernetes/clusters/prod
   kustomizations:
+  - name: certmanager
+    namespace: flux-system
+    path: kubernetes/certmanager/prod
+    helm_repos: []
+    helm_releases:
+    - name: cert-manager
+      namespace: cert-manager
+      chart:
+        name: cert-manager
+        repo_name: jetstack
+        repo_namespace: flux-system
+    cluster_policies: []
+    config_maps: []
+    secrets: []
+  - name: cluster-network
+    namespace: flux-system
+    path: kubernetes/cluster_network/prod
+    helm_repos: []
+    helm_releases: []
+    cluster_policies: []
+    config_maps:
+    - name: calico-config
+      namespace: kube-system
+    secrets: []
   - name: crds
     namespace: flux-system
     path: kubernetes/crds
     helm_repos: []
     helm_releases: []
     cluster_policies: []
+    config_maps: []
+    secrets: []
   - name: flux-system
     namespace: flux-system
     path: kubernetes/clusters/prod
     helm_repos:
-    - name: bitnami
+    - name: backube
       namespace: flux-system
-      url: oci://registry-1.docker.io/bitnamicharts
-      repo_type: oci
-    - name: kubernetes-dashboard
-      namespace: flux-system
-      url: https://kubernetes.github.io/dashboard/
-      repo_type: default
-    - name: prometheus-community
-      namespace: flux-system
-      url: https://prometheus-community.github.io/helm-charts
-      repo_type: default
-    - name: kube-state-metrics
-      namespace: flux-system
-      url: https://kubernetes.github.io/kube-state-metrics
-      repo_type: default
-    - name: rook-release
-      namespace: flux-system
-      url: https://charts.rook.io/release
-      repo_type: default
-    - name: grafana
-      namespace: flux-system
-      url: https://grafana.github.io/helm-charts
-      repo_type: default
-    - name: jetstack
-      namespace: flux-system
-      url: https://charts.jetstack.io
-      repo_type: default
-    - name: ingress-nginx
-      namespace: flux-system
-      url: https://kubernetes.github.io/ingress-nginx
-      repo_type: default
-    - name: istio
-      namespace: flux-system
-      url: https://istio-release.storage.googleapis.com/charts
-      repo_type: default
-    - name: nextcloud
-      namespace: flux-system
-      url: https://nextcloud.github.io/helm/
-      repo_type: default
-    - name: jupyterhub
-      namespace: flux-system
-      url: https://jupyterhub.github.io/helm-chart/
-      repo_type: default
-    - name: kyverno
-      namespace: flux-system
-      url: https://kyverno.github.io/kyverno/
-      repo_type: default
-    - name: weave-works
-      namespace: flux-system
-      url: https://helm.gitops.weave.works
+      url: https://backube.github.io/helm-charts/
       repo_type: default
     - name: bjw-s-helm-charts
       namespace: flux-system
       url: https://bjw-s.github.io/helm-charts/
       repo_type: default
-    - name: authelia
+    - name: grafana
       namespace: flux-system
-      url: https://charts.authelia.com
+      url: https://grafana.github.io/helm-charts
       repo_type: default
-    - name: nvdp
+    - name: ingress-nginx
       namespace: flux-system
-      url: https://nvidia.github.io/k8s-device-plugin
+      url: https://kubernetes.github.io/ingress-nginx
       repo_type: default
-    - name: go-skynet
+    - name: jetstack
       namespace: flux-system
-      url: https://go-skynet.github.io/helm-charts/
+      url: https://charts.jetstack.io
       repo_type: default
-    - name: metallb
+    - name: kube-state-metrics
       namespace: flux-system
-      url: https://metallb.github.io/metallb
+      url: https://kubernetes.github.io/kube-state-metrics
       repo_type: default
-    - name: backube
+    - name: kubernetes-dashboard
       namespace: flux-system
-      url: https://backube.github.io/helm-charts/
+      url: https://kubernetes.github.io/dashboard/
       repo_type: default
     - name: k8s-gateway
       namespace: flux-system
       url: https://ori-edge.github.io/k8s_gateway/
       repo_type: default
-    - name: cnpg
+    - name: metallb
       namespace: flux-system
-      url: https://cloudnative-pg.github.io/charts
+      url: https://metallb.github.io/metallb
+      repo_type: default
+    - name: nvdp
+      namespace: flux-system
+      url: https://nvidia.github.io/k8s-device-plugin
+      repo_type: default
+    - name: prometheus-community
+      namespace: flux-system
+      url: https://prometheus-community.github.io/helm-charts
+      repo_type: default
+    - name: rook-release
+      namespace: flux-system
+      url: https://charts.rook.io/release
+      repo_type: default
+    - name: weave-works
+      namespace: flux-system
+      url: https://helm.gitops.weave.works
       repo_type: default
     helm_releases: []
     cluster_policies: []
-  - name: network
-    namespace: flux-system
-    path: kubernetes/cluster_network/prod
-    helm_repos: []
-    helm_releases: []
-    cluster_policies: []
+    config_maps: []
+    secrets: []
