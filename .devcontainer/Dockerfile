@@ -75,6 +75,14 @@ RUN cd /usr/local/bin/ && \
     chmod +x jq
 RUN jq --version
 
+# renovate: datasource=github-releases depName=derailed/k9s
+ARG K9S_VERSION=v0.30.8
+RUN cd /usr/local/bin/ && \
+    curl -OL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_arm64.tar.gz && \
+    tar xf k9s_Linux_arm64.tar.gz && \
+    chmod +x k9s
+RUN k9s version
+
 # renovate: datasource=github-releases depName=getsops/sops
 ARG SOPS_VERSION=v3.8.1
 RUN cd /usr/local/bin/ && \
