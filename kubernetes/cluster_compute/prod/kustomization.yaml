@@ -4,9 +4,11 @@ kind: Kustomization
 patches:
 - path: nvidia-device-plugin-values.yaml
 - path: intel-device-plugin-values.yaml
+- path: intel-device-plugin-gpu-values.yaml
 - path: node-feature-discovery-values.yaml
 resources:
 - ../base/nvidia-device-plugin
 - ../base/intel-device-plugin
+- ../base/intel-device-plugin-gpu
 - ../base/node-feature-discovery
 - system-upgrade-controller
