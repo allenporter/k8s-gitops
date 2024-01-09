@@ -1,9 +1,0 @@
----
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-namespace: kyverno
-resources:
-  - ingress.yaml
-  - resources.yaml
-  # Disable deprecated API check #1179
-  # - https://raw.githubusercontent.com/kyverno/policies/main/best-practices/check-deprecated-apis/check-deprecated-apis.yaml
