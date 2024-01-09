@@ -22,7 +22,8 @@ metadata:
 spec:
   interval: 30m0s
   path: ./kubernetes/clusters/prod
-  prune: true
+  # Disable prune while under maintenance
+  prune: false
   sourceRef:
     kind: GitRepository
     name: flux-system
