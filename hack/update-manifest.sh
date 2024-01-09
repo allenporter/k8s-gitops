@@ -1,17 +1,30 @@
 #!/usr/bin/env sh
-set -eu
+#
+# The script will either update or verify the manifest file. Pass the
+# argument "generate" to update the manifest file. Pass the argument "validate"
+# to verify the manifest file. The default with no argument is to generate.
+
+COMMAND=${1:-generate}
+if [ "$COMMAND" != "generate" ] && [ "$COMMAND" != "validate" ]; then
+  echo "Invalid command. Please pass either 'generate' or 'validate'."
+  exit 1
+fi
 
 MANIFEST_FILE=kubernetes/clusters/manifest.yaml
+if [ ! -f "$MANIFEST_FILE" ]; then
+  echo "Manifest file not found. Please run this script from the root of the repository."
+  exit 1
+fi
 
-md5sum_before=$(md5sum ${MANIFEST_FILE}| awk '{print $1}')
+# Validate the existing manifest and fail if there are diffs
+if [ "$COMMAND" = "validate" ]; then
+  flux-local get cluster -o yaml --path kubernetes/clusters/prod | diff - ${MANIFEST_FILE}
+  code=$?
+  if [ ${code} -ne 0 ]; then
+    echo "Manifest file is not up to date. Please run 'task update-manifest' to update it."
+  fi
+  exit $code
+fi
 
 # Update manifest
 flux-local get cluster -o yaml --path kubernetes/clusters/prod > ${MANIFEST_FILE}
-
-md5sum_after=$(md5sum ${MANIFEST_FILE} | awk '{print $1}')
-
-# Fail if the manifest was updated
-if [ "$md5sum_before" != "$md5sum_after" ]; then
-  echo "Manifest was updated. Please commit the changes."
-  exit 1
-fi
