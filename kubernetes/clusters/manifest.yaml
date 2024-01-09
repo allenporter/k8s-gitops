@@ -127,6 +127,12 @@ clusters:
         name: cert-manager
         repo_name: jetstack
         repo_namespace: flux-system
+    - name: metallb
+      namespace: metallb
+      chart:
+        name: metallb
+        repo_name: metallb
+        repo_namespace: flux-system
     cluster_policies: []
     config_maps:
     - name: calico-config
