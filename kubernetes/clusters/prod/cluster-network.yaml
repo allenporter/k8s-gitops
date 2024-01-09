@@ -1,6 +1,3 @@
-# The cluster network has no other dependencies since it is really initiated
-# at bootstrap time. This kustomization only provides updates on the existing
-# installed version.
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -13,4 +10,5 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./kubernetes/cluster_network/prod
-  prune: true
+  # Disable prune while under maintenance
+  prune: false
