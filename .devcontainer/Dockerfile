@@ -1,5 +1,18 @@
-
 FROM ubuntu:jammy-20231128
+
+# Setup non-root user
+ARG USERNAME=admin
+ARG GROUPNAME=admin
+RUN addgroup --system ${GROUPNAME} && \
+    adduser --system ${GROUPNAME} --ingroup ${USERNAME} --home /home/${USERNAME} --shell /bin/bash && \
+    chown -R ${USERNAME}:${GROUPNAME} /home/${USERNAME} && \
+    apt-get update && \
+    apt-get install -y sudo && \
+    echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} && \
+    chmod 0440 /etc/sudoers.d/${USERNAME}
+
+# Prepare devcontainer workspaces
+RUN mkdir /workspaces && chown admin /workspaces
 
 RUN apt-get update --fix-missing && \
     apt-get upgrade -y && \
@@ -29,27 +42,11 @@ RUN go version
 RUN apt-get install -y ceph-common
 RUN ceph --version
 
-# renovate: datasource=github-releases depName=etcd-io/etcd
-ARG ETCD_VERSION=v3.5.10
-RUN mkdir -p /src && \
-    cd /src && \
-    curl -OL https://github.com/etcd-io/etcd/archive/refs/tags/${ETCD_VERSION}.zip && \
-    unzip ${ETCD_VERSION}.zip && \
-    cd /src/etcd-${ETCD_VERSION#v} && \
-    ./build.sh && \
-    cp bin/etcdctl /usr/local/bin/etcdctl && \
-    rm -fr /src
-RUN etcdctl version
+# Cleanup from previous steps
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# renovate: datasource=github-releases depName=hashicorp/terraform extractVersion=^v(?<version>.+)$
-ARG TERRAFORM_VERSION=1.6.6
-RUN mkdir -p /src && \
-    cd /src && \
-    curl -OL https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
-    unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
-    cp terraform /usr/local/bin/terraform && \
-    rm -fr /src
-RUN terraform version
+COPY requirements.txt /src/requirements.txt
+RUN pip3 install -r /src/requirements.txt
 
 # renovate: datasource=github-releases depName=GoogleCloudPlatform/cloud-sdk-docker
 ARG GCLOUD_CLI_VERSION=427.0.0
@@ -76,66 +73,56 @@ RUN cd /usr/local/bin/ && \
 RUN jq --version
 
 # renovate: datasource=github-releases depName=derailed/k9s
+ARG ARCH=amd64
 ARG K9S_VERSION=v0.30.8
-RUN cd /usr/local/bin/ && \
-    curl -OL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_arm64.tar.gz && \
-    tar xf k9s_Linux_arm64.tar.gz && \
-    chmod +x k9s
+RUN mkdir /usr/local/k9s && \
+    cd /usr/local/k9s && \
+    curl -OL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_${ARCH}.tar.gz && \
+    tar xf k9s_Linux_${ARCH}.tar.gz && \
+    chmod +x k9s && \
+    mv k9s /usr/local/bin/k9s && \
+    rm -fr /usr/local/k9s
 RUN k9s version
 
 # renovate: datasource=github-releases depName=getsops/sops
 ARG SOPS_VERSION=v3.8.1
 RUN cd /usr/local/bin/ && \
-    curl -OL https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64 && \
-    mv sops-${SOPS_VERSION}.linux.amd64 sops && \
+    curl -OL https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.${ARCH} && \
+    mv sops-${SOPS_VERSION}.linux.${ARCH} sops && \
     chmod +x sops
 RUN sops --version
 
 # renovate: datasource=github-releases depName=yannh/kubeconform
 ARG KUBECONFORM_VERSION=v0.6.4
-RUN cd /usr/local/bin/ && \
-    curl -OL https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz && \
-    tar xf kubeconform-linux-amd64.tar.gz && \
-    chmod +x kubeconform
+RUN mkdir /usr/local/kubeconfirm/ && \
+    cd /usr/local/kubeconfirm/ && \
+    curl -OL https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-${ARCH}.tar.gz && \
+    tar xf kubeconform-linux-${ARCH}.tar.gz && \
+    chmod +x kubeconform && \
+    mv kubeconform /usr/local/bin/kubeconform && \
+    rm -fr /usr/local/kubeconfirm
 RUN kubeconform -v
 
 # renovate: datasource=github-releases depName=kairos-io/provider-kairos
 ARG KAIROS_VERSION=v2.6.2
-RUN cd /usr/local/bin/ && \
-    curl -OL https://github.com/kairos-io/provider-kairos/releases/download/${KAIROS_VERSION}/kairosctl-${KAIROS_VERSION}-linux-amd64.tar.gz && \
-    tar xf kairosctl-${KAIROS_VERSION}-linux-amd64.tar.gz && \
-    chmod +x kairosctl
+RUN mkdir /usr/local/kairos && \
+    cd /usr/local/kairos/ && \
+    curl -OL https://github.com/kairos-io/provider-kairos/releases/download/${KAIROS_VERSION}/kairosctl-${KAIROS_VERSION}-linux-${ARCH}.tar.gz && \
+    tar xf kairosctl-${KAIROS_VERSION}-linux-${ARCH}.tar.gz && \
+    chmod +x kairosctl && \
+    mv kairosctl /usr/local/bin/kairosctl && \
+    rm -fr /usr/local/kairos
 RUN kairosctl -v
 
 # renovate: datasource=github-releases depName=go-task/task
 ARG TASK_VERSION=v3.33.1
 RUN mkdir /usr/local/go-task && \
     cd /usr/local/go-task/ && \
-    curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_arm64.tar.gz && \
-    tar xf task_linux_arm64.tar.gz && \
+    curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_${ARCH}.tar.gz && \
+    tar xf task_linux_${ARCH}.tar.gz && \
     cp task /usr/local/bin/task && \
     chmod +x /usr/local/bin/task
 RUN task --version
-
-# Cleanup from previous steps
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-COPY requirements.txt /src/requirements.txt
-RUN pip3 install -r /src/requirements.txt
-
-# Setup non-root user
-ARG USERNAME=admin
-ARG GROUPNAME=admin
-RUN addgroup --system ${GROUPNAME} && \
-    adduser --system ${GROUPNAME} --ingroup ${USERNAME} --home /home/${USERNAME} --shell /bin/bash && \
-    chown -R ${USERNAME}:${GROUPNAME} /home/${USERNAME} && \
-    apt-get update && \
-    apt-get install -y sudo && \
-    echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} && \
-    chmod 0440 /etc/sudoers.d/${USERNAME}
-
-# Prepare devcontainer workspaces
-RUN mkdir /workspaces && chown admin /workspaces
 
 USER admin
 
