@@ -77,10 +77,13 @@ RUN jq --version
 
 # renovate: datasource=github-releases depName=derailed/k9s
 ARG K9S_VERSION=v0.30.8
-RUN cd /usr/local/bin/ && \
+RUN mkdir /usr/local/k9s && \
+    cd /usr/local/k9s && \
     curl -OL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_amd64.tar.gz && \
-    tar xf k9s_Linux_arm64.tar.gz && \
-    chmod +x k9s
+    tar xf k9s_Linux_amd64.tar.gz && \
+    chmod +x k9s && \
+    mv k9s /usr/local/bin/k9s && \
+    rm -fr /usr/local/k9s
 RUN k9s version
 
 # renovate: datasource=github-releases depName=getsops/sops
@@ -93,18 +96,24 @@ RUN sops --version
 
 # renovate: datasource=github-releases depName=yannh/kubeconform
 ARG KUBECONFORM_VERSION=v0.6.4
-RUN cd /usr/local/bin/ && \
+RUN mkdir /usr/local/kubeconfirm/ && \
+    cd /usr/local/kubeconfirm/ && \
     curl -OL https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz && \
     tar xf kubeconform-linux-amd64.tar.gz && \
-    chmod +x kubeconform
+    chmod +x kubeconform && \
+    mv kubeconform /usr/local/bin/kubeconform && \
+    rm -fr /usr/local/kubeconfirm
 RUN kubeconform -v
 
 # renovate: datasource=github-releases depName=kairos-io/provider-kairos
 ARG KAIROS_VERSION=v2.6.2
-RUN cd /usr/local/bin/ && \
+RUN mkdir /usr/local/kairos && \
+    cd /usr/local/kairos/ && \
     curl -OL https://github.com/kairos-io/provider-kairos/releases/download/${KAIROS_VERSION}/kairosctl-${KAIROS_VERSION}-linux-amd64.tar.gz && \
     tar xf kairosctl-${KAIROS_VERSION}-linux-amd64.tar.gz && \
-    chmod +x kairosctl
+    chmod +x kairosctl && \
+    mv kairosctl /usr/local/bin/kairosctl && \
+    rm -fr /usr/local/kairos
 RUN kairosctl -v
 
 # renovate: datasource=github-releases depName=go-task/task
