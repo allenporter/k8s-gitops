@@ -5,6 +5,7 @@ namespace: flux-system
 resources:
   - backube.yaml
   - bjw-s-helm-charts.yaml
+  - democratic-csi.yaml
   - grafana.yaml
   - ingress-nginix.yaml
   - jetstack.yaml
