@@ -9,6 +9,6 @@ patches:
 resources:
 - ../base/nvidia-device-plugin
 - ../base/intel-device-plugin
-- ../base/intel-device-gpu-plugin
+- ../base/intel-device-plugin-gpu
 - ../base/node-feature-discovery
 - system-upgrade-controller
