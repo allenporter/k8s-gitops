@@ -26,4 +26,4 @@ spec:
     keepHistory: false
   dependsOn:
     - name: node-feature-discovery
-      namespace: tools
+      namespace: node-feature-discovery
