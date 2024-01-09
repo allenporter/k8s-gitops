@@ -2,49 +2,39 @@
 clusters:
 - path: kubernetes/clusters/prod
   kustomizations:
-  - name: certmanager
+  - name: compute
     namespace: flux-system
-    path: kubernetes/certmanager/prod
+    path: kubernetes/compute/prod
     helm_repos: []
     helm_releases:
-    - name: cert-manager
-      namespace: cert-manager
+    - name: nvdp
+      namespace: nvidia-device-plugin
       chart:
-        name: cert-manager
-        repo_name: jetstack
+        name: nvidia-device-plugin
+        repo_name: nvdp
         repo_namespace: flux-system
-    cluster_policies: []
-    config_maps: []
-    secrets: []
-  - name: cluster-network
-    namespace: flux-system
-    path: kubernetes/cluster_network/prod
-    helm_repos: []
-    helm_releases: []
+    - name: intel-device-plugin-operator
+      namespace: intel-device-plugin
+      chart:
+        name: intel-device-plugins-operator
+        repo_name: intel
+        repo_namespace: flux-system
+    - name: intel-device-plugin-gpu
+      namespace: intel-device-plugin
+      chart:
+        name: intel-device-plugins-gpu
+        repo_name: intel
+        repo_namespace: flux-system
+    - name: node-feature-discovery
+      namespace: node-feature-discovery
+      chart:
+        name: node-feature-discovery
+        repo_name: node-feature-discovery
+        repo_namespace: flux-system
     cluster_policies: []
     config_maps:
-    - name: calico-config
-      namespace: kube-system
-    secrets: []
-  - name: cluster-storage
-    namespace: flux-system
-    path: kubernetes/cluster_storage/prod
-    helm_repos: []
-    helm_releases:
-    - name: local-path-provisioner
-      namespace: democratic-csi
-      chart:
-        name: democratic-csi
-        repo_name: democratic-csi
-        repo_namespace: flux-system
-    - name: rook-ceph
-      namespace: rook-ceph
-      chart:
-        name: rook-ceph
-        repo_name: rook-release
-        repo_namespace: flux-system
-    cluster_policies: []
-    config_maps: []
+    - name: default-controller-env
+      namespace: system-upgrade
     secrets: []
   - name: crds
     namespace: flux-system
@@ -78,6 +68,10 @@ clusters:
       namespace: flux-system
       url: https://kubernetes.github.io/ingress-nginx
       repo_type: default
+    - name: intel
+      namespace: flux-system
+      url: https://intel.github.io/helm-charts
+      repo_type: default
     - name: jetstack
       namespace: flux-system
       url: https://charts.jetstack.io
@@ -98,6 +92,10 @@ clusters:
       namespace: flux-system
       url: https://metallb.github.io/metallb
       repo_type: default
+    - name: node-feature-discovery
+      namespace: flux-system
+      url: https://kubernetes-sigs.github.io/node-feature-discovery/charts
+      repo_type: default
     - name: nvdp
       namespace: flux-system
       url: https://nvidia.github.io/k8s-device-plugin
@@ -115,6 +113,48 @@ clusters:
       url: https://helm.gitops.weave.works
       repo_type: default
     helm_releases: []
+    cluster_policies: []
+    config_maps: []
+    secrets: []
+  - name: network
+    namespace: flux-system
+    path: kubernetes/network/prod
+    helm_repos: []
+    helm_releases:
+    - name: cert-manager
+      namespace: cert-manager
+      chart:
+        name: cert-manager
+        repo_name: jetstack
+        repo_namespace: flux-system
+    cluster_policies: []
+    config_maps:
+    - name: calico-config
+      namespace: kube-system
+    secrets: []
+  - name: storage
+    namespace: flux-system
+    path: kubernetes/storage/prod
+    helm_repos: []
+    helm_releases:
+    - name: local-path-provisioner
+      namespace: democratic-csi
+      chart:
+        name: democratic-csi
+        repo_name: democratic-csi
+        repo_namespace: flux-system
+    - name: rook-ceph
+      namespace: rook-ceph
+      chart:
+        name: rook-ceph
+        repo_name: rook-release
+        repo_namespace: flux-system
+    - name: volsync
+      namespace: volsync-system
+      chart:
+        name: volsync
+        repo_name: backube
+        repo_namespace: flux-system
     cluster_policies: []
     config_maps: []
     secrets: []
