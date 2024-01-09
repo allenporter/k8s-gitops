@@ -26,6 +26,26 @@ clusters:
     - name: calico-config
       namespace: kube-system
     secrets: []
+  - name: cluster-storage
+    namespace: flux-system
+    path: kubernetes/cluster_storage/prod
+    helm_repos: []
+    helm_releases:
+    - name: local-path-provisioner
+      namespace: democratic-csi
+      chart:
+        name: democratic-csi
+        repo_name: democratic-csi
+        repo_namespace: flux-system
+    - name: rook-ceph
+      namespace: rook-ceph
+      chart:
+        name: rook-ceph
+        repo_name: rook-release
+        repo_namespace: flux-system
+    cluster_policies: []
+    config_maps: []
+    secrets: []
   - name: crds
     namespace: flux-system
     path: kubernetes/crds
@@ -45,6 +65,10 @@ clusters:
     - name: bjw-s-helm-charts
       namespace: flux-system
       url: https://bjw-s.github.io/helm-charts/
+      repo_type: default
+    - name: democratic-csi
+      namespace: flux-system
+      url: https://democratic-csi.github.io/charts/
       repo_type: default
     - name: grafana
       namespace: flux-system

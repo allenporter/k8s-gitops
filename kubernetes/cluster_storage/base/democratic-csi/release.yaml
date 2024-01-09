@@ -53,6 +53,8 @@ spec:
         volumeBindingMode: WaitForFirstConsumer
         allowVolumeExpansion: true
     driver:
+      # Nodes do not have /etc/localtime
+      localtimeHostPath: null
       config:
         driver: local-hostpath
         local-hostpath:
