@@ -1,5 +1,5 @@
 ---
-name: Lint
+name: Cluster Manifest
 on:
   pull_request:
     branches:
