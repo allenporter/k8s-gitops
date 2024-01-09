@@ -4,5 +4,7 @@ kind: Kustomization
 resources:
 - snapshot-controller
 - ../base/democratic-csi
+- ../base/rook-ceph
 patches:
 - path: democratic-csi-values.yaml
+- path: rook-ceph-values.yaml
