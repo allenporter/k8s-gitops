@@ -25,17 +25,3 @@ jobs:
           path: ${{ matrix.cluster_path }}
           enable-helm: true
           enable-kyverno: true
-
-  policy_tests:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - uses: supplypike/setup-bin@v3
-        with:
-          uri: 'https://github.com/kyverno/kyverno/releases/download/v1.9.0/kyverno-cli_v1.9.0_linux_x86_64.tar.gz'
-          name: 'kyverno-cli'
-          version: 'v1.9.0'
-      - name: Test policies (kyverno test)
-        run: |
-          kyverno test tests/policies/

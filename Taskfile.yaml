@@ -5,3 +5,11 @@ tasks:
   localize:
     cmds:
       - hack/localize/localize.sh
+
+  update-manifest:
+    cmds:
+      - hack/update-manifest.sh
+
+  validate-manifest:
+    cmds:
+      - hack/update-manifest.sh validate

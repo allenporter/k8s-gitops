@@ -1,0 +1,31 @@
+---
+name: Cluster Manifest
+on:
+  pull_request:
+    branches:
+    - main
+    - 'renovate/**'
+  push:
+    branches:
+    - main
+    - 'renovate/**'
+jobs:
+  yaml:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Setup Flux CLI
+      uses: fluxcd/flux2/action@v2.2.2
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+        cache: pip
+        cache-dependency-path: requirements.txt
+    - name: Install python requirements
+      run: |
+        pip install -r requirements.txt
+    - name: Generate cluster manifest
+      run: |
+        hack/update-manifest.sh validate
