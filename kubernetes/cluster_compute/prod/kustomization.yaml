@@ -9,3 +9,4 @@ resources:
 - ../base/nvidia-device-plugin
 - ../base/intel-device-plugin
 - ../base/node-feature-discovery
+- system-upgrade-controller
