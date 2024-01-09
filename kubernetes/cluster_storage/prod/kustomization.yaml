@@ -4,7 +4,9 @@ kind: Kustomization
 patches:
 - path: democratic-csi-values.yaml
 - path: rook-ceph-values.yaml
+- path: volsync-values.yaml
 resources:
 - snapshot-controller
 - ../base/democratic-csi
 - ../base/rook-ceph
+- ../base/volsync
