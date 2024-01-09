@@ -1,5 +1,18 @@
-ARG ARCH=amd64
 FROM ubuntu:jammy-20231128
+
+# Setup non-root user
+ARG USERNAME=admin
+ARG GROUPNAME=admin
+RUN addgroup --system ${GROUPNAME} && \
+    adduser --system ${GROUPNAME} --ingroup ${USERNAME} --home /home/${USERNAME} --shell /bin/bash && \
+    chown -R ${USERNAME}:${GROUPNAME} /home/${USERNAME} && \
+    apt-get update && \
+    apt-get install -y sudo && \
+    echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} && \
+    chmod 0440 /etc/sudoers.d/${USERNAME}
+
+# Prepare devcontainer workspaces
+RUN mkdir /workspaces && chown admin /workspaces
 
 RUN apt-get update --fix-missing && \
     apt-get upgrade -y && \
@@ -29,27 +42,11 @@ RUN go version
 RUN apt-get install -y ceph-common
 RUN ceph --version
 
-# renovate: datasource=github-releases depName=etcd-io/etcd
-ARG ETCD_VERSION=v3.5.10
-RUN mkdir -p /src && \
-    cd /src && \
-    curl -OL https://github.com/etcd-io/etcd/archive/refs/tags/${ETCD_VERSION}.zip && \
-    unzip ${ETCD_VERSION}.zip && \
-    cd /src/etcd-${ETCD_VERSION#v} && \
-    ./build.sh && \
-    cp bin/etcdctl /usr/local/bin/etcdctl && \
-    rm -fr /src
-RUN etcdctl version
+# Cleanup from previous steps
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# renovate: datasource=github-releases depName=hashicorp/terraform extractVersion=^v(?<version>.+)$
-ARG TERRAFORM_VERSION=1.6.6
-RUN mkdir -p /src && \
-    cd /src && \
-    curl -OL https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_${ARCH}.zip && \
-    unzip terraform_${TERRAFORM_VERSION}_linux_${ARCH}.zip && \
-    cp terraform /usr/local/bin/terraform && \
-    rm -fr /src
-RUN terraform version
+COPY requirements.txt /src/requirements.txt
+RUN pip3 install -r /src/requirements.txt
 
 # renovate: datasource=github-releases depName=GoogleCloudPlatform/cloud-sdk-docker
 ARG GCLOUD_CLI_VERSION=427.0.0
@@ -76,6 +73,7 @@ RUN cd /usr/local/bin/ && \
 RUN jq --version
 
 # renovate: datasource=github-releases depName=derailed/k9s
+ARG ARCH=amd64
 ARG K9S_VERSION=v0.30.8
 RUN mkdir /usr/local/k9s && \
     cd /usr/local/k9s && \
@@ -125,26 +123,6 @@ RUN mkdir /usr/local/go-task && \
     cp task /usr/local/bin/task && \
     chmod +x /usr/local/bin/task
 RUN task --version
-
-# Cleanup from previous steps
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-COPY requirements.txt /src/requirements.txt
-RUN pip3 install -r /src/requirements.txt
-
-# Setup non-root user
-ARG USERNAME=admin
-ARG GROUPNAME=admin
-RUN addgroup --system ${GROUPNAME} && \
-    adduser --system ${GROUPNAME} --ingroup ${USERNAME} --home /home/${USERNAME} --shell /bin/bash && \
-    chown -R ${USERNAME}:${GROUPNAME} /home/${USERNAME} && \
-    apt-get update && \
-    apt-get install -y sudo && \
-    echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} && \
-    chmod 0440 /etc/sudoers.d/${USERNAME}
-
-# Prepare devcontainer workspaces
-RUN mkdir /workspaces && chown admin /workspaces
 
 USER admin
 
