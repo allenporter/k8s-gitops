@@ -53,8 +53,6 @@ spec:
         volumeBindingMode: WaitForFirstConsumer
         allowVolumeExpansion: true
     driver:
-      # Nodes do not have /etc/localtime
-      localtimeHostPath: null
       config:
         driver: local-hostpath
         local-hostpath:
@@ -66,6 +64,8 @@ spec:
     node:
       driver:
         image: ghcr.io/democratic-csi/democratic-csi:v1.8.4
+        # Nodes do not have /etc/localtime
+        localtimeHostPath: null
         extraVolumeMounts:
           - name: local-hostpath
             mountPath: /var/lib/rancher/k3s/local-hostpath
