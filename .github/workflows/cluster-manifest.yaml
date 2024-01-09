@@ -28,4 +28,4 @@ jobs:
         pip install -r requirements.txt
     - name: Generate cluster manifest
       run: |
-        hack/update-manifest.sh
+        hack/update-manifest.sh validate
