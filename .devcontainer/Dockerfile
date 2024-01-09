@@ -1,4 +1,4 @@
-
+ARG ARCH=amd64
 FROM ubuntu:jammy-20231128
 
 RUN apt-get update --fix-missing && \
@@ -45,8 +45,8 @@ RUN etcdctl version
 ARG TERRAFORM_VERSION=1.6.6
 RUN mkdir -p /src && \
     cd /src && \
-    curl -OL https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
-    unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
+    curl -OL https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_${ARCH}.zip && \
+    unzip terraform_${TERRAFORM_VERSION}_linux_${ARCH}.zip && \
     cp terraform /usr/local/bin/terraform && \
     rm -fr /src
 RUN terraform version
@@ -79,8 +79,8 @@ RUN jq --version
 ARG K9S_VERSION=v0.30.8
 RUN mkdir /usr/local/k9s && \
     cd /usr/local/k9s && \
-    curl -OL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_amd64.tar.gz && \
-    tar xf k9s_Linux_amd64.tar.gz && \
+    curl -OL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_${ARCH}.tar.gz && \
+    tar xf k9s_Linux_${ARCH}.tar.gz && \
     chmod +x k9s && \
     mv k9s /usr/local/bin/k9s && \
     rm -fr /usr/local/k9s
@@ -89,8 +89,8 @@ RUN k9s version
 # renovate: datasource=github-releases depName=getsops/sops
 ARG SOPS_VERSION=v3.8.1
 RUN cd /usr/local/bin/ && \
-    curl -OL https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64 && \
-    mv sops-${SOPS_VERSION}.linux.amd64 sops && \
+    curl -OL https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.${ARCH} && \
+    mv sops-${SOPS_VERSION}.linux.${ARCH} sops && \
     chmod +x sops
 RUN sops --version
 
@@ -98,8 +98,8 @@ RUN sops --version
 ARG KUBECONFORM_VERSION=v0.6.4
 RUN mkdir /usr/local/kubeconfirm/ && \
     cd /usr/local/kubeconfirm/ && \
-    curl -OL https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz && \
-    tar xf kubeconform-linux-amd64.tar.gz && \
+    curl -OL https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-${ARCH}.tar.gz && \
+    tar xf kubeconform-linux-${ARCH}.tar.gz && \
     chmod +x kubeconform && \
     mv kubeconform /usr/local/bin/kubeconform && \
     rm -fr /usr/local/kubeconfirm
@@ -109,8 +109,8 @@ RUN kubeconform -v
 ARG KAIROS_VERSION=v2.6.2
 RUN mkdir /usr/local/kairos && \
     cd /usr/local/kairos/ && \
-    curl -OL https://github.com/kairos-io/provider-kairos/releases/download/${KAIROS_VERSION}/kairosctl-${KAIROS_VERSION}-linux-amd64.tar.gz && \
-    tar xf kairosctl-${KAIROS_VERSION}-linux-amd64.tar.gz && \
+    curl -OL https://github.com/kairos-io/provider-kairos/releases/download/${KAIROS_VERSION}/kairosctl-${KAIROS_VERSION}-linux-${ARCH}.tar.gz && \
+    tar xf kairosctl-${KAIROS_VERSION}-linux-${ARCH}.tar.gz && \
     chmod +x kairosctl && \
     mv kairosctl /usr/local/bin/kairosctl && \
     rm -fr /usr/local/kairos
@@ -120,8 +120,8 @@ RUN kairosctl -v
 ARG TASK_VERSION=v3.33.1
 RUN mkdir /usr/local/go-task && \
     cd /usr/local/go-task/ && \
-    curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_arm64.tar.gz && \
-    tar xf task_linux_arm64.tar.gz && \
+    curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_${ARCH}.tar.gz && \
+    tar xf task_linux_${ARCH}.tar.gz && \
     cp task /usr/local/bin/task && \
     chmod +x /usr/local/bin/task
 RUN task --version
