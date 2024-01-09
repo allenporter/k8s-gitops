@@ -4,7 +4,6 @@ kind: HelmRelease
 metadata:
   name: nvdp
 spec:
-  releaseName: nvdp
   chart:
     spec:
       chart: nvidia-device-plugin
@@ -13,19 +12,7 @@ spec:
         kind: HelmRepository
         name: nvdp
         namespace: flux-system
-  interval: 1h0m0s
   values:
     image:
       repository: nvcr.io/nvidia/k8s-device-plugin
       tag: v0.14.3
-    gfd:
-      # Automatically generate labels for GPUs
-      enabled: true
-    nodeSelector:
-      accelerator: nvidia
-    config:
-      map:
-        nvidia-plugin-configs: |-
-          version: v1
-          flags:
-            migStrategy: none

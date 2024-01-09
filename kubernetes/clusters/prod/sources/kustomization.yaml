@@ -8,11 +8,13 @@ resources:
   - democratic-csi.yaml
   - grafana.yaml
   - ingress-nginix.yaml
+  - intel.yaml
   - jetstack.yaml
   - kube-state-metrics.yaml
   - kubernetes-dashboard.yaml
   - k8s-gateway.yaml
   - metallb.yaml
+  - node-feature-discovery.yaml
   - nvdp.yaml
   - prometheus-community.yaml
   - rook-release.yaml
