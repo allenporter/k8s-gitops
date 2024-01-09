@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-network
+  name: storage
   namespace: flux-system
 spec:
   interval: 10m0s
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./kubernetes/cluster_network/prod
-  # Disable prune while under maintenance
+  path: ./kubernetes/storage/prod
+  # Disable prune while under cluster maintenance
   prune: false
