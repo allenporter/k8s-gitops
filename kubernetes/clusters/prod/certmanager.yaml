@@ -10,4 +10,5 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./kubernetes/certmanager/prod
-  prune: true
+  # Disable prune while under maintenance
+  prune: false

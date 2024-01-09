@@ -10,4 +10,5 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./kubernetes/cluster_compute/prod
-  prune: true
+  # Disable prune while under cluster maintenance
+  prune: false
