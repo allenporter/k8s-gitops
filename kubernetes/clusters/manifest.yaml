@@ -114,7 +114,37 @@ clusters:
       repo_type: default
     helm_releases: []
     cluster_policies: []
-    config_maps: []
+    config_maps:
+    - name: network-config
+      namespace: flux-system
+    secrets: []
+  - name: monitoring
+    namespace: flux-system
+    path: kubernetes/monitoring/prod
+    helm_repos: []
+    helm_releases:
+    - name: kubernetes-dashboard
+      namespace: kubernetes-dashboard
+      chart:
+        name: kubernetes-dashboard
+        repo_name: kubernetes-dashboard
+        repo_namespace: flux-system
+    - name: kube-prometheus-stack
+      namespace: monitoring
+      chart:
+        name: kube-prometheus-stack
+        repo_name: prometheus-community
+        repo_namespace: flux-system
+    - name: weave-gitops
+      namespace: weave-gitops
+      chart:
+        name: weave-gitops
+        repo_name: weave-works
+        repo_namespace: flux-system
+    cluster_policies: []
+    config_maps:
+    - name: grafana-dashboard-control-plane-99d879ff4d
+      namespace: flux-system
     secrets: []
   - name: network
     namespace: flux-system
@@ -137,8 +167,6 @@ clusters:
     config_maps:
     - name: calico-config
       namespace: kube-system
-    - name: network-config
-      namespace: flux-system
     secrets: []
   - name: network-certs
     namespace: flux-system
