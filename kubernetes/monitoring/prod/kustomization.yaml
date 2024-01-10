@@ -11,3 +11,4 @@ resources:
 - ../base/flux-monitoring
 - ../base/weave-gitops
 - monitoring-secrets.yaml
+- weave-gitops-secret.yaml
