@@ -1,0 +1,20 @@
+---
+cluster:
+  primary_ip: 10.10.100.1
+  secondary_ips:
+  - 10.10.100.2
+  - 10.10.100.3
+  worker_ips:
+  - 10.10.100.4
+
+control_plane:
+  # kube-vip ip address
+  ip: 10.10.101.1
+
+services:
+  # MetalLB IP Pool range
+  ip_range: 10.10.102.1-10.10.102.254
+
+  # k8s-gateway IP address
+  name_service_ip: 10.10.102.1
+  name_service_domain: k8s.mrv.thebends.org

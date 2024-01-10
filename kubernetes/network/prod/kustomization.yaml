@@ -5,7 +5,11 @@ patches:
 - path: cert-manager-values.yaml
 - path: metallb-values.yaml
 resources:
-- calico
 - ../base/cert-manager
 - ../base/metallb
+- calico
+- certs.yaml
+- network-config.yaml
+- network-secrets.yaml
 - load-balancer.yaml
+- name-service.yaml
