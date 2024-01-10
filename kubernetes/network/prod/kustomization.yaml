@@ -10,6 +10,7 @@ resources:
 - calico
 - network-certs.yaml
 - network-config.yaml
+- network-ingress.yaml
 - network-load-balancer.yaml
 - network-name-service.yaml
 - network-secrets.yaml

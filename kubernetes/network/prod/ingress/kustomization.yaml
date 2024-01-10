@@ -4,4 +4,4 @@ kind: Kustomization
 patches:
 - path: nginx-values.yaml
 resources:
-- ../base/nginx
+- ../../base/nginx

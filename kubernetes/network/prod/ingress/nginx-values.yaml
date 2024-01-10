@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: nginx
+  name: nginx-internal
   namespace: nginx
 spec:
   chart:
@@ -10,13 +10,6 @@ spec:
       # renovate: registryUrl=https://kubernetes.github.io/ingress-nginx
       chart: ingress-nginx
       version: 4.9.0
-  values:
-    controller:
-      service:
-        annotations:
-          # Note: DNS not currently working here.
-          external-dns.alpha.kubernetes.io/hostname: prx04.${DOMAIN}.
-        loadBalancerIP: ${NGINX_INGRESS_IP}
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -32,7 +25,4 @@ spec:
   values:
     controller:
       service:
-        annotations:
-          # Note: DNS not currently working here.
-          external-dns.alpha.kubernetes.io/hostname: prx05.${DOMAIN}.
-        loadBalancerIP: ${NGINX_EXT_INGRESS_IP}
+        loadBalancerIP: ${external_ingress_ip}

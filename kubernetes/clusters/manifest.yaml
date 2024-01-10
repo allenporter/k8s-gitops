@@ -148,6 +148,26 @@ clusters:
     cluster_policies: []
     config_maps: []
     secrets: []
+  - name: network-ingress
+    namespace: flux-system
+    path: kubernetes/network/prod/ingress
+    helm_repos: []
+    helm_releases:
+    - name: nginx-internal
+      namespace: nginx
+      chart:
+        name: ingress-nginx
+        repo_name: ingress-nginx
+        repo_namespace: flux-system
+    - name: nginx-external
+      namespace: nginx
+      chart:
+        name: ingress-nginx
+        repo_name: ingress-nginx
+        repo_namespace: flux-system
+    cluster_policies: []
+    config_maps: []
+    secrets: []
   - name: network-load-balancer
     namespace: flux-system
     path: kubernetes/network/prod/load-balancer
