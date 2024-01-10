@@ -8,8 +8,8 @@ resources:
 - ../base/cert-manager
 - ../base/metallb
 - calico
-- certs.yaml
+- network-certs.yaml
 - network-config.yaml
+- network-load-balancer.yaml
+- network-name-service.yaml
 - network-secrets.yaml
-- load-balancer.yaml
-- name-service.yaml
