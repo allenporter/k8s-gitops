@@ -12,3 +12,4 @@ resources:
 - network-config.yaml
 - network-secrets.yaml
 - load-balancer.yaml
+- name-service.yaml

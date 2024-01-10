@@ -21,9 +21,6 @@ spec:
     enable: true
   # https://github.com/ori-edge/k8s_gateway/blob/master/charts/k8s-gateway/values.yaml
   values:
-    domain: k8s.mrv.thebends.org
-    ttl: 1
     service:
       type: LoadBalancer
-      loadBalancerIP: 10.10.102.2
       externalTrafficPolicy: Cluster

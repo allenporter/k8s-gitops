@@ -12,6 +12,4 @@ spec:
   values:
     domain: ${name_service_dns_domain}
     service:
-      type: LoadBalancer
       loadBalancerIP: ${name_service_dns_ip}
-      externalTrafficPolicy: Cluster
