@@ -3,5 +3,6 @@
   gather_facts: false
   roles:
   - edgeos-config
-  - edgeos-certs
+  # Currently disabled as non-functioning
+  # - edgeos-certs
   - edgeos-node-exporter
