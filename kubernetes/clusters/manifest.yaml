@@ -138,6 +138,14 @@ clusters:
     - name: calico-config
       namespace: kube-system
     secrets: []
+  - name: network-load-balancer
+    namespace: flux-system
+    path: kubernetes/network/prod/load-balancer
+    helm_repos: []
+    helm_releases: []
+    cluster_policies: []
+    config_maps: []
+    secrets: []
   - name: storage
     namespace: flux-system
     path: kubernetes/storage/prod
