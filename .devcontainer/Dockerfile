@@ -74,7 +74,8 @@ RUN cd /usr/local/bin/ && \
     curl -OL https://github.com/weaveworks/weave-gitops/releases/download/${WEAVE_GITOPS_VERSION}/gitops-Linux-${WEAVE_ARCH}.tar.gz && \
     tar xf gitops-Linux-${WEAVE_ARCH}.tar.gz && \
     chmod +x gitops
-RUN gitops version
+# This may prompt interactively; don't run
+# RUN gitops version
 
 # renovate: datasource=github-releases depName=stedolan/jq
 ARG JQ_VERSION=1.6
