@@ -11,6 +11,10 @@ spec:
     name: flux-system
   path: ./kubernetes/monitoring/prod
   prune: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   postBuild:
     substituteFrom:
     - kind: ConfigMap
