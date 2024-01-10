@@ -79,12 +79,21 @@ machines:
 - host: pelican
   ip: 10.10.100.1
   mac: 1c:69:7a:6d:2a:70
+  # Storage NIC:
+  #  iface: enx8cae4cd643b7
+  #  mac: 8c:ae:4c:d6:43:b7
 - host: sonar
   ip: 10.10.100.2
   mac: 1c:69:7a:6d:2a:b1
+  # Storage NIC:
+  #  iface: enx8cae4cd643c3
+  #  mac: 8c:ae:4c:d6:43:c3
 - host: buffalo
   ip: 10.10.100.3
   mac: 1c:69:7a:a6:f1:21
+  # Storage NIC:
+  #   iface: enx70bc108bdec5
+  #   mac: 70:bc:10:8b:de:c5
 - host: market
   ip: 10.10.100.4
   mac: e0:d5:5e:e5:25:be

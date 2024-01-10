@@ -10,5 +10,6 @@ data:
   # Service Naming (k8s-gateway)
   name_service_dns_ip: 10.10.102.1
   name_service_dns_domain: k8s.mrv.thebends.org
-  # External reverse proxy (nginx)
+  # Reverse proxies
   external_ingress_ip: 10.10.102.2
+  internal_ingress_ip: 10.10.102.3
