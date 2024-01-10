@@ -1,0 +1,17 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: k8s-gateway
+  namespace: k8s-gateway
+spec:
+  chart:
+    spec:
+      chart: k8s-gateway
+      version: 2.1.0
+  values:
+    domain: ${name_service_dns_domain}
+    service:
+      type: LoadBalancer
+      loadBalancerIP: ${name_service_dns_ip}
+      externalTrafficPolicy: Cluster

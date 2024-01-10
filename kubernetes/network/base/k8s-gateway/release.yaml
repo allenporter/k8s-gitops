@@ -1,0 +1,29 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: k8s-gateway
+  namespace: k8s-gateway
+spec:
+  releaseName: k8s-gateway
+  chart:
+    spec:
+      chart: k8s-gateway
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-gateway
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  # https://github.com/ori-edge/k8s_gateway/blob/master/charts/k8s-gateway/values.yaml
+  values:
+    domain: k8s.mrv.thebends.org
+    ttl: 1
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 10.10.102.2
+      externalTrafficPolicy: Cluster

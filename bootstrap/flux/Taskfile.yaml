@@ -3,7 +3,8 @@ version: '3'
 vars:
   sops_gcloud_key: k8s-gitops-age-key
   flux_sops_secret_name: sops-age
-  flux_namespace: flux-system
+  flux_sops_secret_entry: sops.agekey
+  flux_sops_secret_namespace: flux-system
 
 tasks:
   create-namespace:
@@ -14,7 +15,7 @@ tasks:
     cmds:
       - |
         gcloud secrets versions access 1 --secret={{.sops_gcloud_key}} --project=${GCLOUD_PROJECT_ID} | \
-            kubectl create secret generic "{{.flux_sops_secret_name}}" --namespace="{{.secret_namespace}}" --from-file="{{.flux_sops_secret_name}}=/dev/stdin"
+            kubectl create secret generic "{{.flux_sops_secret_name}}" --namespace="{{.flux_sops_secret_namespace}}" --from-file="{{.flux_sops_secret_name}}=/dev/stdin"
 
   install-flux:
     cmds:

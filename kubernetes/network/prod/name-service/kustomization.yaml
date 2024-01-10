@@ -1,6 +1,7 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: cert-manager
+patches:
+- path: k8s-gateway-values.yaml
 resources:
-  - letsencrypt.yaml
+- ../../base/k8s-gateway

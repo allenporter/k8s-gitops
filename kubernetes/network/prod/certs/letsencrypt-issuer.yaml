@@ -2,21 +2,19 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt
+  name: letsencrypt-issuer
   namespace: cert-manager
 spec:
   acme:
-    # You must replace this email address with your own.
-    # Let's Encrypt will use this to contact you about expiring
-    # certificates, and issues related to your account.
-    email: allen.porter@gmail.com
+    email: ${letsencrypt_email}
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: letsencrypt-issuer-account-key
+      name: letsencrypt-account-key
+      key: tls.key
     solvers:
     - dns01:
         cloudDNS:
-          project: ${CLOUD_DNS_PROJECT_ID}
+          project: ${cloud_project_id}
           serviceAccountSecretRef:
             name: cloud-dns01-service-account
             key: credentials

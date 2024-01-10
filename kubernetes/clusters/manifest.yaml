@@ -137,6 +137,16 @@ clusters:
     config_maps:
     - name: calico-config
       namespace: kube-system
+    - name: network-config
+      namespace: flux-system
+    secrets: []
+  - name: network-certs
+    namespace: flux-system
+    path: kubernetes/network/prod/certs
+    helm_repos: []
+    helm_releases: []
+    cluster_policies: []
+    config_maps: []
     secrets: []
   - name: network-load-balancer
     namespace: flux-system

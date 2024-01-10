@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: network-config
+    namespace: flux-system
+data:
+  # Loadbalancer (metallb)
+  service_ip_range:
+  - 10.10.102.1-10.10.102.254
+  # Service Naming (k8s-gateway)
+  name_service_dns_ip: 10.10.102.1
+  name_service_dns_domain: k8s.mrv.thebends.org
