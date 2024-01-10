@@ -6,9 +6,8 @@ patches:
 - path: kube-prometheus-stack-values.yaml
 - path: weave-gitops-values.yaml
 resources:
-- namespace.yaml
 - ../base/kubernetes-dashboard
 - ../base/kube-prometheus-stack
 - ../base/flux-monitoring
 - ../base/weave-gitops
-- flux-discord-urls-secret.yaml
+- monitoring-secrets.yaml

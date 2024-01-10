@@ -5,10 +5,6 @@
 # to verify the manifest file. The default with no argument is to generate.
 
 COMMAND=${1:-generate}
-if [ "$COMMAND" != "generate" ] && [ "$COMMAND" != "validate" ]; then
-  echo "Invalid command. Please pass either 'generate' or 'validate'."
-  exit 1
-fi
 
 MANIFEST_FILE=kubernetes/clusters/manifest.yaml
 if [ ! -f "$MANIFEST_FILE" ]; then

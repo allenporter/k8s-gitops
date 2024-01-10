@@ -31,12 +31,12 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
-          - g.${DOMAIN}
+          - g.${name_service_dns_domain}
         pathType: Prefix
         tls:
           - secretName: g-tls
             hosts:
-              - g.${DOMAIN}
+              - g.${name_service_dns_domain}
       persistence:
         enabled: false
       sidecar:
@@ -90,12 +90,12 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
-          - p.${DOMAIN}
+          - p.${name_service_dns_domain}
         pathType: Prefix
         tls:
           - secretName: p-tls
             hosts:
-              - p.${DOMAIN}
+              - p.${name_service_dns_domain}
       prometheusSpec:
         enableAdminAPI: true
         ruleSelector: {}
@@ -109,33 +109,35 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         deploymentStrategy:
           type: Recreate
-        storageSpec:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: "rook-ceph-block"
-              resources:
-                requests:
-                  storage: 20Gi
+        # TODO: Re-create when cluster block storage is completely setup #1647
+        # storageSpec:
+        #   volumeClaimTemplate:
+        #     spec:
+        #       storageClassName: "rook-ceph-block"
+        #       resources:
+        #         requests:
+        #           storage: 20Gi
     alertmanager:
       ingress:
         enabled: true
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
-          - a.${DOMAIN}
+          - a.${name_service_dns_domain}
         pathType: Prefix
         tls:
           - secretName: a-tls
             hosts:
-              - a.${DOMAIN}
+              - a.${name_service_dns_domain}
       alertmanagerSpec:
-        storage:
-          volumeClaimTemplate:
-            spec:
-              storageClassName: "rook-ceph-block"
-              resources:
-                requests:
-                  storage: 5Gi
+        # TODO: Re-create when cluster block storage is completely setup #1647
+        # storage:
+        #   volumeClaimTemplate:
+        #     spec:
+        #       storageClassName: "rook-ceph-block"
+        #       resources:
+        #         requests:
+        #           storage: 5Gi
       config:
         global:
           resolve_timeout: 5m
