@@ -13,3 +13,6 @@ kind: L2Advertisement
 metadata:
   name: generic-advertisement
   namespace: metallb
+  ipAddressPools:
+  # Disable to stop mac flood
+  #- name: generic-cluster-pool
