@@ -10,7 +10,8 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./kubernetes/network/prod/load-balancer
-  prune: true
+  # Don't remove kube-vip since it is required for bootstrap
+  prune: false
   dependsOn:
   - name: network
   postBuild:
