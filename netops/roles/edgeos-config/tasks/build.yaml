@@ -1,27 +1,14 @@
 ---
-- name: Login password
-  gcp_secret:
-    project: "{{ lookup('ansible.builtin.env', 'GCLOUD_PROJECT_ID') }}"
-    secret: "{{ gcp_edgeos_encrypted_password_key }}"
-    version: 1
-  register: gcp_encrypted_password
+- name: k3s_token
+  shell:
+    cmd: "sops -d {{ secrets_dir }}/{{ inventory_hostname }}-secret.yaml | yq -r .{{ item }}"
+  register: secrets
+  run_once: true
   delegate_to: localhost
-
-- name: Dyndns login
-  gcp_secret:
-    project: "{{ lookup('ansible.builtin.env', 'GCLOUD_PROJECT_ID') }}"
-    secret: dyndns-login
-    version: 1
-  register: gcp_dyndns_login
-  delegate_to: localhost
-
-- name: Dyndns password
-  gcp_secret:
-    project: "{{ lookup('ansible.builtin.env', 'GCLOUD_PROJECT_ID') }}"
-    secret: dyndns-password
-    version: 1
-  register: gcp_dyndns_password
-  delegate_to: localhost
+  with_items:
+  - encrypted_password
+  - dyndns_login
+  - dyndns_password
 
 - name: Create build directory
   delegate_to: localhost
@@ -34,9 +21,9 @@
 
 - name: Build configuration
   vars:
-    encrypted_password: "{{ gcp_encrypted_password.secret }}"
-    dyndns_login: "{{ gcp_dyndns_login.secret }}"
-    dyndns_password: "{{ gcp_dyndns_password.secret }}"
+    encrypted_password: "{{ secrets.results[0].stdout }}"
+    dyndns_login: "{{ secrets.results[1].stdout }}"
+    dyndns_password: "{{ secrets.results[2].stdout }}"
     # Needed since there is no inventory entry for localhost
     ansible_python_interpreter: /usr/bin/python3
   delegate_to: localhost
