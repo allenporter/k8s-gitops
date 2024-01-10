@@ -14,4 +14,3 @@ data:
   name_service_dns_domain: k8s.mrv.thebends.org
   # Reverse proxies
   external_ingress_ip: 10.10.102.2
-  internal_ingress_ip: 10.10.102.3
