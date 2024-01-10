@@ -13,5 +13,6 @@ spec:
   values:
     adminUser:
       create: true
-      username: ${WEAVE_GITOPS_USERNAME}
-      passwordHash: ${WEAVE_GITOPS_PASSWORD}
+      # Use existing `cluster-user-auth` secret
+      createSecret: false
+      username: gitops
