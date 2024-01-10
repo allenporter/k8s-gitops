@@ -2,8 +2,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-    name: network-config
-    namespace: flux-system
+  name: network-config
+  namespace: flux-system
 data:
   # Loadbalancer (metallb)
   service_ip_range:
