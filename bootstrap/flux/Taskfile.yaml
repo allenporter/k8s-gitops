@@ -15,7 +15,7 @@ tasks:
     cmds:
       - |
         gcloud secrets versions access 1 --secret={{.sops_gcloud_key}} --project=${GCLOUD_PROJECT_ID} | \
-            kubectl create secret generic "{{.flux_sops_secret_name}}" --namespace="{{.flux_sops_secret_namespace}}" --from-file="{{.flux_sops_secret_name}}=/dev/stdin"
+            kubectl create secret generic "{{.flux_sops_secret_name}}" --namespace="{{.flux_sops_secret_namespace}}" --from-file="{{.flux_sops_secret_entry}}=/dev/stdin"
 
   install-flux:
     cmds:
