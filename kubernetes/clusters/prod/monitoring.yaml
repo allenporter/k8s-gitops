@@ -11,6 +11,9 @@ spec:
     name: flux-system
   path: ./kubernetes/monitoring/prod
   prune: true
+  dependsOn:
+  - name: flux-system
+  - name: network
   decryption:
     provider: sops
     secretRef:
