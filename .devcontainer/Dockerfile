@@ -67,6 +67,19 @@ COPY --from=docker.io/alpine/helm:3.13.3                /usr/bin/helm           
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.2.2              /usr/local/bin/flux              /usr/local/bin/flux
 COPY --from=calico/ctl:v3.27.0                          /calicoctl               /usr/bin/calicoctl
 
+
+curl --silent --location "https://github.com/weaveworks/weave-gitops/releases/download/v0.24.0/gitops-$(uname)-$(uname -m).tar.gz" | tar xz -C /tmp
+sudo mv /tmp/gitops /usr/local/bin
+gitops version
+
+# renovate: datasource=github-releases depName=weaveworks/weave-gitops
+ARG WEAVE_GITOPS_VERSION=v0.24.0
+RUN cd /usr/local/bin/ && \
+    curl -OL https://github.com/weaveworks/weave-gitops/releases/download/${WEAVE_GITOPS_VERSION}/gitops-Linux-${ARCH}.tar.gz
+    tar xf gitops-Linux-${ARCH}.tar.gz && \
+    chmod +x gitops
+RUN gitops version
+
 # renovate: datasource=github-releases depName=stedolan/jq
 ARG JQ_VERSION=1.6
 RUN cd /usr/local/bin/ && \
