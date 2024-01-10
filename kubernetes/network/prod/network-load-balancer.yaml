@@ -17,4 +17,3 @@ spec:
     substituteFrom:
     - kind: ConfigMap
       name: network-config
-      namespace: flux-system
