@@ -110,6 +110,7 @@ set port-forward wan-interface eth0
 set service dhcp-server disabled false
 set service dhcp-server hostfile-update disable
 
+# Add back when DHCP hosts are available in inventory
 # delete service dhcp-server shared-network-name LAN
 set service dhcp-server shared-network-name LAN authoritative enable
 set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 default-router 10.10.1.1

@@ -1,7 +1,7 @@
 ---
 - name: k3s_token
   shell:
-    cmd: "sops -d {{ secrets_dir }}/{{ inventory_hostname }}.yaml | yq -r .{{ item }}"
+    cmd: "sops -d {{ secrets_dir }}/{{ inventory_hostname }}-secret.yaml | yq -r .{{ item }}"
   register: secrets
   run_once: true
   delegate_to: localhost
