@@ -5,7 +5,7 @@ metadata:
   name: nginx-internal
   namespace: nginx
 spec:
-  releaseName: nginx
+  releaseName: nginx-internal
   chart:
     spec:
       chart: ingress-nginx
