@@ -110,7 +110,7 @@ set port-forward wan-interface eth0
 set service dhcp-server disabled false
 set service dhcp-server hostfile-update disable
 
-delete service dhcp-server shared-network-name LAN
+# delete service dhcp-server shared-network-name LAN
 set service dhcp-server shared-network-name LAN authoritative enable
 set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 default-router 10.10.1.1
 set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 dns-server 10.10.1.1
@@ -126,15 +126,6 @@ set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mappi
 {% endif %}
 {% endif %}
 {% endfor %}
-
-# Assignments for kairos demos
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping kairos-demo-1 ip-address 10.10.21.101
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping kairos-demo-1 mac-address 'bc:24:11:45:fa:df'
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping kairos-demo-2 ip-address 10.10.21.102
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping kairos-demo-2 mac-address 'bc:24:11:88:02:7a'
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping kairos-demo-2 ip-address 10.10.21.103
-set service dhcp-server shared-network-name LAN subnet 10.10.0.0/16 static-mapping kairos-demo-2 mac-address 'bc:24:11:a3:ca:2b'
-
 
 
 set service dhcp-server static-arp disable

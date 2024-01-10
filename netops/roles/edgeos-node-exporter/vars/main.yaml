@@ -3,5 +3,5 @@ node_exporter_dir: /usr/bin/node-exporter
 node_exporter: /usr/bin/node_exporter
 # renovate: datasource=github-releases depName=prometheus/node_exporter
 node_exporter_version: 1.7.0
-edgeos_exporter_url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter{{ node_exporter_version }}.linux-mipsle.tar.gz"
+edgeos_exporter_url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-mipsle.tar.gz"
 edgeos_exporter_file: "node_exporter-{{ node_exporter_version }}.linux-mipsle"

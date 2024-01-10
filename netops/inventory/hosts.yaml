@@ -1,0 +1,20 @@
+---
+rtr:
+  hosts:
+    rtr01:
+      ansible_host: 10.10.1.1
+      ansible_network_os: edgeos
+      ansible_python_interpreter: /usr/bin/python
+  vars:
+    dyndns_server: domains.google.com
+    domain: thebends.org
+    ext_domain: ext.thebends.org
+    site_domain: mrv.thebends.org
+    k8s_domain: k8s.mrv.thebends.org
+    k8s_dns1_ip: 10.10.102.1
+    k8s_dns2_ip: 10.10.102.2
+    # IP Address for DNS for a subset of DHCP clients
+    dhcp_dns_ip: 10.10.1.20
+    # TODO: This is not yet used to deliver keys
+    ssh_authorized_keys:
+    - github:allenporter
