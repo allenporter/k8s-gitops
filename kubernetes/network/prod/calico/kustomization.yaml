@@ -1,4 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled
 resources:
 - localized-files/raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/calico.yaml
