@@ -1,0 +1,242 @@
+---
+clusters:
+- path: kubernetes/clusters/prod
+  kustomizations:
+  - name: compute
+    namespace: flux-system
+    path: kubernetes/compute/prod
+    helm_repos: []
+    helm_releases:
+    - name: nvdp
+      namespace: nvidia-device-plugin
+      chart:
+        name: nvidia-device-plugin
+        repo_name: nvdp
+        repo_namespace: flux-system
+    - name: intel-device-plugin-operator
+      namespace: intel-device-plugin
+      chart:
+        name: intel-device-plugins-operator
+        repo_name: intel
+        repo_namespace: flux-system
+    - name: intel-device-plugin-gpu
+      namespace: intel-device-plugin
+      chart:
+        name: intel-device-plugins-gpu
+        repo_name: intel
+        repo_namespace: flux-system
+    - name: node-feature-discovery
+      namespace: node-feature-discovery
+      chart:
+        name: node-feature-discovery
+        repo_name: node-feature-discovery
+        repo_namespace: flux-system
+    cluster_policies: []
+    config_maps:
+    - name: default-controller-env
+      namespace: system-upgrade
+    secrets: []
+  - name: crds
+    namespace: flux-system
+    path: kubernetes/crds
+    helm_repos: []
+    helm_releases: []
+    cluster_policies: []
+    config_maps: []
+    secrets: []
+  - name: flux-system
+    namespace: flux-system
+    path: kubernetes/clusters/prod
+    helm_repos:
+    - name: backube
+      namespace: flux-system
+      url: https://backube.github.io/helm-charts/
+      repo_type: default
+    - name: bjw-s-helm-charts
+      namespace: flux-system
+      url: https://bjw-s.github.io/helm-charts/
+      repo_type: default
+    - name: democratic-csi
+      namespace: flux-system
+      url: https://democratic-csi.github.io/charts/
+      repo_type: default
+    - name: grafana
+      namespace: flux-system
+      url: https://grafana.github.io/helm-charts
+      repo_type: default
+    - name: ingress-nginx
+      namespace: flux-system
+      url: https://kubernetes.github.io/ingress-nginx
+      repo_type: default
+    - name: intel
+      namespace: flux-system
+      url: https://intel.github.io/helm-charts
+      repo_type: default
+    - name: jetstack
+      namespace: flux-system
+      url: https://charts.jetstack.io
+      repo_type: default
+    - name: kube-state-metrics
+      namespace: flux-system
+      url: https://kubernetes.github.io/kube-state-metrics
+      repo_type: default
+    - name: kubernetes-dashboard
+      namespace: flux-system
+      url: https://kubernetes.github.io/dashboard/
+      repo_type: default
+    - name: k8s-gateway
+      namespace: flux-system
+      url: https://ori-edge.github.io/k8s_gateway/
+      repo_type: default
+    - name: metallb
+      namespace: flux-system
+      url: https://metallb.github.io/metallb
+      repo_type: default
+    - name: node-feature-discovery
+      namespace: flux-system
+      url: https://kubernetes-sigs.github.io/node-feature-discovery/charts
+      repo_type: default
+    - name: nvdp
+      namespace: flux-system
+      url: https://nvidia.github.io/k8s-device-plugin
+      repo_type: default
+    - name: prometheus-community
+      namespace: flux-system
+      url: https://prometheus-community.github.io/helm-charts
+      repo_type: default
+    - name: rook-release
+      namespace: flux-system
+      url: https://charts.rook.io/release
+      repo_type: default
+    - name: weave-works
+      namespace: flux-system
+      url: https://helm.gitops.weave.works
+      repo_type: default
+    helm_releases: []
+    cluster_policies: []
+    config_maps:
+    - name: network-config
+      namespace: flux-system
+    secrets: []
+  - name: monitoring
+    namespace: flux-system
+    path: kubernetes/monitoring/prod
+    helm_repos: []
+    helm_releases:
+    - name: kubernetes-dashboard
+      namespace: kubernetes-dashboard
+      chart:
+        name: kubernetes-dashboard
+        repo_name: kubernetes-dashboard
+        repo_namespace: flux-system
+    - name: kube-prometheus-stack
+      namespace: monitoring
+      chart:
+        name: kube-prometheus-stack
+        repo_name: prometheus-community
+        repo_namespace: flux-system
+    - name: weave-gitops
+      namespace: weave-gitops
+      chart:
+        name: weave-gitops
+        repo_name: weave-works
+        repo_namespace: flux-system
+    cluster_policies: []
+    config_maps:
+    - name: grafana-dashboard-control-plane-99d879ff4d
+      namespace: flux-system
+    secrets: []
+  - name: network
+    namespace: flux-system
+    path: kubernetes/network/prod
+    helm_repos: []
+    helm_releases:
+    - name: cert-manager
+      namespace: cert-manager
+      chart:
+        name: cert-manager
+        repo_name: jetstack
+        repo_namespace: flux-system
+    cluster_policies: []
+    config_maps:
+    - name: calico-config
+      namespace: kube-system
+    secrets: []
+  - name: network-certs
+    namespace: flux-system
+    path: kubernetes/network/prod/certs
+    helm_repos: []
+    helm_releases: []
+    cluster_policies: []
+    config_maps: []
+    secrets: []
+  - name: network-ingress
+    namespace: flux-system
+    path: kubernetes/network/prod/ingress
+    helm_repos: []
+    helm_releases:
+    - name: nginx-internal
+      namespace: nginx
+      chart:
+        name: ingress-nginx
+        repo_name: ingress-nginx
+        repo_namespace: flux-system
+    - name: nginx-external
+      namespace: nginx
+      chart:
+        name: ingress-nginx
+        repo_name: ingress-nginx
+        repo_namespace: flux-system
+    cluster_policies: []
+    config_maps: []
+    secrets: []
+  - name: network-load-balancer
+    namespace: flux-system
+    path: kubernetes/network/prod/load-balancer
+    helm_repos: []
+    helm_releases: []
+    cluster_policies: []
+    config_maps:
+    - name: kubevip
+      namespace: kube-system
+    secrets: []
+  - name: network-name-service
+    namespace: flux-system
+    path: kubernetes/network/prod/name-service
+    helm_repos: []
+    helm_releases:
+    - name: k8s-gateway
+      namespace: k8s-gateway
+      chart:
+        name: k8s-gateway
+        repo_name: k8s-gateway
+        repo_namespace: flux-system
+    cluster_policies: []
+    config_maps: []
+    secrets: []
+  - name: storage
+    namespace: flux-system
+    path: kubernetes/storage/prod
+    helm_repos: []
+    helm_releases:
+    - name: local-path-provisioner
+      namespace: democratic-csi
+      chart:
+        name: democratic-csi
+        repo_name: democratic-csi
+        repo_namespace: flux-system
+    - name: rook-ceph
+      namespace: rook-ceph
+      chart:
+        name: rook-ceph
+        repo_name: rook-release
+        repo_namespace: flux-system
+    - name: volsync
+      namespace: volsync-system
+      chart:
+        name: volsync
+        repo_name: backube
+        repo_namespace: flux-system
+    cluster_policies: []
+    config_maps: []
+    secrets: []
