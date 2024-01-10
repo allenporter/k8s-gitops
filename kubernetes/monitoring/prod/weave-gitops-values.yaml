@@ -15,3 +15,4 @@ spec:
       create: true
       # Use existing `cluster-user-auth` secret
       createSecret: false
+      username: gitops
