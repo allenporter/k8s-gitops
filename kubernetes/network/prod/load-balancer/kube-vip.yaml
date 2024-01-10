@@ -53,5 +53,5 @@ spec:
   hostNetwork: true
   volumes:
   - hostPath:
-      path:  /etc/rancher/k3s/k3s.yaml
+      path: /etc/rancher/k3s/k3s.yaml
     name: kubeconfig
