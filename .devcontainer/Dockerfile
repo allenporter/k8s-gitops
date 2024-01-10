@@ -69,8 +69,8 @@ COPY --from=calico/ctl:v3.27.0                          /calicoctl              
 
 # renovate: datasource=github-releases depName=weaveworks/weave-gitops
 ARG WEAVE_GITOPS_VERSION=v0.38.0
+ARG WEAVE_ARCH=x86_64
 RUN cd /usr/local/bin/ && \
-    export WEAVE_ARCH=`echo ${ARCH} | sed s/arm64/aarch64/ | sed s/amd64/x86_64/` && \
     curl -OL https://github.com/weaveworks/weave-gitops/releases/download/${WEAVE_GITOPS_VERSION}/gitops-Linux-${WEAVE_ARCH}.tar.gz && \
     tar xf gitops-Linux-${WEAVE_ARCH}.tar.gz && \
     chmod +x gitops
