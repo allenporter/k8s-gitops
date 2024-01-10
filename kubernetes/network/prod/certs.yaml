@@ -20,5 +20,4 @@ spec:
   postBuild:
     substituteFrom:
     - kind: Secret
-      name: letsencrypt-config
-      namespace: cert-manager
+      name: network-secrets
