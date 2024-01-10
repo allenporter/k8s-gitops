@@ -11,3 +11,5 @@ spec:
     name: flux-system
   path: ./kubernetes/storage/prod
   prune: true
+  dependsOn:
+  - name: flux-system

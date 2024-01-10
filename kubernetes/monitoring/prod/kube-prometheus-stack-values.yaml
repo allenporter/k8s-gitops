@@ -10,4 +10,3 @@ spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
       version: 55.6.0
-  values:
