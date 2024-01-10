@@ -12,6 +12,4 @@ spec:
   values:
     domain: ${name_service_dns_domain}
     service:
-      annotations:
-        kube-vip.io/ignore: true
       loadBalancerIP: ${name_service_dns_ip}
