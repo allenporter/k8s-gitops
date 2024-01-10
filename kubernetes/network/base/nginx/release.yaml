@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: nginx
+  name: nginx-internal
   namespace: nginx
 spec:
   releaseName: nginx
@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: ingress-nginx
         namespace: flux-system
-  interval: 5m
+  interval: 30m
   install:
     remediation:
       retries: 3
@@ -21,12 +21,12 @@ spec:
   # https://github.com/kubernetes/ingress-nginx/blob/master/charts/ingress-nginx/values.yaml
   values:
     controller:
-      ingressClass: nginx
+      ingressClass: nginx-internal
       ingressClassResource:
         enabled: true
-        name: nginx
+        name: nginx-internal
         default: true
-        controllerValue: "k8s.io/ingress-nginx"
+        controllerValue: "k8s.io/ingress-nginx-internal"
       service:
         type: LoadBalancer
         # Preserve source ip addresses
@@ -52,7 +52,7 @@ spec:
         kind: HelmRepository
         name: ingress-nginx
         namespace: flux-system
-  interval: 5m
+  interval: 30m
   install:
     remediation:
       retries: 3
