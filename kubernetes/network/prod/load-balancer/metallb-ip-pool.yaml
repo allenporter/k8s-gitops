@@ -5,7 +5,8 @@ metadata:
   name: generic-cluster-pool
   namespace: metallb
 spec:
-  addresses: ${service_ip_range}
+  addresses:
+  - ${service_ip_range}
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
