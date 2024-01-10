@@ -53,7 +53,7 @@ spec:
       admin:
         existingSecret: "grafana"
     coreDns:
-      enabled: false
+      enabled: true
     kubeDns:
       enabled: false
     kubeControllerManager:
