@@ -2,7 +2,9 @@
 creation_rules:
   - path_regex: .*/prod/.*\.yaml
     encrypted_regex: ^(data|stringData)$
-    pgp: BF010A1EAF254C931DB47C39A6821796DB9EAB3D
+    age: age1neakthxhftzns63tmvmpsn0rl4wfzzhsdcucm0a84et24azgxdyqrkagxg
+    # Old key
+    # pgp: BF010A1EAF254C931DB47C39A6821796DB9EAB3D
   - path_regex: bootstrap/.*\.yaml
     age: age1neakthxhftzns63tmvmpsn0rl4wfzzhsdcucm0a84et24azgxdyqrkagxg
   - path_regex: netops/.*\.yaml
