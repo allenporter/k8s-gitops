@@ -11,3 +11,5 @@ spec:
     name: flux-system
   path: ./kubernetes/crds
   prune: true
+  dependsOn:
+  - name: flux-system

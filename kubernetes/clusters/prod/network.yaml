@@ -11,6 +11,8 @@ spec:
     name: flux-system
   path: ./kubernetes/network/prod
   prune: true
+  dependsOn:
+  - name: flux-system
   decryption:
     provider: sops
     secretRef:
