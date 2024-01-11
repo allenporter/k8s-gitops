@@ -84,6 +84,7 @@ spec:
         retain: true
 
       config:
+        enabled: true
         type: configMap
         name: clblast-model-config
         globalMounts:
