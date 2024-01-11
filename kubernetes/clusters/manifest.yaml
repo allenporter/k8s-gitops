@@ -126,6 +126,28 @@ clusters:
     cluster_policies: []
     config_maps: []
     secrets: []
+  - name: ml
+    namespace: flux-system
+    path: kubernetes/ml/prod
+    helm_repos: []
+    helm_releases:
+    - name: llama-clblast
+      namespace: llama
+      chart:
+        name: app-template
+        repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
+    - name: llama-gpt-ui
+      namespace: llama
+      chart:
+        name: app-template
+        repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
+    cluster_policies: []
+    config_maps:
+    - name: clblast-model-config
+      namespace: llama
+    secrets: []
   - name: monitoring
     namespace: flux-system
     path: kubernetes/monitoring/prod
