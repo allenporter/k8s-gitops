@@ -137,7 +137,19 @@ clusters:
         name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
-    - name: llama-gpt-ui
+    - name: llama-gpt-ui-clblast
+      namespace: llama
+      chart:
+        name: app-template
+        repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
+    - name: llama-gpt-ui-openblas
+      namespace: llama
+      chart:
+        name: app-template
+        repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
+    - name: llama-openblas
       namespace: llama
       chart:
         name: app-template
@@ -146,6 +158,8 @@ clusters:
     cluster_policies: []
     config_maps:
     - name: clblast-model-config
+      namespace: llama
+    - name: openblas-model-config
       namespace: llama
     secrets: []
   - name: monitoring
