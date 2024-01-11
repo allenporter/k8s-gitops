@@ -10,6 +10,5 @@ resources:
 - ../base/kubernetes-dashboard
 - ../base/kube-prometheus-stack
 - ../base/weave-gitops
-- flux-discord-urls-secret.yaml
 - monitoring-secrets.yaml
 - weave-gitops-secret.yaml
