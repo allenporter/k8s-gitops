@@ -5,3 +5,4 @@ namespace: home-assistant
 resources:
 - external-service.yaml
 - external-ingress.yaml
+- namespace.yaml
