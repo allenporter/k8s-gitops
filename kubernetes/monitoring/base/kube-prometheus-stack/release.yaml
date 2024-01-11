@@ -171,7 +171,6 @@ spec:
           - name: 'discord'
             discord_configs:
               - send_resolved: true
-                webhook_url: ${ALERTMANAGER_DISCORD_WEBHOOK_URL}
                 title: |-
                   [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }} {{ else if ne .CommonAnnotations.message ""}}{{ .CommonAnnotations.message }} {{ else if ne .CommonAnnotations.description ""}}{{ .CommonAnnotations.description }} {{ else }}{{ .CommonLabels.alertname }}{{ end }}
                 message: >-
@@ -184,3 +183,9 @@ spec:
                   {{ end }}
         templates:
           - '/etc/alertmanager/config/*.tmpl'
+  valuesFrom:
+    - kind: Secret
+      name: discord-alert-url
+      valuesKey: address
+      targetPath: alertmanager.receivers[1].discord_configs[0].webhook_url
+      optional: false
