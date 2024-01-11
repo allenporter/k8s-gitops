@@ -2,10 +2,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: llama-gpt-ui
+  name: llama-gpt-ui-clblast
   namespace: llama
 spec:
-  releaseName: llama-gpt-ui
+  releaseName: llama-gpt-ui-clblast
   chart:
     spec:
       chart: app-template
@@ -55,7 +55,16 @@ spec:
             service:
               name: main
               port: http
+        - host: llama-gpt-clblast.${name_service_dns_domain}
+          paths:
+          - path: /
+            service:
+              name: main
+              port: http
         tls:
         - secretName: llama-gpt-tls
           hosts:
           - llama-gpt.${name_service_dns_domain}
+        - secretName: llama-gpt-clblast-tls
+          hosts:
+          - llama-gpt-clblast.${name_service_dns_domain}
