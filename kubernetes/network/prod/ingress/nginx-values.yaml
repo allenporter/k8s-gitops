@@ -14,6 +14,8 @@ spec:
     controller:
       service:
         loadBalancerIP: ${internal_ingress_ip}
+        annotations:
+          coredns.io/hostname: nginx-internal.${name_service_dns_domain}
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -30,3 +32,5 @@ spec:
     controller:
       service:
         loadBalancerIP: ${external_ingress_ip}
+        annotations:
+          coredns.io/hostname: nginx-external.${name_service_dns_domain}
