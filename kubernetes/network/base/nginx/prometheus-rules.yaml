@@ -30,18 +30,18 @@ spec:
         summary: renew expiring certificates to avoid downtime
     # Updated rules to look at rates for the last minute, consistently failing for 30 minutes.
     - alert: NGINXTooMany500s
-      expr: 100 * (sum(rate(nginx_ingress_controller_requests{status=~"4.+"}[1m])) by (ingress) / sum(rate(nginx_ingress_controller_requests[1m])) by (ingress)) > 5
+      expr: 100 * (sum(rate(nginx_ingress_controller_requests{status=~"4.+"}[1m])) by (ingress) / sum(rate(nginx_ingress_controller_requests[1m])) by (ingress)) > 1
       for: 30m
       labels:
         severity: warning
       annotations:
         description: Too many 5XXs
-        summary: More than 5% of all requests returned 5XX, this requires your attention
+        summary: More than 1% of all requests returned 5XX, this requires your attention
     - alert: NGINXTooMany400s
-      expr: 100 * (sum(rate(nginx_ingress_controller_requests{status=~"4.+"}[1m])) by (ingress) / sum(rate(nginx_ingress_controller_requests[1m])) by (ingress)) > 5
+      expr: 100 * (sum(rate(nginx_ingress_controller_requests{status=~"4.+"}[1m])) by (ingress) / sum(rate(nginx_ingress_controller_requests[1m])) by (ingress)) > 1
       for: 30m
       labels:
         severity: warning
       annotations:
         description: Too many 4XXs
-        summary: More than 5% of all requests returned 4XX, this requires your attention
+        summary: More than 1% of all requests returned 4XX, this requires your attention
