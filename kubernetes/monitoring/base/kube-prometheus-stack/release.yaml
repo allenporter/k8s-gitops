@@ -137,14 +137,13 @@ spec:
             hosts:
               - a.${name_service_dns_domain}
       alertmanagerSpec:
-        # TODO: Re-create when cluster block storage is completely setup #1647
-        # storage:
-        #   volumeClaimTemplate:
-        #     spec:
-        #       storageClassName: "rook-ceph-block"
-        #       resources:
-        #         requests:
-        #           storage: 5Gi
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: "local-hostpath"
+              resources:
+                requests:
+                  storage: 5Gi
       config:
         global:
           resolve_timeout: 5m
@@ -171,6 +170,7 @@ spec:
           - name: 'discord'
             discord_configs:
               - send_resolved: true
+                webhook_url: ${discord_alert_url}
                 title: |-
                   [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }} {{ else if ne .CommonAnnotations.message ""}}{{ .CommonAnnotations.message }} {{ else if ne .CommonAnnotations.description ""}}{{ .CommonAnnotations.description }} {{ else }}{{ .CommonLabels.alertname }}{{ end }}
                 message: >-
@@ -183,9 +183,3 @@ spec:
                   {{ end }}
         templates:
           - '/etc/alertmanager/config/*.tmpl'
-  valuesFrom:
-    - kind: Secret
-      name: discord-alert-url
-      valuesKey: address
-      targetPath: alertmanager.receivers[1].discord_configs[0].webhook_url
-      optional: false
