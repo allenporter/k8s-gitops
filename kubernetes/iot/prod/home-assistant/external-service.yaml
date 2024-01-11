@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: external
+spec:
+  type: ExternalName
+  externalName: campus.mrv.thebends.org
