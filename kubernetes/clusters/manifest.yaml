@@ -118,6 +118,14 @@ clusters:
     - name: network-config
       namespace: flux-system
     secrets: []
+  - name: iot
+    namespace: flux-system
+    path: kubernetes/iot/prod
+    helm_repos: []
+    helm_releases: []
+    cluster_policies: []
+    config_maps: []
+    secrets: []
   - name: monitoring
     namespace: flux-system
     path: kubernetes/monitoring/prod
