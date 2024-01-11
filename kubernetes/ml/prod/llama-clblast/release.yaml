@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app llama-clblast
+  name: llama-clblast
 spec:
   releaseName: llama-clblast
   chart:
@@ -87,5 +87,6 @@ spec:
         type: configMap
         name: clblast-model-config
         globalMounts:
-        - path: /config
+        - path: /config/model-config.json
+          subPath: model-config.json
           readOnly: true
