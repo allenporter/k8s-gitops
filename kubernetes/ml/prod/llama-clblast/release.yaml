@@ -45,6 +45,8 @@ spec:
             env:
             - name: MODEL_DIR
               value: /data/models
+            - name: CONFIG_FILE
+              value: /config/model-config.json
 
     service:
       main:
@@ -70,7 +72,7 @@ spec:
           - llama-clblast.${name_service_dns_domain}
 
     persistence:
-      config:
+      data:
         enabled: true
         storageClassName: "local-hostpath"
         type: persistentVolumeClaim
@@ -80,3 +82,10 @@ spec:
         - path: /data
           readOnly: false
         retain: true
+
+      config:
+        type: configMap
+        name: clblast-model-config
+        globalMounts:
+          - path: /config
+            readOnly: true
