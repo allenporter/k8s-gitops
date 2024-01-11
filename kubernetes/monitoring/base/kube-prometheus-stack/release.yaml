@@ -111,14 +111,18 @@ spec:
         podMonitorSelectorNilUsesHelmValues: false
         deploymentStrategy:
           type: Recreate
-        # TODO: Re-create when cluster block storage is completely setup #1647
-        # storageSpec:
-        #   volumeClaimTemplate:
-        #     spec:
-        #       storageClassName: "rook-ceph-block"
-        #       resources:
-        #         requests:
-        #           storage: 20Gi
+        resources:
+          requests:
+            memory: 400Mi
+          limit:
+            memory: 600Mi
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: "local-hostpath"
+              resources:
+                requests:
+                  storage: 20Gi
     alertmanager:
       ingress:
         enabled: true
