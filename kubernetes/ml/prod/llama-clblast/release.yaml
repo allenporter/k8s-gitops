@@ -87,5 +87,5 @@ spec:
         type: configMap
         name: clblast-model-config
         globalMounts:
-          - path: /config
-            readOnly: true
+        - path: /config
+          readOnly: true
