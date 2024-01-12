@@ -47,8 +47,9 @@ spec:
               value: /data/models
             - name: CONFIG_FILE
               value: /config/model-config.json
-            limits:
-              gpu.intel.com/i915: "1"
+            resources:
+              limits:
+                gpu.intel.com/i915: 1
 
     service:
       main:
