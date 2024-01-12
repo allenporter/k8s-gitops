@@ -14,7 +14,7 @@
     {
       "model": "/data/models/flux-7b-v0.1-Q4_K_M.gguf",
       "model_alias": "flux-7b",
-      "chat_format": "llama-2",
+      "chat_format": "zephyr",
       "n_gpu_layers": 35,
       "offload_kqv": true,
       "n_ctx": 4096,
