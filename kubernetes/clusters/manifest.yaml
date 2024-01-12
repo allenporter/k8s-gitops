@@ -157,9 +157,9 @@ clusters:
         repo_namespace: flux-system
     cluster_policies: []
     config_maps:
-    - name: clblast-model-config
+    - name: clblast-model-config-6khf74f2g4
       namespace: llama
-    - name: openblas-model-config
+    - name: openblas-model-config-md8k78t746
       namespace: llama
     secrets: []
   - name: monitoring
