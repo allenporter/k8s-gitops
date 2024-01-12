@@ -4,4 +4,9 @@ kind: Kustomization
 namespace: llama
 resources:
 - release.yaml
-- model-config.yaml
+configMapGenerator:
+- name: openblas-model-config
+  files:
+  - model-config.json=model-config.json
+configurations:
+- kustomizeconfig.yaml
