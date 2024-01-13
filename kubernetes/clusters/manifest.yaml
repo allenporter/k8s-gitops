@@ -7,12 +7,6 @@ clusters:
     path: kubernetes/compute/prod
     helm_repos: []
     helm_releases:
-    - name: nvdp
-      namespace: nvidia-device-plugin
-      chart:
-        name: nvidia-device-plugin
-        repo_name: nvdp
-        repo_namespace: flux-system
     - name: intel-device-plugin-operator
       namespace: intel-device-plugin
       chart:
@@ -30,6 +24,12 @@ clusters:
       chart:
         name: node-feature-discovery
         repo_name: node-feature-discovery
+        repo_namespace: flux-system
+    - name: nvidia-gpu-operator
+      namespace: nvidia-gpu-operator
+      chart:
+        name: gpu-operator
+        repo_name: nvidia
         repo_namespace: flux-system
     cluster_policies: []
     config_maps:
@@ -96,9 +96,9 @@ clusters:
       namespace: flux-system
       url: https://kubernetes-sigs.github.io/node-feature-discovery/charts
       repo_type: default
-    - name: nvdp
+    - name: nvidia
       namespace: flux-system
-      url: https://nvidia.github.io/k8s-device-plugin
+      url: https://helm.ngc.nvidia.com/nvidia
       repo_type: default
     - name: prometheus-community
       namespace: flux-system
