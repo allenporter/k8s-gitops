@@ -15,7 +15,7 @@ resources:
   - k8s-gateway.yaml
   - metallb.yaml
   - node-feature-discovery.yaml
-  - nvdp.yaml
+  - nvidia.yaml
   - prometheus-community.yaml
   - rook-release.yaml
   - weave-works.yaml
