@@ -1,0 +1,22 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nvidia-gpu-operator
+spec:
+  releaseName: nvidia-gpu-operator
+  chart:
+    spec:
+      chart: gpu-operator
+      sourceRef:
+        kind: HelmRepository
+        name: nvidia
+        namespace: flux-system
+  interval: 1h0m0s
+  values:
+    mig:
+      strategy: mixed
+    nfd:
+      # Already installed separately
+      enabled: false
+    usePrecompiled: true

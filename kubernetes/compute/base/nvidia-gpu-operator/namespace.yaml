@@ -2,4 +2,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: nvidia-device-plugin
+  name: nvidia-gpu-operator

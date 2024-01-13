@@ -1,0 +1,13 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nvidia-gpu-operator
+spec:
+  chart:
+    spec:
+      chart: gpu-operator
+      version: 23.6.2
+  values:
+    driver:
+      version: 535
