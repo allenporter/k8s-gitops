@@ -1,0 +1,9 @@
+---
+version: '3'
+
+tasks:
+  build-cloud-config:
+    env:
+      ANSIBLE_CONFIG: bootstrap/kairos/ansible.cfg
+    cmds:
+      - ansible-playbook bootstrap/kairos/build-cloud-config.yaml {{.CLI_ARGS}}
