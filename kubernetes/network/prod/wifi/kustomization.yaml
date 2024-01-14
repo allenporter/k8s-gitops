@@ -4,7 +4,7 @@ kind: Kustomization
 #patches:
 #- path: unifi-values.yaml
 resources:
-# - ../../base/unifi
+- ../../base/unifi
 #- unifi-backup.yaml
 - unifi-restic-config-secret.yaml
 - unifi-pvc.yaml
