@@ -258,6 +258,14 @@ clusters:
     cluster_policies: []
     config_maps: []
     secrets: []
+  - name: network-wifi
+    namespace: flux-system
+    path: kubernetes/network/prod/wifi
+    helm_repos: []
+    helm_releases: []
+    cluster_policies: []
+    config_maps: []
+    secrets: []
   - name: storage
     namespace: flux-system
     path: kubernetes/storage/prod
