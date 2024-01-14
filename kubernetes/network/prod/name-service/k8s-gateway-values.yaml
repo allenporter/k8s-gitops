@@ -16,3 +16,4 @@ spec:
       annotations:
         # Self reference
         coredns.io/hostname: k8s-gateway.${name_service_dns_domain}
+        kube-vip.io/loadbalancerIPs: ${name_service_dns_ip}
