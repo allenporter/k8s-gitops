@@ -17,3 +17,4 @@ data:
   internal_ingress_ip: 10.10.102.3
   # Prefix for all services at the site
   site_domain: mrv.thebends.org
+  unifi_controller_ip: 10.10.102.4
