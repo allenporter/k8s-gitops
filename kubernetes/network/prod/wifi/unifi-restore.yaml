@@ -1,0 +1,14 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: unifi-restore-20240113
+  naemspace: unifi
+spec:
+  trigger:
+    manual: restore-once
+  restic:
+    repository: unifi-restic-config
+    # Use an existing PVC, don't provision a new one
+    destinationPVC: unifi-shelf
+    copyMethod: Direct

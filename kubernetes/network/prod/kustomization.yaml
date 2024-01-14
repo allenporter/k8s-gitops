@@ -11,3 +11,4 @@ resources:
 - network-load-balancer.yaml
 - network-name-service.yaml
 - network-secrets.yaml
+- network-wifi.yaml
