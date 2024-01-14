@@ -55,11 +55,12 @@ machines:
 # Special hostname for unifi device discovery.
 - host: unifi
   desc: Unifi Controller
-  # Configured LoadBalancer IP with MetalLB in k8s
-  ip: 10.10.25.20
+  # Configured LoadBalancer IP
+  ip: 10.10.102.4
 # Additional alias allocated to the controller
 - host: shelf
   desc: Unifi Controller
+  ip: 10.10.
 
 # Storage servers
 - host: garden
