@@ -33,7 +33,7 @@ spec:
       main:
         type: LoadBalancer
         externalTrafficPolicy: Local
-        loadBalancerIP: ${UNIFI_CONTROLLER_IP}
+        loadBalancerIP: ${unifi_controller_ip}
         annotations:
           metallb.universe.tf/allow-shared-ip: unifi
         # Disable UDP ports, exported on a separate service below so that they
@@ -79,13 +79,13 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt
           haproxy.org/server-ssl: "true"
         hosts:
-        - host: unifi.${DOMAIN}
+        - host: unifi.${name_service_dns_domain}
           paths:
           - path: /
             service:
               name: main
               port: http
-        - host: unifi.prod.${SITE_DOMAIN}
+        - host: unifi.prod.${site_domain}
           paths:
           - path: /
             service:
@@ -94,10 +94,10 @@ spec:
         tls:
         - secretName: unifi-tls
           hosts:
-          - unifi.${DOMAIN}
+          - unifi.${name_service_dns_domain}
         - secretName: unifi-prod-tls
           hosts:
-          - unifi.prod.${SITE_DOMAIN}
+          - unifi.prod.${site_domain}
 
     persistence:
       config:
