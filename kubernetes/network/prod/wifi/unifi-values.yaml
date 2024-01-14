@@ -35,9 +35,8 @@ spec:
         externalTrafficPolicy: Local
         loadBalancerIP: ${unifi_controller_ip}
         annotations:
-          metallb.universe.tf/allow-shared-ip: unifi
-        # Disable UDP ports, exported on a separate service below so that they
-        # can share a LoadBalancer IP
+          # Note this is for documentation even though its not really authoritative
+          coredns.io/hostname: unifi.${site_domain}
         ports:
           http:
             port: 8443
@@ -77,7 +76,6 @@ spec:
         annotations:
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           cert-manager.io/cluster-issuer: letsencrypt
-          haproxy.org/server-ssl: "true"
         hosts:
         - host: unifi.${name_service_dns_domain}
           paths:

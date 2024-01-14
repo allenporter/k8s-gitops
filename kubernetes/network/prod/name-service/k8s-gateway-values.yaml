@@ -13,3 +13,6 @@ spec:
     domain: ${name_service_dns_domain}
     service:
       loadBalancerIP: ${name_service_dns_ip}
+      annotations:
+        # Self reference
+        coredns.io/hostname: k8s-gateway.${name_service_dns_domain}
