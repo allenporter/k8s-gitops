@@ -73,7 +73,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: nginx
+        className: nginx-internal
         annotations:
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           cert-manager.io/cluster-issuer: letsencrypt
