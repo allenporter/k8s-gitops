@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: unifi-restore-20240113
+  name: unifi-restore-20240114
   namespace: unifi
 spec:
   trigger:
@@ -12,3 +12,7 @@ spec:
     # Use an existing PVC, don't provision a new one
     destinationPVC: unifi-shelf
     copyMethod: Direct
+    moverSecurityContext:
+      runAsUser: 999
+      runAsGroup: 999
+      fsGroup: 999

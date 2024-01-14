@@ -18,3 +18,7 @@ spec:
       monthly: 2
       yearly: 1
     copyMethod: Clone
+    moverSecurityContext:
+      runAsUser: 999
+      runAsGroup: 999
+      fsGroup: 999
