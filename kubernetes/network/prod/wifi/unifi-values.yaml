@@ -31,56 +31,45 @@ spec:
                 cpu: 50m
     service:
       main:
-        ports:
-          http:
-            port: 8443
-            protocol: HTTPS
-      controller:
-        enabled: true
-        controller: main
         type: LoadBalancer
-        externalTrafficPolicy: Local
-        loadBalancerIP: ${unifi_controller_ip}
         annotations:
           # Note this is for documentation even though its not really authoritative
           coredns.io/hostname: unifi.${site_domain}
           kube-vip.io/loadbalancerIPs: ${unifi_controller_ip}
+        loadBalancerIP: ${unifi_controller_ip}
+        externalTrafficPolicy: Local
         ports:
-          controller-tcp:
+          http:
+            port: 8443
+            protocol: HTTPS
+          controller:
             enabled: true
             port: 8080
             protocol: TCP
-            nodePort: 8080
           portal-http:
             enabled: false
             port: 8880
             protocol: HTTP
-            nodePort: 8880
           portal-https:
             enabled: false
             port: 8843
             protocol: HTTPS
-            nodePort: 8843
           speedtest:
             enabled: true
             port: 6789
             protocol: TCP
-            nodePort: 6789
           stun:
             enabled: true
             port: 3478
             protocol: UDP
-            nodePort: 3478
           syslog:
             enabled: true
             port: 5514
             protocol: UDP
-            nodePort: 5514
           discovery:
             enabled: true
             port: 10001
             protocol: UDP
-            nodePort: 10001
     ingress:
       main:
         enabled: true
