@@ -42,8 +42,9 @@ spec:
         annotations:
           # Note this is for documentation even though its not really authoritative
           coredns.io/hostname: unifi.${site_domain}
-          kube-vip.io/loadbalancerIPs: ${unifi_controller_ip}
-        loadBalancerIP: ${unifi_controller_ip}
+          #kube-vip.io/loadbalancerIPs: ${unifi_controller_ip}
+        externalIps:
+          - ${unifi_controller_ip}
         externalTrafficPolicy: Local
         ports:
           controller:
