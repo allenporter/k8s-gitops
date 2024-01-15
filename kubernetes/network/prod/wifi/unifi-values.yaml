@@ -37,6 +37,7 @@ spec:
             protocol: HTTPS
       controller:
         enabled: true
+        controller: main
         type: LoadBalancer
         annotations:
           # Note this is for documentation even though its not really authoritative
