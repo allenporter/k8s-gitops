@@ -31,6 +31,12 @@ spec:
                 cpu: 50m
     service:
       main:
+        ports:
+          http:
+            port: 8443
+            protocol: HTTPS
+      controller:
+        enabled: true
         type: LoadBalancer
         annotations:
           # Note this is for documentation even though its not really authoritative
@@ -39,9 +45,6 @@ spec:
         loadBalancerIP: ${unifi_controller_ip}
         externalTrafficPolicy: Local
         ports:
-          http:
-            port: 8443
-            protocol: HTTPS
           controller:
             enabled: true
             port: 8080
