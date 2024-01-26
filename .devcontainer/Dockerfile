@@ -125,7 +125,7 @@ RUN mkdir /usr/local/kairos && \
 RUN kairosctl -v
 
 # renovate: datasource=github-releases depName=go-task/task
-ARG TASK_VERSION=v3.33.1
+ARG TASK_VERSION=v3.34.0
 RUN mkdir /usr/local/go-task && \
     cd /usr/local/go-task/ && \
     curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_${ARCH}.tar.gz && \
