@@ -34,7 +34,7 @@ spec:
             - name: MODEL_DIR
               value: /data/models
             - name: MODEL_URLS
-              value: https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q4_K_M.gguf
+              value: https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q4_K_M.gguf,https://huggingface.co/chanwit/flux-7b-v0.1-gguf/resolve/main/flux-7b-v0.1-Q4_K_M.gguf,https://huggingface.co/meetkai/functionary-7b-v1.4-GGUF/resolve/main/functionary-7b-v1.4.q4_0.gguf,https://huggingface.co/TheBloke/deepseek-coder-6.7B-instruct-GGUF/resolve/main/deepseek-coder-6.7b-instruct.Q4_K_M.gguf
 
         containers:
           main:
