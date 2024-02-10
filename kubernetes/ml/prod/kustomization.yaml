@@ -7,4 +7,4 @@ resources:
 - llama-gpt-ui-clblast
 - llama-gpt-ui-openblas
 - llama-openblas
-#- llama-cpp-server-cuda-release.yaml
+- llama-cublas
