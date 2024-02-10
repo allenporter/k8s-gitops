@@ -18,4 +18,3 @@ resources:
   - nvidia.yaml
   - prometheus-community.yaml
   - rook-release.yaml
-  - weave-works.yaml
