@@ -1,0 +1,42 @@
+{
+  "host": "0.0.0.0",
+  "port": 8080,
+  "models": [
+    {
+      "model": "/data/models/mistral-7b-instruct-v0.1.Q4_K_M.gguf",
+      "model_alias": "gpt-3.5-turbo",
+      "chat_format": "llama-2",
+      "n_gpu_layers": 35,
+      "offload_kqv": true,
+      "n_ctx": 4096,
+      "use_mlock": false
+    },
+    {
+      "model": "/data/models/flux-7b-v0.1-Q4_K_M.gguf",
+      "model_alias": "flux-7b",
+      "chat_format": "zephyr",
+      "n_gpu_layers": 35,
+      "offload_kqv": true,
+      "n_ctx": 4096,
+      "use_mlock": false
+    },
+    {
+      "model": "/data/models/functionary-7b-v1.4.q4_0.gguf",
+      "model_alias": "functionary-7b",
+      "chat_format": "functionary",
+      "n_gpu_layers": 35,
+      "offload_kqv": true,
+      "n_ctx": 4096,
+      "use_mlock": false
+    },
+    {
+      "model": "/data/models/deepseek-coder-6.7b-instruct.Q4_K_M.gguf",
+      "model_alias": "deepseek-coder-6.7b-instruct",
+      "chat_format": "snoozy",
+      "n_gpu_layers": 35,
+      "offload_kqv": true,
+      "n_ctx": 4096,
+      "use_mlock": false
+    }
+  ]
+}
