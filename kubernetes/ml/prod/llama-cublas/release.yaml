@@ -27,7 +27,7 @@ spec:
         initContainers:
           download-model:
             image:
-              repository: ghcr.io/allenporter/llama-cpp-server-cublas
+              repository: ghcr.io/allenporter/llama-cpp-server-model-fetch
               tag: v2.4.0
               pullPolicy: IfNotPresent
             env:
@@ -38,7 +38,7 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/allenporter/llama-cpp-server-clblast
+              repository: ghcr.io/allenporter/llama-cpp-server-cuda
               tag: v2.4.0
               pullPolicy: IfNotPresent
             env:
