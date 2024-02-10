@@ -4,7 +4,8 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - llama-clblast
+- llama-cublas
 - llama-gpt-ui-clblast
+- llama-gpt-ui-cublas
 - llama-gpt-ui-openblas
 - llama-openblas
-- llama-cublas
