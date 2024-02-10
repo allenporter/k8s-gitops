@@ -108,10 +108,6 @@ clusters:
       namespace: flux-system
       url: https://charts.rook.io/release
       repo_type: default
-    - name: weave-works
-      namespace: flux-system
-      url: https://helm.gitops.weave.works
-      repo_type: default
     helm_releases: []
     cluster_policies: []
     config_maps:
@@ -157,9 +153,9 @@ clusters:
         repo_namespace: flux-system
     cluster_policies: []
     config_maps:
-    - name: clblast-model-config-6khf74f2g4
+    - name: clblast-model-config-m5fm4kc97t
       namespace: llama
-    - name: openblas-model-config-md8k78t746
+    - name: openblas-model-config-mct7d4km2h
       namespace: llama
     secrets: []
   - name: monitoring
@@ -178,12 +174,6 @@ clusters:
       chart:
         name: kube-prometheus-stack
         repo_name: prometheus-community
-        repo_namespace: flux-system
-    - name: weave-gitops
-      namespace: weave-gitops
-      chart:
-        name: weave-gitops
-        repo_name: weave-works
         repo_namespace: flux-system
     cluster_policies: []
     config_maps:

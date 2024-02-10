@@ -4,11 +4,8 @@ kind: Kustomization
 patches:
 - path: kubernetes-dashboard-values.yaml
 - path: kube-prometheus-stack-values.yaml
-- path: weave-gitops-values.yaml
 resources:
 - ../base/flux-monitoring
 - ../base/kubernetes-dashboard
 - ../base/kube-prometheus-stack
-- ../base/weave-gitops
 - monitoring-secrets.yaml
-- weave-gitops-secret.yaml
