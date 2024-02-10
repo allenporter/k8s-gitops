@@ -38,7 +38,7 @@ distributing configuration files as simple as possible. The process is non-inter
 
 1. Distribute the `cloud-config.yaml` to the node:
     ```
-    $ task build-cloud-config -- -l kapi01
+    $ task  --taskfile bootstrap/kairos/Taskfile.yaml build-cloud-config -- -l kapi01
     ```
 1. Start a [Manual Installation](https://kairos.io/docs/installation/manual/), which is a non-interactive setup:
     ```
