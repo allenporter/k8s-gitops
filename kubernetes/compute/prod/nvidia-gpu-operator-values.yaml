@@ -8,6 +8,3 @@ spec:
     spec:
       chart: gpu-operator
       version: 23.6.2
-  values:
-    driver:
-      version: 535.154.05

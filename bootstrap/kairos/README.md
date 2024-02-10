@@ -50,6 +50,11 @@ distributing configuration files as simple as possible. The process is non-inter
     ```
 1. Repeat for other control plane nodes, then other worker nodes. Note: The secondary nodes should wait for the primary to be setup before starting install.
 
+## ML Acclerators
+
+1. Copy `bootstrap/kairos/nvidia/100_nvida.yaml` to the node
+1. Reboot the node.
+
 ## Control Plane
 
 Access to the cluster control plane is organized through [kubeconfig Files](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/), which are generated using Ansible and

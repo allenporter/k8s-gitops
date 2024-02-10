@@ -1,0 +1,19 @@
+name: "nvidia runtime"
+
+stages:
+  initramfs:
+    # https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+    - name: "Setup nvidia runtime"
+      commands:
+        - UBUNTU_VERSION=22.04
+        - IMAGE_VARIANT="ubuntu${UBUNTU_VERSION}"
+        - NVIDIA_VERSION=1.14.3-1
+        - curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+        - curl -s -L https://nvidia.github.io/libnvidia-container/${IMAGE_VARIANT}/libnvidia-container.list |
+          sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' |
+          tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+        - apt-get update
+        - apt-get install -y
+            nvidia-container-toolkit=${NVIDIA_VERSION}
+        - apt-get clean && rm -rf /var/lib/apt/lists/*
+        - nvidia-ctk runtime configure --runtime=containerd
