@@ -19,4 +19,6 @@ spec:
     nfd:
       # Already installed separately
       enabled: false
-    usePrecompiled: true
+    # Use an existing driver installed with kairos cloud-config
+    driver:
+      enabled: false
