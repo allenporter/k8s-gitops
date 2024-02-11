@@ -86,3 +86,7 @@ kube-system   metrics-server-67c658944b-wtv27            1/1     Running   1 (9h
 - [kube-vip: Static pods](https://kube-vip.io/docs/installation/static/)
 - [Karios: Reset a node](https://kairos.io/docs/reference/reset/#remotely-via-command-line) for
 instructions on remotely resetting from the command line back to the original image
+
+## Troubleshooting
+
+View kairos-agent logs with `journalctl -fu kairos-agent`
