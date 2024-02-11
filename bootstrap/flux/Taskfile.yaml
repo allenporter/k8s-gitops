@@ -24,3 +24,8 @@ tasks:
   install-flux-system-ks:
     cmds:
       - kubectl apply -f ../../kubernetes/clusters/prod/flux-system/gotk-sync.yaml
+
+  install-gpu-policy:
+    # From https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/gpu-sharing.html#applying-one-cluster-wide-configuration
+    cmds:
+      - kubectl patch clusterpolicy/cluster-policy -n gpu-operator --type merge -p '{"spec": {"devicePlugin": {"config": {"name": "time-slicing-config", "default": "any"}}}}'
