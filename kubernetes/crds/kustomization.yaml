@@ -4,9 +4,9 @@ metadata:
   name: crds
   namespace: flux-system
 resources:
-- localized-files/raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v6.3.2/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
-- localized-files/raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v6.3.2/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
-- localized-files/raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v6.3.2/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
+- localized-files/raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v6.3.3/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
+- localized-files/raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v6.3.3/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
+- localized-files/raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v6.3.3/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
 - localized-files/raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.70.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml
 - localized-files/raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.70.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagers.yaml
 - localized-files/raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.70.0/example/prometheus-operator-crd/monitoring.coreos.com_podmonitors.yaml
