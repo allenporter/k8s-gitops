@@ -1,3 +1,4 @@
+#cloud-config
 name: "nvidia runtime"
 
 stages:
@@ -16,4 +17,4 @@ stages:
         - apt-get install -y
             nvidia-container-toolkit=${NVIDIA_VERSION}
         - apt-get clean && rm -rf /var/lib/apt/lists/*
-        - nvidia-ctk runtime configure --runtime=containerd
+        - nvidia-ctk runtime configure --runtime=crio
