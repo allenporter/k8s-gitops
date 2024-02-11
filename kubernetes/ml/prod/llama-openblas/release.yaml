@@ -40,7 +40,7 @@ spec:
           main:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-openblas
-              tag: v2.4.0
+              tag: v2.6.0
               pullPolicy: IfNotPresent
             env:
             - name: MODEL_DIR
