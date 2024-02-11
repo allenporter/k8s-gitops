@@ -19,14 +19,12 @@ spec:
     nfd:
       # Already installed separately
       enabled: false
-    # Use an existing driver installed with kairos cloud-config
-    driver:
-      enabled: false
+    usePrecompiled: true
     # Based on https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html#rancher-kubernetes-engine-2
     # but updated for k3s paths.
     toolkit:
       env:
-      - name: CONTAINERD_CONFIG
+      - name: CONTAINERD_CONFIG2
         value: /var/lib/rancher/k3s/agent/etc/containerd/config.toml
       - name: CONTAINERD_SOCKET
         value: /run/k3s/containerd/containerd.sock
