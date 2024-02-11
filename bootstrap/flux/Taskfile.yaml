@@ -24,3 +24,7 @@ tasks:
   install-flux-system-ks:
     cmds:
       - kubectl apply -f ../../kubernetes/clusters/prod/flux-system/gotk-sync.yaml
+
+  install-gpu-policy:
+    cmds:
+      - ./install-cpu-policy.sh

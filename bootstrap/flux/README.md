@@ -29,6 +29,10 @@ Before starting this step have:
     $ task --dir bootstrap/flux/ install-flux-system-ks
     ```
 
+1. Once the cluster is built, handle any custom hardware cluster policies.
+    ```
+    $ task --dir bootstrap/flux install-gpu-policy
+    ```
 
 ## References
 
