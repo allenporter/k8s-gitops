@@ -4,25 +4,25 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-    operator.prometheus.io/version: 0.70.0
-  name: podmonitors.monitoring.coreos.com
+    operator.prometheus.io/version: 0.71.2
+  name: servicemonitors.monitoring.coreos.com
 spec:
   group: monitoring.coreos.com
   names:
     categories:
     - prometheus-operator
-    kind: PodMonitor
-    listKind: PodMonitorList
-    plural: podmonitors
+    kind: ServiceMonitor
+    listKind: ServiceMonitorList
+    plural: servicemonitors
     shortNames:
-    - pmon
-    singular: podmonitor
+    - smon
+    singular: servicemonitor
   scope: Namespaced
   versions:
   - name: v1
     schema:
       openAPIV3Schema:
-        description: PodMonitor defines monitoring for a set of pods.
+        description: ServiceMonitor defines monitoring for a set of services.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -37,7 +37,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: Specification of desired Pod selection for target discovery
+            description: Specification of desired Service selection for target discovery
               by Prometheus.
             properties:
               attachMetadata:
@@ -49,56 +49,11 @@ spec:
                       permission on the `Nodes` objects.
                     type: boolean
                 type: object
-              jobLabel:
-                description: "The label to use to retrieve the job name from. `jobLabel`
-                  selects the label from the associated Kubernetes `Pod` object which
-                  will be used as the `job` label for all metrics. \n For example
-                  if `jobLabel` is set to `foo` and the Kubernetes `Pod` object is
-                  labeled with `foo: bar`, then Prometheus adds the `job=\"bar\"`
-                  label to all ingested metrics. \n If the value of this field is
-                  empty, the `job` label of the metrics defaults to the namespace
-                  and name of the PodMonitor object (e.g. `<namespace>/<name>`)."
-                type: string
-              keepDroppedTargets:
-                description: "Per-scrape limit on the number of targets dropped by
-                  relabeling that will be kept in memory. 0 means no limit. \n It
-                  requires Prometheus >= v2.47.0."
-                format: int64
-                type: integer
-              labelLimit:
-                description: "Per-scrape limit on number of labels that will be accepted
-                  for a sample. \n It requires Prometheus >= v2.27.0."
-                format: int64
-                type: integer
-              labelNameLengthLimit:
-                description: "Per-scrape limit on length of labels name that will
-                  be accepted for a sample. \n It requires Prometheus >= v2.27.0."
-                format: int64
-                type: integer
-              labelValueLengthLimit:
-                description: "Per-scrape limit on length of labels value that will
-                  be accepted for a sample. \n It requires Prometheus >= v2.27.0."
-                format: int64
-                type: integer
-              namespaceSelector:
-                description: Selector to select which namespaces the Kubernetes `Pods`
-                  objects are discovered from.
-                properties:
-                  any:
-                    description: Boolean describing whether all namespaces are selected
-                      in contrast to a list restricting them.
-                    type: boolean
-                  matchNames:
-                    description: List of namespace names to select from.
-                    items:
-                      type: string
-                    type: array
-                type: object
-              podMetricsEndpoints:
-                description: List of endpoints part of this PodMonitor.
+              endpoints:
+                description: List of endpoints part of this ServiceMonitor.
                 items:
-                  description: PodMetricsEndpoint defines an endpoint serving Prometheus
-                    metrics to be scraped by Prometheus.
+                  description: Endpoint defines an endpoint serving Prometheus metrics
+                    to be scraped by Prometheus.
                   properties:
                     authorization:
                       description: "`authorization` configures the Authorization header
@@ -177,10 +132,14 @@ spec:
                           type: object
                           x-kubernetes-map-type: atomic
                       type: object
+                    bearerTokenFile:
+                      description: "File to read bearer token for scraping the target.
+                        \n Deprecated: use `authorization` instead."
+                      type: string
                     bearerTokenSecret:
                       description: "`bearerTokenSecret` specifies a key of a Secret
                         containing the bearer token for scraping targets. The secret
-                        needs to be in the same namespace as the PodMonitor object
+                        needs to be in the same namespace as the ServiceMonitor object
                         and readable by the Prometheus Operator. \n Deprecated: use
                         `authorization` instead."
                       properties:
@@ -402,14 +361,14 @@ spec:
                         items:
                           type: string
                         type: array
-                      description: '`params` define optional HTTP URL parameters.'
+                      description: params define optional HTTP URL parameters.
                       type: object
                     path:
                       description: "HTTP path from which to scrape for metrics. \n
                         If empty, Prometheus uses the default value (e.g. `/metrics`)."
                       type: string
                     port:
-                      description: "Name of the Pod port which this endpoint refers
+                      description: "Name of the Service port which this endpoint refers
                         to. \n It takes precedence over `targetPort`."
                       type: string
                     proxyUrl:
@@ -519,7 +478,7 @@ spec:
                       - type: string
                       description: "Name or number of the target port of the `Pod`
                         object behind the Service, the port must be specified with
-                        container port property. \n Deprecated: use 'port' instead."
+                        container port property. \n Deprecated: use `port` instead."
                       x-kubernetes-int-or-string: true
                     tlsConfig:
                       description: TLS configuration to use when scraping the target.
@@ -569,6 +528,10 @@ spec:
                               type: object
                               x-kubernetes-map-type: atomic
                           type: object
+                        caFile:
+                          description: Path to the CA cert in the Prometheus container
+                            to use for the targets.
+                          type: string
                         cert:
                           description: Client certificate to present when doing client-authentication.
                           properties:
@@ -613,9 +576,17 @@ spec:
                               type: object
                               x-kubernetes-map-type: atomic
                           type: object
+                        certFile:
+                          description: Path to the client cert file in the Prometheus
+                            container for the targets.
+                          type: string
                         insecureSkipVerify:
                           description: Disable target certificate validation.
                           type: boolean
+                        keyFile:
+                          description: Path to the client key file in the Prometheus
+                            container for the targets.
+                          type: string
                         keySecret:
                           description: Secret containing the client key file for the
                             targets.
@@ -648,6 +619,51 @@ spec:
                       type: boolean
                   type: object
                 type: array
+              jobLabel:
+                description: "`jobLabel` selects the label from the associated Kubernetes
+                  `Service` object which will be used as the `job` label for all metrics.
+                  \n For example if `jobLabel` is set to `foo` and the Kubernetes
+                  `Service` object is labeled with `foo: bar`, then Prometheus adds
+                  the `job=\"bar\"` label to all ingested metrics. \n If the value
+                  of this field is empty or if the label doesn't exist for the given
+                  Service, the `job` label of the metrics defaults to the name of
+                  the associated Kubernetes `Service`."
+                type: string
+              keepDroppedTargets:
+                description: "Per-scrape limit on the number of targets dropped by
+                  relabeling that will be kept in memory. 0 means no limit. \n It
+                  requires Prometheus >= v2.47.0."
+                format: int64
+                type: integer
+              labelLimit:
+                description: "Per-scrape limit on number of labels that will be accepted
+                  for a sample. \n It requires Prometheus >= v2.27.0."
+                format: int64
+                type: integer
+              labelNameLengthLimit:
+                description: "Per-scrape limit on length of labels name that will
+                  be accepted for a sample. \n It requires Prometheus >= v2.27.0."
+                format: int64
+                type: integer
+              labelValueLengthLimit:
+                description: "Per-scrape limit on length of labels value that will
+                  be accepted for a sample. \n It requires Prometheus >= v2.27.0."
+                format: int64
+                type: integer
+              namespaceSelector:
+                description: Selector to select which namespaces the Kubernetes `Endpoints`
+                  objects are discovered from.
+                properties:
+                  any:
+                    description: Boolean describing whether all namespaces are selected
+                      in contrast to a list restricting them.
+                    type: boolean
+                  matchNames:
+                    description: List of namespace names to select from.
+                    items:
+                      type: string
+                    type: array
+                type: object
               podTargetLabels:
                 description: '`podTargetLabels` defines the labels which are transferred
                   from the associated Kubernetes `Pod` object onto the ingested metrics.'
@@ -660,7 +676,7 @@ spec:
                 format: int64
                 type: integer
               selector:
-                description: Label selector to select the Kubernetes `Pod` objects.
+                description: Label selector to select the Kubernetes `Endpoints` objects.
                 properties:
                   matchExpressions:
                     description: matchExpressions is a list of label selector requirements.
@@ -704,6 +720,13 @@ spec:
                     type: object
                 type: object
                 x-kubernetes-map-type: atomic
+              targetLabels:
+                description: '`targetLabels` defines the labels which are transferred
+                  from the associated Kubernetes `Service` object onto the ingested
+                  metrics.'
+                items:
+                  type: string
+                type: array
               targetLimit:
                 description: '`targetLimit` defines a limit on the number of scraped
                   targets that will be accepted.'
