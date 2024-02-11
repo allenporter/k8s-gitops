@@ -17,4 +17,5 @@ stages:
         - apt-get install -y
             nvidia-container-toolkit=${NVIDIA_VERSION}
         - apt-get clean && rm -rf /var/lib/apt/lists/*
-        - nvidia-ctk runtime configure --runtime=crio
+        # Let the GPU operator configure this
+        # - nvidia-ctk runtime configure --runtime=crio
