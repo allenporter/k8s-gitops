@@ -36,9 +36,9 @@ distributing configuration files as simple as possible. The process is non-inter
 
 1. Boot the node using the image, starting with primary control plane node.
 
-1. Distribute the `cloud-config.yaml` to the node:
+1. Build the `cloud-config.yaml` for the node:
     ```
-    $ task  --taskfile bootstrap/kairos/Taskfile.yaml build-cloud-config -- -l kapi01
+    $ task  --dir bootstrap/kairos/ build-cloud-config -- -l kapi01
     ```
 1. Start a [Manual Installation](https://kairos.io/docs/installation/manual/), which is a non-interactive setup:
     ```

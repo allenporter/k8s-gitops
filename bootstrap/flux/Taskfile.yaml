@@ -27,4 +27,4 @@ tasks:
 
   install-gpu-policy:
     cmds:
-      - ./install-cpu-policy.sh
+      - ./install-gpu-policy.sh
