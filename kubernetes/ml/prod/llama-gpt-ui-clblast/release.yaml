@@ -49,12 +49,6 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
-        - host: llama-gpt.${name_service_dns_domain}
-          paths:
-          - path: /
-            service:
-              name: main
-              port: http
         - host: llama-gpt-clblast.${name_service_dns_domain}
           paths:
           - path: /
@@ -62,9 +56,6 @@ spec:
               name: main
               port: http
         tls:
-        - secretName: llama-gpt-tls
-          hosts:
-          - llama-gpt.${name_service_dns_domain}
         - secretName: llama-gpt-clblast-tls
           hosts:
           - llama-gpt-clblast.${name_service_dns_domain}
