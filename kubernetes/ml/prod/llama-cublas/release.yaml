@@ -21,6 +21,8 @@ spec:
     # Fix problem where helm fails to uninstall
     enable: false
   values:
+    defaultPodOptions:
+      runtimeClassName: nvidia
     controllers:
       main:
         strategy: Recreate
