@@ -35,6 +35,8 @@ clusters:
     config_maps:
     - name: default-controller-env
       namespace: system-upgrade
+    - name: time-slicing-config
+      namespace: nvidia-gpu-operator
     secrets: []
   - name: crds
     namespace: flux-system
