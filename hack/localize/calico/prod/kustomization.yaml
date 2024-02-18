@@ -6,4 +6,4 @@ metadata:
     # Disable pruning since calico is required for bootstrap
     kustomize.toolkit.fluxcd.io/prune: disabled
 resources:
-- https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/calico.yaml
+- https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/calico.yaml
