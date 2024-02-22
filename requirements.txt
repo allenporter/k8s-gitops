@@ -2,7 +2,7 @@ PyJWT==2.8.0
 ansible==9.2.0
 cryptography==42.0.4
 flux-local==4.3.1
-google-cloud-secret-manager==2.18.1
+google-cloud-secret-manager==2.18.2
 hostdb==2.0.0
 pip==24.0
 pre-commit==3.6.2
