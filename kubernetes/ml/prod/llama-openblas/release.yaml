@@ -13,6 +13,7 @@ spec:
         kind: HelmRepository
         name: bjw-s-helm-charts
         namespace: flux-system
+      version: 2.4.0
   interval: 5m
   install:
     remediation:
