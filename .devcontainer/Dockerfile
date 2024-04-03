@@ -60,7 +60,7 @@ COPY --from=docker.io/bitnami/kubectl:1.29.3            /opt/bitnami/kubectl/bin
 COPY --from=registry.k8s.io/kustomize/kustomize:v5.3.0  /app/kustomize                   /usr/local/bin/kustomize
 COPY --from=ghcr.io/kyverno/kyverno-cli:v1.11.4         /ko-app/kubectl-kyverno          /usr/local/bin/kyverno
 COPY --from=instrumentisto/restic:0.16.2-r2             /usr/local/bin/restic            /usr/local/bin/restic
-COPY --from=docker.io/alpine/helm:3.14.2                /usr/bin/helm                    /usr/local/bin/helm
+COPY --from=docker.io/alpine/helm:3.14.3                /usr/bin/helm                    /usr/local/bin/helm
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.2.3              /usr/local/bin/flux              /usr/local/bin/flux
 COPY --from=calico/ctl:v3.27.3                          /calicoctl               /usr/bin/calicoctl
 
