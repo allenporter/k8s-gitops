@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./kubernetes/ml/prod/eval
+  path: ./kubernetes/ml/prod/ml-eval
   prune: true
   dependsOn:
   - name: ml
