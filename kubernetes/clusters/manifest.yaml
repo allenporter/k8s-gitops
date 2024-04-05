@@ -165,6 +165,12 @@ clusters:
         name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
+    - name: doccano
+      namespace: doccano
+      chart:
+        name: app-template
+        repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
     cluster_policies: []
     config_maps:
     - name: clblast-model-config-m5fm4kc97t
@@ -173,20 +179,6 @@ clusters:
       namespace: llama
     - name: openblas-model-config-mct7d4km2h
       namespace: llama
-    secrets: []
-  - name: ml-eval
-    namespace: flux-system
-    path: kubernetes/ml/prod/ml-eval
-    helm_repos: []
-    helm_releases:
-    - name: doccano
-      namespace: doccano
-      chart:
-        name: app-template
-        repo_name: bjw-s-helm-charts
-        repo_namespace: flux-system
-    cluster_policies: []
-    config_maps: []
     secrets: []
   - name: monitoring
     namespace: flux-system

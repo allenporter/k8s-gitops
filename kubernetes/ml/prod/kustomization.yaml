@@ -9,5 +9,4 @@ resources:
 - llama-gpt-ui-cublas
 - llama-gpt-ui-openblas
 - llama-openblas
-- ml-secrets.yaml
-- ml-eval.yaml
+- ml-eval
