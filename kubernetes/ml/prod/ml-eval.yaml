@@ -19,5 +19,8 @@ spec:
       name: sops-age
   postBuild:
     substituteFrom:
+    - kind: ConfigMap
+      name: network-config
+    substituteFrom:
     - kind: Secret
       name: ml-secrets
