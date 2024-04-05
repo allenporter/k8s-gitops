@@ -38,7 +38,7 @@ spec:
             - name: ADMIN_EMAIL
               value: ${doccano_email}
             - name: ADMIN_PASSWORD
-              value: ${doccano_password
+              value: ${doccano_password}
 
     service:
       main:
