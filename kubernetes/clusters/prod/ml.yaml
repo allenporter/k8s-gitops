@@ -17,5 +17,5 @@ spec:
     substituteFrom:
     - kind: ConfigMap
       name: network-config
-    - kind: ConfigMap
+    - kind: Secret
       name: ml-secrets
