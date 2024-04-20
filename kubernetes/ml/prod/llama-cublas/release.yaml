@@ -42,7 +42,7 @@ spec:
           main:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
-              tag: v2.9.0
+              tag: v2.12.0
               pullPolicy: IfNotPresent
             env:
             - name: MODEL_DIR
