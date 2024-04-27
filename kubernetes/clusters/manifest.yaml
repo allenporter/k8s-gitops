@@ -102,6 +102,10 @@ clusters:
       namespace: flux-system
       url: https://helm.ngc.nvidia.com/nvidia
       repo_type: default
+    - name: ollama-helm
+      namespace: flux-system
+      url: https://otwld.github.io/ollama-helm
+      repo_type: default
     - name: prometheus-community
       namespace: flux-system
       url: https://prometheus-community.github.io/helm-charts
@@ -170,6 +174,12 @@ clusters:
       chart:
         name: app-template
         repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
+    - name: ollama
+      namespace: ollama
+      chart:
+        name: ollama
+        repo_name: ollama-helm
         repo_namespace: flux-system
     cluster_policies: []
     config_maps:

@@ -10,3 +10,4 @@ resources:
 - llama-gpt-ui-openblas
 - llama-openblas
 - ml-eval
+- ollama
