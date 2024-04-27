@@ -16,5 +16,6 @@ resources:
   - metallb.yaml
   - node-feature-discovery.yaml
   - nvidia.yaml
+  - ollama.yaml
   - prometheus-community.yaml
   - rook-release.yaml
