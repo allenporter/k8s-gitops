@@ -28,9 +28,9 @@ spec:
         type: nvidia
         number: 1
       models:
-        - mistral
-        - llama3
-        - gemma:7b
+      - mistral
+      - llama3
+      - gemma:7b
     ingress:
       enabled: true
       annotations:
@@ -38,8 +38,8 @@ spec:
       hosts:
       - host: ollama.${name_service_dns_domain}
         paths:
-          - path: /
-            pathType: Prefix
+        - path: /
+          pathType: Prefix
       tls:
       - secretName: ollama-tls
         hosts:
