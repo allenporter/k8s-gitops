@@ -29,8 +29,8 @@ spec:
         number: 1
       models:
       - llama3
-      # - gemma:7b
-      # - mistral
+      - gemma:7b
+      - mistral
 
     # Requirements for nvidia runtime and hardware
     runtimeClassName: nvidia
