@@ -31,6 +31,13 @@ spec:
       - mistral
       - llama3
       - gemma:7b
+
+    # Requirements for nvidia runtime and hardware
+    runtimeClassName: nvidia
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+
     ingress:
       enabled: true
       annotations:
