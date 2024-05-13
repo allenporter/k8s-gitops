@@ -3,7 +3,7 @@ ansible==9.5.1
 cryptography==42.0.7
 flux-local==5.0.1
 google-cloud-secret-manager==2.20.0
-hostdb==2.0.0
+hostdb==2.1.0
 pip==24.0
 pre-commit==3.7.1
 yamllint==1.35.1
