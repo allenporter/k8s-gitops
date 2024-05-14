@@ -13,24 +13,28 @@ clusters:
         name: intel-device-plugins-operator
         repo_name: intel
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: intel-device-plugin-gpu
       namespace: intel-device-plugin
       chart:
         name: intel-device-plugins-gpu
         repo_name: intel
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: node-feature-discovery
       namespace: node-feature-discovery
       chart:
         name: node-feature-discovery
         repo_name: node-feature-discovery
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: nvidia-gpu-operator
       namespace: nvidia-gpu-operator
       chart:
         name: gpu-operator
         repo_name: nvidia
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     cluster_policies: []
     config_maps:
     - name: default-controller-env
@@ -139,48 +143,56 @@ clusters:
         name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: llama-cublas
       namespace: llama
       chart:
         name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: llama-gpt-ui-clblast
       namespace: llama
       chart:
         name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: llama-gpt-ui-cublas
       namespace: llama
       chart:
         name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: llama-gpt-ui-openblas
       namespace: llama
       chart:
         name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: llama-openblas
       namespace: llama
       chart:
         name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: doccano
       namespace: doccano
       chart:
         name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: ollama
       namespace: ollama
       chart:
         name: ollama
         repo_name: ollama-helm
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     cluster_policies: []
     config_maps:
     - name: clblast-model-config-m5fm4kc97t
@@ -201,12 +213,14 @@ clusters:
         name: kubernetes-dashboard
         repo_name: kubernetes-dashboard
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: kube-prometheus-stack
       namespace: monitoring
       chart:
         name: kube-prometheus-stack
         repo_name: prometheus-community
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     cluster_policies: []
     config_maps:
     - name: grafana-dashboard-control-plane-99d879ff4d
@@ -223,6 +237,7 @@ clusters:
         name: cert-manager
         repo_name: jetstack
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     cluster_policies: []
     config_maps:
     - name: calico-config
@@ -247,12 +262,14 @@ clusters:
         name: ingress-nginx
         repo_name: ingress-nginx
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: nginx-external
       namespace: nginx
       chart:
         name: ingress-nginx
         repo_name: ingress-nginx
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     cluster_policies: []
     config_maps: []
     secrets: []
@@ -277,6 +294,7 @@ clusters:
         name: k8s-gateway
         repo_name: k8s-gateway
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     cluster_policies: []
     config_maps: []
     secrets: []
@@ -291,6 +309,7 @@ clusters:
         name: app-template
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     cluster_policies: []
     config_maps: []
     secrets: []
@@ -305,18 +324,21 @@ clusters:
         name: democratic-csi
         repo_name: democratic-csi
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: rook-ceph
       namespace: rook-ceph
       chart:
         name: rook-ceph
         repo_name: rook-release
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     - name: volsync
       namespace: volsync-system
       chart:
         name: volsync
         repo_name: backube
         repo_namespace: flux-system
+        repo_kind: HelmRepository
     cluster_policies: []
     config_maps: []
     secrets: []
