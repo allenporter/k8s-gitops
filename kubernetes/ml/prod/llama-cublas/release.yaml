@@ -31,7 +31,7 @@ spec:
           download-model:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-model-fetch
-              tag: v2.15.0
+              tag: v2.16.0
               pullPolicy: IfNotPresent
             env:
             - name: MODEL_DIR
