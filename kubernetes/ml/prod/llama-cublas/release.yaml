@@ -31,7 +31,7 @@ spec:
           download-model:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-model-fetch
-              tag: v2.16.0
+              tag: v2.17.0
               pullPolicy: IfNotPresent
             env:
             - name: MODEL_DIR
@@ -41,7 +41,7 @@ spec:
           download-tokenizer:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-model-fetch
-              tag: v2.16.0
+              tag: v2.17.0
               pullPolicy: IfNotPresent
             env:
             - name: MODEL_DIR
@@ -52,7 +52,7 @@ spec:
           main:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
-              tag: v2.16.0
+              tag: v2.17.0
               pullPolicy: IfNotPresent
             env:
             - name: MODEL_DIR
