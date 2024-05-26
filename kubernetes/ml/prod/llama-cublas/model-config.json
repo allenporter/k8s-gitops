@@ -22,8 +22,17 @@
     },
     {
       "model": "/data/models/functionary-7b-v1.4.q4_0.gguf",
-      "model_alias": "functionary-7b",
-      "chat_format": "functionary",
+      "model_alias": "functionary-7b-v1",
+      "chat_format": "functionary-v1",
+      "n_gpu_layers": 35,
+      "offload_kqv": true,
+      "n_ctx": 4096,
+      "use_mlock": false
+    },
+    {
+      "model": "/data/models/functionary-7b-v2.q4_0.gguf",
+      "model_alias": "functionary-7b-v2",
+      "chat_format": "functionary-v2",
       "n_gpu_layers": 35,
       "offload_kqv": true,
       "n_ctx": 4096,
