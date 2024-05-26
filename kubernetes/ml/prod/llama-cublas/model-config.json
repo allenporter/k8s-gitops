@@ -12,40 +12,14 @@
       "use_mlock": false
     },
     {
-      "model": "/data/models/flux-7b-v0.1-Q4_K_M.gguf",
-      "model_alias": "flux-7b",
-      "chat_format": "zephyr",
-      "n_gpu_layers": 35,
-      "offload_kqv": true,
-      "n_ctx": 4096,
-      "use_mlock": false
-    },
-    {
-      "model": "/data/models/functionary-7b-v1.4.q4_0.gguf",
-      "model_alias": "functionary-7b-v1",
-      "chat_format": "functionary-v1",
-      "n_gpu_layers": 35,
-      "offload_kqv": true,
-      "n_ctx": 4096,
-      "use_mlock": false
-    },
-    {
-      "model": "/data/models/functionary-7b-v2.q4_0.gguf",
+      "model": "/data/models/functionary-small-v2.5.Q4_0.gguf",
       "model_alias": "functionary-7b-v2",
       "chat_format": "functionary-v2",
+      "hf_pretrained_model_name_or_path": "/data/models/functionary-small-v2.5",
       "n_gpu_layers": 35,
       "offload_kqv": true,
       "n_ctx": 4096,
       "use_mlock": false
     },
-    {
-      "model": "/data/models/deepseek-coder-6.7b-instruct.Q4_K_M.gguf",
-      "model_alias": "deepseek-coder-6.7b-instruct",
-      "chat_format": "snoozy",
-      "n_gpu_layers": 35,
-      "offload_kqv": true,
-      "n_ctx": 4096,
-      "use_mlock": false
-    }
   ]
 }
