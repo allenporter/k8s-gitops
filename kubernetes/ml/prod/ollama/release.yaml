@@ -33,8 +33,8 @@ spec:
       - llama3
       - gemma:7b
       - llava
-      - mistral
-      - phi3
+      - mistral  # 7b
+      - phi3  # 3.8b
 
     # Requirements for nvidia runtime and hardware
     runtimeClassName: nvidia
