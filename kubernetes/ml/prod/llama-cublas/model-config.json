@@ -37,6 +37,15 @@
       "offload_kqv": true,
       "n_ctx": 8192,
       "use_mlock": false
+    },
+    {
+      "model": "/data/models/Hermes-2-Pro-Llama-3-8B-Q4_K_M.gguf",
+      "model_alias": "hermes-2-pro-llama-3",
+      "chat_format": "chatml-function-calling",
+      "n_gpu_layers": 35,
+      "offload_kqv": true,
+      "n_ctx": 8192,
+      "use_mlock": false
     }
   ]
 }
