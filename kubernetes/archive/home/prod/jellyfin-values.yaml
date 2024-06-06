@@ -18,7 +18,7 @@ spec:
           main:
             image:
               repository: jellyfin/jellyfin
-              tag: 10.9.4
+              tag: 10.9.5
     persistence:
       media:
         enabled: true
