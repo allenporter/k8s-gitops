@@ -43,7 +43,7 @@
       "model_alias": "functionary-small-v2.5",
       "hf_model_repo_id": "meetkai/functionary-small-v2.5-GGUF",
       "hf_pretrained_model_name_or_path": "meetkai/functionary-small-v2.5-GGUF",
-      "chat_format": "functionary-v2",
+      "chat_format": "hf-autotokenizer",
       "n_gpu_layers": 35,
       "offload_kqv": true,
       "n_ctx": 4096,
