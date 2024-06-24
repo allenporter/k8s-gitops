@@ -39,7 +39,8 @@
       "use_mlock": false
     },
     {
-      "model": "functionary-small-v2.5",
+      "model": "functionary-small-v2.5.Q4_0.gguf",
+      "model_alias": "functionary-small-v2.5",
       "hf_model_repo_id": "meetkai/functionary-small-v2.5-GGUF",
       "hf_pretrained_model_name_or_path": "meetkai/functionary-small-v2.5-GGUF",
       "chat_format": "functionary-v2",
