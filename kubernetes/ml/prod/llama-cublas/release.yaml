@@ -96,3 +96,14 @@ spec:
         - path: /config/model-config.json
           subPath: model-config.json
           readOnly: true
+
+      cache:
+        enabled: true
+        storageClassName: "local-hostpath"
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 40Gi
+        globalMounts:
+        - path: /root/.cache/
+          readOnly: false
+        retain: true
