@@ -39,12 +39,13 @@
       "use_mlock": false
     },
     {
-      "model": "/data/models/Hermes-2-Pro-Llama-3-8B-Q4_K_M.gguf",
-      "model_alias": "hermes-2-pro-llama-3",
-      "chat_format": "chatml-function-calling",
+      "model": "functionary-small-v2.5",
+      "hf_model_repo_id": "meetkai/functionary-small-v2.5-GGUF",
+      "hf_pretrained_model_name_or_path": "meetkai/functionary-small-v2.5-GGUF",
+      "chat_format": "functionary-v2",
       "n_gpu_layers": 35,
       "offload_kqv": true,
-      "n_ctx": 8192,
+      "n_ctx": 4096,
       "use_mlock": false
     }
   ]
