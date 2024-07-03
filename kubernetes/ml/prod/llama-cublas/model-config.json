@@ -47,6 +47,6 @@
       "offload_kqv": true,
       "n_ctx": 4096,
       "use_mlock": false
-    },
+    }
   ]
 }
