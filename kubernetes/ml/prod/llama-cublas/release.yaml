@@ -37,7 +37,8 @@ spec:
             args:
               - download
               - meetkai/functionary-7b-v1.4-GGUF
-              - --exclude='*gguf'
+              - --exclude
+              - '*gguf'
               - --local-dir=/data/models/functionary-7b-v1.4 
           download-functionary-7b-v1-model:
             image:
