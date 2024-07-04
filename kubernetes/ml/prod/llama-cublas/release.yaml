@@ -51,6 +51,29 @@ spec:
               - meetkai/functionary-7b-v1.4-GGUF
               - functionary-7b-v1.4.q4_0.gguf
               - --local-dir=/data/models/functionary-7b-v1.4 
+          download-functionary-7b-v2-1-files:
+            image:
+              repository: ghcr.io/allenporter/llama-cpp-server-cuda
+              tag: v2.21.1
+              pullPolicy: IfNotPresent
+            command: ["huggingface-cli"]
+            args:
+              - download
+              - meetkai/functionary-7b-v2.1-GGUF
+              - --exclude
+              - '*gguf'
+              - --local-dir=/data/models/functionary-7b-v2.1
+          download-functionary-7b-v2-1-model:
+            image:
+              repository: ghcr.io/allenporter/llama-cpp-server-cuda
+              tag: v2.21.1
+              pullPolicy: IfNotPresent
+            command: ["huggingface-cli"]
+            args:
+              - download
+              - meetkai/functionary-7b-v2.1-GGUF
+              - functionary-7b-v2.1.q4_0.gguf
+              - --local-dir=/data/models/functionary-7b-v2.1
         containers:
           main:
             image:
