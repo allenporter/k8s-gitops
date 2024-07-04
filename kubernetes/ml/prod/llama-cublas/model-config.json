@@ -3,7 +3,7 @@
   "port": 8080,
   "models": [
     {
-      "model": "/data/models/mistral-7b-instruct-v0.1.Q4_K_M.gguf",
+      "model": "/data/models/Mistral-7B-Instruct-v0.1/mistral-7b-instruct-v0.1.Q4_K_M.gguf",
       "model_alias": "mistral-7b-instruct-v1",
       "chat_format": "llama-2",
       "n_gpu_layers": 35,
