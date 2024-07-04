@@ -181,7 +181,7 @@ clusters:
         repo_kind: HelmRepository
     cluster_policies: []
     config_maps:
-    - name: cublas-model-config-t7ddgh76g9
+    - name: cublas-model-config-bmdc2bd8f8
       namespace: llama
     - name: openblas-model-config-mct7d4km2h
       namespace: llama

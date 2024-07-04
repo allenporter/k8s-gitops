@@ -28,6 +28,30 @@ spec:
       main:
         strategy: Recreate
         initContainers:
+          download-mistral-v1-files:
+            image:
+              repository: ghcr.io/allenporter/llama-cpp-server-cuda
+              tag: v2.21.1
+              pullPolicy: IfNotPresent
+            command: ["huggingface-cli"]
+            args:
+              - download
+              - TheBloke/Mistral-7B-Instruct-v0.1-GGUF
+              - --exclude
+              - '*gguf'
+              - --local-dir=/data/models/Mistral-7B-Instruct-v0.1
+          download-mistral-v1-model:
+            image:
+              repository: ghcr.io/allenporter/llama-cpp-server-cuda
+              tag: v2.21.1
+              pullPolicy: IfNotPresent
+            command: ["huggingface-cli"]
+            args:
+              - download
+              - meetkai/functionary-7b-v1.4-GGUF
+              - mistral-7b-instruct-v0.1.Q4_K_M.gguf
+              - --local-dir=/data/models/Mistral-7B-Instruct-v0.1
+
           download-functionary-7b-v1-files:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
