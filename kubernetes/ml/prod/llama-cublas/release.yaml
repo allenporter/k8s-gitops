@@ -28,29 +28,29 @@ spec:
       main:
         strategy: Recreate
         initContainers:
-          download-mistral-v1-files:
+          download-mistral-v01-files:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
               tag: v2.21.1
               pullPolicy: IfNotPresent
             command: ["huggingface-cli"]
             args:
-              - download
-              - TheBloke/Mistral-7B-Instruct-v0.1-GGUF
-              - --exclude
-              - '*gguf'
-              - --local-dir=/data/models/Mistral-7B-Instruct-v0.1
-          download-mistral-v1-model:
+            - download
+            - TheBloke/Mistral-7B-Instruct-v0.1-GGUF
+            - --exclude
+            - '*gguf'
+            - --local-dir=/data/models/Mistral-7B-Instruct-v0.1
+          download-mistral-v01-model:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
               tag: v2.21.1
               pullPolicy: IfNotPresent
             command: ["huggingface-cli"]
             args:
-              - download
-              - TheBloke/Mistral-7B-Instruct-v0.1-GGUF
-              - mistral-7b-instruct-v0.1.Q4_K_M.gguf
-              - --local-dir=/data/models/Mistral-7B-Instruct-v0.1
+            - download
+            - TheBloke/Mistral-7B-Instruct-v0.1-GGUF
+            - mistral-7b-instruct-v0.1.Q4_K_M.gguf
+            - --local-dir=/data/models/Mistral-7B-Instruct-v0.1
 
           download-functionary-7b-v1-files:
             image:
@@ -59,11 +59,11 @@ spec:
               pullPolicy: IfNotPresent
             command: ["huggingface-cli"]
             args:
-              - download
-              - meetkai/functionary-7b-v1.4-GGUF
-              - --exclude
-              - '*gguf'
-              - --local-dir=/data/models/functionary-7b-v1.4 
+            - download
+            - meetkai/functionary-7b-v1.4-GGUF
+            - --exclude
+            - '*gguf'
+            - --local-dir=/data/models/functionary-7b-v1.4
           download-functionary-7b-v1-model:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
@@ -71,10 +71,10 @@ spec:
               pullPolicy: IfNotPresent
             command: ["huggingface-cli"]
             args:
-              - download
-              - meetkai/functionary-7b-v1.4-GGUF
-              - functionary-7b-v1.4.q4_0.gguf
-              - --local-dir=/data/models/functionary-7b-v1.4 
+            - download
+            - meetkai/functionary-7b-v1.4-GGUF
+            - functionary-7b-v1.4.q4_0.gguf
+            - --local-dir=/data/models/functionary-7b-v1.4
           download-functionary-7b-v2-1-files:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
@@ -82,11 +82,11 @@ spec:
               pullPolicy: IfNotPresent
             command: ["huggingface-cli"]
             args:
-              - download
-              - meetkai/functionary-7b-v2.1-GGUF
-              - --exclude
-              - '*gguf'
-              - --local-dir=/data/models/functionary-7b-v2.1
+            - download
+            - meetkai/functionary-7b-v2.1-GGUF
+            - --exclude
+            - '*gguf'
+            - --local-dir=/data/models/functionary-7b-v2.1
           download-functionary-7b-v2-1-model:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
@@ -94,10 +94,10 @@ spec:
               pullPolicy: IfNotPresent
             command: ["huggingface-cli"]
             args:
-              - download
-              - meetkai/functionary-7b-v2.1-GGUF
-              - functionary-7b-v2.1.q4_0.gguf
-              - --local-dir=/data/models/functionary-7b-v2.1
+            - download
+            - meetkai/functionary-7b-v2.1-GGUF
+            - functionary-7b-v2.1.q4_0.gguf
+            - --local-dir=/data/models/functionary-7b-v2.1
         containers:
           main:
             image:
