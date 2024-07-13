@@ -45,6 +45,7 @@ spec:
             - --model=meetkai/functionary-small-v2.5
             - --host=0.0.0.0
             - --max-model-len=8192
+            - --dtype=half
             resources:
               limits:
                 nvidia.com/gpu: 1
