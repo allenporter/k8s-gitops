@@ -179,6 +179,13 @@ clusters:
         repo_name: ollama-helm
         repo_namespace: flux-system
         repo_kind: HelmRepository
+    - name: functionary
+      namespace: functionary
+      chart:
+        name: app-template
+        repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
+        repo_kind: HelmRepository
     cluster_policies: []
     config_maps:
     - name: cublas-model-config-bmdc2bd8f8
