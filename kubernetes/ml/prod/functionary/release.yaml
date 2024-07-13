@@ -44,7 +44,11 @@ spec:
             resources:
               limits:
                 nvidia.com/gpu: 1
-
+            startupProbe:
+              failureThreshold: 35
+              periodSeconds: 20
+              timeoutSeconds: 10
+              
     service:
       main:
         ports:
