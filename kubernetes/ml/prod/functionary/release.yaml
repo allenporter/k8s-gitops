@@ -1,0 +1,77 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: functionary
+spec:
+  releaseName: functionary
+  chart:
+    spec:
+      chart: app-template
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
+      version: 2.4.0
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    # Fix problem where helm fails to uninstall
+    enable: false
+  values:
+    defaultPodOptions:
+      runtimeClassName: nvidia
+    controllers:
+      main:
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: ghcr.io/allenporter/functionary-server
+              tag: v0.1.0
+              pullPolicy: IfNotPresent
+            args:
+            - --model="meetkai/functionary-small-v2.5"
+            - --host=0.0.0.0
+            - --max-model-len=8192
+            resources:
+              limits:
+                nvidia.com/gpu: 1
+
+    service:
+      main:
+        ports:
+          http:
+            port: 8000
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+        - host: functionary.${name_service_dns_domain}
+          paths:
+          - path: /
+            service:
+              name: main
+              port: http
+        tls:
+        - secretName: functionary-tls
+          hosts:
+          - functionary.${name_service_dns_domain}
+
+    persistence:
+      data:
+        enabled: true
+        storageClassName: "local-hostpath"
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 10Gi
+        globalMounts:
+        - path: /data
+          readOnly: false
+        retain: true
