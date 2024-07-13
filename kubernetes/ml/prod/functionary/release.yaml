@@ -46,6 +46,13 @@ spec:
             - --host=0.0.0.0
             - --max-model-len=8192
             - --dtype=half
+            - --device=cuda
+            - --gpu-memory-utilization=0.9
+            env:
+            - name: VLLM_LOGGING_LEVEL
+              value: DEBUG
+            - name: CUDA_LAUNCH_BLOCKING
+              value: 1
             resources:
               limits:
                 nvidia.com/gpu: 1
