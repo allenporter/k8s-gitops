@@ -18,6 +18,10 @@ spec:
   install:
     remediation:
       retries: 3
+    # Fairly large container, don't wait for initial install
+    disableWait: true
+  upgrade: 
+    disableWait: true
   test:
     # Fix problem where helm fails to uninstall
     enable: false
