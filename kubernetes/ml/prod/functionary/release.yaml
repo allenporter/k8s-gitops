@@ -42,9 +42,12 @@ spec:
             - -m
             - server_vllm
             args:
-            - --model="meetkai/functionary-small-v2.5"
-            - --host=0.0.0.0
-            - --max-model-len=8192
+            - --model
+            - meetkai/functionary-small-v2.5
+            - --host
+            - 0.0.0.0
+            - --max-model-len
+            - 8192
             resources:
               limits:
                 nvidia.com/gpu: 1
