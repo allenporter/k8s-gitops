@@ -37,6 +37,10 @@ spec:
               repository: ghcr.io/allenporter/functionary-server
               tag: v0.1.0
               pullPolicy: IfNotPresent
+            command:
+            - python3
+            - -m
+            - server_vllm
             args:
             - --model="meetkai/functionary-small-v2.5"
             - --host=0.0.0.0
