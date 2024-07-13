@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: nginx-internal
@@ -18,7 +18,7 @@ spec:
           coredns.io/hostname: nginx-internal.${name_service_dns_domain}
           kube-vip.io/loadbalancerIPs: ${internal_ingress_ip}
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: nginx-external
