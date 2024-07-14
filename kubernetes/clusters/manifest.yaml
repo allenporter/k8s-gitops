@@ -192,7 +192,7 @@ clusters:
       namespace: llama
     - name: openblas-model-config-mct7d4km2h
       namespace: llama
-    - name: cublas-model-config-gkhfdmcbk4
+    - name: cublas-model-config-92mgm49d6m
       namespace: functionary
     secrets: []
   - name: monitoring

@@ -10,7 +10,8 @@
       "n_gpu_layers": 32,
       "offload_kqv": true,
       "n_ctx": 8192,
-      "use_mlock": false
+      "use_mlock": false,
+      "verbose": true
     }
   ]
 }
