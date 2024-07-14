@@ -192,6 +192,8 @@ clusters:
       namespace: llama
     - name: openblas-model-config-mct7d4km2h
       namespace: llama
+    - name: cublas-model-config-gkhfdmcbk4
+      namespace: functionary
     secrets: []
   - name: monitoring
     namespace: flux-system
