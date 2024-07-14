@@ -5,3 +5,9 @@ namespace: functionary
 resources:
 - namespace.yaml
 - release.yaml
+configMapGenerator:
+- name: cublas-model-config
+  files:
+  - model-config.json=model-config.json
+configurations:
+- kustomizeconfig.yaml

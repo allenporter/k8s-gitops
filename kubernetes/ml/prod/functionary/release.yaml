@@ -18,10 +18,6 @@ spec:
   install:
     remediation:
       retries: 3
-    # Fairly large container, don't wait for initial install
-    disableWait: true
-  upgrade:
-    disableWait: true
   test:
     # Fix problem where helm fails to uninstall
     enable: false
@@ -31,35 +27,45 @@ spec:
     controllers:
       main:
         strategy: Recreate
+        initContainers:
+          download-functionary-files:
+            image:
+              repository: ghcr.io/allenporter/llama-cpp-server-functionary-v2.5
+              tag: v2.22.0
+              pullPolicy: IfNotPresent
+            command: ["huggingface-cli"]
+            args:
+            - download
+            - meetkai/functionary-small-v2.5-GGUF
+            - --exclude
+            - '*gguf'
+            - --local-dir=/data/models/functionary-small-v2.5
+          download-functionary-model:
+            image:
+              repository: ghcr.io/allenporter/llama-cpp-server-functionary-v2.5
+              tag: v2.22.0
+              pullPolicy: IfNotPresent
+            command: ["huggingface-cli"]
+            args:
+            - download
+            - meetkai/functionary-small-v2.5-GGUF
+            - functionary-small-v2.5.Q4_0.gguf
+            - --local-dir=/data/models/functionary-small-v2.5
+
         containers:
           main:
             image:
-              repository: ghcr.io/allenporter/functionary-server
-              tag: v0.1.0
+              repository: ghcr.io/allenporter/llama-cpp-server-functionary-v2.5
+              tag: v2.22.0
               pullPolicy: IfNotPresent
-            command:
-            - python3
-            - -m
-            - server_vllm
-            args:
-            - --model=meetkai/functionary-small-v2.5
-            - --host=0.0.0.0
-            - --max-model-len=8192
-            - --dtype=half
-            - --device=cuda
-            - --gpu-memory-utilization=0.9
             env:
-            - name: VLLM_LOGGING_LEVEL
-              value: DEBUG
-            - name: CUDA_LAUNCH_BLOCKING
-              value: 1
+            - name: MODEL_DIR
+              value: /data/models
+            - name: CONFIG_FILE
+              value: /config/model-config.json
             resources:
               limits:
                 nvidia.com/gpu: 1
-            startupProbe:
-              failureThreshold: 35
-              periodSeconds: 20
-              timeoutSeconds: 10
 
     service:
       main:
@@ -95,3 +101,12 @@ spec:
         - path: /data
           readOnly: false
         retain: true
+
+      config:
+        enabled: true
+        type: configMap
+        name: cublas-model-config
+        globalMounts:
+        - path: /config/model-config.json
+          subPath: model-config.json
+          readOnly: true

@@ -1,0 +1,16 @@
+{
+  "host": "0.0.0.0",
+  "port": 8080,
+  "models": [
+    {
+      "model": "/data/models/functionary-small-v2.5/functionary-small-v2.5.Q4_0.gguf",
+      "model_alias": "functionary-small-v2.5",
+      "hf_pretrained_model_name_or_path": "meetkai/functionary-small-v2.5-GGUF",
+      "chat_format": "functionary",
+      "n_gpu_layers": 32,
+      "offload_kqv": true,
+      "n_ctx": 8192,
+      "use_mlock": false
+    }
+  ]
+}
