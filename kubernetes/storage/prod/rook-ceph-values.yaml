@@ -10,4 +10,4 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.rook.io/release
       chart: rook-ceph
-      version: v1.14.7
+      version: v1.14.8
