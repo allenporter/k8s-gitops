@@ -57,7 +57,7 @@ RUN mkdir -p /usr/local/lib/ && \
     /usr/local/lib/google-cloud-sdk/install.sh --quiet --usage-reporting=false --rc-path=/etc/profile
 
 COPY --from=docker.io/bitnami/kubectl:1.30.1            /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
-COPY --from=registry.k8s.io/kustomize/kustomize:v5.4.2  /app/kustomize                   /usr/local/bin/kustomize
+COPY --from=registry.k8s.io/kustomize/kustomize:v5.4.3  /app/kustomize                   /usr/local/bin/kustomize
 COPY --from=ghcr.io/kyverno/kyverno-cli:v1.12.5         /ko-app/kubectl-kyverno          /usr/local/bin/kyverno
 COPY --from=instrumentisto/restic:0.16.4-r2             /usr/local/bin/restic            /usr/local/bin/restic
 COPY --from=docker.io/alpine/helm:3.15.2                /usr/bin/helm                    /usr/local/bin/helm
