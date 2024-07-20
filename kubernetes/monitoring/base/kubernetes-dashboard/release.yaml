@@ -22,19 +22,15 @@ spec:
   # Default values
   # https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard#configuration
   values:
-    service:
-      annotations:
-        haproxy.org/server-ssl: "true"
-    ingress:
-      enabled: true
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-      hosts:
-        - kubernetes-dashboard.${name_service_dns_domain}
-      tls:
-        - secretName: kubernetes-dashboard-tls
+    app:
+      ingress:
+        enabled: true
+        ingressClass: nginx-internal
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+          - kubernetes-dashboard.${name_service_dns_domain}
+        tls:
+          secretName: kubernetes-dashboard-tls
           hosts:
             - kubernetes-dashboard.${name_service_dns_domain}
-    extraArgs:
-      # Default timeout of 15 minutes is too short. Use 15 days instead
-      - --token-ttl=1296000
