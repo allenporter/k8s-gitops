@@ -31,7 +31,7 @@ spec:
           download-mistral-v01-files:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
-              tag: v2.21.1
+              tag: v2.22.0
               pullPolicy: IfNotPresent
             command: ["huggingface-cli"]
             args:
@@ -43,7 +43,7 @@ spec:
           download-mistral-v01-model:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
-              tag: v2.21.1
+              tag: v2.22.0
               pullPolicy: IfNotPresent
             command: ["huggingface-cli"]
             args:
@@ -55,7 +55,7 @@ spec:
           download-functionary-7b-v1-files:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
-              tag: v2.21.1
+              tag: v2.22.0
               pullPolicy: IfNotPresent
             command: ["huggingface-cli"]
             args:
@@ -67,7 +67,7 @@ spec:
           download-functionary-7b-v1-model:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
-              tag: v2.21.1
+              tag: v2.22.0
               pullPolicy: IfNotPresent
             command: ["huggingface-cli"]
             args:
@@ -78,7 +78,7 @@ spec:
           download-functionary-7b-v2-1-files:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
-              tag: v2.21.1
+              tag: v2.22.0
               pullPolicy: IfNotPresent
             command: ["huggingface-cli"]
             args:
@@ -90,7 +90,7 @@ spec:
           download-functionary-7b-v2-1-model:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
-              tag: v2.21.1
+              tag: v2.22.0
               pullPolicy: IfNotPresent
             command: ["huggingface-cli"]
             args:
@@ -102,7 +102,7 @@ spec:
           main:
             image:
               repository: ghcr.io/allenporter/llama-cpp-server-cuda
-              tag: v2.21.1
+              tag: v2.22.0
               pullPolicy: IfNotPresent
             env:
             - name: MODEL_DIR
