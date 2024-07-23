@@ -31,12 +31,13 @@ spec:
         number: 1
       models:
       - llama3
-      - gemma:7b
+      - llama3.1
       - gemma2:9b
       - llava
       - mistral  # 7b
       - phi3  # 3.8b
       - fixt/home-3b-v3:latest  # 3b
+      - llama3-groq-tool-use
 
     # Requirements for nvidia runtime and hardware
     runtimeClassName: nvidia
