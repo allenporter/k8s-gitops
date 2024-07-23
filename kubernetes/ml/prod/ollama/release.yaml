@@ -24,6 +24,10 @@ spec:
     # Fix problem where helm fails to uninstall
     enable: false
   values:
+    image:
+      repository: ollama/ollama
+      tag: 0.2.8
+      pullPolicy: IfNotPresent
     ollama:
       gpu:
         enabled: true
