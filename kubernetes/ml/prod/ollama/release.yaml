@@ -42,7 +42,9 @@ spec:
       - phi3  # 3.8b
       - fixt/home-3b-v3:latest  # 3b
       - llama3-groq-tool-use
-
+    extraEnv:
+    - name: OLLAMA_DEBUG
+      value: "1"
     # Requirements for nvidia runtime and hardware
     runtimeClassName: nvidia
     resources:
