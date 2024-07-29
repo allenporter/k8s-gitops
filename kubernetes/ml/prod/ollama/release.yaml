@@ -39,8 +39,8 @@ spec:
       - mistral  # 7b
       - fixt/home-3b-v3:latest  # 3b
       - llama3-groq-tool-use
-      # - allenporter/xlam:1b
-      # - allenporter/xlam:7b
+      - allenporter/xlam:1b
+      - allenporter/xlam:7b
     extraEnv:
     - name: OLLAMA_DEBUG
       value: "1"
