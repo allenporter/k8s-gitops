@@ -34,14 +34,13 @@ spec:
         type: nvidia
         number: 1
       models:
-      - llama3
       - llama3.1
       - gemma2:9b
-      - llava
       - mistral  # 7b
-      - phi3  # 3.8b
       - fixt/home-3b-v3:latest  # 3b
       - llama3-groq-tool-use
+      - xlam:1b
+      - xlam:7b
     extraEnv:
     - name: OLLAMA_DEBUG
       value: "1"
