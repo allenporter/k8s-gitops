@@ -93,7 +93,7 @@ RUN cd /usr/local/bin/ && \
 RUN sops --version
 
 # renovate: datasource=github-releases depName=yannh/kubeconform
-ARG KUBECONFORM_VERSION=v0.6.6
+ARG KUBECONFORM_VERSION=v0.6.7
 RUN mkdir /usr/local/kubeconfirm/ && \
     cd /usr/local/kubeconfirm/ && \
     curl -OL https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-${ARCH}.tar.gz && \
