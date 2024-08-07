@@ -6,6 +6,7 @@ clusters:
     namespace: flux-system
     path: kubernetes/compute/prod
     helm_repos: []
+    oci_repos: []
     helm_releases:
     - name: intel-device-plugin-operator
       namespace: intel-device-plugin
@@ -46,6 +47,7 @@ clusters:
     namespace: flux-system
     path: kubernetes/crds
     helm_repos: []
+    oci_repos: []
     helm_releases: []
     cluster_policies: []
     config_maps: []
@@ -118,6 +120,10 @@ clusters:
       namespace: flux-system
       url: https://charts.rook.io/release
       repo_type: default
+    oci_repos:
+    - name: flux-manifests
+      namespace: flux-system
+      url: oci://ghcr.io/fluxcd/flux-manifests
     helm_releases: []
     cluster_policies: []
     config_maps:
@@ -128,6 +134,7 @@ clusters:
     namespace: flux-system
     path: kubernetes/iot/prod
     helm_repos: []
+    oci_repos: []
     helm_releases: []
     cluster_policies: []
     config_maps: []
@@ -136,6 +143,7 @@ clusters:
     namespace: flux-system
     path: kubernetes/ml/prod
     helm_repos: []
+    oci_repos: []
     helm_releases:
     - name: llama-cublas
       namespace: llama
@@ -199,6 +207,7 @@ clusters:
     namespace: flux-system
     path: kubernetes/monitoring/prod
     helm_repos: []
+    oci_repos: []
     helm_releases:
     - name: kubernetes-dashboard
       namespace: kubernetes-dashboard
@@ -223,6 +232,7 @@ clusters:
     namespace: flux-system
     path: kubernetes/network/prod
     helm_repos: []
+    oci_repos: []
     helm_releases:
     - name: cert-manager
       namespace: cert-manager
@@ -240,6 +250,7 @@ clusters:
     namespace: flux-system
     path: kubernetes/network/prod/certs
     helm_repos: []
+    oci_repos: []
     helm_releases: []
     cluster_policies: []
     config_maps: []
@@ -248,6 +259,7 @@ clusters:
     namespace: flux-system
     path: kubernetes/network/prod/ingress
     helm_repos: []
+    oci_repos: []
     helm_releases:
     - name: nginx-internal
       namespace: nginx
@@ -270,6 +282,7 @@ clusters:
     namespace: flux-system
     path: kubernetes/network/prod/load-balancer
     helm_repos: []
+    oci_repos: []
     helm_releases: []
     cluster_policies: []
     config_maps:
@@ -280,6 +293,7 @@ clusters:
     namespace: flux-system
     path: kubernetes/network/prod/name-service
     helm_repos: []
+    oci_repos: []
     helm_releases:
     - name: k8s-gateway
       namespace: k8s-gateway
@@ -295,6 +309,7 @@ clusters:
     namespace: flux-system
     path: kubernetes/network/prod/wifi
     helm_repos: []
+    oci_repos: []
     helm_releases:
     - name: unifi
       namespace: unifi
@@ -310,6 +325,7 @@ clusters:
     namespace: flux-system
     path: kubernetes/storage/prod
     helm_repos: []
+    oci_repos: []
     helm_releases:
     - name: local-path-provisioner
       namespace: democratic-csi
