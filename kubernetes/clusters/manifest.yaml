@@ -159,20 +159,6 @@ clusters:
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    - name: llama-gpt-ui-openblas
-      namespace: llama
-      chart:
-        name: app-template
-        repo_name: bjw-s-helm-charts
-        repo_namespace: flux-system
-        repo_kind: HelmRepository
-    - name: llama-openblas
-      namespace: llama
-      chart:
-        name: app-template
-        repo_name: bjw-s-helm-charts
-        repo_namespace: flux-system
-        repo_kind: HelmRepository
     - name: doccano
       namespace: doccano
       chart:
@@ -197,8 +183,6 @@ clusters:
     cluster_policies: []
     config_maps:
     - name: cublas-model-config-bmdc2bd8f8
-      namespace: llama
-    - name: openblas-model-config-mct7d4km2h
       namespace: llama
     - name: cublas-model-config-92mgm49d6m
       namespace: functionary
