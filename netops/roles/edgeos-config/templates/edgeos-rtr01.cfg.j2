@@ -1,7 +1,6 @@
 set firewall all-ping enable
 set firewall broadcast-ping disable
-set firewall group network-group clients description 'Network machine clients'
-set firewall group network-group clients network 10.10.38.0/24
+delete firewall group
 set firewall ipv6-receive-redirects disable
 set firewall ipv6-src-route disable
 set firewall ip-src-route disable
@@ -100,11 +99,12 @@ set port-forward lan-interface eth1
 set port-forward lan-interface eth2
 set port-forward lan-interface eth3
 
-set port-forward rule 2 description 'ha-prod'
-set port-forward rule 2 forward-to address 10.10.102.2
-set port-forward rule 2 forward-to port 443
-set port-forward rule 2 original-port 18123
-set port-forward rule 2 protocol tcp_udp
+set port-forward rule 1 description ha-prod
+set port-forward rule 1 forward-to address 10.10.1.20
+set port-forward rule 1 forward-to port 443
+set port-forward rule 1 original-port 18123
+set port-forward rule 1 protocol tcp_udp
+delete port-forward rule 2
 
 set port-forward wan-interface eth0
 set service dhcp-server disabled false
@@ -158,7 +158,14 @@ set service gui http-port 80
 set service gui https-port 443
 set service gui older-ciphers enable
 
-delete set service snmp
+set service nat rule 5010 description 'masquerade for WAN'
+set service nat rule 5010 outbound-interface eth0
+set service nat rule 5010 type masquerade
+set service nat rule 5010 protocol all
+
+delete service nat rule 5012
+
+delete service snmp
 set service snmp community woodgreen authorization ro
 set service snmp description 'EdgeRouter ERX'
 set service snmp contact admin@mineral.{{ site_domain }}
@@ -184,6 +191,15 @@ set system login user admin authentication public-keys thebends-key type ssh-rsa
 set system login user admin full-name Administrator
 set system login user admin level admin
 
+set system package repository stretch components 'main contrib non-free'
+set system package repository stretch distribution stretch
+set system package repository stretch url http://http.us.debian.org/debian
+
+set system time-zone UTC
+set vpn ipsec allow-access-to-local-interface disable
+set vpn ipsec auto-firewall-nat-exclude disable
+set vpn l2tp
+
 set system ntp server 0.ubnt.pool.ntp.org
 set system ntp server 1.ubnt.pool.ntp.org
 set system ntp server 2.ubnt.pool.ntp.org
@@ -192,7 +208,3 @@ set system ntp server 3.ubnt.pool.ntp.org
 set system syslog global facility all level notice
 set system syslog global facility protocols level debug
 set system syslog host 10.10.1.10 facility all level info
-
-set system package repository stretch components 'main contrib non-free'
-set system package repository stretch distribution stretch
-set system package repository stretch url http://http.us.debian.org/debian
