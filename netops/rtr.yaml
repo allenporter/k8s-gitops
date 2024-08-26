@@ -5,4 +5,4 @@
   - edgeos-config
   # Currently disabled as non-functioning
   # - edgeos-certs
-  - edgeos-node-exporter
+  # - edgeos-node-exporter
