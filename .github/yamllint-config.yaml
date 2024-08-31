@@ -5,6 +5,7 @@ ignore: |
   **/*tmpl.yaml
   **/authelia-users-database.yaml
   **/localized-files/**
+  netops/machinedb/machines-catalog.yaml
   venv
 extends: default
 rules:
