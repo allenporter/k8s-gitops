@@ -16,7 +16,7 @@ jobs:
           cluster-path: './'
           debug: 'yes'
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: renovate-helm-release-annotations
