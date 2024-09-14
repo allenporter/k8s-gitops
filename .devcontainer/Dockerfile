@@ -104,7 +104,7 @@ RUN mkdir /usr/local/kubeconfirm/ && \
 RUN kubeconform -v
 
 # renovate: datasource=github-releases depName=kairos-io/provider-kairos
-ARG KAIROS_VERSION=v2.7.3
+ARG KAIROS_VERSION=v2.7.4
 RUN mkdir /usr/local/kairos && \
     cd /usr/local/kairos/ && \
     curl -OL https://github.com/kairos-io/provider-kairos/releases/download/${KAIROS_VERSION}/kairosctl-${KAIROS_VERSION}-linux-${ARCH}.tar.gz && \
