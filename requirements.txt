@@ -5,7 +5,7 @@ flux-local==5.5.1
 google-cloud-secret-manager==2.20.2
 hostdb==2.1.0
 pip==24.2
-pre-commit==4.0.0
+pre-commit==4.0.1
 yamllint==1.35.1
 yq==3.4.3
 ansible-pylibssh==1.2.2
