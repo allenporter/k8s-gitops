@@ -120,6 +120,10 @@ clusters:
       namespace: flux-system
       url: https://charts.rook.io/release
       repo_type: default
+    - name: chromadb
+      namespace: flux-system
+      url: https://amikos-tech.github.io/chromadb-chart/
+      repo_type: default
     oci_repos:
     - name: flux-manifests
       namespace: flux-system

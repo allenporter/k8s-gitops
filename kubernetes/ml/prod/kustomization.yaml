@@ -8,3 +8,4 @@ resources:
 - ml-eval
 - ollama
 - functionary
+- chromadb
