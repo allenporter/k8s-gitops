@@ -56,13 +56,13 @@ RUN mkdir -p /usr/local/lib/ && \
     tar xf google-cloud-cli-${GCLOUD_CLI_VERSION}-linux-x86_64.tar.gz && \
     /usr/local/lib/google-cloud-sdk/install.sh --quiet --usage-reporting=false --rc-path=/etc/profile
 
-COPY --from=docker.io/bitnami/kubectl:1.31.0            /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
+COPY --from=docker.io/bitnami/kubectl:1.31.1            /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
 COPY --from=registry.k8s.io/kustomize/kustomize:v5.4.3  /app/kustomize                   /usr/local/bin/kustomize
-COPY --from=ghcr.io/kyverno/kyverno-cli:v1.12.5         /ko-app/kubectl-kyverno          /usr/local/bin/kyverno
+COPY --from=ghcr.io/kyverno/kyverno-cli:v1.12.6         /ko-app/kubectl-kyverno          /usr/local/bin/kyverno
 COPY --from=instrumentisto/restic:0.16.4-r2             /usr/local/bin/restic            /usr/local/bin/restic
-COPY --from=docker.io/alpine/helm:3.15.4                /usr/bin/helm                    /usr/local/bin/helm
+COPY --from=docker.io/alpine/helm:3.16.1                /usr/bin/helm                    /usr/local/bin/helm
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.3.0              /usr/local/bin/flux              /usr/local/bin/flux
-COPY --from=calico/ctl:v3.28.1                          /usr/bin/calicoctl               /usr/bin/calicoctl
+COPY --from=calico/ctl:v3.28.2                          /usr/bin/calicoctl               /usr/bin/calicoctl
 
 # renovate: datasource=github-releases depName=stedolan/jq
 ARG JQ_VERSION=1.6
@@ -85,7 +85,7 @@ RUN mkdir /usr/local/k9s && \
 RUN k9s version
 
 # renovate: datasource=github-releases depName=getsops/sops
-ARG SOPS_VERSION=v3.9.0
+ARG SOPS_VERSION=v3.9.1
 RUN cd /usr/local/bin/ && \
     curl -OL https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.${ARCH} && \
     mv sops-${SOPS_VERSION}.linux.${ARCH} sops && \
@@ -104,7 +104,7 @@ RUN mkdir /usr/local/kubeconfirm/ && \
 RUN kubeconform -v
 
 # renovate: datasource=github-releases depName=kairos-io/provider-kairos
-ARG KAIROS_VERSION=v2.7.3
+ARG KAIROS_VERSION=v2.7.4
 RUN mkdir /usr/local/kairos && \
     cd /usr/local/kairos/ && \
     curl -OL https://github.com/kairos-io/provider-kairos/releases/download/${KAIROS_VERSION}/kairosctl-${KAIROS_VERSION}-linux-${ARCH}.tar.gz && \
@@ -115,7 +115,7 @@ RUN mkdir /usr/local/kairos && \
 RUN kairosctl -v
 
 # renovate: datasource=github-releases depName=go-task/task
-ARG TASK_VERSION=v3.38.0
+ARG TASK_VERSION=v3.39.2
 RUN mkdir /usr/local/go-task && \
     cd /usr/local/go-task/ && \
     curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_${ARCH}.tar.gz && \

@@ -10,4 +10,4 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io
       chart: cert-manager
-      version: v1.15.3
+      version: v1.16.1
