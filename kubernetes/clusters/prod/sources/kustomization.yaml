@@ -19,3 +19,4 @@ resources:
   - ollama.yaml
   - prometheus-community.yaml
   - rook-release.yaml
+  - chromadb.yaml
