@@ -29,6 +29,8 @@ spec:
       pullPolicy: IfNotPresent
     chromadb:
       apiVersion: 0.5.13
+      auth:
+        enabled: false
 
     ingress:
       enabled: true
