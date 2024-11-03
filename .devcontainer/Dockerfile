@@ -61,7 +61,7 @@ COPY --from=registry.k8s.io/kustomize/kustomize:v5.4.3  /app/kustomize          
 COPY --from=ghcr.io/kyverno/kyverno-cli:v1.12.6         /ko-app/kubectl-kyverno          /usr/local/bin/kyverno
 COPY --from=instrumentisto/restic:0.16.4-r2             /usr/local/bin/restic            /usr/local/bin/restic
 COPY --from=docker.io/alpine/helm:3.16.2                /usr/bin/helm                    /usr/local/bin/helm
-COPY --from=ghcr.io/fluxcd/flux-cli:v2.3.0              /usr/local/bin/flux              /usr/local/bin/flux
+COPY --from=ghcr.io/fluxcd/flux-cli:v2.4.0              /usr/local/bin/flux              /usr/local/bin/flux
 COPY --from=calico/ctl:v3.28.2                          /usr/bin/calicoctl               /usr/bin/calicoctl
 
 # renovate: datasource=github-releases depName=stedolan/jq
