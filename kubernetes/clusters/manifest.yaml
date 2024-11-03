@@ -184,6 +184,13 @@ clusters:
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
         repo_kind: HelmRepository
+    - name: chromadb
+      namespace: chromadb
+      chart:
+        name: chromadb
+        repo_name: chromadb
+        repo_namespace: flux-system
+        repo_kind: HelmRepository
     cluster_policies: []
     config_maps:
     - name: cublas-model-config-bmdc2bd8f8
