@@ -6,5 +6,5 @@ ansible_user: kairos
 ansible_password: kairos
 
 # renovate: datasource=github-releases depName=kube-vip/kube-vip
-kube_vip_version: 0.8.3
+kube_vip_version: 0.8.5
 calico_url: https://raw.githubusercontent.com/projectcalico/calico/v3.28.2/manifests/calico.yaml
