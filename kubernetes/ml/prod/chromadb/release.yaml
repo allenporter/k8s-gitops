@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: ghcr.io/chroma-core/chroma
-      tag: 0.5.17
+      tag: 0.5.18
       pullPolicy: IfNotPresent
     chromadb:
       apiVersion: 0.5.13
