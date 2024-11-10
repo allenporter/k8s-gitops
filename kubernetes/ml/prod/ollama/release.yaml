@@ -26,7 +26,7 @@ spec:
   values:
     image:
       repository: ollama/ollama
-      tag: 0.4.0
+      tag: 0.4.1
       pullPolicy: IfNotPresent
     ollama:
       gpu:
