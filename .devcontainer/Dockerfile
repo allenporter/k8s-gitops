@@ -64,6 +64,7 @@ COPY --from=docker.io/alpine/helm:3.16.3                /usr/bin/helm           
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.4.0              /usr/local/bin/flux              /usr/local/bin/flux
 COPY --from=ghcr.io/siderolabs/talosctl:v1.8.3          /talosctl                        /usr/local/bin/talosctl
 COPY --from=calico/ctl:v3.29.0                          /usr/bin/calicoctl               /usr/bin/calicoctl
+COPY --from=ghcr.io/budimanjojo/talhelper:v3.0.10       /bin/talhelper                   /usr/local/bin/talhelper
 
 # renovate: datasource=github-releases depName=stedolan/jq
 ARG JQ_VERSION=1.6
