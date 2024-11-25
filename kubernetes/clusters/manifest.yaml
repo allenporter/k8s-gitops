@@ -280,9 +280,7 @@ clusters:
     oci_repos: []
     helm_releases: []
     cluster_policies: []
-    config_maps:
-    - name: kubevip
-      namespace: kube-system
+    config_maps: []
     secrets: []
   - name: network-name-service
     namespace: flux-system

@@ -8,7 +8,7 @@ cluster:
   - 10.10.100.4
 
 control_plane:
-  # kube-vip ip address
+  # vip address
   ip: 10.10.101.1
 
 services:

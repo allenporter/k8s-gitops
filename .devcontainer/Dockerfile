@@ -113,17 +113,6 @@ RUN mkdir /usr/local/kubeconfirm/ && \
     rm -fr /usr/local/kubeconfirm
 RUN kubeconform -v
 
-# renovate: datasource=github-releases depName=kairos-io/provider-kairos
-ARG KAIROS_VERSION=v2.7.5
-RUN mkdir /usr/local/kairos && \
-    cd /usr/local/kairos/ && \
-    curl -OL https://github.com/kairos-io/provider-kairos/releases/download/${KAIROS_VERSION}/kairosctl-${KAIROS_VERSION}-linux-${ARCH}.tar.gz && \
-    tar xf kairosctl-${KAIROS_VERSION}-linux-${ARCH}.tar.gz && \
-    chmod +x kairosctl && \
-    mv kairosctl /usr/local/bin/kairosctl && \
-    rm -fr /usr/local/kairos
-RUN kairosctl -v
-
 # renovate: datasource=github-releases depName=go-task/task
 ARG TASK_VERSION=v3.40.0
 RUN mkdir /usr/local/go-task && \

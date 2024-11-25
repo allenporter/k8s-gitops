@@ -3,7 +3,5 @@ version: '3'
 
 tasks:
   talhelper-genconfig:
-    env:
-      ANSIBLE_CONFIG: bootstrap/kairos/ansible.cfg
     cmds:
       - talhelper genconfig -c talconf.yaml -e talenv.sops.yaml {{.CLI_ARGS}}
