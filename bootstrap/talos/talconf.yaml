@@ -1,0 +1,78 @@
+---
+clusterName: k8s-cluster
+talosVersion: v1.8.3
+kubernetesVersion: v1.29.11
+endpoint: https://10.10.101.1:6443
+domain: ${domain}
+allowSchedulingOnMasters: true
+allowSchedulingOnControlPlanes: true
+nodes:
+  - hostname: kapi01
+    ipAddress: 10.10.100.1
+    controlPlane: true
+    installDisk: /dev/sda
+    # /dev/nvme0n1 for ceph
+  - hostname: kapi02
+    ipAddress: 10.10.100.2
+    controlPlane: true
+    installDisk: /dev/sda
+    # /dev/nvme0n1 for ceph
+    nodeAnnotations:
+      accelerator: intel
+  - hostname: kapi03
+    ipAddress: 10.10.100.3
+    controlPlane: true
+    installDisk: /dev/sda
+    # /dev/nvme0n1 for ceph
+    nodeAnnotations:
+      accelerator: intel
+  - hostname: kube01
+    ipAddress: 10.10.100.4
+    controlPlane: false
+    installDisk: /dev/sda
+    # NVidia extensions for older hardware that uses older proprietary drivers
+    nodeAnnotations:
+      accelerator: nvidia
+    kernelModules:
+      - name: nvidia
+      - name: nvidia_uvm
+      - name: nvidia_drm
+      - name: nvidia_modeset
+controlPlane:
+  nameservers:
+    - 10.10.1.1
+    - 10.10.10.1
+  networkInterfaces:
+    - interface: eth0
+      addresses:
+        - 10.10.0.0/16
+      routes:
+        - network: 0.0.0.0/0
+          gateway: 10.10.1.1
+  nodeAnnotations:
+    accelerator: intel
+  schematic:
+    customization:
+      extraKernelArgs:
+        - net.ifnames=0
+        - i915.force_probe=7d55
+      # All control plane nodes have the same intel extensions
+      systemExtensions:
+        officialExtensions:
+          - siderolabs/intel-ucode
+          - siderolabs/intel-ice-firmware
+          # Note: Renamed in new version
+          - siderolabs/i915-ucode
+worker:
+  nameservers:
+    - 10.10.1.1
+    - 10.10.10.1
+  networkInterfaces:
+    - interface: eth0
+      routes:
+        - network: 0.0.0.0/0
+          gateway: 10.10.1.1
+  schematic:
+    customization:
+      extraKernelArgs:
+        - net.ifnames=0

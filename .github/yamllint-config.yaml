@@ -6,6 +6,7 @@ ignore: |
   **/authelia-users-database.yaml
   **/localized-files/**
   netops/machinedb/machines-catalog.yaml
+  **/*.sops.yaml
   venv
 extends: default
 rules:
