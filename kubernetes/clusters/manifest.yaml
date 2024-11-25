@@ -278,6 +278,22 @@ clusters:
     path: kubernetes/network/prod/load-balancer
     helm_repos: []
     oci_repos: []
+    helm_releases:
+    - name: metallb
+      namespace: metallb
+      chart:
+        name: metallb
+        repo_name: metallb
+        repo_namespace: flux-system
+        repo_kind: HelmRepository
+    cluster_policies: []
+    config_maps: []
+    secrets: []
+  - name: network-load-balancer-config
+    namespace: flux-system
+    path: kubernetes/network/prod/load-balancer-config
+    helm_repos: []
+    oci_repos: []
     helm_releases: []
     cluster_policies: []
     config_maps: []
