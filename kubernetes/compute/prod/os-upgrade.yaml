@@ -23,7 +23,6 @@ spec:
   cordon: false
   drain:
     force: false
-    deleteEmptydirData: false
     disableEviction: true
   upgrade:
     image: quay.io/kairos/ubuntu
