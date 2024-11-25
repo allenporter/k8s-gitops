@@ -22,7 +22,8 @@ spec:
   serviceAccountName: system-upgrade
   cordon: false
   drain:
-    force: true
+    force: false
+    deleteEmptydirData: false
     disableEviction: true
   upgrade:
     image: quay.io/kairos/ubuntu
