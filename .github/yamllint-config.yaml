@@ -25,3 +25,5 @@ rules:
     spaces: 2
     indent-sequences: consistent
   new-line-at-end-of-file: disable
+  document-start:
+    present: true
