@@ -1,3 +1,0 @@
----
-- name: Build cloud configs
-  include_tasks: build.yaml

@@ -1,5 +1,4 @@
 k8s-cluster-kapi01.yaml
 k8s-cluster-kapi02.yaml
 k8s-cluster-kapi03.yaml
-k8s-cluster-kube01.yaml
 talosconfig

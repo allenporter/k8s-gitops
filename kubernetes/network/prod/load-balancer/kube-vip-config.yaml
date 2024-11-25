@@ -1,8 +1,0 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: kubevip
-  namespace: kube-system
-data:
-  range-global: 10.10.102.1-10.10.102.254

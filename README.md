@@ -6,11 +6,12 @@ This is a Flux/Gitops managed k8s cluster following the model used by [k8s@home]
 
 ## Bare Metal
 
-The cluster is provisioned as [Kairos](https://kairos.io) high availability [k3s](http://k3s.io) using [kube-vip](https://kube-vip.io/) and [Calico](https://docs.tigera.io/calico/latest/about/) for simple to deploy cluster networking.
+The cluster is provisioned with [Talos](https://www.talos.dev/) high availability using [Virtual (shared) ip](https://www.talos.dev/v1.8/talos-guides/network/vip/) and [Flannel](https://github.com/flannel-io/flannel)
+which is the default cluster networking.
 
 The nodes have a mix of accelerators.
 
-See [bootstrap](/bootstrap/kairos/) for more background on provisioning of bare
+See [bootstrap](/bootstrap/talos/) for more background on provisioning of bare
 metal nodes.
 
 ## Development Toolchain

@@ -6,49 +6,50 @@ endpoint: https://10.10.101.1:6443
 domain: ${domain}
 allowSchedulingOnMasters: true
 allowSchedulingOnControlPlanes: true
+cniConfig:
+  # Disable flannel
+  name: none
 nodes:
   - hostname: kapi01
     ipAddress: 10.10.100.1
     controlPlane: true
     installDisk: /dev/sda
-    # /dev/nvme0n1 for ceph
+    # /dev/sda
+    # /dev/nvme0n1
   - hostname: kapi02
     ipAddress: 10.10.100.2
     controlPlane: true
     installDisk: /dev/sda
-    # /dev/nvme0n1 for ceph
+    # /dev/sda
+    # /dev/nvme0n1
     nodeAnnotations:
       accelerator: intel
   - hostname: kapi03
     ipAddress: 10.10.100.3
     controlPlane: true
     installDisk: /dev/sda
-    # /dev/nvme0n1 for ceph
+    # /dev/sda
+    # /dev/nvme0n1
     nodeAnnotations:
       accelerator: intel
-  - hostname: kube01
-    ipAddress: 10.10.100.4
-    controlPlane: false
-    installDisk: /dev/sda
-    # NVidia extensions for older hardware that uses older proprietary drivers
-    nodeAnnotations:
-      accelerator: nvidia
-    kernelModules:
-      - name: nvidia
-      - name: nvidia_uvm
-      - name: nvidia_drm
-      - name: nvidia_modeset
+  # - hostname: kube01
+  #   ipAddress: 10.10.100.4
+  #   controlPlane: false
+  #   installDisk: /dev/sda
+  #   # NVidia extensions for older hardware that uses older proprietary drivers
+  #   nodeAnnotations:
+  #     accelerator: nvidia
+  #   kernelModules:
+  #     - name: nvidia
+  #     - name: nvidia_uvm
+  #     - name: nvidia_drm
+  #     - name: nvidia_modeset
 controlPlane:
-  nameservers:
-    - 10.10.1.1
-    - 10.10.10.1
   networkInterfaces:
     - interface: eth0
-      addresses:
-        - 10.10.0.0/16
-      routes:
-        - network: 0.0.0.0/0
-          gateway: 10.10.1.1
+      dhcp: true
+      vip:
+        ip: 10.10.101.1
   nodeAnnotations:
     accelerator: intel
   schematic:
@@ -64,14 +65,12 @@ controlPlane:
           # Note: Renamed in new version
           - siderolabs/i915-ucode
 worker:
-  nameservers:
-    - 10.10.1.1
-    - 10.10.10.1
+  machineSpec:
+    mode: metal
+    arch: amd64
   networkInterfaces:
     - interface: eth0
-      routes:
-        - network: 0.0.0.0/0
-          gateway: 10.10.1.1
+      dhcp: true
   schematic:
     customization:
       extraKernelArgs:
