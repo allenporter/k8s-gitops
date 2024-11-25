@@ -10,9 +10,6 @@ LOCALIZE_DIR="hack/localize"
 rm -fr kubernetes/crds
 kustomize localize ${LOCALIZE_DIR}/crds kubernetes/crds
 
-rm -fr kubernetes/network/prod/calico
-kustomize localize ${LOCALIZE_DIR}/calico/prod kubernetes/network/prod/calico
-
 rm -fr kubernetes/storage/prod/snapshot-controller
 kustomize localize ${LOCALIZE_DIR}/snapshot-controller kubernetes/storage/prod/snapshot-controller
 

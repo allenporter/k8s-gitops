@@ -10,11 +10,5 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./kubernetes/network/prod/load-balancer
-  # Don't remove load balancers required for bootstrap
-  prune: false
   dependsOn:
   - name: network
-  postBuild:
-    substituteFrom:
-    - kind: ConfigMap
-      name: network-config
