@@ -64,7 +64,16 @@ COPY --from=docker.io/alpine/helm:3.16.3                /usr/bin/helm           
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.4.0              /usr/local/bin/flux              /usr/local/bin/flux
 COPY --from=ghcr.io/siderolabs/talosctl:v1.8.3          /talosctl                        /usr/local/bin/talosctl
 COPY --from=calico/ctl:v3.29.0                          /usr/bin/calicoctl               /usr/bin/calicoctl
-COPY --from=ghcr.io/budimanjojo/talhelper:v3.0.10       /bin/talhelper                   /usr/local/bin/talhelper
+
+ARG ARCH=amd64
+
+# renovate: datasource=github-releases depName=budimanjojo/talhelper
+ARG TAL_HELPER_VERSION=v3.0.10
+RUN cd /usr/local/bin/ && \
+    curl -OL https://github.com/budimanjojo/talhelper/releases/download/${TAL_HELPER_VERSION}/talhelper_linux_${ARCH}.tar.gz && \
+    tar xf talhelper_linux_${ARCH}.tar.gz && \
+    chmod +x talhelper
+RUN talhelper --version
 
 # renovate: datasource=github-releases depName=stedolan/jq
 ARG JQ_VERSION=1.6
@@ -75,7 +84,6 @@ RUN cd /usr/local/bin/ && \
 RUN jq --version
 
 # renovate: datasource=github-releases depName=derailed/k9s
-ARG ARCH=amd64
 ARG K9S_VERSION=v0.30.8
 RUN mkdir /usr/local/k9s && \
     cd /usr/local/k9s && \
