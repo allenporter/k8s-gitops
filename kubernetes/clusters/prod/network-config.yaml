@@ -5,8 +5,6 @@ metadata:
   name: network-config
   namespace: flux-system
 data:
-  # LoadBalancer for control plan
-  kube_vip_ip: 10.10.101.1
   # LoadBalancer for services
   service_ip_range: 10.10.102.1-10.10.102.254
   # Service Naming (k8s-gateway)

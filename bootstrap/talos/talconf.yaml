@@ -6,9 +6,6 @@ endpoint: https://10.10.101.1:6443
 domain: ${domain}
 allowSchedulingOnMasters: true
 allowSchedulingOnControlPlanes: true
-cniConfig:
-  # Disable flannel
-  name: none
 nodes:
   - hostname: kapi01
     ipAddress: 10.10.100.1
