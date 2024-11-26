@@ -64,6 +64,10 @@ clusters:
       namespace: flux-system
       url: https://bjw-s.github.io/helm-charts/
       repo_type: default
+    - name: cilium
+      namespace: flux-system
+      url: https://helm.cilium.io/
+      repo_type: default
     - name: democratic-csi
       namespace: flux-system
       url: https://democratic-csi.github.io/charts/
@@ -119,10 +123,6 @@ clusters:
     - name: rook-release
       namespace: flux-system
       url: https://charts.rook.io/release
-      repo_type: default
-    - name: chromadb
-      namespace: flux-system
-      url: https://amikos-tech.github.io/chromadb-chart/
       repo_type: default
     oci_repos:
     - name: flux-manifests
@@ -182,13 +182,6 @@ clusters:
       chart:
         name: app-template
         repo_name: bjw-s-helm-charts
-        repo_namespace: flux-system
-        repo_kind: HelmRepository
-    - name: chromadb
-      namespace: chromadb
-      chart:
-        name: chromadb
-        repo_name: chromadb
         repo_namespace: flux-system
         repo_kind: HelmRepository
     cluster_policies: []
