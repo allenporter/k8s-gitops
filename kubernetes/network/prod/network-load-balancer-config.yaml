@@ -10,6 +10,7 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./kubernetes/network/prod/load-balancer-config
+  prune: true
   dependsOn:
   - name: network-load-balancer
   postBuild:
