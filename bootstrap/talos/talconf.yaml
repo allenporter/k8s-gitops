@@ -70,3 +70,8 @@ worker:
     customization:
       extraKernelArgs:
         - net.ifnames=0
+patches:
+  - |-
+     cluster:
+       proxy:
+         disabled: true
