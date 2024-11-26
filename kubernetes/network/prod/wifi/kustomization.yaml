@@ -8,5 +8,3 @@ resources:
 - unifi-backup.yaml
 - unifi-restic-config-secret.yaml
 - unifi-pvc.yaml
-# See restore steps in README.md
-# - unifi-restore.yaml

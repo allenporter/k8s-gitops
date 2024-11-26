@@ -156,20 +156,6 @@ clusters:
     helm_repos: []
     oci_repos: []
     helm_releases:
-    - name: llama-cublas
-      namespace: llama
-      chart:
-        name: app-template
-        repo_name: bjw-s-helm-charts
-        repo_namespace: flux-system
-        repo_kind: HelmRepository
-    - name: llama-gpt-ui-cublas
-      namespace: llama
-      chart:
-        name: app-template
-        repo_name: bjw-s-helm-charts
-        repo_namespace: flux-system
-        repo_kind: HelmRepository
     - name: doccano
       namespace: doccano
       chart:
@@ -177,26 +163,8 @@ clusters:
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    - name: ollama
-      namespace: ollama
-      chart:
-        name: ollama
-        repo_name: ollama-helm
-        repo_namespace: flux-system
-        repo_kind: HelmRepository
-    - name: functionary
-      namespace: functionary
-      chart:
-        name: app-template
-        repo_name: bjw-s-helm-charts
-        repo_namespace: flux-system
-        repo_kind: HelmRepository
     cluster_policies: []
-    config_maps:
-    - name: cublas-model-config-bmdc2bd8f8
-      namespace: llama
-    - name: cublas-model-config-92mgm49d6m
-      namespace: functionary
+    config_maps: []
     secrets: []
   - name: monitoring
     namespace: flux-system
