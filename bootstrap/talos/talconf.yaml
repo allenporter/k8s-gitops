@@ -41,6 +41,8 @@ nodes:
   #     - name: nvidia_uvm
   #     - name: nvidia_drm
   #     - name: nvidia_modeset
+cniConfig:
+  name: none
 controlPlane:
   networkInterfaces:
     - interface: eth0
@@ -62,9 +64,6 @@ controlPlane:
           # Note: Renamed in new version
           - siderolabs/i915-ucode
 worker:
-  machineSpec:
-    mode: metal
-    arch: amd64
   networkInterfaces:
     - interface: eth0
       dhcp: true

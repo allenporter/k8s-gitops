@@ -4,6 +4,7 @@ if [ "X${GOOGLE_APPLICATION_CREDENTIALS}" != "X" ]; then
 fi
 
 export KUBECONFIG="${HOME}/.env/kubeconfig.yaml"
+export TALOSCONFIG="/workspaces/k8s-gitops/bootstrap/talos/clusterconfig/talosconfig"
 
 # No default ansible inventory at the moment
 # ANSIBLE_INVENTORY="${ENV_INVENTORY_ROOT}/prod/inventory.yaml"
