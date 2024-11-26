@@ -17,3 +17,7 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
+  postBuild:
+    substituteFrom:
+    - kind: ConfigMap
+      name: network-config

@@ -1,4 +1,3 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 patches:
@@ -9,5 +8,5 @@ resources:
 - network-name-service.yaml
 - network-secrets.yaml
 - network-wifi.yaml
-- network-load-balancer-config.yaml
 - network-ingress.yaml
+- network-load-balancer-config.yaml

@@ -13,7 +13,6 @@ spec:
   prune: true
   dependsOn:
   - name: network
-  - name: network-load-balancer-config
   postBuild:
     substituteFrom:
     - kind: ConfigMap
