@@ -17,7 +17,6 @@ spec:
       name: sops-age
   dependsOn:
   - name: network
-  - name: network-load-balancer
   postBuild:
     substituteFrom:
     - kind: ConfigMap
