@@ -11,8 +11,6 @@ spec:
     name: flux-system
   path: ./kubernetes/network/prod/load-balancer-config
   prune: false
-  dependsOn:
-  - name: network-load-balancer
   postBuild:
     substituteFrom:
     - kind: ConfigMap
