@@ -22,7 +22,12 @@ spec:
   values:
     ipam:
       mode: kubernetes
-    kubeProxyReplacement: false
+    kubeProxyReplacement: true
+    ubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
+    k8sServiceHost: 127.0.0.1
+    k8sServicePort: 7445
+    l2announcements:
+      enabled: true
     # hubble:
     #   relay:
     #     enabled: true
@@ -31,13 +36,6 @@ spec:
     # ingressController:
     #   enabled: true
     #   loadbalancerMode: dedicated
-    # l2announcements:
-    #   enabled: true
-    # k8sClientRateLimit:
-    #   qps: 10
-    #   burst: 20
-    # k8sServiceHost: ${API_SERVER_IP}
-    # k8sServicePort: ${API_SERVER_PORT}
     securityContext:
       capabilities:
         ciliumAgent:
