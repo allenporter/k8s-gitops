@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: unifi-restore-20240114
+  name: unifi-restore-20241126
   namespace: unifi
 spec:
   trigger:
