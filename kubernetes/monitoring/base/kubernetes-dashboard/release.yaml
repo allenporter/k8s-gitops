@@ -26,6 +26,7 @@ spec:
       ingress:
         enabled: true
         useDefaultIngressClass: true
+        useDefaultAnnotations: false
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
