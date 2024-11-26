@@ -23,6 +23,14 @@ spec:
     ipam:
       mode: kubernetes
     kubeProxyReplacement: false
+    hubble:
+      relay:
+        enabled: true
+      ui:
+        enabled: true
+    ingressController:
+      enabled: true
+      loadbalancerMode: dedicated
     securityContext:
       capabilities:
         ciliumAgent:
