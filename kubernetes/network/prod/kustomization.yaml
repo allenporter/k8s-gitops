@@ -7,8 +7,6 @@ resources:
 - ../base/cert-manager
 - network-certs.yaml
 - network-ingress.yaml
-- network-load-balancer.yaml
-- network-load-balancer-config.yaml
 - network-name-service.yaml
 - network-secrets.yaml
 - network-wifi.yaml
