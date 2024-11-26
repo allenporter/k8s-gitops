@@ -28,7 +28,6 @@ spec:
       enabled: true
       ingress:
         enabled: true
-        ingressClassName: nginx-internal
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
@@ -88,7 +87,6 @@ spec:
     prometheus:
       ingress:
         enabled: true
-        ingressClassName: nginx-internal
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
@@ -126,7 +124,6 @@ spec:
     alertmanager:
       ingress:
         enabled: true
-        ingressClassName: nginx-internal
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
