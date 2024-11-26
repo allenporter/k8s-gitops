@@ -5,7 +5,6 @@ patches:
 - path: cert-manager-values.yaml
 resources:
 - ../base/cert-manager
-- calico
 - network-certs.yaml
 - network-ingress.yaml
 - network-load-balancer.yaml
