@@ -6,7 +6,7 @@ patches:
 resources:
 - ../base/cert-manager
 - network-certs.yaml
-- network-ingress.yaml
+# - network-ingress.yaml
 - network-name-service.yaml
 - network-secrets.yaml
 - network-wifi.yaml
