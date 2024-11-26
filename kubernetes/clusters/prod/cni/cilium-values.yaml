@@ -23,14 +23,21 @@ spec:
     ipam:
       mode: kubernetes
     kubeProxyReplacement: false
-    hubble:
-      relay:
-        enabled: true
-      ui:
-        enabled: true
-    ingressController:
-      enabled: true
-      loadbalancerMode: dedicated
+    # hubble:
+    #   relay:
+    #     enabled: true
+    #   ui:
+    #     enabled: true
+    # ingressController:
+    #   enabled: true
+    #   loadbalancerMode: dedicated
+    # l2announcements:
+    #   enabled: true
+    # k8sClientRateLimit:
+    #   qps: 10
+    #   burst: 20
+    # k8sServiceHost: ${API_SERVER_IP}
+    # k8sServicePort: ${API_SERVER_PORT}
     securityContext:
       capabilities:
         ciliumAgent:
