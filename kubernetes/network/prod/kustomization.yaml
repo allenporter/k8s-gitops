@@ -9,3 +9,4 @@ resources:
 - network-name-service.yaml
 - network-secrets.yaml
 - network-wifi.yaml
+- network-load-balancer-config.yaml
