@@ -1,11 +1,12 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-# patches:
-# - path: unifi-values.yaml
+patches:
+- path: unifi-values.yaml
 resources:
 - ../../base/unifi
 # - unifi-backup.yaml
 - unifi-restic-config-secret.yaml
 - unifi-pvc.yaml
-- unifi-restore.yaml
+# See restore steps in README.md
+# - unifi-restore.yaml

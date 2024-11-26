@@ -294,7 +294,14 @@ clusters:
     path: kubernetes/network/prod/wifi
     helm_repos: []
     oci_repos: []
-    helm_releases: []
+    helm_releases:
+    - name: unifi
+      namespace: unifi
+      chart:
+        name: app-template
+        repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
+        repo_kind: HelmRepository
     cluster_policies: []
     config_maps: []
     secrets: []
