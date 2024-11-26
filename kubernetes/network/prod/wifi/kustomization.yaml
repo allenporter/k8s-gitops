@@ -5,7 +5,7 @@ kind: Kustomization
 # - path: unifi-values.yaml
 resources:
 - ../../base/unifi
-- unifi-backup.yaml
+# - unifi-backup.yaml
 - unifi-restic-config-secret.yaml
 - unifi-pvc.yaml
 - unifi-restore.yaml
