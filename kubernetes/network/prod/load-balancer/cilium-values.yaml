@@ -13,6 +13,12 @@ spec:
         kind: HelmRepository
         name: cilium
         namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    enable: true
   values:
     ipam:
       mode: kubernetes
