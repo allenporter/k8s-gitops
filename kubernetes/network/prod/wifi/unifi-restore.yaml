@@ -17,4 +17,3 @@ spec:
       runAsGroup: 999
       fsGroup: 999
     storageClassName: local-hostpath
-    
