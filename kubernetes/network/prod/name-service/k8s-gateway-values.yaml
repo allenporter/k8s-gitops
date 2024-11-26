@@ -16,3 +16,4 @@ spec:
       annotations:
         # Self reference
         coredns.io/hostname: k8s-gateway.${name_service_dns_domain}
+        io.cilium/lb-ipam-ips: ${name_service_dns_ip}

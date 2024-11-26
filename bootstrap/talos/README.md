@@ -8,7 +8,10 @@ for the initial setup.
 1. Configure DHCP static map matching the `talconf.yaml`
 1. Boot machines off the Talos Linux image
 1. Remove the USB disk once its running in ram
-
+1. Environment should already be configured with
+```bash
+$ TALCONFIG=bootstrap/talos/clusterconfig/talosconfig
+```
 
 ## Generate the talos configuration
 
@@ -36,12 +39,12 @@ $ talosctl apply-config --insecure -n 10.10.100.3 --file bootstrap/talos/cluster
 ## Kubernetes bootstrap
 
 ```bash
-$ talosctl bootstrap --nodes 10.10.100.1 --endpoints 10.10.100.1 --talosconfig bootstrap/talos/clusterconfig/talosconfig
+$ talosctl bootstrap --nodes 10.10.100.1 --endpoints 10.10.100.1 
 ```
 
 Install kubeconfig:
 ```bash
-$ talosctl --talosconfig bootstrap/talos/clusterconfig/talosconfig -n 10.10.100.1 kubeconfig
+$ talosctl  -n 10.10.100.1 kubeconfig
 ```
 
 ## Verify Kubernetes health
@@ -62,12 +65,26 @@ kapi03   Ready    control-plane   115s   v1.29.11
 $ talosctl apply-config --insecure -n 10.10.100.4 --file bootstrap/talos/clusterconfig/k8s-cluster-kube01.yaml
 ```
 
-## Reboot
+## Maintenance
+
+### Update config
+
+```bash
+$ task --dir bootstrap/talos/ talhelper-updateconfig
+```
+
+### Check manifests
+
+```bash
+$ talosctl get manifests -n 10.10.100.1
+```
+
+### Reboot
 
 This will reboot all nodes:
 
 ```bash
-$ talosctl reboot --talosconfig bootstrap/talos/clusterconfig/talosconfig
+$ talosctl reboot
 ...
 watching nodes: [10.10.100.1 10.10.100.2 10.10.100.3]
     * 10.10.100.1: post check passed

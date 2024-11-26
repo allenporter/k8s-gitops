@@ -43,6 +43,7 @@ spec:
         annotations:
           # Note this is for documentation even though its not really authoritative
           coredns.io/hostname: unifi.${site_domain}
+          io.cilium/lb-ipam-ips: ${unifi_controller_ip}
         externalTrafficPolicy: Cluster
         ports:
           controller:

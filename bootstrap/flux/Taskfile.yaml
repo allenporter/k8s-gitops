@@ -5,6 +5,7 @@ vars:
   flux_sops_secret_name: sops-age
   flux_sops_secret_entry: sops.agekey
   flux_sops_secret_namespace: flux-system
+  flux_namespace: flux-system
 
 tasks:
   create-namespace:
