@@ -26,9 +26,10 @@ spec:
       ingress:
         enabled: true
         useDefaultIngressClass: true
-        useDefaultAnnotations: false
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt
+        issuer:
+          # Adds the annotation equivalent to
+          #   cert-manager.io/cluster-issuer: letsencrypt
+          scope: cluster
         hosts:
           - kubernetes-dashboard.${name_service_dns_domain}
         tls:
