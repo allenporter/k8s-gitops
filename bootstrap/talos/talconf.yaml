@@ -35,16 +35,22 @@ nodes:
     nodeAnnotations:
       accelerator: nvidia
     # NVidia extensions for older hardware that uses older proprietary drivers
-    # kernelModules:
-    #   - name: nvidia
-    #   - name: nvidia_uvm
-    #   - name: nvidia_drm
-    #   - name: nvidia_modeset
-    # patches:
-    #   - |-
-    #     machine:
-    #       install:
-    #         image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.8.3
+    kernelModules:
+      - name: nvidia
+      - name: nvidia_uvm
+      - name: nvidia_drm
+      - name: nvidia_modeset
+      # Image using these extensions
+      # customization:
+      # systemExtensions:
+      #     officialExtensions:
+      #         - siderolabs/nonfree-kmod-nvidia-production
+      #         - siderolabs/nvidia-container-toolkit-production
+    patches:
+      - |-
+        machine:
+          install:
+            image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.8.3
 
 cniConfig:
   name: none
