@@ -65,8 +65,8 @@ spec:
             - "https://miniflux.${name_service_dns_domain}/oauth2/oidc/callback"
           name: 'Miniflux'
           secret: ${MINIFLUX_CLIENT_SECRET}
-        # - id: home-assistant
-        #   redirectURIs:
-        #     - "http://unknown"
-        #   name: 'Home Assistant'
-        #   secret: home-assistant-client-secret
+        - id: home-assistant
+          redirectURIs:
+            - "http://localhost:8123/auth/oidc/callback"
+          name: 'Home Assistant'
+          secret: ${HOME_ASSISTANT_CLIENT_SECRET}
