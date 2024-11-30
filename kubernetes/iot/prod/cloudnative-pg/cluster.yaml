@@ -22,3 +22,5 @@ spec:
         enabled: true
       storage:
         storageClass: local-hostpath
+      initdb:
+        database: miniflux
