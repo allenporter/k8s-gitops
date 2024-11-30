@@ -13,6 +13,10 @@ spec:
   prune: true
   dependsOn:
   - name: flux-system
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   postBuild:
     substituteFrom:
     - kind: ConfigMap
