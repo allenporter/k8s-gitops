@@ -23,6 +23,7 @@ spec:
       KUBERNETES_POD_NAMESPACE: dexidp
     ingress:
       enabled: true
+      ingressClassName: nginx-internal
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-production
       hosts:
