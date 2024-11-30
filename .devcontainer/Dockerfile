@@ -83,7 +83,7 @@ RUN cd /usr/local/bin/ && \
 RUN jq --version
 
 # renovate: datasource=github-releases depName=derailed/k9s
-ARG K9S_VERSION=v0.30.8
+ARG K9S_VERSION=v0.32.7
 RUN mkdir /usr/local/k9s && \
     cd /usr/local/k9s && \
     curl -OL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_${ARCH}.tar.gz && \
