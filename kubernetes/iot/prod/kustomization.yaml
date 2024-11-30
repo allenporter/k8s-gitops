@@ -6,3 +6,4 @@ resources:
 - devpod.yaml
 - dexidp
 - miniflux
+- cloudnative-pg
