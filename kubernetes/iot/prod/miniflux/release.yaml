@@ -46,6 +46,7 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: nginx-internal
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
