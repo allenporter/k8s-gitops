@@ -22,6 +22,8 @@ spec:
         enabled: true
       storage:
         storageClass: local-hostpath
+      affinity:
+        topologyKey: kubernetes.io/hostname
       initdb:
         database: miniflux-db
         owner: ${MINIFLUX_PG_USER}
