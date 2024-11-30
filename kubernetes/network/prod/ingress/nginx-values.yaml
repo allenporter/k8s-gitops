@@ -31,8 +31,7 @@ spec:
         controllerValue: "k8s.io/ingress-nginx-internal"
       service:
         type: LoadBalancer
-        # Preserve source ip addresses
-        externalTrafficPolicy: Local
+        externalTrafficPolicy: Cluster
         loadBalancerIP: ${internal_ingress_ip}
         annotations:
           coredns.io/hostname: nginx-internal.${name_service_dns_domain}
