@@ -38,6 +38,12 @@ spec:
     env:
       DATABASE_URL: postgres://${MINIFLUX_PG_USER}:${MINIFLUX_PG_PASSWORD}@cluster-rw.cloudnative-pg.svc.cluster.local/miniflux?sslmode=disable
       RUN_MIGRATIONS: 1
+      INIT_POSTGRES_DBNAME: miniflux
+      INIT_POSTGRES_HOST: postgres16-rw.database.svc.cluster.local
+      INIT_POSTGRES_USER: ${MINIFLUX_PG_USER}
+      INIT_POSTGRES_PASS: ${MINIFLUX_PG_PASSWORD}
+      INIT_POSTGRES_SUPER_PASS: ${POSTGRES_SUPER_PASSWORD}
+
       OAUTH2_CLIENT_ID: miniflux
       OAUTH2_CLIENT_SECRET: ${MINIFLUX_CLIENT_SECRET}
       OAUTH2_PROVIDER: oidc
