@@ -20,3 +20,4 @@ resources:
   - ollama.yaml
   - prometheus-community.yaml
   - rook-release.yaml
+  - dex.yaml
