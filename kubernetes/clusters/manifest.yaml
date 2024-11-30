@@ -124,6 +124,10 @@ clusters:
       namespace: flux-system
       url: https://charts.rook.io/release
       repo_type: default
+    - name: dex
+      namespace: flux-system
+      url: https://charts.dexidp.io
+      repo_type: default
     oci_repos:
     - name: flux-manifests
       namespace: flux-system
@@ -146,7 +150,21 @@ clusters:
     path: kubernetes/iot/prod
     helm_repos: []
     oci_repos: []
-    helm_releases: []
+    helm_releases:
+    - name: dex
+      namespace: dexidp
+      chart:
+        name: dex
+        repo_name: dex
+        repo_namespace: flux-system
+        repo_kind: HelmRepository
+    - name: miniflux
+      namespace: miniflux
+      chart:
+        name: app-template
+        repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
+        repo_kind: HelmRepository
     cluster_policies: []
     config_maps: []
     secrets: []

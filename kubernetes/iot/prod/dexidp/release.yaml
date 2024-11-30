@@ -1,0 +1,82 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: dex
+  namespace: dexidp
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: dex
+      version: 0.19.1
+      sourceRef:
+        kind: HelmRepository
+        name: dex
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/dexidp/dex
+      tag: v2.41.1
+    env:
+      KUBERNETES_POD_NAMESPACE: dexidp
+    envFrom:
+      - secretRef:
+          name: github-oauth-client
+      - secretRef:
+          name: hedgedoc-oauth
+      - secretRef:
+          name: grafana-oauth
+      - secretRef:
+          name: outline-oauth
+    ingress:
+      enabled: true
+      className: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-production
+      hosts:
+        - host: &host dexidp.${name_service_dns_domain}
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - hosts:
+            - *host
+          secretName: dex-tls
+
+    config:
+      issuer: &issuer https://dexidp.${name_service_dns_domain}
+
+      storage:
+        type: kubernetes
+        config:
+          inCluster: true
+
+      web:
+        http: 0.0.0.0:5556
+
+      logger:
+        level: debug
+        format: text
+
+      enablePasswordDB: true
+      staticPasswords:
+        - email: "user@dex.local"
+          # password is "password"
+          hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
+          username: "user"
+          userID: "e4d0f2da-af40-11ef-8ae1-3fe0522c43fb"
+
+
+      staticClients:
+        - id: miniflux
+          redirectURIs:
+            - "https://miniflux.${name_service_dns_domain}/oauth2/oidc/callback"
+          name: 'Miniflux'
+          secret: ${MINIFLUX_CLIENT_SECRET}
+        # - id: home-assistant
+        #   redirectURIs:
+        #     - "http://unknown"
+        #   name: 'Home Assistant'
+        #   secret: home-assistant-client-secret
