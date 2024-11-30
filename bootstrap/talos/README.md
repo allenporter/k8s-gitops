@@ -34,8 +34,7 @@ $ talosctl -n 10.10.100.1 disks --insecure
 $ talosctl apply-config --insecure -n 10.10.100.1 --file bootstrap/talos/clusterconfig/k8s-cluster-kapi01.yaml
 $ talosctl apply-config --insecure -n 10.10.100.2 --file bootstrap/talos/clusterconfig/k8s-cluster-kapi02.yaml
 $ talosctl apply-config --insecure -n 10.10.100.3 --file bootstrap/talos/clusterconfig/k8s-cluster-kapi03.yaml
-$ talosctl apply-config --insecure -n 10.10.100.4 --file bootstrap/talos/clusterconfig/k8s-cluster-kube01.
-yaml
+$ talosctl apply-config --insecure -n 10.10.100.4 --file bootstrap/talos/clusterconfig/k8s-cluster-kube01.yaml
 ```
 
 ## Kubernetes bootstrap
