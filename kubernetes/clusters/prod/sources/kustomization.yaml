@@ -21,3 +21,4 @@ resources:
   - prometheus-community.yaml
   - rook-release.yaml
   - dex.yaml
+  - cloudnative-pg.yaml
