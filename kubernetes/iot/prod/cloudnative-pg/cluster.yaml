@@ -23,4 +23,7 @@ spec:
       storage:
         storageClass: local-hostpath
       initdb:
-        database: miniflux
+        database: miniflux-db
+        owner: ${MINIFLUX_PG_USER}
+        secret:
+          name: miniflux-secret
