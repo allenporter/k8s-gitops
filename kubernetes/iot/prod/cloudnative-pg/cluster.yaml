@@ -20,3 +20,5 @@ spec:
     cluster:
       monitoring:
         enabled: true
+      storage:
+        storageClass: local-hostpath
