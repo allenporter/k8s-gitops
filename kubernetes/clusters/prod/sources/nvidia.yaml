@@ -5,5 +5,5 @@ metadata:
   name: nvidia
   namespace: flux-system
 spec:
-  interval: 30m
+  interval: 2h
   url: https://helm.ngc.nvidia.com/nvidia
