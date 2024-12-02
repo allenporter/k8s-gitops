@@ -12,3 +12,4 @@ resources:
 - ../base/node-feature-discovery
 - ../base/nvidia-device-plugin
 - system-upgrade-controller
+- nvidia-time-slicing-config.yaml
