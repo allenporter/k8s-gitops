@@ -29,19 +29,17 @@ clusters:
         repo_name: node-feature-discovery
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    - name: nvidia-gpu-operator
-      namespace: nvidia-gpu-operator
+    - name: nvidia-device-plugin
+      namespace: nvidia-device-plugin
       chart:
-        name: gpu-operator
-        repo_name: nvidia
+        name: nvidia-device-pugin
+        repo_name: nvidia-device-plugin
         repo_namespace: flux-system
         repo_kind: HelmRepository
     cluster_policies: []
     config_maps:
     - name: default-controller-env
       namespace: system-upgrade
-    - name: time-slicing-config
-      namespace: nvidia-gpu-operator
     secrets: []
   - name: crds
     namespace: flux-system
@@ -131,6 +129,10 @@ clusters:
     - name: cloudnative-pg
       namespace: flux-system
       url: https://cloudnative-pg.github.io/charts
+      repo_type: default
+    - name: nvidia-device-plugin
+      namespace: flux-system
+      url: https://nvidia.github.io/k8s-device-plugin
       repo_type: default
     oci_repos:
     - name: flux-manifests
