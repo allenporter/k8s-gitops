@@ -19,16 +19,28 @@ spec:
     nfd:
       # Already installed separately
       enabled: false
-    usePrecompiled: true
-    # Based on https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html#rancher-kubernetes-engine-2
-    # but updated for k3s paths.
+
+
+    cdi:
+      enabled: true
+      default: true
+    operator:
+      repository: ghcr.io/jfroy
+      version: v24.6.2-ubi8
+    driver:
+      enabled: false
     toolkit:
+      repository: ghcr.io/jfroy
+      image: container-toolkit
+      version: 1.16.2-ubi8
       env:
-      - name: CONTAINERD_CONFIG2
-        value: /var/lib/rancher/k3s/agent/etc/containerd/config.toml
-      - name: CONTAINERD_SOCKET
-        value: /run/k3s/containerd/containerd.sock
-      - name: CONTAINERD_RUNTIME_CLASS
-        value: nvidia
-      - name: CONTAINERD_SET_AS_DEFAULT
-        value: "true"
+        - name: CONTAINERD_CONFIG
+          value: /var/nvidia/etc/containerd.toml
+        # talos does not recover if containerd is restarted with SIGHUP
+        # https://github.com/siderolabs/talos/issues/9271
+        - name: CONTAINERD_RESTART_MODE
+          value: none
+      installDir: "/var/nvidia"
+    dcgmExporter:
+      serviceMonitor:
+        enabled: true

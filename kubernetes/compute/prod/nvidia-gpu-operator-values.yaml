@@ -11,3 +11,7 @@ spec:
   values:
     driver:
       version: 550.90.07
+    devicePlugin:
+      config:
+        name: time-slicing-config
+        default: any
