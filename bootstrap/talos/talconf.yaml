@@ -64,7 +64,7 @@ nodes:
                 [plugins]
                   [plugins."io.containerd.grpc.v1.cri"]
                     [plugins."io.containerd.grpc.v1.cri".containerd]
-                      default_runtime_name = "nvidia"        
+                      default_runtime_name = "nvidia"
               path: /etc/cri/conf.d/20-customization.part
               op: create
 
