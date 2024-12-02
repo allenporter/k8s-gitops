@@ -11,3 +11,4 @@ tasks:
       - talosctl apply-config -n 10.10.100.1 --file clusterconfig/k8s-cluster-kapi01.yaml {{.CLI_ARGS}}
       - talosctl apply-config -n 10.10.100.2 --file clusterconfig/k8s-cluster-kapi02.yaml {{.CLI_ARGS}}
       - talosctl apply-config -n 10.10.100.3 --file clusterconfig/k8s-cluster-kapi03.yaml {{.CLI_ARGS}}
+      - talosctl apply-config -n 10.10.100.4 --file clusterconfig/k8s-cluster-kube01.yaml {{.CLI_ARGS}}
