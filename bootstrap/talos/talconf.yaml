@@ -56,6 +56,18 @@ nodes:
           path: /machine/sysctls
           value:
             net.core.bpf_jit_harden: 1
+      - |-
+        - op: add
+          path: /machine/files
+          value:
+            - content: |
+                [plugins]
+                  [plugins."io.containerd.grpc.v1.cri"]
+                    [plugins."io.containerd.grpc.v1.cri".containerd]
+                      default_runtime_name = "nvidia"        
+              path: /etc/cri/conf.d/20-customization.part
+              op: create
+
 
 cniConfig:
   name: none
