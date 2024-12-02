@@ -5,5 +5,5 @@ metadata:
   name: rook-release
   namespace: flux-system
 spec:
-  interval: 5m
+  interval: 2h
   url: https://charts.rook.io/release
