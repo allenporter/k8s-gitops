@@ -5,11 +5,10 @@ patches:
 - path: intel-device-plugin-values.yaml
 - path: intel-device-plugin-gpu-values.yaml
 - path: node-feature-discovery-values.yaml
-- path: nvidia-gpu-operator-values.yaml
+- path: nvidia-device-plugin-values.yaml
 resources:
 - ../base/intel-device-plugin
 - ../base/intel-device-plugin-gpu
 - ../base/node-feature-discovery
-- ../base/nvidia-gpu-operator
+- ../base/nvidia-device-plugin
 - system-upgrade-controller
-- nvidia-time-slicing-config.yaml
