@@ -32,7 +32,7 @@ clusters:
     - name: nvidia-device-plugin
       namespace: nvidia-device-plugin
       chart:
-        name: nvidia-device-pugin
+        name: nvidia-device-plugin
         repo_name: nvidia-device-plugin
         repo_namespace: flux-system
         repo_kind: HelmRepository
