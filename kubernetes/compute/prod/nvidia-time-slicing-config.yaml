@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: time-slicing-config
-  namespace: nvidia-gpu-operator
+  namespace: nvidia-device-plugin
 data:
   any: |-
     version: v1
