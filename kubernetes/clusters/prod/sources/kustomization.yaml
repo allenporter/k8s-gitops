@@ -22,3 +22,4 @@ resources:
   - rook-release.yaml
   - dex.yaml
   - cloudnative-pg.yaml
+  - nvidia-device-plugin.yaml
