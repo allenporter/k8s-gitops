@@ -6,5 +6,5 @@ resources:
 # - llama-cublas
 # - llama-gpt-ui-cublas
 - ml-eval
-# - ollama
+- ollama
 # - functionary
