@@ -62,7 +62,7 @@ COPY --from=ghcr.io/kyverno/kyverno-cli:v1.13.2         /ko-app/kubectl-kyverno 
 COPY --from=instrumentisto/restic:0.16.4-r2             /usr/local/bin/restic            /usr/local/bin/restic
 COPY --from=docker.io/alpine/helm:3.16.3                /usr/bin/helm                    /usr/local/bin/helm
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.4.0              /usr/local/bin/flux              /usr/local/bin/flux
-COPY --from=ghcr.io/siderolabs/talosctl:v1.8.3          /talosctl                        /usr/local/bin/talosctl
+COPY --from=ghcr.io/siderolabs/talosctl:v1.9.0          /talosctl                        /usr/local/bin/talosctl
 
 ARG ARCH=amd64
 
