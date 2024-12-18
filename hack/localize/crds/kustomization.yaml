@@ -6,9 +6,9 @@ metadata:
   namespace: flux-system
 resources:
 # rook ceph
-- https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.1.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
-- https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.1.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
-- https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.1.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
+- https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.2.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
+- https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.2.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
+- https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.2.0/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
 # Upgrade prometheus-operator crds ahead of kube-prometheus-stack
 - https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.79.1/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml
 - https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.79.1/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagers.yaml
