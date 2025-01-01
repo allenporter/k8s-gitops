@@ -20,7 +20,7 @@ jobs:
       - name: Setup Flux CLI
         uses: fluxcd/flux2/action@v2.4.0
       - name: flux-local diff
-        uses: allenporter/flux-local/action/diff@6.0.2
+        uses: allenporter/flux-local/action/diff@6.1.1
         id: diff
         with:
           path: ${{ matrix.cluster_path }}

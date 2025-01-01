@@ -46,7 +46,9 @@ RUN ceph --version
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /src/requirements.txt
-RUN pip3 install -r /src/requirements.txt
+RUN pip3 install uv
+RUN uv venv
+RUN uv pip install -r /src/requirements.txt
 
 # renovate: datasource=github-releases depName=GoogleCloudPlatform/cloud-sdk-docker
 ARG GCLOUD_CLI_VERSION=427.0.0
@@ -58,16 +60,15 @@ RUN mkdir -p /usr/local/lib/ && \
 
 COPY --from=docker.io/bitnami/kubectl:1.32.0            /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
 COPY --from=registry.k8s.io/kustomize/kustomize:v5.4.3  /app/kustomize                   /usr/local/bin/kustomize
-COPY --from=ghcr.io/kyverno/kyverno-cli:v1.13.2         /ko-app/kubectl-kyverno          /usr/local/bin/kyverno
 COPY --from=instrumentisto/restic:0.16.4-r2             /usr/local/bin/restic            /usr/local/bin/restic
-COPY --from=docker.io/alpine/helm:3.16.3                /usr/bin/helm                    /usr/local/bin/helm
+COPY --from=docker.io/alpine/helm:3.16.4                /usr/bin/helm                    /usr/local/bin/helm
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.4.0              /usr/local/bin/flux              /usr/local/bin/flux
-COPY --from=ghcr.io/siderolabs/talosctl:v1.9.0          /talosctl                        /usr/local/bin/talosctl
+COPY --from=ghcr.io/siderolabs/talosctl:v1.9.1          /talosctl                        /usr/local/bin/talosctl
 
 ARG ARCH=amd64
 
 # renovate: datasource=github-releases depName=budimanjojo/talhelper
-ARG TAL_HELPER_VERSION=v3.0.13
+ARG TAL_HELPER_VERSION=v3.0.14
 RUN cd /usr/local/bin/ && \
     curl -OL https://github.com/budimanjojo/talhelper/releases/download/${TAL_HELPER_VERSION}/talhelper_linux_${ARCH}.tar.gz && \
     tar xf talhelper_linux_${ARCH}.tar.gz && \
@@ -94,7 +95,7 @@ RUN mkdir /usr/local/k9s && \
 RUN k9s version
 
 # renovate: datasource=github-releases depName=getsops/sops
-ARG SOPS_VERSION=v3.9.2
+ARG SOPS_VERSION=v3.9.3
 RUN cd /usr/local/bin/ && \
     curl -OL https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.${ARCH} && \
     mv sops-${SOPS_VERSION}.linux.${ARCH} sops && \
