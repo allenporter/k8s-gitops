@@ -2,24 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ml-papers-service
+  name: ollama
   namespace: devpod
 spec:
   selector:
-    allenporter/appname: ml-papers
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ml-papers-ollama
-  namespace: devpod
-spec:
-  selector:
-    allenporter/appname: ml-papers
+    devpod/appname: devcontainer-cuda
   ports:
     - protocol: TCP
       port: 80
