@@ -36,7 +36,6 @@ clusters:
         repo_name: nvidia-device-plugin
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    cluster_policies: []
     config_maps:
     - name: default-controller-env
       namespace: system-upgrade
@@ -49,7 +48,6 @@ clusters:
     helm_repos: []
     oci_repos: []
     helm_releases: []
-    cluster_policies: []
     config_maps: []
     secrets: []
   - name: flux-system
@@ -148,7 +146,6 @@ clusters:
         repo_name: cilium
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    cluster_policies: []
     config_maps:
     - name: network-config
       namespace: flux-system
@@ -187,7 +184,6 @@ clusters:
         repo_name: cloudnative-pg
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    cluster_policies: []
     config_maps: []
     secrets: []
   - name: ml
@@ -210,7 +206,6 @@ clusters:
         repo_name: ollama-helm
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    cluster_policies: []
     config_maps: []
     secrets: []
   - name: monitoring
@@ -233,7 +228,6 @@ clusters:
         repo_name: prometheus-community
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    cluster_policies: []
     config_maps:
     - name: grafana-dashboard-control-plane-99d879ff4d
       namespace: flux-system
@@ -251,7 +245,6 @@ clusters:
         repo_name: jetstack
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    cluster_policies: []
     config_maps: []
     secrets: []
   - name: network-certs
@@ -260,7 +253,6 @@ clusters:
     helm_repos: []
     oci_repos: []
     helm_releases: []
-    cluster_policies: []
     config_maps: []
     secrets: []
   - name: network-ingress
@@ -276,7 +268,6 @@ clusters:
         repo_name: ingress-nginx
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    cluster_policies: []
     config_maps: []
     secrets: []
   - name: network-load-balancer-config
@@ -285,7 +276,6 @@ clusters:
     helm_repos: []
     oci_repos: []
     helm_releases: []
-    cluster_policies: []
     config_maps: []
     secrets: []
   - name: network-name-service
@@ -301,7 +291,6 @@ clusters:
         repo_name: k8s-gateway
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    cluster_policies: []
     config_maps: []
     secrets: []
   - name: network-wifi
@@ -317,7 +306,6 @@ clusters:
         repo_name: bjw-s-helm-charts
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    cluster_policies: []
     config_maps: []
     secrets: []
   - name: storage
@@ -347,6 +335,5 @@ clusters:
         repo_name: backube
         repo_namespace: flux-system
         repo_kind: HelmRepository
-    cluster_policies: []
     config_maps: []
     secrets: []
