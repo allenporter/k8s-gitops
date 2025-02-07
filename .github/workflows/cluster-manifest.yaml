@@ -28,6 +28,7 @@ jobs:
         python-version-file: ".python-version"
     - name: Install python requirements
       run: |
+        uv venv
         uv pip install -r requirements.txt
     - name: Generate cluster manifest
       run: |
