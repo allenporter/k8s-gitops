@@ -35,4 +35,4 @@ jobs:
         uv pip install -r requirements.txt
     - name: Generate cluster manifest
       run: |
-        hack/update-manifest.sh validate
+        uv run hack/update-manifest.sh validate
