@@ -62,7 +62,7 @@ COPY --from=docker.io/bitnami/kubectl:1.32.2            /opt/bitnami/kubectl/bin
 COPY --from=registry.k8s.io/kustomize/kustomize:v5.6.0  /app/kustomize                   /usr/local/bin/kustomize
 COPY --from=instrumentisto/restic:0.17.3-r2             /usr/local/bin/restic            /usr/local/bin/restic
 COPY --from=docker.io/alpine/helm:3.17.1                /usr/bin/helm                    /usr/local/bin/helm
-COPY --from=ghcr.io/fluxcd/flux-cli:v2.4.0              /usr/local/bin/flux              /usr/local/bin/flux
+COPY --from=ghcr.io/fluxcd/flux-cli:v2.5.0              /usr/local/bin/flux              /usr/local/bin/flux
 COPY --from=ghcr.io/siderolabs/talosctl:v1.9.4          /talosctl                        /usr/local/bin/talosctl
 
 ARG ARCH=amd64
