@@ -29,7 +29,7 @@ spec:
           main:
             image:
               repository: ghcr.io/miniflux/miniflux
-              tag: 2.2.5
+              tag: 2.2.6
 
             env:
               DATABASE_URL: postgres://${MINIFLUX_PG_USER}:${MINIFLUX_PG_PASSWORD}@cluster-rw.cloudnative-pg.svc.cluster.local/miniflux-db?sslmode=disable
