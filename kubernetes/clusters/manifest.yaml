@@ -138,6 +138,7 @@ clusters:
     - name: flux-manifests
       namespace: flux-system
       url: oci://ghcr.io/fluxcd/flux-manifests
+      ref_tag: v2.4.0
     helm_releases:
     - name: cilium
       namespace: kube-system
