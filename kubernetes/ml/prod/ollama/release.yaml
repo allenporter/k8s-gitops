@@ -35,16 +35,19 @@ spec:
         number: 1
       models:
         pull:
-        - llama3.1  # 8b
-        - llama3.2:3b
-        - qwen2.5:7b
         - gemma2:9b
         - llama3.2-vision:11b
-        # - mistral  # 7b
-        # - fixt/home-3b-v3:latest  # 3b
-        # - llama3-groq-tool-use
-        # - allenporter/xlam:1b
-        # - allenporter/xlam:7b
+        - qwen2.5:0.5b
+        - qwen2.5:3b
+        - qwen2.5:7b
+        - qwen2.5:14b
+        - qwen3:0.6b
+        - qwen3:1.7b
+        - qwen3:4b
+        - qwen3:8b
+        - qwen3:14b
+        - gemma3-tools:4b
+        - gemma3-tools:12b
     extraEnv:
     - name: OLLAMA_DEBUG
       value: "1"
