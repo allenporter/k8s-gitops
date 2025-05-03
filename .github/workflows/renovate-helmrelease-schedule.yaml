@@ -13,7 +13,8 @@ jobs:
       - name: Renovate Helm Releases
         uses: allenporter/renovate-helm-releases@v2
         with:
-          cluster-path: './'
+          cluster-path: './kubernetes'
+          exclude-folders: './kubernetes/crds/localized-files'
           debug: 'yes'
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
