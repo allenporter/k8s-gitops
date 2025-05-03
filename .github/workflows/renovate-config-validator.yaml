@@ -16,4 +16,4 @@ jobs:
       - name: Validate
         uses: rinchsan/renovate-config-validator@v0.2.0
         with:
-          pattern: 'renovate.json5'
+          pattern: '.github/renovate.json5'
