@@ -35,7 +35,8 @@ spec:
         number: 1
       models:
         pull:
-        - gemma2:9b
+        - llama3.1  # 8b
+        - llama3.2:3b
         - llama3.2-vision:11b
         - qwen2.5:0.5b
         - qwen2.5:3b
