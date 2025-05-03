@@ -42,6 +42,7 @@ spec:
               OAUTH2_REDIRECT_URL: https://miniflux.${name_service_dns_domain}/oauth2/oidc/callback
     service:
       main:
+        controller: main
         ports:
           http:
             port: 8080
@@ -56,7 +57,7 @@ spec:
           paths:
           - path: /
             service:
-              name: main
+              identifier: main
               port: http
         tls:
         - secretName: miniflux-tls
