@@ -9,6 +9,10 @@ spec:
     spec:
       chart: app-template
       version: 2.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
   values:
     controllers:
       main:

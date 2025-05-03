@@ -43,10 +43,12 @@
   },
   "flux": {
     "fileMatch": [
+        "(?:^|/)gotk-components\\.yaml$"
         "kubernetes/clusters/prod/flux-system/.+\\.yaml$",
+        "kubernetes/clusters/prod/sources/.+\\.yaml$",
         // Match base releases and overlays
-        "-values\\.yaml$",
-        "release\\.yaml$",
+        "(?:^|/)-values\\.yaml$",
+        "(?:^|/)release\\.yaml$",
     ]
   },
   "packageRules": [
