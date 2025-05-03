@@ -60,7 +60,7 @@ clusters:
       repo_type: default
     - name: bjw-s-helm-charts
       namespace: flux-system
-      url: https://bjw-s.github.io/helm-charts/
+      url: https://bjw-s-labs.github.io/helm-charts/
       repo_type: default
     - name: cilium
       namespace: flux-system
