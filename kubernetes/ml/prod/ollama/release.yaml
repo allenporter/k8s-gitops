@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: ollama-helm
         namespace: flux-system
-      version: 0.69.0
+      version: 1.15.0
   interval: 5m
   # Large timeout for allowing more time for model downloads
   timeout: 15m
@@ -34,16 +34,17 @@ spec:
         type: nvidia
         number: 1
       models:
-      - llama3.1  # 8b
-      - llama3.2:3b
-      - qwen2.5:7b
-      - gemma2:9b
-      - llama3.2-vision:11b
-      # - mistral  # 7b
-      # - fixt/home-3b-v3:latest  # 3b
-      # - llama3-groq-tool-use
-      # - allenporter/xlam:1b
-      # - allenporter/xlam:7b
+        pull:
+        - llama3.1  # 8b
+        - llama3.2:3b
+        - qwen2.5:7b
+        - gemma2:9b
+        - llama3.2-vision:11b
+        # - mistral  # 7b
+        # - fixt/home-3b-v3:latest  # 3b
+        # - llama3-groq-tool-use
+        # - allenporter/xlam:1b
+        # - allenporter/xlam:7b
     extraEnv:
     - name: OLLAMA_DEBUG
       value: "1"
