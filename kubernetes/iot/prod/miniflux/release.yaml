@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: bjw-s-helm-charts
         namespace: flux-system
-      version: 2.6.0
+      version: 3.7.3
   interval: 5m
   install:
     remediation:
@@ -42,13 +42,14 @@ spec:
               OAUTH2_REDIRECT_URL: https://miniflux.${name_service_dns_domain}/oauth2/oidc/callback
     service:
       main:
+        controller: main
         ports:
           http:
             port: 8080
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx-internal
+        className: nginx-internal
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
@@ -56,7 +57,7 @@ spec:
           paths:
           - path: /
             service:
-              name: main
+              identifier: main
               port: http
         tls:
         - secretName: miniflux-tls

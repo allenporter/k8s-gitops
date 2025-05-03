@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: bjw-s-helm-charts
         namespace: flux-system
-      version: 2.6.0
+      version: 3.7.3
   interval: 5m
   install:
     remediation:
@@ -70,6 +70,7 @@ spec:
 
     service:
       main:
+        controller: main
         ports:
           http:
             port: 8000
@@ -84,7 +85,7 @@ spec:
           paths:
           - path: /
             service:
-              name: main
+              identifier: main
               port: http
         tls:
         - secretName: functionary-tls
