@@ -19,5 +19,5 @@ spec:
       retries: 5
   values:
     oauth:
-      clientID: ${tailscale_client_id}
+      clientId: ${tailscale_client_id}
       clientSecret: ${tailscale_client_secret}
