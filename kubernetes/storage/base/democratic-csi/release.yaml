@@ -51,7 +51,7 @@ spec:
         defaultClass: false
         reclaimPolicy: Delete
         volumeBindingMode: WaitForFirstConsumer
-        allowVolumeExpansion: true
+        allowVolumeExpansion: false
     driver:
       config:
         driver: local-hostpath
