@@ -11,3 +11,4 @@ resources:
 - network-wifi.yaml
 - network-ingress.yaml
 - network-load-balancer-config.yaml
+- network-bridge.yaml
