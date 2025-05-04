@@ -43,7 +43,7 @@ spec:
         - qwen3:1.7b
         - qwen3:4b
         - qwen3:8b
-        - gemma3-tools:4b
+        - PetrosStav/gemma3-tools:4b
     extraEnv:
     - name: OLLAMA_DEBUG
       value: "1"
