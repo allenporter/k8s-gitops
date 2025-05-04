@@ -36,7 +36,7 @@ spec:
           - --enable-capacity=true
           - --capacity-ownerref-level=1
       externalResizer:
-        enabled: true
+        enabled: false
       externalAttacher:
         enabled: false
       externalSnapshotter:
@@ -51,7 +51,7 @@ spec:
         defaultClass: false
         reclaimPolicy: Delete
         volumeBindingMode: WaitForFirstConsumer
-        allowVolumeExpansion: true
+        allowVolumeExpansion: false
     driver:
       config:
         driver: local-hostpath
