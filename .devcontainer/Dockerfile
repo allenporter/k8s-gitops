@@ -61,7 +61,7 @@ RUN mkdir -p /usr/local/lib/ && \
 COPY --from=docker.io/bitnami/kubectl:1.33.0            /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
 COPY --from=registry.k8s.io/kustomize/kustomize:v5.6.0  /app/kustomize                   /usr/local/bin/kustomize
 COPY --from=instrumentisto/restic:0.17.3-r2             /usr/local/bin/restic            /usr/local/bin/restic
-COPY --from=docker.io/alpine/helm:3.17.2                /usr/bin/helm                    /usr/local/bin/helm
+COPY --from=docker.io/alpine/helm:3.17.3                /usr/bin/helm                    /usr/local/bin/helm
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.5.1              /usr/local/bin/flux              /usr/local/bin/flux
 COPY --from=ghcr.io/siderolabs/talosctl:v1.10.0          /talosctl                        /usr/local/bin/talosctl
 
