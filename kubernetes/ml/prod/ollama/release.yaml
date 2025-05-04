@@ -72,4 +72,4 @@ spec:
       enabled: true
       storageClass: "local-hostpath"
       accessMode: ReadWriteOnce
-      size: 40Gi
+      size: 65i
