@@ -134,6 +134,10 @@ clusters:
       namespace: flux-system
       url: https://nvidia.github.io/k8s-device-plugin
       repo_type: default
+    - name: tailscale
+      namespace: flux-system
+      url: https://pkgs.tailscale.com/helmcharts
+      repo_type: default
     oci_repos:
     - name: flux-manifests
       namespace: flux-system
@@ -244,6 +248,21 @@ clusters:
       chart:
         name: cert-manager
         repo_name: jetstack
+        repo_namespace: flux-system
+        repo_kind: HelmRepository
+    config_maps: []
+    secrets: []
+  - name: network-bridge
+    namespace: flux-system
+    path: kubernetes/network/prod/bridge
+    helm_repos: []
+    oci_repos: []
+    helm_releases:
+    - name: tailscale-operator
+      namespace: tailscale
+      chart:
+        name: tailscale-operator
+        repo_name: tailscale
         repo_namespace: flux-system
         repo_kind: HelmRepository
     config_maps: []
