@@ -5,4 +5,4 @@ namespace: tailscale
 resources:
 - namespace.yaml
 - release.yaml
-- service.yaml
+# - service.yaml
