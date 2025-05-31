@@ -9,4 +9,4 @@ spec:
     spec:
       # renovate: registryUrl=https://kubernetes.github.io/dashboard/
       chart: kubernetes-dashboard
-      version: 7.12.0
+      version: 7.13.0
