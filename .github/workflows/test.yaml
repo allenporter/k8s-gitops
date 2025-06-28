@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Flux CLI
-        uses: fluxcd/flux2/action@v2.6.2
+        uses: fluxcd/flux2/action@v2.6.3
       - name: flux-local test
         uses: allenporter/flux-local/action/test@7.5.6
         with:
