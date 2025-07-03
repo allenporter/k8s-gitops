@@ -59,7 +59,7 @@ RUN mkdir -p /usr/local/lib/ && \
     /usr/local/lib/google-cloud-sdk/install.sh --quiet --usage-reporting=false --rc-path=/etc/profile
 
 COPY --from=docker.io/bitnami/kubectl:1.33.1            /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
-COPY --from=registry.k8s.io/kustomize/kustomize:v5.6.0  /app/kustomize                   /usr/local/bin/kustomize
+COPY --from=registry.k8s.io/kustomize/kustomize:v5.7.0  /app/kustomize                   /usr/local/bin/kustomize
 COPY --from=instrumentisto/restic:0.17.3-r2             /usr/local/bin/restic            /usr/local/bin/restic
 COPY --from=docker.io/alpine/helm:3.18.3                /usr/bin/helm                    /usr/local/bin/helm
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.6.3              /usr/local/bin/flux              /usr/local/bin/flux
