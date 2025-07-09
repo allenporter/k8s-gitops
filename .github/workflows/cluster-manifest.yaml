@@ -19,7 +19,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Setup Flux CLI
-      uses: fluxcd/flux2/action@v2.6.3
+      uses: fluxcd/flux2/action@v2.6.4
     - name: Set up uv
       uses: astral-sh/setup-uv@v6
       with:
