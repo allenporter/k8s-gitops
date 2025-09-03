@@ -1,4 +1,4 @@
-FROM ubuntu:jammy-20250730
+FROM ubuntu:jammy-20250819
 
 # Setup non-root user
 ARG USERNAME=admin
