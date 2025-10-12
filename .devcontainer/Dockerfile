@@ -1,4 +1,4 @@
-FROM ubuntu:jammy-20250619
+FROM ubuntu:jammy-20251001
 
 # Setup non-root user
 ARG USERNAME=admin
@@ -58,17 +58,17 @@ RUN mkdir -p /usr/local/lib/ && \
     tar xf google-cloud-cli-${GCLOUD_CLI_VERSION}-linux-x86_64.tar.gz && \
     /usr/local/lib/google-cloud-sdk/install.sh --quiet --usage-reporting=false --rc-path=/etc/profile
 
-COPY --from=docker.io/bitnami/kubectl:1.33.3            /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
-COPY --from=registry.k8s.io/kustomize/kustomize:v5.7.0  /app/kustomize                   /usr/local/bin/kustomize
+COPY --from=docker.io/bitnami/kubectl:1.33.4            /opt/bitnami/kubectl/bin/kubectl /usr/local/bin/kubectl
+COPY --from=registry.k8s.io/kustomize/kustomize:v5.7.1  /app/kustomize                   /usr/local/bin/kustomize
 COPY --from=instrumentisto/restic:0.18.0-r2             /usr/local/bin/restic            /usr/local/bin/restic
-COPY --from=docker.io/alpine/helm:3.18.3                /usr/bin/helm                    /usr/local/bin/helm
+COPY --from=docker.io/alpine/helm:3.19.0                /usr/bin/helm                    /usr/local/bin/helm
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.6.4              /usr/local/bin/flux              /usr/local/bin/flux
-COPY --from=ghcr.io/siderolabs/talosctl:v1.10.5          /talosctl                        /usr/local/bin/talosctl
+COPY --from=ghcr.io/siderolabs/talosctl:v1.11.2          /talosctl                        /usr/local/bin/talosctl
 
 ARG ARCH=amd64
 
 # renovate: datasource=github-releases depName=budimanjojo/talhelper
-ARG TAL_HELPER_VERSION=v3.0.31
+ARG TAL_HELPER_VERSION=v3.0.37
 RUN cd /usr/local/bin/ && \
     curl -OL https://github.com/budimanjojo/talhelper/releases/download/${TAL_HELPER_VERSION}/talhelper_linux_${ARCH}.tar.gz && \
     tar xf talhelper_linux_${ARCH}.tar.gz && \
@@ -84,7 +84,7 @@ RUN cd /usr/local/bin/ && \
 RUN jq --version
 
 # renovate: datasource=github-releases depName=derailed/k9s
-ARG K9S_VERSION=v0.50.9
+ARG K9S_VERSION=v0.50.15
 RUN mkdir /usr/local/k9s && \
     cd /usr/local/k9s && \
     curl -OL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_${ARCH}.tar.gz && \
@@ -95,7 +95,7 @@ RUN mkdir /usr/local/k9s && \
 RUN k9s version
 
 # renovate: datasource=github-releases depName=getsops/sops
-ARG SOPS_VERSION=v3.10.2
+ARG SOPS_VERSION=v3.11.0
 RUN cd /usr/local/bin/ && \
     curl -OL https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.${ARCH} && \
     mv sops-${SOPS_VERSION}.linux.${ARCH} sops && \
@@ -114,7 +114,7 @@ RUN mkdir /usr/local/kubeconfirm/ && \
 RUN kubeconform -v
 
 # renovate: datasource=github-releases depName=go-task/task
-ARG TASK_VERSION=v3.44.1
+ARG TASK_VERSION=v3.45.4
 RUN mkdir /usr/local/go-task && \
     cd /usr/local/go-task/ && \
     curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_${ARCH}.tar.gz && \

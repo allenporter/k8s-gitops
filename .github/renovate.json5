@@ -57,7 +57,7 @@
     // have a working space for evaluating the rules independently.
     {
       "description": "dev: Patches are automatic",
-      "matchPaths": ["**/dev/*"],
+      "matchPaths": ["**/dev/*", "**/.devcontainer/*"],
       "automerge": true,
       "automergeType": "branch",
       "additionalBranchPrefix": "dev-",
@@ -65,14 +65,14 @@
     },
     {
       "description": "dev: Minor updates automerged",
-      "matchPaths": ["**/dev/*"],
+      "matchPaths": ["**/dev/*", "**/.devcontainer/*"],
       "automerge": true,
       "additionalBranchPrefix": "dev-minor",
       "matchUpdateTypes": ["minor"],
     },
     {
       "description": "dev: Major packages updated weekly",
-      "matchPaths": ["**/dev/**"],
+      "matchPaths": ["**/dev/**", "**/.devcontainer/*"],
       "extends": ["schedule:weekends"],
       "additionalBranchPrefix": "dev-major",
       "matchUpdateTypes": ["major"],
