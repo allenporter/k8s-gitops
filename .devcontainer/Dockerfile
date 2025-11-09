@@ -3,8 +3,8 @@ FROM ubuntu:jammy-20251001
 # Setup non-root user
 ARG USERNAME=admin
 ARG GROUPNAME=admin
-RUN addgroup --system ${GROUPNAME} && \
-    adduser --system ${GROUPNAME} --ingroup ${USERNAME} --home /home/${USERNAME} --shell /bin/bash && \
+RUN /usr/sbin/addgroup --system ${GROUPNAME} && \
+    /usr/sbin/adduser --system ${GROUPNAME} --ingroup ${USERNAME} --home /home/${USERNAME} --shell /bin/bash && \
     chown -R ${USERNAME}:${GROUPNAME} /home/${USERNAME} && \
     apt-get update && \
     apt-get install -y sudo && \
@@ -35,7 +35,7 @@ RUN add-apt-repository ppa:longsleep/golang-backports && \
     apt-get install -y \
         golang-${GO_VERSION} \
         git
-ENV PATH $PATH:/usr/lib/go-${GO_VERSION}/bin
+ENV PATH=$PATH:/usr/lib/go-${GO_VERSION}/bin
 RUN go version
 
 # Ceph quincy versions upported by base ubuntu image
