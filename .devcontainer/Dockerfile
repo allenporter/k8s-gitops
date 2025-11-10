@@ -47,7 +47,8 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /src/requirements.txt
 RUN pip3 install uv
-RUN uv venv
+ARG PYTHON_VERSION=3.13
+RUN uv venv --python=${PYTHON_VERSION}
 RUN uv pip install -r /src/requirements.txt
 
 # renovate: datasource=github-releases depName=GoogleCloudPlatform/cloud-sdk-docker
