@@ -20,6 +20,7 @@ metadata:
   name: home-assistant-core
   namespace: devpod
 spec:
+  ingressClassName: nginx-internal
   rules:
     - host: devpod-core.${name_service_dns_domain}
       http:
