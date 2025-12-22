@@ -42,6 +42,7 @@ spec:
           enabled: true
       admissionWebhooks:
         # We can't have two at once
+        # https://github.com/kubernetes/ingress-nginx/issues/7546
         enabled: false
     defaultBackend:
       enabled: true
@@ -89,6 +90,7 @@ spec:
           enabled: true
       admissionWebhooks:
         # We can't have two at once
+        # https://github.com/kubernetes/ingress-nginx/issues/7546
         enabled: false
     defaultBackend:
       enabled: true
