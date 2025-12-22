@@ -11,31 +11,31 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8123
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-  name: home-assistant-core
-  namespace: devpod
-spec:
-  ingressClassName: nginx-internal
-  rules:
-    - host: devpod-core.${name_service_dns_domain}
-      http:
-        paths:
-          - backend:
-              service:
-                name: home-assistant-core
-                port:
-                  number: 80
-            path: /
-            pathType: Prefix
-  tls:
-    - hosts:
-        - devpod-core.${name_service_dns_domain}
-      secretName: home-assistant-core-tls
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   annotations:
+#     cert-manager.io/cluster-issuer: letsencrypt
+#   name: home-assistant-core
+#   namespace: devpod
+# spec:
+#   ingressClassName: nginx-internal
+#   rules:
+#     - host: devpod-core.${name_service_dns_domain}
+#       http:
+#         paths:
+#           - backend:
+#               service:
+#                 name: home-assistant-core
+#                 port:
+#                   number: 80
+#             path: /
+#             pathType: Prefix
+#   tls:
+#     - hosts:
+#         - devpod-core.${name_service_dns_domain}
+#       secretName: home-assistant-core-tls
 # ---
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
