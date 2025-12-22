@@ -8,12 +8,13 @@ data:
   # LoadBalancer for services
   service_ip_range: 10.10.102.1-10.10.102.254
   service_ip_start: 10.10.102.1
+  # Note: 10.10.102.2 is allocated to cilium-ingress
   service_ip_end: 10.10.102.254
   # Service Naming (k8s-gateway)
   name_service_dns_ip: 10.10.102.1
   name_service_dns_domain: k8s.mrv.thebends.org
   # Reverse proxies
-  external_ingress_ip: 10.10.102.2
+  external_ingress_ip: 10.10.102.5
   internal_ingress_ip: 10.10.102.3
   # Prefix for all services at the site
   site_domain: mrv.thebends.org
