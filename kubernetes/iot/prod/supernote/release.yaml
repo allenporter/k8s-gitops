@@ -29,7 +29,7 @@ spec:
           main:
             image:
               repository: ghcr.io/allenporter/supernote-lite
-              tag: 0.4.1
+              tag: v0.4.1
 
             env:
               SUPERNOTE_JWT_SECRET: ${SUPERNOTE_JWT_SECRET}
