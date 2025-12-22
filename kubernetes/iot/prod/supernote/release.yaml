@@ -1,0 +1,58 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: supernote
+  namespace: supernote
+spec:
+  releaseName: supernote
+  chart:
+    spec:
+      chart: app-template
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
+      version: 4.4.0
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    # Fix problem where helm fails to uninstall
+    enable: false
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/allenporter/supernote-lite
+              tag: 0.4.1
+
+            env:
+              SUPERNOTE_JWT_SECRET: ${SUPERNOTE_JWT_SECRET}
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 8080
+    ingress:
+      main:
+        enabled: true
+        className: nginx-internal
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+        - host: supernote.${name_service_dns_domain}
+          paths:
+          - path: /
+            service:
+              identifier: main
+              port: http
+        tls:
+        - secretName: supernote-tls
+          hosts:
+          - supernote.${name_service_dns_domain}
