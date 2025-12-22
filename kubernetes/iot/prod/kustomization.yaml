@@ -7,3 +7,4 @@ resources:
 - dexidp
 - miniflux
 - cloudnative-pg
+- supernote
