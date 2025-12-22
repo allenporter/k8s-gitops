@@ -190,6 +190,13 @@ clusters:
         repo_name: cloudnative-pg
         repo_namespace: flux-system
         repo_kind: HelmRepository
+    - name: supernote
+      namespace: supernote
+      chart:
+        name: app-template
+        repo_name: bjw-s-helm-charts
+        repo_namespace: flux-system
+        repo_kind: HelmRepository
     config_maps: []
     secrets: []
   - name: ml
