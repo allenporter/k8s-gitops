@@ -1,5 +1,5 @@
 PyJWT==2.10.1
-ansible==10.7.0
+ansible==13.1.0
 cryptography==46.0.3
 flux-local==7.11.0
 google-cloud-secret-manager==2.26.0
