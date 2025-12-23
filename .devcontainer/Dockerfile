@@ -1,4 +1,4 @@
-FROM ubuntu:jammy-20251013
+FROM mcr.microsoft.com/devcontainers/python:3.14-bookworm
 
 # Setup non-root user
 ARG USERNAME=admin
@@ -19,23 +19,19 @@ RUN apt-get update --fix-missing && \
     apt-get install -y --fix-missing \
         curl \
         unzip \
-        software-properties-common \
         vim \
         bind9-dnsutils \
         python3-pip \
         sshpass \
-        netcat \
+        netcat-traditional \
         mkisofs \
-        age
+        age \
+        git \
+        libssh-dev
 
 
-ARG GO_VERSION=1.19
-RUN add-apt-repository ppa:longsleep/golang-backports && \
-    apt-get update && \
-    apt-get install -y \
-        golang-${GO_VERSION} \
-        git
-ENV PATH=$PATH:/usr/lib/go-${GO_VERSION}/bin
+COPY --from=golang:1.19-bookworm /usr/local/go /usr/local/go
+ENV PATH=$PATH:/usr/local/go/bin
 RUN go version
 
 # Ceph quincy versions upported by base ubuntu image
@@ -51,7 +47,7 @@ RUN uv venv
 RUN uv pip install -r /src/requirements.txt
 
 # renovate: datasource=github-releases depName=GoogleCloudPlatform/cloud-sdk-docker
-ARG GCLOUD_CLI_VERSION=427.0.0
+ARG GCLOUD_CLI_VERSION=504.0.1
 RUN mkdir -p /usr/local/lib/ && \
     cd /usr/local/lib/ && \
     curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-${GCLOUD_CLI_VERSION}-linux-x86_64.tar.gz && \
