@@ -127,7 +127,7 @@ watching nodes: [10.10.100.1 10.10.100.2 10.10.100.3]
     $ task --dir bootstrap/talos/ talhelper-gen-upgrade-k8s
     ```
 
-3. Run each command
+3. Run each command. Note this does not work for images with a custom installer like NVidia nodes.
 
     ```
     $ talosctl upgrade --talosconfig=./bootstrap/talos/clusterconfig/talosconfig --nodes=10.10.100.1 --
