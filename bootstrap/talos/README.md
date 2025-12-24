@@ -92,3 +92,48 @@ watching nodes: [10.10.100.1 10.10.100.2 10.10.100.3]
     * 10.10.100.2: post check passed
     * 10.10.100.3: post check passed
 ```
+
+### Upgrade
+
+1. Edit `talconf.yaml` following suggested [upgrade paths](https://docs.siderolabs.com/talos/v1.12/configure-your-talos-cluster/lifecycle-management/upgrading-talos#supported-upgrade-paths)
+
+
+2. Regenerate upgrade commands
+
+    ```
+    $ task --dir bootstrap/talos/ talhelper-gen-upgrade
+    ```
+
+3. Run each command
+
+    ```
+    $ talosctl upgrade --talosconfig=./bootstrap/talos/clusterconfig/talosconfig --nodes=10.10.100.1 --
+    image=factory.talos.dev/metal-installer/f20a270363ef05e94cec3a1e50cef514e27ad5d593bce64adca56a9756b59134:v1.8.4;
+    WARNING: 10.10.100.1: server version 1.8.3 is older than client version 1.12.0
+    ◱ watching nodes: [10.10.100.1]
+        * 10.10.100.1: waiting for actor ID
+    ...
+        * 10.10.100.1: post check passed
+    ```
+
+
+### Upgrade Kubernetes
+
+1. Edit `talconf.yaml`
+
+2. Regenerate upgrade commands
+
+    ```
+    $ task --dir bootstrap/talos/ talhelper-gen-upgrade-k8s
+    ```
+
+3. Run each command
+
+    ```
+    $ talosctl upgrade --talosconfig=./bootstrap/talos/clusterconfig/talosconfig --nodes=10.10.100.1 --
+    image=factory.talos.dev/metal-installer/f20a270363ef05e94cec3a1e50cef514e27ad5d593bce64adca56a9756b59134:v1.8.4;
+    WARNING: 10.10.100.1: server version 1.8.3 is older than client version 1.12.0
+    ◱ watching nodes: [10.10.100.1]
+        * 10.10.100.1: waiting for actor ID
+    ...
+    ```

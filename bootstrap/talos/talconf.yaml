@@ -1,6 +1,6 @@
 ---
 clusterName: k8s-cluster
-talosVersion: v1.8.3
+talosVersion: v1.8.4
 kubernetesVersion: v1.30.7
 endpoint: https://10.10.101.1:6443
 allowSchedulingOnMasters: true

@@ -12,3 +12,11 @@ tasks:
       - talosctl apply-config -n 10.10.100.2 --file clusterconfig/k8s-cluster-kapi02.yaml {{.CLI_ARGS}}
       - talosctl apply-config -n 10.10.100.3 --file clusterconfig/k8s-cluster-kapi03.yaml {{.CLI_ARGS}}
       - talosctl apply-config -n 10.10.100.4 --file clusterconfig/k8s-cluster-kube01.yaml {{.CLI_ARGS}}
+
+  talhelper-gen-upgrade:
+    cmds:
+      - talhelper gencommand upgrade -c talconf.yaml -e talenv.sops.yaml {{.CLI_ARGS}} -o bootstrap/talos/clusterconfig
+
+  talhelper-gen-upgrade-k8s:
+    cmds:
+      - talhelper gencommand upgrade-k8s -c talconf.yaml -e talenv.sops.yaml {{.CLI_ARGS}} -o bootstrap/talos/clusterconfig
