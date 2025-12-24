@@ -50,7 +50,14 @@ nodes:
       - |-
         machine:
           install:
-            image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.8.3
+            # For 1.8.3:
+            #   nonfree-kmod-nvidia 550.90.07-v1.8.3
+            #   nvidia-container-toolkit 550.90.07-v1.16.1
+            # image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.8.3
+            # For 1.8.4:
+            #   nonfree-kmod-nvidia 550.90.07-x
+            #   nvidia-container-toolkit 550.90.07-x
+            image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.8.4
       - |-
         - op: add
           path: /machine/sysctls
