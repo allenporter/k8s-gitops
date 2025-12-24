@@ -31,7 +31,7 @@ nodes:
   - hostname: kube01
     ipAddress: 10.10.100.4
     controlPlane: false
-    installDisk: /dev/sdb
+    installDisk: /dev/sda
     nodeAnnotations:
       accelerator: nvidia
     # NVidia extensions for older hardware that uses older proprietary drivers
