@@ -1,7 +1,7 @@
 ---
 clusterName: k8s-cluster
-talosVersion: v1.8.3
-kubernetesVersion: v1.30.7
+talosVersion: v1.11.6
+kubernetesVersion: v1.33.6
 endpoint: https://10.10.101.1:6443
 allowSchedulingOnMasters: true
 allowSchedulingOnControlPlanes: true
@@ -31,7 +31,7 @@ nodes:
   - hostname: kube01
     ipAddress: 10.10.100.4
     controlPlane: false
-    installDisk: /dev/sdb
+    installDisk: /dev/sda
     nodeAnnotations:
       accelerator: nvidia
     # NVidia extensions for older hardware that uses older proprietary drivers
@@ -50,7 +50,27 @@ nodes:
       - |-
         machine:
           install:
-            image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.8.3
+            # For 1.8.3:
+            #   nonfree-kmod-nvidia 550.90.07-v1.8.3
+            #   nvidia-container-toolkit 550.90.07-v1.16.1
+            # image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.8.3
+            # For 1.8.4:
+            #   nonfree-kmod-nvidia 550.90.07-x
+            #   nvidia-container-toolkit 550.90.07-x
+            # image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.8.4
+            # For 1.9.6:
+            #   nonfree-kmod-nvidia 550.x
+            #   nvidia-container-toolkit 550.x
+            # image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.9.6
+            # For 1.10.9
+            #   nonfree-kmod-nvidia 570.x
+            #   nvidia-container-toolkit 570.x
+            # image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.10.9
+            # For 1.11.6
+            #   nonfree-kmod-nvidia 570.x
+            #   nvidia-container-toolkit 570.x
+            image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.11.6
+
       - |-
         - op: add
           path: /machine/sysctls
@@ -87,10 +107,9 @@ controlPlane:
       # All control plane nodes have the same intel extensions
       systemExtensions:
         officialExtensions:
-          - siderolabs/intel-ucode
+          - siderolabs/i915
           - siderolabs/intel-ice-firmware
-          # Note: Renamed in new version
-          - siderolabs/i915-ucode
+          - siderolabs/intel-ucode
 
 worker:
   networkInterfaces:
