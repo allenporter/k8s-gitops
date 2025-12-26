@@ -12,7 +12,7 @@ rtr:
     site_domain: mrv.thebends.org
     k8s_domain: k8s.mrv.thebends.org
     k8s_dns1_ip: 10.10.102.1
-    k8s_dns2_ip: 10.10.102.2
+    # k8s_dns2_ip: 10.10.102.2
     # IP Address for DNS for a subset of DHCP clients
     dhcp_dns_ip: 10.10.1.20
     # TODO: This is not yet used to deliver keys
