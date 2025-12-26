@@ -1,6 +1,6 @@
 ---
 clusterName: k8s-cluster
-talosVersion: v1.8.4
+talosVersion: v1.9.6
 kubernetesVersion: v1.30.14
 endpoint: https://10.10.101.1:6443
 allowSchedulingOnMasters: true
@@ -96,8 +96,10 @@ controlPlane:
         officialExtensions:
           - siderolabs/intel-ucode
           - siderolabs/intel-ice-firmware
-          # Note: Renamed in new version
-          - siderolabs/i915-ucode
+          - siderolabs/i915
+
+imageFactory:
+  installerURLTmpl: "{{.RegistryURL}}/installer{{if .Secureboot}}-secureboot{{end}}/{{.ID}}:{{.Version}}"
 
 worker:
   networkInterfaces:
