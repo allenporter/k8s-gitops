@@ -14,5 +14,10 @@ spec:
         kind: HelmRepository
         name: rook-release
         namespace: flux-system
+  interval: 30m
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   values:
     operatorNamespace: rook-ceph
