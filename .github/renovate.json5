@@ -1,125 +1,178 @@
 {
-  "extends": [
-    "config:base",
-    "regexManagers:dockerfileVersions",
+  extends: [
+    'config:recommended',
+    'customManagers:dockerfileVersions',
   ],
-  "timezone": "America/Los_Angeles",
-  "assignees": ["allenporter"],
-  "dependencyDashboardTitle": "Renovate Dashboard",
-  "regexManagers": [
+  timezone: 'America/Los_Angeles',
+  assignees: [
+    'allenporter',
+  ],
+  dependencyDashboardTitle: 'Renovate Dashboard',
+  customManagers: [
     {
-      // Every HelmRelease has an annotation that can tell renovate how
-      // to find the HelmRepository url and chart version. This regexp
-      // tells renovate how to parse it. The annotation itself is added by the
-      // renovate-helm-releases github action.
-      "fileMatch": [".+\\.yaml$"],
-      "matchStrings": [
-        "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
+      customType: 'regex',
+      managerFilePatterns: [
+        '/.+\\.yaml$/',
       ],
-      "datasourceTemplate": "helm",
-    },
-    {
-      description: "Raw GitHub URL Regex manager",
-      "fileMatch": [".+\\.yaml$"],
       matchStrings: [
-        "https:\\/\\/raw.githubusercontent.com\\/(?<depName>[\\w\\d\\-_]+\\/[\\w\\d\\-_]+)\\/(?<currentValue>[\\w\\d\\.\\-_]+)\\/.*",
+        'registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n',
       ],
-      datasourceTemplate: "github-releases",
-      versioningTemplate: "semver",
+      datasourceTemplate: 'helm',
     },
     {
-      "fileMatch": [".+\\.yaml$"],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s.+?_version: (?<currentValue>.+?)\\s"
+      customType: 'regex',
+      description: 'Raw GitHub URL Regex manager',
+      managerFilePatterns: [
+        '/.+\\.yaml$/',
       ],
-      "extractVersionTemplate": "^v?(?<version>.*)$",
-    }
-  ],
-  "helm-values": {
-    // Match value files in HelmReleases. This is used so that renovate include
-    // these files when evaluating updates to helm charts or even images referenced
-    // within the chart.
-    "fileMatch": [".*(release|values|components)\\.yaml$"],
-  },
-  "flux": {
-    "fileMatch": [
-        "(?:^|/)gotk-components\\.yaml$",
-        "kubernetes/clusters/prod/flux-system/.+\\.yaml$",
-        "kubernetes/clusters/prod/sources/.+\\.yaml$",
-        // Match base releases and overlays
-        "(?:^|/)-values\\.yaml$",
-        "(?:^|/)release\\.yaml$",
-    ]
-  },
-  "packageRules": [
-    // Use different update schedules for dev and prod based on the type of
-    // patch. Note that each rule needs its own brach prefix in order to
-    // have a working space for evaluating the rules independently.
-    {
-      "description": "dev: Patches are automatic",
-      "matchPaths": ["**/dev/*", "**/.devcontainer/*"],
-      "automerge": true,
-      "automergeType": "branch",
-      "additionalBranchPrefix": "dev-",
-      "matchUpdateTypes": ["patch", "digest"],
+      matchStrings: [
+        'https:\\/\\/raw.githubusercontent.com\\/(?<depName>[\\w\\d\\-_]+\\/[\\w\\d\\-_]+)\\/(?<currentValue>[\\w\\d\\.\\-_]+)\\/.*',
+      ],
+      datasourceTemplate: 'github-releases',
+      versioningTemplate: 'semver',
     },
     {
-      "description": "dev: Minor updates automerged",
-      "matchPaths": ["**/dev/*", "**/.devcontainer/*"],
-      "automerge": true,
-      "additionalBranchPrefix": "dev-minor",
-      "matchUpdateTypes": ["minor"],
-    },
-    {
-      "description": "dev: Major packages updated weekly",
-      "matchPaths": ["**/dev/**", "**/.devcontainer/*"],
-      "extends": ["schedule:weekends"],
-      "additionalBranchPrefix": "dev-major",
-      "matchUpdateTypes": ["major"],
-    },
-    {
-      "description": "prod: Patches are automatic after 1 day",
-      "matchPaths": ["**/prod/**", ".github/workflows/**"],
-      "automerge": true,
-      "automergeType": "branch",
-      "stabilityDays": 1,
-      "additionalBranchPrefix": "prod-patch",
-      "matchUpdateTypes": ["patch"],
-    },
-    {
-      "description": "prod: Minor updates automerged weekly",
-      "matchPaths": ["**/prod/**", ".github/workflows/**"],
-      "automerge": true,
-      "extends": ["schedule:weekends"],
-      "additionalBranchPrefix": "prod-minor",
-      "stabilityDays": 1,
-      "matchUpdateTypes": ["minor"],
-    },
-    {
-      "description": "prod: Packages updated weekly",
-      "matchPaths": ["**/prod/**", ".github/workflows/**"],
-      "extends": ["schedule:weekends"],
-      "additionalBranchPrefix": "prod-",
-      "stabilityDays": 1,
-      "matchUpdateTypes": ["major", "minor"],
-    },
-    {
-      "description": "Development requirements: minor updates are silent",
-      "matchFiles": ["requirements.txt", "Dockerfile"],
-      "automerge": true,
-      "automergeType": "branch",
-      "matchUpdateTypes": ["minor", "patch"],
-    },
-    {
-      "description": "Development requirements: updated weekly",
-      "matchFiles": ["requirements.txt", "Dockerfile"],
-      "extends": ["schedule:weekends"],
-      "automerge": true,
-      "stabilityDays": 1,
-      "matchUpdateTypes": ["major"],
+      customType: 'regex',
+      managerFilePatterns: [
+        '/.+\\.yaml$/',
+      ],
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s.+?_version: (?<currentValue>.+?)\\s',
+      ],
+      extractVersionTemplate: '^v?(?<version>.*)$',
     },
   ],
-  "pre-commit": {
-    "enabled": true
+  'helm-values': {
+    managerFilePatterns: [
+      '/.*(release|values|components)\\.yaml$/',
+    ],
+  },
+  flux: {
+    managerFilePatterns: [
+      '/(?:^|/)gotk-components\\.yaml$/',
+      '/kubernetes/clusters/prod/flux-system/.+\\.yaml$/',
+      '/kubernetes/clusters/prod/sources/.+\\.yaml$/',
+      '/(?:^|/)-values\\.yaml$/',
+      '/(?:^|/)release\\.yaml$/',
+    ],
+  },
+  packageRules: [
+    {
+      description: 'dev: Patches are automatic',
+      matchFileNames: [
+        '**/dev/*',
+        '**/.devcontainer/*',
+      ],
+      automerge: true,
+      automergeType: 'branch',
+      additionalBranchPrefix: 'dev-',
+      matchUpdateTypes: [
+        'patch',
+        'digest',
+      ],
+    },
+    {
+      description: 'dev: Minor updates automerged',
+      matchFileNames: [
+        '**/dev/*',
+        '**/.devcontainer/*',
+      ],
+      automerge: true,
+      additionalBranchPrefix: 'dev-minor',
+      matchUpdateTypes: [
+        'minor',
+      ],
+    },
+    {
+      description: 'dev: Major packages updated weekly',
+      matchFileNames: [
+        '**/dev/**',
+        '**/.devcontainer/*',
+      ],
+      extends: [
+        'schedule:weekends',
+      ],
+      additionalBranchPrefix: 'dev-major',
+      matchUpdateTypes: [
+        'major',
+      ],
+    },
+    {
+      description: 'prod: Patches are automatic after 1 day',
+      matchFileNames: [
+        '**/prod/**',
+        '.github/workflows/**',
+      ],
+      automerge: true,
+      automergeType: 'branch',
+      minimumReleaseAge: '1 day',
+      additionalBranchPrefix: 'prod-patch',
+      matchUpdateTypes: [
+        'patch',
+      ],
+    },
+    {
+      description: 'prod: Minor updates automerged weekly',
+      matchFileNames: [
+        '**/prod/**',
+        '.github/workflows/**',
+      ],
+      automerge: true,
+      extends: [
+        'schedule:weekends',
+      ],
+      additionalBranchPrefix: 'prod-minor',
+      minimumReleaseAge: '1 day',
+      matchUpdateTypes: [
+        'minor',
+      ],
+    },
+    {
+      description: 'prod: Packages updated weekly',
+      matchFileNames: [
+        '**/prod/**',
+        '.github/workflows/**',
+      ],
+      extends: [
+        'schedule:weekends',
+      ],
+      additionalBranchPrefix: 'prod-',
+      minimumReleaseAge: '1 day',
+      matchUpdateTypes: [
+        'major',
+        'minor',
+      ],
+    },
+    {
+      description: 'Development requirements: minor updates are silent',
+      matchFileNames: [
+        'requirements.txt',
+        'Dockerfile',
+      ],
+      automerge: true,
+      automergeType: 'branch',
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+      ],
+    },
+    {
+      description: 'Development requirements: updated weekly',
+      matchFileNames: [
+        'requirements.txt',
+        'Dockerfile',
+      ],
+      extends: [
+        'schedule:weekends',
+      ],
+      automerge: true,
+      minimumReleaseAge: '1 day',
+      matchUpdateTypes: [
+        'major',
+      ],
+    },
+  ],
+  'pre-commit': {
+    enabled: true,
   },
 }
