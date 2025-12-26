@@ -370,5 +370,12 @@ clusters:
         repo_name: backube
         repo_namespace: flux-system
         repo_kind: HelmRepository
+    - name: rook-ceph-cluster
+      namespace: rook-ceph
+      chart:
+        name: rook-release/rook-ceph-cluster
+        repo_name: rook-release
+        repo_namespace: flux-system
+        repo_kind: HelmRepository
     config_maps: []
     secrets: []
