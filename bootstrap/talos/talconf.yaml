@@ -1,6 +1,6 @@
 ---
 clusterName: k8s-cluster
-talosVersion: v1.10.9
+talosVersion: v1.11.6
 kubernetesVersion: v1.31.14
 endpoint: https://10.10.101.1:6443
 allowSchedulingOnMasters: true
@@ -65,7 +65,11 @@ nodes:
             # For 1.10.9
             #   nonfree-kmod-nvidia 570.x
             #   nvidia-container-toolkit 570.x
-            image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.10.9
+            # image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.10.9
+            # For 1.11.6
+            #   nonfree-kmod-nvidia 570.x
+            #   nvidia-container-toolkit 570.x
+            image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.11.6
 
       - |-
         - op: add
@@ -106,9 +110,6 @@ controlPlane:
           - siderolabs/i915
           - siderolabs/intel-ice-firmware
           - siderolabs/intel-ucode
-
-imageFactory:
-  installerURLTmpl: "{{.RegistryURL}}/installer{{if .Secureboot}}-secureboot{{end}}/{{.ID}}:{{.Version}}"
 
 worker:
   networkInterfaces:
