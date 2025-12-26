@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://kubernetes.github.io/ingress-nginx
       chart: ingress-nginx
-      version: 4.14.0
+      version: 4.14.1
       sourceRef:
         kind: HelmRepository
         name: ingress-nginx
@@ -40,5 +40,57 @@ spec:
         enabled: true
         serviceMonitor:
           enabled: true
+      admissionWebhooks:
+        # We can't have two at once
+        # https://github.com/kubernetes/ingress-nginx/issues/7546
+        enabled: false
+    defaultBackend:
+      enabled: true
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nginx-external
+  namespace: nginx
+spec:
+  releaseName: nginx-external
+  chart:
+    spec:
+      # renovate: registryUrl=https://kubernetes.github.io/ingress-nginx
+      chart: ingress-nginx
+      version: 4.14.1
+      sourceRef:
+        kind: HelmRepository
+        name: ingress-nginx
+        namespace: flux-system
+  interval: 30m
+  install:
+    remediation:
+      retries: 3
+  # Default values
+  # https://github.com/kubernetes/ingress-nginx/blob/master/charts/ingress-nginx/values.yaml
+  values:
+    controller:
+      ingressClass: nginx-external
+      ingressClassResource:
+        enabled: true
+        name: nginx-external
+        default: true
+        controllerValue: "k8s.io/ingress-nginx-external"
+      service:
+        type: LoadBalancer
+        externalTrafficPolicy: Cluster
+        loadBalancerIP: ${external_ingress_ip}
+        annotations:
+          coredns.io/hostname: nginx-external.${name_service_dns_domain}
+          lbipam.cilium.io/ips: ${external_ingress_ip}
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+      admissionWebhooks:
+        # We can't have two at once
+        # https://github.com/kubernetes/ingress-nginx/issues/7546
+        enabled: false
     defaultBackend:
       enabled: true
