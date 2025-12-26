@@ -8,7 +8,7 @@ spec:
   releaseName: rook-ceph-cluster
   chart:
     spec:
-      chart: ook-ceph-cluster
+      chart: rook-ceph-cluster
       version: v1.17.1
       sourceRef:
         kind: HelmRepository
