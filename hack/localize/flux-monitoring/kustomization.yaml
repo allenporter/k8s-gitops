@@ -10,5 +10,5 @@ generatorOptions:
 configMapGenerator:
 - name: grafana-dashboard-control-plane
   files:
-  - https://raw.githubusercontent.com/fluxcd/flux2/v2.7.3/manifests/monitoring/monitoring-config/dashboards/control-plane.json
-  - https://raw.githubusercontent.com/fluxcd/flux2/v2.7.3/manifests/monitoring/monitoring-config/dashboards/cluster.json
+  - https://raw.githubusercontent.com/fluxcd/flux2/v2.7.5/manifests/monitoring/monitoring-config/dashboards/control-plane.json
+  - https://raw.githubusercontent.com/fluxcd/flux2/v2.7.5/manifests/monitoring/monitoring-config/dashboards/cluster.json
