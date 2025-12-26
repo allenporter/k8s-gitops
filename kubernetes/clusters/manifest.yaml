@@ -373,7 +373,7 @@ clusters:
     - name: rook-ceph-cluster
       namespace: rook-ceph
       chart:
-        name: rook-release/rook-ceph-cluster
+        name: rook-ceph-cluster
         repo_name: rook-release
         repo_namespace: flux-system
         repo_kind: HelmRepository
