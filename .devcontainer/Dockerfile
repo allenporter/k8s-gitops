@@ -1,4 +1,4 @@
-FROM ubuntu:jammy-20251001
+FROM mcr.microsoft.com/devcontainers/python:3.14-bookworm
 
 # Setup non-root user
 ARG USERNAME=admin
@@ -19,23 +19,19 @@ RUN apt-get update --fix-missing && \
     apt-get install -y --fix-missing \
         curl \
         unzip \
-        software-properties-common \
         vim \
         bind9-dnsutils \
         python3-pip \
         sshpass \
-        netcat \
+        netcat-traditional \
         mkisofs \
-        age
+        age \
+        git \
+        libssh-dev
 
 
-ARG GO_VERSION=1.19
-RUN add-apt-repository ppa:longsleep/golang-backports && \
-    apt-get update && \
-    apt-get install -y \
-        golang-${GO_VERSION} \
-        git
-ENV PATH=$PATH:/usr/lib/go-${GO_VERSION}/bin
+COPY --from=golang:1.25-bookworm /usr/local/go /usr/local/go
+ENV PATH=$PATH:/usr/local/go/bin
 RUN go version
 
 # Ceph quincy versions upported by base ubuntu image
@@ -51,24 +47,24 @@ RUN uv venv
 RUN uv pip install -r /src/requirements.txt
 
 # renovate: datasource=github-releases depName=GoogleCloudPlatform/cloud-sdk-docker
-ARG GCLOUD_CLI_VERSION=427.0.0
+ARG GCLOUD_CLI_VERSION=504.0.1
 RUN mkdir -p /usr/local/lib/ && \
     cd /usr/local/lib/ && \
     curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-${GCLOUD_CLI_VERSION}-linux-x86_64.tar.gz && \
     tar xf google-cloud-cli-${GCLOUD_CLI_VERSION}-linux-x86_64.tar.gz && \
     /usr/local/lib/google-cloud-sdk/install.sh --quiet --usage-reporting=false --rc-path=/etc/profile
 
-COPY --from=registry.k8s.io/kubectl:v1.34.1             /bin/kubectl                     /usr/local/bin/kubectl
-COPY --from=registry.k8s.io/kustomize/kustomize:v5.7.1  /app/kustomize                   /usr/local/bin/kustomize
-COPY --from=instrumentisto/restic:0.18.0-r2             /usr/local/bin/restic            /usr/local/bin/restic
-COPY --from=docker.io/alpine/helm:3.19.0                /usr/bin/helm                    /usr/local/bin/helm
-COPY --from=ghcr.io/fluxcd/flux-cli:v2.7.3              /usr/local/bin/flux              /usr/local/bin/flux
-COPY --from=ghcr.io/siderolabs/talosctl:v1.11.5          /talosctl                        /usr/local/bin/talosctl
+COPY --from=registry.k8s.io/kubectl:v1.35.0             /bin/kubectl                     /usr/local/bin/kubectl
+COPY --from=registry.k8s.io/kustomize/kustomize:v5.8.0  /app/kustomize                   /usr/local/bin/kustomize
+COPY --from=instrumentisto/restic:0.18.1-r2             /usr/local/bin/restic            /usr/local/bin/restic
+COPY --from=docker.io/alpine/helm:4.0.4                /usr/bin/helm                    /usr/local/bin/helm
+COPY --from=ghcr.io/fluxcd/flux-cli:v2.7.5              /usr/local/bin/flux              /usr/local/bin/flux
+COPY --from=ghcr.io/siderolabs/talosctl:v1.12.0          /talosctl                        /usr/local/bin/talosctl
 
 ARG ARCH=amd64
 
 # renovate: datasource=github-releases depName=budimanjojo/talhelper
-ARG TAL_HELPER_VERSION=v3.0.39
+ARG TAL_HELPER_VERSION=v3.0.43
 RUN cd /usr/local/bin/ && \
     curl -OL https://github.com/budimanjojo/talhelper/releases/download/${TAL_HELPER_VERSION}/talhelper_linux_${ARCH}.tar.gz && \
     tar xf talhelper_linux_${ARCH}.tar.gz && \
@@ -114,7 +110,7 @@ RUN mkdir /usr/local/kubeconfirm/ && \
 RUN kubeconform -v
 
 # renovate: datasource=github-releases depName=go-task/task
-ARG TASK_VERSION=v3.45.4
+ARG TASK_VERSION=v3.46.4
 RUN mkdir /usr/local/go-task && \
     cd /usr/local/go-task/ && \
     curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_${ARCH}.tar.gz && \

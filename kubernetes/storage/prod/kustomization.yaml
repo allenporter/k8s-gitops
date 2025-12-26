@@ -10,3 +10,4 @@ resources:
 - ../base/democratic-csi
 - ../base/rook-ceph
 - ../base/volsync
+- rook-ceph-cluster-values.yaml
