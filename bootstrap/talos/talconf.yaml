@@ -61,7 +61,7 @@ nodes:
             # For 1.9.6:
             #   nonfree-kmod-nvidia 550.x
             #   nvidia-container-toolkit 550.x
-            image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.9.6
+            # image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.9.6
             # For 1.10.9
             #   nonfree-kmod-nvidia 570.x
             #   nvidia-container-toolkit 570.x
