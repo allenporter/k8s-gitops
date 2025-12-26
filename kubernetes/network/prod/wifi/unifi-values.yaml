@@ -21,7 +21,7 @@ spec:
           main:
             image:
               repository: jacobalberty/unifi
-              tag: v9.3.43
+              tag: v10.0.162
             env:
               TZ: America/Los_Angeles
               RUNAS_UID0: "false"

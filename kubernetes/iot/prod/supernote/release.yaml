@@ -2,10 +2,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: doccano
-  namespace: doccano
+  name: supernote
+  namespace: supernote
 spec:
-  releaseName: doccano
+  releaseName: supernote
   chart:
     spec:
       chart: app-template
@@ -14,7 +14,7 @@ spec:
         kind: HelmRepository
         name: bjw-s-helm-charts
         namespace: flux-system
-      version: 4.5.0
+      version: 4.4.0
   interval: 5m
   install:
     remediation:
@@ -25,41 +25,34 @@ spec:
   values:
     controllers:
       main:
-        strategy: Recreate
         containers:
           main:
             image:
-              repository: doccano/doccano
-              pullPolicy: IfNotPresent
-              tag: 1.8.4
-            env:
-            - name: ADMIN_USERNAME
-              value: admin
-            - name: ADMIN_EMAIL
-              value: ${doccano_email}
-            - name: ADMIN_PASSWORD
-              value: ${doccano_password}
+              repository: ghcr.io/allenporter/supernote-lite
+              tag: v0.4.1
 
+            env:
+              SUPERNOTE_JWT_SECRET: ${SUPERNOTE_JWT_SECRET}
     service:
       main:
         controller: main
         ports:
           http:
-            port: 8000
-
+            port: 8080
     ingress:
       main:
         enabled: true
+        className: nginx-internal
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
-        - host: doccano.${name_service_dns_domain}
+        - host: supernote.${name_service_dns_domain}
           paths:
           - path: /
             service:
               identifier: main
               port: http
         tls:
-        - secretName: doccano-tls
+        - secretName: supernote-tls
           hosts:
-          - doccano.${name_service_dns_domain}
+          - supernote.${name_service_dns_domain}
