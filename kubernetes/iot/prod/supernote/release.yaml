@@ -23,10 +23,15 @@ spec:
     # Fix problem where helm fails to uninstall
     enable: false
   values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        # From supernote-lite container
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
     controllers:
       main:
-        securityContext:
-          fsGroup: 1000  # From supernote-lite container
         containers:
           main:
             image:
