@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: ghcr.io/allenporter/supernote-lite
-              tag: v0.6.2
+              tag: v0.7.0
 
     service:
       main:
