@@ -25,12 +25,14 @@ spec:
   values:
     controllers:
       main:
+        securityContext:
+          fsGroup: 1000  # From supernote-lite container
         containers:
           main:
             image:
               repository: ghcr.io/allenporter/supernote-lite
-              tag: v0.6.0
-  
+              tag: v0.6.1
+
     service:
       main:
         controller: main
