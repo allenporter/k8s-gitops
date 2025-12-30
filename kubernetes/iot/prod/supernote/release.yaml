@@ -29,10 +29,8 @@ spec:
           main:
             image:
               repository: ghcr.io/allenporter/supernote-lite
-              tag: v0.4.1
-
-            env:
-              SUPERNOTE_JWT_SECRET: ${SUPERNOTE_JWT_SECRET}
+              tag: v0.6.0
+  
     service:
       main:
         controller: main
@@ -56,3 +54,13 @@ spec:
         - secretName: supernote-tls
           hosts:
           - supernote.${name_service_dns_domain}
+    persistence:
+      config:
+        enabled: true
+        type: secret
+        name: config
+      data:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 5Gi
