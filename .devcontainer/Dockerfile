@@ -59,7 +59,7 @@ COPY --from=registry.k8s.io/kustomize/kustomize:v5.8.0  /app/kustomize          
 COPY --from=instrumentisto/restic:0.18.1-r2             /usr/local/bin/restic            /usr/local/bin/restic
 COPY --from=docker.io/alpine/helm:4.0.4                /usr/bin/helm                    /usr/local/bin/helm
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.7.5              /usr/local/bin/flux              /usr/local/bin/flux
-COPY --from=ghcr.io/siderolabs/talosctl:v1.12.0          /talosctl                        /usr/local/bin/talosctl
+COPY --from=ghcr.io/siderolabs/talosctl:v1.12.1          /talosctl                        /usr/local/bin/talosctl
 
 ARG ARCH=amd64
 
