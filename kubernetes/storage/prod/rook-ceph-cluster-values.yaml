@@ -21,3 +21,7 @@ spec:
     crds: CreateReplace
   values:
     operatorNamespace: rook-ceph
+    cephBlockPools:
+      storageClass:
+        enabled: true
+        isDefault: false
