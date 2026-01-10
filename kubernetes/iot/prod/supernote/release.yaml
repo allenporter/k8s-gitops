@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: ghcr.io/allenporter/supernote-lite
-              tag: v0.7.0
+              tag: v0.9.0
 
     service:
       main:
@@ -62,12 +62,9 @@ spec:
           hosts:
           - supernote.${name_service_dns_domain}
     persistence:
-      config:
-        enabled: true
-        type: secret
-        name: config
       data:
         enabled: true
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
-        size: 5Gi
+        size: 20Gi
+        storageClass: ceph-block
