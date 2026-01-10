@@ -3,47 +3,28 @@
 [Supernote Lite](https://github.com/allenporter/supernote-lite) is a self hosted private cloud service for the supernote notebook.
 
 
-## Generate configuration
+## Create Admin user
+
+First install the supernote CLI locally, then create the first user which becomes the admin user.
 
 ```shell
-% supernote-server config init 
+$ uv pip install 'supernote[server]'
+% supernote admin --url https://supernote.k8s.mrv.thebends.org user add email@example.com
 ```
 
-You'll need to include this `/config/config.yaml` in the container. I recommend updating the storage dir to point to a pvc e.g. `/data`
-
-```yaml
-# Generated Supernote Server Configuration
-# Save this as config.yaml.
-auth:
-  expiration_hours: 24
-  secret_key: <abcef>
-  users_file: /config/users.yaml
-host: 0.0.0.0
-port: 8080
-storage_dir: /data
-trace_log_file: /data/server_trace.log
-```
-
-## Generate users
+Registration is closed after this.
 
 ```shell
-% supernote-server user add alice
-Password for alice: 
+supernote cloud-login email@example.com --url https://supernote.k8s.mrv.thebends.org
+# Now your creds will be remembered by default
+supernote admin user list
 ```
 
-You'll need to include this `/config/users.yaml` in the container:
+Output:
+```
+Total Users: 1
 
-```yaml
-# Generated Supernote User Entry
-# Append this to your users.yaml file.
-users:
-- avatar: null
-  devices: []
-  email: null
-  is_active: true
-  mobile: null
-  password_md5: <password md5>
-  profile: {}
-  signature: null
-  username: alice
+Email                          Name                 Capacity  
+-----------------------------------------------------------------
+example@gmail.com              example              10737418240
 ```
