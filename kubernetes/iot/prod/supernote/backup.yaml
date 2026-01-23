@@ -5,7 +5,7 @@ metadata:
   name: supernote-backup
   namespace: supernote
 spec:
-  sourcePVC: supernote-data
+  sourcePVC: supernote
   trigger:
     # Take a backup daily at 2am
     schedule: "0 2 * * *"
