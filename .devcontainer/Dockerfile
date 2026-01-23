@@ -27,6 +27,7 @@ RUN apt-get update --fix-missing && \
         mkisofs \
         age \
         git \
+        jq \
         libssh-dev
 
 
@@ -61,30 +62,22 @@ COPY --from=docker.io/alpine/helm:4.0.4                /usr/bin/helm            
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.7.5              /usr/local/bin/flux              /usr/local/bin/flux
 COPY --from=ghcr.io/siderolabs/talosctl:v1.12.1          /talosctl                        /usr/local/bin/talosctl
 
-ARG ARCH=amd64
+ARG TARGETARCH
 
 # renovate: datasource=github-releases depName=budimanjojo/talhelper
 ARG TAL_HELPER_VERSION=v3.0.45
 RUN cd /usr/local/bin/ && \
-    curl -OL https://github.com/budimanjojo/talhelper/releases/download/${TAL_HELPER_VERSION}/talhelper_linux_${ARCH}.tar.gz && \
-    tar xf talhelper_linux_${ARCH}.tar.gz && \
+    curl -OL https://github.com/budimanjojo/talhelper/releases/download/${TAL_HELPER_VERSION}/talhelper_linux_${TARGETARCH}.tar.gz && \
+    tar xf talhelper_linux_${TARGETARCH}.tar.gz && \
     chmod +x talhelper
 RUN talhelper --version
-
-# renovate: datasource=github-releases depName=stedolan/jq
-ARG JQ_VERSION=1.6
-RUN cd /usr/local/bin/ && \
-    curl -OL https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64 && \
-    mv jq-linux64 jq && \
-    chmod +x jq
-RUN jq --version
 
 # renovate: datasource=github-releases depName=derailed/k9s
 ARG K9S_VERSION=v0.50.16
 RUN mkdir /usr/local/k9s && \
     cd /usr/local/k9s && \
-    curl -OL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_${ARCH}.tar.gz && \
-    tar xf k9s_Linux_${ARCH}.tar.gz && \
+    curl -OL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_${TARGETARCH}.tar.gz && \
+    tar xf k9s_Linux_${TARGETARCH}.tar.gz && \
     chmod +x k9s && \
     mv k9s /usr/local/bin/k9s && \
     rm -fr /usr/local/k9s
@@ -93,8 +86,8 @@ RUN k9s version
 # renovate: datasource=github-releases depName=getsops/sops
 ARG SOPS_VERSION=v3.11.0
 RUN cd /usr/local/bin/ && \
-    curl -OL https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.${ARCH} && \
-    mv sops-${SOPS_VERSION}.linux.${ARCH} sops && \
+    curl -OL https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.${TARGETARCH} && \
+    mv sops-${SOPS_VERSION}.linux.${TARGETARCH} sops && \
     chmod +x sops
 RUN sops --version
 
@@ -102,8 +95,8 @@ RUN sops --version
 ARG KUBECONFORM_VERSION=v0.7.0
 RUN mkdir /usr/local/kubeconfirm/ && \
     cd /usr/local/kubeconfirm/ && \
-    curl -OL https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-${ARCH}.tar.gz && \
-    tar xf kubeconform-linux-${ARCH}.tar.gz && \
+    curl -OL https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-${TARGETARCH}.tar.gz && \
+    tar xf kubeconform-linux-${TARGETARCH}.tar.gz && \
     chmod +x kubeconform && \
     mv kubeconform /usr/local/bin/kubeconform && \
     rm -fr /usr/local/kubeconfirm
@@ -113,8 +106,8 @@ RUN kubeconform -v
 ARG TASK_VERSION=v3.46.4
 RUN mkdir /usr/local/go-task && \
     cd /usr/local/go-task/ && \
-    curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_${ARCH}.tar.gz && \
-    tar xf task_linux_${ARCH}.tar.gz && \
+    curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_${TARGETARCH}.tar.gz && \
+    tar xf task_linux_${TARGETARCH}.tar.gz && \
     cp task /usr/local/bin/task && \
     chmod +x /usr/local/bin/task
 RUN task --version
