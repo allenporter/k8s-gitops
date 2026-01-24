@@ -55,16 +55,16 @@ spec:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt
         hosts:
-        - host: supernote.${name_service_dns_domain}
-          paths:
-          - path: /
-            service:
-              identifier: main
-              port: http
+          - host: supernote.${name_service_dns_domain}
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
         tls:
-        - secretName: supernote-tls
-          hosts:
-          - supernote.${name_service_dns_domain}
+          - secretName: supernote-tls
+            hosts:
+              - supernote.${name_service_dns_domain}
     persistence:
       data:
         enabled: true
