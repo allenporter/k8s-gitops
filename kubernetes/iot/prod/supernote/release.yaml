@@ -53,6 +53,11 @@ spec:
         ports:
           http:
             port: 8080
+      mcp:
+        controller: main
+        ports:
+          http:
+            port: 8081
     ingress:
       main:
         enabled: true
@@ -70,6 +75,22 @@ spec:
           - secretName: supernote-tls
             hosts:
               - supernote.${name_service_dns_domain}
+      mcp:
+        enabled: true
+        className: nginx-internal
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+          - host: supernote-mcp.${name_service_dns_domain}
+            paths:
+              - path: /
+                service:
+                  identifier: mcp
+                  port: http
+        tls:
+          - secretName: supernote-mcp-tls
+            hosts:
+              - supernote-mcp.${name_service_dns_domain}
     persistence:
       data:
         enabled: true
