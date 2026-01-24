@@ -41,6 +41,11 @@ spec:
             env:
               - name: SUPERNOTE_PROXY_MODE
                 value: "relaxed"
+              - name: SUPERNOTE_GEMINI_API_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: supernote-gemini
+                    key: api_key
 
     service:
       main:
