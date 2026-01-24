@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: supernote-debug
+  namespace: supernote
+spec:
+  containers:
+  - name: debug
+    image: ubuntu:latest
+    command: ["/bin/bash", "-c", "sleep infinity"]
+    volumeMounts:
+    - mountPath: /data
+      name: restore-data
+    securityContext:
+      runAsUser: 0 
+  volumes:
+  - name: restore-data
+    persistentVolumeClaim:
+      claimName: supernote-restore-data
+  restartPolicy: Never
