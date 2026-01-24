@@ -171,6 +171,16 @@
         'major',
       ],
     },
+    {
+      description: 'supernote: Update immediately',
+      matchPackageNames: [
+        'ghcr.io/allenporter/supernote-lite',
+      ],
+      schedule: [],
+      minimumReleaseAge: '0 days',
+      automerge: true,
+      automergeType: 'branch',
+    },
   ],
   'pre-commit': {
     enabled: true,
