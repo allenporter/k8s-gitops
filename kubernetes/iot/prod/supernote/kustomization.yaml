@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - release.yaml
-- config-secret.yaml
 - backup.yaml
 - restic-config-secret.yaml
 - gemini-secret.yaml
