@@ -73,7 +73,7 @@ RUN cd /usr/local/bin/ && \
 RUN talhelper --version
 
 # renovate: datasource=github-releases depName=derailed/k9s
-ARG K9S_VERSION=v0.50.16
+ARG K9S_VERSION=v0.50.18
 RUN mkdir /usr/local/k9s && \
     cd /usr/local/k9s && \
     curl -OL https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9s_Linux_${TARGETARCH}.tar.gz && \
