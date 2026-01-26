@@ -7,15 +7,15 @@ metadata:
 spec:
   sourcePVC: supernote
   trigger:
-    # Take a backup daily at 2am
-    schedule: "0 2 * * *"
+    # Take a backup daily at 1am
+    schedule: "0 1 * * *"
   restic:
     pruneIntervalDays: 14
     repository: supernote-restic-config
     retain:
-      daily: 7
+      daily: 5
       weekly: 4
-      monthly: 6
+      monthly: 2
       yearly: 1
     copyMethod: Clone
     moverSecurityContext:
