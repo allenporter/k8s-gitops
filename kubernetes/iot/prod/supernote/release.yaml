@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: ghcr.io/allenporter/supernote-lite
-              tag: v0.13.6
+              tag: v0.14.2
 
             env:
               - name: SUPERNOTE_PROXY_MODE
@@ -46,6 +46,11 @@ spec:
                   secretKeyRef:
                     name: supernote-gemini
                     key: api_key
+              - name: SUPERNOTE_BASE_URL
+                value: "https://supernote.${name_service_dns_domain}/"
+              - name: SUPERNOTE_MCP_BASE_URL
+                value: "https://supernote-mcp.${name_service_dns_domain}/"
+
 
     service:
       main:
