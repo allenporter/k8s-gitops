@@ -1,29 +1,29 @@
 {
-	"name": "k8s-gitops-env Dockerfile",
-	"build": {
-		"context": "..",
-		"dockerfile": "./Dockerfile"
-	},
-	"workspaceMount": "source=k8s-gitops-workspace,target=/workspaces,type=volume",
-	"workspaceFolder": "/workspaces/",
-	"mounts": [
-		"source=${localEnv:HOME}/Development/homelab,target=/workspaces/homelab,type=bind,consistency=cached",
-		"source=${localWorkspaceFolder}/.env/,target=/home/admin/.env/,type=bind,consistency=cached",
-		"source=${localEnv:HOME}/Documents,target=/workspaces/documents,type=bind,consistency=cached"
-	],
-	"remoteUser": "admin",
-	"containerEnv": {
-		"GNUPGHOME": "/home/admin/.env/.gpupg",
-		"CEPH_CONF": "/home/admin/.env/ceph.conf",
-		"CEPH_ARGS": "--keyring=/home/admin/.env/ceph.keyring",
-		"GOOGLE_APPLICATION_CREDENTIALS": "/home/admin/.env/gcloud-service-account.json",
-		"ANSIBLE_ROLES_PATH": "/workspaces/k8s-gitops/roles/",
-		// Used to set up ansible inventory prefixes based on prod/dev environment
-		"ENV_INVENTORY_ROOT": "/workspaces/homelab/hosts",
-		"SOPS_AGE_KEY_FILE": "/home/admin/.env/k8s-gitops-age-key.txt"
+    "name": "k8s-gitops-env Dockerfile",
+    "build": {
+        "context": "..",
+        "dockerfile": "./Dockerfile"
+    },
+    "workspaceMount": "source=k8s-gitops-workspace,target=/workspaces,type=volume",
+    "workspaceFolder": "/workspaces/",
+    "mounts": [
+        "source=${localEnv:HOME}/Development/homelab,target=/workspaces/homelab,type=bind,consistency=cached",
+        "source=${localWorkspaceFolder}/.env/,target=/home/admin/.env/,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/Documents,target=/workspaces/documents,type=bind,consistency=cached"
+    ],
+    "remoteUser": "admin",
+    "containerEnv": {
+        "GNUPGHOME": "/home/admin/.env/.gpupg",
+        "CEPH_CONF": "/home/admin/.env/ceph.conf",
+        "CEPH_ARGS": "--keyring=/home/admin/.env/ceph.keyring",
+        "GOOGLE_APPLICATION_CREDENTIALS": "/home/admin/.env/gcloud-service-account.json",
+        "ANSIBLE_ROLES_PATH": "/workspaces/k8s-gitops/roles/",
+        // Used to set up ansible inventory prefixes based on prod/dev environment
+        "ENV_INVENTORY_ROOT": "/workspaces/homelab/hosts",
+        "SOPS_AGE_KEY_FILE": "/home/admin/.env/k8s-gitops-age-key.txt"
 
-	},
-	"runArgs": [
-		"--dns-search=mrv.thebends.org"
-	]
+    },
+    "runArgs": [
+        "--dns-search=mrv.thebends.org"
+    ]
 }

@@ -24,7 +24,7 @@ Output:
 ```
 Total Users: 1
 
-Email                          Name                 Capacity  
+Email                          Name                 Capacity
 -----------------------------------------------------------------
 example@gmail.com              example              10737418240
 ```
@@ -106,7 +106,7 @@ To restore the latest backup to a separate PVC and inspect the contents:
 
     ```bash
     kubectl exec -it -n supernote supernote-debug -- bash
-    
+
     # Inside the pod:
     ls -la /data
     ```
