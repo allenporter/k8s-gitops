@@ -90,10 +90,6 @@ clusters:
       namespace: flux-system
       url: https://kubernetes.github.io/kube-state-metrics
       repo_type: default
-    - name: kubernetes-dashboard
-      namespace: flux-system
-      url: https://kubernetes.github.io/dashboard/
-      repo_type: default
     - name: k8s-gateway
       namespace: flux-system
       url: https://ori-edge.github.io/k8s_gateway/
@@ -137,6 +133,10 @@ clusters:
     - name: tailscale
       namespace: flux-system
       url: https://pkgs.tailscale.com/helmcharts
+      repo_type: default
+    - name: headlamp
+      namespace: flux-system
+      url: https://kubernetes-sigs.github.io/headlamp/
       repo_type: default
     oci_repos:
     - name: flux-manifests
@@ -227,18 +227,18 @@ clusters:
     helm_repos: []
     oci_repos: []
     helm_releases:
-    - name: kubernetes-dashboard
-      namespace: kubernetes-dashboard
-      chart:
-        name: kubernetes-dashboard
-        repo_name: kubernetes-dashboard
-        repo_namespace: flux-system
-        repo_kind: HelmRepository
     - name: kube-prometheus-stack
       namespace: monitoring
       chart:
         name: kube-prometheus-stack
         repo_name: prometheus-community
+        repo_namespace: flux-system
+        repo_kind: HelmRepository
+    - name: headlamp
+      namespace: kube-system
+      chart:
+        name: headlamp
+        repo_name: headlamp
         repo_namespace: flux-system
         repo_kind: HelmRepository
     config_maps:

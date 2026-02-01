@@ -1,11 +1,10 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 patches:
-- path: kubernetes-dashboard-values.yaml
 - path: kube-prometheus-stack-values.yaml
+- path: headlamp-values.yaml
 resources:
 - ../base/flux-monitoring
-- ../base/kubernetes-dashboard
 - ../base/kube-prometheus-stack
 - monitoring-secrets.yaml
+- ../base/headlamp

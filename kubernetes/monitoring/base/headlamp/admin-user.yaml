@@ -2,28 +2,28 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: admin-user
-  namespace: kubernetes-dashboard
+  name: headlamp-admin
+  namespace: kube-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: admin-user
+  name: headlamp-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: cluster-admin
 subjects:
 - kind: ServiceAccount
-  name: admin-user
-  namespace: kubernetes-dashboard
+  name: headlamp-admin
+  namespace: kube-system
 ---
 # See https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md#getting-a-long-lived-bearer-token-for-serviceaccount
 apiVersion: v1
 kind: Secret
 metadata:
-  name: admin-user
-  namespace: kubernetes-dashboard
+  name: headlamp-admin
+  namespace: kube-system
   annotations:
-    kubernetes.io/service-account.name: "admin-user"
+    kubernetes.io/service-account.name: "headlamp-admin"
 type: kubernetes.io/service-account-token

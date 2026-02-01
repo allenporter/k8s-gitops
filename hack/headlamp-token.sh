@@ -2,8 +2,8 @@
 
 set -e
 
-INGRESS="kubernetes-dashboard"
-NAMESPACE="kubernetes-dashboard"
+INGRESS="headlamp"
+NAMESPACE="headlamp"
 TOKEN_PREFIX="admin-user"
 
 HOSTNAME=$(kubectl get ingress ${INGRESS} -n ${NAMESPACE} -o 'jsonpath={.spec.rules[0].host}')
