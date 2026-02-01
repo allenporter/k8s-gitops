@@ -27,8 +27,11 @@ spec:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
       hosts:
-        - headlamp.${name_service_dns_domain}
+        - host: headlamp.${name_service_dns_domain}
+          paths:
+            - path: /
+              pathType: Prefix
       tls:
-        secretName: headlamp-tls
-        hosts:
-          - headlamp.${name_service_dns_domain}
+        - secretName: headlamp-tls
+          hosts:
+            - headlamp.${name_service_dns_domain}
