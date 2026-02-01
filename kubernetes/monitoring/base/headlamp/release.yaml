@@ -30,7 +30,7 @@ spec:
         - host: headlamp.${name_service_dns_domain}
           paths:
             - path: /
-              pathType: Prefix
+              type: Prefix
       tls:
         - secretName: headlamp-tls
           hosts:
