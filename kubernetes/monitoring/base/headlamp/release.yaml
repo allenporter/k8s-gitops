@@ -21,18 +21,14 @@ spec:
     enable: true
   values:
     replicaCount: 2
-    app:
-      ingress:
-        enabled: true
-        ingressClassName: nginx-internal
-        issuer:
-          # Adds the annotation equivalent to
-          #   cert-manager.io/cluster-issuer: letsencrypt
-          scope: cluster
-          name: letsencrypt
+    ingress:
+      enabled: true
+      ingressClassName: nginx-internal
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hosts:
+        - headlamp.${name_service_dns_domain}
+      tls:
+        secretName: headlamp-tls
         hosts:
           - headlamp.${name_service_dns_domain}
-        tls:
-          secretName: headlamp-tls
-          hosts:
-            - headlamp.${name_service_dns_domain}
