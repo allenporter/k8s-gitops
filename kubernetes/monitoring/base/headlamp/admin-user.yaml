@@ -18,7 +18,7 @@ subjects:
   name: headlamp-admin
   namespace: kube-system
 ---
-# See https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md#getting-a-long-lived-bearer-token-for-serviceaccount
+# See https://headlamp.dev/docs/latest/installation/#create-a-service-account-token
 apiVersion: v1
 kind: Secret
 metadata:
