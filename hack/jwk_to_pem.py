@@ -29,6 +29,7 @@ def jwk_to_pem_private_key(jwk_key_content: str) -> str:
 
     return private_key_bytes.decode("utf-8")
 
+
 def main():
     """Run the script."""
 
@@ -45,6 +46,7 @@ def main():
     jwk_key_content = args.jwk_key_file.read()
     pem_private_key = jwk_to_pem_private_key(jwk_key_content)
     print(pem_private_key)
+
 
 if __name__ == "__main__":
     main()

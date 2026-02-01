@@ -40,7 +40,7 @@ $ talosctl apply-config -n 10.10.100.4 --file bootstrap/talos/clusterconfig/k8s-
 ## Kubernetes bootstrap
 
 ```bash
-$ talosctl bootstrap --nodes 10.10.100.1 --endpoints 10.10.100.1 
+$ talosctl bootstrap --nodes 10.10.100.1 --endpoints 10.10.100.1
 ```
 
 Install kubeconfig:
