@@ -14,7 +14,7 @@ repos:
   - id: trailing-whitespace
   - id: check-merge-conflict
 - repo: https://gitlab.com/bmares/check-json5
-  rev: v1.0.0
+  rev: v1.0.1
   hooks:
   - id: check-json5
     files: ^(.+\.json5)$
