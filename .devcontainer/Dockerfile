@@ -103,7 +103,7 @@ RUN mkdir /usr/local/kubeconfirm/ && \
 RUN kubeconform -v
 
 # renovate: datasource=github-releases depName=go-task/task
-ARG TASK_VERSION=v3.46.4
+ARG TASK_VERSION=v3.48.0
 RUN mkdir /usr/local/go-task && \
     cd /usr/local/go-task/ && \
     curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_${TARGETARCH}.tar.gz && \
