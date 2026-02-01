@@ -2,16 +2,16 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: kubernetes-dashboard
-  namespace: monitoring
+  name: headlamp
+  namespace: kube-system
 spec:
-  releaseName: kubernetes-dashboard
+  releaseName: headlamp
   chart:
     spec:
-      chart: kubernetes-dashboard
+      chart: headlamp
       sourceRef:
         kind: HelmRepository
-        name: kubernetes-dashboard
+        name: headlamp
         namespace: flux-system
   interval: 5m
   install:
@@ -19,9 +19,8 @@ spec:
       retries: 3
   test:
     enable: true
-  # Default values
-  # https://artifacthub.io/packages/helm/k8s-dashboard/kubernetes-dashboard#configuration
   values:
+    replicaCount: 2
     app:
       ingress:
         enabled: true
@@ -32,8 +31,8 @@ spec:
           scope: cluster
           name: letsencrypt
         hosts:
-          - kubernetes-dashboard.${name_service_dns_domain}
+          - headlamp.${name_service_dns_domain}
         tls:
-          secretName: kubernetes-dashboard-tls
+          secretName: headlamp-tls
           hosts:
-            - kubernetes-dashboard.${name_service_dns_domain}
+            - headlamp.${name_service_dns_domain}
