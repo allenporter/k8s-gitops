@@ -3,8 +3,8 @@
 set -e
 
 INGRESS="headlamp"
-NAMESPACE="headlamp"
-TOKEN_PREFIX="admin-user"
+NAMESPACE="kube-system"
+TOKEN_PREFIX="headlamp-admin"
 
 HOSTNAME=$(kubectl get ingress ${INGRESS} -n ${NAMESPACE} -o 'jsonpath={.spec.rules[0].host}')
 SECRET_NAME=$(kubectl get secret -n ${NAMESPACE} | grep ${TOKEN_PREFIX} | awk '{print $1}')
