@@ -58,7 +58,7 @@ RUN mkdir -p /usr/local/lib/ && \
 COPY --from=registry.k8s.io/kubectl:v1.35.0             /bin/kubectl                     /usr/local/bin/kubectl
 COPY --from=registry.k8s.io/kustomize/kustomize:v5.8.0  /app/kustomize                   /usr/local/bin/kustomize
 COPY --from=instrumentisto/restic:0.18.1-r2             /usr/local/bin/restic            /usr/local/bin/restic
-COPY --from=docker.io/alpine/helm:4.0.4                /usr/bin/helm                    /usr/local/bin/helm
+COPY --from=docker.io/alpine/helm:4.1.0                /usr/bin/helm                    /usr/local/bin/helm
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.7.5              /usr/local/bin/flux              /usr/local/bin/flux
 COPY --from=ghcr.io/siderolabs/talosctl:v1.12.2          /talosctl                        /usr/local/bin/talosctl
 
@@ -103,7 +103,7 @@ RUN mkdir /usr/local/kubeconfirm/ && \
 RUN kubeconform -v
 
 # renovate: datasource=github-releases depName=go-task/task
-ARG TASK_VERSION=v3.46.4
+ARG TASK_VERSION=v3.48.0
 RUN mkdir /usr/local/go-task && \
     cd /usr/local/go-task/ && \
     curl -OL https://github.com/go-task/task/releases/download/${TASK_VERSION}/task_linux_${TARGETARCH}.tar.gz && \

@@ -12,7 +12,6 @@ resources:
   - intel.yaml
   - jetstack.yaml
   - kube-state-metrics.yaml
-  - kubernetes-dashboard.yaml
   - k8s-gateway.yaml
   - metallb.yaml
   - node-feature-discovery.yaml
@@ -24,3 +23,4 @@ resources:
   - cloudnative-pg.yaml
   - nvidia-device-plugin.yaml
   - tailscale.yaml
+  - headlamp.yaml

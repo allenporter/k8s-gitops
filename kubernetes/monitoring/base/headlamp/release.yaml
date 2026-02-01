@@ -1,0 +1,41 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: headlamp
+  namespace: kube-system
+spec:
+  releaseName: headlamp
+  chart:
+    spec:
+      chart: headlamp
+      sourceRef:
+        kind: HelmRepository
+        name: headlamp
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  values:
+    replicaCount: 2
+    ingress:
+      enabled: true
+      ingressClassName: nginx-internal
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+      hosts:
+        - host: headlamp.${name_service_dns_domain}
+          paths:
+            - path: /
+              type: Prefix
+      tls:
+        - secretName: headlamp-tls
+          hosts:
+            - headlamp.${name_service_dns_domain}
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: headlamp-admin

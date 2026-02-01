@@ -2,9 +2,9 @@
 
 set -e
 
-INGRESS="kubernetes-dashboard"
-NAMESPACE="kubernetes-dashboard"
-TOKEN_PREFIX="admin-user"
+INGRESS="headlamp"
+NAMESPACE="kube-system"
+TOKEN_PREFIX="headlamp-admin"
 
 HOSTNAME=$(kubectl get ingress ${INGRESS} -n ${NAMESPACE} -o 'jsonpath={.spec.rules[0].host}')
 SECRET_NAME=$(kubectl get secret -n ${NAMESPACE} | grep ${TOKEN_PREFIX} | awk '{print $1}')
