@@ -35,3 +35,7 @@ spec:
         - secretName: headlamp-tls
           hosts:
             - headlamp.${name_service_dns_domain}
+    serviceAccount:
+      create: false
+      annotations: {}
+      name: headlamp-admin
