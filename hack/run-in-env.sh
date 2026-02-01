@@ -8,4 +8,4 @@ if [ -f "${my_path}/venv/bin/activate" ]; then
   break
 fi
 
-exec "$@"
+uv run "$@"
