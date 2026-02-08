@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: ghcr.io/allenporter/supernote-lite
-              tag: v0.14.7
+              tag: v0.14.8
 
             env:
               - name: SUPERNOTE_PROXY_MODE
