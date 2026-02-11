@@ -31,7 +31,7 @@ RUN apt-get update --fix-missing && \
         libssh-dev
 
 
-COPY --from=golang:1.25-bookworm /usr/local/go /usr/local/go
+COPY --from=golang:1.26-bookworm /usr/local/go /usr/local/go
 ENV PATH=$PATH:/usr/local/go/bin
 RUN go version
 
