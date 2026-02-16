@@ -174,7 +174,7 @@
     {
       description: 'supernote: Update immediately',
       matchPackageNames: [
-        'ghcr.io/allenporter/supernote-lite',
+        'ghcr.io/allenporter/supernote',
       ],
       schedule: [],
       minimumReleaseAge: '0 days',
