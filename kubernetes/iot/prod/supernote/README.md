@@ -1,6 +1,6 @@
 # Supernote
 
-[Supernote Lite](https://github.com/allenporter/supernote-lite) is a self hosted private cloud service for the supernote notebook.
+[Supernote Personal Knowledge Management Hub](https://github.com/allenporter/supernote) is a self hosted private cloud service for the supernote notebook.
 
 
 ## Create Admin user
