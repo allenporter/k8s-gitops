@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: ollama-helm
         namespace: flux-system
-      version: 1.41.0
+      version: 1.42.0
   interval: 5m
   # Large timeout for allowing more time for model downloads
   timeout: 15m
@@ -26,7 +26,7 @@ spec:
   values:
     image:
       repository: ollama/ollama
-      tag: 0.15.6
+      tag: 0.16.1
       pullPolicy: IfNotPresent
     ollama:
       gpu:
