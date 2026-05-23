@@ -3,25 +3,67 @@
 
 set -e
 
-cd "$(dirname "$0")/.."
+# Robust, shell-agnostic path resolution for Bash and Zsh
+if [ -n "$BASH_VERSION" ]; then
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+elif [ -n "$ZSH_VERSION" ]; then
+    SCRIPT_DIR="$(cd "$(dirname "${(%):-%x}")" && pwd)"
+else
+    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+fi
+PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# Run bootstrap to ensure dependencies and hooks are installed
+"${PROJECT_ROOT}/script/bootstrap"
 
 echo "==> Project is set up!"
 
-# Check if the script is being sourced or executed
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-  # Executed: provide instructions
-  echo "==> To activate the virtual environment in your current shell, run:"
-  if [ -d ".venv" ]; then
-    echo "    source .venv/bin/activate"
-  else
-    echo "    # Dependencies were installed, but no .venv directory was found at root."
-  fi
+# Detect if the script is being sourced or executed
+SOURCED=false
+if [ -n "$ZSH_VERSION" ]; then
+    case $ZSH_EVAL_CONTEXT in
+        *toplevel*) SOURCED=true ;;
+    esac
+elif [ -n "$BASH_VERSION" ]; then
+    if [ "${BASH_SOURCE[0]}" != "$0" ]; then
+        SOURCED=true
+    fi
 else
-  # Sourced: activate the environment
-  if [ -d ".venv" ]; then
-    source .venv/bin/activate
-    echo "==> Virtual environment activated."
+    if [ "$0" = "sh" ] || [ "$0" = "bash" ] || [ "$0" = "zsh" ] || [ "$0" = "-sh" ] || [ "$0" = "-bash" ] || [ "$0" = "-zsh" ]; then
+        SOURCED=true
+    fi
+fi
+
+if [ "$SOURCED" = "false" ]; then
+  # Executed: provide instructions
+  echo "==> To activate the virtual environment and load K8s configs in your current shell, run:"
+  echo "    source script/setup"
+else
+  # Sourced: activate the environment & export K8s configs
+  if [ -d "${PROJECT_ROOT}/.venv" ]; then
+    source "${PROJECT_ROOT}/.venv/bin/activate"
+    echo "==> Virtual environment (.venv) activated."
   else
     echo "==> Warning: .venv directory not found, cannot activate."
   fi
+
+  # Export Kubernetes & GitOps environment variables
+  export KUBECONFIG="${PROJECT_ROOT}/.env/kubeconfig.yaml"
+  export SOPS_AGE_KEY_FILE="${PROJECT_ROOT}/.env/k8s-gitops-age-key.txt"
+  export GOOGLE_APPLICATION_CREDENTIALS="${PROJECT_ROOT}/.env/gcloud-service-account.json"
+  export ANSIBLE_ROLES_PATH="${PROJECT_ROOT}/roles/"
+
+  # Dynamically resolve homelab relative path if present
+  if [ -d "${PROJECT_ROOT}/../homelab" ]; then
+      export ENV_INVENTORY_ROOT="$(cd "${PROJECT_ROOT}/../homelab" && pwd)/hosts"
+  else
+      export ENV_INVENTORY_ROOT="${HOME}/Development/homelab/hosts"
+  fi
+
+  # Add Google Cloud SDK to path if installed via Homebrew Cask
+  if [ -d "/opt/homebrew/share/google-cloud-sdk/bin" ]; then
+      export PATH="/opt/homebrew/share/google-cloud-sdk/bin:$PATH"
+  fi
+
+  echo "🚀 k8s-gitops shell environment activated successfully!"
 fi

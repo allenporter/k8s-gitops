@@ -1,19 +1,99 @@
 #!/usr/bin/env bash
-# script/bootstrap: Initial environment setup
+# script/bootstrap: Initial environment setup including Homebrew CLI tools
 
 set -e
 
 cd "$(dirname "$0")/.."
 
-echo "==> Bootstrapping..."
+echo "==> Auditing Homebrew CLI tools..."
+if command -v brew >/dev/null 2>&1; then
+  # List of core formulas to install
+  FORMULAS=(
+    kubernetes-cli
+    kustomize
+    restic
+    helm
+    talosctl
+    talhelper
+    k9s
+    sops
+    kubeconform
+    go-task
+    age
+    jq
+  )
 
+  MISSING_FORMULAS=()
+  for formula in "${FORMULAS[@]}"; do
+    if ! brew list --formula "$formula" >/dev/null 2>&1; then
+      MISSING_FORMULAS+=("$formula")
+    fi
+  done
+
+  if [ ${#MISSING_FORMULAS[@]} -gt 0 ]; then
+    echo "==> Installing missing Homebrew formulas: ${MISSING_FORMULAS[*]}"
+    brew install "${MISSING_FORMULAS[@]}"
+  else
+    echo "==> Core Homebrew formulas are already installed."
+  fi
+
+  # Audit and upgrade jq if outdated
+  if brew outdated jq >/dev/null 2>&1 || [ "$(brew list --versions jq | awk '{print $2}')" = "1.6" ]; then
+    echo "==> Upgrading jq..."
+    brew upgrade jq || true
+  fi
+
+  # Tap and install fluxcd/tap/flux
+  if ! brew list --formula fluxcd/tap/flux >/dev/null 2>&1 && ! command -v flux >/dev/null 2>&1; then
+    echo "==> Tapping fluxcd/tap and installing flux..."
+    brew tap fluxcd/tap
+    if ! brew install fluxcd/tap/flux; then
+      echo "==> Brew install of flux failed. Falling back to direct precompiled binary installation..."
+      FLUX_VERSION="2.8.8"
+      TEMP_DIR=$(mktemp -d)
+      curl -sSL -o "${TEMP_DIR}/flux.tar.gz" "https://github.com/fluxcd/flux2/releases/download/v${FLUX_VERSION}/flux_${FLUX_VERSION}_darwin_arm64.tar.gz"
+      tar -xzf "${TEMP_DIR}/flux.tar.gz" -C "${TEMP_DIR}"
+      mv "${TEMP_DIR}/flux" /opt/homebrew/bin/flux
+      chmod +x /opt/homebrew/bin/flux
+      rm -rf "${TEMP_DIR}"
+      echo "==> Successfully installed flux precompiled binary to /opt/homebrew/bin/flux."
+    fi
+  fi
+
+  # Install Google Cloud CLI Cask if missing
+  if ! brew list --cask google-cloud-sdk >/dev/null 2>&1 && ! command -v gcloud >/dev/null 2>&1; then
+    echo "==> Installing google-cloud-sdk cask..."
+    brew install --cask google-cloud-sdk
+  fi
+else
+  echo "Warning: Homebrew is not installed. Skipping CLI tool provisioning."
+fi
+
+echo "==> Bootstrapping Python virtual environment..."
 if command -v uv >/dev/null 2>&1; then
   echo "==> Using uv for synchronization..."
-  uv venv
+  uv venv .venv --python python3.14
+
+  # Configure compiler flags for Apple Silicon Homebrew libraries (e.g. for building ansible-pylibssh)
+  if command -v brew >/dev/null 2>&1; then
+    BREW_PREFIX=$(brew --prefix)
+    export CFLAGS="-I${BREW_PREFIX}/include -I${BREW_PREFIX}/opt/libssh/include ${CFLAGS:-}"
+    export LDFLAGS="-L${BREW_PREFIX}/lib -L${BREW_PREFIX}/opt/libssh/lib ${LDFLAGS:-}"
+  fi
+
   uv pip install -r requirements.txt
 elif command -v python3 >/dev/null 2>&1; then
   echo "==> Using pip for installation..."
+  python3 -m venv .venv
+  source .venv/bin/activate
   python3 -m pip install --upgrade pip
+
+  if command -v brew >/dev/null 2>&1; then
+    BREW_PREFIX=$(brew --prefix)
+    export CFLAGS="-I${BREW_PREFIX}/include -I${BREW_PREFIX}/opt/libssh/include ${CFLAGS:-}"
+    export LDFLAGS="-L${BREW_PREFIX}/lib -L${BREW_PREFIX}/opt/libssh/lib ${LDFLAGS:-}"
+  fi
+
   python3 -m pip install -r requirements.txt
 else
   echo "Aborting: python3 not found."
@@ -24,6 +104,7 @@ echo "==> Installing pre-commit hooks..."
 if command -v uv >/dev/null 2>&1; then
   uv run pre-commit install
 else
+  source .venv/bin/activate
   pre-commit install
 fi
 
