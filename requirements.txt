@@ -1,4 +1,4 @@
-PyJWT==2.11.0
+PyJWT==2.13.0
 ansible==13.7.0
 cryptography==46.0.7
 flux-local==8.1.0
