@@ -42,6 +42,7 @@ clusters:
     - name: time-slicing-config
       namespace: nvidia-device-plugin
     secrets: []
+    helm_chart_sources: []
   - name: crds
     namespace: flux-system
     path: kubernetes/crds
@@ -50,6 +51,7 @@ clusters:
     helm_releases: []
     config_maps: []
     secrets: []
+    helm_chart_sources: []
   - name: flux-system
     namespace: flux-system
     path: kubernetes/clusters/prod
@@ -156,6 +158,7 @@ clusters:
     - name: network-config
       namespace: flux-system
     secrets: []
+    helm_chart_sources: []
   - name: iot
     namespace: flux-system
     path: kubernetes/iot/prod
@@ -199,6 +202,7 @@ clusters:
         repo_kind: HelmRepository
     config_maps: []
     secrets: []
+    helm_chart_sources: []
   - name: ml
     namespace: flux-system
     path: kubernetes/ml/prod
@@ -221,6 +225,7 @@ clusters:
         repo_kind: HelmRepository
     config_maps: []
     secrets: []
+    helm_chart_sources: []
   - name: monitoring
     namespace: flux-system
     path: kubernetes/monitoring/prod
@@ -245,6 +250,7 @@ clusters:
     - name: grafana-dashboard-control-plane-99d879ff4d
       namespace: flux-system
     secrets: []
+    helm_chart_sources: []
   - name: network
     namespace: flux-system
     path: kubernetes/network/prod
@@ -260,6 +266,7 @@ clusters:
         repo_kind: HelmRepository
     config_maps: []
     secrets: []
+    helm_chart_sources: []
   - name: network-bridge
     namespace: flux-system
     path: kubernetes/network/prod/bridge
@@ -275,6 +282,7 @@ clusters:
         repo_kind: HelmRepository
     config_maps: []
     secrets: []
+    helm_chart_sources: []
   - name: network-certs
     namespace: flux-system
     path: kubernetes/network/prod/certs
@@ -283,6 +291,7 @@ clusters:
     helm_releases: []
     config_maps: []
     secrets: []
+    helm_chart_sources: []
   - name: network-ingress
     namespace: flux-system
     path: kubernetes/network/prod/ingress
@@ -305,6 +314,7 @@ clusters:
         repo_kind: HelmRepository
     config_maps: []
     secrets: []
+    helm_chart_sources: []
   - name: network-load-balancer-config
     namespace: flux-system
     path: kubernetes/network/prod/load-balancer-config
@@ -313,6 +323,7 @@ clusters:
     helm_releases: []
     config_maps: []
     secrets: []
+    helm_chart_sources: []
   - name: network-name-service
     namespace: flux-system
     path: kubernetes/network/prod/name-service
@@ -328,6 +339,7 @@ clusters:
         repo_kind: HelmRepository
     config_maps: []
     secrets: []
+    helm_chart_sources: []
   - name: network-wifi
     namespace: flux-system
     path: kubernetes/network/prod/wifi
@@ -343,6 +355,7 @@ clusters:
         repo_kind: HelmRepository
     config_maps: []
     secrets: []
+    helm_chart_sources: []
   - name: storage
     namespace: flux-system
     path: kubernetes/storage/prod
@@ -379,3 +392,4 @@ clusters:
         repo_kind: HelmRepository
     config_maps: []
     secrets: []
+    helm_chart_sources: []
