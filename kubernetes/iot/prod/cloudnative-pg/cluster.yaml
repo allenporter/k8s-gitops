@@ -14,6 +14,26 @@ spec:
         kind: HelmRepository
         name: cloudnative-pg
         namespace: flux-system
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              group: postgresql.cnpg.io
+              version: v1
+              kind: Cluster
+              name: cluster
+            patch: |
+              - op: add
+                path: /spec/probes
+                value:
+                  readiness:
+                    timeoutSeconds: 15
+                    periodSeconds: 20
+                    failureThreshold: 5
+                  liveness:
+                    timeoutSeconds: 15
+                    periodSeconds: 20
+                    failureThreshold: 5
   values:
     version:
       postgresql: "16"
