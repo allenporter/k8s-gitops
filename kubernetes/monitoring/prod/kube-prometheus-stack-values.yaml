@@ -17,3 +17,10 @@ spec:
           volumeClaimTemplate:
             spec:
               storageClassName: "ceph-block"
+    alertmanager:
+      alertmanagerSpec:
+        storage:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: "ceph-block"
+
