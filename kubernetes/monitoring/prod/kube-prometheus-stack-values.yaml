@@ -23,4 +23,3 @@ spec:
           volumeClaimTemplate:
             spec:
               storageClassName: "ceph-block"
-

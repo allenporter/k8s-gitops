@@ -13,24 +13,29 @@ jobs:
       matrix:
         cluster_path:
           - kubernetes/clusters/prod
-        resource:
-          - helmrelease
-          - kustomization
     steps:
-      - name: Setup Flux CLI
-        uses: fluxcd/flux2/action@v2.8.8
-      - name: flux-local diff
-        uses: allenporter/flux-local/action/diff@8.3.0
-        id: diff
+      - name: Checkout PR Branch
+        uses: actions/checkout@v4
+      - name: Checkout Baseline Branch
+        uses: actions/checkout@v4
         with:
-          path: ${{ matrix.cluster_path }}
-          resource: ${{ matrix.resource }}
+          ref: main
+          path: baseline-repo
+      - name: Setup flate CLI
+        uses: home-operations/flate/action@v0.4.10
+      - name: Run flate diff
+        id: diff
+        run: |
+          diff_output=$(flate diff all --path ${{ matrix.cluster_path }} --path-orig baseline-repo/${{ matrix.cluster_path }})
+          echo "diff<<EOF" >> $GITHUB_OUTPUT
+          echo "$diff_output" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
       - name: PR Comments
         uses: mshick/add-pr-comment@v3
         if: ${{ steps.diff.outputs.diff != '' }}
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message-id: ${{ github.event.pull_request.number }}/${{ matrix.cluster_path }}/${{ matrix.resource }}
+          message-id: ${{ github.event.pull_request.number }}/${{ matrix.cluster_path }}
           message-failure: Unable to post diff
           message: |
             ```diff
