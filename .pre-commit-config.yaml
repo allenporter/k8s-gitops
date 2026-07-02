@@ -30,11 +30,3 @@ repos:
   rev: 26.5.1
   hooks:
   - id: black
-- repo: local
-  hooks:
-  - id: manifest
-    name: manifest
-    entry: hack/run-in-env.sh hack/update-manifest.sh
-    language: script
-    files: ^(.+\.yaml)$
-    types: [text]
