@@ -23,6 +23,8 @@ jobs:
           path: baseline-repo
       - name: Setup flate CLI
         uses: home-operations/flate/action@v0.4.10
+        with:
+          base: ""
       - name: Run flate diff
         id: diff
         run: |
