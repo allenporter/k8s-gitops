@@ -14,21 +14,16 @@ jobs:
         cluster_path:
           - kubernetes/clusters/prod
     steps:
-      - name: Checkout PR Branch
-        uses: actions/checkout@v4
-      - name: Checkout Baseline Branch
+      - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
-          path: baseline-repo
+          fetch-depth: 0
       - name: Setup flate CLI
         uses: home-operations/flate/action@v0.4.10
-        with:
-          base: ""
       - name: Run flate diff
         id: diff
         run: |
-          diff_output=$(flate diff all --path ${{ matrix.cluster_path }} --path-orig baseline-repo/${{ matrix.cluster_path }})
+          diff_output=$(flate diff all --path ${{ matrix.cluster_path }})
           echo "diff<<EOF" >> $GITHUB_OUTPUT
           echo "$diff_output" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT

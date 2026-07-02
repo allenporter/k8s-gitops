@@ -17,10 +17,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - name: Setup flate CLI
         uses: home-operations/flate/action@v0.4.10
-        with:
-          base: ""
       - name: Run flate test
         run: |
           flate test all --path ${{ matrix.cluster_path }}
