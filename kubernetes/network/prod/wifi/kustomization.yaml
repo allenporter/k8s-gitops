@@ -7,5 +7,4 @@ resources:
 - ../../base/unifi
 - unifi-backup.yaml
 - unifi-restic-config-secret.yaml
-- unifi-pvc.yaml
 - unifi-pvc-ceph.yaml
