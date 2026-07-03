@@ -108,6 +108,6 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: unifi-shelf
+        existingClaim: unifi-shelf-ceph
         globalMounts:
         - path: /unifi
