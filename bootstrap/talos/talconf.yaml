@@ -1,6 +1,6 @@
 ---
 clusterName: k8s-cluster
-talosVersion: v1.11.6
+talosVersion: v1.12.5
 kubernetesVersion: v1.33.6
 endpoint: https://10.10.101.1:6443
 allowSchedulingOnMasters: true
@@ -69,17 +69,19 @@ nodes:
             # For 1.11.6
             #   nonfree-kmod-nvidia 570.x
             #   nvidia-container-toolkit 570.x
-            image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.11.6
+            # image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.11.6
+            # For 1.12.5
+            #   nonfree-kmod-nvidia 570.x
+            #   nvidia-container-toolkit 570.x
+            image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.12.5
 
       - |-
-        - op: add
-          path: /machine/sysctls
-          value:
+        machine:
+          sysctls:
             net.core.bpf_jit_harden: 1
       - |-
-        - op: add
-          path: /machine/files
-          value:
+        machine:
+          files:
             - content: |
                 [plugins]
                   [plugins."io.containerd.grpc.v1.cri"]
