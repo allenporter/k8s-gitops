@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: k8s-gateway
-      version: 2.1.0
+      version: 3.7.2
   values:
     domain: ${name_service_dns_domain}
     service:
