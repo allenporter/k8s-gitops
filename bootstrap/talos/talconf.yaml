@@ -1,7 +1,7 @@
 ---
 clusterName: k8s-cluster
 talosVersion: v1.12.5
-kubernetesVersion: v1.33.6
+kubernetesVersion: v1.34.9
 endpoint: https://10.10.101.1:6443
 allowSchedulingOnMasters: true
 allowSchedulingOnControlPlanes: true
