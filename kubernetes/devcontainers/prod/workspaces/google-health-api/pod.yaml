@@ -35,7 +35,21 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["/bin/sh", "-c", "devcontainer run-user-commands --workspace-folder /workspaces/python-google-health-api"]
+              command:
+              - /bin/sh
+              - -c
+              - |
+                (
+                  if ! command -v devcontainer >/dev/null 2>&1; then
+                    echo "Installing devcontainer CLI..."
+                    npm install -g @devcontainers/cli || true
+                  fi
+                  while [ ! -f /workspaces/python-google-health-api/.devcontainer/devcontainer.json ]; do
+                    sleep 10
+                  done
+                  echo "devcontainer.json found! Running user commands..."
+                  devcontainer run-user-commands --workspace-folder /workspaces/python-google-health-api
+                ) >/tmp/devcontainer-init.log 2>&1 &
         volumeMounts:
         - name: workspace-volume
           mountPath: /workspaces/python-google-health-api
