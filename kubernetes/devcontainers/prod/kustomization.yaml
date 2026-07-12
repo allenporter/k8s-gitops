@@ -7,6 +7,6 @@ resources:
   - ssh-public-keys.yaml
   - prepuller.yaml
   - workspaces/google-health-api
-  - workspaces/ring-keypad
   - workspaces/home-assistant-core
-  - workspaces/journal-assistant
+  - workspaces/ring-keypad-release.yaml
+  - workspaces/journal-assistant-release.yaml

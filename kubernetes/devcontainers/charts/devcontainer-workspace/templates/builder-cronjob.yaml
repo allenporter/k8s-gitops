@@ -1,9 +1,10 @@
+{{- if .Values.builder.enabled -}}
 ---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: build-journal-assistant
-  namespace: devcontainers
+  name: build-{{ .Values.workspaceName }}
+  namespace: {{ .Release.Namespace }}
 spec:
   schedule: "0 0 1 1 *"
   suspend: true
@@ -15,7 +16,7 @@ spec:
           restartPolicy: Never
           containers:
           - name: builder
-            image: node:20-bookworm-slim
+            image: {{ .Values.global.builder.image | quote }}
             command: ["/bin/sh", "-c"]
             args:
             - |
@@ -38,7 +39,7 @@ spec:
               docker buildx create --use --name mybuilder
 
               echo "=== Step 4: Clone repository ==="
-              git clone --depth 1 https://github.com/allenporter/home-assistant-journal-assistant.git /tmp/build
+              git clone --depth 1 {{ .Values.git.url }} /tmp/build
               cd /tmp/build
 
               echo "=== Step 5: Install Devcontainer CLI ==="
@@ -47,9 +48,11 @@ spec:
               echo "=== Step 6: Build and Push Image with Inline Cache ==="
               devcontainer build \
                 --workspace-folder . \
-                --image-name registry.k8s.mrv.thebends.org/devcontainers/home-assistant-journal-assistant:latest \
-                --cache-from type=registry,ref=registry.k8s.mrv.thebends.org/devcontainers/home-assistant-ring-keypad:latest \
-                --cache-from type=registry,ref=registry.k8s.mrv.thebends.org/devcontainers/home-assistant-journal-assistant:latest \
+                --image-name {{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}:{{ .Values.image.tag }} \
+                --cache-from type=registry,ref={{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}:{{ .Values.image.tag }} \
+                {{- range .Values.builder.cacheFrom }}
+                --cache-from type=registry,ref={{ . }} \
+                {{- end }}
                 --cache-to type=inline \
                 --push
             env:
@@ -58,9 +61,10 @@ spec:
             - name: DOCKER_BUILDKIT
               value: "1"
           - name: dind
-            image: docker:24-dind
+            image: {{ .Values.global.builder.dindImage | quote }}
             env:
             - name: DOCKER_TLS_CERTDIR
               value: ""
             securityContext:
               privileged: true
+{{- end }}

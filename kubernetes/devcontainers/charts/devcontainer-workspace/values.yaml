@@ -1,0 +1,24 @@
+# Default values for devcontainer-workspace.
+# This is a YAML-formatted file.
+
+global:
+  registry: registry.k8s.mrv.thebends.org
+  domainSuffix: devcontainers.k8s.mrv.thebends.org
+  storageClass: local-hostpath
+  sshKeySecret: ssh-public-keys
+  sshTargetPort: 2222
+  builder:
+    image: node:20-bookworm-slim
+    dindImage: docker:24-dind
+
+workspaceName: ""
+git:
+  url: ""
+  directory: ""
+storage:
+  size: 10Gi
+image:
+  tag: latest
+builder:
+  enabled: true
+  cacheFrom: []
