@@ -24,3 +24,4 @@ resources:
   - nvidia-device-plugin.yaml
   - tailscale.yaml
   - headlamp.yaml
+  - zot.yaml
