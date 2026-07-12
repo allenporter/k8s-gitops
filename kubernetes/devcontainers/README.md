@@ -94,7 +94,37 @@ storageSize: 10Gi
 
 ---
 
-## 4. Alternatives Investigated & Downsides
+## 4. Running on GPU Machines
+
+To run a workspace on a GPU-enabled node, you simply need to request the GPU as a resource limit in your `values` block. The Kubernetes scheduler will automatically route the pod to a node that has the allocatable GPU resources:
+
+### NVIDIA GPU Workspace
+```yaml
+  values:
+    workspaceName: ml-workspace
+    git:
+      url: https://github.com/your-username/ml-project.git
+      directory: ml-project
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+```
+
+### Intel GPU Workspace (QuickSync / Arc)
+```yaml
+  values:
+    workspaceName: video-transcode
+    git:
+      url: https://github.com/your-username/video-project.git
+      directory: video-project
+    resources:
+      limits:
+        gpu.intel.com/i915: 1
+```
+
+---
+
+## 5. Alternatives Investigated & Downsides
 
 Before committing to this DIY GitOps model, we evaluated several popular devcontainer orchestration tools:
 
