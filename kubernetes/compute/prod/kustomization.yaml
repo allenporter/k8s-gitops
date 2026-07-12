@@ -17,3 +17,4 @@ resources:
 - ../base/actions-runner-scale-set
 - system-upgrade-controller
 - nvidia-time-slicing-config.yaml
+- github-app-credentials.sops.yaml
