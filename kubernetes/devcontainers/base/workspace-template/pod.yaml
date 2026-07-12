@@ -49,6 +49,7 @@ spec:
                   if [ -n "$GIT_REPOSITORY_URL" ] && [ ! -d /workspaces/temp/.git ]; then
                     echo "Cloning $GIT_REPOSITORY_URL..."
                     git clone "$GIT_REPOSITORY_URL" /workspaces/temp || true
+                    chown -R vscode:vscode /workspaces/temp
                   fi
                   if ! command -v devcontainer >/dev/null 2>&1; then
                     echo "Installing devcontainer CLI..."
