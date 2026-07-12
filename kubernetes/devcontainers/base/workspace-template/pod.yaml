@@ -52,6 +52,8 @@ spec:
                     chown -R vscode:vscode /workspaces/temp
                   fi
                   if ! command -v devcontainer >/dev/null 2>&1; then
+                    echo "Installing Node.js and NPM..."
+                    apt-get update && apt-get install -y nodejs npm
                     echo "Installing devcontainer CLI..."
                     npm install -g @devcontainers/cli || true
                   fi
