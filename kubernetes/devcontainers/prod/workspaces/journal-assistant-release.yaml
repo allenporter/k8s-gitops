@@ -5,7 +5,6 @@ metadata:
   name: journal-assistant
   namespace: devcontainers
 spec:
-  wait: false
   releaseName: journal-assistant
   chart:
     spec:
@@ -17,11 +16,11 @@ spec:
         namespace: flux-system
   interval: 5m
   install:
-    wait: false
+    disableWait: true
     remediation:
       retries: 3
   upgrade:
-    wait: false
+    disableWait: true
   values:
     workspaceName: journal-assistant
     git:
