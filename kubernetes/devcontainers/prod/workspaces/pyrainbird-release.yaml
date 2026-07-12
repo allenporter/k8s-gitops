@@ -1,0 +1,31 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: pyrainbird
+  namespace: devcontainers
+spec:
+  releaseName: pyrainbird
+  chart:
+    spec:
+      chart: ./kubernetes/devcontainers/charts/devcontainer-workspace
+      interval: 30m
+      sourceRef:
+        kind: GitRepository
+        name: flux-system
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  values:
+    workspaceName: pyrainbird
+    git:
+      url: https://github.com/allenporter/pyrainbird.git
+      directory: pyrainbird
+    storage:
+      size: 10Gi
+    image:
+      tag: latest
+    builder:
+      enabled: true
