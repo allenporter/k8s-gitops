@@ -25,3 +25,4 @@ resources:
   - tailscale.yaml
   - headlamp.yaml
   - zot.yaml
+  - actions-runner-controller.yaml
