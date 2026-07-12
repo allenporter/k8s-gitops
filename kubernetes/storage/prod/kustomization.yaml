@@ -5,9 +5,11 @@ patches:
 - path: democratic-csi-values.yaml
 - path: rook-ceph-values.yaml
 - path: volsync-values.yaml
+- path: zot-values.yaml
 resources:
 - snapshot-controller
 - ../base/democratic-csi
 - ../base/rook-ceph
 - ../base/volsync
+- ../base/zot
 - rook-ceph-cluster-values.yaml
