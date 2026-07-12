@@ -2,5 +2,5 @@ apiVersion: v2
 name: devcontainer-workspace
 description: A generic Helm chart for deploying persistent Kubernetes-native SSH workspaces with local builders.
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.0.0"
