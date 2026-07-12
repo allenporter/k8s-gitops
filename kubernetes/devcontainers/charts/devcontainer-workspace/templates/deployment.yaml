@@ -23,6 +23,10 @@ spec:
         image: "{{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}:{{ .Values.image.tag }}"
         imagePullPolicy: Always
         workingDir: /workspaces/{{ .Values.git.directory }}
+        {{- if .Values.resources }}
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        {{- end }}
         command: ["/bin/sh", "-c"]
         args:
         - |
@@ -57,6 +61,14 @@ spec:
         - name: ssh-keys
           mountPath: /tmp/ssh-keys
           readOnly: true
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}
+      {{- end }}
       volumes:
       - name: workspace-volume
         persistentVolumeClaim:

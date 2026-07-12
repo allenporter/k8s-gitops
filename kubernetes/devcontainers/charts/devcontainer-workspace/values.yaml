@@ -22,3 +22,7 @@ image:
 builder:
   enabled: true
   cacheFrom: []
+
+resources: {}
+nodeSelector: {}
+tolerations: []
