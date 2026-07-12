@@ -29,6 +29,7 @@ spec:
     storage:
       size: 10Gi
     image:
-      tag: latest
+      repository: mcr.microsoft.com/devcontainers/python
+      tag: 3.14-bookworm
     builder:
-      enabled: true
+      enabled: false
