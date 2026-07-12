@@ -1,0 +1,24 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: arc-controller-extra-rbac
+  namespace: arc-systems
+rules:
+- apiGroups: ["rbac.authorization.k8s.io"]
+  resources: ["roles", "rolebindings"]
+  verbs: ["create", "update", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: arc-controller-extra-rbac-binding
+  namespace: arc-systems
+subjects:
+- kind: ServiceAccount
+  name: gha-runner-scale-set-controller-gha-rs-controller
+  namespace: arc-systems
+roleRef:
+  kind: Role
+  name: arc-controller-extra-rbac
+  apiGroup: rbac.authorization.k8s.io
