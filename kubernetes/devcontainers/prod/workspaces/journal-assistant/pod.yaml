@@ -25,6 +25,10 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
         - |
+            if ! command -v sshd >/dev/null 2>&1; then
+              echo "sshd not found. Installing openssh-server..."
+              sudo apt-get update && sudo apt-get install -y openssh-server
+            fi
             sudo mkdir -p /home/vscode/.ssh
             sudo cp /tmp/ssh-keys/authorized_keys /home/vscode/.ssh/authorized_keys
             sudo chown -R vscode:vscode /home/vscode/.ssh
