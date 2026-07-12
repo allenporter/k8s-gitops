@@ -14,7 +14,7 @@ spec:
         name: actions-runner-controller-charts
         namespace: flux-system
   values:
-    githubConfigUrl: "https://github.com/allenporter"
+    githubConfigUrl: "https://github.com/allenporter/k8s-gitops"
     githubConfigSecret: github-app-credentials
     controllerServiceAccount:
       namespace: arc-systems
