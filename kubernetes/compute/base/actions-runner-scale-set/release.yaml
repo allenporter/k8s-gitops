@@ -20,6 +20,9 @@ spec:
   values:
     githubConfigUrl: "https://github.com/allenporter/k8s-gitops"
     githubConfigSecret: github-app-credentials
+    controllerServiceAccount:
+      namespace: arc-systems
+      name: gha-runner-scale-set-controller
     minRunners: 0
     maxRunners: 5
     containerMode:
