@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: workspace
-        image: "{{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}:{{ .Values.image.tag }}"
+        image: "{{ if .Values.image.repository }}{{ .Values.image.repository }}{{ else }}{{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}{{ end }}:{{ .Values.image.tag }}"
         imagePullPolicy: Always
         workingDir: /workspaces/{{ .Values.git.directory }}
         {{- if .Values.resources }}
