@@ -25,18 +25,16 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
         - |
-            if ! command -v sshd >/dev/null 2>&1 || ! command -v devcontainer >/dev/null 2>&1; then
+            if ! command -v sshd >/dev/null 2>&1 || ! command -v node >/dev/null 2>&1; then
               sudo apt-get update
             fi
             if ! command -v sshd >/dev/null 2>&1; then
               echo "sshd not found. Installing openssh-server..."
               sudo apt-get install -y openssh-server
             fi
-            if ! command -v devcontainer >/dev/null 2>&1; then
-              echo "Installing Node.js and NPM..."
-              sudo apt-get install -y nodejs npm
-              echo "Installing devcontainer CLI..."
-              sudo npm install -g @devcontainers/cli || true
+            if ! command -v node >/dev/null 2>&1; then
+              echo "Installing Node.js..."
+              sudo apt-get install -y nodejs
             fi
             sudo mkdir -p /home/vscode/.ssh
             sudo cp /tmp/ssh-keys/authorized_keys /home/vscode/.ssh/authorized_keys
@@ -46,6 +44,60 @@ spec:
             sudo chown -R vscode:vscode /workspaces
             sudo ssh-keygen -A
             sudo mkdir -p /var/run/sshd
+
+            # Write devcontainer lifecycle hooks runner script
+            sudo cat << 'EOF' > /usr/local/bin/run-devcontainer-hooks.js
+            const fs = require('fs');
+            const { execSync } = require('child_process');
+            const path = require('path');
+
+            const wsFolder = process.argv[2];
+            if (!wsFolder) {
+              console.error("Workspace folder not specified");
+              process.exit(1);
+            }
+
+            const configPath = path.join(wsFolder, '.devcontainer', 'devcontainer.json');
+            if (!fs.existsSync(configPath)) {
+              console.log("No devcontainer.json found at: " + configPath);
+              process.exit(0);
+            }
+
+            let content = fs.readFileSync(configPath, 'utf8');
+            content = content.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '$1');
+
+            let config;
+            try {
+              config = JSON.parse(content);
+            } catch (e) {
+              console.error("Failed to parse devcontainer.json: " + e.message);
+              process.exit(1);
+            }
+
+            function runCmd(cmd) {
+              if (!cmd) return;
+              if (Array.isArray(cmd)) {
+                cmd = cmd.join(' ');
+              }
+              console.log("Executing lifecycle command: " + cmd);
+              const formattedCmd = cmd.replace(/\${containerWorkspaceFolder}/g, wsFolder)
+                                      .replace(/\${localWorkspaceFolder}/g, wsFolder);
+              try {
+                execSync(formattedCmd, { stdio: 'inherit', cwd: wsFolder, shell: true });
+              } catch (err) {
+                console.error("Error executing command: " + cmd, err.message);
+              }
+            }
+
+            runCmd(config.initializeCommand);
+            runCmd(config.onCreateCommand);
+            runCmd(config.updateContentCommand);
+            runCmd(config.postCreateCommand);
+            runCmd(config.postStartCommand);
+            runCmd(config.postAttachCommand);
+            EOF
+            sudo chmod +x /usr/local/bin/run-devcontainer-hooks.js
+
             sudo /usr/sbin/sshd -D -p 2222
         env:
         - name: GIT_REPOSITORY_URL
@@ -66,11 +118,11 @@ spec:
                   while [ ! -f /workspaces/home-assistant-ring-keypad/.devcontainer/devcontainer.json ]; do
                     sleep 10
                   done
-                  while ! command -v devcontainer >/dev/null 2>&1; do
+                  while ! command -v node >/dev/null 2>&1; do
                     sleep 2
                   done
                   echo "devcontainer.json found! Running user commands..."
-                  devcontainer run-user-commands --workspace-folder /workspaces/home-assistant-ring-keypad
+                  node /usr/local/bin/run-devcontainer-hooks.js /workspaces/home-assistant-ring-keypad
                 ) >/tmp/devcontainer-init.log 2>&1 &
         volumeMounts:
         - name: workspace-volume
