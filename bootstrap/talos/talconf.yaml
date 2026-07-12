@@ -131,3 +131,19 @@ patches:
      cluster:
        proxy:
          disabled: true
+  - |-
+     machine:
+       registries:
+         mirrors:
+           docker.io:
+             endpoints:
+               - https://registry.k8s.mrv.thebends.org
+               - https://registry-1.docker.io
+           ghcr.io:
+             endpoints:
+               - https://registry.k8s.mrv.thebends.org
+               - https://ghcr.io
+           mcr.microsoft.com:
+             endpoints:
+               - https://registry.k8s.mrv.thebends.org
+               - https://mcr.microsoft.com
