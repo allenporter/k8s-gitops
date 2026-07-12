@@ -8,3 +8,4 @@ resources:
   - prepuller.yaml
   - workspaces/google-health-api
   - workspaces/ring-keypad
+  - workspaces/home-assistant-core
