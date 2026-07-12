@@ -50,11 +50,13 @@ spec:
               - /bin/sh
               - -c
               - |
-                if [ ! -d /workspaces/{{ .Values.git.directory }}/.git ]; then
-                  echo "Cloning..."
-                  git clone {{ .Values.git.url }} /workspaces/{{ .Values.git.directory }}
-                  chown -R vscode:vscode /workspaces/{{ .Values.git.directory }}
-                fi
+                (
+                  if [ ! -d /workspaces/{{ .Values.git.directory }}/.git ]; then
+                    echo "Cloning..."
+                    git clone {{ .Values.git.url }} /workspaces/{{ .Values.git.directory }}
+                    chown -R vscode:vscode /workspaces/{{ .Values.git.directory }} || true
+                  fi
+                ) >/tmp/workspace-clone.log 2>&1 &
         volumeMounts:
         - name: workspace-volume
           mountPath: /workspaces/{{ .Values.git.directory }}
