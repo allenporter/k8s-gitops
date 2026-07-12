@@ -5,6 +5,7 @@ metadata:
   name: google-health-api
   namespace: devcontainers
 spec:
+  wait: false
   releaseName: google-health-api
   chart:
     spec:

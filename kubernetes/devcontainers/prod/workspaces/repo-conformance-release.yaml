@@ -5,6 +5,7 @@ metadata:
   name: repo-conformance
   namespace: devcontainers
 spec:
+  wait: false
   releaseName: repo-conformance
   chart:
     spec:

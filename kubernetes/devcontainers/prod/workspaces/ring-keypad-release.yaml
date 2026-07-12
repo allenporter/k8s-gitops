@@ -5,6 +5,7 @@ metadata:
   name: ring-keypad
   namespace: devcontainers
 spec:
+  wait: false
   releaseName: ring-keypad
   chart:
     spec:
