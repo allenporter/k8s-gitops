@@ -13,3 +13,7 @@ spec:
   prune: true
   dependsOn:
   - name: flux-system
+  postBuild:
+    substituteFrom:
+    - kind: ConfigMap
+      name: network-config
