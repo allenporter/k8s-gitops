@@ -1,0 +1,31 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: home-assistant-core
+  namespace: devcontainers
+spec:
+  releaseName: home-assistant-core
+  chart:
+    spec:
+      chart: ./kubernetes/devcontainers/charts/devcontainer-workspace
+      interval: 30m
+      sourceRef:
+        kind: GitRepository
+        name: flux-system
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  values:
+    workspaceName: home-assistant-core
+    git:
+      url: https://github.com/home-assistant/core.git
+      directory: home-assistant-core
+    storage:
+      size: 20Gi
+    image:
+      tag: latest
+    builder:
+      enabled: true
