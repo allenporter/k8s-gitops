@@ -9,3 +9,4 @@ resources:
   - workspaces/google-health-api
   - workspaces/ring-keypad
   - workspaces/home-assistant-core
+  - workspaces/journal-assistant

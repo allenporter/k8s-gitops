@@ -5,3 +5,4 @@ resources:
   - pod.yaml
   - service.yaml
   - pvc.yaml
+  - builder-cronjob.yaml

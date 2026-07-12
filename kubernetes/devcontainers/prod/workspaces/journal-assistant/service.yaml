@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ws-journal-assistant
+  namespace: devcontainers
+  annotations:
+    coredns.io/hostname: ws-journal-assistant.devcontainers.k8s.mrv.thebends.org
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 22
+    targetPort: 2222
+    protocol: TCP
+    name: ssh
+  selector:
+    app: ws-journal-assistant
