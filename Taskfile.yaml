@@ -1,6 +1,9 @@
 ---
 version: '3'
 
+includes:
+  devcontainers: ./kubernetes/devcontainers/Taskfile.yaml
+
 tasks:
   localize:
     cmds:
