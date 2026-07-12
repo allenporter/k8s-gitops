@@ -6,10 +6,14 @@ patches:
 - path: intel-device-plugin-gpu-values.yaml
 - path: node-feature-discovery-values.yaml
 - path: nvidia-device-plugin-values.yaml
+- path: actions-runner-controller-values.yaml
+- path: actions-runner-scale-set-values.yaml
 resources:
 - ../base/intel-device-plugin
 - ../base/intel-device-plugin-gpu
 - ../base/node-feature-discovery
 - ../base/nvidia-device-plugin
+- ../base/actions-runner-controller
+- ../base/actions-runner-scale-set
 - system-upgrade-controller
 - nvidia-time-slicing-config.yaml
