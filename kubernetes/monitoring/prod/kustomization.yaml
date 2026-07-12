@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 patches:
@@ -8,3 +9,4 @@ resources:
 - ../base/kube-prometheus-stack
 - monitoring-secrets.yaml
 - ../base/headlamp
+- ../base/cilium-dashboards
