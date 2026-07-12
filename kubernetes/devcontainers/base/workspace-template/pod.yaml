@@ -115,7 +115,7 @@ spec:
                   while [ ! -f /workspaces/temp/.devcontainer/devcontainer.json ]; do
                     sleep 10
                   done
-                  while ! command -v node >/dev/null 2>&1; do
+                  while ! command -v node >/dev/null 2>&1 || [ ! -f /usr/local/bin/run-devcontainer-hooks.js ]; do
                     sleep 2
                   done
                   echo "devcontainer.json found! Running user commands..."
