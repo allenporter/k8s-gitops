@@ -22,7 +22,21 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["/bin/sh", "-c", "devcontainer run-user-commands --workspace-folder /workspaces/home-assistant-core"]
+              command:
+              - /bin/sh
+              - -c
+              - |
+                (
+                  if ! command -v devcontainer >/dev/null 2>&1; then
+                    echo "Installing devcontainer CLI..."
+                    npm install -g @devcontainers/cli || true
+                  fi
+                  while [ ! -f /workspaces/home-assistant-core/.devcontainer/devcontainer.json ]; do
+                    sleep 10
+                  done
+                  echo "devcontainer.json found! Running user commands..."
+                  devcontainer run-user-commands --workspace-folder /workspaces/home-assistant-core
+                ) >/tmp/devcontainer-init.log 2>&1 &
         volumeMounts:
         - name: workspace-volume
           mountPath: /workspaces/home-assistant-core
