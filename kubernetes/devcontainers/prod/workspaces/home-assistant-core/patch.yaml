@@ -16,6 +16,11 @@ spec:
               echo "sshd not found. Installing openssh-server..."
               sudo apt-get update && sudo apt-get install -y openssh-server
             fi
+            sudo mkdir -p /home/vscode/.ssh
+            sudo cp /tmp/ssh-keys/authorized_keys /home/vscode/.ssh/authorized_keys
+            sudo chown -R vscode:vscode /home/vscode/.ssh
+            sudo chmod 700 /home/vscode/.ssh
+            sudo chmod 600 /home/vscode/.ssh/authorized_keys
             sudo ssh-keygen -A
             sudo mkdir -p /var/run/sshd
             sudo /usr/sbin/sshd -D -p 2222
@@ -40,6 +45,10 @@ spec:
         volumeMounts:
         - name: workspace-volume
           mountPath: /workspaces/home-assistant-core
+        - name: ssh-keys
+          mountPath: /tmp/ssh-keys
+          readOnly: true
+
 ---
 apiVersion: v1
 kind: Service

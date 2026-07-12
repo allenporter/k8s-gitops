@@ -29,6 +29,11 @@ spec:
               echo "sshd not found. Installing openssh-server..."
               sudo apt-get update && sudo apt-get install -y openssh-server
             fi
+            sudo mkdir -p /home/vscode/.ssh
+            sudo cp /tmp/ssh-keys/authorized_keys /home/vscode/.ssh/authorized_keys
+            sudo chown -R vscode:vscode /home/vscode/.ssh
+            sudo chmod 700 /home/vscode/.ssh
+            sudo chmod 600 /home/vscode/.ssh/authorized_keys
             sudo ssh-keygen -A
             sudo mkdir -p /var/run/sshd
             sudo /usr/sbin/sshd -D -p 2222
@@ -54,8 +59,7 @@ spec:
         - name: workspace-volume
           mountPath: /workspaces/python-google-health-api
         - name: ssh-keys
-          mountPath: /home/vscode/.ssh/authorized_keys
-          subPath: authorized_keys
+          mountPath: /tmp/ssh-keys
           readOnly: true
       volumes:
       - name: workspace-volume
