@@ -9,7 +9,7 @@ spec:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 87.12.5
+      version: 87.14.0
   values:
     prometheus:
       prometheusSpec:
