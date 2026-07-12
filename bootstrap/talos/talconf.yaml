@@ -34,51 +34,20 @@ nodes:
     installDisk: /dev/sda
     nodeAnnotations:
       accelerator: nvidia
-    # NVidia extensions for older hardware that uses older proprietary drivers
     kernelModules:
       - name: nvidia
       - name: nvidia_uvm
       - name: nvidia_drm
       - name: nvidia_modeset
-      # Image using these extensions
-      # customization:
-      # systemExtensions:
-      #     officialExtensions:
-      #         - siderolabs/nonfree-kmod-nvidia-production
-      #         - siderolabs/nvidia-container-toolkit-production
+    schematic:
+      customization:
+        extraKernelArgs:
+          - net.ifnames=0
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/nonfree-kmod-nvidia-lts
+            - siderolabs/nvidia-container-toolkit-lts
     patches:
-      - |-
-        machine:
-          install:
-            # For 1.8.3:
-            #   nonfree-kmod-nvidia 550.90.07-v1.8.3
-            #   nvidia-container-toolkit 550.90.07-v1.16.1
-            # image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.8.3
-            # For 1.8.4:
-            #   nonfree-kmod-nvidia 550.90.07-x
-            #   nvidia-container-toolkit 550.90.07-x
-            # image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.8.4
-            # For 1.9.6:
-            #   nonfree-kmod-nvidia 550.x
-            #   nvidia-container-toolkit 550.x
-            # image: factory.talos.dev/installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.9.6
-            # For 1.10.9
-            #   nonfree-kmod-nvidia 570.x
-            #   nvidia-container-toolkit 570.x
-            # image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.10.9
-            # For 1.11.6
-            #   nonfree-kmod-nvidia 570.x
-            #   nvidia-container-toolkit 570.x
-            # image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.11.6
-            # For 1.12.5
-            #   nonfree-kmod-nvidia 570.x
-            #   nvidia-container-toolkit 570.x
-            # image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.12.5
-            # For 1.13.6
-            #   nonfree-kmod-nvidia 570.x
-            #   nvidia-container-toolkit 570.x
-            image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.13.6
-
       - |-
         machine:
           sysctls:
@@ -87,10 +56,12 @@ nodes:
         machine:
           files:
             - content: |
-                [plugins]
-                  [plugins."io.containerd.grpc.v1.cri"]
-                    [plugins."io.containerd.grpc.v1.cri".containerd]
-                      default_runtime_name = "nvidia"
+                [plugins."io.containerd.cri.v1.runtime"]
+                  default_runtime_name = "nvidia"
+                [plugins."io.containerd.cri.v1.runtime".containerd.runtimes.nvidia]
+                  runtime_type = "io.containerd.runc.v2"
+                  [plugins."io.containerd.cri.v1.runtime".containerd.runtimes.nvidia.options]
+                    BinaryName = "/usr/local/bin/nvidia-container-runtime"
               path: /etc/cri/conf.d/20-customization.part
               op: create
 
