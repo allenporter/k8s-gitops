@@ -76,28 +76,19 @@ spec:
                   "urls": [
                     "https://registry-1.docker.io"
                   ],
-                  "onDemand": true,
-                  "tls": {
-                    "enable": true
-                  }
+                  "onDemand": true
                 },
                 {
                   "urls": [
                     "https://ghcr.io"
                   ],
-                  "onDemand": true,
-                  "tls": {
-                    "enable": true
-                  }
+                  "onDemand": true
                 },
                 {
                   "urls": [
                     "https://mcr.microsoft.com"
                   ],
-                  "onDemand": true,
-                  "tls": {
-                    "enable": true
-                  }
+                  "onDemand": true
                 }
               ]
             }
