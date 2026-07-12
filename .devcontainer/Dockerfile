@@ -60,6 +60,7 @@ COPY --from=registry.k8s.io/kustomize/kustomize:v5.8.1  /app/kustomize          
 COPY --from=instrumentisto/restic:0.18.1-r2             /usr/local/bin/restic            /usr/local/bin/restic
 COPY --from=docker.io/alpine/helm:4.2.3                /usr/bin/helm                    /usr/local/bin/helm
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.9.1              /usr/local/bin/flux              /usr/local/bin/flux
+COPY --from=ghcr.io/home-operations/flate:0.4.10         /flate                           /usr/local/bin/flate
 COPY --from=ghcr.io/siderolabs/talosctl:v1.13.6          /talosctl                        /usr/local/bin/talosctl
 
 ARG TARGETARCH
