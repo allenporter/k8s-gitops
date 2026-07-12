@@ -4,7 +4,13 @@ kind: Deployment
 metadata:
   name: workspace-temp
 spec:
+  selector:
+    matchLabels:
+      app: ha-core-workspace-temp
   template:
+    metadata:
+      labels:
+        app: ha-core-workspace-temp
     spec:
       containers:
       - name: workspace
