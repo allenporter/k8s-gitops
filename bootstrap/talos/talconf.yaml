@@ -1,6 +1,6 @@
 ---
 clusterName: k8s-cluster
-talosVersion: v1.12.5
+talosVersion: v1.13.6
 kubernetesVersion: v1.35.6
 endpoint: https://10.10.101.1:6443
 allowSchedulingOnMasters: true
@@ -73,7 +73,11 @@ nodes:
             # For 1.12.5
             #   nonfree-kmod-nvidia 570.x
             #   nvidia-container-toolkit 570.x
-            image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.12.5
+            # image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.12.5
+            # For 1.13.6
+            #   nonfree-kmod-nvidia 570.x
+            #   nvidia-container-toolkit 570.x
+            image: factory.talos.dev/metal-installer/26124abcbd408be693df9fe852c80ef1e6cc178e34d7d7d8430a28d1130b4227:v1.13.6
 
       - |-
         machine:
