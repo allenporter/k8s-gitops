@@ -31,6 +31,7 @@ spec:
             sudo chown -R vscode:vscode /home/vscode/.ssh
             sudo chmod 700 /home/vscode/.ssh
             sudo chmod 600 /home/vscode/.ssh/authorized_keys
+            sudo chown -R vscode:vscode /workspaces
             sudo ssh-keygen -A
             sudo mkdir -p /var/run/sshd
             sudo /usr/sbin/sshd -D -p 2222
