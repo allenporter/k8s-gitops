@@ -1,0 +1,65 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: build-ring-keypad
+  namespace: devcontainers
+spec:
+  schedule: "0 0 1 1 *"
+  suspend: true
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: builder
+            image: node:20-bookworm-slim
+            command: ["/bin/sh", "-c"]
+            args:
+            - |
+              set -e
+              echo "=== Step 1: Install Git, Docker CLI, and Curl ==="
+              apt-get update && apt-get install -y git docker.io curl
+
+              echo "=== Step 2: Install Docker Buildx Plugin ==="
+              mkdir -p /root/.docker/cli-plugins
+              curl -SL https://github.com/docker/buildx/releases/download/v0.12.0/buildx-v0.12.0.linux-amd64 -o /root/.docker/cli-plugins/docker-buildx
+              chmod +x /root/.docker/cli-plugins/docker-buildx
+
+              echo "=== Step 3: Wait for Docker sidecar daemon ==="
+              while ! docker info >/dev/null 2>&1; do
+                sleep 1
+              done
+              echo "Docker daemon is ready!"
+
+              # Set up buildx
+              docker buildx create --use --name mybuilder
+
+              echo "=== Step 4: Clone repository ==="
+              git clone --depth 1 https://github.com/allenporter/home-assistant-ring-keypad.git /tmp/build
+              cd /tmp/build
+
+              echo "=== Step 5: Install Devcontainer CLI ==="
+              npm install -g @devcontainers/cli
+
+              echo "=== Step 6: Build and Push Image with Inline Cache ==="
+              devcontainer build \
+                --workspace-folder . \
+                --image-name registry.k8s.mrv.thebends.org/devcontainers/home-assistant-ring-keypad:latest \
+                --cache-from type=registry,ref=registry.k8s.mrv.thebends.org/devcontainers/home-assistant-ring-keypad:latest \
+                --cache-to type=inline \
+                --push
+            env:
+            - name: DOCKER_HOST
+              value: tcp://localhost:2375
+            - name: DOCKER_BUILDKIT
+              value: "1"
+          - name: dind
+            image: docker:24-dind
+            env:
+            - name: DOCKER_TLS_CERTDIR
+              value: ""
+            securityContext:
+              privileged: true

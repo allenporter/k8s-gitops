@@ -2,26 +2,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ws-ring-keypad
+  name: ws-journal-assistant
   namespace: devcontainers
   labels:
-    app: ws-ring-keypad
+    app: ws-journal-assistant
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: ws-ring-keypad
+      app: ws-journal-assistant
   template:
     metadata:
       labels:
-        app: ws-ring-keypad
+        app: ws-journal-assistant
     spec:
       containers:
       - name: workspace
-        image: registry.k8s.mrv.thebends.org/devcontainers/home-assistant-ring-keypad:latest
-        workingDir: /workspaces/home-assistant-ring-keypad
+        image: registry.k8s.mrv.thebends.org/devcontainers/home-assistant-journal-assistant:latest
+        workingDir: /workspaces/home-assistant-journal-assistant
         command: ["/bin/sh", "-c"]
         args:
         - |
@@ -41,21 +41,21 @@ spec:
               - /bin/sh
               - -c
               - |
-                if [ ! -d /workspaces/home-assistant-ring-keypad/.git ]; then
+                if [ ! -d /workspaces/home-assistant-journal-assistant/.git ]; then
                   echo "Cloning..."
-                  git clone https://github.com/allenporter/home-assistant-ring-keypad.git /workspaces/home-assistant-ring-keypad
-                  chown -R vscode:vscode /workspaces/home-assistant-ring-keypad
+                  git clone https://github.com/allenporter/home-assistant-journal-assistant.git /workspaces/home-assistant-journal-assistant
+                  chown -R vscode:vscode /workspaces/home-assistant-journal-assistant
                 fi
         volumeMounts:
         - name: workspace-volume
-          mountPath: /workspaces/home-assistant-ring-keypad
+          mountPath: /workspaces/home-assistant-journal-assistant
         - name: ssh-keys
           mountPath: /tmp/ssh-keys
           readOnly: true
       volumes:
       - name: workspace-volume
         persistentVolumeClaim:
-          claimName: ws-ring-keypad-pvc
+          claimName: ws-journal-assistant-pvc
       - name: ssh-keys
         secret:
           secretName: ssh-public-keys
