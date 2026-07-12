@@ -11,6 +11,12 @@ spec:
     command: ["/bin/sh", "-c"]
     args:
     - |
+        if ! command -v sshd >/dev/null 2>&1; then
+          echo "sshd not found. Installing openssh-server..."
+          sudo apt-get update && sudo apt-get install -y openssh-server
+        fi
+        sudo ssh-keygen -A
+        sudo mkdir -p /var/run/sshd
         sudo /usr/sbin/sshd -D -p 2222
     lifecycle:
       postStart:
