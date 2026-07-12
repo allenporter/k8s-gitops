@@ -124,7 +124,36 @@ To run a workspace on a GPU-enabled node, you simply need to request the GPU as 
 
 ---
 
-## 5. Alternatives Investigated & Downsides
+## 5. Workspace Maintenance & Operations (Taskfile)
+
+We provide a sub-Taskfile to simplify common operations and maintenance tasks for your devcontainer workspaces. You can run these commands from the root of the repository:
+
+*   **List all workspaces**: Prints the status of all HelmReleases, Pods, PVCs, and Services inside the `devcontainers` namespace:
+    ```bash
+    task devcontainers:list
+    ```
+*   **Reconcile updates**: Forces Flux to pull latest git commits and sync kustomizations instantly:
+    ```bash
+    task devcontainers:reconcile
+    ```
+*   **Trigger a manual build**: Compiles and pushes the devcontainer image for a specific workspace:
+    ```bash
+    task devcontainers:build WORKSPACE=<workspace-name>
+    # Example:
+    task devcontainers:build WORKSPACE=home-assistant-core
+    ```
+*   **Restart a workspace**: Performs a rolling restart of a specific workspace deployment:
+    ```bash
+    task devcontainers:restart WORKSPACE=<workspace-name>
+    ```
+*   **Clean up manual build jobs**: Deletes completed manual builder Jobs from the namespace:
+    ```bash
+    task devcontainers:cleanup
+    ```
+
+---
+
+## 6. Alternatives Investigated & Downsides
 
 Before committing to this DIY GitOps model, we evaluated several popular devcontainer orchestration tools:
 
