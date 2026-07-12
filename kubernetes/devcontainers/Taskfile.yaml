@@ -1,0 +1,38 @@
+---
+version: '3'
+
+env:
+  KUBECONFIG: ../k8s-gitops/.env/kubeconfig.yaml
+
+tasks:
+  list:
+    desc: List all devcontainer HelmReleases, Pods, PVCs, and Services
+    cmds:
+      - kubectl get helmreleases,pods,pvc,svc -n devcontainers
+
+  reconcile:
+    desc: Reconcile Flux system source and devcontainers workspace updates
+    cmds:
+      - flux reconcile source git flux-system
+      - flux reconcile kustomization devcontainers
+
+  build:
+    desc: Trigger a manual build Job for a workspace (e.g. task devcontainers:build WORKSPACE=ring-keypad)
+    requires:
+      vars: [WORKSPACE]
+    cmds:
+      - kubectl delete job build-{{.WORKSPACE}}-manual -n devcontainers --ignore-not-found=true
+      - kubectl create job build-{{.WORKSPACE}}-manual --from=cronjob/build-{{.WORKSPACE}} -n devcontainers
+      - echo "Build Job triggered. Monitor progress with 'kubectl get pods -n devcontainers -w'"
+
+  restart:
+    desc: Restart a specific devcontainer workspace (e.g. task devcontainers:restart WORKSPACE=ring-keypad)
+    requires:
+      vars: [WORKSPACE]
+    cmds:
+      - kubectl rollout restart deployment ws-{{.WORKSPACE}} -n devcontainers
+
+  cleanup:
+    desc: Clean up completed manual build Jobs in the namespace
+    cmds:
+      - kubectl delete jobs -n devcontainers -l job-name || true
