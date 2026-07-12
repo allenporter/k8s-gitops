@@ -1,0 +1,36 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ws-google-health-api
+  namespace: devcontainers
+  labels:
+    app: ws-google-health-api
+spec:
+  containers:
+  - name: workspace
+    image: registry.k8s.mrv.thebends.org/devcontainers/python-google-health-api:latest
+    workingDir: /workspaces/python-google-health-api
+    command: ["/bin/sh", "-c"]
+    args:
+    - |
+        sudo /usr/sbin/sshd -D -p 2222
+    lifecycle:
+      postStart:
+        exec:
+          command: ["/bin/sh", "-c", "devcontainer run-user-commands --workspace-folder /workspaces/python-google-health-api"]
+    volumeMounts:
+    - name: workspace-volume
+      mountPath: /workspaces/python-google-health-api
+    - name: ssh-keys
+      mountPath: /home/vscode/.ssh/authorized_keys
+      subPath: authorized_keys
+      readOnly: true
+  volumes:
+  - name: workspace-volume
+    persistentVolumeClaim:
+      claimName: ws-google-health-api-pvc
+  - name: ssh-keys
+    secret:
+      secretName: ssh-public-keys
+      defaultMode: 0o600
