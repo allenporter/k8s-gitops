@@ -18,9 +18,18 @@ spec:
         workingDir: /workspaces/home-assistant-core
         args:
         - |
+            if ! command -v sshd >/dev/null 2>&1 || ! command -v devcontainer >/dev/null 2>&1; then
+              sudo apt-get update
+            fi
             if ! command -v sshd >/dev/null 2>&1; then
               echo "sshd not found. Installing openssh-server..."
-              sudo apt-get update && sudo apt-get install -y openssh-server
+              sudo apt-get install -y openssh-server
+            fi
+            if ! command -v devcontainer >/dev/null 2>&1; then
+              echo "Installing Node.js and NPM..."
+              sudo apt-get install -y nodejs npm
+              echo "Installing devcontainer CLI..."
+              sudo npm install -g @devcontainers/cli || true
             fi
             sudo mkdir -p /home/vscode/.ssh
             sudo cp /tmp/ssh-keys/authorized_keys /home/vscode/.ssh/authorized_keys
@@ -47,14 +56,11 @@ spec:
                     git clone "$GIT_REPOSITORY_URL" /workspaces/home-assistant-core || true
                     chown -R vscode:vscode /workspaces/home-assistant-core
                   fi
-                  if ! command -v devcontainer >/dev/null 2>&1; then
-                    echo "Installing Node.js and NPM..."
-                    apt-get update && apt-get install -y nodejs npm
-                    echo "Installing devcontainer CLI..."
-                    npm install -g @devcontainers/cli || true
-                  fi
                   while [ ! -f /workspaces/home-assistant-core/.devcontainer/devcontainer.json ]; do
                     sleep 10
+                  done
+                  while ! command -v devcontainer >/dev/null 2>&1; do
+                    sleep 2
                   done
                   echo "devcontainer.json found! Running user commands..."
                   devcontainer run-user-commands --workspace-folder /workspaces/home-assistant-core
