@@ -5,6 +5,7 @@ metadata:
   name: home-assistant-datasets
   namespace: devcontainers
 spec:
+  wait: false
   releaseName: home-assistant-datasets
   chart:
     spec:
