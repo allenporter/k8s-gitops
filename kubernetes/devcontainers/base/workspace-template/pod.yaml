@@ -1,39 +1,50 @@
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: workspace-temp
 spec:
-  containers:
-  - name: workspace
-    image: mcr.microsoft.com/devcontainers/python:3.14-bookworm
-    workingDir: /workspaces/temp
-    command: ["/bin/sh", "-c"]
-    args:
-    - |
-        if ! command -v sshd >/dev/null 2>&1; then
-          echo "sshd not found. Installing openssh-server..."
-          sudo apt-get update && sudo apt-get install -y openssh-server
-        fi
-        sudo ssh-keygen -A
-        sudo mkdir -p /var/run/sshd
-        sudo /usr/sbin/sshd -D -p 2222
-    lifecycle:
-      postStart:
-        exec:
-          command: ["/bin/sh", "-c", "devcontainer run-user-commands --workspace-folder /workspaces/temp"]
-    volumeMounts:
-    - name: workspace-volume
-      mountPath: /workspaces/temp
-    - name: ssh-keys
-      mountPath: /home/vscode/.ssh/authorized_keys
-      subPath: authorized_keys
-      readOnly: true
-  volumes:
-  - name: workspace-volume
-    persistentVolumeClaim:
-      claimName: workspace-pvc
-  - name: ssh-keys
-    secret:
-      secretName: ssh-public-keys
-      defaultMode: 0o600
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: workspace-temp
+  template:
+    metadata:
+      labels:
+        app: workspace-temp
+    spec:
+      containers:
+      - name: workspace
+        image: mcr.microsoft.com/devcontainers/python:3.14-bookworm
+        workingDir: /workspaces/temp
+        command: ["/bin/sh", "-c"]
+        args:
+        - |
+            if ! command -v sshd >/dev/null 2>&1; then
+              echo "sshd not found. Installing openssh-server..."
+              sudo apt-get update && sudo apt-get install -y openssh-server
+            fi
+            sudo ssh-keygen -A
+            sudo mkdir -p /var/run/sshd
+            sudo /usr/sbin/sshd -D -p 2222
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "devcontainer run-user-commands --workspace-folder /workspaces/temp"]
+        volumeMounts:
+        - name: workspace-volume
+          mountPath: /workspaces/temp
+        - name: ssh-keys
+          mountPath: /home/vscode/.ssh/authorized_keys
+          subPath: authorized_keys
+          readOnly: true
+      volumes:
+      - name: workspace-volume
+        persistentVolumeClaim:
+          claimName: workspace-pvc
+      - name: ssh-keys
+        secret:
+          secretName: ssh-public-keys
+          defaultMode: 0o600
