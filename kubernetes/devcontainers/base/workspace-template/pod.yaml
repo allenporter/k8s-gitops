@@ -35,6 +35,9 @@ spec:
             sudo ssh-keygen -A
             sudo mkdir -p /var/run/sshd
             sudo /usr/sbin/sshd -D -p 2222
+        env:
+        - name: GIT_REPOSITORY_URL
+          value: ""
         lifecycle:
           postStart:
             exec:
@@ -43,6 +46,10 @@ spec:
               - -c
               - |
                 (
+                  if [ -n "$GIT_REPOSITORY_URL" ] && [ ! -d /workspaces/temp/.git ]; then
+                    echo "Cloning $GIT_REPOSITORY_URL..."
+                    git clone "$GIT_REPOSITORY_URL" /workspaces/temp || true
+                  fi
                   if ! command -v devcontainer >/dev/null 2>&1; then
                     echo "Installing devcontainer CLI..."
                     npm install -g @devcontainers/cli || true
