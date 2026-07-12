@@ -5,6 +5,7 @@ metadata:
   name: ical
   namespace: devcontainers
 spec:
+  wait: false
   releaseName: ical
   chart:
     spec:

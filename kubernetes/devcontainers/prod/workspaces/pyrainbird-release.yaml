@@ -5,6 +5,7 @@ metadata:
   name: pyrainbird
   namespace: devcontainers
 spec:
+  wait: false
   releaseName: pyrainbird
   chart:
     spec:

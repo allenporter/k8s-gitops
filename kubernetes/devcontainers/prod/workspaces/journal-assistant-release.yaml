@@ -5,6 +5,7 @@ metadata:
   name: journal-assistant
   namespace: devcontainers
 spec:
+  wait: false
   releaseName: journal-assistant
   chart:
     spec:
