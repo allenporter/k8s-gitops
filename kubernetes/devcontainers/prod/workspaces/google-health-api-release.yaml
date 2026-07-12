@@ -17,8 +17,11 @@ spec:
         namespace: flux-system
   interval: 5m
   install:
+    wait: false
     remediation:
       retries: 3
+  upgrade:
+    wait: false
   values:
     workspaceName: google-health-api
     git:
