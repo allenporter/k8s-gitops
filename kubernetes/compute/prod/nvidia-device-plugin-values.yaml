@@ -15,5 +15,6 @@ spec:
         namespace: flux-system
   values:
     runtimeClassName: nvidia
+    deviceListStrategy: cdi-annotations
     config:
       name: time-slicing-config
