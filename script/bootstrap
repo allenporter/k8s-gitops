@@ -60,6 +60,13 @@ if command -v brew >/dev/null 2>&1; then
     fi
   fi
 
+  # Tap and install home-operations/tap/flate
+  if ! brew list --cask home-operations/tap/flate >/dev/null 2>&1 && ! command -v flate >/dev/null 2>&1; then
+    echo "==> Tapping home-operations/tap and installing flate..."
+    brew tap home-operations/tap
+    brew install --cask home-operations/tap/flate
+  fi
+
   # Install Google Cloud CLI Cask if missing
   if ! brew list --cask google-cloud-sdk >/dev/null 2>&1 && ! command -v gcloud >/dev/null 2>&1; then
     echo "==> Installing google-cloud-sdk cask..."
