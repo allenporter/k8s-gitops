@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: workspace-temp
+spec:
+  containers:
+  - name: workspace
+    image: mcr.microsoft.com/devcontainers/python:3.14-bookworm
+    workingDir: /workspaces/temp
+    command: ["/bin/sh", "-c"]
+    args:
+    - |
+        sudo /usr/sbin/sshd -D -p 2222
+    lifecycle:
+      postStart:
+        exec:
+          command: ["/bin/sh", "-c", "devcontainer run-user-commands --workspace-folder /workspaces/temp"]
+    volumeMounts:
+    - name: workspace-volume
+      mountPath: /workspaces/temp
+    - name: ssh-keys
+      mountPath: /home/vscode/.ssh/authorized_keys
+      subPath: authorized_keys
+      readOnly: true
+  volumes:
+  - name: workspace-volume
+    persistentVolumeClaim:
+      claimName: workspace-pvc
+  - name: ssh-keys
+    secret:
+      secretName: ssh-public-keys
+      defaultMode: 0o600
