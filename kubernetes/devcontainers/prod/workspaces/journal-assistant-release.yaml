@@ -16,8 +16,11 @@ spec:
         namespace: flux-system
   interval: 5m
   install:
+    disableWait: true
     remediation:
       retries: 3
+  upgrade:
+    disableWait: true
   values:
     workspaceName: journal-assistant
     git:

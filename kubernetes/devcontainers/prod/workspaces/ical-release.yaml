@@ -2,10 +2,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: ring-keypad
+  name: ical
   namespace: devcontainers
 spec:
-  releaseName: ring-keypad
+  releaseName: ical
   chart:
     spec:
       chart: ./kubernetes/devcontainers/charts/devcontainer-workspace
@@ -22,13 +22,14 @@ spec:
   upgrade:
     disableWait: true
   values:
-    workspaceName: ring-keypad
+    workspaceName: ical
     git:
-      url: https://github.com/allenporter/home-assistant-ring-keypad.git
-      directory: home-assistant-ring-keypad
+      url: https://github.com/allenporter/ical.git
+      directory: ical
     storage:
       size: 10Gi
     image:
-      tag: latest
+      repository: mcr.microsoft.com/devcontainers/python
+      tag: 3.14-bookworm
     builder:
-      enabled: true
+      enabled: false

@@ -5,8 +5,11 @@ namespace: devcontainers
 resources:
   - ../base
   - ssh-public-keys.yaml
-  - prepuller.yaml
-  - workspaces/google-health-api
-  - workspaces/home-assistant-core
+  - workspaces/google-health-api-release.yaml
+  - workspaces/home-assistant-core-release.yaml
+  - workspaces/home-assistant-datasets-release.yaml
+  - workspaces/repo-conformance-release.yaml
+  - workspaces/ical-release.yaml
+  - workspaces/pyrainbird-release.yaml
   - workspaces/ring-keypad-release.yaml
   - workspaces/journal-assistant-release.yaml

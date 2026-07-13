@@ -10,6 +10,7 @@ global:
   builder:
     image: node:24-bookworm-slim
     dindImage: docker:24-dind
+    dindImage: docker:29-dind
 
 workspaceName: ""
 git:
@@ -18,7 +19,12 @@ git:
 storage:
   size: 10Gi
 image:
+  repository: ""
   tag: latest
 builder:
   enabled: true
   cacheFrom: []
+
+resources: {}
+nodeSelector: {}
+tolerations: []
