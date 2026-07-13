@@ -176,6 +176,11 @@
       matchPackageNames: [
         'ghcr.io/allenporter/supernote',
       ],
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+        'digest',
+      ],
       schedule: [],
       minimumReleaseAge: '0 days',
       automerge: true,
