@@ -4,3 +4,6 @@ kind: Kustomization
 resources:
 - gotk-components.yaml
 - gotk-sync.yaml
+- webhook-secret.yaml
+- webhook-receiver.yaml
+- webhook-ingress.yaml
