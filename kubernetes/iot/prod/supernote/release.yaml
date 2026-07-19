@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: ghcr.io/allenporter/supernote
-              tag: v0.15.1
+              tag: v0.16.0
 
             env:
               - name: SUPERNOTE_PROXY_MODE
