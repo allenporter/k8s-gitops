@@ -103,3 +103,12 @@ spec:
         accessMode: ReadWriteOnce
         size: 20Gi
         storageClass: ceph-block
+    serviceMonitor:
+      main:
+        enabled: true
+        service:
+          identifier: main
+        endpoints:
+          - port: http
+            path: /metrics
+            interval: 1m
