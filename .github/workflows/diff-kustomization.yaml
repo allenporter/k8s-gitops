@@ -19,7 +19,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup flate CLI
-        uses: home-operations/flate/action@v0.4.11
+        uses: home-operations/flate/action@v0.4.12
       - name: Run flate diff
         id: diff
         run: |
