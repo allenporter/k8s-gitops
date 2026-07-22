@@ -66,7 +66,7 @@ COPY --from=ghcr.io/siderolabs/talosctl:v1.13.7          /talosctl              
 ARG TARGETARCH
 
 # renovate: datasource=github-releases depName=budimanjojo/talhelper
-ARG TAL_HELPER_VERSION=v3.1.13
+ARG TAL_HELPER_VERSION=v3.1.14
 RUN cd /usr/local/bin/ && \
     curl -OL https://github.com/budimanjojo/talhelper/releases/download/${TAL_HELPER_VERSION}/talhelper_linux_${TARGETARCH}.tar.gz && \
     tar xf talhelper_linux_${TARGETARCH}.tar.gz && \
