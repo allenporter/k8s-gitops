@@ -8,7 +8,8 @@ global:
   sshKeySecret: ssh-public-keys
   sshTargetPort: 2222
   builder:
-    image: node:20-bookworm-slim
+    image: node:24-bookworm-slim
+    dindImage: docker:24-dind
     dindImage: docker:29-dind
 
 workspaceName: ""
