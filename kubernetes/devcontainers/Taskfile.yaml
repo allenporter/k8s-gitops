@@ -10,6 +10,11 @@ tasks:
     cmds:
       - kubectl get helmreleases,pods,pvc,svc -n devcontainers
 
+  endpoints:
+    desc: List all devcontainer SSH hostnames, IPs, and connection commands
+    cmds:
+      - kubectl get svc -n devcontainers -o jsonpath='{range .items[*]}{.metadata.name}{" "}{.status.loadBalancer.ingress[0].ip}{"\n"}{end}' | awk '{printf "%-28s %-15s ssh vscode@%s.devcontainers.k8s.mrv.thebends.org\n", $1, $2, $1}'
+
   reconcile:
     desc: Reconcile Flux system source and devcontainers workspace updates
     cmds:
