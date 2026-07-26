@@ -10,6 +10,7 @@ resources:
   - workspaces/home-assistant-datasets-release.yaml
   - workspaces/repo-conformance-release.yaml
   - workspaces/ical-release.yaml
+  - workspaces/icaldav-release.yaml
   - workspaces/pyrainbird-release.yaml
   - workspaces/ring-keypad-release.yaml
   - workspaces/journal-assistant-release.yaml
