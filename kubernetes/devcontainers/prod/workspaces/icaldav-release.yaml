@@ -29,7 +29,8 @@ spec:
     storage:
       size: 10Gi
     image:
-      repository: mcr.microsoft.com/devcontainers/python
-      tag: 3.14-bookworm
+      tag: latest
+    features:
+      "registry.k8s.mrv.thebends.org/devcontainers/antigravity:1": {}
     builder:
-      enabled: false
+      enabled: true

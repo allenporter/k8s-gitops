@@ -62,6 +62,9 @@ spec:
                 {{- range .Values.builder.cacheFrom }}
                 --cache-from type=registry,ref={{ . }} \
                 {{- end }}
+                {{- if .Values.features }}
+                --additional-features '{{ .Values.features | toJson }}' \
+                {{- end }}
                 --cache-to type=inline \
                 --push
             env:
