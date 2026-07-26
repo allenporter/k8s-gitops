@@ -54,6 +54,17 @@ spec:
               echo "=== Step 5: Install Devcontainer CLI ==="
               npm install -g @devcontainers/cli
 
+              if [ ! -f .devcontainer/devcontainer.json ]; then
+                echo "Creating default .devcontainer/devcontainer.json..."
+                mkdir -p .devcontainer
+                cat << 'EOF' > .devcontainer/devcontainer.json
+{
+  "name": "{{ .Values.workspaceName }}",
+  "image": "mcr.microsoft.com/devcontainers/python:3.14-bookworm"
+}
+EOF
+              fi
+
               echo "=== Step 6: Build and Push Image with Inline Cache ==="
               devcontainer build \
                 --workspace-folder . \
