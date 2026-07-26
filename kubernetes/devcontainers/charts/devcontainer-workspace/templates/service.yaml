@@ -13,5 +13,13 @@ spec:
     targetPort: {{ .Values.global.sshTargetPort }}
     protocol: TCP
     name: ssh
+  - port: 52425
+    targetPort: 52425
+    protocol: TCP
+    name: antigravity-https
+  - port: 43635
+    targetPort: 43635
+    protocol: TCP
+    name: antigravity-http
   selector:
     app: ws-{{ .Values.workspaceName }}
