@@ -14,6 +14,15 @@ spec:
       template:
         spec:
           restartPolicy: Never
+          initContainers:
+          - name: dind
+            image: {{ .Values.global.builder.dindImage | quote }}
+            restartPolicy: Always
+            env:
+            - name: DOCKER_TLS_CERTDIR
+              value: ""
+            securityContext:
+              privileged: true
           containers:
           - name: builder
             image: {{ .Values.global.builder.image | quote }}
@@ -60,11 +69,4 @@ spec:
               value: tcp://localhost:2375
             - name: DOCKER_BUILDKIT
               value: "1"
-          - name: dind
-            image: {{ .Values.global.builder.dindImage | quote }}
-            env:
-            - name: DOCKER_TLS_CERTDIR
-              value: ""
-            securityContext:
-              privileged: true
 {{- end }}
