@@ -76,10 +76,6 @@ spec:
         - name: ssh-keys
           mountPath: /tmp/ssh-keys
           readOnly: true
-        {{- if .Values.sharedKeyring.enabled }}
-        - name: shared-keyring
-          mountPath: /home/vscode/.local/share/keyrings
-        {{- end }}
       {{- if .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml .Values.nodeSelector | nindent 8 }}
@@ -96,8 +92,3 @@ spec:
         secret:
           secretName: {{ .Values.global.sshKeySecret | quote }}
           defaultMode: 0o600
-      {{- if .Values.sharedKeyring.enabled }}
-      - name: shared-keyring
-        persistentVolumeClaim:
-          claimName: {{ .Values.sharedKeyring.claimName }}
-      {{- end }}
