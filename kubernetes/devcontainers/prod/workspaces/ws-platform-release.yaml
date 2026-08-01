@@ -37,7 +37,7 @@ spec:
       limits:
         memory: "8Gi"
     image:
-      repository: registry.k8s.mrv.thebends.org/devcontainers/home-assistant-core
+      repository: registry.k8s.mrv.thebends.org/devcontainers/icaldav
       tag: latest
     builder:
       enabled: true
