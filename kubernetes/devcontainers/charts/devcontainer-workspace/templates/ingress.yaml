@@ -18,6 +18,13 @@ spec:
   - host: ws-{{ .Values.workspaceName }}.{{ .Values.global.domainSuffix }}
     http:
       paths:
+      - path: /auth/callback
+        pathType: Prefix
+        backend:
+          service:
+            name: ws-{{ .Values.workspaceName }}
+            port:
+              number: 41031
       - path: /
         pathType: Prefix
         backend:
