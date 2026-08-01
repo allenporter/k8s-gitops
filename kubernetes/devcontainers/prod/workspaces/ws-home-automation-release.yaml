@@ -5,7 +5,7 @@ metadata:
   name: ws-home-automation
   namespace: devcontainers
   annotations:
-    devcontainer.purpose: "Home automation core, device integration SDKs (PyRainbird, Ring Keypad, Google Health API, Roborock, Nest SDM, GCal Sync), and calendar synchronization (iCal/iCalDAV)."
+    devcontainer.purpose: "Home automation core, device integration SDKs (PyRainbird, Ring Keypad, Google Health API, Roborock, Nest SDM, GCal Sync, Google Photos Library API), and calendar synchronization (iCal/iCalDAV)."
 spec:
   releaseName: ws-home-automation
   chart:
@@ -48,6 +48,8 @@ spec:
           directory: python-google-nest-sdm
         - url: https://github.com/allenporter/gcal_sync.git
           directory: gcal_sync
+        - url: https://github.com/allenporter/python-google-photos-library-api.git
+          directory: python-google-photos-library-api
     storage:
       size: 40Gi
     resources:
