@@ -5,18 +5,19 @@ metadata:
   name: ws-harness-dev
   namespace: devcontainers
   annotations:
-    devcontainer.purpose: "Autonomous AI agent harness development (ADK Coder), agent evaluation benchmarks, and custom Home Assistant ADK integration components."
+    devcontainer.purpose: "ADK coder harness development, test automation framework, and custom Home Assistant ADK components."
 spec:
   releaseName: ws-harness-dev
   chart:
     spec:
       chart: ./kubernetes/devcontainers/charts/devcontainer-workspace
-      interval: 30m
+      reconcileStrategy: Revision
+      interval: 1m
       sourceRef:
         kind: GitRepository
         name: flux-system
         namespace: flux-system
-  interval: 5m
+  interval: 1m
   install:
     disableWait: true
     remediation:
@@ -29,7 +30,7 @@ spec:
       url: https://github.com/allenporter/adk-coder.git
       directory: harness-dev
     storage:
-      size: 30Gi
+      size: 40Gi
     resources:
       requests:
         cpu: "1"

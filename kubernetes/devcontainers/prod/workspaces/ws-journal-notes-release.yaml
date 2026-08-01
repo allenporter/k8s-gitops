@@ -5,18 +5,19 @@ metadata:
   name: ws-journal-notes
   namespace: devcontainers
   annotations:
-    devcontainer.purpose: "Personal knowledge management, Journal Assistant processing tools, note automation, and Supernote e-ink device integrations."
+    devcontainer.purpose: "Personal journaling, notes management (Journal Assistant), and Supernote document parsing."
 spec:
   releaseName: ws-journal-notes
   chart:
     spec:
       chart: ./kubernetes/devcontainers/charts/devcontainer-workspace
-      interval: 30m
+      reconcileStrategy: Revision
+      interval: 1m
       sourceRef:
         kind: GitRepository
         name: flux-system
         namespace: flux-system
-  interval: 5m
+  interval: 1m
   install:
     disableWait: true
     remediation:
@@ -29,7 +30,7 @@ spec:
       url: https://github.com/allenporter/journal-assistant.git
       directory: journal-notes
     storage:
-      size: 20Gi
+      size: 40Gi
     resources:
       requests:
         cpu: "1"
