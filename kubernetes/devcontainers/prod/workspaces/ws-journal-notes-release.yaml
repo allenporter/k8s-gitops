@@ -29,6 +29,9 @@ spec:
     git:
       url: https://github.com/allenporter/journal-assistant.git
       directory: journal-notes
+      extraRepos:
+        - url: https://github.com/allenporter/supernote.git
+          directory: supernote
     storage:
       size: 40Gi
     resources:

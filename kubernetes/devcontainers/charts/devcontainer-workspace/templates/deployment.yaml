@@ -53,14 +53,21 @@ spec:
               - |
                 (
                   if [ ! -d /workspaces/{{ .Values.git.directory }}/.git ]; then
-                    echo "Cloning..."
+                    echo "Cloning primary repo..."
                     git clone {{ .Values.git.url }} /workspaces/{{ .Values.git.directory }}
                     chown -R vscode:vscode /workspaces/{{ .Values.git.directory }} || true
                   fi
+                  {{- range .Values.git.extraRepos }}
+                  if [ ! -d /workspaces/{{ .directory }}/.git ]; then
+                    echo "Cloning {{ .directory }}..."
+                    git clone {{ .url }} /workspaces/{{ .directory }}
+                    chown -R vscode:vscode /workspaces/{{ .directory }} || true
+                  fi
+                  {{- end }}
                 ) >/tmp/workspace-clone.log 2>&1 &
         volumeMounts:
         - name: workspace-volume
-          mountPath: /workspaces/{{ .Values.git.directory }}
+          mountPath: /workspaces
         - name: ssh-keys
           mountPath: /tmp/ssh-keys
           readOnly: true
