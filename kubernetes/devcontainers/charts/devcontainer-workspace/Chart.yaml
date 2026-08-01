@@ -1,6 +1,6 @@
 apiVersion: v2
 name: devcontainer-workspace
-description: A generic Helm chart for deploying persistent Kubernetes-native SSH workspaces with local builders.
+description: Helm chart for deploying a DevContainer workspace with SSH and Antigravity
 type: application
-version: 0.1.5
-appVersion: "1.0.0"
+version: 0.2.0
+appVersion: "1.1.0"
