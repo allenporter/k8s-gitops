@@ -33,7 +33,7 @@ spec:
     resources:
       requests:
         cpu: "1"
-        memory: "4Gi"
+        memory: "2Gi"
       limits:
         memory: "8Gi"
     image:

@@ -32,8 +32,8 @@ spec:
       size: 20Gi
     resources:
       requests:
-        cpu: "2"
-        memory: "8Gi"
+        cpu: "1"
+        memory: "2Gi"
       limits:
         memory: "16Gi"
     image:
