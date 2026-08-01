@@ -6,14 +6,14 @@ This directory manages lightweight, persistent, multi-repository development env
 
 ## 🌐 1. Grouped Workspaces & Web UI Access
 
-Workspaces are organized into 4 domain-focused groups. Each workspace is exposed over clean, port-free HTTPS via your internal Ingress controller (`nginx-internal` on `10.10.102.3`):
+Workspaces are organized into 4 domain-focused groups. Each workspace is exposed over clean, port-free HTTPS with valid Let's Encrypt TLS certificates via your internal Ingress controller (`nginx-internal` on `10.10.102.3`):
 
 | Workspace | Purpose / Grouped Repositories | Direct Internal HTTPS Access URL |
 | :--- | :--- | :--- |
-| **`ws-home-automation`** | `home-assistant-core`, `google-health-api`, `pyrainbird`, `home-assistant-ring-keypad`, `python-roborock`, `python-google-nest-sdm`, `gcal_sync`, `python-google-photos-library-api`, `icaldav`, `ical`, `home-assistant-datasets` | 👉 **[https://ws-home-automation.devcontainers.k8s.mrv.thebends.org/](https://ws-home-automation.devcontainers.k8s.mrv.thebends.org/)** |
-| **`ws-harness-dev`** | `adk-coder`, ADK harness framework, custom HA-ADK integration components | 👉 **[https://ws-harness-dev.devcontainers.k8s.mrv.thebends.org/](https://ws-harness-dev.devcontainers.k8s.mrv.thebends.org/)** |
-| **`ws-journal-notes`** | `journal-assistant`, `supernote` parser | 👉 **[https://ws-journal-notes.devcontainers.k8s.mrv.thebends.org/](https://ws-journal-notes.devcontainers.k8s.mrv.thebends.org/)** |
-| **`ws-platform`** | `k8s-gitops`, `devcontainer-features`, `repo-conformance` | 👉 **[https://ws-platform.devcontainers.k8s.mrv.thebends.org/](https://ws-platform.devcontainers.k8s.mrv.thebends.org/)** |
+| **`ws-home-automation`** | `home-assistant-core`, `google-health-api`, `pyrainbird`, `home-assistant-ring-keypad`, `python-roborock`, `python-google-nest-sdm`, `gcal_sync`, `python-google-photos-library-api`, `icaldav`, `ical`, `home-assistant-datasets` | 👉 **[https://ws-home-automation.k8s.mrv.thebends.org/](https://ws-home-automation.k8s.mrv.thebends.org/)** |
+| **`ws-harness-dev`** | `adk-coder`, ADK harness framework, custom HA-ADK integration components | 👉 **[https://ws-harness-dev.k8s.mrv.thebends.org/](https://ws-harness-dev.k8s.mrv.thebends.org/)** |
+| **`ws-journal-notes`** | `journal-assistant`, `supernote` parser | 👉 **[https://ws-journal-notes.k8s.mrv.thebends.org/](https://ws-journal-notes.k8s.mrv.thebends.org/)** |
+| **`ws-platform`** | `k8s-gitops`, `devcontainer-features`, `repo-conformance` | 👉 **[https://ws-platform.k8s.mrv.thebends.org/](https://ws-platform.k8s.mrv.thebends.org/)** |
 
 ---
 
@@ -28,7 +28,7 @@ Workspaces are organized into 4 domain-focused groups. Each workspace is exposed
 When authenticating a workspace for the first time:
 
 1. **Click "Sign In"**:
-   Open **[https://ws-home-automation.devcontainers.k8s.mrv.thebends.org/](https://ws-home-automation.devcontainers.k8s.mrv.thebends.org/)** in Chrome and click **Sign In**.
+   Open **[https://ws-home-automation.k8s.mrv.thebends.org/](https://ws-home-automation.k8s.mrv.thebends.org/)** in Chrome and click **Sign In**.
 
 2. **Get the Active OAuth URL & Port**:
    Run the `agy-auth` helper command in your Mac terminal:
@@ -55,7 +55,7 @@ When authenticating a workspace for the first time:
 |                                                                                 |
 |  - Controller: Ingress-Nginx Internal (ingressClassName: nginx-internal)        |
 |  - VIP Address: 10.10.102.3                                                     |
-|  - Domain Wildcard: *.devcontainers.k8s.mrv.thebends.org                         |
+|  - Domain Wildcard: *.k8s.mrv.thebends.org (Let's Encrypt TLS Validated)        |
 |  - TLS / HTTP2: SSL termination at edge; upstream proxy to port 52425 (HTTP)    |
 |  - Header Rewriting: nginx.ingress.kubernetes.io/upstream-vhost: "localhost:52425"|
 +---------------------------------------------------------------------------------+
@@ -73,8 +73,8 @@ When authenticating a workspace for the first time:
 ```
 
 ### Ingress & Port Mapping
-* **Clean Port-Free HTTPS**: Browsers access `https://ws-*.devcontainers.k8s.mrv.thebends.org/` over port `443`.
-* **Internal Ingress Only**: Uses `ingressClassName: nginx-internal` (`10.10.102.3`), ensuring zero exposure to the public internet.
+* **Clean Single-Level Domains**: Browsers access `https://ws-*.k8s.mrv.thebends.org/` over port `443`.
+* **Zero SSL Warnings**: Single-level subdomain `ws-*.k8s.mrv.thebends.org` natively matches your cluster's Let's Encrypt wildcard certificate!
 * **HTTP/2 Multiplexing**: Infinite concurrent SSE streams (`SubscribeToSidecars`, `JetboxSubscribeToState`, etc.) over a single TLS socket.
 * **Header Rewriting**: Uses `nginx.ingress.kubernetes.io/upstream-vhost: "localhost:52425"` for native Host header compliance without snippet security errors.
 
@@ -82,7 +82,7 @@ When authenticating a workspace for the first time:
 
 ## 📁 4. Multi-Repository Storage Setup
 
-Each workspace deployment mounts a 40Gi local NVMe volume at **`/workspaces`**. The Helm chart (`devcontainer-workspace` `v0.2.7`) automatically clones the primary repository and any extra repositories into subfolders under `/workspaces/`:
+Each workspace deployment mounts a 40Gi local NVMe volume at **`/workspaces`**. The Helm chart (`devcontainer-workspace` `v0.2.9`) automatically clones the primary repository and any extra repositories into subfolders under `/workspaces/`:
 
 ### Example HelmRelease Configuration (`ws-home-automation-release.yaml`):
 ```yaml

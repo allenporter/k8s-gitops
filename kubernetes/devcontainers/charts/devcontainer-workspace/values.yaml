@@ -3,7 +3,7 @@
 
 global:
   registry: registry.k8s.mrv.thebends.org
-  domainSuffix: devcontainers.k8s.mrv.thebends.org
+  domainSuffix: k8s.mrv.thebends.org
   storageClass: local-hostpath
   sshKeySecret: ssh-public-keys
   sshTargetPort: 2222
