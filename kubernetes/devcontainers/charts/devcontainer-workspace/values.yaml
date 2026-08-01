@@ -9,7 +9,6 @@ global:
   sshTargetPort: 2222
   builder:
     image: node:24-bookworm-slim
-    dindImage: docker:24-dind
     dindImage: docker:29-dind
 
 workspaceName: ""
@@ -17,7 +16,7 @@ git:
   url: ""
   directory: ""
 storage:
-  size: 10Gi
+  size: 20Gi
 image:
   repository: ""
   tag: latest
@@ -25,6 +24,16 @@ builder:
   enabled: true
   cacheFrom: []
 
-resources: {}
+resources:
+  requests:
+    cpu: "2"
+    memory: "8Gi"
+  limits:
+    memory: "16Gi"
+
+sharedKeyring:
+  enabled: true
+  claimName: antigravity-shared-keyring-pvc
+
 nodeSelector: {}
 tolerations: []
