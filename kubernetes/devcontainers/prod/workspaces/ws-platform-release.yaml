@@ -5,18 +5,19 @@ metadata:
   name: ws-platform
   namespace: devcontainers
   annotations:
-    devcontainer.purpose: "Kubernetes GitOps infrastructure, cluster Helm charts, DevContainer feature development, and repository conformance tooling."
+    devcontainer.purpose: "Kubernetes GitOps management (k8s-gitops), devcontainer-features development, and repo-conformance checks."
 spec:
   releaseName: ws-platform
   chart:
     spec:
       chart: ./kubernetes/devcontainers/charts/devcontainer-workspace
-      interval: 30m
+      reconcileStrategy: Revision
+      interval: 1m
       sourceRef:
         kind: GitRepository
         name: flux-system
         namespace: flux-system
-  interval: 5m
+  interval: 1m
   install:
     disableWait: true
     remediation:
@@ -29,7 +30,7 @@ spec:
       url: https://github.com/allenporter/k8s-gitops.git
       directory: platform
     storage:
-      size: 30Gi
+      size: 40Gi
     resources:
       requests:
         cpu: "1"

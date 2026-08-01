@@ -11,12 +11,13 @@ spec:
   chart:
     spec:
       chart: ./kubernetes/devcontainers/charts/devcontainer-workspace
-      interval: 30m
+      reconcileStrategy: Revision
+      interval: 1m
       sourceRef:
         kind: GitRepository
         name: flux-system
         namespace: flux-system
-  interval: 5m
+  interval: 1m
   install:
     disableWait: true
     remediation:
