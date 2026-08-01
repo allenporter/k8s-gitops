@@ -1,167 +1,142 @@
-# Kubernetes-Native Devcontainers Architecture & Design Guide
+# Kubernetes-Native Devcontainers Architecture & Operations Guide
 
-This directory manages lightweight, persistent development environments running directly inside your Kubernetes cluster. It completely replaces external tools like Devpod by leveraging GitOps (Flux), your local private registry (Zot), and standard SSH access over your local network/Tailscale.
+This directory manages lightweight, persistent, multi-repository development environments running directly inside your Kubernetes cluster. It leverages GitOps (Flux), an internal private registry (Zot), shared CephFS keyring authentication, native internal Ingress (`nginx-internal`), and direct SSH access.
 
 ---
 
-## 1. System Architecture (What We Have)
+## 🌐 1. Grouped Workspaces & Web UI Access
 
-Our devcontainer ecosystem is divided into two distinct parts: **The Build Pipeline** and **The Workspace Runtime**.
+Workspaces are organized into 4 domain-focused groups. Each workspace is exposed over clean, port-free HTTPS via your internal Ingress controller (`nginx-internal` on `10.10.102.3`):
+
+| Workspace | Purpose / Grouped Repositories | Direct Internal HTTPS Access URL |
+| :--- | :--- | :--- |
+| **`ws-home-automation`** | `home-assistant-core`, `google-health-api`, `pyrainbird`, `home-assistant-ring-keypad`, `python-roborock`, `python-google-nest-sdm`, `gcal_sync`, `python-google-photos-library-api`, `icaldav`, `ical`, `home-assistant-datasets` | 👉 **[https://ws-home-automation.devcontainers.k8s.mrv.thebends.org/](https://ws-home-automation.devcontainers.k8s.mrv.thebends.org/)** |
+| **`ws-harness-dev`** | `adk-coder`, ADK harness framework, custom HA-ADK integration components | 👉 **[https://ws-harness-dev.devcontainers.k8s.mrv.thebends.org/](https://ws-harness-dev.devcontainers.k8s.mrv.thebends.org/)** |
+| **`ws-journal-notes`** | `journal-assistant`, `supernote` parser | 👉 **[https://ws-journal-notes.devcontainers.k8s.mrv.thebends.org/](https://ws-journal-notes.devcontainers.k8s.mrv.thebends.org/)** |
+| **`ws-platform`** | `k8s-gitops`, `devcontainer-features`, `repo-conformance` | 👉 **[https://ws-platform.devcontainers.k8s.mrv.thebends.org/](https://ws-platform.devcontainers.k8s.mrv.thebends.org/)** |
+
+---
+
+## 🔑 2. Authentication & Single Sign-On (Shared CephFS Keyring)
+
+### Shared Keyring Architecture
+* All 4 workspace pods mount a shared ReadWriteMany (RWX) CephFS Persistent Volume Claim (**`antigravity-shared-keyring-pvc`**) at `/home/vscode/.local/share/keyrings`.
+* **Single Sign-On (SSO)**: Logging in **ONCE** on any workspace (e.g. `ws-home-automation`) saves `login.keyring` to CephFS, automatically authenticating all 4 DevContainers across all cluster nodes!
+
+### Initial Google OAuth Setup Workflow
+
+When authenticating a workspace for the first time:
+
+1. **Click "Sign In"**:
+   Open **[https://ws-home-automation.devcontainers.k8s.mrv.thebends.org/](https://ws-home-automation.devcontainers.k8s.mrv.thebends.org/)** in Chrome and click **Sign In**.
+
+2. **Get the Active OAuth URL & Port**:
+   Run the `agy-auth` helper command in your Mac terminal:
+   ```bash
+   KUBECONFIG=/Users/allen/Development/k8s-gitops/kubeconfig kubectl exec -n devcontainers deployment/ws-home-automation -- agy-auth
+   ```
+
+3. **Authorize & Port-Forward Callback**:
+   * Open the printed `https://accounts.google.com/o/oauth2/auth?...` URL in Chrome and log in.
+   * Note the callback port in `redirect_uri` (e.g. `41031`).
+   * Forward that port from your Mac terminal:
+     ```bash
+     KUBECONFIG=/Users/allen/Development/k8s-gitops/kubeconfig kubectl port-forward -n devcontainers deployment/ws-home-automation <CALLBACK_PORT>:<CALLBACK_PORT>
+     ```
+   * Chrome will automatically redirect to `http://localhost:<CALLBACK_PORT>/auth/callback?...` and complete your login!
+
+---
+
+## 🛠 3. System Architecture & Ingress Setup
 
 ```
 +---------------------------------------------------------------------------------+
-| BUILD PIPELINE (CronJob)                                                        |
+| INGRESS & NETWORKING LAYER                                                      |
 |                                                                                 |
-|  +--------------------------+                      +-------------------------+  |
-|  | Builder Container        |                      | DinD Container          |  |
-|  |                          |                      |                         |  |
-|  | 1. git clone             |                      | Runs Docker daemon      |  |
-|  | 2. devcontainer build    | ===[DOCKER_HOST]====>| performs layer builds   |  |
-|  |    --cache-to type=inline|                      |                         |  |
-|  +--------------------------+                      +-------------------------+  |
-|               ||                                                                |
-|               || [push image + cache]                                           |
-+---------------+-----------------------------------------------------------------+
-                ||
-                \/
-+--------------------------------------------+
-| Zot Private Registry (Secure HTTPS)        |
-| - URL: registry.k8s.mrv.thebends.org       |
-+--------------------------------------------+
-                ||
-                || [pull pre-built image]
-                \/
+|  - Controller: Ingress-Nginx Internal (ingressClassName: nginx-internal)        |
+|  - VIP Address: 10.10.102.3                                                     |
+|  - Domain Wildcard: *.devcontainers.k8s.mrv.thebends.org                         |
+|  - TLS / HTTP2: SSL termination at edge; upstream proxy to port 52425 (HTTP)    |
+|  - Header Rewriting: nginx.ingress.kubernetes.io/upstream-vhost: "localhost:52425"|
 +---------------------------------------------------------------------------------+
-| WORKSPACE RUNTIME (Deployment)                                                  |
+                                      ||
+                                      \/
++---------------------------------------------------------------------------------+
+| WORKSPACE POD RUNTIME                                                           |
 |                                                                                 |
-| - Image: registry.k8s.mrv.thebends.org/devcontainers/<repo>:latest              |
-| - Storage: local-hostpath NVMe SSD (Persistent mount to /workspaces)            |
-| - SSH: sshd running inside container namespace on port 2222                     |
-| - LoadBalancer: Cilium assigns LAN IP; CoreDNS maps hostname                    |
+|  - Storage: 40Gi local-hostpath NVMe SSD mounted at /workspaces                 |
+|  - Shared Keyring: ReadWriteMany CephFS PVC at /home/vscode/.local/share/keyrings|
+|  - Daemon: Antigravity language_server listening on 127.0.0.1:52424            |
+|  - Bridging: socat listening on 0.0.0.0:43635 -> 127.0.0.1:52424                |
+|  - SSH: OpenSSH daemon listening on port 2222                                    |
 +---------------------------------------------------------------------------------+
 ```
 
-### A. The Build Pipeline
-Instead of compiling Dockerfiles inside the workspace pod on boot, we use an asynchronous build pipeline in the cluster:
-*   **Suspended CronJobs**: Each workspace folder includes a `builder-cronjob.yaml`. The CronJobs are defined with `suspend: true` so they never run on a schedule. Instead, they act as GitOps templates.
-*   **Manual Trigger**: Rebuilds are triggered manually when you update a devcontainer configuration:
-    ```bash
-    kubectl create job build-ring-keypad-manual --from=cronjob/build-ring-keypad -n devcontainers
-    ```
-*   **Docker-in-Docker (DinD)**: The builder pod launches a standard Node.js image alongside a privileged `docker:dind` sidecar container. The builder clones the repository, installs the `@devcontainers/cli` natively, and runs the compilation.
-
-### B. Shared Inline Caching
-To avoid downloading packages and compilers (like Rust) from scratch every time:
-*   We use BuildKit's **Inline Caching** (`--cache-to type=inline` / `--cache-from type=registry,...`). This embeds the layer caching metadata directly inside the main image tag.
-*   **Cross-Project Reuse**: Caches are shared seamlessly across different projects. For example, building the `journal-assistant` devcontainer pulls the cached layers from the `ring-keypad` image, allowing the entire Rust compiler setup step to finish in exactly **1.8 seconds** instead of minutes.
-
-### C. The Workspace Runtime
-*   **Pre-Built Images**: The workspace Deployment pulls the fully compiled image directly from your Zot registry. Booting takes less than **0.1 seconds** because no setups or builds run on startup.
-*   **Persistent Storage**: Workspaces mount a `local-hostpath` Persistent Volume Claim at `/workspaces`. Installed Python virtualenvs, dependencies, and configuration files are preserved permanently on the node's local NVMe SSD.
-*   **sshd Entrypoint**: The container runs an entrypoint script that verifies if `sshd` is present. If missing, it installs it in 2 seconds via `apt-get` and launches the daemon on port `2222`. Your authorized keys are copied with strict `0600` permissions on startup.
-*   **Cilium & CoreDNS Integration**: Each workspace has a dedicated `LoadBalancer` Service. Cilium assigns it a stable LAN IP (e.g. `10.10.102.7`), and the `k8s-gateway` CoreDNS plugin automatically registers it as `<workspace-name>.devcontainers.k8s.mrv.thebends.org` for direct access.
+### Ingress & Port Mapping
+* **Clean Port-Free HTTPS**: Browsers access `https://ws-*.devcontainers.k8s.mrv.thebends.org/` over port `443`.
+* **Internal Ingress Only**: Uses `ingressClassName: nginx-internal` (`10.10.102.3`), ensuring zero exposure to the public internet.
+* **HTTP/2 Multiplexing**: Infinite concurrent SSE streams (`SubscribeToSidecars`, `JetboxSubscribeToState`, etc.) over a single TLS socket.
+* **Header Rewriting**: Uses `nginx.ingress.kubernetes.io/upstream-vhost: "localhost:52425"` for native Host header compliance without snippet security errors.
 
 ---
 
-## 2. Design Choices & Rationale
+## 📁 4. Multi-Repository Storage Setup
 
-*   **Local NVMe SSDs (`local-hostpath`) vs. Ceph**: Development activities (compilations, virtualenv creations, dependency resolutions) are highly disk-I/O intensive. Distributed network filesystems like Ceph introduce too much latency. Binding to the local SSD of the host node guarantees bare-metal performance.
-*   **Secure HTTPS Registry vs. ClusterIP**: We route registry traffic through Zot's secure external ingress domain (`registry.k8s.mrv.thebends.org`). This ensures standard TLS validation (via cert-manager Let's Encrypt), meaning Talos nodes (`containerd`) and the builder pods can pull and push images securely without configuring complex insecure registry mirrors in Talos machine configurations.
-*   **Inline Caching vs. Registry Cache Tags**: Pushing a separate cache tag using `--cache-to type=registry` utilizes custom OCI index schemas that many registries (including Zot) fail to write. Storing cache metadata inline inside the destination image is highly robust and universally compatible.
-*   **Suspended CronJobs vs. Operators**: Using suspended CronJobs keeps the cluster configuration declarative and transparent. Rebuild templates are version-controlled in git alongside the deployment manifests, requiring no central controller database or API state.
+Each workspace deployment mounts a 40Gi local NVMe volume at **`/workspaces`**. The Helm chart (`devcontainer-workspace` `v0.2.7`) automatically clones the primary repository and any extra repositories into subfolders under `/workspaces/`:
 
----
-
-## 3. Future Work & Boilerplate Reduction
-
-While the current setup is highly resilient, we can consider the following enhancements:
-
-### A. Pre-Baked Base Images (Strategy C)
-Instead of having every workspace container run `apt-get install -y openssh-server` on boot, we can build a custom "homelab-base-developer" base image that pre-bakes `sshd`, Git, Node, and common toolchains. Individual workspaces will inherit from this image (`FROM registry.k8s.mrv.thebends.org/devcontainers/homelab-base:latest`), making runtime startup completely instant.
-
-### B. Mutating Webhook (Boilerplate Injection)
-Currently, our `pod.yaml` deployments contain boilerplate configurations for SSH key copying, sshd checks, volume mounts, and shell args.
-*   **How it would work**: We could deploy a simple Mutating Admission Webhook (e.g. using Kyverno or a tiny Go controller).
-*   **Boilerplate Elimination**: When a developer creates a minimal workspace Deployment, the webhook intercepts the API call and dynamically injects the sshd containers, volume mounts, env variables, and SSH keys. The git repository manifests would reduce to a clean, 10-line YAML.
-
-### C. Helm Template Packaging
-Alternatively, we can wrap the workspace specifications into a single, localized Helm Chart. Adding a workspace would then require only defining a small `values.yaml` file:
+### Example HelmRelease Configuration (`ws-home-automation-release.yaml`):
 ```yaml
-workspaceName: journal-assistant
-gitUrl: https://github.com/allenporter/home-assistant-journal-assistant.git
-storageSize: 10Gi
+values:
+  workspaceName: home-automation
+  git:
+    url: https://github.com/home-assistant/core.git
+    directory: home-assistant-core
+    extraRepos:
+      - url: https://github.com/allenporter/google-health-api.git
+        directory: google-health-api
+      - url: https://github.com/allenporter/pyrainbird.git
+        directory: pyrainbird
+      - url: https://github.com/allenporter/home-assistant-ring-keypad.git
+        directory: home-assistant-ring-keypad
+      - url: https://github.com/allenporter/python-roborock.git
+        directory: python-roborock
+      - url: https://github.com/allenporter/python-google-nest-sdm.git
+        directory: python-google-nest-sdm
+      - url: https://github.com/allenporter/gcal_sync.git
+        directory: gcal_sync
+      - url: https://github.com/allenporter/python-google-photos-library-api.git
+        directory: python-google-photos-library-api
+      - url: https://github.com/allenporter/icaldav.git
+        directory: icaldav
+      - url: https://github.com/allenporter/ical.git
+        directory: ical
+      - url: https://github.com/allenporter/home-assistant-datasets.git
+        directory: home-assistant-datasets
 ```
 
 ---
 
-## 4. Running on GPU Machines
+## 🔧 5. Maintenance & Operations Commands
 
-To run a workspace on a GPU-enabled node, you simply need to request the GPU as a resource limit in your `values` block. The Kubernetes scheduler will automatically route the pod to a node that has the allocatable GPU resources:
+### Useful Taskfile & Kube Commands
 
-### NVIDIA GPU Workspace
-```yaml
-  values:
-    workspaceName: ml-workspace
-    git:
-      url: https://github.com/your-username/ml-project.git
-      directory: ml-project
-    resources:
-      limits:
-        nvidia.com/gpu: 1
-```
-
-### Intel GPU Workspace (QuickSync / Arc)
-```yaml
-  values:
-    workspaceName: video-transcode
-    git:
-      url: https://github.com/your-username/video-project.git
-      directory: video-project
-    resources:
-      limits:
-        gpu.intel.com/i915: 1
-```
-
----
-
-## 5. Workspace Maintenance & Operations (Taskfile)
-
-We provide a sub-Taskfile to simplify common operations and maintenance tasks for your devcontainer workspaces. You can run these commands from the root of the repository:
-
-*   **List all workspaces**: Prints the status of all HelmReleases, Pods, PVCs, and Services inside the `devcontainers` namespace:
-    ```bash
-    task devcontainers:list
-    ```
-*   **Reconcile updates**: Forces Flux to pull latest git commits and sync kustomizations instantly:
-    ```bash
-    task devcontainers:reconcile
-    ```
-*   **Trigger a manual build**: Compiles and pushes the devcontainer image for a specific workspace:
-    ```bash
-    task devcontainers:build WORKSPACE=<workspace-name>
-    # Example:
-    task devcontainers:build WORKSPACE=home-assistant-core
-    ```
-*   **Restart a workspace**: Performs a rolling restart of a specific workspace deployment:
-    ```bash
-    task devcontainers:restart WORKSPACE=<workspace-name>
-    ```
-*   **Clean up manual build jobs**: Deletes completed manual builder Jobs from the namespace:
-    ```bash
-    task devcontainers:cleanup
-    ```
-
----
-
-## 6. Alternatives Investigated & Downsides
-
-Before committing to this DIY GitOps model, we evaluated several popular devcontainer orchestration tools:
-
-*   **Coder**
-    *   *Downside*: Requires a heavy centralized control plane, PostgreSQL database, and licensing/enterprise boundaries. It bypassed GitOps, managing workspaces through imperative API calls and database states.
-*   **Daytona**
-    *   *Downside*: Tailored primarily for Virtual Machine and Cloud Provider backends (like AWS EC2/DigitalOcean). Its Kubernetes provider is immature and poorly documented, making it hard to integrate with local storage classes and native ingress controllers.
-*   **DevWorkspace Operator (Eclipse Che)**
-    *   *Downside*: Highly complex architecture requiring dozens of Custom Resource Definitions (CRDs). It enforces web-based IDE interfaces (like OpenShift Dev Spaces) and breaks native, direct SSH access over Tailscale/LAN.
-*   **Our DIY GitOps Model**
-    *   *Upside*: Extremely lightweight (zero additional controllers deployed). Workspace states and build configurations are fully declared in Git, managed by Flux, and leverage existing cluster infrastructure (Zot, Cilium, k8s-gateway, local SSDs).
+* **Check Pods & Ingress Status**:
+  ```bash
+  KUBECONFIG=./kubeconfig kubectl get pods,ingress -n devcontainers
+  ```
+* **Check Logins / Auth URLs**:
+  ```bash
+  KUBECONFIG=./kubeconfig kubectl exec -n devcontainers deployment/ws-home-automation -- agy-auth
+  ```
+* **Inspect Antigravity Daemon Logs**:
+  ```bash
+  KUBECONFIG=./kubeconfig kubectl exec -n devcontainers deployment/ws-home-automation -- tail -n 50 /home/vscode/.gemini/antigravity/language_server.log
+  ```
+* **Trigger Cluster Image Builder CronJob**:
+  ```bash
+  KUBECONFIG=./kubeconfig kubectl create job --from=cronjob/build-home-automation build-home-automation-manual -n devcontainers
+  ```
+* **Force Reconcile Flux GitOps**:
+  ```bash
+  KUBECONFIG=./kubeconfig flux reconcile kustomization devcontainers --with-source
+  ```
