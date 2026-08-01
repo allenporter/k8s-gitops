@@ -15,3 +15,7 @@ spec:
   - name: flux-system
   - name: storage
   - name: network
+  postBuild:
+    substituteFrom:
+    - kind: ConfigMap
+      name: network-config
