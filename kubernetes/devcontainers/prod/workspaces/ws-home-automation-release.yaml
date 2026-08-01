@@ -5,7 +5,7 @@ metadata:
   name: ws-home-automation
   namespace: devcontainers
   annotations:
-    devcontainer.purpose: "Home automation core, device integration SDKs (PyRainbird, Ring Keypad, Google Health API), and calendar synchronization (iCal/iCalDAV)."
+    devcontainer.purpose: "Home automation core, device integration SDKs (PyRainbird, Ring Keypad, Google Health API, Roborock, Nest SDM, GCal Sync), and calendar synchronization (iCal/iCalDAV)."
 spec:
   releaseName: ws-home-automation
   chart:
@@ -42,6 +42,12 @@ spec:
           directory: ical
         - url: https://github.com/allenporter/home-assistant-datasets.git
           directory: home-assistant-datasets
+        - url: https://github.com/allenporter/python-roborock.git
+          directory: python-roborock
+        - url: https://github.com/allenporter/python-google-nest-sdm.git
+          directory: python-google-nest-sdm
+        - url: https://github.com/allenporter/gcal_sync.git
+          directory: gcal_sync
     storage:
       size: 40Gi
     resources:
