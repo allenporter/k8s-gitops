@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: ws-home-automation
   namespace: devcontainers
+  annotations:
+    devcontainer.purpose: "Home automation core, device integration SDKs (PyRainbird, Ring Keypad, Google Health API), and calendar synchronization (iCal/iCalDAV)."
 spec:
   releaseName: ws-home-automation
   chart:
