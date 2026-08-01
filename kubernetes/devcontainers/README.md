@@ -1,6 +1,6 @@
 # Kubernetes-Native Devcontainers Architecture & Operations Guide
 
-This directory manages lightweight, persistent, multi-repository development environments running directly inside your Kubernetes cluster. It leverages GitOps (Flux), an internal private registry (Zot), shared CephFS keyring authentication, native internal Ingress (`nginx-internal`), and direct SSH access.
+This directory manages lightweight, persistent, multi-repository development environments running directly inside your Kubernetes cluster. It leverages GitOps (Flux), an internal private registry (Zot), native internal Ingress (`nginx-internal`), and direct SSH access.
 
 ---
 
@@ -17,15 +17,15 @@ Workspaces are organized into 4 domain-focused groups. Each workspace is exposed
 
 ---
 
-## 🔑 2. Authentication & Single Sign-On (Shared CephFS Keyring)
+## 🔑 2. Authentication & Keyring Storage
 
-### Shared Keyring Architecture
-* All 4 workspace pods mount a shared ReadWriteMany (RWX) CephFS Persistent Volume Claim (**`antigravity-shared-keyring-pvc`**) at `/home/vscode/.local/share/keyrings`.
-* **Single Sign-On (SSO)**: Logging in **ONCE** on any workspace (e.g. `ws-home-automation`) saves `login.keyring` to CephFS, automatically authenticating all 4 DevContainers across all cluster nodes!
+### Isolated Local Keyrings
+* Each workspace pod maintains its own encrypted secret keyring (`login.keyring`) stored on its high-speed local 40Gi NVMe volume (`local-hostpath`).
+* This eliminates cross-node CephFS network dependencies and ensures complete credential isolation between development environments.
 
-### Initial Google OAuth Setup Workflow
+### Google OAuth Setup Workflow
 
-When authenticating a workspace for the first time:
+When authenticating a workspace:
 
 1. **Click "Sign In"**:
    Open **[https://ws-home-automation.k8s.mrv.thebends.org/](https://ws-home-automation.k8s.mrv.thebends.org/)** in Chrome and click **Sign In**.
@@ -65,7 +65,6 @@ When authenticating a workspace for the first time:
 | WORKSPACE POD RUNTIME                                                           |
 |                                                                                 |
 |  - Storage: 40Gi local-hostpath NVMe SSD mounted at /workspaces                 |
-|  - Shared Keyring: ReadWriteMany CephFS PVC at /home/vscode/.local/share/keyrings|
 |  - Daemon: Antigravity language_server listening on 127.0.0.1:52424            |
 |  - Bridging: socat listening on 0.0.0.0:43635 -> 127.0.0.1:52424                |
 |  - SSH: OpenSSH daemon listening on port 2222                                    |
@@ -82,7 +81,7 @@ When authenticating a workspace for the first time:
 
 ## 📁 4. Multi-Repository Storage Setup
 
-Each workspace deployment mounts a 40Gi local NVMe volume at **`/workspaces`**. The Helm chart (`devcontainer-workspace` `v0.2.9`) automatically clones the primary repository and any extra repositories into subfolders under `/workspaces/`:
+Each workspace deployment mounts a 40Gi local NVMe volume at **`/workspaces`**. The Helm chart (`devcontainer-workspace` `v0.3.1`) automatically clones the primary repository and any extra repositories into subfolders under `/workspaces/`:
 
 ### Example HelmRelease Configuration (`ws-home-automation-release.yaml`):
 ```yaml

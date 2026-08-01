@@ -32,8 +32,8 @@ resources:
     memory: "16Gi"
 
 sharedKeyring:
-  enabled: true
-  claimName: antigravity-shared-keyring-pvc
+  enabled: false
+  claimName: ""
 
 nodeSelector: {}
 tolerations: []
