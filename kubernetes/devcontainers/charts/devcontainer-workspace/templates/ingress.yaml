@@ -14,7 +14,7 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header Host localhost:52425;
 spec:
-  ingressClassName: nginx
+  ingressClassName: external
   rules:
   - host: ws-{{ .Values.workspaceName }}.{{ .Values.global.domainSuffix }}
     http:
