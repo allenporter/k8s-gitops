@@ -15,5 +15,9 @@ spec:
     targetPort: 43635
     protocol: TCP
     name: antigravity-http
+  - port: 41031
+    targetPort: 41031
+    protocol: TCP
+    name: oauth-callback
   selector:
     app: ws-{{ .Values.workspaceName }}
