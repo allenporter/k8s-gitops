@@ -44,12 +44,7 @@ spec:
             sudo ssh-keygen -A
             sudo mkdir -p /var/run/sshd
 
-            if [ ! -x /usr/local/bin/start-antigravity ]; then
-              echo "Installing Antigravity daemon feature..."
-              curl -sSL https://raw.githubusercontent.com/allenporter/devcontainer-features/main/src/antigravity/install.sh | PORT=52425 sudo -E bash
-            fi
-
-            if ! pgrep -f language_server >/dev/null 2>&1; then
+            if [ -x /usr/local/bin/start-antigravity ] && ! pgrep -f language_server >/dev/null 2>&1; then
               sudo -u vscode /usr/local/bin/start-antigravity >/dev/null 2>&1 &
             fi
 
