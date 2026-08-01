@@ -37,6 +37,7 @@ spec:
       limits:
         memory: "8Gi"
     image:
+      repository: registry.k8s.mrv.thebends.org/devcontainers/repo-conformance
       tag: latest
     builder:
       enabled: true
