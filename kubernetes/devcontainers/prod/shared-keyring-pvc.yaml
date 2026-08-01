@@ -6,8 +6,8 @@ metadata:
   namespace: devcontainers
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: local-hostpath
+    - ReadWriteMany
+  storageClassName: ceph-filesystem
   resources:
     requests:
       storage: 1Gi
