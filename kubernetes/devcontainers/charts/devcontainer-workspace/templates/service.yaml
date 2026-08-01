@@ -13,6 +13,14 @@ spec:
     targetPort: {{ .Values.global.sshTargetPort }}
     protocol: TCP
     name: ssh
+  - port: 80
+    targetPort: 52425
+    protocol: TCP
+    name: http
+  - port: 443
+    targetPort: 52425
+    protocol: TCP
+    name: https
   - port: 52425
     targetPort: 52425
     protocol: TCP
