@@ -24,6 +24,9 @@ builder:
   enabled: true
   cacheFrom: []
 
+features:
+  registry.k8s.mrv.thebends.org/devcontainers/antigravity:1: {}
+
 resources:
   requests:
     cpu: "1"
