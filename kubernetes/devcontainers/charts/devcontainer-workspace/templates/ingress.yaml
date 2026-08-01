@@ -5,6 +5,7 @@ metadata:
   name: ws-{{ .Values.workspaceName }}
   namespace: {{ .Release.Namespace }}
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
     coredns.io/hostname: ws-{{ .Values.workspaceName }}.{{ .Values.global.domainSuffix }}
     ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "86400"
@@ -14,6 +15,10 @@ metadata:
     nginx.ingress.kubernetes.io/upstream-vhost: "localhost:52425"
 spec:
   ingressClassName: nginx-internal
+  tls:
+  - hosts:
+    - ws-{{ .Values.workspaceName }}.{{ .Values.global.domainSuffix }}
+    secretName: ws-{{ .Values.workspaceName }}-tls
   rules:
   - host: ws-{{ .Values.workspaceName }}.{{ .Values.global.domainSuffix }}
     http:
