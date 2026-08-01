@@ -2,5 +2,5 @@ apiVersion: v2
 name: devcontainer-workspace
 description: Helm chart for deploying a DevContainer workspace with SSH and Antigravity
 type: application
-version: 0.2.3
+version: 0.2.4
 appVersion: "1.2.1"
