@@ -11,7 +11,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "86400"
     nginx.ingress.kubernetes.io/proxy-buffering: "off"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-    nginx.ingress.kubernetes.io/upstream-vhost: "localhost:52425"
+    nginx.ingress.kubernetes.io/upstream-vhost: "localhost:43635"
 spec:
   ingressClassName: nginx-internal
   rules:
@@ -24,4 +24,4 @@ spec:
           service:
             name: ws-{{ .Values.workspaceName }}
             port:
-              number: 52425
+              number: 43635
