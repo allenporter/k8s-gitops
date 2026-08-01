@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: ws-platform
   namespace: devcontainers
+  annotations:
+    devcontainer.purpose: "Kubernetes GitOps infrastructure, cluster Helm charts, DevContainer feature development, and repository conformance tooling."
 spec:
   releaseName: ws-platform
   chart:

@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: ws-journal-notes
   namespace: devcontainers
+  annotations:
+    devcontainer.purpose: "Personal knowledge management, Journal Assistant processing tools, note automation, and Supernote e-ink device integrations."
 spec:
   releaseName: ws-journal-notes
   chart:

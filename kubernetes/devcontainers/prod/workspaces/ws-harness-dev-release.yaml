@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: ws-harness-dev
   namespace: devcontainers
+  annotations:
+    devcontainer.purpose: "Autonomous AI agent harness development (ADK Coder), agent evaluation benchmarks, and custom Home Assistant ADK integration components."
 spec:
   releaseName: ws-harness-dev
   chart:
