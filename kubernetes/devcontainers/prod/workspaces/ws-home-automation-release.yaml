@@ -34,8 +34,8 @@ spec:
           directory: google-health-api
         - url: https://github.com/allenporter/pyrainbird.git
           directory: pyrainbird
-        - url: https://github.com/allenporter/ring-keypad.git
-          directory: ring-keypad
+        - url: https://github.com/allenporter/home-assistant-ring-keypad.git
+          directory: home-assistant-ring-keypad
         - url: https://github.com/allenporter/icaldav.git
           directory: icaldav
         - url: https://github.com/allenporter/ical.git
