@@ -31,9 +31,5 @@ resources:
   limits:
     memory: "16Gi"
 
-sharedKeyring:
-  enabled: false
-  claimName: ""
-
 nodeSelector: {}
 tolerations: []
