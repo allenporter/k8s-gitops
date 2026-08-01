@@ -5,6 +5,7 @@ metadata:
   name: ws-{{ .Values.workspaceName }}
   namespace: {{ .Release.Namespace }}
   annotations:
+    coredns.io/hostname: ws-{{ .Values.workspaceName }}.{{ .Values.global.domainSuffix }}
     ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "86400"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "86400"
