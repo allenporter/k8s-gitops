@@ -30,10 +30,8 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
         - |
-            if [ -x /usr/local/bin/start-antigravity ]; then
-              if ! pgrep -f language_server >/dev/null 2>&1; then
-                bash /usr/local/bin/start-antigravity >/tmp/start-antigravity.log 2>&1 &
-              fi
+            if [ -x /usr/local/bin/start-antigravity ] && ! pgrep -x language_server >/dev/null 2>&1; then
+              bash /usr/local/bin/start-antigravity >/tmp/start-antigravity.log 2>&1 &
             fi
 
             if ! command -v sshd >/dev/null 2>&1; then
