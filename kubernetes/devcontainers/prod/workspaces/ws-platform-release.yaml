@@ -5,7 +5,7 @@ metadata:
   name: ws-platform
   namespace: devcontainers
   annotations:
-    devcontainer.purpose: "Kubernetes GitOps management (k8s-gitops), devcontainer-features development, and repo-conformance checks."
+    devcontainer.purpose: "Platform engineering: k8s-gitops, devcontainer-features, and repo-conformance."
 spec:
   releaseName: ws-platform
   chart:
@@ -28,7 +28,7 @@ spec:
     workspaceName: platform
     git:
       url: https://github.com/allenporter/k8s-gitops.git
-      directory: platform
+      directory: k8s-gitops
       extraRepos:
         - url: https://github.com/allenporter/devcontainer-features.git
           directory: devcontainer-features
@@ -41,9 +41,9 @@ spec:
         cpu: "1"
         memory: "2Gi"
       limits:
-        memory: "8Gi"
+        memory: "16Gi"
     image:
-      repository: registry.k8s.mrv.thebends.org/devcontainers/icaldav
+      repository: registry.k8s.mrv.thebends.org/devcontainers/k8s-gitops
       tag: latest
     builder:
       enabled: true

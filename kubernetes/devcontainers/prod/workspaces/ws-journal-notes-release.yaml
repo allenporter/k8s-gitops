@@ -5,7 +5,7 @@ metadata:
   name: ws-journal-notes
   namespace: devcontainers
   annotations:
-    devcontainer.purpose: "Personal journaling, notes management (Journal Assistant), and Supernote document parsing."
+    devcontainer.purpose: "Journal assistant and Supernote document parsing tools."
 spec:
   releaseName: ws-journal-notes
   chart:
@@ -28,7 +28,7 @@ spec:
     workspaceName: journal-notes
     git:
       url: https://github.com/allenporter/journal-assistant.git
-      directory: journal-notes
+      directory: journal-assistant
       extraRepos:
         - url: https://github.com/allenporter/supernote.git
           directory: supernote
@@ -41,7 +41,7 @@ spec:
       limits:
         memory: "16Gi"
     image:
-      repository: registry.k8s.mrv.thebends.org/devcontainers/home-assistant-journal-assistant
+      repository: registry.k8s.mrv.thebends.org/devcontainers/journal-assistant
       tag: latest
     builder:
       enabled: true
