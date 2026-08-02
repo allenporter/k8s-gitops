@@ -43,7 +43,7 @@ spec:
       limits:
         memory: "16Gi"
     image:
-      repository: registry.k8s.mrv.thebends.org/devcontainers/k8s-gitops
+      repository: registry.k8s.mrv.thebends.org/devcontainers/platform
       tag: latest
     builder:
       enabled: true
