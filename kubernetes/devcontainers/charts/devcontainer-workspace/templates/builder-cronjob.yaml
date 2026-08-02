@@ -30,8 +30,8 @@ spec:
             args:
             - |
               set -e
-              echo "=== Step 1: Install Git, Docker CLI, and Curl ==="
-              apt-get update && apt-get install -y git docker.io curl
+              echo "=== Step 1: Install Git, Docker CLI, Curl, and JQ ==="
+              apt-get update && apt-get install -y git docker.io curl jq
 
               echo "=== Step 2: Install Docker Buildx Plugin ==="
               mkdir -p /root/.docker/cli-plugins
@@ -48,16 +48,25 @@ spec:
               docker buildx create --use --name mybuilder
 
               echo "=== Step 4: Clone repository ==="
-              git clone --depth 1 {{ .Values.git.url }} /tmp/build
-              cd /tmp/build
+              mkdir -p /tmp/build
+              git clone --depth 1 {{ .Values.git.url }} /tmp/build/{{ .Values.git.directory }}
+              cd /tmp/build/{{ .Values.git.directory }}
 
-              echo "=== Step 5: Install Devcontainer CLI ==="
+              echo "=== Step 5: Install Devcontainer CLI & Enforce workspaceFolder ==="
               npm install -g @devcontainers/cli
 
-              if [ ! -f .devcontainer/devcontainer.json ]; then
+              DEVCONTAINER_JSON=".devcontainer/devcontainer.json"
+              if [ ! -f "$DEVCONTAINER_JSON" ]; then
                 echo "Creating default .devcontainer/devcontainer.json..."
                 mkdir -p .devcontainer
-                printf '{\n  "name": "%s",\n  "image": "%s"\n}\n' "{{ .Values.workspaceName }}" "mcr.microsoft.com/devcontainers/python:3.14-bookworm" > .devcontainer/devcontainer.json
+                printf '{\n  "name": "%s",\n  "image": "%s",\n  "workspaceFolder": "/workspaces/%s"\n}\n' \
+                  "{{ .Values.workspaceName }}" \
+                  "mcr.microsoft.com/devcontainers/python:3.14-bookworm" \
+                  "{{ .Values.git.directory }}" > "$DEVCONTAINER_JSON"
+              else
+                echo "Enforcing workspaceFolder=/workspaces/{{ .Values.git.directory }} in existing devcontainer.json..."
+                tmp_json=$(mktemp)
+                jq '. + {"workspaceFolder": "/workspaces/{{ .Values.git.directory }}"}' "$DEVCONTAINER_JSON" > "$tmp_json" && mv "$tmp_json" "$DEVCONTAINER_JSON"
               fi
 
               echo "=== Step 6: Build and Push Image with Inline Cache ==="
