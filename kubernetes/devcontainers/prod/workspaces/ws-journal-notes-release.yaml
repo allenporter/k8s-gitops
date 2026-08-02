@@ -41,7 +41,7 @@ spec:
       limits:
         memory: "16Gi"
     image:
-      repository: registry.k8s.mrv.thebends.org/devcontainers/journal-assistant
+      repository: registry.k8s.mrv.thebends.org/devcontainers/journal-notes
       tag: latest
     builder:
       enabled: true
