@@ -38,7 +38,7 @@ spec:
       limits:
         memory: "16Gi"
     image:
-      repository: registry.k8s.mrv.thebends.org/devcontainers/home-assistant-ring-keypad
+      repository: registry.k8s.mrv.thebends.org/devcontainers/harness-dev
       tag: latest
     builder:
       enabled: true
