@@ -45,7 +45,7 @@ spec:
             sudo mkdir -p /var/run/sshd
 
             if [ -x /usr/local/bin/start-antigravity ] && ! pgrep -f language_server >/dev/null 2>&1; then
-              sudo -u vscode /usr/local/bin/start-antigravity >/dev/null 2>&1 &
+              /usr/local/bin/start-antigravity >/dev/null 2>&1 &
             fi
 
             sudo /usr/sbin/sshd -D -p {{ .Values.global.sshTargetPort }}
