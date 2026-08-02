@@ -56,6 +56,16 @@ spec:
               - -c
               - |
                 (
+                  if [ -d /workspaces/.git ]; then
+                    echo "Cleaning up top-level image build leftover files in /workspaces..."
+                    find /workspaces -maxdepth 1 -not -name "." -not -name ".." \
+                      -not -name "{{ .Values.git.directory }}" \
+                      {{- range .Values.git.extraRepos }}
+                      -not -name "{{ .directory }}" \
+                      {{- end }}
+                      -exec rm -rf {} + || true
+                  fi
+
                   if [ ! -d /workspaces/{{ .Values.git.directory }}/.git ]; then
                     echo "Cloning primary repo..."
                     git clone {{ .Values.git.url }} /workspaces/{{ .Values.git.directory }}
