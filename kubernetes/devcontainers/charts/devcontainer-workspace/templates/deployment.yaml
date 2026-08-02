@@ -31,7 +31,7 @@ spec:
         args:
         - |
             if [ -x /usr/local/bin/start-antigravity ] && ! pgrep -f language_server >/dev/null 2>&1; then
-              /usr/local/bin/start-antigravity >/dev/null 2>&1 &
+              bash /usr/local/bin/start-antigravity >/tmp/start-antigravity.log 2>&1 &
             fi
 
             if ! command -v sshd >/dev/null 2>&1; then
