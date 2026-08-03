@@ -27,7 +27,6 @@ spec:
         - sh
         - -c
         - |
-          mkdir -p /workspaces/.persistent/keyrings /workspaces/.persistent/antigravity
           if [ ! -d /workspaces/{{ .Values.git.directory }}/.git ]; then
             echo "Cloning primary repo {{ .Values.git.directory }}..."
             git clone {{ .Values.git.url }} /workspaces/{{ .Values.git.directory }}
