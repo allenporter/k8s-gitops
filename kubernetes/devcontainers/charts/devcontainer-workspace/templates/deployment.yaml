@@ -18,15 +18,26 @@ spec:
       labels:
         app: ws-{{ .Values.workspaceName }}
     spec:
+      securityContext:
+        fsGroup: 1000
       initContainers:
-      - name: init-volume-permissions
-        image: busybox:latest
+      - name: init-git-repos
+        image: alpine/git:latest
         command:
         - sh
         - -c
         - |
           mkdir -p /workspaces/.persistent/keyrings /workspaces/.persistent/antigravity
-          chmod -R 777 /workspaces
+          if [ ! -d /workspaces/{{ .Values.git.directory }}/.git ]; then
+            echo "Cloning primary repo {{ .Values.git.directory }}..."
+            git clone {{ .Values.git.url }} /workspaces/{{ .Values.git.directory }}
+          fi
+          {{- range .Values.git.extraRepos }}
+          if [ ! -d /workspaces/{{ .directory }}/.git ]; then
+            echo "Cloning extra repo {{ .directory }}..."
+            git clone {{ .url }} /workspaces/{{ .directory }}
+          fi
+          {{- end }}
         volumeMounts:
         - name: workspace-volume
           mountPath: /workspaces
@@ -42,41 +53,10 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
         - |
-            if [ -x /usr/local/bin/start-antigravity ] && ! pgrep -x language_server >/dev/null 2>&1; then
-              bash /usr/local/bin/start-antigravity >/tmp/start-antigravity.log 2>&1 &
+            if [ -x /usr/local/bin/start-antigravity ]; then
+              /usr/local/bin/start-antigravity >/tmp/start-antigravity.log 2>&1 &
             fi
-
-            CURRENT_USER=$(whoami)
-            USER_HOME=$(eval echo "~${CURRENT_USER}")
-            sudo mkdir -p "${USER_HOME}/.ssh"
-            sudo cp /tmp/ssh-keys/authorized_keys "${USER_HOME}/.ssh/authorized_keys" 2>/dev/null || true
-            sudo chown -R "${CURRENT_USER}" "${USER_HOME}/.ssh" 2>/dev/null || true
-            sudo chmod 700 "${USER_HOME}/.ssh" 2>/dev/null || true
-            sudo chmod 600 "${USER_HOME}/.ssh/authorized_keys" 2>/dev/null || true
-
             sleep infinity
-        lifecycle:
-          postStart:
-            exec:
-              command:
-              - /bin/sh
-              - -c
-              - |
-                (
-                  CURRENT_USER=$(whoami)
-                  if [ ! -d /workspaces/{{ .Values.git.directory }}/.git ]; then
-                    echo "Cloning primary repo..."
-                    git clone {{ .Values.git.url }} /workspaces/{{ .Values.git.directory }}
-                    chown -R "${CURRENT_USER}" /workspaces/{{ .Values.git.directory }} || true
-                  fi
-                  {{- range .Values.git.extraRepos }}
-                  if [ ! -d /workspaces/{{ .directory }}/.git ]; then
-                    echo "Cloning {{ .directory }}..."
-                    git clone {{ .url }} /workspaces/{{ .directory }}
-                    chown -R "${CURRENT_USER}" /workspaces/{{ .directory }} || true
-                  fi
-                  {{- end }}
-                ) >/tmp/workspace-clone.log 2>&1 &
         volumeMounts:
         - name: workspace-volume
           mountPath: /workspaces
@@ -86,9 +66,6 @@ spec:
         - name: workspace-volume
           subPath: .persistent/antigravity
           mountPath: /home/vscode/.gemini/antigravity
-        - name: ssh-keys
-          mountPath: /tmp/ssh-keys
-          readOnly: true
       - name: ingress-bridge-sidecar
         image: alpine/socat:latest
         command:
@@ -111,7 +88,3 @@ spec:
       - name: workspace-volume
         persistentVolumeClaim:
           claimName: ws-{{ .Values.workspaceName }}-pvc
-      - name: ssh-keys
-        secret:
-          secretName: {{ .Values.global.sshKeySecret | quote }}
-          defaultMode: 0o600
