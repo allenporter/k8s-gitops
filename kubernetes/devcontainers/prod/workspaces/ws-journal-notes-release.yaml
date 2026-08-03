@@ -39,7 +39,7 @@ spec:
         - url: https://github.com/allenporter/supernote.git
           directory: supernote
     storage:
-      size: 40Gi
+      size: 20Gi
     resources:
       requests:
         cpu: "1"

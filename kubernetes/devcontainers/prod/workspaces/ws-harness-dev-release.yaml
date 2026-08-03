@@ -36,7 +36,7 @@ spec:
       url: https://github.com/allenporter/adk-coder.git
       directory: harness-dev
     storage:
-      size: 40Gi
+      size: 30Gi
     resources:
       requests:
         cpu: "1"
