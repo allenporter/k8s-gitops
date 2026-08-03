@@ -41,7 +41,7 @@ spec:
         - url: https://github.com/allenporter/repo-conformance.git
           directory: repo-conformance
     storage:
-      size: 40Gi
+      size: 30Gi
     resources:
       requests:
         cpu: "1"
