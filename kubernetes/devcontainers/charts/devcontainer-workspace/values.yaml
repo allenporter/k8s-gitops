@@ -1,15 +1,19 @@
-# Default values for devcontainer-workspace.
-# This is a YAML-formatted file.
+# Generic default values for devcontainer-workspace chart.
+# Cluster-specific values belong in HelmRelease manifests.
 
 global:
-  registry: registry.k8s.mrv.thebends.org
-  domainSuffix: k8s.mrv.thebends.org
+  registry: ""
+  domainSuffix: ""
   storageClass: local-hostpath
   sshKeySecret: ssh-public-keys
   sshTargetPort: 2222
   builder:
     image: node:24-bookworm-slim
     dindImage: docker:29-dind
+
+ingress:
+  className: nginx-internal
+  clusterIssuer: letsencrypt
 
 workspaceName: ""
 git:
@@ -25,7 +29,6 @@ builder:
   cacheFrom: []
 
 features:
-  registry.k8s.mrv.thebends.org/devcontainers/antigravity:1: {}
   ghcr.io/devcontainers/features/sshd:1: {}
 
 resources:
