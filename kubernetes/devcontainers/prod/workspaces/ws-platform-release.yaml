@@ -26,6 +26,12 @@ spec:
     disableWait: true
   values:
     workspaceName: platform
+    global:
+      domainSuffix: "${name_service_dns_domain:=k8s.mrv.thebends.org}"
+      registry: "registry.k8s.mrv.thebends.org"
+      sshKeySecret: "ssh-public-keys"
+    features:
+      registry.k8s.mrv.thebends.org/devcontainers/antigravity:1: {}
     git:
       url: https://github.com/allenporter/k8s-gitops.git
       directory: k8s-gitops
