@@ -73,7 +73,7 @@ spec:
         image: alpine/socat:latest
         command:
         - socat
-        - "TCP-LISTEN:43635,fork,bind=0.0.0.0,reuseaddr"
+        - "TCP-LISTEN:43635,fork,reuseaddr,bind=0.0.0.0"
         - "TCP:127.0.0.1:52424"
         resources:
           limits:
