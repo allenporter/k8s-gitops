@@ -1,5 +1,5 @@
 # Generic default values for devcontainer-workspace chart.
-# Cluster-specific values belong in HelmRelease manifests.
+# Cluster-specific values and feature lists belong in HelmRelease manifests.
 
 global:
   registry: ""
@@ -28,8 +28,7 @@ builder:
   enabled: true
   cacheFrom: []
 
-features:
-  ghcr.io/devcontainers/features/sshd:1: {}
+features: {}
 
 resources:
   requests:
