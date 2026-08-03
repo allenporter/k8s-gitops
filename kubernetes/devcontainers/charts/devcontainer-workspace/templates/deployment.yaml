@@ -46,21 +46,19 @@ spec:
               bash /usr/local/bin/start-antigravity >/tmp/start-antigravity.log 2>&1 &
             fi
 
-            if ! command -v sshd >/dev/null 2>&1; then
-              echo "sshd not found. Installing openssh-server..."
-              sudo apt-get update && sudo apt-get install -y openssh-server
-            fi
             CURRENT_USER=$(whoami)
             USER_HOME=$(eval echo "~${CURRENT_USER}")
             sudo mkdir -p "${USER_HOME}/.ssh"
-            sudo cp /tmp/ssh-keys/authorized_keys "${USER_HOME}/.ssh/authorized_keys"
-            sudo chown -R "${CURRENT_USER}" "${USER_HOME}/.ssh"
-            sudo chmod 700 "${USER_HOME}/.ssh"
-            sudo chmod 600 "${USER_HOME}/.ssh/authorized_keys"
-            sudo ssh-keygen -A
-            sudo mkdir -p /var/run/sshd
+            sudo cp /tmp/ssh-keys/authorized_keys "${USER_HOME}/.ssh/authorized_keys" 2>/dev/null || true
+            sudo chown -R "${CURRENT_USER}" "${USER_HOME}/.ssh" 2>/dev/null || true
+            sudo chmod 700 "${USER_HOME}/.ssh" 2>/dev/null || true
+            sudo chmod 600 "${USER_HOME}/.ssh/authorized_keys" 2>/dev/null || true
 
-            sudo /usr/sbin/sshd -D -p {{ .Values.global.sshTargetPort }}
+            if command -v sshd >/dev/null 2>&1; then
+              sudo /usr/sbin/sshd -D -p {{ .Values.global.sshTargetPort }}
+            else
+              sleep infinity
+            fi
         lifecycle:
           postStart:
             exec:
@@ -99,6 +97,16 @@ spec:
         - name: ssh-keys
           mountPath: /tmp/ssh-keys
           readOnly: true
+      - name: ingress-bridge-sidecar
+        image: alpine/socat:latest
+        command:
+        - socat
+        - "TCP-LISTEN:43635,fork,bind=0.0.0.0,reuseaddr"
+        - "TCP:127.0.0.1:52424"
+        resources:
+          limits:
+            memory: 32Mi
+            cpu: 50m
       {{- if .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml .Values.nodeSelector | nindent 8 }}
