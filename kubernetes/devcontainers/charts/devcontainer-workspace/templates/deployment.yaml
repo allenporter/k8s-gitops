@@ -18,6 +18,18 @@ spec:
       labels:
         app: ws-{{ .Values.workspaceName }}
     spec:
+      initContainers:
+      - name: init-volume-permissions
+        image: busybox:latest
+        command:
+        - sh
+        - -c
+        - |
+          mkdir -p /workspaces/.persistent_vscode /workspaces/.persistent_admin
+          chmod -R 777 /workspaces
+        volumeMounts:
+        - name: workspace-volume
+          mountPath: /workspaces
       containers:
       - name: workspace
         image: "{{ if .Values.image.repository }}{{ .Values.image.repository }}{{ else }}{{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}{{ end }}:{{ .Values.image.tag }}"
@@ -47,7 +59,6 @@ spec:
             sudo chmod 600 "${USER_HOME}/.ssh/authorized_keys"
             sudo ssh-keygen -A
             sudo mkdir -p /var/run/sshd
-            (sudo chown -R "${CURRENT_USER}" /workspaces "${USER_HOME}/.local/share/keyrings" || true) &
 
             sudo /usr/sbin/sshd -D -p {{ .Values.global.sshTargetPort }}
         lifecycle:
