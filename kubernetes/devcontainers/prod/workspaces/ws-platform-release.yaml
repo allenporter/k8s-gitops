@@ -32,6 +32,7 @@ spec:
       sshKeySecret: "ssh-public-keys"
     features:
       registry.k8s.mrv.thebends.org/devcontainers/antigravity:1: {}
+      ghcr.io/devcontainers/features/sshd:1: {}
     git:
       url: https://github.com/allenporter/k8s-gitops.git
       directory: k8s-gitops
@@ -41,7 +42,7 @@ spec:
         - url: https://github.com/allenporter/repo-conformance.git
           directory: repo-conformance
     storage:
-      size: 30Gi
+      size: 40Gi
     resources:
       requests:
         cpu: "1"

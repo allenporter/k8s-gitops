@@ -32,6 +32,7 @@ spec:
       sshKeySecret: "ssh-public-keys"
     features:
       registry.k8s.mrv.thebends.org/devcontainers/antigravity:1: {}
+      ghcr.io/devcontainers/features/sshd:1: {}
     git:
       url: https://github.com/home-assistant/core.git
       directory: home-assistant-core
