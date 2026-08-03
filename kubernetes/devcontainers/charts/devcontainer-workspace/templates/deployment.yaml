@@ -31,11 +31,6 @@ spec:
         - sh
         - -c
         - |
-          if [ -d /workspaces/.persistent/antigravity ] && [ ! -d /workspaces/.persistent/gemini/antigravity ]; then
-            echo "Migrating .persistent/antigravity into .persistent/gemini/antigravity..."
-            mkdir -p /workspaces/.persistent/gemini
-            cp -a /workspaces/.persistent/antigravity /workspaces/.persistent/gemini/
-          fi
           if [ ! -d /workspaces/{{ .Values.git.directory }}/.git ]; then
             echo "Cloning primary repo {{ .Values.git.directory }}..."
             git clone {{ .Values.git.url }} /workspaces/{{ .Values.git.directory }}
