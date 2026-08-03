@@ -4,6 +4,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: ws-{{ .Values.workspaceName }}-pvc
   namespace: {{ .Release.Namespace }}
+  annotations:
+    helm.sh/resource-policy: keep
 spec:
   accessModes:
   - ReadWriteOnce
