@@ -18,7 +18,10 @@ spec:
       labels:
         app: ws-{{ .Values.workspaceName }}
     spec:
+      # Standard DevContainer non-root user (vscode: UID 1000, GID 1000)
       securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
         fsGroup: 1000
       initContainers:
       - name: init-git-repos
@@ -61,13 +64,7 @@ spec:
           mountPath: /workspaces
         - name: workspace-volume
           subPath: .persistent/keyrings
-          mountPath: /root/.local/share/keyrings
-        - name: workspace-volume
-          subPath: .persistent/keyrings
           mountPath: /home/vscode/.local/share/keyrings
-        - name: workspace-volume
-          subPath: .persistent/antigravity
-          mountPath: /root/.gemini/antigravity
         - name: workspace-volume
           subPath: .persistent/antigravity
           mountPath: /home/vscode/.gemini/antigravity
