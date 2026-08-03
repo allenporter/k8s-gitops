@@ -27,18 +27,23 @@ spec:
       initContainers:
       - name: init-git-repos
         image: alpine/git:latest
+        securityContext:
+          runAsUser: 0
         command:
         - sh
         - -c
         - |
+          chown -R 1000:1000 /workspaces/.persistent 2>/dev/null || true
           if [ ! -d /workspaces/{{ .Values.git.directory }}/.git ]; then
             echo "Cloning primary repo {{ .Values.git.directory }}..."
             git clone {{ .Values.git.url }} /workspaces/{{ .Values.git.directory }}
+            chown -R 1000:1000 /workspaces/{{ .Values.git.directory }} 2>/dev/null || true
           fi
           {{- range .Values.git.extraRepos }}
           if [ ! -d /workspaces/{{ .directory }}/.git ]; then
             echo "Cloning extra repo {{ .directory }}..."
             git clone {{ .url }} /workspaces/{{ .directory }}
+            chown -R 1000:1000 /workspaces/{{ .directory }} 2>/dev/null || true
           fi
           {{- end }}
         volumeMounts:
