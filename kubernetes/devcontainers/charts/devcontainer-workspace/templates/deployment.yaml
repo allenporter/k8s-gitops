@@ -61,7 +61,13 @@ spec:
           mountPath: /workspaces
         - name: workspace-volume
           subPath: .persistent/keyrings
+          mountPath: /root/.local/share/keyrings
+        - name: workspace-volume
+          subPath: .persistent/keyrings
           mountPath: /home/vscode/.local/share/keyrings
+        - name: workspace-volume
+          subPath: .persistent/antigravity
+          mountPath: /root/.gemini/antigravity
         - name: workspace-volume
           subPath: .persistent/antigravity
           mountPath: /home/vscode/.gemini/antigravity
