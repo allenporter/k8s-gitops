@@ -38,14 +38,16 @@ spec:
               echo "sshd not found. Installing openssh-server..."
               sudo apt-get update && sudo apt-get install -y openssh-server
             fi
-            sudo mkdir -p /home/vscode/.ssh
-            sudo cp /tmp/ssh-keys/authorized_keys /home/vscode/.ssh/authorized_keys
-            sudo chown -R vscode:vscode /home/vscode/.ssh
-            sudo chmod 700 /home/vscode/.ssh
-            sudo chmod 600 /home/vscode/.ssh/authorized_keys
+            CURRENT_USER=$(whoami)
+            USER_HOME=$(eval echo "~${CURRENT_USER}")
+            sudo mkdir -p "${USER_HOME}/.ssh"
+            sudo cp /tmp/ssh-keys/authorized_keys "${USER_HOME}/.ssh/authorized_keys"
+            sudo chown -R "${CURRENT_USER}" "${USER_HOME}/.ssh"
+            sudo chmod 700 "${USER_HOME}/.ssh"
+            sudo chmod 600 "${USER_HOME}/.ssh/authorized_keys"
             sudo ssh-keygen -A
             sudo mkdir -p /var/run/sshd
-            (sudo chown -R vscode:vscode /workspaces /home/vscode/.local/share/keyrings || true) &
+            (sudo chown -R "${CURRENT_USER}" /workspaces "${USER_HOME}/.local/share/keyrings" || true) &
 
             sudo /usr/sbin/sshd -D -p {{ .Values.global.sshTargetPort }}
         lifecycle:
@@ -56,6 +58,7 @@ spec:
               - -c
               - |
                 (
+                  CURRENT_USER=$(whoami)
                   if [ -d /workspaces/.git ]; then
                     echo "Cleaning up top-level image build leftover files in /workspaces..."
                     find /workspaces -maxdepth 1 -not -name "." -not -name ".." \
@@ -69,13 +72,13 @@ spec:
                   if [ ! -d /workspaces/{{ .Values.git.directory }}/.git ]; then
                     echo "Cloning primary repo..."
                     git clone {{ .Values.git.url }} /workspaces/{{ .Values.git.directory }}
-                    chown -R vscode:vscode /workspaces/{{ .Values.git.directory }} || true
+                    chown -R "${CURRENT_USER}" /workspaces/{{ .Values.git.directory }} || true
                   fi
                   {{- range .Values.git.extraRepos }}
                   if [ ! -d /workspaces/{{ .directory }}/.git ]; then
                     echo "Cloning {{ .directory }}..."
                     git clone {{ .url }} /workspaces/{{ .directory }}
-                    chown -R vscode:vscode /workspaces/{{ .directory }} || true
+                    chown -R "${CURRENT_USER}" /workspaces/{{ .directory }} || true
                   fi
                   {{- end }}
                 ) >/tmp/workspace-clone.log 2>&1 &
