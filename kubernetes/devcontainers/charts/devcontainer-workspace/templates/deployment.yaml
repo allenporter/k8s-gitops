@@ -31,6 +31,11 @@ spec:
         - sh
         - -c
         - |
+          if [ -d /workspaces/.persistent/antigravity ] && [ ! -d /workspaces/.persistent/gemini/antigravity ]; then
+            echo "Migrating .persistent/antigravity into .persistent/gemini/antigravity..."
+            mkdir -p /workspaces/.persistent/gemini
+            cp -a /workspaces/.persistent/antigravity /workspaces/.persistent/gemini/
+          fi
           if [ ! -d /workspaces/{{ .Values.git.directory }}/.git ]; then
             echo "Cloning primary repo {{ .Values.git.directory }}..."
             git clone {{ .Values.git.url }} /workspaces/{{ .Values.git.directory }}
@@ -67,8 +72,8 @@ spec:
           subPath: .persistent/keyrings
           mountPath: /home/vscode/.local/share/keyrings
         - name: workspace-volume
-          subPath: .persistent/antigravity
-          mountPath: /home/vscode/.gemini/antigravity
+          subPath: .persistent/gemini
+          mountPath: /home/vscode/.gemini
       - name: ingress-bridge-sidecar
         image: alpine/socat:latest
         command:
