@@ -23,3 +23,13 @@ spec:
           volumeClaimTemplate:
             spec:
               storageClassName: "ceph-block"
+    grafana:
+      ingress:
+        enabled: true
+        ingressClassName: nginx-external
+        hosts:
+          - g.k8s.mrv.thebends.org
+        tls:
+          - secretName: g-tls
+            hosts:
+              - g.k8s.mrv.thebends.org
