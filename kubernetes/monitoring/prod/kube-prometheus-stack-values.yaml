@@ -26,7 +26,7 @@ spec:
     grafana:
       ingress:
         enabled: true
-        ingressClassName: nginx-external
+        ingressClassName: nginx-internal
         hosts:
           - g.k8s.mrv.thebends.org
         tls:
