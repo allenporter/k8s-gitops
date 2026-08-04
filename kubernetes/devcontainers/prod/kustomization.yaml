@@ -5,6 +5,7 @@ namespace: devcontainers
 resources:
   - ../base
   - ssh-public-keys.yaml
+  - devcontainers-dashboard.yaml
   - workspaces/ws-home-automation-release.yaml
   - workspaces/ws-harness-dev-release.yaml
   - workspaces/ws-journal-notes-release.yaml

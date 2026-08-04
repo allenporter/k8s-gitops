@@ -1,0 +1,277 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: devcontainers-dashboard
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  devcontainers.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "name": "Annotations & Alerts",
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 1,
+      "id": null,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+          "id": 1,
+          "title": "Active Workspaces",
+          "type": "stat",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "count(kube_pod_info{namespace=\"devcontainers\"})",
+              "legendFormat": "Pods",
+              "refId": "A"
+            }
+          ],
+          "options": {
+            "reduceOptions": { "values": false, "calcs": ["lastNotNull"], "fields": "" },
+            "orientation": "auto",
+            "textMode": "auto",
+            "colorMode": "value",
+            "graphMode": "area"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  { "color": "green", "value": null }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+          "id": 2,
+          "title": "Total DevContainer Memory",
+          "type": "stat",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "sum(container_memory_working_set_bytes{namespace=\"devcontainers\", container=\"workspace\"})",
+              "legendFormat": "Memory",
+              "refId": "A"
+            }
+          ],
+          "options": {
+            "reduceOptions": { "values": false, "calcs": ["lastNotNull"], "fields": "" },
+            "orientation": "auto",
+            "textMode": "auto",
+            "colorMode": "value",
+            "graphMode": "area"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "bytes",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  { "color": "green", "value": null },
+                  { "color": "yellow", "value": 17179869184 },
+                  { "color": "red", "value": 34359738368 }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 },
+          "id": 3,
+          "title": "Total CPU Usage",
+          "type": "stat",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"devcontainers\", container=\"workspace\"}[5m]))",
+              "legendFormat": "Cores",
+              "refId": "A"
+            }
+          ],
+          "options": {
+            "reduceOptions": { "values": false, "calcs": ["lastNotNull"], "fields": "" },
+            "orientation": "auto",
+            "textMode": "auto",
+            "colorMode": "value",
+            "graphMode": "area"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short",
+              "decimals": 2,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  { "color": "green", "value": null },
+                  { "color": "yellow", "value": 4 },
+                  { "color": "red", "value": 8 }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "gridPos": { "h": 4, "w": 6, "x": 18, "y": 0 },
+          "id": 4,
+          "title": "Total Storage Used",
+          "type": "stat",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "sum(kubelet_volume_stats_used_bytes{namespace=\"devcontainers\"})",
+              "legendFormat": "Storage",
+              "refId": "A"
+            }
+          ],
+          "options": {
+            "reduceOptions": { "values": false, "calcs": ["lastNotNull"], "fields": "" },
+            "orientation": "auto",
+            "textMode": "auto",
+            "colorMode": "value",
+            "graphMode": "area"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "bytes",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  { "color": "green", "value": null }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+          "id": 5,
+          "title": "RAM Usage per Workspace Pod",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "sum(container_memory_working_set_bytes{namespace=\"devcontainers\", container=\"workspace\"}) by (pod)",
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "drawStyle": "line",
+                "lineInterpolation": "smooth",
+                "fillOpacity": 15
+              },
+              "unit": "bytes"
+            }
+          }
+        },
+        {
+          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+          "id": 6,
+          "title": "CPU Usage per Workspace Pod",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"devcontainers\", container=\"workspace\"}[5m])) by (pod)",
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "drawStyle": "line",
+                "lineInterpolation": "smooth",
+                "fillOpacity": 15
+              },
+              "unit": "short"
+            }
+          }
+        },
+        {
+          "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 },
+          "id": 7,
+          "title": "PVC Disk Usage per Workspace",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "kubelet_volume_stats_used_bytes{namespace=\"devcontainers\"}",
+              "legendFormat": "{{persistentvolumeclaim}}",
+              "refId": "A"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "drawStyle": "line",
+                "lineInterpolation": "smooth",
+                "fillOpacity": 15
+              },
+              "unit": "bytes"
+            }
+          }
+        },
+        {
+          "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
+          "id": 8,
+          "title": "Network Bandwidth (Received / Transmitted)",
+          "type": "timeseries",
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "targets": [
+            {
+              "expr": "sum(rate(container_network_receive_bytes_total{namespace=\"devcontainers\"}[5m])) by (pod)",
+              "legendFormat": "Rx - {{pod}}",
+              "refId": "A"
+            },
+            {
+              "expr": "sum(rate(container_network_transmit_bytes_total{namespace=\"devcontainers\"}[5m])) by (pod)",
+              "legendFormat": "Tx - {{pod}}",
+              "refId": "B"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "drawStyle": "line",
+                "lineInterpolation": "smooth",
+                "fillOpacity": 10
+              },
+              "unit": "Bps"
+            }
+          }
+        }
+      ],
+      "refresh": "10s",
+      "schemaVersion": 38,
+      "style": "dark",
+      "tags": ["devcontainers", "kubernetes", "resource-monitoring"],
+      "time": { "from": "now-1h", "to": "now" },
+      "timepicker": {
+        "refresh_intervals": ["5s", "10s", "30s", "1m", "5m"]
+      },
+      "timezone": "browser",
+      "title": "DevContainer Workspaces",
+      "uid": "devcontainers-overview",
+      "version": 1
+    }
