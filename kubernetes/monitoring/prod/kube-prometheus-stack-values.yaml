@@ -5,11 +5,6 @@ metadata:
   name: kube-prometheus-stack
   namespace: monitoring
 spec:
-  chart:
-    spec:
-      # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
-      chart: kube-prometheus-stack
-      version: 88.0.1
   values:
     prometheus:
       prometheusSpec:
@@ -23,13 +18,3 @@ spec:
           volumeClaimTemplate:
             spec:
               storageClassName: "ceph-block"
-    grafana:
-      ingress:
-        enabled: true
-        ingressClassName: nginx-internal
-        hosts:
-          - g.k8s.mrv.thebends.org
-        tls:
-          - secretName: g-tls
-            hosts:
-              - g.k8s.mrv.thebends.org
