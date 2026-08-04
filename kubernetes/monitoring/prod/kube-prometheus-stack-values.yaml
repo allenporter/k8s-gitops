@@ -5,6 +5,11 @@ metadata:
   name: kube-prometheus-stack
   namespace: monitoring
 spec:
+  chart:
+    spec:
+      # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      version: 88.0.1
   values:
     prometheus:
       prometheusSpec:
