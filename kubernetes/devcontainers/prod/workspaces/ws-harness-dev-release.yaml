@@ -43,7 +43,9 @@ spec:
         cpu: "1"
         memory: "2Gi"
       limits:
-        memory: "16Gi"
+        memory: "8Gi"
+    nodeSelector:
+      kubernetes.io/hostname: "kube01"
     image:
       repository: registry.k8s.mrv.thebends.org/devcontainers/harness-dev
       tag: latest
