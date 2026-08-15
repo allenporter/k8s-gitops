@@ -8,6 +8,12 @@
     'allenporter',
   ],
   dependencyDashboardTitle: 'Renovate Dashboard',
+  customDatasources: {
+    antigravity: {
+      defaultRegistryUrlTemplate: 'https://antigravity-hub-auto-updater-974169037036.us-central1.run.app/manifest/latest-x64-linux.yml',
+      format: 'yaml',
+    },
+  },
   customManagers: [
     {
       customType: 'regex',
@@ -40,6 +46,19 @@
         '# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s.+?_version: (?<currentValue>.+?)\\s',
       ],
       extractVersionTemplate: '^v?(?<version>.*)$',
+    },
+    {
+      customType: 'regex',
+      description: 'Antigravity feature version in HelmReleases',
+      managerFilePatterns: [
+        '/.*release\\.yaml$/',
+      ],
+      matchStrings: [
+        '# renovate: datasource=custom.antigravity depName=antigravity(?: versioning=(?<versioning>[^\\s]+?))?\\s+version: "(?<currentValue>.*?)"',
+        '# renovate: datasource=custom.antigravity depName=antigravity(?: versioning=(?<versioning>[^\\s]+?))?\\s+version: (?<currentValue>[^"\\s]+)',
+      ],
+      datasourceTemplate: 'custom.antigravity',
+      depNameTemplate: 'antigravity',
     },
   ],
   'helm-values': {
