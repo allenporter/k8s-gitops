@@ -72,8 +72,8 @@ spec:
               echo "=== Step 6: Build and Push Image with Inline Cache ==="
               devcontainer build \
                 --workspace-folder . \
-                --image-name {{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}:{{ .Values.image.tag }} \
-                --cache-from type=registry,ref={{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}:{{ .Values.image.tag }} \
+                --image-name {{ if .Values.image.repository }}{{ .Values.image.repository }}{{ else }}{{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}{{ end }}:{{ .Values.image.tag }} \
+                --cache-from type=registry,ref={{ if .Values.image.repository }}{{ .Values.image.repository }}{{ else }}{{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}{{ end }}:{{ .Values.image.tag }} \
                 {{- range .Values.builder.cacheFrom }}
                 --cache-from type=registry,ref={{ . }} \
                 {{- end }}
