@@ -23,7 +23,7 @@ spec:
     ipam:
       mode: kubernetes
     kubeProxyReplacement: true
-    ubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
+    kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
     k8sServiceHost: 127.0.0.1
     k8sServicePort: 7445
     l2announcements:
