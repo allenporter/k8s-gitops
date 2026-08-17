@@ -58,3 +58,6 @@ spec:
       tag: latest
     builder:
       enabled: true
+    serviceAccount:
+      create: true
+      clusterAdmin: true
