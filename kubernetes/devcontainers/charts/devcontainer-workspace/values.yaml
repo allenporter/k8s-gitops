@@ -39,3 +39,8 @@ resources:
 
 nodeSelector: {}
 tolerations: []
+
+serviceAccount:
+  create: false
+  name: ""
+  clusterAdmin: false
