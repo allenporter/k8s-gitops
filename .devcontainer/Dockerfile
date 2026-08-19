@@ -61,7 +61,7 @@ COPY --from=instrumentisto/restic:0.18.1-r2             /usr/local/bin/restic   
 COPY --from=docker.io/alpine/helm:4.2.4                /usr/bin/helm                    /usr/local/bin/helm
 COPY --from=ghcr.io/fluxcd/flux-cli:v2.9.4              /usr/local/bin/flux              /usr/local/bin/flux
 COPY --from=ghcr.io/home-operations/flate:0.5.0         /flate                           /usr/local/bin/flate
-COPY --from=ghcr.io/siderolabs/talosctl:v1.13.8          /talosctl                        /usr/local/bin/talosctl
+COPY --from=ghcr.io/siderolabs/talosctl:v1.13.9          /talosctl                        /usr/local/bin/talosctl
 
 ARG TARGETARCH
 
