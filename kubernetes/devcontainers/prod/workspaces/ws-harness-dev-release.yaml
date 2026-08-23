@@ -32,8 +32,6 @@ spec:
       sshKeySecret: "ssh-public-keys"
     features:
       registry.k8s.mrv.thebends.org/devcontainers/antigravity-remote-control:1:
-        # renovate: datasource=custom.antigravity depName=antigravity
-        version: "2.9.1"
         enableRemoteControl: true
         enableLocalInterface: true
         hostname: "harness-dev"
