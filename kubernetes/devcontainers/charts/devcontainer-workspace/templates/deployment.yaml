@@ -64,6 +64,8 @@ spec:
             if [ -x /usr/local/bin/start-antigravity ]; then
               /usr/local/bin/start-antigravity >/tmp/start-antigravity.log 2>&1 &
             fi
+            mkdir -p /workspaces/.persistent/config /workspaces/.persistent/gemini /workspaces/.persistent/keyrings
+            ln -sfn /workspaces/.persistent /workspaces/.persistent_vscode
             sleep infinity
         volumeMounts:
         - name: workspace-volume
@@ -74,6 +76,9 @@ spec:
         - name: workspace-volume
           subPath: .persistent/gemini
           mountPath: /home/vscode/.gemini
+        - name: workspace-volume
+          subPath: .persistent/config
+          mountPath: /home/vscode/.config
       - name: ingress-bridge-sidecar
         image: alpine/socat:latest
         command:
