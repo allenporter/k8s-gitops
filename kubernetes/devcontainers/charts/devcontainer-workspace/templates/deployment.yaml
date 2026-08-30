@@ -36,10 +36,12 @@ spec:
         - sh
         - -c
         - |
+          {{- if and .Values.git.url .Values.git.directory }}
           if [ ! -d /workspaces/{{ .Values.git.directory }}/.git ]; then
             echo "Cloning primary repo {{ .Values.git.directory }}..."
             git clone {{ .Values.git.url }} /workspaces/{{ .Values.git.directory }}
           fi
+          {{- end }}
           {{- range .Values.git.extraRepos }}
           if [ ! -d /workspaces/{{ .directory }}/.git ]; then
             echo "Cloning extra repo {{ .directory }}..."
@@ -51,7 +53,7 @@ spec:
           mountPath: /workspaces
       containers:
       - name: workspace
-        image: "{{ if .Values.image.repository }}{{ .Values.image.repository }}{{ else }}{{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}{{ end }}:{{ .Values.image.tag }}"
+        image: "{{ if .Values.image.repository }}{{ .Values.image.repository }}{{ else }}{{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory | default .Values.workspaceName }}{{ end }}:{{ .Values.image.tag }}"
         imagePullPolicy: Always
         workingDir: /workspaces
         {{- if .Values.resources }}
