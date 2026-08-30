@@ -47,10 +47,14 @@ spec:
               # Set up buildx
               docker buildx create --use --name mybuilder
 
-              echo "=== Step 4: Clone repository ==="
-              mkdir -p /tmp/build
-              git clone --depth 1 {{ .Values.git.url }} /tmp/build/{{ .Values.git.directory }}
-              cd /tmp/build/{{ .Values.git.directory }}
+              echo "=== Step 4: Prepare workspace directory ==="
+              mkdir -p /tmp/build/{{ .Values.git.directory | default .Values.workspaceName }}
+              cd /tmp/build/{{ .Values.git.directory | default .Values.workspaceName }}
+              {{- if and .Values.git.url .Values.git.directory }}
+              if [ ! -d .git ]; then
+                git clone --depth 1 {{ .Values.git.url }} .
+              fi
+              {{- end }}
 
               echo "=== Step 5: Install Devcontainer CLI & Enforce workspaceFolder ==="
               npm install -g @devcontainers/cli
@@ -62,18 +66,18 @@ spec:
                 printf '{\n  "name": "%s",\n  "image": "%s",\n  "workspaceFolder": "/workspaces/%s"\n}\n' \
                   "{{ .Values.workspaceName }}" \
                   "mcr.microsoft.com/devcontainers/python:3.14-bookworm" \
-                  "{{ .Values.git.directory }}" > "$DEVCONTAINER_JSON"
+                  "{{ .Values.git.directory | default .Values.workspaceName }}" > "$DEVCONTAINER_JSON"
               else
-                echo "Enforcing workspaceFolder=/workspaces/{{ .Values.git.directory }} in existing devcontainer.json..."
+                echo "Enforcing workspaceFolder=/workspaces/{{ .Values.git.directory | default .Values.workspaceName }} in existing devcontainer.json..."
                 tmp_json=$(mktemp)
-                jq '. + {"workspaceFolder": "/workspaces/{{ .Values.git.directory }}"}' "$DEVCONTAINER_JSON" > "$tmp_json" && mv "$tmp_json" "$DEVCONTAINER_JSON"
+                jq '. + {"workspaceFolder": "/workspaces/{{ .Values.git.directory | default .Values.workspaceName }}"}' "$DEVCONTAINER_JSON" > "$tmp_json" && mv "$tmp_json" "$DEVCONTAINER_JSON"
               fi
 
               echo "=== Step 6: Build and Push Image with Inline Cache ==="
               devcontainer build \
                 --workspace-folder . \
-                --image-name {{ if .Values.image.repository }}{{ .Values.image.repository }}{{ else }}{{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}{{ end }}:{{ .Values.image.tag }} \
-                --cache-from type=registry,ref={{ if .Values.image.repository }}{{ .Values.image.repository }}{{ else }}{{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory }}{{ end }}:{{ .Values.image.tag }} \
+                --image-name {{ if .Values.image.repository }}{{ .Values.image.repository }}{{ else }}{{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory | default .Values.workspaceName }}{{ end }}:{{ .Values.image.tag }} \
+                --cache-from type=registry,ref={{ if .Values.image.repository }}{{ .Values.image.repository }}{{ else }}{{ .Values.global.registry }}/devcontainers/{{ .Values.git.directory | default .Values.workspaceName }}{{ end }}:{{ .Values.image.tag }} \
                 {{- range .Values.builder.cacheFrom }}
                 --cache-from type=registry,ref={{ . }} \
                 {{- end }}

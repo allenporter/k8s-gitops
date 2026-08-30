@@ -1,0 +1,65 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ws-home-assistant-llm
+  namespace: devcontainers
+  annotations:
+    devcontainer.purpose: "Home Assistant LLM development, datasets, synthetic home, google adk, rulebook, and openai custom conversation."
+spec:
+  releaseName: ws-home-assistant-llm
+  chart:
+    spec:
+      chart: ./kubernetes/devcontainers/charts/devcontainer-workspace
+      reconcileStrategy: Revision
+      interval: 1m
+      sourceRef:
+        kind: GitRepository
+        name: flux-system
+        namespace: flux-system
+  interval: 1m
+  install:
+    disableWait: true
+    remediation:
+      retries: 3
+  upgrade:
+    disableWait: true
+  values:
+    workspaceName: home-assistant-llm
+    global:
+      domainSuffix: "${name_service_dns_domain:=k8s.mrv.thebends.org}"
+      registry: "registry.k8s.mrv.thebends.org"
+      sshKeySecret: "ssh-public-keys"
+    features:
+      registry.k8s.mrv.thebends.org/devcontainers/antigravity-remote-control:1:
+        enableRemoteControl: true
+        enableLocalInterface: true
+        hostname: "home-assistant-llm"
+      ghcr.io/devcontainers/features/sshd:1: {}
+    git:
+      url: https://github.com/allenporter/home-assistant-datasets.git
+      directory: home-assistant-datasets
+      extraRepos:
+        - url: https://github.com/allenporter/home-assistant-synthetic-home.git
+          directory: home-assistant-synthetic-home
+        - url: https://github.com/allenporter/home-assistant-google-adk.git
+          directory: home-assistant-google-adk
+        - url: https://github.com/allenporter/home-assistant-rulebook.git
+          directory: home-assistant-rulebook
+        - url: https://github.com/allenporter/hass-openai-custom-conversation.git
+          directory: hass-openai-custom-conversation
+    storage:
+      size: 40Gi
+    resources:
+      requests:
+        cpu: "1"
+        memory: "4Gi"
+      limits:
+        memory: "12Gi"
+    nodeSelector:
+      kubernetes.io/hostname: "kapi02"
+    image:
+      repository: registry.k8s.mrv.thebends.org/devcontainers/home-assistant-datasets
+      tag: latest
+    builder:
+      enabled: true
