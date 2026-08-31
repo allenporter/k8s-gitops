@@ -59,7 +59,7 @@ COPY --from=registry.k8s.io/kubectl:v1.37.0             /bin/kubectl            
 COPY --from=registry.k8s.io/kustomize/kustomize:v5.8.1  /app/kustomize                   /usr/local/bin/kustomize
 COPY --from=instrumentisto/restic:0.18.1-r2             /usr/local/bin/restic            /usr/local/bin/restic
 COPY --from=docker.io/alpine/helm:4.2.4                /usr/bin/helm                    /usr/local/bin/helm
-COPY --from=ghcr.io/fluxcd/flux-cli:v2.9.4              /usr/local/bin/flux              /usr/local/bin/flux
+COPY --from=ghcr.io/fluxcd/flux-cli:v2.9.5              /usr/local/bin/flux              /usr/local/bin/flux
 COPY --from=ghcr.io/home-operations/flate:0.6.2         /flate                           /usr/local/bin/flate
 COPY --from=ghcr.io/siderolabs/talosctl:v1.13.9          /talosctl                        /usr/local/bin/talosctl
 
