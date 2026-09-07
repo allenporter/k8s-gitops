@@ -10,7 +10,16 @@ spec:
   suspend: true
   jobTemplate:
     spec:
-      backoffLimit: 0
+      {{- if and .Values.builder (hasKey .Values.builder "backoffLimit") }}
+      backoffLimit: {{ .Values.builder.backoffLimit }}
+      {{- else }}
+      backoffLimit: 1
+      {{- end }}
+      {{- if and .Values.builder (hasKey .Values.builder "ttlSecondsAfterFinished") }}
+      ttlSecondsAfterFinished: {{ .Values.builder.ttlSecondsAfterFinished }}
+      {{- else }}
+      ttlSecondsAfterFinished: 86400
+      {{- end }}
       template:
         spec:
           restartPolicy: Never
