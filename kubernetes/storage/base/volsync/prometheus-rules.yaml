@@ -1,0 +1,20 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: volsync-alert-rules
+  namespace: volsync-system
+  labels:
+    role: alert-rules
+spec:
+  groups:
+  - name: volsync
+    rules:
+    - alert: VolSyncVolumeOutOfSync
+      expr: volsync_volume_out_of_sync == 1
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "VolSync replication {{ $labels.obj_namespace }}/{{ $labels.obj_name }} is out of sync"
+        description: "VolSync volume replication {{ $labels.obj_name }} in namespace {{ $labels.obj_namespace }} ({{ $labels.role }}) has been out of sync for more than 5 minutes."
