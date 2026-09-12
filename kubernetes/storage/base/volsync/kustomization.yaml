@@ -5,3 +5,4 @@ namespace: volsync-system
 resources:
   - namespace.yaml
   - release.yaml
+  - prometheus-rules.yaml
