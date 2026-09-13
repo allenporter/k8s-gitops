@@ -10,6 +10,7 @@ spec:
     # Take a backup daily
     schedule: "0 0 * * *"
   restic:
+    cacheStorageClassName: ceph-block
     pruneIntervalDays: 14
     repository: unifi-restic-config
     retain:
