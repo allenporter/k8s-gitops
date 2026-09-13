@@ -5,7 +5,7 @@ metadata:
   name: unifi-backup
   namespace: unifi
 spec:
-  sourcePVC: unifi-shelf
+  sourcePVC: unifi-shelf-ceph
   trigger:
     # Take a backup daily
     schedule: "0 0 * * *"
