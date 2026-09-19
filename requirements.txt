@@ -6,5 +6,5 @@ hostdb==2.1.0
 pip==26.2.1
 pre-commit==4.6.2
 yamllint==1.38.0
-yq==4.1.2
+yq==4.2.0
 ansible-pylibssh==1.4.0
