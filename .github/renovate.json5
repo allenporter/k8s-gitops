@@ -77,6 +77,15 @@
   },
   packageRules: [
     {
+      description: 'Ignore broken tailscale-operator 1.102.4 upstream image digest',
+      matchPackageNames: [
+        'tailscale-operator',
+      ],
+      ignoreVersions: [
+        '1.102.4',
+      ],
+    },
+    {
       description: 'dev: Patches are automatic',
       matchFileNames: [
         '**/dev/*',
