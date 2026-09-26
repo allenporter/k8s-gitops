@@ -11,4 +11,5 @@ resources:
   - workspaces/ws-journal-notes-release.yaml
   - workspaces/ws-platform-release.yaml
   - workspaces/ws-home-assistant-llm-release.yaml
+  - workspaces/ws-home-assistant-llm-gpu-release.yaml
   - workspaces/ws-personal-release.yaml
