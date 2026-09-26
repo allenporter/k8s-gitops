@@ -41,6 +41,8 @@ resources:
 
 nodeSelector: {}
 tolerations: []
+runtimeClassName: ""
+env: []
 
 serviceAccount:
   create: false
