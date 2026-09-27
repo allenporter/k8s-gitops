@@ -6,44 +6,40 @@ This directory manages lightweight, persistent, multi-repository development env
 
 ## 🌐 1. Grouped Workspaces & Web UI Access
 
-Workspaces are organized into 4 domain-focused groups. Each workspace is exposed over clean, port-free HTTPS with valid Let's Encrypt TLS certificates via your internal Ingress controller (`nginx-internal` on `10.10.102.3`):
+Workspaces are organized into domain-focused environments. Each workspace is exposed over clean, port-free HTTPS with valid Let's Encrypt TLS certificates via your internal Ingress controller (`nginx-internal` on `10.10.102.3`):
 
-| Workspace | Purpose / Grouped Repositories | Direct Internal HTTPS Access URL |
-| :--- | :--- | :--- |
-| **`ws-home-automation`** | `home-assistant-core`, `google-health-api`, `pyrainbird`, `home-assistant-ring-keypad`, `python-roborock`, `python-google-nest-sdm`, `gcal_sync`, `python-google-photos-library-api`, `icaldav`, `ical`, `home-assistant-datasets` | 👉 **[https://ws-home-automation.k8s.mrv.thebends.org/](https://ws-home-automation.k8s.mrv.thebends.org/)** |
-| **`ws-harness-dev`** | `adk-coder`, ADK harness framework, custom HA-ADK integration components | 👉 **[https://ws-harness-dev.k8s.mrv.thebends.org/](https://ws-harness-dev.k8s.mrv.thebends.org/)** |
-| **`ws-journal-notes`** | `journal-assistant`, `supernote` parser | 👉 **[https://ws-journal-notes.k8s.mrv.thebends.org/](https://ws-journal-notes.k8s.mrv.thebends.org/)** |
-| **`ws-platform`** | `k8s-gitops`, `devcontainer-features`, `repo-conformance` | 👉 **[https://ws-platform.k8s.mrv.thebends.org/](https://ws-platform.k8s.mrv.thebends.org/)** |
+| Workspace | Purpose / Grouped Repositories | Direct Internal HTTPS Access URL | Node |
+| :--- | :--- | :--- | :--- |
+| **`ws-home-automation`** | `home-assistant-core`, `google-health-api`, `pyrainbird`, `home-assistant-ring-keypad`, `python-roborock`, `python-google-nest-sdm`, `gcal_sync`, `python-google-photos-library-api`, `icaldav`, `ical`, `home-assistant-datasets` | 👉 **[https://ws-home-automation.k8s.mrv.thebends.org/](https://ws-home-automation.k8s.mrv.thebends.org/)** | `kapi01` |
+| **`ws-harness-dev`** | `adk-coder`, ADK harness framework, custom HA-ADK integration components | 👉 **[https://ws-harness-dev.k8s.mrv.thebends.org/](https://ws-harness-dev.k8s.mrv.thebends.org/)** | `kube01` |
+| **`ws-journal-notes`** | `journal-assistant`, `supernote` parser | 👉 **[https://ws-journal-notes.k8s.mrv.thebends.org/](https://ws-journal-notes.k8s.mrv.thebends.org/)** | `kapi03` |
+| **`ws-platform`** | `k8s-gitops`, `devcontainer-features`, `repo-conformance` | 👉 **[https://ws-platform.k8s.mrv.thebends.org/](https://ws-platform.k8s.mrv.thebends.org/)** | `kapi02` |
+| **`ws-home-assistant-llm`** | `home-assistant-datasets`, `home-assistant-synthetic-home`, `home-assistant-google-adk`, `home-assistant-rulebook`, `hass-openai-custom-conversation` | 👉 **[https://ws-home-assistant-llm.k8s.mrv.thebends.org/](https://ws-home-assistant-llm.k8s.mrv.thebends.org/)** | `kapi02` |
+| **`ws-home-assistant-llm-gpu`** | `home-assistant-datasets` (NVIDIA GTX 1070 GPU accelerated) | 👉 **[https://ws-home-assistant-llm-gpu.k8s.mrv.thebends.org/](https://ws-home-assistant-llm-gpu.k8s.mrv.thebends.org/)** | `kube01` |
+| **`ws-personal`** | General purpose personal workspace & scratchpad | 👉 **[https://ws-personal.k8s.mrv.thebends.org/](https://ws-personal.k8s.mrv.thebends.org/)** | `kapi03` |
 
 ---
 
-## 🔑 2. Authentication & Keyring Storage
+## 🔑 2. Authentication & Credential Storage
 
-### Isolated Local Keyrings
-* Each workspace pod maintains its own encrypted secret keyring (`login.keyring`) stored on its high-speed local 40Gi NVMe volume (`local-hostpath`).
-* This eliminates cross-node CephFS network dependencies and ensures complete credential isolation between development environments.
+### Isolated Persistent Storage
+* Each workspace pod maintains its persistent configuration and OAuth tokens under `/workspaces/.persistent/` mounted directly to `/home/vscode/.gemini`, `/home/vscode/.config`, and `/home/vscode/.local/share/keyrings`.
+* This ensures all login sessions, CLI configurations, and state survive pod restarts and rollouts.
 
-### Google OAuth Setup Workflow
+### Google Account Login Workflow (`agy auth login`)
 
-When authenticating a workspace:
+All workspaces run the `antigravity-remote-control` feature bundling the native `agy` CLI (`/usr/local/bin/agy`) alongside the Language Server Web Hub daemon:
 
-1. **Click "Sign In"**:
-   Open **[https://ws-home-automation.k8s.mrv.thebends.org/](https://ws-home-automation.k8s.mrv.thebends.org/)** in Chrome and click **Sign In**.
-
-2. **Get the Active OAuth URL & Port**:
-   Run the `agy-auth` helper command in your Mac terminal:
+1. **Log in directly via `agy auth login`**:
    ```bash
-   KUBECONFIG=/Users/allen/Development/k8s-gitops/kubeconfig kubectl exec -n devcontainers deployment/ws-home-automation -- agy-auth
+   KUBECONFIG=./kubeconfig kubectl exec -it -n devcontainers deployment/ws-home-automation -c workspace -- agy auth login
    ```
-
-3. **Authorize & Port-Forward Callback**:
-   * Open the printed `https://accounts.google.com/o/oauth2/auth?...` URL in Chrome and log in.
-   * Note the callback port in `redirect_uri` (e.g. `41031`).
-   * Forward that port from your Mac terminal:
-     ```bash
-     KUBECONFIG=/Users/allen/Development/k8s-gitops/kubeconfig kubectl port-forward -n devcontainers deployment/ws-home-automation <CALLBACK_PORT>:<CALLBACK_PORT>
-     ```
-   * Chrome will automatically redirect to `http://localhost:<CALLBACK_PORT>/auth/callback?...` and complete your login!
+2. **Authorize in Browser**:
+   * Open the printed `https://accounts.google.com/o/oauth2/auth?...` URL in your browser and authorize your account.
+   * Paste the verification code back into the terminal prompt.
+3. **Automatic Synchronization**:
+   * The OAuth token is saved to `~/.gemini/antigravity-cli/antigravity-oauth-token` and automatically synchronized with the background Language Server daemon (`~/.gemini/antigravity/`).
+   * The Web Hub and Google Remote Control ([https://antigravity.google](https://antigravity.google)) will immediately connect.
 
 ---
 
@@ -123,9 +119,13 @@ values:
   ```bash
   KUBECONFIG=./kubeconfig kubectl get pods,ingress -n devcontainers
   ```
-* **Check Logins / Auth URLs**:
+* **Check Auth / CLI Status**:
   ```bash
-  KUBECONFIG=./kubeconfig kubectl exec -n devcontainers deployment/ws-home-automation -- agy-auth
+  KUBECONFIG=./kubeconfig kubectl exec -it -n devcontainers deployment/ws-home-automation -c workspace -- agy auth status
+  ```
+* **Log In to Antigravity**:
+  ```bash
+  KUBECONFIG=./kubeconfig kubectl exec -it -n devcontainers deployment/ws-home-automation -c workspace -- agy auth login
   ```
 * **Inspect Antigravity Daemon Logs**:
   ```bash
