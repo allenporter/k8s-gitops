@@ -17,3 +17,7 @@
 ## 4. Single-Target Staging (Blast Radius Control)
 - Never batch destructive or structural changes across all containers or environments in a single compound command.
 - Apply and verify changes on a single isolated instance first before applying to others.
+
+## 5. Strict GitOps Invariant (Zero Out-of-Band Cluster Mutations)
+- NEVER apply ad-hoc or temporary mutations directly to workloads or configuration via `kubectl apply` or `helm upgrade`.
+- All operational and configuration changes must be made declaratively via Git (commit, PR, merge) and applied via Flux reconciliation (`flux reconcile ...`).
