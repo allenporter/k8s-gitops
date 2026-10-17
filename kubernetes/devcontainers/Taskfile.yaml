@@ -41,3 +41,19 @@ tasks:
     desc: Clean up completed manual build Jobs in the namespace
     cmds:
       - kubectl delete jobs -n devcontainers -l job-name || true
+
+  versions:
+    desc: Check running and staged Antigravity versions for a workspace (e.g. task devcontainers:versions WORKSPACE=platform)
+    requires:
+      vars: [WORKSPACE]
+    cmds:
+      - kubectl exec -n devcontainers deployment/ws-{{.WORKSPACE}} -c workspace -- agy-upgrade --check
+
+  upgrade:
+    desc: Stage or apply an Antigravity upgrade on a workspace without rebuilding the container (e.g. task devcontainers:upgrade WORKSPACE=platform MODE=--stage)
+    requires:
+      vars: [WORKSPACE]
+    vars:
+      MODE: '{{.MODE | default "--restart"}}'
+    cmds:
+      - kubectl exec -n devcontainers deployment/ws-{{.WORKSPACE}} -c workspace -- agy-upgrade {{.MODE}}
