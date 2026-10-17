@@ -6,4 +6,5 @@ metadata:
   namespace: flux-system
 spec:
   interval: 2h
-  url: https://k8s-gateway.kryptonian.kapsi.fi/
+  type: oci
+  url: oci://codeberg.org/k8s-gateway/charts
