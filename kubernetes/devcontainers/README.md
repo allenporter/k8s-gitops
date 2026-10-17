@@ -131,6 +131,18 @@ values:
   ```bash
   KUBECONFIG=./kubeconfig kubectl exec -n devcontainers deployment/ws-home-automation -- tail -n 50 /home/vscode/.gemini/antigravity/language_server.log
   ```
+* **Check or Apply Antigravity Upgrades (No Container Rebuild Required)**:
+  Workspaces persist upgraded `language_server` and `agy` binaries in `/workspaces/.persistent/bin/` across pod restarts, and expose `HostBridgeService` (`127.0.0.1:52423`) for UI-triggered updates:
+  ```bash
+  # Check running vs. upstream version
+  KUBECONFIG=./kubeconfig kubectl exec -n devcontainers deployment/ws-platform -c workspace -- agy-upgrade --check
+
+  # Stage latest update in background without interrupting active sessions
+  KUBECONFIG=./kubeconfig kubectl exec -n devcontainers deployment/ws-platform -c workspace -- agy-upgrade --stage
+
+  # Stage and gracefully restart language_server
+  KUBECONFIG=./kubeconfig kubectl exec -n devcontainers deployment/ws-platform -c workspace -- agy-upgrade --restart
+  ```
 * **Trigger Cluster Image Builder CronJob**:
   ```bash
   KUBECONFIG=./kubeconfig kubectl create job --from=cronjob/build-home-automation build-home-automation-manual -n devcontainers

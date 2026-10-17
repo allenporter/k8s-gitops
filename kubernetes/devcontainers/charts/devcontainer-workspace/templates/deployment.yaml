@@ -70,11 +70,13 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
         - |
-            if [ -x /usr/local/bin/start-antigravity ]; then
+            mkdir -p /workspaces/.persistent/config /workspaces/.persistent/gemini /workspaces/.persistent/keyrings /workspaces/.persistent/bin
+            ln -sfn /workspaces/.persistent /workspaces/.persistent_vscode
+            if [ -x /workspaces/.persistent/bin/start-antigravity ]; then
+              /workspaces/.persistent/bin/start-antigravity >/tmp/start-antigravity.log 2>&1 &
+            elif [ -x /usr/local/bin/start-antigravity ]; then
               /usr/local/bin/start-antigravity >/tmp/start-antigravity.log 2>&1 &
             fi
-            mkdir -p /workspaces/.persistent/config /workspaces/.persistent/gemini /workspaces/.persistent/keyrings
-            ln -sfn /workspaces/.persistent /workspaces/.persistent_vscode
             sleep infinity
         volumeMounts:
         - name: workspace-volume
