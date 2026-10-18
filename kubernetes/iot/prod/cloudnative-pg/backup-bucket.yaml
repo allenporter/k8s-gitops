@@ -1,0 +1,9 @@
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: cnpg-backup-bucket
+  namespace: cloudnative-pg
+spec:
+  bucketName: cnpg-backup
+  storageClassName: ceph-bucket

@@ -34,6 +34,12 @@ spec:
                     timeoutSeconds: 15
                     periodSeconds: 20
                     failureThreshold: 5
+              - op: replace
+                path: /spec/backup/barmanObjectStore/s3Credentials/accessKeyId/key
+                value: AWS_ACCESS_KEY_ID
+              - op: replace
+                path: /spec/backup/barmanObjectStore/s3Credentials/secretAccessKey/key
+                value: AWS_SECRET_ACCESS_KEY
   values:
     version:
       postgresql: "16"
@@ -49,3 +55,21 @@ spec:
         owner: ${MINIFLUX_PG_USER}
         secret:
           name: miniflux-secret
+    backups:
+      enabled: true
+      provider: s3
+      endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc:80
+      retentionPolicy: 30d
+      s3:
+        bucket: cnpg-backup
+        path: /
+      secret:
+        create: false
+        name: cnpg-backup-bucket
+      wal:
+        compression: gzip
+        encryption: ""
+      data:
+        compression: gzip
+        encryption: ""
+        jobs: 2
