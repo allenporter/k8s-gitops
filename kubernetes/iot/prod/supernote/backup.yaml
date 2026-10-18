@@ -10,6 +10,7 @@ spec:
     # Take a backup daily at 1am
     schedule: "0 1 * * *"
   restic:
+    cacheStorageClassName: ceph-block
     pruneIntervalDays: 14
     repository: supernote-restic-config
     retain:
