@@ -6,3 +6,4 @@ resources:
 - release.yaml
 - cluster.yaml
 - cluster-secrets.yaml
+- backup-bucket.yaml
