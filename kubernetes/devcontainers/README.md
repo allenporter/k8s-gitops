@@ -37,9 +37,13 @@ All workspaces run the `antigravity-remote-control` feature bundling the native 
 2. **Authorize in Browser**:
    * Open the printed `https://accounts.google.com/o/oauth2/auth?...` URL in your browser and authorize your account.
    * Paste the verification code back into the terminal prompt.
-3. **Automatic Synchronization**:
-   * The OAuth token is saved to `~/.gemini/antigravity-cli/antigravity-oauth-token` and automatically synchronized with the background Language Server daemon (`~/.gemini/antigravity/`).
-   * The Web Hub and Google Remote Control ([https://antigravity.google](https://antigravity.google)) will immediately connect.
+3. **Sync Token & Restart Web Hub Daemon (`start-antigravity`)**:
+   * The OAuth token is saved to `~/.gemini/antigravity-cli/antigravity-oauth-token`.
+   * On a freshly initialized workspace, `start-antigravity` runs at pod boot before that token file exists. After completing `agy auth login` for the first time, run `start-antigravity` to create the token symlinks into `~/.gemini/antigravity/` and restart `language_server` with the new credentials:
+   ```bash
+   KUBECONFIG=./kubeconfig kubectl exec -n devcontainers deployment/ws-home-automation -c workspace -- start-antigravity
+   ```
+   * Refresh the Web Hub UI and it will immediately connect.
 
 ---
 
@@ -123,9 +127,10 @@ values:
   ```bash
   KUBECONFIG=./kubeconfig kubectl exec -it -n devcontainers deployment/ws-home-automation -c workspace -- agy auth status
   ```
-* **Log In to Antigravity**:
+* **Log In to Antigravity & Sync Web Hub Daemon**:
   ```bash
   KUBECONFIG=./kubeconfig kubectl exec -it -n devcontainers deployment/ws-home-automation -c workspace -- agy auth login
+  KUBECONFIG=./kubeconfig kubectl exec -n devcontainers deployment/ws-home-automation -c workspace -- start-antigravity
   ```
 * **Inspect Antigravity Daemon Logs**:
   ```bash
