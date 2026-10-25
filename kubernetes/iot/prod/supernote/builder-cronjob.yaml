@@ -1,0 +1,73 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: build-supernote
+  namespace: supernote
+spec:
+  schedule: "0 0 1 1 *"
+  suspend: true
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      ttlSecondsAfterFinished: 86400
+      template:
+        spec:
+          restartPolicy: Never
+          initContainers:
+            - name: dind
+              image: docker:29-dind
+              restartPolicy: Always
+              env:
+                - name: DOCKER_TLS_CERTDIR
+                  value: ""
+              securityContext:
+                privileged: true
+          containers:
+            - name: builder
+              image: docker:29-cli
+              env:
+                - name: DOCKER_HOST
+                  value: tcp://localhost:2375
+                - name: DOCKER_BUILDKIT
+                  value: "1"
+                - name: GIT_REPO
+                  value: "https://github.com/allenporter/supernote.git"
+                - name: GIT_REF
+                  value: "main"
+                - name: IMAGE_REPO
+                  value: "registry.${name_service_dns_domain}/allenporter/supernote"
+                - name: IMAGE_TAG
+                  value: "dev"
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  set -e
+                  echo "=== Step 1: Ensure git is installed ==="
+                  apk add --no-cache git
+
+                  echo "=== Step 2: Wait for Docker sidecar daemon ==="
+                  while ! docker info >/dev/null 2>&1; do
+                    sleep 1
+                  done
+                  echo "Docker daemon is ready!"
+
+                  echo "=== Step 3: Clone repository ($$GIT_REPO @ $$GIT_REF) ==="
+                  mkdir -p /tmp/build/supernote
+                  cd /tmp/build/supernote
+                  git clone --depth 1 --branch "$$GIT_REF" "$$GIT_REPO" .
+                  SHORT_SHA=$$(git rev-parse --short HEAD)
+                  echo "Checked out commit $$SHORT_SHA"
+
+                  echo "=== Step 4: Build and push image to local registry ==="
+                  docker buildx create --use --name supernote-builder
+                  docker buildx build \
+                    --file ./Dockerfile \
+                    --tag "$$IMAGE_REPO:$$IMAGE_TAG" \
+                    --tag "$$IMAGE_REPO:$$SHORT_SHA" \
+                    --cache-from "type=registry,ref=$$IMAGE_REPO:$$IMAGE_TAG" \
+                    --cache-to "type=inline" \
+                    --push \
+                    .
+
+                  echo "=== Successfully pushed $$IMAGE_REPO:$$IMAGE_TAG and $$IMAGE_REPO:$$SHORT_SHA ==="
