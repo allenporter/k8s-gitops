@@ -29,6 +29,37 @@ Email                          Name                 Capacity
 example@gmail.com              example              10737418240
 ```
 
+## Local Dev Build (Zot Registry)
+
+To build `supernote` from GitHub (`main` or a branch) in-cluster and push it to the internal Zot registry (`registry.k8s.mrv.thebends.org/allenporter/supernote`) without cutting a public release:
+
+1. **Trigger a Manual Build Job**
+
+   ```bash
+   kubectl delete job build-supernote-manual -n supernote --ignore-not-found=true
+   kubectl create job --from=cronjob/build-supernote build-supernote-manual -n supernote
+   ```
+
+2. **Watch Build Logs**
+
+   ```bash
+   kubectl logs -n supernote job/build-supernote-manual -c builder -f
+   ```
+
+   This builds `Dockerfile` from `GIT_REF` (default `main`) and pushes both:
+   - `registry.k8s.mrv.thebends.org/allenporter/supernote:dev`
+   - `registry.k8s.mrv.thebends.org/allenporter/supernote:<short-sha>`
+
+3. **Deploy Local Dev Image**
+
+   Update `release.yaml` to point to the local registry image and tag:
+
+   ```yaml
+   image:
+     repository: registry.${name_service_dns_domain}/allenporter/supernote
+     tag: dev # or the <short-sha> printed by the build job
+   ```
+
 ## Backup & Restore
 
 ### Manual Backup
