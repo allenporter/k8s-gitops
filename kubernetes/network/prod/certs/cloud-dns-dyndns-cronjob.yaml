@@ -1,0 +1,88 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cloud-dns-dyndns
+  namespace: cert-manager
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      ttlSecondsAfterFinished: 3600
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: dyndns
+            image: gcr.io/google.com/cloudsdktool/google-cloud-cli:590.0.1-alpine
+            env:
+            - name: PROJECT_ID
+              value: ${cloud_project_id}
+            - name: DNS_ZONE
+              value: thebends-mrv
+            - name: DNS_RECORD
+              value: ext.${site_domain}.
+            - name: CLOUDSDK_CONFIG
+              value: /tmp/gcloud
+            command:
+            - /bin/sh
+            - -c
+            args:
+            - |
+              set -euo pipefail
+
+              WAN_IP="$$(curl -fsSL --max-time 10 https://checkip.amazonaws.com | tr -d '[:space:]' || true)"
+              if [ -z "$$WAN_IP" ]; then
+                WAN_IP="$$(curl -fsSL --max-time 10 https://api.ipify.org | tr -d '[:space:]')"
+              fi
+              if ! echo "$$WAN_IP" | grep -Eq '^[0-9]{1,3}(\.[0-9]{1,3}){3}$$'; then
+                echo "Invalid WAN IP fetched: '$$WAN_IP'" >&2
+                exit 1
+              fi
+
+              gcloud auth activate-service-account --key-file=/var/secrets/google/credentials --quiet
+
+              CURRENT_IP="$$(gcloud dns record-sets list \
+                --project="$$PROJECT_ID" \
+                --zone="$$DNS_ZONE" \
+                --name="$$DNS_RECORD" \
+                --type="A" \
+                --format="value(rrdatas[0])")"
+
+              if [ -z "$$CURRENT_IP" ]; then
+                echo "Creating A record $$DNS_RECORD -> $$WAN_IP"
+                gcloud dns record-sets create "$$DNS_RECORD" \
+                  --project="$$PROJECT_ID" \
+                  --zone="$$DNS_ZONE" \
+                  --type="A" \
+                  --ttl="300" \
+                  --rrdatas="$$WAN_IP"
+              elif [ "$$WAN_IP" != "$$CURRENT_IP" ]; then
+                echo "Updating A record $$DNS_RECORD: $$CURRENT_IP -> $$WAN_IP"
+                gcloud dns record-sets update "$$DNS_RECORD" \
+                  --project="$$PROJECT_ID" \
+                  --zone="$$DNS_ZONE" \
+                  --type="A" \
+                  --ttl="300" \
+                  --rrdatas="$$WAN_IP"
+              else
+                echo "No change: $$DNS_RECORD is already $$WAN_IP"
+              fi
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                memory: 256Mi
+            volumeMounts:
+            - name: google-credentials
+              mountPath: /var/secrets/google
+              readOnly: true
+          volumes:
+          - name: google-credentials
+            secret:
+              secretName: cloud-dns01-service-account
