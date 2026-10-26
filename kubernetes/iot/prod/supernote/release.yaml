@@ -36,7 +36,7 @@ spec:
           main:
             image:
               repository: registry.${name_service_dns_domain}/allenporter/supernote
-              tag: d61ed13
+              tag: 0b3c626
 
             env:
               - name: SUPERNOTE_PROXY_MODE
