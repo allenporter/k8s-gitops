@@ -11,7 +11,6 @@ Workspaces are organized into domain-focused environments. Each workspace is exp
 | Workspace | Purpose / Grouped Repositories | Direct Internal HTTPS Access URL | Node |
 | :--- | :--- | :--- | :--- |
 | **`ws-home-automation`** | `home-assistant-core`, `google-health-api`, `pyrainbird`, `home-assistant-ring-keypad`, `python-roborock`, `python-google-nest-sdm`, `gcal_sync`, `python-google-photos-library-api`, `icaldav`, `ical`, `home-assistant-datasets` | 👉 **[https://ws-home-automation.k8s.mrv.thebends.org/](https://ws-home-automation.k8s.mrv.thebends.org/)** | `kapi01` |
-| **`ws-journal-notes`** | `journal-assistant`, `supernote` parser | 👉 **[https://ws-journal-notes.k8s.mrv.thebends.org/](https://ws-journal-notes.k8s.mrv.thebends.org/)** | `kapi03` |
 | **`ws-platform`** | `k8s-gitops`, `devcontainer-features`, `repo-conformance` | 👉 **[https://ws-platform.k8s.mrv.thebends.org/](https://ws-platform.k8s.mrv.thebends.org/)** | `kapi02` |
 | **`ws-home-assistant-llm`** | `home-assistant-datasets`, `home-assistant-synthetic-home`, `home-assistant-google-adk`, `home-assistant-rulebook`, `hass-openai-custom-conversation` | 👉 **[https://ws-home-assistant-llm.k8s.mrv.thebends.org/](https://ws-home-assistant-llm.k8s.mrv.thebends.org/)** | `kapi02` |
 | **`ws-home-assistant-llm-gpu`** | `home-assistant-datasets` (NVIDIA GTX 1070 GPU accelerated) | 👉 **[https://ws-home-assistant-llm-gpu.k8s.mrv.thebends.org/](https://ws-home-assistant-llm-gpu.k8s.mrv.thebends.org/)** | `kube01` |
