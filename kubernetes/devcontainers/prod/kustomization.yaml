@@ -7,7 +7,6 @@ resources:
   - ssh-public-keys.yaml
   - devcontainers-dashboard.yaml
   - workspaces/ws-home-automation-release.yaml
-  - workspaces/ws-harness-dev-release.yaml
   - workspaces/ws-journal-notes-release.yaml
   - workspaces/ws-platform-release.yaml
   - workspaces/ws-home-assistant-llm-release.yaml
