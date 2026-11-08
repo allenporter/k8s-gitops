@@ -35,6 +35,7 @@ spec:
         enableRemoteControl: true
         enableLocalInterface: true
         hostname: "calendar"
+      ghcr.io/devcontainers/features/github-cli:1: {}
       ghcr.io/devcontainers/features/sshd:1: {}
     git:
       url: https://github.com/allenporter/ical.git
