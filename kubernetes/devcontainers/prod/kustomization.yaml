@@ -8,6 +8,7 @@ resources:
   - devcontainers-dashboard.yaml
   - workspaces/ws-home-automation-release.yaml
   - workspaces/ws-home-assistant-release.yaml
+  - workspaces/ws-calendar-release.yaml
   - workspaces/ws-platform-release.yaml
   - workspaces/ws-home-assistant-llm-release.yaml
   - workspaces/ws-home-assistant-llm-gpu-release.yaml

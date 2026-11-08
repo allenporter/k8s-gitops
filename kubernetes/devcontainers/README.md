@@ -10,7 +10,9 @@ Workspaces are organized into domain-focused environments. Each workspace is exp
 
 | Workspace | Purpose / Grouped Repositories | Direct Internal HTTPS Access URL | Node |
 | :--- | :--- | :--- | :--- |
-| **`ws-home-automation`** | `home-assistant-core`, `google-health-api`, `pyrainbird`, `home-assistant-ring-keypad`, `python-roborock`, `python-google-nest-sdm`, `gcal_sync`, `python-google-photos-library-api`, `icaldav`, `ical`, `home-assistant-datasets` | 👉 **[https://ws-home-automation.k8s.mrv.thebends.org/](https://ws-home-automation.k8s.mrv.thebends.org/)** | `kapi01` |
+| **`ws-home-assistant`** | `home-assistant-core`, `home-assistant-frontend`, `alerts.home-assistant.io`, `python-roborock`, `pyrainbird`, `aioesphomeapi`, `python-google-nest-sdm`, `home-assistant-ring-keypad`, `python-google-health-api`, `python-google-photos-library-api`, `home-assistant-canvas` | 👉 **[https://ws-home-assistant.k8s.mrv.thebends.org/](https://ws-home-assistant.k8s.mrv.thebends.org/)** | `kapi03` |
+| **`ws-calendar`** | `ical`, `icaldav`, `gcal_sync` | 👉 **[https://ws-calendar.k8s.mrv.thebends.org/](https://ws-calendar.k8s.mrv.thebends.org/)** | `kapi03` |
+| **`ws-home-automation`** | Legacy combined workspace (pending migration to `ws-home-assistant` & `ws-calendar`) | 👉 **[https://ws-home-automation.k8s.mrv.thebends.org/](https://ws-home-automation.k8s.mrv.thebends.org/)** | `kapi01` |
 | **`ws-platform`** | `k8s-gitops`, `devcontainer-features`, `repo-conformance` | 👉 **[https://ws-platform.k8s.mrv.thebends.org/](https://ws-platform.k8s.mrv.thebends.org/)** | `kapi02` |
 | **`ws-home-assistant-llm`** | `home-assistant-datasets`, `home-assistant-synthetic-home`, `home-assistant-google-adk`, `home-assistant-rulebook`, `hass-openai-custom-conversation` | 👉 **[https://ws-home-assistant-llm.k8s.mrv.thebends.org/](https://ws-home-assistant-llm.k8s.mrv.thebends.org/)** | `kapi02` |
 | **`ws-home-assistant-llm-gpu`** | `home-assistant-datasets` (NVIDIA GTX 1070 GPU accelerated) | 👉 **[https://ws-home-assistant-llm-gpu.k8s.mrv.thebends.org/](https://ws-home-assistant-llm-gpu.k8s.mrv.thebends.org/)** | `kube01` |
