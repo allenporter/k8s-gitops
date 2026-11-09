@@ -39,6 +39,11 @@ resources:
   limits:
     memory: "8Gi"
 
+sidecarResources:
+  limits:
+    memory: 32Mi
+    cpu: 50m
+
 nodeSelector: {}
 tolerations: []
 runtimeClassName: ""
