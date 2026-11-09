@@ -56,6 +56,13 @@ spec:
         memory: "4Gi"
       limits:
         memory: "12Gi"
+    sidecarResources:
+      requests:
+        cpu: "50m"
+        memory: "64Mi"
+      limits:
+        cpu: "200m"
+        memory: "256Mi"
     nodeSelector:
       kubernetes.io/hostname: "kapi02"
     image:
