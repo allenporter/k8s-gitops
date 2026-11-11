@@ -96,10 +96,10 @@ spec:
         - socat
         - "TCP-LISTEN:43635,fork,reuseaddr,bind=0.0.0.0"
         - "TCP:127.0.0.1:52424"
+        {{- if .Values.sidecarResources }}
         resources:
-          limits:
-            memory: 32Mi
-            cpu: 50m
+          {{- toYaml .Values.sidecarResources | nindent 10 }}
+        {{- end }}
       {{- if .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml .Values.nodeSelector | nindent 8 }}
