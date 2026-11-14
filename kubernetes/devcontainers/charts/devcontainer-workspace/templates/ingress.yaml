@@ -8,11 +8,13 @@ metadata:
     cert-manager.io/cluster-issuer: {{ .Values.ingress.clusterIssuer | default "letsencrypt" | quote }}
     coredns.io/hostname: ws-{{ .Values.workspaceName }}.{{ .Values.global.domainSuffix }}
     ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "86400"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "86400"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-buffering: "off"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
     nginx.ingress.kubernetes.io/upstream-vhost: "localhost:52425"
+    nginx.ingress.kubernetes.io/upstream-keepalive-connections: "4"
+    nginx.ingress.kubernetes.io/upstream-keepalive-timeout: "30"
 spec:
   ingressClassName: {{ .Values.ingress.className | default "nginx-internal" | quote }}
   tls:
