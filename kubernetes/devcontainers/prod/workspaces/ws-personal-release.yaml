@@ -35,6 +35,7 @@ spec:
         enableRemoteControl: true
         enableLocalInterface: true
         hostname: "personal"
+      ghcr.io/devcontainers/features/github-cli:1: {}
       ghcr.io/devcontainers/features/sshd:1: {}
     storage:
       size: 30Gi
