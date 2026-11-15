@@ -1,6 +1,6 @@
-# Supernote
+# Open Private Cloud for Supernote
 
-[Supernote Personal Knowledge Management Hub](https://github.com/allenporter/supernote) is a self hosted private cloud service for the supernote notebook.
+[Open Private Cloud for Supernote](https://github.com/allenporter/supernote) is a self-hosted private cloud service for the Supernote notebook.
 
 
 ## Create Admin user
