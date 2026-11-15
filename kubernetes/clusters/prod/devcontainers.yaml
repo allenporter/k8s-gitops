@@ -15,6 +15,10 @@ spec:
   - name: flux-system
   - name: storage
   - name: network
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
   postBuild:
     substituteFrom:
     - kind: ConfigMap
