@@ -30,7 +30,8 @@ builder:
   backoffLimit: 1
   ttlSecondsAfterFinished: 86400
 
-features: {}
+features:
+  ghcr.io/devcontainers/features/github-cli:1: {}
 
 resources:
   requests:
