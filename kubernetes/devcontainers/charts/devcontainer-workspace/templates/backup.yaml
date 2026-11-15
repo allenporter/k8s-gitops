@@ -1,0 +1,23 @@
+{{- if .Values.backup.enabled -}}
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: ws-{{ .Values.workspaceName }}-backup
+  namespace: {{ .Release.Namespace }}
+spec:
+  sourcePVC: ws-{{ .Values.workspaceName }}-pvc
+  trigger:
+    schedule: {{ .Values.backup.schedule | default "30 1 * * *" | quote }}
+  restic:
+    cacheStorageClassName: {{ .Values.backup.cacheStorageClassName | default "ceph-block" | quote }}
+    pruneIntervalDays: {{ .Values.backup.pruneIntervalDays | default 14 }}
+    repository: {{ .Values.backup.repositorySecret | default (printf "ws-%s-restic-config" .Values.workspaceName) | quote }}
+    retain:
+      {{- toYaml .Values.backup.retain | nindent 6 }}
+    copyMethod: {{ .Values.backup.copyMethod | default "Direct" | quote }}
+    moverSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      fsGroup: 1000
+{{- end }}
