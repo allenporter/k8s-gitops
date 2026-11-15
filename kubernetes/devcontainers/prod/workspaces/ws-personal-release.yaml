@@ -39,6 +39,10 @@ spec:
       ghcr.io/devcontainers/features/sshd:1: {}
     storage:
       size: 30Gi
+    backup:
+      enabled: true
+      schedule: "30 1 * * *"
+      repositorySecret: ws-personal-restic-config
     resources:
       requests:
         cpu: "1"
