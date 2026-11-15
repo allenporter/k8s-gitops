@@ -35,8 +35,8 @@ spec:
         containers:
           main:
             image:
-              repository: registry.${name_service_dns_domain}/allenporter/supernote
-              tag: 5b04dc6
+              repository: ghcr.io/allenporter/supernote
+              tag: v0.25.0
 
             env:
               - name: SUPERNOTE_PROXY_MODE
