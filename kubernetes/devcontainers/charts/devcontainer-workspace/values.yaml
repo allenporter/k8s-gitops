@@ -21,6 +21,18 @@ git:
   directory: ""
 storage:
   size: 20Gi
+backup:
+  enabled: false
+  schedule: "30 1 * * *"
+  repositorySecret: ""
+  copyMethod: Direct
+  cacheStorageClassName: ceph-block
+  pruneIntervalDays: 14
+  retain:
+    daily: 5
+    weekly: 4
+    monthly: 2
+    yearly: 1
 image:
   repository: ""
   tag: latest
