@@ -26,24 +26,37 @@ Workspaces are organized into domain-focused environments. Each workspace is exp
 * Each workspace pod maintains its persistent configuration and OAuth tokens under `/workspaces/.persistent/` mounted directly to `/home/vscode/.gemini`, `/home/vscode/.config`, and `/home/vscode/.local/share/keyrings`.
 * This ensures all login sessions, CLI configurations, and state survive pod restarts and rollouts.
 
-### Google Account Login Workflow (`agy auth login`)
+### Google Account Login & Remote Control (`agy` + `start-antigravity`)
 
 All workspaces run the `antigravity-remote-control` feature bundling the native `agy` CLI (`/usr/local/bin/agy`) alongside the Language Server Web Hub daemon:
 
-1. **Log in directly via `agy auth login`**:
+1. **Log in interactively via `agy`**:
    ```bash
-   KUBECONFIG=./kubeconfig kubectl exec -it -n devcontainers deployment/ws-home-automation -c workspace -- agy auth login
+   KUBECONFIG=./kubeconfig kubectl exec -it -n devcontainers deployment/ws-home-automation -c workspace -- agy
    ```
 2. **Authorize in Browser**:
    * Open the printed `https://accounts.google.com/o/oauth2/auth?...` URL in your browser and authorize your account.
-   * Paste the verification code back into the terminal prompt.
-3. **Sync Token & Restart Web Hub Daemon (`start-antigravity`)**:
+   * Paste the verification code back into the terminal prompt, then exit `agy` (`/exit` or `Ctrl+D` twice).
+3. **Sync Token, Reconcile Remote Control & Restart Web Hub Daemon (`start-antigravity`)**:
    * The OAuth token is saved to `~/.gemini/antigravity-cli/antigravity-oauth-token`.
-   * On a freshly initialized workspace, `start-antigravity` runs at pod boot before that token file exists. After completing `agy auth login` for the first time, run `start-antigravity` to create the token symlinks into `~/.gemini/antigravity/` and restart `language_server` with the new credentials:
+   * Run `start-antigravity` to symlink the token into `~/.gemini/antigravity/`, mark Web Hub onboarding complete, reconcile `remoteControlEnabled` / `remoteControlHostname` in `~/.gemini/config/config.json` (in `antigravity-remote-control` `v1.9.0+`), and restart `language_server`:
    ```bash
    KUBECONFIG=./kubeconfig kubectl exec -n devcontainers deployment/ws-home-automation -c workspace -- start-antigravity
    ```
-   * Refresh the Web Hub UI and it will immediately connect.
+   * Refresh the Web Hub UI (`https://ws-<name>.k8s.mrv.thebends.org/`) or open `https://antigravity.google.com` and both will connect to the same instance.
+
+> **Important — How Remote Control (`antigravity.google.com`) Works in Web Hub Mode:**
+> * **Never run `agy remote-control start` inside these containers.** That starts a second, separate `agy remote-control serve` daemon backed by `~/.gemini/antigravity-cli/` instead of the Web Hub `language_server` backed by `~/.gemini/antigravity/`, causing `antigravity.google.com` to route to a split-brain store with separate conversations and sidecars.
+> * Because `language_server` runs with `--subclient_type hub`, the browser UI hides the Remote Control settings panel until `userSettings.remoteControlEnabled` is `true` in `~/.gemini/config/config.json`.
+> * On container images built with `antigravity-remote-control` `< v1.9.0` (before `/etc/antigravity/options.env` was wired into `start-antigravity`), enable or rename Remote Control live without rebuilding or restarting via:
+>   ```bash
+>   KUBECONFIG=./kubeconfig kubectl exec -n devcontainers deployment/ws-<name> -c workspace -- sh -c '
+>     tmp=$(mktemp) &&
+>     jq ".userSettings.remoteControlEnabled = true | .userSettings.remoteControlHostname = \"ws-<name>\"" \
+>       ~/.gemini/config/config.json > "$tmp" &&
+>     chmod 600 "$tmp" && mv "$tmp" ~/.gemini/config/config.json
+>   '
+>   ```
 
 ---
 
@@ -129,7 +142,7 @@ values:
   ```
 * **Log In to Antigravity & Sync Web Hub Daemon**:
   ```bash
-  KUBECONFIG=./kubeconfig kubectl exec -it -n devcontainers deployment/ws-home-automation -c workspace -- agy auth login
+  KUBECONFIG=./kubeconfig kubectl exec -it -n devcontainers deployment/ws-home-automation -c workspace -- agy
   KUBECONFIG=./kubeconfig kubectl exec -n devcontainers deployment/ws-home-automation -c workspace -- start-antigravity
   ```
 * **Inspect Antigravity Daemon Logs**:
