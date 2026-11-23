@@ -124,3 +124,12 @@ kubectl get certificates -A | grep -v "True"
   kubectl -n devpod delete pod --field-selector=status.phase=Failed
   ```
   Their associated PersistentVolumeClaims remain `Bound` and preserved.
+
+### Prometheus TSDB `ENOSPC` Compaction Deadlock
+- If Prometheus alerts on `PrometheusTSDBCompactionsFailing` / `PrometheusNotIngestingSamples` with `no space left on device` on its PVC:
+  1. Ensure `retentionSize` is set below PVC capacity in `kubernetes/monitoring/prod/kube-prometheus-stack/release.yaml` (via GitOps PR + Flux reconciliation).
+  2. Live config reload alone may not break an active `ENOSPC` compaction deadlock; restart the pod once the config is applied so startup TSDB retention pruning frees space:
+     ```bash
+     kubectl -n monitoring delete pod prometheus-kube-prometheus-stack-prometheus-0
+     kubectl -n monitoring rollout status sts/prometheus-kube-prometheus-stack-prometheus --timeout=3m
+     ```
