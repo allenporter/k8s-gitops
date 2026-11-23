@@ -1,0 +1,120 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kart-kingdom
+  namespace: kart-kingdom
+spec:
+  releaseName: kart-kingdom
+  chart:
+    spec:
+      chart: app-template
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
+      version: 5.2.1
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  test:
+    # Fix problem where helm fails to uninstall
+    enable: false
+  values:
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+    controllers:
+      main:
+        strategy: Recreate
+        containers:
+          main:
+            image:
+              repository: python
+              tag: 3.14-slim
+            env:
+              PYTHONUNBUFFERED: "1"
+            command: ["/bin/sh", "-c"]
+            args:
+              - |
+                set -eu
+                mkdir -p /data/html
+                if [ -z "$(ls -A /data/html 2>/dev/null)" ]; then
+                  cat <<'EOF' > /data/html/index.html
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                  <meta charset="utf-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1">
+                  <title>Kart Kingdom</title>
+                </head>
+                <body>
+                  <h1>Kart Kingdom</h1>
+                  <p>Static web server is running. Copy your HTML files into <code>/data/html</code>.</p>
+                </body>
+                </html>
+                EOF
+                fi
+                exec python3 -m http.server 8000 --bind 0.0.0.0 --directory /data/html
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: 8000
+                  initialDelaySeconds: 5
+                  periodSeconds: 15
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: 8000
+                  initialDelaySeconds: 2
+                  periodSeconds: 5
+            resources:
+              requests:
+                cpu: 10m
+                memory: 32Mi
+              limits:
+                cpu: 200m
+                memory: 128Mi
+    service:
+      main:
+        controller: main
+        ports:
+          http:
+            port: 8000
+    ingress:
+      main:
+        enabled: true
+        className: nginx-internal
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt
+        hosts:
+          - host: kart-kingdom.${name_service_dns_domain}
+            paths:
+              - path: /
+                service:
+                  identifier: main
+                  port: http
+        tls:
+          - secretName: kart-kingdom-tls
+            hosts:
+              - kart-kingdom.${name_service_dns_domain}
+    persistence:
+      data:
+        enabled: true
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: ceph-block
+        globalMounts:
+          - path: /data
