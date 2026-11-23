@@ -7,6 +7,11 @@ description: Procedures, runbooks, and diagnostic command chains for inspecting 
 
 Use this skill when asked to review, audit, or report on cluster health, active alerts, or degraded workloads.
 
+## 0. Environment & Tooling Defaults
+- **Kubeconfig:** If `kubectl config current-context` is unset (e.g., when invoked from another workspace), set `KUBECONFIG=/workspaces/k8s-gitops/kubeconfig`.
+- **Talosconfig:** Generated cluster configs live under `/workspaces/k8s-gitops/bootstrap/talos/clusterconfig/` (or `~/.talos/config` if configured).
+- **GitHub API:** Prefer `gh api` over unauthenticated `curl` to `api.github.com` to avoid rate limits.
+
 ---
 
 ## 1. Quick Health Audit Sequence
@@ -77,6 +82,8 @@ kubectl get certificates -A | grep -v "True"
 - **NEVER** apply ad-hoc or temporary mutations to workloads, Helm releases, or manifests directly via `kubectl apply` or `helm upgrade`.
 - All configuration changes, version pins, and fixes **must** be made declaratively via Git (commit, push, PR, merge) and applied via Flux reconciliation (`flux reconcile ...`).
 - Manual live edits are overwritten by Flux upon reconciliation and create split-brain state between Git and the live cluster.
+- **Worktree-safe PR merging:** Use `gh pr merge <num> --squash` without `--delete-branch` when merging PRs whose branches may be checked out in another local worktree (GitHub auto-deletes remote branches; `--delete-branch` exits non-zero if a local worktree holds the branch).
+- **Verify reconciliation completion:** Wait for `flux reconcile` / rollout commands to complete before reporting final status.
 
 ### Renovate Automerge Protection
 - Renovate is configured to automerge patch updates in `**/prod/**` after 1 day.
@@ -99,6 +106,15 @@ kubectl get certificates -A | grep -v "True"
   kubectl -n rook-ceph exec deploy/rook-ceph-tools -- \
     radosgw-admin period update --commit --rgw-realm=ceph-objectstore \
     --rgw-zonegroup=ceph-objectstore --rgw-zone=ceph-objectstore --yes-i-really-mean-it
+  ```
+
+### Ceph Stale Crash Reports (`CephDaemonCrash`)
+- If `CephDaemonCrash` or `CephHealthWarning` is firing due to already-recovered daemon crashes (e.g., a monitor failover that Rook already replaced), inspect and archive them after confirming storage/quorum health:
+  ```bash
+  kubectl -n rook-ceph exec deploy/rook-ceph-tools -- ceph crash ls-new
+  kubectl -n rook-ceph exec deploy/rook-ceph-tools -- ceph crash info <crash-id>
+  # After confirming root cause and user approval:
+  kubectl -n rook-ceph exec deploy/rook-ceph-tools -- ceph crash archive-all
   ```
 
 ### Stale DevPod Cleanup

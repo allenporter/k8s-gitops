@@ -27,7 +27,9 @@ RUN apt-get update --fix-missing && \
         mkisofs \
         age \
         git \
+        gh \
         jq \
+        ripgrep \
         libssh-dev
 
 
