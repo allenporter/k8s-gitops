@@ -21,3 +21,7 @@
 ## 5. Strict GitOps Invariant (Zero Out-of-Band Cluster Mutations)
 - NEVER apply ad-hoc or temporary mutations directly to workloads or configuration via `kubectl apply` or `helm upgrade`.
 - All operational and configuration changes must be made declaratively via Git (commit, PR, merge) and applied via Flux reconciliation (`flux reconcile ...`).
+
+## 6. Secret, SOPS & Git Staging Hygiene
+- NEVER stage changes with broad `git add .` or `git add -A` without inspecting `git status`; always stage explicit file paths and ensure `kubeconfig`, `*.kubeconfig`, and `*.log` are never committed.
+- NEVER run `sops set` with unvalidated shell variables. Always use `set -euo pipefail`, verify tool syntax (e.g., Python `yq` vs Go `yq`), and assert non-empty/valid values (`: "${VAR:?}"` and `openssl x509` where applicable) before mutating encrypted secret files.
