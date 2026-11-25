@@ -32,6 +32,14 @@ spec:
         - secretName: zot-registry-tls
           hosts:
             - registry.${name_service_dns_domain}
+    extraVolumes:
+      - name: zot-htpasswd
+        secret:
+          secretName: zot-htpasswd
+    extraVolumeMounts:
+      - name: zot-htpasswd
+        mountPath: /secret
+        readOnly: true
     configFiles:
       config.json: |-
         {
@@ -57,7 +65,37 @@ spec:
           },
           "http": {
             "address": "0.0.0.0",
-            "port": "5000"
+            "port": "5000",
+            "auth": {
+              "htpasswd": {
+                "path": "/secret/htpasswd"
+              }
+            },
+            "accessControl": {
+              "repositories": {
+                "devcontainers/**": {
+                  "anonymousPolicy": ["read"],
+                  "policies": [
+                    {
+                      "users": ["builder"],
+                      "actions": ["read", "create", "update", "delete"]
+                    }
+                  ]
+                },
+                "allenporter/**": {
+                  "anonymousPolicy": ["read"],
+                  "policies": [
+                    {
+                      "users": ["builder"],
+                      "actions": ["read", "create", "update", "delete"]
+                    }
+                  ]
+                },
+                "**": {
+                  "anonymousPolicy": ["read"]
+                }
+              }
+            }
           },
           "log": {
             "level": "info"

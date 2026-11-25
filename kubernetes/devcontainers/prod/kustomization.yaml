@@ -7,6 +7,7 @@ resources:
   - ssh-public-keys.yaml
   - devcontainers-dashboard.yaml
   - ws-personal-restic-secret.yaml
+  - zot-builder-auth-secret.yaml
   - workspaces/ws-home-automation-release.yaml
   - workspaces/ws-home-assistant-release.yaml
   - workspaces/ws-calendar-release.yaml

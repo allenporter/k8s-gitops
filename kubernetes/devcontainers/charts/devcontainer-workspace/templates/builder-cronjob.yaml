@@ -100,4 +100,15 @@ spec:
               value: tcp://localhost:2375
             - name: DOCKER_BUILDKIT
               value: "1"
+            {{- if .Values.global.builder.registryAuthSecret }}
+            volumeMounts:
+            - name: zot-builder-auth
+              mountPath: /root/.docker/config.json
+              subPath: config.json
+              readOnly: true
+          volumes:
+          - name: zot-builder-auth
+            secret:
+              secretName: {{ .Values.global.builder.registryAuthSecret | quote }}
+            {{- end }}
 {{- end }}

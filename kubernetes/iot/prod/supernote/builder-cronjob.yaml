@@ -71,3 +71,12 @@ spec:
                     .
 
                   echo "=== Successfully pushed $$IMAGE_REPO:$$IMAGE_TAG and $$IMAGE_REPO:$$SHORT_SHA ==="
+              volumeMounts:
+                - name: zot-builder-auth
+                  mountPath: /root/.docker/config.json
+                  subPath: config.json
+                  readOnly: true
+          volumes:
+            - name: zot-builder-auth
+              secret:
+                secretName: zot-builder-auth

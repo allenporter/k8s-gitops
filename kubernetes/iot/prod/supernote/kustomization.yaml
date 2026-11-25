@@ -9,6 +9,7 @@ resources:
   - prometheus-rules.yaml
   - restic-config-secret.yaml
   - gemini-secret.yaml
+  - zot-builder-auth-secret.yaml
 configMapGenerator:
   - name: supernote-dashboard
     namespace: supernote
