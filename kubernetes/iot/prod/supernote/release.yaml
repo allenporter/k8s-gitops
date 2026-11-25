@@ -50,6 +50,8 @@ spec:
                 value: "https://supernote.${name_service_dns_domain}/"
               - name: SUPERNOTE_MCP_BASE_URL
                 value: "https://supernote-mcp.${name_service_dns_domain}/"
+              - name: SUPERNOTE_WIKI_ENABLED
+                value: "true"
 
 
     service:
