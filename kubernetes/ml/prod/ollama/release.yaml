@@ -44,9 +44,6 @@ spec:
         - qwen3:4b
         - qwen3:8b
         - PetrosStav/gemma3-tools:4b
-    extraEnv:
-    - name: OLLAMA_DEBUG
-      value: "1"
     # Requirements for nvidia runtime and hardware
     runtimeClassName: nvidia
     resources:
