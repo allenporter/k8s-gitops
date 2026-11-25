@@ -28,43 +28,52 @@ set firewall name WAN_LOCAL rule 20 action drop
 set firewall name WAN_LOCAL rule 20 description 'Drop invalid state'
 set firewall name WAN_LOCAL rule 20 state invalid enable
 
-set firewall name WAN_LOCAL rule 30 action accept
-set firewall name WAN_LOCAL rule 30 description ike
-set firewall name WAN_LOCAL rule 30 destination port 500
-set firewall name WAN_LOCAL rule 30 log disable
-set firewall name WAN_LOCAL rule 30 protocol udp
+set firewall ipv6-name WANv6_IN default-action drop
+set firewall ipv6-name WANv6_IN description 'WAN to internal (IPv6)'
+set firewall ipv6-name WANv6_IN rule 10 action accept
+set firewall ipv6-name WANv6_IN rule 10 description 'Allow established/related'
+set firewall ipv6-name WANv6_IN rule 10 state established enable
+set firewall ipv6-name WANv6_IN rule 10 state related enable
+set firewall ipv6-name WANv6_IN rule 20 action drop
+set firewall ipv6-name WANv6_IN rule 20 description 'Drop invalid state'
+set firewall ipv6-name WANv6_IN rule 20 state invalid enable
+set firewall ipv6-name WANv6_IN rule 30 action accept
+set firewall ipv6-name WANv6_IN rule 30 description 'Allow ICMPv6'
+set firewall ipv6-name WANv6_IN rule 30 protocol ipv6-icmp
 
-set firewall name WAN_LOCAL rule 40 action accept
-set firewall name WAN_LOCAL rule 40 description esp
-set firewall name WAN_LOCAL rule 40 log disable
-set firewall name WAN_LOCAL rule 40 protocol esp
-
-set firewall name WAN_LOCAL rule 50 action accept
-set firewall name WAN_LOCAL rule 50 description nat-t
-set firewall name WAN_LOCAL rule 50 destination port 4500
-set firewall name WAN_LOCAL rule 50 log disable
-set firewall name WAN_LOCAL rule 50 protocol udp
-
-set firewall name WAN_LOCAL rule 60 action accept
-set firewall name WAN_LOCAL rule 60 description l2tp
-set firewall name WAN_LOCAL rule 60 destination port 1701
-set firewall name WAN_LOCAL rule 60 ipsec match-ipsec
-set firewall name WAN_LOCAL rule 60 log disable
-set firewall name WAN_LOCAL rule 60 protocol udp
+set firewall ipv6-name WANv6_LOCAL default-action drop
+set firewall ipv6-name WANv6_LOCAL description 'WAN to router (IPv6)'
+set firewall ipv6-name WANv6_LOCAL rule 10 action accept
+set firewall ipv6-name WANv6_LOCAL rule 10 description 'Allow established/related'
+set firewall ipv6-name WANv6_LOCAL rule 10 state established enable
+set firewall ipv6-name WANv6_LOCAL rule 10 state related enable
+set firewall ipv6-name WANv6_LOCAL rule 20 action drop
+set firewall ipv6-name WANv6_LOCAL rule 20 description 'Drop invalid state'
+set firewall ipv6-name WANv6_LOCAL rule 20 state invalid enable
+set firewall ipv6-name WANv6_LOCAL rule 30 action accept
+set firewall ipv6-name WANv6_LOCAL rule 30 description 'Allow ICMPv6'
+set firewall ipv6-name WANv6_LOCAL rule 30 protocol ipv6-icmp
+set firewall ipv6-name WANv6_LOCAL rule 40 action accept
+set firewall ipv6-name WANv6_LOCAL rule 40 description 'Allow DHCPv6'
+set firewall ipv6-name WANv6_LOCAL rule 40 destination port 546
+set firewall ipv6-name WANv6_LOCAL rule 40 protocol udp
+set firewall ipv6-name WANv6_LOCAL rule 40 source port 547
 
 delete vpn l2tp remote-access
 delete vpn ipsec ipsec-interfaces
 
 set firewall receive-redirects disable
-set firewall send-redirects enable
-set firewall source-validation disable
+set firewall send-redirects disable
+set firewall source-validation loose
 set firewall syn-cookies enable
 
 set interfaces ethernet eth0 address dhcp
 set interfaces ethernet eth0 address dhcpv6
 set interfaces ethernet eth0 description Internet
 set interfaces ethernet eth0 duplex auto
+set interfaces ethernet eth0 firewall in ipv6-name WANv6_IN
 set interfaces ethernet eth0 firewall in name WAN_IN
+set interfaces ethernet eth0 firewall local ipv6-name WANv6_LOCAL
 set interfaces ethernet eth0 firewall local name WAN_LOCAL
 set interfaces ethernet eth0 speed auto
 set interfaces ethernet eth1 description Local
@@ -103,8 +112,12 @@ set port-forward rule 1 description ha-prod
 set port-forward rule 1 forward-to address 10.10.1.20
 set port-forward rule 1 forward-to port 443
 set port-forward rule 1 original-port 18123
-set port-forward rule 1 protocol tcp_udp
-delete port-forward rule 2
+set port-forward rule 1 protocol tcp
+set port-forward rule 2 description ingress
+set port-forward rule 2 forward-to address 10.10.102.5
+set port-forward rule 2 forward-to port 443
+set port-forward rule 2 original-port 18124
+set port-forward rule 2 protocol tcp
 
 set port-forward wan-interface eth0
 set service dhcp-server disabled false
@@ -156,7 +169,7 @@ set service dns forwarding options no-negcache
 set service dns forwarding system
 set service gui http-port 80
 set service gui https-port 443
-set service gui older-ciphers enable
+set service gui older-ciphers disable
 
 set service nat rule 5010 description 'masquerade for WAN'
 set service nat rule 5010 outbound-interface eth0
@@ -171,6 +184,7 @@ set service snmp description 'EdgeRouter ERX'
 set service snmp contact admin@mineral.{{ site_domain }}
 set service snmp location Closet
 
+set service ssh disable-password-authentication
 set service ssh port 22
 set service ssh protocol-version v2
 
@@ -188,17 +202,14 @@ set system login user admin authentication public-keys macbook-air-key key AAAAC
 set system login user admin authentication public-keys macbook-air-key type ssh-ed25519
 set system login user admin authentication public-keys thebends-key key AAAAB3NzaC1yc2EAAAADAQABAAACAQDGoSPGgVtZOg4BRGC3ZnnG2CpqAyXTQ4mpjF9MJnTMURqGFWbyyOZWLdvNQQTqk5C4CP5sAS3XCY/sxJI1DcYDlq2+YS8oGgqFthEf6eHI1mgDinnIdq+lXuT+0tYHCBPjkvN8fposKsMbXO/FGvGkoRvVfnATVEtrOqd4jedo1m600iMn5PT7IPclGX4Q55b8+GneRlq04SXPn+XzD0m57XXqtWU6fD5oBaXG71WnYvWxpSSCRZT2gFWFBanX1xCFoLfXFS3y61L0XNbPGLs8hC2/nES/R1L/TuztddsymJoZhFGK7HMbOlngIDhIAt66blnehQTDD+8WxdcE6koGzq5mHh/PhYB8oF/ejHux3+6SypEDp+Ts/7aA9rnIN/c9tA6mAg7VRGGFgKcKMCiT16jTQqfGIAdFpO2aovzQXjKqsjP4mWFMR1/4xzGpOOKvK6AY6tT9rZ2N8+81zoNGuXg5ACndYpoC6O/2iQ5K2CQZ1dmHk84xHBo5qNoMkACbXhPW/ZMZrbyFtmR65L7D5f45B1aV6k38bffzelHuhX0uzY21wLz/cM1EDs7Id241qDqoc+V/vhjZyetJj/6GS/AI8Go7u5gEz990brn6Ko7gSA02czkTeG6woep+CZbtFamOrbRA5kacX5rW2OQiYsq5AcWMFlPRhO6BNUJ5VQ==
 set system login user admin authentication public-keys thebends-key type ssh-rsa
+set system login user admin authentication public-keys ws-platform key AAAAC3NzaC1lZDI1NTE5AAAAIJyWDh41q5bXTFii9m8akexdo9HNfIq+8hV1NIi/RFdw
+set system login user admin authentication public-keys ws-platform type ssh-ed25519
 set system login user admin full-name Administrator
 set system login user admin level admin
-
-set system package repository stretch components 'main contrib non-free'
-set system package repository stretch distribution stretch
-set system package repository stretch url http://http.us.debian.org/debian
 
 set system time-zone UTC
 set vpn ipsec allow-access-to-local-interface disable
 set vpn ipsec auto-firewall-nat-exclude disable
-set vpn l2tp
 
 set system ntp server 0.ubnt.pool.ntp.org
 set system ntp server 1.ubnt.pool.ntp.org
