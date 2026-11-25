@@ -10,6 +10,7 @@ global:
   builder:
     image: node:24-bookworm-slim
     dindImage: docker:29-dind
+    registryAuthSecret: zot-builder-auth
 
 ingress:
   className: nginx-internal

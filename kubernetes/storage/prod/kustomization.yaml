@@ -12,4 +12,5 @@ resources:
 - ../base/rook-ceph
 - ../base/volsync
 - ../base/zot
+- zot-htpasswd-secret.yaml
 - rook-ceph-cluster-values.yaml
