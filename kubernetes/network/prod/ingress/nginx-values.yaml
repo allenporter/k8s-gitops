@@ -77,7 +77,7 @@ spec:
       ingressClassResource:
         enabled: true
         name: nginx-external
-        default: true
+        default: false
         controllerValue: "k8s.io/ingress-nginx-external"
       service:
         type: LoadBalancer
