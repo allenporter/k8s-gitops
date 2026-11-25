@@ -60,3 +60,53 @@ For `kube01` (NVIDIA node), the schematic ID is `26124abcbd408be693df9fe852c80ef
 - Verify node ready status: `kubectl get nodes -o wide`
 - Confirm all pods are healthy: `kubectl get pods -A | grep -v -E "Running|Completed"`
 - Confirm Ceph storage health: `kubectl -n rook-ceph exec deploy/rook-ceph-tools -- ceph status`
+
+---
+
+## Kubernetes CA Rotation (`talosctl rotate-ca`)
+
+### Blast Radius Warning
+Running `talosctl rotate-ca --kubernetes=true` replaces `kube-root-ca.crt` with **only** the new CA once the final step removes the old CA. Long-running in-cluster controllers and pods load `/var/run/secrets/kubernetes.io/serviceaccount/ca.crt` into memory once at startup and do **not** reload it from disk. As soon as the old CA is dropped, those pods fail API server TLS verification (`x509: certificate signed by unknown authority`), which breaks Cilium networking/DNS watches, L2 announcements, CSI provisioners, ingress, monitoring, auth, CI, and device plugins until restarted.
+
+### Required Post-Rotation Rolling Restarts
+Immediately after `talosctl rotate-ca --kubernetes=true --dry-run=false` completes, restart in-cluster API clients starting with networking/DNS:
+1. **Networking / DNS / Ingress:**
+   - `kube-system`: `ds/cilium` (verify all nodes — delete/recreate any pod that didn't self-restart), `deploy/coredns`, `deploy/headlamp`
+   - `k8s-gateway`: `deploy/k8s-gateway`
+   - `nginx`: `deploy/nginx-internal-ingress-nginx-controller`, `deploy/nginx-external-ingress-nginx-controller`
+   - `tailscale`: `deploy/operator`
+2. **Storage / CSI:**
+   - `rook-ceph`: `deploy/rook-ceph-operator`, `deploy/csi-cephfsplugin-provisioner`, `deploy/csi-rbdplugin-provisioner`
+   - `kube-system`: `deploy/snapshot-controller`
+   - `democratic-csi`: `ds/local-path-provisioner-node`
+3. **Monitoring / Auth / Certs / CI / Device Plugins:**
+   - `monitoring`: `sts/prometheus-kube-prometheus-stack-prometheus`, `deploy/kube-prometheus-stack-operator`, `deploy/kube-prometheus-stack-grafana`
+   - `cert-manager`: `deploy/cert-manager`, `deploy/cert-manager-cainjector`, `deploy/cert-manager-webhook`
+   - `dexidp`: `deploy/dex`
+   - `arc-systems`: `deploy/gha-runner-scale-set-controller-gha-rs-controller`
+   - `intel-device-plugin`: `deploy/inteldeviceplugins-controller-manager`
+   - `nvidia-device-plugin`: `ds/nvidia-device-plugin`
+   - `node-feature-discovery`: `deploy/node-feature-discovery-gc`, `deploy/node-feature-discovery-master`
+   - `system-upgrade`: `deploy/system-upgrade-controller`
+
+Verify afterward that 0 pods log `certificate signed by unknown authority` and that in-cluster and external DNS resolve cleanly.
+
+### Safely Syncing `bootstrap/talos/talsecret.sops.yaml`
+- **Never** assume Go `yq` syntax (`from_yaml`); macOS Homebrew often ships Python `yq` (a `jq` wrapper).
+- **Always** guard `sops set` with `set -euo pipefail`, non-empty variable checks (`: "${VAR:?}"`), and X.509 decode/fingerprint validation before writing to `talsecret.sops.yaml`:
+  ```bash
+  set -euo pipefail
+  # Works with Python yq (jq wrapper); for Go yq, use `.spec | from_yaml | .cluster.ca.{crt,key}`
+  NEW_CRT="$(talosctl -n 10.10.100.1 -e 10.10.100.1 get machineconfig v1alpha1 -o yaml \
+    | yq -r .spec | yq -sr '[.[] | select(.cluster != null)][0].cluster.ca.crt')"
+  NEW_KEY="$(talosctl -n 10.10.100.1 -e 10.10.100.1 get machineconfig v1alpha1 -o yaml \
+    | yq -r .spec | yq -sr '[.[] | select(.cluster != null)][0].cluster.ca.key')"
+
+  : "${NEW_CRT:?NEW_CRT is empty — aborting}"
+  : "${NEW_KEY:?NEW_KEY is empty — aborting}"
+  printf '%s' "$NEW_CRT" | base64 -d | openssl x509 -noout -fingerprint -sha256
+
+  sops set bootstrap/talos/talsecret.sops.yaml '["certs"]["k8s"]["crt"]' "\"$NEW_CRT\""
+  sops set bootstrap/talos/talsecret.sops.yaml '["certs"]["k8s"]["key"]' "\"$NEW_KEY\""
+  ```
+- Regenerate `bootstrap/talos/clusterconfig/*` with `task --dir bootstrap/talos/ talhelper-genconfig` and verify `git diff bootstrap/talos/talsecret.sops.yaml` remains SOPS-encrypted.
