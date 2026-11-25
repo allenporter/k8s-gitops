@@ -21,3 +21,7 @@ venv
 .env/*
 **/build/*
 .DS_Store
+
+kubeconfig
+*.kubeconfig
+*.log
