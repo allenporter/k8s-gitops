@@ -99,7 +99,7 @@ spec:
             hosts:
               - p.${name_service_dns_domain}
       prometheusSpec:
-        enableAdminAPI: true
+        enableAdminAPI: false
         retentionSize: 15GB
         ruleSelector: {}
         ruleNamespaceSelector: {}
