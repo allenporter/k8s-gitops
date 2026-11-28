@@ -1,91 +1,58 @@
 ---
 name: edgeos-ops
-description: Safe inspection, commit-confirm mutation, smoke-testing, and recovery procedures for the Ubiquiti EdgeRouter X (mineral / 10.10.1.1) running EdgeOS.
+description: GitOps-first procedures for inspecting, diffing, safely applying (commit-confirm), smoke-testing, and recovering EdgeOS router configuration via netops/.
 ---
 
-# EdgeOS Router Operations (`mineral` / `10.10.1.1`)
+# EdgeOS Router Operations
 
-Runbook for inspecting and safely mutating the EdgeRouter X (`mineral`, `10.10.1.1`) without causing lockouts or losing connectivity.
+GitOps-first runbook for managing the EdgeOS router defined in `netops/inventory/hosts.yaml` and `netops/roles/edgeos-config/templates/edgeos-rtr01.cfg.j2`.
 
 ## Core Safety Rules
-1. **Never push `netops/rtr.yaml` blindly:** The legacy Ansible `edgeos_config` role does not use `commit-confirm` and may overwrite live router drift. Always inspect live config first and apply small, targeted changes.
-2. **Always back up before mutating:** Ensure a recent copy of `/config/config.boot` exists off-router (e.g., on the user's laptop) before touching firewall, interface, SSH, NAT, or DHCP settings. Never commit `/config/config.boot` or plaintext secrets to Git.
-3. **Always arm `commit-confirm` before `commit`:** Never run bare `vyatta-cfg-cmd-wrapper commit` for firewall, SSH, interface, DNS, or NAT changes.
-4. **Never change `switch0` IP (`10.10.1.1/16`), DHCP, SSH `listen-address`, or firmware remotely** without explicit user approval and physical access available.
-5. **Sync `netops/roles/edgeos-config/templates/edgeos-rtr01.cfg.j2`** in Git after any confirmed live change.
+1. **Git is the source of truth:** Declare configuration changes in `netops/roles/edgeos-config/templates/edgeos-rtr01.cfg.j2` (and `netops/inventory/hosts.yaml`) on a branch/PR **first**, diff against the live router, then apply only the reviewed delta.
+2. **Never push legacy `netops/rtr.yaml` blindly:** The legacy Ansible `edgeos_config` role does not support `commit-confirm`. Use `netops/edgeos.py` instead.
+3. **Always back up before mutating:** Ensure an off-router backup of `/config/config.boot` exists before changing firewall, interface, SSH, NAT, or DHCP settings. Never commit `/config/config.boot` or plaintext secrets to Git.
+4. **Always use `commit-confirm`:** Never run bare `vyatta-cfg-cmd-wrapper commit` for firewall, SSH, interface, DNS, or NAT changes.
+5. **Never change LAN interface IPs, DHCP subnets, SSH `listen-address`, or router firmware remotely** without explicit user approval and physical access available.
 
 ---
 
-## Read-Only Inspection
+## Standard GitOps Workflow
 
-Non-interactive SSH on EdgeOS requires `/opt/vyatta/bin/vyatta-op-cmd-wrapper` for operational (`show`) commands:
+Use `netops/edgeos.py` (reads router IP and variables directly from `netops/inventory/hosts.yaml`):
+
+### 1. Check Drift (Read-Only)
+```bash
+uv run netops/edgeos.py render
+uv run netops/edgeos.py diff
+```
+*(Secret fields are automatically redacted during `render`/`diff` when `SOPS_AGE_KEY_FILE` is unset. Pass `--ssh-host <alias>` if using a custom SSH config entry.)*
+
+### 2. Apply a Reviewed Delta (`commit-confirm` + Smoke Tests)
+Put the exact reviewed `set`/`delete` commands derived from your Git change into a temporary file (e.g., `/tmp/edgeos-changes.cfg`) and run:
 
 ```bash
-ssh mineral '/opt/vyatta/bin/vyatta-op-cmd-wrapper show version'
-ssh mineral '/opt/vyatta/bin/vyatta-op-cmd-wrapper show interfaces ethernet eth0'
-ssh mineral '/opt/vyatta/bin/vyatta-op-cmd-wrapper show configuration commands' \
-  | grep -E '^(set firewall|set interfaces ethernet eth0|set port-forward|set service (gui|ssh|snmp)|set vpn|set system package)'
+uv run netops/edgeos.py apply --commands-file /tmp/edgeos-changes.cfg --minutes 5
 ```
 
----
+What `netops/edgeos.py apply` enforces automatically:
+1. Saves a timestamped pre-change backup to `/tmp/edgeos-backup-<ts>.cfg` (`0600`).
+2. Arms EdgeOS's 5-minute auto-rollback timer via PTY (`ssh -tt` + `/opt/vyatta/sbin/vyatta-config-mgmt.pl --action=commit-confirm --minutes=5`) before running `vyatta-cfg-cmd-wrapper commit`.
+3. Runs post-commit smoke tests (fresh SSH session, outbound HTTPS egress, WAN interface UP).
+4. Runs `confirm` and `save` **only if all smoke tests pass**; otherwise aborts and lets the 5-minute timer revert the router automatically.
 
-## Safe Mutation Procedure (`commit-confirm 5` + Smoke Tests)
-
-> **Important EdgeOS detail:** `/opt/vyatta/sbin/vyatta-cfg-cmd-wrapper` does **not** implement `commit-confirm`. Instead, `commit-confirm` is handled by `/opt/vyatta/sbin/vyatta-config-mgmt.pl --action=commit-confirm --minutes=5`, which requires a PTY (`ssh -tt`) for its `Proceed? [yes]` prompt.
-
-### Step 1: Stage, Arm 5-Minute Rollback, and Commit
-Upload a small script to `/tmp/edgeos-change.sh` on `mineral` and run it with `ssh -tt`:
-
+### 3. Direct Read-Only Inspection (When Needed)
+Non-interactive SSH on EdgeOS requires `/opt/vyatta/bin/vyatta-op-cmd-wrapper` for `show` commands:
 ```bash
-ssh mineral 'cat > /tmp/edgeos-change.sh' <<'REMOTE'
-#!/bin/bash
-set -euo pipefail
-sg vyattacfg -c '
-set -euo pipefail
-CMD=/opt/vyatta/sbin/vyatta-cfg-cmd-wrapper
-export CMD_WRAPPER_SESSION_ID=$$
-
-$CMD begin
-trap "$CMD end || true" EXIT
-
-# --- Place targeted $CMD set / $CMD delete lines here ---
-
-# Arm 5-minute auto-rollback before committing
-sudo sg vyattacfg "/opt/vyatta/sbin/vyatta-config-mgmt.pl --action=commit-confirm --minutes=5"
-$CMD commit
-'
-REMOTE
-printf 'y\n' | ssh -tt mineral 'bash /tmp/edgeos-change.sh && rm -f /tmp/edgeos-change.sh'
-```
-
-### Step 2: Run Automated Smoke Tests *Before* Confirming
-Only run `confirm` + `save` if **all** checks pass (guarded by `set -euo pipefail`; if any check fails, do **not** confirm — let the 5-minute timer revert automatically):
-
-```bash
-set -euo pipefail
-# 1. Fresh SSH session
-ssh -o ConnectTimeout=5 mineral 'echo SSH_OK'
-
-# 2. Outbound internet HTTPS
-WAN_IP="$(curl -fsS --max-time 5 https://checkip.amazonaws.com | tr -d '[:space:]')"
-: "${WAN_IP:?Internet egress check failed}"
-
-# 3. Internal DNS / cluster service
-curl -fsS -o /dev/null https://registry.k8s.mrv.thebends.org/v2/
-
-# 4. Assert expected config state via show configuration commands
-# ...
-
-# 5. Cancel rollback timer and persist to /config/config.boot
-ssh mineral 'sudo sg vyattacfg "/opt/vyatta/sbin/vyatta-config-mgmt.pl --action=confirm" && sudo sg vyattacfg "/opt/vyatta/sbin/vyatta-cfg-cmd-wrapper save"'
+ssh admin@<router-ip> '/opt/vyatta/bin/vyatta-op-cmd-wrapper show version'
+ssh admin@<router-ip> '/opt/vyatta/bin/vyatta-op-cmd-wrapper show interfaces ethernet eth0'
 ```
 
 ---
 
 ## Recovery Ladder
 
-1. **Locked out before `confirm`:** Wait 5 minutes — EdgeOS automatically reboots back to the last saved `/config/config.boot`.
-2. **Still have SSH/GUI, but broke internet/DNS/firewall:** Roll back using the 50 archived revisions in `/config/archive/`:
+1. **Locked out before `confirm`:** Wait for the `commit-confirm` timer (default 5 minutes) — EdgeOS automatically reboots back to the last saved `/config/config.boot`.
+2. **Still have SSH/GUI, but broke connectivity:** Roll back from `/config/archive/` (`commit-revisions 50`):
    ```text
    show system commit
    configure
@@ -93,4 +60,4 @@ ssh mineral 'sudo sg vyattacfg "/opt/vyatta/sbin/vyatta-config-mgmt.pl --action=
    commit
    save
    ```
-3. **Saved a broken config and lost LAN access:** Physically hold the ER-X Reset button for ~10s until `eth4` flashes and goes solid (factory default `192.168.1.1`, `ubnt`/`ubnt` on `eth0`), connect a laptop with `192.168.1.2/24` to `eth0`, and restore the backed-up `config.boot`.
+3. **Saved a broken config and lost LAN access:** Physically factory-reset the EdgeRouter (hold Reset ~10s until LED flashes and goes solid → defaults to `192.168.1.1`, `ubnt`/`ubnt` on `eth0`), connect a laptop with `192.168.1.2/24` to `eth0`, and restore the off-router `config.boot` backup.

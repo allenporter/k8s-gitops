@@ -162,7 +162,9 @@ set service dns forwarding name-server 8.8.8.8
 set service dns forwarding options server=/{{ site_domain }}/10.10.1.10
 set service dns forwarding options server=/10.10.in-addr.arpa/10.10.1.10
 set service dns forwarding options server=/{{ k8s_domain }}/{{ k8s_dns1_ip }}
+{% if k8s_dns2_ip is defined %}
 set service dns forwarding options server=/{{ k8s_domain }}/{{ k8s_dns2_ip }}
+{% endif %}
 set service dns forwarding options 'dhcp-host=24:5a:4c:13:ae:c0,set:LAN,set:AP,10.10.35.2,mega'
 set service dns forwarding options no-hosts
 set service dns forwarding options no-negcache
