@@ -27,18 +27,22 @@ uv run netops/edgeos.py diff
 ```
 *(Secret fields are automatically redacted during `render`/`diff` when `SOPS_AGE_KEY_FILE` is unset. Pass `--ssh-host <alias>` if using a custom SSH config entry.)*
 
-### 2. Apply a Reviewed Delta (`commit-confirm` + Smoke Tests)
-Put the exact reviewed `set`/`delete` commands derived from your Git change into a temporary file (e.g., `/tmp/edgeos-changes.cfg`) and run:
+### 2. Preview & Apply a Reviewed Delta (`--dry-run` → `commit-confirm` + Smoke Tests)
+Put the exact reviewed `set`/`delete` commands derived from your Git change into a temporary file (e.g., `/tmp/edgeos-changes.cfg`) and preview first:
 
 ```bash
+# Preview EdgeOS's own context diff without committing
+uv run netops/edgeos.py apply --commands-file /tmp/edgeos-changes.cfg --dry-run
+
+# Apply with 5-minute commit-confirm rollback + automated smoke tests
 uv run netops/edgeos.py apply --commands-file /tmp/edgeos-changes.cfg --minutes 5
 ```
 
 What `netops/edgeos.py apply` enforces automatically:
-1. Saves a timestamped pre-change backup to `/tmp/edgeos-backup-<ts>.cfg` (`0600`).
-2. Arms EdgeOS's 5-minute auto-rollback timer via PTY (`ssh -tt` + `/opt/vyatta/sbin/vyatta-config-mgmt.pl --action=commit-confirm --minutes=5`) before running `vyatta-cfg-cmd-wrapper commit`.
-3. Runs post-commit smoke tests (fresh SSH session, outbound HTTPS egress, WAN interface UP).
-4. Runs `confirm` and `save` **only if all smoke tests pass**; otherwise aborts and lets the 5-minute timer revert the router automatically.
+1. Saves a timestamped `0600` pre-change backup to `~/.config/edgeos/backups/`.
+2. Aborts if another `commit-confirm` is already pending, then arms EdgeOS's auto-rollback timer via PTY (`ssh -tt` + `/opt/vyatta/sbin/vyatta-config-mgmt.pl --action=commit-confirm`) before running `vyatta-cfg-cmd-wrapper commit` (and disarms the timer if `commit` itself fails).
+3. Runs post-commit smoke tests (fresh `BatchMode` SSH session, outbound HTTPS egress, direct UDP DNS query to `<router-ip>:53`, and WAN interface UP).
+4. Runs `confirm` and `save` **only if all smoke tests pass**; otherwise aborts and lets the timer revert the router automatically.
 
 ### 3. Direct Read-Only Inspection (When Needed)
 Non-interactive SSH on EdgeOS requires `/opt/vyatta/bin/vyatta-op-cmd-wrapper` for `show` commands:
