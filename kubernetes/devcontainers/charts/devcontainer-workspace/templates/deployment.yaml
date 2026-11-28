@@ -89,6 +89,32 @@ spec:
         - |
             mkdir -p /workspaces/.persistent/config /workspaces/.persistent/gemini /workspaces/.persistent/keyrings /workspaces/.persistent/bin
             ln -sfn /workspaces/.persistent /workspaces/.persistent_vscode
+            {{- if .Values.serviceAccount.clusterAdmin }}
+            if [ -f /var/run/secrets/kubernetes.io/serviceaccount/token ]; then
+              mkdir -p /home/vscode/.kube
+              cat <<'EOF' > /home/vscode/.kube/config
+            apiVersion: v1
+            kind: Config
+            clusters:
+            - name: in-cluster
+              cluster:
+                server: https://kubernetes.default.svc:443
+                certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            contexts:
+            - name: in-cluster
+              context:
+                cluster: in-cluster
+                user: serviceaccount
+                namespace: default
+            current-context: in-cluster
+            users:
+            - name: serviceaccount
+              user:
+                tokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+            EOF
+              chmod 600 /home/vscode/.kube/config
+            fi
+            {{- end }}
             if [ -s /home/vscode/.gemini/config/config.json ] && command -v jq >/dev/null 2>&1 && [ -n "${ANTIGRAVITY_ENABLE_REMOTE_CONTROL:-}${ANTIGRAVITY_HOSTNAME:-}" ]; then
               rc_bool="true"
               case "$(printf '%s' "${ANTIGRAVITY_ENABLE_REMOTE_CONTROL:-true}" | tr '[:upper:]' '[:lower:]')" in
