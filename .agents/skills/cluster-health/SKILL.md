@@ -8,31 +8,7 @@ description: Procedures, runbooks, and diagnostic command chains for inspecting 
 Use this skill when asked to review, audit, or report on cluster health, active alerts, or degraded workloads.
 
 ## 0. Environment & Tooling Defaults
-- **Kubeconfig (Prefer In-Cluster Auth):** If `kubectl config current-context` is unset (or fails TLS verification after a CA rotation) and `/var/run/secrets/kubernetes.io/serviceaccount/token` exists (e.g., inside `ws-platform` or another cluster-admin devcontainer pod), self-heal by writing `~/.kube/config` to use the pod's mounted ServiceAccount dynamically (no static certs/tokens; automatically survives token refreshes and CA rotations):
-  ```bash
-  mkdir -p ~/.kube && cat <<'EOF' > ~/.kube/config
-  apiVersion: v1
-  kind: Config
-  clusters:
-  - name: in-cluster
-    cluster:
-      server: https://kubernetes.default.svc:443
-      certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-  contexts:
-  - name: in-cluster
-    context:
-      cluster: in-cluster
-      user: serviceaccount
-      namespace: default
-  current-context: in-cluster
-  users:
-  - name: serviceaccount
-    user:
-      tokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-  EOF
-  chmod 600 ~/.kube/config
-  ```
-  Never copy or commit a static `kubeconfig` into the repository. Outside the cluster, use your host's local `~/.kube/config` or `KUBECONFIG`.
+- **Kubeconfig:** Inside `ws-platform`, `~/.kube/config` is automatically bootstrapped on pod startup from the mounted in-cluster `ServiceAccount` (`/var/run/secrets/kubernetes.io/serviceaccount/{ca.crt,token}`). Outside the cluster, use your host's `~/.kube/config` or `KUBECONFIG` (never commit a `kubeconfig` to the repo).
 - **Talosconfig:** Generated cluster configs live under `/workspaces/k8s-gitops/bootstrap/talos/clusterconfig/` (or `~/.talos/config` if configured).
 - **GitHub API:** Prefer `gh api` over unauthenticated `curl` to `api.github.com` to avoid rate limits.
 
