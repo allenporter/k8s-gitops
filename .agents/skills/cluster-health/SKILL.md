@@ -8,7 +8,7 @@ description: Procedures, runbooks, and diagnostic command chains for inspecting 
 Use this skill when asked to review, audit, or report on cluster health, active alerts, or degraded workloads.
 
 ## 0. Environment & Tooling Defaults
-- **Kubeconfig:** If `kubectl config current-context` is unset (e.g., when invoked from another workspace), set `KUBECONFIG=/workspaces/k8s-gitops/kubeconfig`.
+- **Kubeconfig:** Inside `ws-platform`, `~/.kube/config` is automatically bootstrapped on pod startup from the mounted in-cluster `ServiceAccount` (`/var/run/secrets/kubernetes.io/serviceaccount/{ca.crt,token}`). Outside the cluster, use your host's `~/.kube/config` or `KUBECONFIG` (never commit a `kubeconfig` to the repo).
 - **Talosconfig:** Generated cluster configs live under `/workspaces/k8s-gitops/bootstrap/talos/clusterconfig/` (or `~/.talos/config` if configured).
 - **GitHub API:** Prefer `gh api` over unauthenticated `curl` to `api.github.com` to avoid rate limits.
 
