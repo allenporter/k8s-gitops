@@ -13,6 +13,7 @@ repos:
   - id: end-of-file-fixer
   - id: trailing-whitespace
   - id: check-merge-conflict
+  - id: detect-private-key
 - repo: https://gitlab.com/bmares/check-json5
   rev: v1.0.1
   hooks:
@@ -30,3 +31,10 @@ repos:
   rev: 26.5.1
   hooks:
   - id: black
+- repo: local
+  hooks:
+  - id: forbid-kubeconfig
+    name: Forbid committing kubeconfig or talosconfig files
+    entry: Do not commit kubeconfig or talosconfig files to the repository
+    language: fail
+    files: (^|/)(kubeconfig(\.ya?ml)?|talosconfig)$|\.kubeconfig$
